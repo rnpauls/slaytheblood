@@ -3,6 +3,9 @@ extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 
+@export var background_color: Color = Color("000000b0")
+
+@onready var background: ColorRect = $Background
 @onready var tooltip_card: CenterContainer = %TooltipCard
 @onready var card_description: RichTextLabel = %CardDescription
 
@@ -10,7 +13,7 @@ func _ready() -> void:
 	for card: CardMenuUI in tooltip_card.get_children():
 		card.queue_free()
 	
-	hide_tooltip()
+	background.color = background_color
 
 func show_tooltip(card: Card) -> void:
 	var new_card := CARD_MENU_UI_SCENE.instantiate() as CardMenuUI
