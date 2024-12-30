@@ -11,6 +11,7 @@ const MONSTER_ROOM_WEIGHT := 10.0
 const SHOP_ROOM_WEIGHT := 2.5
 const CAMPFIRE_ROOM_WEIGHT := 4.0
 
+@export var battle_stats_pool: BattleStatsPool
 var random_room_type_weights = {
 	Room.Type.MONSTER: 0.0,
 	Room.Type.CAMPFIRE: 0.0,
@@ -29,6 +30,8 @@ func generate_map() -> Array[Array]:
 		var current_j := j
 		for i in FLOORS -1:
 			current_j = _setup_conection(i, current_j)
+	
+	battle_stats_pool.setup()
 	
 	_setup_boss_room()
 	_setup_random_room_weights()
@@ -80,7 +83,8 @@ func _setup_conection(i: int, j: int) -> int:
 	var current_room := map_data[i][j] as Room
 	
 	while not next_room or _would_cross_existing_path(i,j,next_room):
-		var random_j := clampi(randi_range(j-1, j+1), 0, MAP_WIDTH -1)
+		#var random_j := clampi(randi_range(j-1, j+1), 0, MAP_WIDTH -1)
+		var random_j := randi_range(max(j - 1, 0), min(j + 1, MAP_WIDTH - 1))
 		next_room = map_data[i+1][random_j]
 	
 	current_room.next_rooms.append(next_room)
@@ -123,6 +127,7 @@ func _setup_boss_room() -> void:
 			current_room.next_rooms.append(boss_room)
 	
 	boss_room.type = Room.Type.BOSS
+	boss_room.battle_stats = battle_stats_pool.get_random_battle_for_tier(2)
 			
 func _setup_random_room_weights()-> void:
 	random_room_type_weights[Room.Type.MONSTER] = MONSTER_ROOM_WEIGHT
@@ -135,6 +140,7 @@ func _setup_room_types() -> void:
 	for room: Room in map_data[0]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.MONSTER
+			room.battle_stats = battle_stats_pool.get_random_battle_for_tier(0)
 	
 	#9th floor is always treasure
 	for room: Room in map_data[FLOORS/2]:
@@ -175,13 +181,13 @@ func _set_room_randomly(room_to_set: Room) -> void:
 		
 	room_to_set.type = type_candidate
 
-	#if type_candidate == Room.Type.MONSTER:
-		#var tier_for_monster_rooms := 0
-		#
-		#if room_to_set.row > 2:
-			#tier_for_monster_rooms = 1
-			#
-		#room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(tier_for_monster_rooms)
+	if type_candidate == Room.Type.MONSTER:
+		var tier_for_monster_rooms := 0
+		
+		if room_to_set.row > 2:
+			tier_for_monster_rooms = 1
+			
+		room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(tier_for_monster_rooms)
 	#
 	#if type_candidate == Room.Type.EVENT:
 		#room_to_set.event_scene = event_room_pool.get_random()
