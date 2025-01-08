@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TrueStrengthStatus" load_steps=3 format=3 uid="uid://ygl75v6sitj"]
+
+[ext_resource type="Texture2D" uid="uid://cn2c1psh561cc" path="res://art/tile_0127.png" id="1_53eip"]
+[ext_resource type="Script" path="res://statuses/true_strength_form.gd" id="2_m1g75"]
+
+[resource]
+script = ExtResource("2_m1g75")
+id = "true_strength_form"
+type = 0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+icon = ExtResource("1_53eip")
+tooltip = ""
