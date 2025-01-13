@@ -43,6 +43,17 @@ func play() -> void:
 	card.play(targets,char_stats, player_modifiers)
 	queue_free()
 
+func get_active_enemy_modifiers() -> ModifierHandler:
+	if targets.is_empty() or targets.size() > 1 or targets[0] is not Enemy:
+		return null
+	
+	return targets[0].modifier_handler
+
+func request_tooltip() -> void:
+	var enemy_modifiers := get_active_enemy_modifiers()
+	var updated_tooltip := card.get_updated_tooltip(player_modifiers,enemy_modifiers)
+	Events.card_tooltip_requested.emit(card.icon, updated_tooltip)
+
 func _on_gui_input(event: InputEvent) -> void:
 	card_state_machine.on_gui_input(event)
 

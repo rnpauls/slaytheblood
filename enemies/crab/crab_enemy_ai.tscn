@@ -13,17 +13,17 @@
 
 [sub_resource type="Resource" id="Resource_nqcw4"]
 script = ExtResource("4_2vf12")
-number = "7"
+base_text = "%s"
 icon = ExtResource("3_x7bh8")
 
 [sub_resource type="Resource" id="Resource_hxbwl"]
 script = ExtResource("4_2vf12")
-number = ""
+base_text = "6"
 icon = ExtResource("6_74jcc")
 
 [sub_resource type="Resource" id="Resource_mc6vm"]
 script = ExtResource("4_2vf12")
-number = ""
+base_text = "15"
 icon = ExtResource("8_60es0")
 
 [node name="CrabEnemyAI" type="Node"]
