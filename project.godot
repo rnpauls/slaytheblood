@@ -74,3 +74,6 @@ scroll_down={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/snap/snap_2d_vertices_to_pixel=false
+textures/snap/snap_2d_transforms_to_pixel=false
+textures/screen_space_roughness_limiter/enabled=true

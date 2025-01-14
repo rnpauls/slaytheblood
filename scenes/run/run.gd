@@ -8,19 +8,22 @@ const SHOP_SCENE := preload("res://scenes/shop/shop.tscn")
 const TREASURE_SCENE := preload("res://scenes/treasure/treasure.tscn")
 
 @export var run_startup: RunStartup
-@onready var map: Map = $Map
 
+@onready var map: Map = $Map
 @onready var current_view: Node = $CurrentView
 @onready var health_ui: HealthUI = %HealthUI
 @onready var gold_ui: GoldUI = %GoldUI
+@onready var relic_handler: RelicHandler = %RelicHandler
+@onready var relic_tooltip: RelicTooltip = %RelicTooltip
+@onready var deck_button: CardPileOpener = %DeckButton
+@onready var deck_view: CardPileView = %DeckView
+
 @onready var battle_button: Button = %BattleButton
 @onready var map_button: Button = %MapButton
 @onready var shop_button: Button = %ShopButton
 @onready var treasure_button: Button = %TreasureButton
 @onready var rewards_button: Button = %RewardsButton
 @onready var campfire_button: Button = %CampfireButton
-@onready var deck_button: CardPileOpener = %DeckButton
-@onready var deck_view: CardPileView = %DeckView
 
 var stats: RunStats
 var character: CharacterStats
@@ -81,6 +84,8 @@ func _setup_top_bar() -> void:
 	character.stats_changed.connect(health_ui.update_stats.bind(character))
 	health_ui.update_stats(character)
 	gold_ui.run_stats = stats
+	relic_handler.add_relic(character.starting_relic)
+	Events.relic_tooltip_requested.connect(relic_tooltip.show_tooltip)
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
@@ -89,7 +94,7 @@ func _on_battle_room_entered(room: Room) -> void:
 	var battle_scene: Battle = _change_view(BATTLE_SCENE) as Battle
 	battle_scene.char_stats = character
 	battle_scene.battle_stats = room.battle_stats
-	#battle_scene.relics = relic_handler
+	battle_scene.relics = relic_handler
 	battle_scene.start_battle()
 
 func _on_campfire_entered() -> void:
