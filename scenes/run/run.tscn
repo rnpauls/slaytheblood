@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcama8h1qr5h6"]
+[gd_scene load_steps=13 format=3 uid="uid://bcama8h1qr5h6"]
 
 [ext_resource type="Script" path="res://scenes/run/run.gd" id="1_28tcv"]
 [ext_resource type="PackedScene" uid="uid://bvsm0ynb8p1bw" path="res://scenes/map/map.tscn" id="1_m4lvx"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
 [ext_resource type="PackedScene" uid="uid://cfyvr6vvjt3yv" path="res://scenes/relic_handler/relic_tooltip.tscn" id="10_kjras"]
+[ext_resource type="Script" path="res://scenes/run/pause_menu.gd" id="11_d0odi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q3ve3"]
 
 [node name="Run" type="Node"]
 script = ExtResource("1_28tcv")
@@ -20,6 +23,7 @@ run_startup = ExtResource("2_g1vxi")
 [node name="CurrentView" type="Node" parent="."]
 
 [node name="DebugButtons" type="VBoxContainer" parent="."]
+visible = false
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 2.0
@@ -117,3 +121,54 @@ visible = false
 [node name="RelicTooltip" parent="TopBar" instance=ExtResource("10_kjras")]
 unique_name_in_owner = true
 visible = false
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 5
+visible = false
+script = ExtResource("11_d0odi")
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.568627)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -20.0
+offset_right = 47.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_q3ve3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BackToGameButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 14)
+layout_mode = 2
+text = "Back"
+
+[node name="SaveAndQuitButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 14)
+layout_mode = 2
+text = "Main Menu"

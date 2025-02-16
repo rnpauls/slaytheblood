@@ -44,9 +44,9 @@ func _blink_timer_setup() -> void:
 func _generate_shop_cards() -> void:
 	var shop_card_array: Array[Card] = []
 	#var available_cards: Array[Card] = char_stats.draftable_cards.duplicate_cards()
-	#RNG.array_shuffle(available_cards)
 	var available_cards:= char_stats.draftable_cards.cards.duplicate(true)
-	available_cards.shuffle()
+	RNG.array_shuffle(available_cards)
+	#available_cards.shuffle()
 	shop_card_array = available_cards.slice(0, 3)
 	
 	for card: Card in shop_card_array:
@@ -67,8 +67,8 @@ func _generate_shop_relics() -> void:
 			return can_appear and not already_had_it
 	)
 	
-	#RNG.array_shuffle(available_relics)
-	available_relics.shuffle()
+	RNG.array_shuffle(available_relics)
+	#available_relics.shuffle()
 	shop_relics_array = available_relics.slice(0, 3)
 	
 	for relic: Relic in shop_relics_array:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://6dbich680qne"]
+[gd_scene load_steps=12 format=3 uid="uid://6dbich680qne"]
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_lsjs7"]
+[ext_resource type="Resource" uid="uid://c6y7qo3oyjpal" path="res://scenes/run/run_startup.tres" id="2_8aaed"]
 [ext_resource type="Texture2D" uid="uid://dpfqok8tuy4r7" path="res://art/tile_0084.png" id="2_uyx6e"]
 [ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="3_rkg7c"]
 [ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="4_t0oo2"]
@@ -28,6 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lsjs7")
+run_startup = ExtResource("2_8aaed")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -103,19 +105,19 @@ position = Vector2(44, 121)
 scale = Vector2(2, 2)
 texture = ExtResource("4_t0oo2")
 
-[node name="Wizard2" type="Sprite2D" parent="."]
+[node name="Ghost" type="Sprite2D" parent="."]
 position = Vector2(200, 104)
 scale = Vector2(2, 2)
 texture = ExtResource("5_vxe4u")
 flip_h = true
 
-[node name="Assassin2" type="Sprite2D" parent="."]
+[node name="Bat" type="Sprite2D" parent="."]
 position = Vector2(228, 92)
 scale = Vector2(2, 2)
 texture = ExtResource("6_b3udk")
 flip_h = true
 
-[node name="Warrior2" type="Sprite2D" parent="."]
+[node name="Spider" type="Sprite2D" parent="."]
 position = Vector2(221, 119)
 scale = Vector2(2, 2)
 texture = ExtResource("7_yoaod")

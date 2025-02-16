@@ -5,6 +5,7 @@ var instance: RandomNumberGenerator
 
 func _ready() -> void:
 	initialize()
+	print_debug("TODO: Make separate seeds for each random element")
 
 
 func initialize() -> void:
