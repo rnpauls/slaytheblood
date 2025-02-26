@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bf8ixi4c0xvl4"]
+
+[ext_resource type="Texture2D" uid="uid://pgj8vfpj6tc5" path="res://art/tile_0130.png" id="1_2tgow"]
+[ext_resource type="Script" path="res://relics/confusing_staff.gd" id="2_4rnon"]
+
+[resource]
+script = ExtResource("2_4rnon")
+relic_name = "Confusing Staff"
+id = "confusing_staff"
+type = 4
+character_type = 0
+starter_relic = false
+icon = ExtResource("1_2tgow")
+tooltip = "Randomize the cost of your cards between 0 and 3"

@@ -16,6 +16,7 @@ signal player_hand_discarded
 signal player_turn_ended
 signal player_hit
 signal player_died
+signal player_card_drawn
 
 #Enemy-related events
 signal enemy_action_completed(enemy: Enemy)
@@ -47,3 +48,6 @@ signal treasure_room_exited(found_relic: Relic)
 
 # Relic-related events
 signal relic_tooltip_requested(relic: Relic)
+
+#Random Event room-related events
+signal event_room_exited

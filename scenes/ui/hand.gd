@@ -8,7 +8,7 @@ const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 
 
 func add_card(card: Card) -> void:
-	var new_card_ui := CARD_UI_SCENE.instantiate()
+	var new_card_ui := CARD_UI_SCENE.instantiate() as CardUI
 	add_child(new_card_ui)
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
 	new_card_ui.card = card
@@ -16,12 +16,22 @@ func add_card(card: Card) -> void:
 	new_card_ui.char_stats = char_stats
 	new_card_ui.player_modifiers = player.modifier_handler
 
-func discard_card(card:CardUI) -> void:
+
+func discard_card(card: CardUI) -> void:
 	card.queue_free()
 
+
+func enable_hand() -> void:
+	for card: CardUI in get_children():
+		card.disabled = false
+		if card.is_hovered():
+			card.card_state_machine.on_mouse_entered()
+
+
 func disable_hand() -> void:
-	for card in get_children():
+	for card: CardUI in get_children():
 		card.disabled = true
+
 
 func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	child.disabled = true

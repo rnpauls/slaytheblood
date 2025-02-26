@@ -19,6 +19,12 @@ func _ready() -> void:
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	Events.player_died.connect(_on_player_died)
+#mess with a card in hand
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_accept"):
+		#var card_ui = player_handler.hand.get_child(0) as CardUI
+		#card_ui.card.cost -=  1
+		#card_ui.card = card_ui.card
 
 func start_battle() ->void:
 	get_tree().paused = false

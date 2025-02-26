@@ -20,7 +20,7 @@ var original_index := 0
 var parent: Control
 var tween: Tween
 var playable := true : set = _set_playable
-var disabled := false
+var disabled := true
 
 func _ready() -> void:
 	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
@@ -48,6 +48,10 @@ func get_active_enemy_modifiers() -> ModifierHandler:
 		return null
 	
 	return targets[0].modifier_handler
+
+func is_hovered() -> bool:
+	var rect := Rect2(Vector2.ZERO, self.size)
+	return rect.has_point(get_local_mouse_position())
 
 func request_tooltip() -> void:
 	var enemy_modifiers := get_active_enemy_modifiers()
@@ -82,6 +86,7 @@ func _set_playable(value: bool) -> void:
 func _set_char_stats(value: CharacterStats) -> void:
 	char_stats = value
 	char_stats.stats_changed.connect(_on_char_stats_changed)
+	#_on_char_stats_changed()
 
 func _on_drop_point_detector_area_entered(area):
 	if not targets.has(area):

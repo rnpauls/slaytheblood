@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func start_battle(char_stats: CharacterStats) -> void:
 	character = char_stats
-	character.draw_pile = character.deck.duplicate(true)
+	character.draw_pile = character.deck.custom_duplicate()
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
 	relics.relics_activated.connect(_on_relics_activated)
@@ -48,6 +48,7 @@ func draw_card() -> void:
 	reshuffle_deck_from_discard()
 	hand.add_card(character.draw_pile.draw_card())
 	reshuffle_deck_from_discard()
+	Events.player_card_drawn.emit()
 
 
 func draw_cards(amount: int, is_start_of_turn_draw: bool = false) -> void:
@@ -57,11 +58,11 @@ func draw_cards(amount: int, is_start_of_turn_draw: bool = false) -> void:
 		tween.tween_interval(HAND_DRAW_INTERVAL)
 	
 	tween.finished.connect(
-		func(): Events.player_hand_drawn.emit()
-		#func(): 
-			#hand.enable_hand()
-			#if is_start_of_turn_draw:
-				#Events.player_hand_drawn.emit()
+		#func(): Events.player_hand_drawn.emit()
+		func(): 
+			hand.enable_hand()
+			if is_start_of_turn_draw:
+				Events.player_hand_drawn.emit()
 	)
 
 

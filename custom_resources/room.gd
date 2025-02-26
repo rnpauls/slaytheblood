@@ -1,7 +1,7 @@
 class_name Room
 extends Resource
 
-enum Type {NOT_ASSIGNED, MONSTER, TREASURE, CAMPFIRE, SHOP, BOSS}
+enum Type {NOT_ASSIGNED, MONSTER, TREASURE, CAMPFIRE, SHOP, BOSS, EVENT}
 
 @export var type: Type
 @export var row: int
@@ -11,6 +11,8 @@ enum Type {NOT_ASSIGNED, MONSTER, TREASURE, CAMPFIRE, SHOP, BOSS}
 @export var selected := false
 #Only used by BOSS and MONSTER
 @export var battle_stats: BattleStats
+#Event rooms
+@export var event_scene: PackedScene
 
 func _to_string() -> String:
 	return "%s (%s)" % [column, Type.keys()[type][0]]

@@ -1,6 +1,7 @@
 class_name MapRoom
 extends Area2D
 
+signal clicked(room: Room)
 signal selected(room: Room)
 
 const ICONS := {
@@ -10,7 +11,7 @@ const ICONS := {
 	Room.Type.CAMPFIRE: [preload("res://art/player_heart.png"), Vector2(0.6, 0.6)],
 	Room.Type.SHOP: [preload("res://art/gold.png"), Vector2(0.6, 0.6)],
 	Room.Type.BOSS: [preload("res://art/tile_0105.png"), Vector2(1.25, 1.25)],
-	#Room.Type.EVENT: [preload("res://art/rarity.png"), Vector2(0.9, 0.9)],
+	Room.Type.EVENT: [preload("res://art/rarity.png"), Vector2(0.9, 0.9)],
 }
 
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
@@ -44,6 +45,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		return
 	
 	room.selected = true
+	clicked.emit(room)
 	animation_player.play("select")
 
 #Called by animationplayer when the "select" animation finishes
