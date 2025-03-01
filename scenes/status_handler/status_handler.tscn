@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djfl6g8hr6qaa"]
 
-[ext_resource type="Script" path="res://scenes/status_handler/status_handler.gd" id="1_254f0"]
+[ext_resource type="Script" uid="uid://cxask213h54" path="res://scenes/status_handler/status_handler.gd" id="1_254f0"]
 
 [node name="StatusHandler" type="GridContainer"]
 mouse_filter = 0

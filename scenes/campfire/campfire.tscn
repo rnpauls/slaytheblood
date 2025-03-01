@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://b1ujjxp0k35wf"]
 
-[ext_resource type="Script" path="res://scenes/campfire/campfire.gd" id="1_4dva7"]
+[ext_resource type="Script" uid="uid://b84ee0xlq1dfv" path="res://scenes/campfire/campfire.gd" id="1_4dva7"]
 [ext_resource type="Texture2D" uid="uid://bkd3d4xet2f0d" path="res://art/line.png" id="2_5qpty"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="2_bhiml"]
 
@@ -120,8 +120,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vff7s"]
 _data = {
-"RESET": SubResource("Animation_t3wwr"),
-"fade_out": SubResource("Animation_xcu4r")
+&"RESET": SubResource("Animation_t3wwr"),
+&"fade_out": SubResource("Animation_xcu4r")
 }
 
 [node name="Campfire" type="Control"]

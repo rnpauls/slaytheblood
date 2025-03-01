@@ -1,15 +1,15 @@
 [gd_scene load_steps=12 format=3 uid="uid://bfqlf1512o16k"]
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_b23i7"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_state_machine.gd" id="3_s2iv8"]
+[ext_resource type="Script" uid="uid://c0lc112hi2ygm" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
+[ext_resource type="Script" uid="uid://cuxsjd0iiq5mx" path="res://scenes/card_ui/card_state_machine.gd" id="3_s2iv8"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="3_vt4qo"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_jrm7m"]
+[ext_resource type="Script" uid="uid://cv1grwub7xt37" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_jrm7m"]
 [ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="4_mvnb2"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_qxlhx"]
-[ext_resource type="Script" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="8_fkyii"]
+[ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
+[ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
+[ext_resource type="Script" uid="uid://b1q7qqo14l5rt" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_qxlhx"]
+[ext_resource type="Script" uid="uid://tes4lojr5he7" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="8_fkyii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gup6u"]
 size = Vector2(25, 30)

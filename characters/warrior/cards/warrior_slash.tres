@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://dbwg1dj4k5cn8"]
 
-[ext_resource type="Script" path="res://characters/warrior/cards/warrior_slash.gd" id="1_es836"]
+[ext_resource type="Script" uid="uid://c50ryy81tiio0" path="res://characters/warrior/cards/warrior_slash.gd" id="1_es836"]
 [ext_resource type="Texture2D" uid="uid://cqcal03735mv8" path="res://art/tile_0118.png" id="1_n1rrn"]
 [ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/slash.ogg" id="3_2er4u"]
 

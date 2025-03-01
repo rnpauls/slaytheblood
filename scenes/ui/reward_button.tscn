@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cui26vqxgd78n"]
 
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="1_0hgxs"]
-[ext_resource type="Script" path="res://scenes/ui/reward_button.gd" id="1_7swje"]
+[ext_resource type="Script" uid="uid://b5apw5su05pig" path="res://scenes/ui/reward_button.gd" id="1_7swje"]
 
 [node name="RewardButton" type="Button"]
 custom_minimum_size = Vector2(0, 14)

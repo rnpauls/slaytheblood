@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://b3ineiqcx3j0p"]
 
 [ext_resource type="Texture2D" uid="uid://bh86draisrojo" path="res://art/arrow_small.png" id="1_e48m1"]
-[ext_resource type="Script" path="res://scenes/relic_handler/relic_handler.gd" id="1_nme40"]
+[ext_resource type="Script" uid="uid://dae1jwmmcdm0e" path="res://scenes/relic_handler/relic_handler.gd" id="1_nme40"]
 [ext_resource type="Texture2D" uid="uid://buel02xqwkvy2" path="res://art/arrow_small_disabled.png" id="2_jjl0u"]
-[ext_resource type="Script" path="res://scenes/relic_handler/relics_control.gd" id="3_5nlls"]
+[ext_resource type="Script" uid="uid://bjokv1rqwix77" path="res://scenes/relic_handler/relics_control.gd" id="3_5nlls"]
 [ext_resource type="PackedScene" uid="uid://big0rbu80crno" path="res://scenes/relic_handler/relic_ui.tscn" id="4_qg6nw"]
 
 [node name="RelicHandler" type="HBoxContainer"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://cp36y7j6a0hvw"]
 
-[ext_resource type="Script" path="res://scenes/treasure/treasure.gd" id="1_ahqvo"]
-[ext_resource type="Script" path="res://custom_resources/relic.gd" id="2_6uobi"]
+[ext_resource type="Script" uid="uid://dstxj6so82aho" path="res://scenes/treasure/treasure.gd" id="1_ahqvo"]
+[ext_resource type="Script" uid="uid://cy15ahfyoaoc8" path="res://custom_resources/relic.gd" id="2_6uobi"]
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="2_ipoxy"]
 [ext_resource type="Texture2D" uid="uid://hva3iy5hon7a" path="res://art/tile_0089.png" id="3_3xvia"]
 [ext_resource type="Resource" uid="uid://bmnv3qvjsuaxk" path="res://relics/explosive_barrel.tres" id="3_8an4p"]
@@ -116,9 +116,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_intt6"]
 _data = {
-"RESET": SubResource("Animation_31ci2"),
-"highlight": SubResource("Animation_ph34s"),
-"open": SubResource("Animation_pdekj")
+&"RESET": SubResource("Animation_31ci2"),
+&"highlight": SubResource("Animation_ph34s"),
+&"open": SubResource("Animation_pdekj")
 }
 
 [sub_resource type="Curve" id="Curve_3pr70"]

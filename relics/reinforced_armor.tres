@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://bpyxehcf5kwl"]
 
 [ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_gedrb"]
-[ext_resource type="Script" path="res://relics/reinforced_armor.gd" id="2_t2i1h"]
+[ext_resource type="Script" uid="uid://cv1n5mj1v5c6r" path="res://relics/reinforced_armor.gd" id="2_t2i1h"]
 
 [resource]
 script = ExtResource("2_t2i1h")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfyvr6vvjt3yv"]
 
-[ext_resource type="Script" path="res://scenes/relic_handler/relic_tooltip.gd" id="1_3cv1d"]
+[ext_resource type="Script" uid="uid://cfyj71ne7pcds" path="res://scenes/relic_handler/relic_tooltip.gd" id="1_3cv1d"]
 [ext_resource type="Texture2D" uid="uid://bxa8pkakcodgw" path="res://art/tile_0082.png" id="2_y05f1"]
 
 [node name="RelicTooltip" type="Control"]

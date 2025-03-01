@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dsiqp6n72kl03"]
 
 [ext_resource type="PackedScene" uid="uid://big0rbu80crno" path="res://scenes/relic_handler/relic_ui.tscn" id="1_bev8e"]
-[ext_resource type="Script" path="res://scenes/shop/shop_relic.gd" id="1_w5qq0"]
+[ext_resource type="Script" uid="uid://b7w1pmsiruum7" path="res://scenes/shop/shop_relic.gd" id="1_w5qq0"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="4_uorme"]
 
 [node name="ShopRelic" type="VBoxContainer"]

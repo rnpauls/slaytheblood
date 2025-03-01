@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=3 uid="uid://dv7qi15lhpteq"]
 
-[ext_resource type="Script" path="res://scenes/shop/shop.gd" id="1_1ldyg"]
+[ext_resource type="Script" uid="uid://rjtfm0o4foxt" path="res://scenes/shop/shop.gd" id="1_1ldyg"]
 [ext_resource type="Texture2D" uid="uid://bj3im6egs4wxx" path="res://art/tile_0086.png" id="2_00e6t"]
-[ext_resource type="Script" path="res://custom_resources/relic.gd" id="2_m2rrw"]
+[ext_resource type="Script" uid="uid://cy15ahfyoaoc8" path="res://custom_resources/relic.gd" id="2_m2rrw"]
 [ext_resource type="Texture2D" uid="uid://cb7u4juyjpdnx" path="res://art/shopkeeper_blink.png" id="3_35pu7"]
 [ext_resource type="Resource" uid="uid://d2oia2j5pejbf" path="res://relics/coupons.tres" id="3_rno6l"]
 [ext_resource type="PackedScene" uid="uid://cj1ggwrpxs7bs" path="res://scenes/shop/shop_card.tscn" id="4_61gdv"]
@@ -61,8 +61,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_exf1x"]
 _data = {
-"Blink": SubResource("Animation_4yhk1"),
-"RESET": SubResource("Animation_aaacn")
+&"Blink": SubResource("Animation_4yhk1"),
+&"RESET": SubResource("Animation_aaacn")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_irnh7"]

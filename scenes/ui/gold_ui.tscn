@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cc02c3cbroin"]
 
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="1_6cvld"]
-[ext_resource type="Script" path="res://scenes/ui/gold_ui.gd" id="1_k71xw"]
+[ext_resource type="Script" uid="uid://otg3prwumwa" path="res://scenes/ui/gold_ui.gd" id="1_k71xw"]
 
 [node name="GoldUI" type="HBoxContainer"]
 offset_right = 32.0

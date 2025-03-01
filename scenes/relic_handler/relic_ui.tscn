@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://big0rbu80crno"]
 
-[ext_resource type="Script" path="res://scenes/relic_handler/relic_ui.gd" id="1_jnrvr"]
+[ext_resource type="Script" uid="uid://co5cqlajlf2fp" path="res://scenes/relic_handler/relic_ui.gd" id="1_jnrvr"]
 [ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_tqrdb"]
 [ext_resource type="Material" uid="uid://d30aqi80c1nrc" path="res://art/white_sprite_material.tres" id="2_mfpcx"]
 [ext_resource type="Resource" uid="uid://dhg8g1wnj0oft" path="res://relics/healing_potion.tres" id="2_sir3c"]
@@ -63,8 +63,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4js1w"]
 _data = {
-"RESET": SubResource("Animation_eknsn"),
-"flash": SubResource("Animation_dig6a")
+&"RESET": SubResource("Animation_eknsn"),
+&"flash": SubResource("Animation_dig6a")
 }
 
 [node name="RelicUI" type="Control"]

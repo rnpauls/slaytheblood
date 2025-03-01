@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blelxs68q7t0p"]
 
-[ext_resource type="Script" path="res://scenes/event_rooms/event_room_button.gd" id="1_x7c75"]
+[ext_resource type="Script" uid="uid://dwgt8rdm4ut0w" path="res://scenes/event_rooms/event_room_button.gd" id="1_x7c75"]
 
 [node name="EventRoomButton" type="Button"]
 offset_right = 10.0

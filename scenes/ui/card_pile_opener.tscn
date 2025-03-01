@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dg030i3ximmfl"]
 
 [ext_resource type="Texture2D" uid="uid://c50m0leqqs44k" path="res://art/draw.png" id="1_plnky"]
-[ext_resource type="Script" path="res://card_pile_opener.gd" id="2_syg7e"]
+[ext_resource type="Script" uid="uid://d4ml2etymlsjc" path="res://card_pile_opener.gd" id="2_syg7e"]
 
 [node name="CardPileOpener" type="TextureButton"]
 offset_right = 16.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2ay04rjh0l4v"]
 
-[ext_resource type="Script" path="res://scenes/ui/card_menu_ui.gd" id="1_6bsit"]
+[ext_resource type="Script" uid="uid://bsbbk55f2yr4f" path="res://scenes/ui/card_menu_ui.gd" id="1_6bsit"]
 [ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/warrior/cards/warrior_slash.tres" id="2_56wht"]
 [ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="3_2y3x4"]
 
