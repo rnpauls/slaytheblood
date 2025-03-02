@@ -10,8 +10,15 @@ id = "warrior_slash"
 type = 0
 rarity = 0
 target = 2
-cost = 2
+cost = 1
+pitch = 1
+attack = 3
+defense = 2
 exhausts = false
+go_again = true
 icon = ExtResource("1_n1rrn")
 tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage to all enemies.[/center]"
 sound = ExtResource("3_2er4u")
+disable_attack = false
+disable_defense = false
+disable_pitch = false

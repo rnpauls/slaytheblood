@@ -2,7 +2,7 @@ extends Relic
 
 
 func activate_relic(owner: RelicUI) -> void:
-	Events.player_hand_drawn.connect(_add_mana.bind(owner), CONNECT_ONE_SHOT)
+	Events.player_action_phase_started.connect(_add_mana.bind(owner), CONNECT_ONE_SHOT)
 
 func _add_mana(owner: RelicUI) -> void:
 	owner.flash()

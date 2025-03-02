@@ -23,6 +23,7 @@ var playable := true : set = _set_playable
 var disabled := true
 
 func _ready() -> void:
+	Events.player_card_drawn.connect(_on_card_drawn)
 	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
 	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
 	Events.card_aim_ended.connect(_on_card_drag_or_aim_ended)
@@ -41,6 +42,13 @@ func play() -> void:
 		return
 	
 	card.play(targets,char_stats, player_modifiers)
+	queue_free()
+	
+func pitch() -> void:
+	if not card:
+		return
+	
+	card.pitch_card(char_stats)#, player_modifiers)
 	queue_free()
 
 func get_active_enemy_modifiers() -> ModifierHandler:
@@ -107,4 +115,7 @@ func _on_card_drag_or_aim_ended(_card: CardUI) -> void:
 	playable = char_stats.can_play_card(card)
 
 func _on_char_stats_changed() -> void:
+	playable = char_stats.can_play_card(card)
+
+func _on_card_drawn() -> void:
 	playable = char_stats.can_play_card(card)

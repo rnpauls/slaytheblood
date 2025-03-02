@@ -10,8 +10,15 @@ id = "warrior_axe_attack"
 type = 0
 rarity = 0
 target = 1
-cost = 1
+cost = 0
+pitch = 2
+attack = 4
+defense = 2
 exhausts = false
+go_again = false
 icon = ExtResource("1_ctxlx")
 tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
 sound = ExtResource("3_cs8ol")
+disable_attack = false
+disable_defense = false
+disable_pitch = false

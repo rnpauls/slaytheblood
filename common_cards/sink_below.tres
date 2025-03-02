@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://65vpdfe0j24m"]
+
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_vbwx5"]
+[ext_resource type="Script" uid="uid://snyc3vhfffq4" path="res://characters/warrior/cards/warrior_block.gd" id="2_uovba"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/block.ogg" id="3_gi7r4"]
+
+[resource]
+script = ExtResource("2_uovba")
+id = "warrior_block"
+type = 2
+rarity = 0
+target = 0
+cost = 0
+pitch = 1
+attack = 0
+defense = 4
+exhausts = false
+go_again = false
+icon = ExtResource("1_vbwx5")
+tooltip_text = "[center]Gain [color=\"0044ff\"]%s[/color] block[/center]"
+sound = ExtResource("3_gi7r4")
+disable_attack = true
+disable_defense = false
+disable_pitch = false

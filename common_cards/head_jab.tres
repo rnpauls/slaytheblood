@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cw14a8p7hxfqe"]
+
+[ext_resource type="Texture2D" uid="uid://kq1nex3ea5ma" path="res://art/Classic 100/item47.png" id="1_gisun"]
+[ext_resource type="Script" uid="uid://dqvm5enjoevkf" path="res://common_cards/head_jab.gd" id="2_1e008"]
+
+[resource]
+script = ExtResource("2_1e008")
+id = "head_jab"
+type = 0
+rarity = 0
+target = 1
+cost = 0
+pitch = 1
+attack = 3
+defense = 2
+exhausts = false
+go_again = true
+icon = ExtResource("1_gisun")
+tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
+disable_attack = false
+disable_defense = false
+disable_pitch = false

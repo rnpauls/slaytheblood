@@ -7,11 +7,18 @@
 [resource]
 script = ExtResource("1_3dkr1")
 id = "warrior_true_strength"
-type = 2
+type = 1
 rarity = 2
 target = 0
-cost = 3
-exhausts = false
+cost = 1
+pitch = 3
+attack = 0
+defense = 3
+exhausts = true
+go_again = false
 icon = ExtResource("1_7voqq")
 tooltip_text = "[center]At the start of your turn, gain 2 [color=\\\"ffdf00\\\"]Muscle[/color].[/center]"
 sound = ExtResource("3_48tqc")
+disable_attack = true
+disable_defense = true
+disable_pitch = false

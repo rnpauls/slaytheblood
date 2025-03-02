@@ -1,11 +1,11 @@
 # Player turn order:
 # 1. START_OF_TURN Relics 
 # 2. START_OF_TURN Statuses
-# 3. Draw Hand
-# 4. End Turn 
+# 3. Action phase started signal
+# 4. End turn button
 # 5. END_OF_TURN Relics 
 # 6. END_OF_TURN Statuses
-# 7. Discard Hand
+# 7. End of turn cleanup (reset mana, action points, and draw back up)
 class_name PlayerHandler
 extends Node
 
@@ -21,6 +21,7 @@ var character: CharacterStats
 
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
+	Events.card_pitched.connect(_on_card_pitched)
 
 
 func start_battle(char_stats: CharacterStats) -> void:
@@ -36,6 +37,7 @@ func start_battle(char_stats: CharacterStats) -> void:
 func start_turn() -> void:
 	character.block = 0
 	character.reset_mana()
+	character.reset_action_points()
 	relics.activate_relics_by_type(Relic.Type.START_OF_TURN)
 
 
@@ -51,19 +53,25 @@ func draw_card() -> void:
 	Events.player_card_drawn.emit()
 
 
-func draw_cards(amount: int, is_start_of_turn_draw: bool = false) -> void:
+func draw_cards(amount: int) -> void:
 	var tween := create_tween()
 	for i in range(amount):
 		tween.tween_callback(draw_card)
 		tween.tween_interval(HAND_DRAW_INTERVAL)
 	
-	tween.finished.connect(
-		#func(): Events.player_hand_drawn.emit()
-		func(): 
-			hand.enable_hand()
-			if is_start_of_turn_draw:
-				Events.player_hand_drawn.emit()
-	)
+	#tween.finished.connect(
+		##func(): Events.player_hand_drawn.emit()
+		#func(): 
+			#hand.enable_hand()
+			#if is_end_of_turn_draw:
+				#Events.player_hand_drawn.emit()
+	#)
+
+func end_turn_cleanup() -> void:
+	character.reset_mana()
+	character.action_points = 0
+	draw_cards(character.cards_per_turn - hand.get_child_count())
+	Events.player_hand_drawn.emit()
 
 
 func discard_cards() -> void:
@@ -94,18 +102,24 @@ func reshuffle_deck_from_discard() -> void:
 
 
 func _on_card_played(card: Card) -> void:
-	if card.exhausts or card.type == Card.Type.POWER:
+	if card.exhausts:# or card.type == Card.Type.POWER:
 		return
 	
 	character.discard.add_card(card)
 
+func _on_card_pitched(card: Card) -> void:
+	#if card.exhausts or card.type == Card.Type.POWER:
+		#return
+	character.draw_pile.add_card(card)
 
 func _on_statuses_applied(type: Status.Type) -> void:
 	match type:
 		Status.Type.START_OF_TURN:
-			draw_cards(character.cards_per_turn, true)
+			print("Need to implement drawing cards at end of turn instead of start. Currently card draw signal controls turn flow")
+			Events.player_action_phase_started.emit()
+			hand.enable_hand()
 		Status.Type.END_OF_TURN:
-			discard_cards()
+			end_turn_cleanup()
 
 
 func _on_relics_activated(type: Relic.Type) -> void:

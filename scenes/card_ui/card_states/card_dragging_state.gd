@@ -31,7 +31,9 @@ func on_input(event: InputEvent) -> void:
 		card_ui.global_position = card_ui.get_global_mouse_position() - card_ui.pivot_offset
 	
 	if cancel:
+		card_ui.accept_event()
 		transition_requested.emit(self, CardState.State.BASE)
 	elif confirm and minimum_drag_time_elapsed:
-		get_viewport().set_input_as_handled()
+		#get_viewport().set_input_as_handled()
+		card_ui.accept_event()
 		transition_requested.emit(self, CardState.State.RELEASED)

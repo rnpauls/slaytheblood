@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cxcm2s6evmy36"]
+[gd_scene load_steps=24 format=3 uid="uid://cxcm2s6evmy36"]
 
 [ext_resource type="Script" uid="uid://bpq3l77qluekc" path="res://scenes/battle/battle.gd" id="1_0ser8"]
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_hkrb3"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b50ekork55ljq" path="res://scenes/ui/mana_ui.tscn" id="11_8aauo"]
 [ext_resource type="PackedScene" uid="uid://dg4s3vaj75784" path="res://scenes/ui/tooltip.tscn" id="12_qjopr"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="13_7w6b0"]
+[ext_resource type="PackedScene" uid="uid://bljd5caaiyxj5" path="res://scenes/ui/action_points_ui.tscn" id="14_5moxy"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
@@ -93,6 +94,12 @@ metadata/_edit_lock_ = true
 offset_top = -41.0
 offset_bottom = -23.0
 char_stats = ExtResource("4_psa3f")
+
+[node name="ActionPointsUI" parent="BattleUI" instance=ExtResource("14_5moxy")]
+offset_left = 29.0
+offset_top = -41.0
+offset_right = 47.0
+offset_bottom = -23.0
 
 [node name="Tooltip" parent="BattleUI" instance=ExtResource("12_qjopr")]
 offset_top = 6.0

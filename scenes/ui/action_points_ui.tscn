@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://bljd5caaiyxj5"]
+
+[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_grfoq"]
+[ext_resource type="Script" uid="uid://vpjpuov3ou03" path="res://scenes/ui/action_points_ui.gd" id="2_grfoq"]
+
+[node name="ActionPointsUI" type="Panel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -6.0
+grow_vertical = 0
+theme = ExtResource("1_grfoq")
+script = ExtResource("2_grfoq")
+
+[node name="ActionPointsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -3.0
+offset_right = 2.5
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Designator" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -15.0
+offset_right = 12.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Actions"
+horizontal_alignment = 1
+vertical_alignment = 1

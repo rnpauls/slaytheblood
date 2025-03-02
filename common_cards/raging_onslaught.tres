@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://jk155r0wgw12"]
+
+[ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/Classic 100/item53.png" id="1_ejx80"]
+[ext_resource type="Script" uid="uid://c65yv7hg0ramj" path="res://common_cards/raging_onslaught.gd" id="1_xvkww"]
+
+[resource]
+script = ExtResource("1_xvkww")
+id = "raging_onslaught"
+type = 0
+rarity = 0
+target = 1
+cost = 3
+pitch = 1
+attack = 7
+defense = 3
+exhausts = false
+go_again = false
+icon = ExtResource("1_ejx80")
+tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
+disable_attack = false
+disable_defense = false
+disable_pitch = false
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

@@ -16,6 +16,8 @@ func enter() ->void:
 	Events.tooltip_hide_requested.emit()
 
 func on_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("right_mouse"):
+		transition_requested.emit(self, CardState.State.PITCHED)
 	if not card_ui.playable or card_ui.disabled:
 		return
 	if event.is_action_pressed("left_mouse"):
