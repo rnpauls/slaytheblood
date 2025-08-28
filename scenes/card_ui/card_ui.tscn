@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="4_mvnb2"]
 [ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
 [ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
+[ext_resource type="Script" uid="uid://cqvkgse7bithh" path="res://scenes/card_ui/card_states/card_blocked_state.gd" id="6_qeblu"]
 [ext_resource type="Script" uid="uid://b1q7qqo14l5rt" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_qxlhx"]
 [ext_resource type="Script" uid="uid://tes4lojr5he7" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="8_fkyii"]
-[ext_resource type="Script" uid="uid://dp8udoutyrshc" path="res://scenes/card_ui/card_states/card_pitched_state.gd" id="11_qeblu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gup6u"]
 size = Vector2(25, 30)
@@ -47,8 +47,12 @@ script = ExtResource("3_s2iv8")
 initial_state = NodePath("CardBaseState")
 
 [node name="CardPitchedState" type="Node" parent="CardStateMachine"]
-script = ExtResource("11_qeblu")
+script = ExtResource("6_qeblu")
 state = 5
+
+[node name="CardBlockedState" type="Node" parent="CardStateMachine"]
+script = ExtResource("6_qeblu")
+state = 6
 
 [node name="CardBaseState" type="Node" parent="CardStateMachine"]
 script = ExtResource("4_jrm7m")

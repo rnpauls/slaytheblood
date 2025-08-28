@@ -14,7 +14,7 @@ extends Node2D
 func _ready() -> void:
 	
 	enemy_handler.child_order_changed.connect(_on_enemies_child_order_changed)
-	Events.enemy_turn_ended.connect(_on_enemy_turn_ended)
+	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
 	
 	Events.player_end_phase_started.connect(player_handler.end_turn)
 	Events.player_turn_ended.connect(enemy_handler.start_turn)
@@ -38,9 +38,10 @@ func start_battle() ->void:
 	
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_type(Relic.Type.START_OF_COMBAT)
-	player_handler.draw_cards(player.stats.cards_per_turn)
+	print_debug("TODO: Implement random start turn?")
+	player_handler.draw_cards(player.stats.cards_per_turn, true)
 
-func _on_enemy_turn_ended() ->void:
+func _on_enemy_phase_ended() ->void:
 	player_handler.start_turn()
 	enemy_handler.reset_enemy_actions()
 

@@ -20,11 +20,13 @@ signal player_hit
 signal player_died
 signal player_card_drawn
 signal player_action_phase_started
+signal player_blocks_declared
 
 #Enemy-related events
-signal enemy_action_completed(enemy: Enemy)
-signal enemy_turn_ended
+signal enemy_turn_completed(enemy: Enemy) #curently called when enemy is done with all actions, and statuses should be activated to move to next enemy
+signal enemy_phase_ended #Called when all enemies are done, move to player turn
 signal enemy_died(enemy: Enemy)
+signal enemy_attack_declared
 
 #Battle-related events
 signal battle_over_screen_requested(text: String, type: BattleOverPanel.Type)

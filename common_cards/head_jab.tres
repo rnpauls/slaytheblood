@@ -16,7 +16,7 @@ defense = 2
 exhausts = false
 go_again = true
 icon = ExtResource("1_gisun")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
+tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage. [u]Go Again[/u].[/center]"
 disable_attack = false
 disable_defense = false
 disable_pitch = false

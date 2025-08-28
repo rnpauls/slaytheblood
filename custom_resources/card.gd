@@ -67,17 +67,27 @@ func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierH
 	char_stats.mana -= cost
 	char_stats.action_points -= 1
 	
+	for targetx in targets:
+		if targetx is Enemy:
+			targetx.defend_attack(attack, modifiers, go_again)
+			#Could emit a signal with this info, and include the targets, then connect to each enemy and await an answer
 	if is_single_targeted():
 		apply_effects(targets, modifiers)
 	else:
 		apply_effects(_get_targets(targets), modifiers)
-	
+	for targetx in targets:
+		if targetx is Enemy:
+			targetx.stats.block = 0
 	if go_again:
 		char_stats.action_points += 1
 
 func pitch_card(char_stats: CharacterStats) -> void:
 	Events.card_pitched.emit(self)
 	char_stats.mana += pitch
+
+func block_card(char_stats: CharacterStats) -> void:
+	#Events.card_blocked.emit(self)
+	char_stats.block += defense
 
 func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:
 	pass

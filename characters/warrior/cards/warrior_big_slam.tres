@@ -15,6 +15,7 @@ pitch = 1
 attack = 10
 defense = 3
 exhausts = false
+go_again = false
 icon = ExtResource("1_wqqw1")
 tooltip_text = "[center]Deal [color=\\\"ff0000\\\"]%s[/color] damage and apply 2 [color=\\\"ffdf00\\\"]Exposed[/color].[/center]"
 sound = ExtResource("3_ocq4c")

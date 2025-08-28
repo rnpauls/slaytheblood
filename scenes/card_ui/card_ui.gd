@@ -51,6 +51,13 @@ func pitch() -> void:
 	card.pitch_card(char_stats)#, player_modifiers)
 	queue_free()
 
+func block() -> void:
+	if not card:
+		return
+	
+	card.block_card(char_stats)#, player_modifiers)
+	queue_free()
+
 func get_active_enemy_modifiers() -> ModifierHandler:
 	if targets.is_empty() or targets.size() > 1 or targets[0] is not Enemy:
 		return null
