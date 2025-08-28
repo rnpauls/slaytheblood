@@ -21,6 +21,8 @@ var parent: Control
 var tween: Tween
 var playable := true : set = _set_playable
 var disabled := true
+var is_blocking:= false
+
 
 func _ready() -> void:
 	Events.player_card_drawn.connect(_on_card_drawn)

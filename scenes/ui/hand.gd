@@ -5,6 +5,11 @@ const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 
 @export var player: Player
 @export var char_stats: CharacterStats
+@export var is_blocking: bool = false
+
+func _ready() -> void:
+	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
+	Events.player_blocks_declared.connect(_on_player_blocks_declared)
 
 
 func add_card(card: Card) -> void:
@@ -39,3 +44,9 @@ func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	var new_index := clampi(child.original_index, 0, get_child_count())
 	move_child.call_deferred(child, new_index)
 	child.set_deferred("disabled", false)
+
+func _on_enemy_attack_declared() -> void:
+	is_blocking = true
+
+func _on_player_blocks_declared() -> void:
+	is_blocking = false

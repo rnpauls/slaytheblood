@@ -5,10 +5,8 @@ extends Node
 
 var current_state: CardState
 var states := {}
-var is_blocking:= false
 
 func init(card: CardUI) -> void:
-	var is_blocking = false
 	for child in get_children():
 		if child is CardState:
 			states[child.state] = child
@@ -19,8 +17,6 @@ func init(card: CardUI) -> void:
 		initial_state.enter()
 		current_state = initial_state
 	
-	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
-	Events.player_blocks_declared.connect(_on_player_blocks_declared)
 	
 
 func on_input(event: InputEvent) -> void:
@@ -54,9 +50,3 @@ func _on_transition_requested(from: CardState, to: CardState.State) -> void:
 		current_state = new_state
 		new_state.post_enter()
 	
-
-func _on_enemy_attack_declared() -> void:
-	is_blocking = true
-
-func _on_player_blocks_declared() -> void:
-	is_blocking = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfqlf1512o16k"]
+[gd_scene load_steps=14 format=3 uid="uid://bfqlf1512o16k"]
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_b23i7"]
 [ext_resource type="Script" uid="uid://c0lc112hi2ygm" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="4_mvnb2"]
 [ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
 [ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
+[ext_resource type="Script" uid="uid://dp8udoutyrshc" path="res://scenes/card_ui/card_states/card_pitched_state.gd" id="6_opj8w"]
 [ext_resource type="Script" uid="uid://cqvkgse7bithh" path="res://scenes/card_ui/card_states/card_blocked_state.gd" id="6_qeblu"]
 [ext_resource type="Script" uid="uid://b1q7qqo14l5rt" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_qxlhx"]
 [ext_resource type="Script" uid="uid://tes4lojr5he7" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="8_fkyii"]
@@ -47,7 +48,7 @@ script = ExtResource("3_s2iv8")
 initial_state = NodePath("CardBaseState")
 
 [node name="CardPitchedState" type="Node" parent="CardStateMachine"]
-script = ExtResource("6_qeblu")
+script = ExtResource("6_opj8w")
 state = 5
 
 [node name="CardBlockedState" type="Node" parent="CardStateMachine"]

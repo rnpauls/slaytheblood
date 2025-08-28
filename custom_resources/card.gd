@@ -86,7 +86,7 @@ func pitch_card(char_stats: CharacterStats) -> void:
 	char_stats.mana += pitch
 
 func block_card(char_stats: CharacterStats) -> void:
-	#Events.card_blocked.emit(self)
+	Events.card_blocked.emit(self)
 	char_stats.block += defense
 
 func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:

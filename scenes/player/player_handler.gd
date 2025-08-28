@@ -22,6 +22,7 @@ var character: CharacterStats
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
 	Events.card_pitched.connect(_on_card_pitched)
+	Events.card_blocked.connect(_on_card_blocked)
 
 
 func start_battle(char_stats: CharacterStats) -> void:
@@ -107,9 +108,10 @@ func _on_card_played(card: Card) -> void:
 	
 	character.discard.add_card(card)
 
+func _on_card_blocked(card: Card) -> void:
+	character.discard.add_card(card)
+
 func _on_card_pitched(card: Card) -> void:
-	#if card.exhausts or card.type == Card.Type.POWER:
-		#return
 	character.draw_pile.add_card(card)
 
 func _on_statuses_applied(type: Status.Type) -> void:
