@@ -62,6 +62,7 @@ func declare_next_attack() -> void:
 	else:
 		stats.action_points -= 1
 			#return
+		Events.enemy_attack_declared.emit()
 		await Events.player_blocks_declared
 		do_action()
 		#var new_conditional_action := enemy_action_picker.get_first_conditional_action()

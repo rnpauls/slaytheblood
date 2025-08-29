@@ -206,4 +206,6 @@ func pick_best_arsenal(cards: Array) -> Card:
 
 func end_turn() -> void:
 	for i in enemy.stats.cards_per_turn - hand.size():
-		hand.append(enemy.stats.draw_pile.draw_card())
+		var temp_card: Card = enemy.stats.draw_pile.draw_card()
+		if temp_card:
+			hand.append(temp_card)

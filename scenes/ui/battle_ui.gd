@@ -21,6 +21,7 @@ func _ready() -> void:
 	draw_pile_button.pressed.connect(draw_pile_view.show_current_view.bind("Draw Pile", true))
 	discard_pile_button.pressed.connect(discard_pile_view.show_current_view.bind("Discard Pile"))
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
+	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
 
 func initialize_card_pile_ui() ->void:
 	draw_pile_button.card_pile = char_stats.draw_pile
@@ -56,4 +57,4 @@ func _on_enemy_attack_declared() -> void:
 	end_turn_button.disabled = false
 
 func _on_enemy_phase_ended() -> void:
-	end_turn_button.text = "END_TURN"
+	end_turn_button.text = "END TURN"

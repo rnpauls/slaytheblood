@@ -22,6 +22,7 @@ signal player_died
 signal player_card_drawn
 signal player_action_phase_started
 signal player_blocks_declared
+signal player_set_up #emitted once the player is initialized in the battle
 
 #Enemy-related events
 signal enemy_turn_completed(enemy: Enemy) #curently called when enemy is done with all actions, and statuses should be activated to move to next enemy

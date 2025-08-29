@@ -10,7 +10,8 @@ func empty() -> bool:
 
 func draw_card() -> Card:
 	var card = cards.pop_front()
-	card_pile_size_changed.emit(cards.size())
+	if card:
+		card_pile_size_changed.emit(cards.size())
 	return card
 
 func add_card(card: Card) -> void:

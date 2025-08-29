@@ -32,6 +32,7 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.discard = CardPile.new()
 	relics.relics_activated.connect(_on_relics_activated)
 	player.status_handler.statuses_applied.connect(_on_statuses_applied)
+	Events.player_set_up.emit()
 	start_turn()
 
 
@@ -117,7 +118,7 @@ func _on_card_pitched(card: Card) -> void:
 func _on_statuses_applied(type: Status.Type) -> void:
 	match type:
 		Status.Type.START_OF_TURN:
-			print("Need to implement drawing cards at end of turn instead of start. Currently card draw signal controls turn flow")
+			#print("Need to implement drawing cards at end of turn instead of start. Currently card draw signal controls turn flow")
 			Events.player_action_phase_started.emit()
 			hand.enable_hand()
 		Status.Type.END_OF_TURN:

@@ -39,6 +39,8 @@ func start_battle() ->void:
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_type(Relic.Type.START_OF_COMBAT)
 	print_debug("TODO: Implement random start turn?")
+	if not player_handler.player:
+		await Events.player_set_up
 	player_handler.draw_cards(player.stats.cards_per_turn, true)
 
 func _on_enemy_phase_ended() ->void:

@@ -89,11 +89,11 @@ func _on_player_action_phase_started() -> void:
 
 func _on_plan_created(enemy: Enemy) -> void:
 	enemy.declare_next_attack()
-	Events.enemy_attack_declared.emit()
+	#Events.enemy_attack_declared.emit()
 
 func _on_enemy_action_completed(enemy: Enemy) ->void:
 	enemy.declare_next_attack()
-	Events.enemy_attack_declared.emit()
+	#Events.enemy_attack_declared.emit()
 
 func enemy_end_phase() -> void:
 	for enemy: Enemy in get_children():
