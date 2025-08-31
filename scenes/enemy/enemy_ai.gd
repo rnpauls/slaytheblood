@@ -32,6 +32,7 @@ func play_next_action() -> Card:
 		if turn_plan and turn_plan.remaining.size() > 0 and not arsenal:
 			arsenal = pick_best_arsenal(turn_plan.remaining)
 			hand.erase(arsenal)
+			print_enemy_ai("arsenaled %s" % arsenal.id)
 		turn_plan = null
 		return null
 	
@@ -40,16 +41,20 @@ func play_next_action() -> Card:
 	while resources < next_action.cost and turn_plan.pitched.size() > 0:
 		var pitch = turn_plan.pitched[0]
 		resources += pitch.pitch
+		enemy.stats.draw_pile.add_card(pitch)
 		hand.erase(pitch)
 		turn_plan.pitched.erase(pitch)
+		print_enemy_ai("pitched %s for %d" % [pitch.id, pitch.pitch])
 	
 	if resources < next_action.cost:
 		turn_plan.actions.erase(next_action)
+		print_enemy_ai("ran out of resources for %s" % next_action.id)
 		return null
 	
 	resources -= next_action.cost
 	hand.erase(next_action)
 	turn_plan.actions.erase(next_action)
+	print_enemy_ai("played %s" % [next_action.id])
 	return next_action
 
 # Defending phase: Player attacks AI, returns array of defense values
@@ -80,9 +85,12 @@ func defend(player_attack_power: int, has_go_again: bool, player_hand_size) -> A
 			best_option = {"defense_applied": option.defense_applied, "offense_lost": offense_lost, "damage_taken": damage_taken, "raw_damage": option.offense_after}
 	
 	for block in best_option.defense_applied:
+		#Does this actually work? Checking if it equals the arsenal card?
 		if block.card == arsenal:
+			print_enemy_ai("blocked arsenal %s for %d" % [block.card.id, block.card.defense])
 			arsenal = null
 		else:
+			print_enemy_ai("blocked %s for %d" % [block.card.id, block.card.defense])
 			hand.erase(block.card)
 	return best_option.defense_applied.map(func(c): return c.defense) if best_option.defense_applied else []
 
@@ -205,7 +213,11 @@ func pick_best_arsenal(cards: Array) -> Card:
 	return best_card
 
 func end_turn() -> void:
+	#Should recycle pitch here instead of instantly sending it to the bottom
 	for i in enemy.stats.cards_per_turn - hand.size():
 		var temp_card: Card = enemy.stats.draw_pile.draw_card()
 		if temp_card:
 			hand.append(temp_card)
+
+func print_enemy_ai(debug_str: String) -> void:
+				print("%s %s: %s" % [enemy.stats.character_name, enemy.name, debug_str])

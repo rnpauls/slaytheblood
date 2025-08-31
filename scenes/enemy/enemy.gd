@@ -130,9 +130,10 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	
 	var mod_dmg := modifier_handler.get_modified_value(damage, which_modifier)
+	stats.take_damage(mod_dmg)
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 16, 0.15))
-	tween.tween_callback(stats.take_damage.bind(mod_dmg))
+	#tween.tween_callback(stats.take_damage.bind(mod_dmg))
 	tween.tween_interval(0.17)
 	
 	tween.finished.connect(

@@ -41,7 +41,7 @@ func start_battle() ->void:
 	print_debug("TODO: Implement random start turn?")
 	if not player_handler.player:
 		await Events.player_set_up
-	player_handler.draw_cards(player.stats.cards_per_turn, true)
+	player_handler.draw_cards(player.stats.cards_per_turn, 'init')
 
 func _on_enemy_phase_ended() ->void:
 	player_handler.start_turn()

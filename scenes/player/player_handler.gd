@@ -55,25 +55,34 @@ func draw_card() -> void:
 	Events.player_card_drawn.emit()
 
 
-func draw_cards(amount: int, initial_hand = false) -> void:
+func draw_cards(amount: int, hand_type = null) -> void:
+	if amount == 0:
+		if hand_type == 'init':
+			hand.enable_hand()
+			return
+		elif hand_type == 'end':
+			Events.player_hand_drawn.emit()
+		return
+
 	var tween := create_tween()
 	for i in range(amount):
 		tween.tween_callback(draw_card)
 		tween.tween_interval(HAND_DRAW_INTERVAL)
-	if initial_hand:
+	if hand_type == 'init':
 		tween.finished.connect(
 			#func(): Events.player_hand_drawn.emit()
 			func(): 
 				hand.enable_hand()
-				#if is_end_of_turn_draw:
-					#Events.player_hand_drawn.emit()
 		)
-
+	if hand_type == 'end':
+		tween.finished.connect(
+			func(): 
+				Events.player_hand_drawn.emit()
+		)
 func end_turn_cleanup() -> void:
 	character.reset_mana()
 	character.action_points = 0
-	draw_cards(character.cards_per_turn - hand.get_child_count())
-	Events.player_hand_drawn.emit()
+	draw_cards(character.cards_per_turn - hand.get_child_count(), 'end')
 
 
 func discard_cards() -> void:

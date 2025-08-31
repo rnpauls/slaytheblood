@@ -8,7 +8,7 @@
 script = ExtResource("2_uovba")
 id = "warrior_block"
 type = 2
-rarity = 0
+rarity = 1
 target = 0
 cost = 0
 pitch = 1

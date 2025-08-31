@@ -62,6 +62,7 @@ func _get_targets(targets: Array[Node]) -> Array[Node]:
 		_:
 			return []
 
+#Currently does not accept non-attack actions targetting enemies
 func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
 	Events.card_played.emit(self)
 	char_stats.mana -= cost
