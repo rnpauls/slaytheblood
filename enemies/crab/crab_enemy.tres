@@ -12,4 +12,4 @@ character_name = "Crab"
 art = ExtResource("1_42m8v")
 max_health = 10
 starting_deck = ExtResource("4_tye3e")
-cards_per_turn = 4
+cards_per_turn = 3

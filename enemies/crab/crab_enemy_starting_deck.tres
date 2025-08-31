@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CardPile" load_steps=6 format=3 uid="uid://bq26uippxtt0a"]
+[gd_resource type="Resource" script_class="CardPile" load_steps=8 format=3 uid="uid://bq26uippxtt0a"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_alm8v"]
 [ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab.tres" id="2_3n1jn"]
 [ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="3_h1isr"]
+[ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="4_25ls3"]
 [ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="4_l6cic"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="5_bw58w"]
+[ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://common_cards/sink_below.tres" id="6_sr5ik"]
 
 [resource]
 script = ExtResource("5_bw58w")
-cards = Array[ExtResource("1_alm8v")]([ExtResource("2_3n1jn"), ExtResource("2_3n1jn"), ExtResource("2_3n1jn"), ExtResource("2_3n1jn"), ExtResource("3_h1isr"), ExtResource("3_h1isr"), ExtResource("4_l6cic"), ExtResource("4_l6cic"), ExtResource("4_l6cic")])
+cards = Array[ExtResource("1_alm8v")]([ExtResource("2_3n1jn"), ExtResource("3_h1isr"), ExtResource("3_h1isr"), ExtResource("4_25ls3"), ExtResource("4_25ls3"), ExtResource("4_l6cic"), ExtResource("4_l6cic"), ExtResource("6_sr5ik")])
