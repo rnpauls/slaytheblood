@@ -49,3 +49,9 @@ func _to_string() -> String:
 	for i in range(cards.size()):
 		_card_strings.append("%s: %s" % [i+1, cards[i].id])
 	return "\n".join(_card_strings)
+
+func reveal_top_cards(num_to_reveal : int) -> Array[Card]:
+	if num_to_reveal <= 0:
+		return []
+	else:
+		return cards.slice(0,num_to_reveal)

@@ -11,14 +11,21 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % modified_dmg
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	var topPitch : int
+	var top_card_arr : Array[Card]
+	var top_pitch = 0
 	#if target[0] is Player:
 		#topPitch = targets[0].stats.draw_pile[0].pitch
 	#elif target[0] is Enemy:
-	topPitch = modifiers.get_parent().stats.draw_pile[0].pitch
-	print_debug("Revealed %s to rabble" % 	modifiers.get_parent().stats.draw_pile[0])
+	top_card_arr = modifiers.get_parent().stats.draw_pile.reveal_top_cards(1)
+	if top_card_arr.is_empty():
+		top_pitch = 0
+		print_debug("rabble on empty deck")
+	else:
+		top_pitch = top_card_arr[0].pitch
+		print_debug("Revealed %s to rabble" % 	top_card_arr[0].id)
+
 	
 	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack-topPitch, Modifier.Type.DMG_DEALT)
+	damage_effect.amount = modifiers.get_modified_value(attack-top_pitch, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.execute(targets)
