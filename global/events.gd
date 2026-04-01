@@ -9,6 +9,7 @@ signal card_aim_ended(card_ui: CardUI)
 signal card_played(card: CardUI)
 signal card_pitched(card: CardUI)
 signal card_blocked(card: CardUI)
+#signal card_milled(card: CardUI)
 signal card_tooltip_requested(icon: Texture, text: String)
 signal tooltip_hide_requested
 

@@ -10,6 +10,7 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var arrow: Sprite2D = $Arrow
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
+@onready var enemy_card_ui: EnemyCardUI = $EnemyCardUI
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
@@ -47,6 +48,8 @@ func setup_ai() -> void:
 	enemy_ai = new_ai
 	enemy_ai.enemy = self
 	enemy_ai.setup()
+	enemy_card_ui.update_cards(enemy_ai)
+
 
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
@@ -57,6 +60,7 @@ func declare_next_attack() -> void:
 	#if not current_action:
 	current_action = enemy_ai.play_next_action()
 	update_intent()
+	enemy_card_ui.update_cards(enemy_ai)
 	if current_action == null:
 		Events.enemy_turn_completed.emit(self)
 	else:
@@ -114,6 +118,7 @@ func do_action() -> void:
 		stats.action_points += 1
 	
 	enemy_action_completed.emit(self)
+	enemy_card_ui.update_cards(enemy_ai)
 
 #Defend player attack
 #attack: base attack
@@ -130,6 +135,8 @@ func defend_attack(attack: int, modifiers: ModifierHandler, go_again: bool) -> v
 	stats.block += defense_array.reduce(func(sum, plus): return sum + plus, 0)
 	#return defense_array.reduce(func(sum, plus) : sum + plus, 0)
 	update_intent()
+	enemy_card_ui.update_cards(enemy_ai)
+
 
 func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 	if stats.health <= 0:
@@ -162,6 +169,8 @@ func cleanup_phase() -> void:
 	enemy_ai.end_turn()
 	stats.block = 0
 	stats.action_points = 1
+	enemy_card_ui.update_cards(enemy_ai)
+
 
 func _on_area_entered(_area):
 	arrow.show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp7xdwgtmam1n"]
+[gd_scene format=3 uid="uid://cp7xdwgtmam1n"]
 
 [ext_resource type="Script" uid="uid://lv62ht8mc8om" path="res://scenes/enemy/enemy.gd" id="1_dl80c"]
 [ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_srxb5"]
@@ -6,47 +6,59 @@
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="3_p3m4l"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="6_4c52q"]
+[ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_card_ui.tscn" id="6_4efjx"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="7_ipda1"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="8_3uufv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 
-[node name="Enemy" type="Area2D" groups=["enemies"]]
+[node name="Enemy" type="Area2D" unique_id=844617398 groups=["enemies"]]
 collision_layer = 4
 script = ExtResource("1_dl80c")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=919184121]
 texture = ExtResource("1_srxb5")
 
-[node name="Arrow" type="Sprite2D" parent="."]
+[node name="Arrow" type="Sprite2D" parent="." unique_id=2093290913]
 visible = false
 position = Vector2(15, 0)
 rotation = -1.5708
 texture = ExtResource("2_ywvjq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=703996517]
 shape = SubResource("RectangleShape2D_54tcg")
 
-[node name="StatsUI" parent="." instance=ExtResource("3_p3m4l")]
+[node name="StatsUI" parent="." unique_id=408535621 instance=ExtResource("3_p3m4l")]
 offset_top = 7.0
 offset_bottom = 23.0
 
-[node name="IntentUI" parent="." instance=ExtResource("5_rbfua")]
+[node name="IntentUI" parent="." unique_id=257861735 instance=ExtResource("5_rbfua")]
 offset_top = -29.0
 offset_bottom = -15.0
 
-[node name="StatusHandler" parent="." node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
-offset_left = -25.0
-offset_top = 21.0
-offset_right = -25.0
-offset_bottom = 34.0
+[node name="EnemyCardUI" parent="." unique_id=1222570682 instance=ExtResource("6_4efjx")]
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = 22.0
+offset_right = 21.0
+offset_bottom = 38.0
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
+offset_left = -24.0
+offset_top = 37.0
+offset_right = -24.0
+offset_bottom = 50.0
 status_owner = NodePath("..")
 
-[node name="ModifierHandler" parent="." instance=ExtResource("7_ipda1")]
+[node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]
 
-[node name="DamageDealtModifier" parent="ModifierHandler" instance=ExtResource("8_3uufv")]
+[node name="DamageDealtModifier" parent="ModifierHandler" unique_id=1958181695 instance=ExtResource("8_3uufv")]
 
-[node name="DamageTakenModifier" parent="ModifierHandler" instance=ExtResource("8_3uufv")]
+[node name="DamageTakenModifier" parent="ModifierHandler" unique_id=2052155626 instance=ExtResource("8_3uufv")]
 type = 1
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

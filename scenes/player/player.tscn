@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://behjfqeouf5ky"]
+[gd_scene format=3 uid="uid://behjfqeouf5ky"]
 
 [ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="1_cf0j3"]
 [ext_resource type="Script" uid="uid://bljhj80f6512h" path="res://scenes/player/player.gd" id="1_g61l3"]
@@ -7,29 +7,29 @@
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="5_7r1uk"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="6_x5300"]
 
-[node name="Player" type="Node2D" groups=["player"]]
+[node name="Player" type="Node2D" unique_id=1759816572 groups=["player"]]
 script = ExtResource("1_g61l3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=617256268]
 texture = ExtResource("1_cf0j3")
 
-[node name="StatsUI" parent="." instance=ExtResource("2_ukskc")]
+[node name="StatsUI" parent="." unique_id=411925854 instance=ExtResource("2_ukskc")]
 offset_top = 7.0
 offset_bottom = 23.0
 
-[node name="StatusHandler" parent="." node_paths=PackedStringArray("status_owner") instance=ExtResource("4_yap0n")]
+[node name="StatusHandler" parent="." unique_id=778162033 node_paths=PackedStringArray("status_owner") instance=ExtResource("4_yap0n")]
 offset_left = -25.0
 offset_top = 24.0
 offset_right = -25.0
 offset_bottom = 24.0
 status_owner = NodePath("..")
 
-[node name="ModifierHandler" parent="." instance=ExtResource("5_7r1uk")]
+[node name="ModifierHandler" parent="." unique_id=1113226736 instance=ExtResource("5_7r1uk")]
 
-[node name="DamageDealtModifier" parent="ModifierHandler" instance=ExtResource("6_x5300")]
+[node name="DamageDealtModifier" parent="ModifierHandler" unique_id=1214438667 instance=ExtResource("6_x5300")]
 
-[node name="DamageTakenModifier" parent="ModifierHandler" instance=ExtResource("6_x5300")]
+[node name="DamageTakenModifier" parent="ModifierHandler" unique_id=1490203088 instance=ExtResource("6_x5300")]
 type = 1
 
-[node name="CardCostModifier" parent="ModifierHandler" instance=ExtResource("6_x5300")]
+[node name="CardCostModifier" parent="ModifierHandler" unique_id=1882914202 instance=ExtResource("6_x5300")]
 type = 2

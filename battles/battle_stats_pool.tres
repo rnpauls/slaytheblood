@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BattleStatsPool" load_steps=6 format=3 uid="uid://b03opgk5gd1bn"]
+[gd_resource type="Resource" script_class="BattleStatsPool" format=3 uid="uid://b03opgk5gd1bn"]
 
 [ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="1_p6jnf"]
 [ext_resource type="Resource" uid="uid://st77tqqf1bs1" path="res://battles/tier_0_bats2.tres" id="2_kip4e"]

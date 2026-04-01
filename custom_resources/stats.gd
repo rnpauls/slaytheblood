@@ -76,3 +76,12 @@ func take_damage(damage : int) -> void:
 
 func heal(amount : int) -> void:
 	health += amount
+
+func mill(amount: int) -> Array[Card]:
+	var milled_cards: Array[Card]
+	for card_num in amount:
+		var milled_card = draw_pile.draw_card()
+		if milled_card:
+			discard.add_card(milled_card)
+			milled_cards.append(milled_card)
+	return milled_cards
