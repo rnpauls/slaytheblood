@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://be0pdlwkj8poo"]
+[gd_resource type="Resource" format=3 uid="uid://be0pdlwkj8poo"]
 
 [ext_resource type="Texture2D" uid="uid://ck1t4hdip6xrl" path="res://art/tile_0119.png" id="1_ctxlx"]
 [ext_resource type="Script" uid="uid://wrv08yk6qt1n" path="res://characters/warrior/cards/warrior_axe_attack.gd" id="2_vvytm"]
@@ -7,18 +7,10 @@
 [resource]
 script = ExtResource("2_vvytm")
 id = "warrior_axe_attack"
-type = 0
-rarity = 0
 target = 1
-cost = 0
 pitch = 2
 attack = 4
 defense = 2
-exhausts = false
-go_again = false
 icon = ExtResource("1_ctxlx")
 tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
 sound = ExtResource("3_cs8ol")
-disable_attack = false
-disable_defense = false
-disable_pitch = false

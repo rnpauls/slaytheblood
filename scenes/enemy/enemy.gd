@@ -15,7 +15,7 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 signal enemy_action_completed
 
-var enemy_action_picker: EnemyActionPicker
+#var enemy_action_picker: EnemyActionPicker
 var enemy_ai: EnemyAI
 #var current_action: EnemyAction: set = set_current_action
 var current_action: Card: set = set_current_action
@@ -81,20 +81,27 @@ func update_enemy() -> void:
 	update_stats()
 
 func update_intent() -> void:
+	var new_intent = Intent.new()
 	if current_action and current_action.type == Card.Type.ATTACK:
 		var og_atk = current_action.attack
 		var modified_damage := modifier_handler.get_modified_value(og_atk, Modifier.Type.DMG_DEALT)
 		modified_damage = enemy_ai.target.modifier_handler.get_modified_value(modified_damage, Modifier.Type.DMG_TAKEN)
-		var new_intent = Intent.new()
+		
 		if current_action.go_again:
 			new_intent.base_text = "%s GA"
 		else:
 			new_intent.base_text = "%s"
 		new_intent.current_text = new_intent.base_text % modified_damage
 		new_intent.icon = preload("res://art/tile_0103.png")
-		intent_ui.update_intent(new_intent)
 	else:
-		intent_ui.update_intent(null)
+		if enemy_ai and enemy_ai.hand.size() > 0:
+			new_intent.base_text = "?x%s"
+			new_intent.current_text = new_intent.base_text % get_num_cards_for_turn()
+			new_intent.icon = null
+		else:
+			new_intent.current_text = "EMPTY"
+			new_intent.icon = null
+	intent_ui.update_intent(new_intent)
 
 func do_action() -> void:
 	#stats.block = 0
@@ -122,7 +129,8 @@ func defend_attack(attack: int, modifiers: ModifierHandler, go_again: bool) -> v
 	#else:
 	stats.block += defense_array.reduce(func(sum, plus): return sum + plus, 0)
 	#return defense_array.reduce(func(sum, plus) : sum + plus, 0)
-	
+	update_intent()
+
 func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 	if stats.health <= 0:
 		return
@@ -144,6 +152,11 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 				Events.enemy_died.emit(self)
 				queue_free()
 	)
+	
+func get_num_cards_for_turn() -> int:
+	var player_life = get_tree().get_first_node_in_group("player").stats.health
+	var turn_plan: Dictionary = enemy_ai.calculate_max_offense_now(player_life)
+	return turn_plan.actions.size()
 
 func cleanup_phase() -> void:
 	enemy_ai.end_turn()
