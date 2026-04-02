@@ -1,20 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://s4mgc84jep8h"]
+[gd_scene format=3 uid="uid://s4mgc84jep8h"]
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_0qctv"]
 [ext_resource type="Script" uid="uid://cjhf23ocvv0vi" path="res://scenes/ui/card_visuals.gd" id="2_4hbsy"]
 [ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="2_p7yu4"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="3_10ksf"]
+[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/pixel_rpg_label_settings.tres" id="4_m3e03"]
 [ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="4_n0g3o"]
 [ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="5_imfec"]
 
-[node name="CardVisuals" type="Control"]
-custom_minimum_size = Vector2(25, 30)
+[node name="CardVisuals" type="Control" unique_id=101409697]
+custom_minimum_size = Vector2(200, 280)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 280.0
 theme = ExtResource("1_0qctv")
 script = ExtResource("2_4hbsy")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1886818472]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,127 +27,109 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_p7yu4")
 
-[node name="Cost" type="Label" parent="."]
+[node name="Cost" type="Label" parent="." unique_id=564548442]
 layout_mode = 1
-offset_left = 14.0
-offset_top = 1.0
-offset_right = 24.0
-offset_bottom = 11.0
-text = "2"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Defense" type="Label" parent="."]
-layout_mode = 1
-offset_left = 14.0
-offset_top = 21.0
-offset_right = 24.0
-offset_bottom = 31.0
+offset_left = 105.0
+offset_top = 13.0
+offset_right = 198.0
+offset_bottom = 71.0
 text = "3"
+label_settings = ExtResource("4_m3e03")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Attack" type="Label" parent="."]
+[node name="Defense" type="Label" parent="." unique_id=681672455]
 layout_mode = 1
-offset_left = 2.0
-offset_top = 21.0
-offset_right = 12.0
-offset_bottom = 31.0
+offset_left = 111.0
+offset_top = 235.0
+offset_right = 198.0
+offset_bottom = 279.0
 text = "4"
+label_settings = ExtResource("4_m3e03")
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Attack" type="Label" parent="." unique_id=1820418952]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 9.0
+offset_top = 235.0
+offset_right = 81.0
+offset_bottom = 279.0
+text = "6"
+label_settings = ExtResource("4_m3e03")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1088393672]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 78.0
+offset_right = 162.0
+offset_bottom = 202.0
 mouse_filter = 2
 texture = ExtResource("3_10ksf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AttackIcon" type="TextureRect" parent="."]
+[node name="AttackIcon" type="TextureRect" parent="." unique_id=407441525]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.5
-offset_top = 3.0
-offset_right = -6.5
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = 189.0
+offset_right = 45.0
+offset_bottom = 234.0
 mouse_filter = 2
 texture = ExtResource("3_10ksf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="DefenseIcon" type="TextureRect" parent="."]
+[node name="DefenseIcon" type="TextureRect" parent="." unique_id=1309720383]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 6.5
-offset_top = 3.0
-offset_right = 11.5
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 153.0
+offset_top = 193.0
+offset_right = 198.0
+offset_bottom = 238.0
 mouse_filter = 2
 texture = ExtResource("5_imfec")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Rarity" type="TextureRect" parent="."]
+[node name="Rarity" type="TextureRect" parent="." unique_id=1750346003]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 3.0
-offset_right = 8.0
-offset_bottom = 9.0
+offset_left = 7.0
+offset_top = 16.0
+offset_right = 52.0
+offset_bottom = 61.0
 texture = ExtResource("4_n0g3o")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PitchStrip" type="CanvasModulate" parent="."]
+[node name="PitchStrip" type="CanvasModulate" parent="." unique_id=868946663]
+position = Vector2(105, 0)
 
-[node name="PitchStrip1" type="ColorRect" parent="PitchStrip"]
+[node name="PitchStrip1" type="ColorRect" parent="PitchStrip" unique_id=902687351]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 2.0
+offset_left = -104.0
 offset_top = 1.0
-offset_right = 23.0
-offset_bottom = 2.0
+offset_right = 94.0
+offset_bottom = 7.0
 grow_horizontal = 2
 
-[node name="PitchStrip2" type="ColorRect" parent="PitchStrip"]
+[node name="PitchStrip2" type="ColorRect" parent="PitchStrip" unique_id=1392931361]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 9.0
-offset_top = 2.0
-offset_right = 16.0
-offset_bottom = 3.0
+offset_left = -60.0
+offset_top = 7.0
+offset_right = 60.0
+offset_bottom = 15.0
 grow_horizontal = 2
 
-[node name="PitchStrip3" type="ColorRect" parent="PitchStrip"]
+[node name="PitchStrip3" type="ColorRect" parent="PitchStrip" unique_id=768315697]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 11.0
-offset_top = 3.0
-offset_right = 14.0
-offset_bottom = 4.0
+offset_left = -40.0
+offset_top = 15.0
+offset_right = 40.0
+offset_bottom = 21.0
 grow_horizontal = 2

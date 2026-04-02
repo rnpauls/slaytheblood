@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://big0rbu80crno"]
+[gd_scene format=3 uid="uid://big0rbu80crno"]
 
 [ext_resource type="Script" uid="uid://co5cqlajlf2fp" path="res://scenes/relic_handler/relic_ui.gd" id="1_jnrvr"]
 [ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_tqrdb"]
@@ -67,26 +67,24 @@ _data = {
 &"flash": SubResource("Animation_dig6a")
 }
 
-[node name="RelicUI" type="Control"]
-custom_minimum_size = Vector2(16, 16)
+[node name="RelicUI" type="Control" unique_id=1748562188]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_jnrvr")
 relic = ExtResource("2_sir3c")
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Icon" type="TextureRect" parent="." unique_id=2080651039]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_right = 64.0
+offset_bottom = 64.0
 pivot_offset = Vector2(8, 8)
 texture = ExtResource("1_tqrdb")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_4js1w")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=85685316]
+libraries/ = SubResource("AnimationLibrary_4js1w")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

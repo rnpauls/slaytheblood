@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_srxb5"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="2_ywvjq"]
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="3_p3m4l"]
+[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/pixel_rpg_label_settings_smaller.tres" id="5_hvxgb"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="6_4c52q"]
 [ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_card_ui.tscn" id="6_4efjx"]
@@ -11,12 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="8_3uufv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
+size = Vector2(82, 82)
 
 [node name="Enemy" type="Area2D" unique_id=844617398 groups=["enemies"]]
 collision_layer = 4
 script = ExtResource("1_dl80c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=919184121]
+scale = Vector2(5.125, 5.125)
 texture = ExtResource("1_srxb5")
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=2093290913]
@@ -29,29 +32,34 @@ texture = ExtResource("2_ywvjq")
 shape = SubResource("RectangleShape2D_54tcg")
 
 [node name="StatsUI" parent="." unique_id=408535621 instance=ExtResource("3_p3m4l")]
-offset_top = 7.0
-offset_bottom = 23.0
+offset_left = -126.0
+offset_top = 42.0
+offset_right = 126.0
+offset_bottom = 106.0
+theme = ExtResource("5_hvxgb")
 
 [node name="IntentUI" parent="." unique_id=257861735 instance=ExtResource("5_rbfua")]
-offset_top = -29.0
-offset_bottom = -15.0
+offset_left = -27.0
+offset_top = -96.0
+offset_right = 35.0
+offset_bottom = -59.0
 
 [node name="EnemyCardUI" parent="." unique_id=1222570682 instance=ExtResource("6_4efjx")]
 anchors_preset = 8
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = 22.0
-offset_right = 21.0
-offset_bottom = 38.0
+offset_left = -71.0
+offset_top = 110.0
+offset_right = 79.0
+offset_bottom = 147.0
 grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
-offset_left = -24.0
-offset_top = 37.0
-offset_right = -24.0
-offset_bottom = 50.0
+offset_left = -83.0
+offset_top = 163.0
+offset_right = -83.0
+offset_bottom = 176.0
 status_owner = NodePath("..")
 
 [node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]

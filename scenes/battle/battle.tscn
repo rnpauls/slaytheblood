@@ -14,9 +14,9 @@
 [ext_resource type="Resource" uid="uid://p755tj1qwgr3" path="res://enemies/bat/bat_enemy.tres" id="8_u75mi"]
 [ext_resource type="PackedScene" uid="uid://b50ekork55ljq" path="res://scenes/ui/mana_ui.tscn" id="11_8aauo"]
 [ext_resource type="PackedScene" uid="uid://dg4s3vaj75784" path="res://scenes/ui/tooltip.tscn" id="12_qjopr"]
-[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="13_7w6b0"]
 [ext_resource type="PackedScene" uid="uid://bljd5caaiyxj5" path="res://scenes/ui/action_points_ui.tscn" id="14_5moxy"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
+[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/pixel_rpg_label_settings_smaller.tres" id="16_5moxy"]
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="18_ajj10"]
@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="21_wry5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywq45"]
-size = Vector2(256, 100)
+size = Vector2(1262, 209)
 
 [node name="Battle" type="Node2D" unique_id=2090464004]
 script = ExtResource("1_0ser8")
@@ -33,6 +33,7 @@ metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1702230980]
 modulate = Color(0.349065, 0.349065, 0.349065, 1)
+scale = Vector2(5, 4.9999995)
 texture = ExtResource("1_hkrb3")
 centered = false
 
@@ -40,31 +41,31 @@ centered = false
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea" unique_id=1768850659]
-position = Vector2(128, 50)
+position = Vector2(640, 608.5)
 shape = SubResource("RectangleShape2D_ywq45")
 debug_color = Color(0, 0.6, 0.701961, 0.211765)
-metadata/_edit_lock_ = true
 
 [node name="EnemyHandler" type="Node2D" parent="." unique_id=79269191]
 script = ExtResource("4_2ufbh")
 
 [node name="CrabEnemy" parent="EnemyHandler" unique_id=311269398 instance=ExtResource("2_spkj8")]
-position = Vector2(195, 73)
+position = Vector2(1136, 344)
 stats = ExtResource("5_247pw")
 
 [node name="BatEnemy" parent="EnemyHandler" unique_id=721559201 instance=ExtResource("2_spkj8")]
-position = Vector2(163, 55)
+position = Vector2(916, 315)
 stats = ExtResource("8_u75mi")
 
 [node name="BatEnemy2" parent="EnemyHandler" unique_id=1602055530 instance=ExtResource("2_spkj8")]
-position = Vector2(230, 55)
+position = Vector2(786, 404)
 stats = ExtResource("8_u75mi")
 
 [node name="Player" parent="." unique_id=1140780656 instance=ExtResource("3_g13cx")]
-position = Vector2(61, 76)
+position = Vector2(320, 359)
 stats = ExtResource("4_psa3f")
 
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
+visible = false
 
 [node name="PlayerHandler" type="Node" parent="." unique_id=1870701093 node_paths=PackedStringArray("player", "hand") groups=["player_handler"]]
 script = ExtResource("8_r04wr")
@@ -81,30 +82,37 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -30.0
-offset_right = 75.0
+offset_left = -272.0
+offset_top = -290.0
+offset_right = 272.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 script = ExtResource("2_bgimw")
 player = NodePath("../../Player")
-metadata/_edit_lock_ = true
 
 [node name="ManaUI" parent="BattleUI" unique_id=356935032 instance=ExtResource("11_8aauo")]
-offset_top = -41.0
-offset_bottom = -23.0
+offset_left = 33.0
+offset_top = -312.0
+offset_right = 113.0
+offset_bottom = -232.0
 char_stats = ExtResource("4_psa3f")
 
 [node name="ActionPointsUI" parent="BattleUI" unique_id=1261898973 instance=ExtResource("14_5moxy")]
-offset_left = 29.0
-offset_top = -41.0
-offset_right = 47.0
-offset_bottom = -23.0
+offset_left = 31.0
+offset_top = -448.0
+offset_right = 111.0
+offset_bottom = -368.0
 
 [node name="Tooltip" parent="BattleUI" unique_id=1281849298 instance=ExtResource("12_qjopr")]
-offset_top = 22.0
-offset_bottom = 58.0
+visible = false
+offset_left = -392.0
+offset_top = 160.0
+offset_right = 392.0
+offset_bottom = 432.0
 
 [node name="EndTurnButton" type="Button" parent="BattleUI" unique_id=1995290884]
 unique_name_in_owner = true
@@ -113,21 +121,21 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -49.0
-offset_top = -39.0
-offset_right = -4.0
-offset_bottom = -25.0
+offset_left = -216.0
+offset_top = -108.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("13_7w6b0")
-text = "END TURN"
+theme = ExtResource("16_5moxy")
+text = "END"
 
 [node name="DrawPileButton" parent="BattleUI" unique_id=1843257857 node_paths=PackedStringArray("counter") instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
-offset_left = 7.0
-offset_top = 124.0
-offset_right = 23.0
-offset_bottom = 140.0
+offset_left = 24.0
+offset_top = 600.0
+offset_right = 124.0
+offset_bottom = 700.0
 counter = NodePath("Counter")
 
 [node name="Counter" type="Label" parent="BattleUI/DrawPileButton" unique_id=1401742662]
@@ -141,10 +149,10 @@ horizontal_alignment = 1
 
 [node name="DiscardPileButton" parent="BattleUI" unique_id=1643009583 node_paths=PackedStringArray("counter") instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
-offset_left = 234.0
-offset_top = 124.0
-offset_right = 250.0
-offset_bottom = 140.0
+offset_left = 1158.0
+offset_top = 488.0
+offset_right = 1258.0
+offset_bottom = 588.0
 texture_normal = ExtResource("18_ajj10")
 counter = NodePath("Counter")
 
@@ -169,6 +177,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0.364706, 0.337255, 0)
+metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="RedFlash" unique_id=1069220402]
 wait_time = 0.1

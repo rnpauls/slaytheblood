@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcama8h1qr5h6"]
+[gd_scene format=3 uid="uid://bcama8h1qr5h6"]
 
 [ext_resource type="Script" uid="uid://btv4bxuwq3ute" path="res://scenes/run/run.gd" id="1_28tcv"]
 [ext_resource type="PackedScene" uid="uid://bvsm0ynb8p1bw" path="res://scenes/map/map.tscn" id="1_m4lvx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="4_i2rp4"]
 [ext_resource type="PackedScene" uid="uid://dddovy5g11sne" path="res://scenes/ui/health_ui.tscn" id="4_ptqfx"]
 [ext_resource type="Texture2D" uid="uid://d3p1vffksgu74" path="res://art/deck.png" id="5_048qf"]
+[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/pixel_rpg_label_settings_smaller.tres" id="5_cnkn7"]
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
 [ext_resource type="PackedScene" uid="uid://cfyvr6vvjt3yv" path="res://scenes/relic_handler/relic_tooltip.tscn" id="10_kjras"]
@@ -14,15 +15,15 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3ve3"]
 
-[node name="Run" type="Node"]
+[node name="Run" type="Node" unique_id=2041853783]
 script = ExtResource("1_28tcv")
 run_startup = ExtResource("2_g1vxi")
 
-[node name="Map" parent="." instance=ExtResource("1_m4lvx")]
+[node name="Map" parent="." unique_id=1285956947 instance=ExtResource("1_m4lvx")]
 
-[node name="CurrentView" type="Node" parent="."]
+[node name="CurrentView" type="Node" parent="." unique_id=1456447172]
 
-[node name="DebugButtons" type="VBoxContainer" parent="."]
+[node name="DebugButtons" type="VBoxContainer" parent="." unique_id=1463792825]
 visible = false
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -30,105 +31,106 @@ offset_right = 2.0
 grow_vertical = 2
 alignment = 1
 
-[node name="MapButton" type="Button" parent="DebugButtons"]
+[node name="MapButton" type="Button" parent="DebugButtons" unique_id=1018327408]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Map"
 
-[node name="BattleButton" type="Button" parent="DebugButtons"]
+[node name="BattleButton" type="Button" parent="DebugButtons" unique_id=1426318882]
 unique_name_in_owner = true
 layout_mode = 2
 text = "battle"
 
-[node name="ShopButton" type="Button" parent="DebugButtons"]
+[node name="ShopButton" type="Button" parent="DebugButtons" unique_id=691426145]
 unique_name_in_owner = true
 layout_mode = 2
 text = "shop"
 
-[node name="TreasureButton" type="Button" parent="DebugButtons"]
+[node name="TreasureButton" type="Button" parent="DebugButtons" unique_id=1776729829]
 unique_name_in_owner = true
 layout_mode = 2
 text = "treasure"
 
-[node name="RewardsButton" type="Button" parent="DebugButtons"]
+[node name="RewardsButton" type="Button" parent="DebugButtons" unique_id=817451563]
 unique_name_in_owner = true
 layout_mode = 2
 text = "rewards"
 
-[node name="CampfireButton" type="Button" parent="DebugButtons"]
+[node name="CampfireButton" type="Button" parent="DebugButtons" unique_id=1508717213]
 unique_name_in_owner = true
 layout_mode = 2
 text = "campfire"
 
-[node name="TopBar" type="CanvasLayer" parent="."]
+[node name="TopBar" type="CanvasLayer" parent="." unique_id=1876607555]
 layer = 3
 
-[node name="Background" type="ColorRect" parent="TopBar"]
-custom_minimum_size = Vector2(0, 18)
+[node name="Background" type="ColorRect" parent="TopBar" unique_id=1159474024]
+custom_minimum_size = Vector2(0, 80)
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.490196)
 
-[node name="BarItems" type="HBoxContainer" parent="TopBar"]
+[node name="BarItems" type="HBoxContainer" parent="TopBar" unique_id=1626484409]
 custom_minimum_size = Vector2(0, 18)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
 
-[node name="HealthUI" parent="TopBar/BarItems" instance=ExtResource("4_ptqfx")]
+[node name="HealthUI" parent="TopBar/BarItems" unique_id=796332838 instance=ExtResource("4_ptqfx")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
+theme = ExtResource("5_cnkn7")
 show_max_hp = true
 
-[node name="GoldUI" parent="TopBar/BarItems" instance=ExtResource("4_3b4mu")]
+[node name="GoldUI" parent="TopBar/BarItems" unique_id=982445713 instance=ExtResource("4_3b4mu")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="RelicHandlerContainer" type="CenterContainer" parent="TopBar/BarItems"]
+[node name="RelicHandlerContainer" type="CenterContainer" parent="TopBar/BarItems" unique_id=1619718458]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RelicHandler" parent="TopBar/BarItems/RelicHandlerContainer" instance=ExtResource("6_a2nef")]
+[node name="RelicHandler" parent="TopBar/BarItems/RelicHandlerContainer" unique_id=2006051407 instance=ExtResource("6_a2nef")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(800, 80)
 layout_mode = 2
 
-[node name="DeckButton" parent="TopBar/BarItems" node_paths=PackedStringArray("counter") instance=ExtResource("4_i2rp4")]
+[node name="DeckButton" parent="TopBar/BarItems" unique_id=336927411 node_paths=PackedStringArray("counter") instance=ExtResource("4_i2rp4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("5_048qf")
 counter = NodePath("Label")
 
-[node name="Label" type="Label" parent="TopBar/BarItems/DeckButton"]
+[node name="Label" type="Label" parent="TopBar/BarItems/DeckButton" unique_id=1314902417]
 layout_mode = 0
-offset_left = -4.0
-offset_top = 12.0
-offset_right = 6.0
-offset_bottom = 18.0
+offset_left = -36.0
+offset_top = 4.0
+offset_right = 24.0
+offset_bottom = 41.0
 text = "99"
 horizontal_alignment = 1
 
-[node name="DeckView" parent="TopBar" instance=ExtResource("6_c0b4k")]
+[node name="DeckView" parent="TopBar" unique_id=1303857816 instance=ExtResource("6_c0b4k")]
 unique_name_in_owner = true
 visible = false
 
-[node name="RelicTooltip" parent="TopBar" instance=ExtResource("10_kjras")]
+[node name="RelicTooltip" parent="TopBar" unique_id=474516011 instance=ExtResource("10_kjras")]
 unique_name_in_owner = true
 visible = false
 
-[node name="PauseMenu" type="CanvasLayer" parent="."]
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1260299461]
 process_mode = 3
 layer = 5
 visible = false
 script = ExtResource("11_d0odi")
 
-[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+[node name="ColorRect" type="ColorRect" parent="PauseMenu" unique_id=1227856339]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -136,7 +138,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.568627)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu" unique_id=1694087890]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -150,24 +152,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="PauseMenu/VBoxContainer"]
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer" unique_id=982850179]
 layout_mode = 2
 text = "Paused"
 label_settings = SubResource("LabelSettings_q3ve3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/VBoxContainer" unique_id=787508658]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="BackToGameButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
+[node name="BackToGameButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer" unique_id=1602370902]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 14)
 layout_mode = 2
 text = "Back"
 
-[node name="SaveAndQuitButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer"]
+[node name="SaveAndQuitButton" type="Button" parent="PauseMenu/VBoxContainer/HBoxContainer" unique_id=2108017282]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 14)
 layout_mode = 2

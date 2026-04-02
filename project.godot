@@ -29,11 +29,11 @@ RNG="*res://global/rng.gd"
 
 [display]
 
-window/size/viewport_width=256
-window/size/viewport_height=144
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/always_on_top=true
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/window_width_override=2480
+window/size/window_height_override=1440
 window/stretch/mode="viewport"
 
 [editor]
