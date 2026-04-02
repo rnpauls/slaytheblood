@@ -61,7 +61,7 @@ position = Vector2(786, 404)
 stats = ExtResource("8_u75mi")
 
 [node name="Player" parent="." unique_id=1140780656 instance=ExtResource("3_g13cx")]
-position = Vector2(320, 359)
+position = Vector2(320, 256)
 stats = ExtResource("4_psa3f")
 
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
@@ -108,11 +108,10 @@ offset_right = 111.0
 offset_bottom = -368.0
 
 [node name="Tooltip" parent="BattleUI" unique_id=1281849298 instance=ExtResource("12_qjopr")]
-visible = false
 offset_left = -392.0
-offset_top = 160.0
+offset_top = 104.0
 offset_right = 392.0
-offset_bottom = 432.0
+offset_bottom = 376.0
 
 [node name="EndTurnButton" type="Button" parent="BattleUI" unique_id=1995290884]
 unique_name_in_owner = true

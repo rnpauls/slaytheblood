@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvsm0ynb8p1bw"]
+[gd_scene format=3 uid="uid://bvsm0ynb8p1bw"]
 
 [ext_resource type="Script" uid="uid://k82yiqxg3pj1" path="res://scenes/map/map.gd" id="1_yuly5"]
 [ext_resource type="Script" uid="uid://dpol4nlmb6yic" path="res://scenes/map/map_generator.gd" id="2_blka6"]
@@ -12,29 +12,29 @@ colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.440866, 0.251865, 0
 gradient = SubResource("Gradient_frlm1")
 width = 50
 
-[node name="Map" type="Node2D"]
+[node name="Map" type="Node2D" unique_id=1346441814]
 script = ExtResource("1_yuly5")
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="." unique_id=312199346]
 
-[node name="Lines" type="Node2D" parent="Visuals"]
+[node name="Lines" type="Node2D" parent="Visuals" unique_id=1866922881]
 unique_name_in_owner = true
 
-[node name="Rooms" type="Node2D" parent="Visuals"]
+[node name="Rooms" type="Node2D" parent="Visuals" unique_id=951261988]
 unique_name_in_owner = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(128, 72)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1895497469]
+offset = Vector2(640, 360)
 
-[node name="MapGenerator" type="Node" parent="."]
+[node name="MapGenerator" type="Node" parent="." unique_id=563887563]
 script = ExtResource("2_blka6")
 battle_stats_pool = ExtResource("3_l33wd")
 event_room_pool = ExtResource("4_h8dso")
 
-[node name="MapBackground" type="CanvasLayer" parent="."]
+[node name="MapBackground" type="CanvasLayer" parent="." unique_id=512174887]
 layer = -1
 
-[node name="Background" type="TextureRect" parent="MapBackground"]
+[node name="Background" type="TextureRect" parent="MapBackground" unique_id=972142049]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

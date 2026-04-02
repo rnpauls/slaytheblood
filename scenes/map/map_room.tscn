@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dy1q3kgfos12t"]
+[gd_scene format=3 uid="uid://dy1q3kgfos12t"]
 
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="1_0sdrv"]
 [ext_resource type="Script" uid="uid://wocx3dktkeuf" path="res://scenes/map/map_room.gd" id="1_6y5c6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_etker"]
+radius = 36.124783
 
 [sub_resource type="Animation" id="Animation_ph5cb"]
 length = 0.001
@@ -85,28 +86,27 @@ _data = {
 &"select": SubResource("Animation_akl6w")
 }
 
-[node name="MapRoom" type="Area2D"]
+[node name="MapRoom" type="Area2D" unique_id=2134281168]
 collision_layer = 8
 script = ExtResource("1_6y5c6")
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="." unique_id=2065288615]
 
-[node name="Line2D" type="Line2D" parent="Visuals"]
+[node name="Line2D" type="Line2D" parent="Visuals" unique_id=1813265889]
 modulate = Color(1, 1, 1, 0)
 points = PackedVector2Array(-10, 8, -2, 12, 10, 6, 10, -6, 0, -14, -12, -6)
 closed = true
 width = 2.0
 default_color = Color(0.466181, 0.466181, 0.466181, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1307325523]
+scale = Vector2(5, 5)
 texture = ExtResource("1_0sdrv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1425540236]
 shape = SubResource("CircleShape2D_etker")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ktsdl")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1058675184]
+libraries/ = SubResource("AnimationLibrary_ktsdl")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

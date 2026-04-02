@@ -1,9 +1,9 @@
 class_name MapGenerator
 extends Node
 
-const X_DIST := 30*5
-const Y_DIST := 25*5
-const PLACEMENT_RANDOMNESS := 5*5
+const X_DIST := 160
+const Y_DIST := 160
+const PLACEMENT_RANDOMNESS := 25
 const FLOORS := 15
 const MAP_WIDTH := 7
 const PATHS := 6
