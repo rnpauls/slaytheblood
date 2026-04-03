@@ -56,3 +56,12 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 				Events.player_died.emit()
 				queue_free()
 	)
+
+#func destroy_arsenal() -> bool:
+	#if stats.arsenal == null:
+		#return false
+	#else:
+		#var arsenal_card: Card = stats.arsenal
+		#stats.arsenal = null
+		#arsenal_card.queue_free()
+		#return true

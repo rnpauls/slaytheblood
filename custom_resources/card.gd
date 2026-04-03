@@ -3,6 +3,7 @@ extends Resource
 
 #enum Type {ATTACK, SKILL, POWER}
 enum Type {ATTACK, NAA, BLOCK}
+enum TypeString {Attack, Action, Block}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 
@@ -77,8 +78,8 @@ func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierH
 	else:
 		apply_effects(_get_targets(targets), modifiers)
 	for targetx in targets:
-		if targetx is Enemy:
-			targetx.stats.block = 0
+		#if targetx is Enemy:
+		targetx.stats.block = 0
 	if go_again:
 		char_stats.action_points += 1
 

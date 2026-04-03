@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg4s3vaj75784"]
+[gd_scene format=3 uid="uid://dg4s3vaj75784"]
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_u4kfk"]
 [ext_resource type="Script" uid="uid://drngp1l7qt64h" path="res://scenes/ui/tooltip.gd" id="2_o5b0k"]
 [ext_resource type="Texture2D" uid="uid://cqcal03735mv8" path="res://art/tile_0118.png" id="3_08dln"]
 
-[node name="Tooltip" type="PanelContainer"]
+[node name="Tooltip" type="PanelContainer" unique_id=2076900567]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -15,17 +15,17 @@ grow_horizontal = 2
 theme = ExtResource("1_u4kfk")
 script = ExtResource("2_o5b0k")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1720940792]
 layout_mode = 2
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=847242771]
 layout_mode = 2
 
-[node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1730401851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
@@ -33,7 +33,7 @@ texture = ExtResource("3_08dln")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TooltipText" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="TooltipText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1146330493]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

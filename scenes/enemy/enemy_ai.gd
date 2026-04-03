@@ -5,9 +5,9 @@ var enemy: Enemy # Reference to enemy object (with life, intellect)
 #var deck: CardPile # Array of card objects (Card class)
 var hand: Array = [] # Current hand
 #var life: int
-var arsenal = null # Single Card or null
+var arsenal: Card = null # Single Card or null
 var turn_plan = null # Stores the planned turn {damage, pitched, actions, remaining}
-var resources = 0 # Tracks resources available this turn
+var resources := 0 # Tracks resources available this turn
 
 @export var target: Node2D#: set = _set_target
 

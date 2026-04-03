@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="1_vrruq"]
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_wm70o"]
-[ext_resource type="Resource" uid="uid://bllgno480j4cf" path="res://characters/warrior/cards/wild_ride_red.tres" id="8_m7ai2"]
+[ext_resource type="Resource" uid="uid://bdxdpo8h67w3y" path="res://common_cards/command_and_conquer.tres" id="2_gobyu"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="3_ne0bc"]
 
 [resource]
 script = ExtResource("1_vrruq")
-cards = Array[ExtResource("1_wm70o")]([ExtResource("8_m7ai2"), ExtResource("8_m7ai2"), ExtResource("8_m7ai2"), ExtResource("8_m7ai2"), ExtResource("8_m7ai2")])
+cards = Array[ExtResource("1_wm70o")]([ExtResource("2_gobyu"), ExtResource("3_ne0bc"), ExtResource("3_ne0bc"), ExtResource("2_gobyu"), ExtResource("2_gobyu")])

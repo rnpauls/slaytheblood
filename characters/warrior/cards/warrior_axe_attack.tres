@@ -10,7 +10,7 @@ id = "warrior_axe_attack"
 target = 1
 pitch = 2
 attack = 4
-defense = 2
+defense = 3
 icon = ExtResource("1_ctxlx")
 tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
 sound = ExtResource("3_cs8ol")

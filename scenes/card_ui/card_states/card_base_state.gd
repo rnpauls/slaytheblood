@@ -27,7 +27,7 @@ func on_gui_input(event: InputEvent) -> void:
 		transition_requested.emit(self, CardState.State.CLICKED)
 
 func on_mouse_entered() -> void:
-	card_ui.request_tooltip()
+	#card_ui.request_tooltip()
 	if not card_ui.playable or card_ui.disabled:
 		return
 	
@@ -35,7 +35,7 @@ func on_mouse_entered() -> void:
 	
 
 func on_mouse_exited() -> void:
-	Events.tooltip_hide_requested.emit()
+	#Events.tooltip_hide_requested.emit()
 	if not card_ui.playable or card_ui.disabled:
 		return
 	card_ui.card_visuals.panel.set("theme_override_styles/panel", card_ui.BASE_STYLEBOX)

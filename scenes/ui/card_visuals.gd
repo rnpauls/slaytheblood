@@ -12,6 +12,8 @@ extends Control
 @onready var pitch_strip: CanvasModulate = $PitchStrip
 @onready var attack_icon: TextureRect = $AttackIcon
 @onready var defense_icon: TextureRect = $DefenseIcon
+@onready var text_box: RichTextLabel = $TextBox
+@onready var type_label: RichTextLabel = $TypeLabel
 
 
 func set_card(value: Card) -> void:
@@ -20,6 +22,8 @@ func set_card(value: Card) -> void:
 
 	card = value
 	cost.text = str(card.cost)
+	text_box.text = card.tooltip_text
+	type_label.text = str(card.TypeString.keys()[card.type])
 	if card.disable_attack or card.type == Card.Type.BLOCK or card.type == Card.Type.NAA:
 		hide_attack()
 	else:

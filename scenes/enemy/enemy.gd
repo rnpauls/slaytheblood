@@ -171,6 +171,14 @@ func cleanup_phase() -> void:
 	stats.action_points = 1
 	enemy_card_ui.update_cards(enemy_ai)
 
+func destroy_arsenal() -> bool:
+	if enemy_ai.arsenal == null:
+		return false
+	else:
+		var arsenal_card: Card = enemy_ai.arsenal
+		enemy_ai.arsenal = null
+		arsenal_card.queue_free()
+		return true
 
 func _on_area_entered(_area):
 	arrow.show()

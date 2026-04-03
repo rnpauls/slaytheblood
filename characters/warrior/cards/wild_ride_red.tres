@@ -9,7 +9,7 @@ script = ExtResource("2_3cbwq")
 id = "wild_ride"
 target = 1
 cost = 2
-pitch = 3
+pitch = 1
 attack = 6
 icon = ExtResource("1_3cbwq")
 tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage. Discard top of deck. If 6power, go again.[/center]"

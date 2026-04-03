@@ -1,0 +1,23 @@
+[gd_resource type="Resource" format=3 uid="uid://bdxdpo8h67w3y"]
+
+[ext_resource type="Texture2D" uid="uid://4wkwbhjb0yp5" path="res://art/Classic 100/bone3.png" id="1_t5nsj"]
+[ext_resource type="Script" uid="uid://bsa40ofeg5ph2" path="res://common_cards/command_and_conquer.gd" id="2_t5nsj"]
+
+[resource]
+script = ExtResource("2_t5nsj")
+id = "command_and_conquer"
+type = null
+rarity = 2
+target = 1
+cost = 2
+pitch = 1
+attack = 6
+defense = 3
+exhausts = null
+go_again = null
+icon = ExtResource("1_t5nsj")
+tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage. On hit, destroy enemy arsenal.[/center]"
+disable_attack = null
+disable_defense = null
+disable_pitch = null
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"
