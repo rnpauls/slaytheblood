@@ -6,11 +6,13 @@ const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 @export var player: Player
 @export var char_stats: CharacterStats
 @export var is_blocking: bool = false
+@export var is_selecting: bool = false
 
 func _ready() -> void:
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
 	Events.player_blocks_declared.connect(_on_player_blocks_declared)
-
+	Events.selecting_cards_from_hand.connect(_on_selecting_cards_from_hand)
+	Events.finished_selecting_cards_from_hand.connect(_on_finished_selecting_cards_from_hand)
 
 func add_card(card: Card) -> void:
 	var new_card_ui := CARD_UI_SCENE.instantiate() as CardUI
@@ -50,3 +52,11 @@ func _on_enemy_attack_declared() -> void:
 
 func _on_player_blocks_declared() -> void:
 	is_blocking = false
+
+func _on_selecting_cards_from_hand() -> void:
+	is_selecting = true
+
+func _on_finished_selecting_cards_from_hand(_cards: Array[CardUI]) -> void:
+	is_selecting = false
+	for handcard in get_children() as Array[CardUI]:
+		handcard.card_state_machine.force_return_to_base_state()

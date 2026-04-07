@@ -6,18 +6,12 @@
 [resource]
 script = ExtResource("2_t5nsj")
 id = "command_and_conquer"
-type = null
 rarity = 2
 target = 1
 cost = 2
 pitch = 1
 attack = 6
 defense = 3
-exhausts = null
-go_again = null
 icon = ExtResource("1_t5nsj")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage. On hit, destroy enemy arsenal.[/center]"
-disable_attack = null
-disable_defense = null
-disable_pitch = null
+tooltip_text = "[center]On hit, destroy enemy arsenal.[/center]"
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

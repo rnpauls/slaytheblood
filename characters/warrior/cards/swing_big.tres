@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bxiso7x1yngt3"]
 
-[ext_resource type="Texture2D" uid="uid://cqcal03735mv8" path="res://art/tile_0118.png" id="1_ihg8k"]
+[ext_resource type="Texture2D" uid="uid://c2t6r0k11hap5" path="res://art/Classic 100/item29.png" id="1_ihg8k"]
 [ext_resource type="Script" uid="uid://c12206mchsls3" path="res://characters/warrior/cards/swing_big.gd" id="2_ihg8k"]
 [ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/slash.ogg" id="3_fkd8o"]
 
@@ -8,11 +8,10 @@
 script = ExtResource("2_ihg8k")
 id = "swing_big"
 rarity = 2
-target = 2
+target = 1
 cost = 2
 pitch = 1
 attack = 8
 defense = 3
 icon = ExtResource("1_ihg8k")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage to all enemies.[/center]"
 sound = ExtResource("3_fkd8o")

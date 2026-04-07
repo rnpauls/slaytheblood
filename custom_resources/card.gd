@@ -87,12 +87,21 @@ func pitch_card(char_stats: CharacterStats) -> void:
 	Events.card_pitched.emit(self)
 	char_stats.mana += pitch
 
-func block_card(char_stats: CharacterStats) -> void:
+func sink_card(char_stats: CharacterStats) -> void:
+	Events.card_sunk.emit(self)
+
+func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
+	apply_block_effects(targets, modifiers)
 	Events.card_blocked.emit(self)
-	char_stats.block += defense
 
 func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:
 	pass
+
+func apply_block_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+	var block_effect := BlockEffect.new()
+	block_effect.amount = defense
+	block_effect.sound = sound
+	block_effect.execute(targets)
 	
 func get_default_tooltip() -> String:
 	return tooltip_text

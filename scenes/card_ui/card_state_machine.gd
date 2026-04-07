@@ -11,6 +11,7 @@ func init(card: CardUI) -> void:
 		if child is CardState:
 			states[child.state] = child
 			child.transition_requested.connect(_on_transition_requested)
+			#Events.finished_selecting_cards_from_hand.connect(_on_finished_selecting_cards_from_hand)
 			child.card_ui = card
 	
 	if initial_state:
@@ -50,3 +51,13 @@ func _on_transition_requested(from: CardState, to: CardState.State) -> void:
 		current_state = new_state
 		new_state.post_enter()
 	
+#func _on_finished_selecting_cards_from_hand(_cards: Array[CardUI]) -> void:
+func force_return_to_base_state() -> void:
+	var new_state: CardState = states[CardState.State.BASE]
+		
+	if current_state:
+		current_state.exit()
+	
+	new_state.enter()
+	current_state = new_state
+	new_state.post_enter()

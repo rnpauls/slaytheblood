@@ -16,6 +16,8 @@ func enter() ->void:
 	Events.tooltip_hide_requested.emit()
 
 func on_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_mouse") and hand.is_selecting:
+		transition_requested.emit(self, CardState.State.SELECTED)
 	if event.is_action_pressed("left_mouse") and hand.is_blocking:
 		transition_requested.emit(self, CardState.State.BLOCKED)
 	if event.is_action_pressed("right_mouse"):

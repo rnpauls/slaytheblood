@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="CardPile" load_steps=10 format=3 uid="uid://bg8v8osd0axpy"]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bg8v8osd0axpy"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_6rakt"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_tp1qw"]
 [ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/warrior/cards/warrior_slash.tres" id="3_kdxy2"]
 [ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/warrior/cards/warrior_big_slam.tres" id="4_lcvrb"]
 [ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/warrior/cards/warrior_true_strength.tres" id="5_1qht6"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab.tres" id="6_01wkr"]
 [ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="7_11m5d"]
+[ext_resource type="Resource" uid="uid://bxiso7x1yngt3" path="res://characters/warrior/cards/swing_big.tres" id="8_2ypy4"]
 [ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://common_cards/sink_below.tres" id="8_ypb8s"]
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="9_2ypy4"]
+[ext_resource type="Resource" uid="uid://b72t3ass05h4u" path="res://characters/warrior/cards/warrior_block.tres" id="9_wlxe0"]
 
 [resource]
 script = ExtResource("2_tp1qw")
-cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("6_01wkr"), ExtResource("7_11m5d"), ExtResource("8_ypb8s"), ExtResource("5_1qht6"), ExtResource("9_2ypy4")])
+cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("7_11m5d"), ExtResource("8_ypb8s"), ExtResource("5_1qht6"), ExtResource("9_2ypy4"), ExtResource("8_2ypy4"), ExtResource("9_wlxe0")])

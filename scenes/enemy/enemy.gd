@@ -1,7 +1,7 @@
 class_name Enemy
 extends Area2D
 
-const ARROW_OFFSET := 5
+const ARROW_OFFSET := 45
 const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 
 @export var stats: EnemyStats : set = set_enemy_stats
@@ -109,7 +109,7 @@ func update_intent() -> void:
 
 func do_action() -> void:
 	#stats.block = 0
-	print_debug("Enemy defense used to be set to zero here")
+	#print_debug("Enemy defense used to be set to zero here")
 	if not current_action:
 		return
 	

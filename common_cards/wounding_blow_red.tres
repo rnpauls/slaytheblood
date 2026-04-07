@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bwdwsrg65wk8t"]
 
-[ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/Classic 100/item53.png" id="1_tfyyy"]
+[ext_resource type="Texture2D" uid="uid://jesqh00q1sja" path="res://art/Classic 100/item4.png" id="1_tfyyy"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/wounding_blow_red.gd" id="2_tfyyy"]
 
 [resource]
@@ -11,5 +11,4 @@ pitch = 1
 attack = 4
 defense = 3
 icon = ExtResource("1_tfyyy")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

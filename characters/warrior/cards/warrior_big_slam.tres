@@ -9,10 +9,10 @@ script = ExtResource("1_32phl")
 id = "warrior_big_slam"
 rarity = 1
 target = 1
-cost = 7
+cost = 3
 pitch = 1
-attack = 10
+attack = 8
 defense = 3
 icon = ExtResource("1_wqqw1")
-tooltip_text = "[center]Deal [color=\\\"ff0000\\\"]%s[/color] damage and apply 2 [color=\\\"ffdf00\\\"]Exposed[/color].[/center]"
+tooltip_text = "[center]Apply 2 [color=\\\"ffdf00\\\"]Exposed[/color].[/center]"
 sound = ExtResource("3_ocq4c")

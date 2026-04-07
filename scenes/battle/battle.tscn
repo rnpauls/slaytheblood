@@ -75,25 +75,6 @@ hand = NodePath("../BattleUI/Hand")
 [node name="BattleUI" type="CanvasLayer" parent="." unique_id=2022019696 groups=["ui_layer"]]
 script = ExtResource("7_8utji")
 
-[node name="Hand" type="HBoxContainer" parent="BattleUI" unique_id=991299964 node_paths=PackedStringArray("player") groups=["player_hand"]]
-unique_name_in_owner = true
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -272.0
-offset_top = -290.0
-offset_right = 272.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-script = ExtResource("2_bgimw")
-player = NodePath("../../Player")
-
 [node name="ManaUI" parent="BattleUI" unique_id=356935032 instance=ExtResource("11_8aauo")]
 offset_left = 33.0
 offset_top = -312.0
@@ -127,6 +108,7 @@ offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("16_5moxy")
+disabled = true
 text = "END"
 
 [node name="DrawPileButton" parent="BattleUI" unique_id=1843257857 node_paths=PackedStringArray("counter") instance=ExtResource("17_3u6fe")]
@@ -163,6 +145,67 @@ offset_right = 8.0
 offset_bottom = 17.0
 text = "99"
 horizontal_alignment = 1
+
+[node name="ChoiceScreen" type="ColorRect" parent="BattleUI" unique_id=293939386]
+unique_name_in_owner = true
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.23921569, 0.23921569, 0.23921569, 0.654902)
+
+[node name="ChoiceScreenLabel" type="RichTextLabel" parent="BattleUI/ChoiceScreen" unique_id=1249946325]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -255.0
+offset_right = 400.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Sample text"
+horizontal_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="BattleUI/ChoiceScreen" unique_id=968592556]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = -424.0
+offset_right = -20.0
+offset_bottom = -336.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("16_5moxy")
+text = "CONFIRM"
+
+[node name="Hand" type="HBoxContainer" parent="BattleUI" unique_id=991299964 node_paths=PackedStringArray("player") groups=["player_hand"]]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -272.0
+offset_top = -290.0
+offset_right = 272.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("2_bgimw")
+player = NodePath("../../Player")
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=811855806]
 layer = 2
@@ -204,3 +247,5 @@ layer = 4
 
 [node name="StatusView" parent="StatusViewLayer" unique_id=877282367 instance=ExtResource("21_hb0k1")]
 visible = false
+
+[connection signal="pressed" from="BattleUI/ChoiceScreen/ConfirmButton" to="BattleUI" method="_on_confirm_button_pressed"]

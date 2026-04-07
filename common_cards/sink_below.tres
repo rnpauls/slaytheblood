@@ -1,24 +1,17 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://65vpdfe0j24m"]
+[gd_resource type="Resource" format=3 uid="uid://65vpdfe0j24m"]
 
-[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_vbwx5"]
-[ext_resource type="Script" uid="uid://snyc3vhfffq4" path="res://characters/warrior/cards/warrior_block.gd" id="2_uovba"]
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/Classic 100/item52.png" id="1_vu1fo"]
+[ext_resource type="Script" uid="uid://vkcpd5x25jeg" path="res://common_cards/sink_below.gd" id="2_vu1fo"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/block.ogg" id="3_gi7r4"]
 
 [resource]
-script = ExtResource("2_uovba")
-id = "warrior_block"
+script = ExtResource("2_vu1fo")
+id = "sink_below"
 type = 2
-rarity = 1
-target = 0
-cost = 0
+rarity = 2
 pitch = 1
-attack = 0
 defense = 4
-exhausts = false
-go_again = false
-icon = ExtResource("1_vbwx5")
-tooltip_text = "[center]Gain [color=\"0044ff\"]%s[/color] block[/center]"
+icon = ExtResource("1_vu1fo")
+tooltip_text = "[center]Sink 1[/center]"
 sound = ExtResource("3_gi7r4")
 disable_attack = true
-disable_defense = false
-disable_pitch = false

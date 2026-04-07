@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://s8o4e6v14nrd"]
 
-[ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/Classic 100/item53.png" id="1_1y116"]
+[ext_resource type="Texture2D" uid="uid://5a4kk006fk3b" path="res://art/Classic 100/item10.png" id="1_1y116"]
 [ext_resource type="Script" uid="uid://cvgrfpows1pow" path="res://common_cards/critical_strike_red.gd" id="2_1y116"]
 
 [resource]
@@ -12,5 +12,4 @@ pitch = 1
 attack = 5
 defense = 3
 icon = ExtResource("1_1y116")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage.[/center]"
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

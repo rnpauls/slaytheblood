@@ -23,6 +23,7 @@ func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
 	Events.card_pitched.connect(_on_card_pitched)
 	Events.card_blocked.connect(_on_card_blocked)
+	Events.card_sunk.connect(_on_card_sunk)
 
 
 func start_battle(char_stats: CharacterStats) -> void:
@@ -73,6 +74,7 @@ func draw_cards(amount: int, hand_type = null) -> void:
 			#func(): Events.player_hand_drawn.emit()
 			func(): 
 				hand.enable_hand()
+				Events.player_initial_hand_drawn.emit()
 		)
 	if hand_type == 'end':
 		tween.finished.connect(
@@ -122,6 +124,9 @@ func _on_card_blocked(card: Card) -> void:
 	character.discard.add_card(card)
 
 func _on_card_pitched(card: Card) -> void:
+	character.draw_pile.add_card(card)
+
+func _on_card_sunk(card: Card) -> void:
 	character.draw_pile.add_card(card)
 
 func _on_statuses_applied(type: Status.Type) -> void:

@@ -13,7 +13,8 @@ extends Control
 @onready var attack_icon: TextureRect = $AttackIcon
 @onready var defense_icon: TextureRect = $DefenseIcon
 @onready var text_box: RichTextLabel = $TextBox
-@onready var type_label: RichTextLabel = $TypeLabel
+@onready var type_label: RichTextLabel = $Type
+@onready var card_name: RichTextLabel = $Name
 
 
 func set_card(value: Card) -> void:
@@ -24,6 +25,7 @@ func set_card(value: Card) -> void:
 	cost.text = str(card.cost)
 	text_box.text = card.tooltip_text
 	type_label.text = str(card.TypeString.keys()[card.type])
+	card_name.text = card.id.capitalize()
 	if card.disable_attack or card.type == Card.Type.BLOCK or card.type == Card.Type.NAA:
 		hide_attack()
 	else:
