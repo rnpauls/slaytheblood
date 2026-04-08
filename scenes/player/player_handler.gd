@@ -21,6 +21,7 @@ var character: CharacterStats
 
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
+	Events.card_discarded.connect(_on_card_discarded)
 	Events.card_pitched.connect(_on_card_pitched)
 	Events.card_blocked.connect(_on_card_blocked)
 	Events.card_sunk.connect(_on_card_sunk)
@@ -115,6 +116,12 @@ func reshuffle_deck_from_discard() -> void:
 
 
 func _on_card_played(card: Card) -> void:
+	if card.exhausts:# or card.type == Card.Type.POWER:
+		return
+	
+	character.discard.add_card(card)
+
+func _on_card_discarded(card: Card) -> void:
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		return
 	

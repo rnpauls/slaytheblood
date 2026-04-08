@@ -13,6 +13,8 @@ func _ready() -> void:
 	Events.player_blocks_declared.connect(_on_player_blocks_declared)
 	Events.selecting_cards_from_hand.connect(_on_selecting_cards_from_hand)
 	Events.finished_selecting_cards_from_hand.connect(_on_finished_selecting_cards_from_hand)
+	Events.lock_hand.connect(_on_lock_hand)
+	Events.unlock_hand.connect(_on_unlock_hand)
 
 func add_card(card: Card) -> void:
 	var new_card_ui := CARD_UI_SCENE.instantiate() as CardUI
@@ -60,3 +62,9 @@ func _on_finished_selecting_cards_from_hand(_cards: Array[CardUI]) -> void:
 	is_selecting = false
 	for handcard in get_children() as Array[CardUI]:
 		handcard.card_state_machine.force_return_to_base_state()
+
+func _on_lock_hand() -> void:
+	disable_hand()
+
+func _on_unlock_hand() -> void:
+	enable_hand()

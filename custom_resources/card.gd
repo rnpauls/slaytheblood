@@ -83,6 +83,10 @@ func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierH
 	if go_again:
 		char_stats.action_points += 1
 
+func discard_card() -> void:
+	print("Discarded %s" % id)
+	Events.card_discarded.emit(self)
+
 func pitch_card(char_stats: CharacterStats) -> void:
 	Events.card_pitched.emit(self)
 	char_stats.mana += pitch

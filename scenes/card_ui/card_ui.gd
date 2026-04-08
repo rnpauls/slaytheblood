@@ -47,7 +47,14 @@ func play() -> void:
 	
 	card.play(targets,char_stats, player_modifiers)
 	queue_free()
+
+func discard() -> void:
+	if not card:
+		return
 	
+	card.discard_card()
+	queue_free()
+
 func pitch() -> void:
 	if not card:
 		return
@@ -123,6 +130,7 @@ func _set_char_stats(value: CharacterStats) -> void:
 func _on_drop_point_detector_area_entered(area):
 	if not targets.has(area):
 		targets.append(area)
+		print("cardui added %s" % area)
 
 
 func _on_drop_point_detector_area_exited(area):
