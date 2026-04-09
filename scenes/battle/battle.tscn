@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="18_ajj10"]
+[ext_resource type="Script" uid="uid://dbsc38jytyirs" path="res://scenes/weapon_ui/weapon_ui.gd" id="19_156m4"]
 [ext_resource type="PackedScene" uid="uid://c7640ve4l6kcn" path="res://scenes/ui/status_view.tscn" id="21_hb0k1"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="21_wry5f"]
 
@@ -67,8 +68,10 @@ stats = ExtResource("4_psa3f")
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
 visible = false
 
-[node name="PlayerHandler" type="Node" parent="." unique_id=1870701093 node_paths=PackedStringArray("player", "hand") groups=["player_handler"]]
+[node name="PlayerHandler" type="Node" parent="." unique_id=1870701093 node_paths=PackedStringArray("weapon_left", "weapon_right", "player", "hand") groups=["player_handler"]]
 script = ExtResource("8_r04wr")
+weapon_left = NodePath("../BattleUI/WeaponUILeft")
+weapon_right = NodePath("../BattleUI/WeaponUIRight")
 player = NodePath("../Player")
 hand = NodePath("../BattleUI/Hand")
 
@@ -206,6 +209,22 @@ size_flags_vertical = 3
 alignment = 1
 script = ExtResource("2_bgimw")
 player = NodePath("../../Player")
+
+[node name="WeaponUILeft" type="Control" parent="BattleUI" unique_id=820238846]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("19_156m4")
+metadata/_custom_type_script = "uid://dbsc38jytyirs"
+
+[node name="WeaponUIRight" type="Control" parent="BattleUI" unique_id=1627143198]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("19_156m4")
+metadata/_custom_type_script = "uid://dbsc38jytyirs"
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=811855806]
 layer = 2

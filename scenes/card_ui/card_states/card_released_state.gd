@@ -6,7 +6,7 @@ func enter() -> void:
 	
 	played = false
 	if not card_ui.targets.is_empty():
-		print(card_ui.targets[0].get_class())
+		#print(card_ui.targets[0].get_class())
 		if card_ui.targets[0] is Enemy:
 			played = true
 			card_ui.play()

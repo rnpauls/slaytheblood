@@ -13,6 +13,8 @@ const HAND_DRAW_INTERVAL := 0.25
 const HAND_DISCARD_INTERVAL := 0.25
 
 @export var relics: RelicHandler
+@export var weapon_left: WeaponUI
+@export var weapon_right: WeaponUI
 @export var player: Player
 @export var hand: Hand
 
@@ -32,6 +34,8 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.draw_pile = character.deck.custom_duplicate()
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
+	weapon_left.set_weapon(character.weapon_left)
+	weapon_right.set_weapon(character.weapon_right)
 	relics.relics_activated.connect(_on_relics_activated)
 	player.status_handler.statuses_applied.connect(_on_statuses_applied)
 	Events.player_set_up.emit()
@@ -43,7 +47,7 @@ func start_turn() -> void:
 	character.reset_mana()
 	character.reset_action_points()
 	relics.activate_relics_by_type(Relic.Type.START_OF_TURN)
-
+	reset_weapons()
 
 func end_turn() -> void:
 	hand.disable_hand()
@@ -152,3 +156,7 @@ func _on_relics_activated(type: Relic.Type) -> void:
 			player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 		Relic.Type.END_OF_TURN:
 			player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
+
+func reset_weapons() -> void:
+	for wep in [weapon_left, weapon_right] as Array[WeaponUI]:
+		wep.reset()

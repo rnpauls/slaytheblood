@@ -8,6 +8,8 @@ extends Stats
 @export_group("Gameplay Data")
 @export var draftable_cards: CardPile
 @export var starting_relic: Relic
+@export var weapon_left: Weapon
+@export var weapon_right: Weapon = null
 
 func take_damage(damage : int) -> void:
 	var initial_health := health

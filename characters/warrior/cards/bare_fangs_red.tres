@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3 uid="uid://cq4310wmwj2av"]
+
+[ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="1_k5rlb"]
+[ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/warrior/cards/wild_ride_red.gd" id="2_6feat"]
+
+[resource]
+script = ExtResource("2_6feat")
+id = "wild_ride"
+icon = ExtResource("1_k5rlb")
+tooltip_text = "[center]Trash 1. If 6power, go again.[/center]"
