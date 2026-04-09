@@ -136,13 +136,13 @@ func _on_drop_point_detector_area_entered(area):
 func _on_drop_point_detector_area_exited(area):
 	targets.erase(area)
 
-func _on_card_drag_or_aiming_started(used_card: CardUI) -> void:
+func _on_card_drag_or_aiming_started(used_card: Node) -> void:
 	if used_card == self:
 		return
 	
 	disabled = true
 
-func _on_card_drag_or_aim_ended(_card: CardUI) -> void:
+func _on_card_drag_or_aim_ended(_card: Node) -> void:
 	disabled = false
 	playable = char_stats.can_play_card(card)
 

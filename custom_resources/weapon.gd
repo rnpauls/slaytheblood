@@ -26,7 +26,7 @@ func initialize_weapon(_owner: WeaponUI) -> void:
 	pass
 
 
-func activate_weapon(_owner: WeaponUI) -> void:
+func activate_weapon(targets: Array) -> void:
 	pass
 
 func reset() -> void:
