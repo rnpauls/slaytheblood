@@ -55,10 +55,12 @@ func end_turn() -> void:
 
 
 func draw_card() -> void:
-	reshuffle_deck_from_discard()
-	hand.add_card(character.draw_pile.draw_card())
-	reshuffle_deck_from_discard()
-	Events.player_card_drawn.emit()
+	#reshuffle_deck_from_discard()
+	var card_drawn: Card = character.draw_pile.draw_card()
+	if card_drawn:
+		hand.add_card(card_drawn)
+		#reshuffle_deck_from_discard()
+		Events.player_card_drawn.emit()
 
 
 func draw_cards(amount: int, hand_type = null) -> void:
@@ -126,9 +128,12 @@ func _on_card_played(card: Card) -> void:
 	character.discard.add_card(card)
 
 func _on_card_discarded(card: Card) -> void:
+	if card.attack >= 6:
+		var enr_status  := preload("res://statuses/enraged.tres").duplicate()
+		player.status_handler.add_status(enr_status)
+	
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		return
-	
 	character.discard.add_card(card)
 
 func _on_card_blocked(card: Card) -> void:

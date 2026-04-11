@@ -28,8 +28,7 @@ func apply_statuses_by_type(type: Status.Type) -> void:
 	
 	tween.finished.connect(func(): statuses_applied.emit(type))
 
-func _ready():
-	Events.card_discarded.connect(_on_card_discarded)
+#func _ready():
 	#var test := load("res://statuses/true_strength_form.tres")
 	#await get_tree().create_timer(1).timeout
 	#add_status(test)
@@ -91,8 +90,3 @@ func _on_status_applied(status: Status) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):
 		Events.status_tooltip_requested.emit(_get_all_statuses())
-
-func _on_card_discarded(card: CardUI) -> void:
-	if card.card.attack >= 6:
-		var enr_status = EnragedStatus.new()
-		add_status(enr_status)

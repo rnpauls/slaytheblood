@@ -1,27 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://t6ju34jk13so"]
+[gd_scene format=3 uid="uid://t6ju34jk13so"]
 
 [ext_resource type="Script" uid="uid://dhsc6cxte7vs0" path="res://scenes/ui/status_tooltip.gd" id="1_drw0w"]
 [ext_resource type="Texture2D" uid="uid://cw6byp2lelct" path="res://art/expose.png" id="1_fp00s"]
 [ext_resource type="Resource" uid="uid://8nlco1rmi3ad" path="res://statuses/muscle.tres" id="2_gyblk"]
 
-[node name="StatusTooltip" type="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
-offset_right = 150.0
-offset_bottom = 15.0
+[node name="StatusTooltip" type="HBoxContainer" unique_id=2038343475]
+custom_minimum_size = Vector2(600, 0)
+offset_right = 668.0
+offset_bottom = 200.0
 script = ExtResource("1_drw0w")
 status = ExtResource("2_gyblk")
 
-[node name="Icon" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(10, 10)
+[node name="Icon" type="TextureRect" parent="." unique_id=865445612]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+size_flags_horizontal = 6
 texture = ExtResource("1_fp00s")
-expand_mode = 1
+expand_mode = 4
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
-custom_minimum_size = Vector2(110, 0)
+[node name="Label" type="Label" parent="." unique_id=1822522912]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "Exposed: Takes 50% more damage from attacks for %s turns"
 vertical_alignment = 1
 autowrap_mode = 2

@@ -1,7 +1,7 @@
 class_name WeaponUI
 extends Control
 
-@export var weapon: Weapon : set = set_weapon
+@export var weapon: Weapon
 @export var activable: bool = false
 @export var targeting: bool = false
 @export var shader_material: ShaderMaterial
@@ -19,6 +19,7 @@ func _ready() -> void:
 	#weapon = preload("res://weapons/explosive_barrel.tres")
 	#await get_tree().create_timer(1).timeout
 	#flash()
+	weapon = null
 
 func _input(event: InputEvent) -> void:
 	if (event.is_action_released("left_mouse") or event.is_action_pressed("left_mouse") ) and targeting:
@@ -31,10 +32,11 @@ func _input(event: InputEvent) -> void:
 func set_weapon(new_weapon: Weapon) -> void:
 	if not is_node_ready():
 		await ready
-	if not new_weapon:
+	weapon = new_weapon
+	if not weapon:
 		icon.texture_normal = null
 		return
-	weapon = new_weapon
+	print("setting up weapon %s" % new_weapon.id)
 	icon.texture_normal = weapon.icon
 	icon.material = shader_material
 	weapon.weapon_used_up.connect(_on_weapon_used_up)
