@@ -7,4 +7,4 @@
 script = ExtResource("2_6feat")
 id = "wild_ride"
 icon = ExtResource("1_k5rlb")
-tooltip_text = "[center]Trash 1. If 6power, go again.[/center]"
+tooltip_text = "[center]Rampage 1: +2atk.[/center]"

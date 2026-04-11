@@ -6,7 +6,7 @@ const ARC_POINTS := 8
 @onready var area_2d: Area2D = $Area2D
 @onready var card_arc: Line2D = $CanvasLayer/CardArc
 
-var current_card: CardUI
+var current_card: Node
 var targeting := false
 
 func _ready() -> void:
@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 
 func _get_points() -> Array:
 	var points := []
-	var start := current_card.global_position
+	var start : Vector2 = current_card.global_position
 	start.x += (current_card.size.x / 2)
 	var target := get_local_mouse_position()
 	var distance := (target - start)
@@ -40,8 +40,9 @@ func ease_out_cubic(number: float) -> float:
 	return 1.0 - pow(1.0 - number, 3.0)
 
 func _on_card_aim_started(card: Node) -> void:
-	if not card.card.is_single_targeted():
-		return
+	if card is CardUI:
+		if not card.card.is_single_targeted():
+			return
 	
 	targeting = true
 	area_2d.monitoring = true

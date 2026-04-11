@@ -5,8 +5,8 @@ extends Node2D
 @export var char_stats: CharacterStats
 @export var music: AudioStream
 @export var relics: RelicHandler
-@export var weapon_left: WeaponUI
-@export var weapon_right: WeaponUI
+@onready var weapon_left: WeaponUI = %WeaponUILeft
+@onready var weapon_right: WeaponUI = %WeaponUIRight
 
 @onready var battle_ui: BattleUI = $BattleUI as BattleUI
 @onready var player_handler: PlayerHandler = $PlayerHandler as PlayerHandler

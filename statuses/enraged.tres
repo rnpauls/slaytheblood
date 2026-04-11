@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnragedStatus" format=3 uid="uid://caqi35e6g1l5m"]
+
+[ext_resource type="Texture2D" uid="uid://d3d5isipcqtf" path="res://art/Classic 100/item73.png" id="1_wdi67"]
+[ext_resource type="Script" uid="uid://bkr72ip00i51x" path="res://statuses/enraged.gd" id="2_sn4fr"]
+
+[resource]
+script = ExtResource("2_sn4fr")
+id = "enraged"
+type = 1
+can_expire = true
+duration = 1
+icon = ExtResource("1_wdi67")
+tooltip = "Enraged: Has discarded a 6+atk this turn"

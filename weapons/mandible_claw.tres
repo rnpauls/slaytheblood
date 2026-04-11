@@ -1,7 +1,17 @@
-[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://bc6bqtk55c1q1"]
+[gd_resource type="Resource" format=3 uid="uid://bc6bqtk55c1q1"]
 
-[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="1_7ovet"]
+[ext_resource type="Texture2D" uid="uid://g28v5xussth6" path="res://art/Classic 100/item61.png" id="1_yy8wy"]
+[ext_resource type="Script" uid="uid://3mmytkx4coca" path="res://weapons/mandible_claw.gd" id="2_yy8wy"]
 
 [resource]
-script = ExtResource("1_7ovet")
+script = ExtResource("2_yy8wy")
+weapon_name = "Mandible Claw"
+id = "mandible_claw"
+type = 5
+character_type = 2
+starter_weapon = true
+icon = ExtResource("1_yy8wy")
+tooltip = "Enraged: Go Again"
+attack = 3
+cost = 2
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

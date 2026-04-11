@@ -4,21 +4,24 @@ extends Control
 @export var weapon: Weapon : set = set_weapon
 @export var activable: bool = false
 @export var targeting: bool = false
-var targets: Array
+@export var shader_material: ShaderMaterial
+var targets: Array[Node]
 
 @onready var icon: TextureButton = $Icon
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	var material = ShaderMaterial.new()
-	material.shader = preload("res://art/shaders/greyscale.gdshader")
-	icon.material = material
+	shader_material = ShaderMaterial.new()
+	shader_material.shader = preload("res://art/shaders/greyscale.gdshader")
+	
+	Events.player_initial_hand_drawn.connect(enable_weapon)
+	Events.enemy_phase_ended.connect(enable_weapon)
 	#weapon = preload("res://weapons/explosive_barrel.tres")
 	#await get_tree().create_timer(1).timeout
 	#flash()
 
-func on_input(event: InputEvent) -> void:
-	if event.is_action_released("left_mouse") and targeting:
+func _input(event: InputEvent) -> void:
+	if (event.is_action_released("left_mouse") or event.is_action_pressed("left_mouse") ) and targeting:
 		if not targets.is_empty():
 		#get_viewport().set_input_as_handled()
 			self.accept_event()
@@ -28,9 +31,12 @@ func on_input(event: InputEvent) -> void:
 func set_weapon(new_weapon: Weapon) -> void:
 	if not is_node_ready():
 		await ready
-	
+	if not new_weapon:
+		icon.texture_normal = null
+		return
 	weapon = new_weapon
-	icon.texture = weapon.icon
+	icon.texture_normal = weapon.icon
+	icon.material = shader_material
 	weapon.weapon_used_up.connect(_on_weapon_used_up)
 
 func flash() -> void:
@@ -44,17 +50,21 @@ func _on_weapon_used_up() -> void:
 	disable_weapon()
 
 func disable_weapon() -> void:
+	if not weapon: return 
 	activable = false
 	set_grey_out(true)
 
 func enable_weapon() -> void:
+	if not weapon: return
 	activable = true
 	set_grey_out(false)
 
 func reset() -> void:
+	if not weapon: return
 	weapon.reset()
 
 func can_activate_weapon() -> bool:
+	if not weapon: return false
 	var player: Player = get_tree().get_first_node_in_group("player")
 	var mana:= player.stats.mana
 	var ap := player.stats.action_points
@@ -64,6 +74,7 @@ func can_activate_weapon() -> bool:
 		return false
 
 func set_grey_out(enabled: bool):
+	if not weapon: return
 	var mat:= icon.material
 	if enabled:
 		mat.set_shader_parameter("strength", 1.0)
