@@ -28,10 +28,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 			go_again = true
 		else:
 			go_again = false
-	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
-	damage_effect.execute(targets)
+	do_stock_attack_damage_effect(targets, modifiers)
 	Events.unlock_hand.emit()
 
 func _on_card_discarded(card: Card) -> void:

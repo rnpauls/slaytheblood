@@ -69,9 +69,9 @@ func play(targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierH
 	char_stats.mana -= cost
 	char_stats.action_points -= 1
 	
-	for targetx in targets:
-		if targetx is Enemy:
-			targetx.defend_attack(attack, modifiers, go_again)
+	#for targetx in targets:
+		#if targetx is Enemy:
+			#targetx.defend_attack(attack, modifiers, go_again)
 			#Could emit a signal with this info, and include the targets, then connect to each enemy and await an answer
 	if is_single_targeted():
 		apply_effects(targets, modifiers)
@@ -112,3 +112,10 @@ func get_default_tooltip() -> String:
 
 func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler) -> String:
 	return tooltip_text
+
+func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler) -> void:
+	var damage_effect := AttackDamageEffect.new()
+	damage_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
+	damage_effect.sound = sound
+	damage_effect.go_again = go_again
+	damage_effect.execute(targets)

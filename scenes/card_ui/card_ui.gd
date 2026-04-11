@@ -130,7 +130,7 @@ func _set_char_stats(value: CharacterStats) -> void:
 func _on_drop_point_detector_area_entered(area):
 	if not targets.has(area):
 		targets.append(area)
-		print("cardui added %s" % area)
+		#print("cardui added %s" % area)
 
 
 func _on_drop_point_detector_area_exited(area):

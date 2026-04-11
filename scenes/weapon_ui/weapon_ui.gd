@@ -36,7 +36,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 	if not weapon:
 		icon.texture_normal = null
 		return
-	print("setting up weapon %s" % new_weapon.id)
+	#print("setting up weapon %s" % new_weapon.id)
 	icon.texture_normal = weapon.icon
 	icon.material = shader_material
 	weapon.weapon_used_up.connect(_on_weapon_used_up)

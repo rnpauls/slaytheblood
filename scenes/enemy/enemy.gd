@@ -124,10 +124,9 @@ func do_action() -> void:
 #attack: base attack
 #modifiers: Player modifiers
 #go_again: if the attack has go_again
-func defend_attack(attack: int, modifiers: ModifierHandler, go_again: bool) -> void:
+func defend_attack(attack: int, go_again: bool) -> void:
 	var player_hand_size := get_tree().get_first_node_in_group("player_hand").get_child_count()
-	var modified_damage := modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	modified_damage = modifier_handler.get_modified_value(modified_damage, Modifier.Type.DMG_TAKEN)
+	var modified_damage = modifier_handler.get_modified_value(attack, Modifier.Type.DMG_TAKEN)
 	var defense_array := enemy_ai.defend(modified_damage, go_again, player_hand_size)
 	#if defense_array.is_empty():
 		#return 0
