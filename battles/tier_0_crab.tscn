@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://buv7y7ls0wpsq"]
+[gd_scene format=3 uid="uid://buv7y7ls0wpsq"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_iptin"]
 [ext_resource type="Resource" uid="uid://b7kxqdggip08o" path="res://enemies/crab/crab_enemy.tres" id="2_14jjx"]
 
-[node name="Tier0Crab" type="Node2D"]
+[node name="Tier0Crab" type="Node2D" unique_id=1585917984]
 
-[node name="Enemy" parent="." instance=ExtResource("1_iptin")]
-position = Vector2(187, 81)
+[node name="Enemy" parent="." unique_id=1904645265 instance=ExtResource("1_iptin")]
+position = Vector2(997, 317)
 stats = ExtResource("2_14jjx")

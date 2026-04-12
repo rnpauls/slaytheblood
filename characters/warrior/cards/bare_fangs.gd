@@ -22,11 +22,10 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	discard_effect.execute(targets)
 	var discarded_cards = await Events.card_discarded
 	discarded_card = discarded_cards[0]
-	if discarded_card:
-		if discarded_card.attack >= 6:
-			attack += 2
-	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
-	damage_effect.execute(targets)
+	var custom_attack: int
+	if discarded_card and discarded_card.attack >= 6:
+		custom_attack = attack + 2
+	else:
+		custom_attack = attack
+	do_stock_attack_damage_effect(targets, modifiers, custom_attack)
 	Events.unlock_hand.emit()

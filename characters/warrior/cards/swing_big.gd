@@ -1,10 +1,7 @@
 extends Card
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
-	damage_effect.execute(targets)
+	do_stock_attack_damage_effect(targets, modifiers)
 
 func get_default_tooltip() -> String:
 	return tooltip_text % attack

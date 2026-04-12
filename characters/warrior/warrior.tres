@@ -15,6 +15,7 @@ portrait = ExtResource("1_px3i1")
 draftable_cards = ExtResource("2_s65w1")
 starting_relic = ExtResource("5_md8iq")
 weapon_left = ExtResource("6_4dwfv")
+weapon_right = ExtResource("6_4dwfv")
 character_name = "Warrior"
 art = ExtResource("1_px3i1")
 max_health = 66

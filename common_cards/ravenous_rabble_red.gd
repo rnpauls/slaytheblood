@@ -23,9 +23,5 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	else:
 		top_pitch = top_card_arr[0].pitch
 		print_debug("Revealed %s to rabble" % 	top_card_arr[0].id)
-
 	
-	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack-top_pitch, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
-	damage_effect.execute(targets)
+	do_stock_attack_damage_effect(targets, modifiers, attack-top_pitch)

@@ -20,8 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="18_ajj10"]
-[ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_ui/weapon_ui.tscn" id="19_pyfix"]
-[ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="20_8eh2s"]
+[ext_resource type="PackedScene" uid="uid://dd6xjykbymk7u" path="res://scenes/weapon_handler/weapon_handler.tscn" id="19_156m4"]
 [ext_resource type="PackedScene" uid="uid://c7640ve4l6kcn" path="res://scenes/ui/status_view.tscn" id="21_hb0k1"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="21_wry5f"]
 
@@ -210,21 +209,19 @@ alignment = 1
 script = ExtResource("2_bgimw")
 player = NodePath("../../Player")
 
-[node name="WeaponUILeft" parent="BattleUI" unique_id=1748562188 instance=ExtResource("19_pyfix")]
+[node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 208.0
-offset_top = 240.0
-offset_right = 272.0
-offset_bottom = 304.0
-weapon = ExtResource("20_8eh2s")
+offset_left = 184.0
+offset_top = 202.0
+offset_right = 184.0
+offset_bottom = 202.0
 
-[node name="WeaponUIRight" parent="BattleUI" unique_id=638797767 instance=ExtResource("19_pyfix")]
+[node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 371.0
-offset_top = 240.0
-offset_right = 435.0
-offset_bottom = 304.0
-weapon = ExtResource("20_8eh2s")
+offset_left = 397.0
+offset_top = 202.0
+offset_right = 397.0
+offset_bottom = 202.0
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=811855806]
 layer = 2

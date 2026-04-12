@@ -1,7 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://d2ne48orv21kv"]
+[gd_resource type="Resource" format=3 uid="uid://d2ne48orv21kv"]
 
 [ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/Classic 100/item53.png" id="1_1a7pr"]
-[ext_resource type="Script" uid="uid://c65yv7hg0ramj" path="res://common_cards/raging_onslaught_red.gd" id="2_ot3ks"]
+[ext_resource type="Script" uid="uid://c65yv7hg0ramj" path="res://common_cards/raging_onslaught.gd" id="2_ot3ks"]
 
 [resource]
 script = ExtResource("2_ot3ks")

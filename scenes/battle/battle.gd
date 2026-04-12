@@ -5,8 +5,8 @@ extends Node2D
 @export var char_stats: CharacterStats
 @export var music: AudioStream
 @export var relics: RelicHandler
-@onready var weapon_left: WeaponUI = %WeaponUILeft
-@onready var weapon_right: WeaponUI = %WeaponUIRight
+@onready var weapon_left: WeaponHandler = %LeftWeaponHandler
+@onready var weapon_right: WeaponHandler = %RightWeaponHandler
 
 @onready var battle_ui: BattleUI = $BattleUI as BattleUI
 @onready var player_handler: PlayerHandler = $PlayerHandler as PlayerHandler
@@ -37,6 +37,9 @@ func start_battle() ->void:
 	player_handler.relics = relics
 	player_handler.weapon_left = weapon_left
 	player_handler.weapon_right = weapon_right
+	weapon_left.owner_of_weapon = player
+	weapon_right.owner_of_weapon = player
+	
 	
 	
 	enemy_handler.setup_enemies(battle_stats)

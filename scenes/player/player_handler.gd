@@ -13,8 +13,8 @@ const HAND_DRAW_INTERVAL := 0.25
 const HAND_DISCARD_INTERVAL := 0.25
 
 @export var relics: RelicHandler
-@export var weapon_left: WeaponUI
-@export var weapon_right: WeaponUI
+@export var weapon_left: WeaponHandler
+@export var weapon_right: WeaponHandler
 @export var player: Player
 @export var hand: Hand
 
@@ -163,5 +163,5 @@ func _on_relics_activated(type: Relic.Type) -> void:
 			player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 
 func reset_weapons() -> void:
-	for wep in [weapon_left, weapon_right] as Array[WeaponUI]:
+	for wep in [weapon_left, weapon_right] as Array[WeaponHandler]:
 		wep.reset()

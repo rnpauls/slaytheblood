@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://de0t0sb7c3tao"]
+
+[ext_resource type="Texture2D" uid="uid://5a4kk006fk3b" path="res://art/Classic 100/item10.png" id="1_ly60u"]
+[ext_resource type="Script" uid="uid://cvgrfpows1pow" path="res://common_cards/critical_strike.gd" id="2_qe11u"]
+
+[resource]
+script = ExtResource("2_qe11u")
+id = "critical_strike"
+target = 1
+cost = 1
+pitch = 3
+attack = 3
+defense = 3
+icon = ExtResource("1_ly60u")
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

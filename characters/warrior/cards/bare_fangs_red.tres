@@ -1,10 +1,14 @@
 [gd_resource type="Resource" format=3 uid="uid://cq4310wmwj2av"]
 
-[ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="1_k5rlb"]
-[ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/warrior/cards/wild_ride_red.gd" id="2_6feat"]
+[ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_qoays"]
+[ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/warrior/cards/wild_ride.gd" id="2_6feat"]
 
 [resource]
 script = ExtResource("2_6feat")
-id = "wild_ride"
-icon = ExtResource("1_k5rlb")
+id = "bare_fangs"
+cost = 2
+pitch = 1
+attack = 6
+icon = ExtResource("1_qoays")
 tooltip_text = "[center]Rampage 1: +2atk.[/center]"
+disable_defense = true

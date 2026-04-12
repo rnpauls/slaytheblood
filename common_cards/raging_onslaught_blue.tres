@@ -1,10 +1,10 @@
 [gd_resource type="Resource" format=3 uid="uid://c5xvfairy4mu4"]
 
 [ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/Classic 100/item53.png" id="1_70qjk"]
-[ext_resource type="Script" uid="uid://dhnwsnauefevu" path="res://common_cards/raging_onslaught_blue.gd" id="2_m0dtl"]
+[ext_resource type="Script" uid="uid://c65yv7hg0ramj" path="res://common_cards/raging_onslaught.gd" id="2_70qjk"]
 
 [resource]
-script = ExtResource("2_m0dtl")
+script = ExtResource("2_70qjk")
 id = "raging_onslaught"
 target = 1
 cost = 3

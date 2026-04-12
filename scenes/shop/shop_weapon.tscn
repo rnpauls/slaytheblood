@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqb8lmaxydbk6"]
 
 [ext_resource type="Script" uid="uid://damyj20tqvdgp" path="res://scenes/shop/shop_weapon.gd" id="1_0fpeb"]
-[ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_ui/weapon_ui.tscn" id="2_slswq"]
+[ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_handler/weapon_ui.tscn" id="2_slswq"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="3_0strh"]
 
 [node name="ShopWeapon" type="VBoxContainer" unique_id=509102568]

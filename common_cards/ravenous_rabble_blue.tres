@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://dqxasrxlk6q38"]
+
+[ext_resource type="Texture2D" uid="uid://d2vujk8wvu6ia" path="res://art/tile_0123.png" id="1_6v8r4"]
+[ext_resource type="Script" uid="uid://dtudl7747thxx" path="res://common_cards/ravenous_rabble_red.gd" id="2_f73ua"]
+[ext_resource type="AudioStream" uid="uid://de2ryat1pxq6" path="res://art/enemy_attack.ogg" id="3_re7em"]
+
+[resource]
+script = ExtResource("2_f73ua")
+id = "rabble"
+rarity = 1
+target = 1
+pitch = 3
+attack = 3
+defense = 2
+go_again = true
+icon = ExtResource("1_6v8r4")
+tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage minus the pitch on top of deck.[/center]"
+sound = ExtResource("3_re7em")
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

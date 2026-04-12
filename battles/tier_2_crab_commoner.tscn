@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dt0udcpihe8ve"]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_qedx2"]
+[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_tp4gr"]
+[ext_resource type="Resource" uid="uid://b7kxqdggip08o" path="res://enemies/crab/crab_enemy.tres" id="3_xr6i6"]
+
+[node name="Tier2CrabCommoner" type="Node2D" unique_id=215508035]
+
+[node name="Enemy" parent="." unique_id=171155132 instance=ExtResource("1_qedx2")]
+position = Vector2(748, 367)
+stats = ExtResource("2_tp4gr")
+
+[node name="Enemy2" parent="." unique_id=830231401 instance=ExtResource("1_qedx2")]
+position = Vector2(965, 188)
+stats = ExtResource("3_xr6i6")
+
+[node name="Enemy3" parent="." unique_id=844617398 instance=ExtResource("1_qedx2")]
+position = Vector2(1139, 338)
+stats = ExtResource("3_xr6i6")

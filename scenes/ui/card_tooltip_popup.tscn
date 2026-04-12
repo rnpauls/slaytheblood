@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://da4qwswwfbl28"]
+[gd_scene format=3 uid="uid://da4qwswwfbl28"]
 
 [ext_resource type="Script" uid="uid://bb74kroepxjkc" path="res://scenes/ui/card_tooltip_popup.gd" id="1_dkxna"]
 [ext_resource type="PackedScene" uid="uid://b2ay04rjh0l4v" path="res://scenes/ui/card_menu_ui.tscn" id="2_2y4ub"]
 
-[node name="CardTooltipPopup" type="Control"]
+[node name="CardTooltipPopup" type="Control" unique_id=241290583]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dkxna")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=316316818]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,28 +22,29 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 0.666667)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1181134253]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -26.0
-offset_right = 75.0
-offset_bottom = 26.0
+offset_left = -400.0
+offset_top = -252.0
+offset_right = 400.0
+offset_bottom = 252.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 
-[node name="TooltipCard" type="CenterContainer" parent="VBoxContainer"]
+[node name="TooltipCard" type="CenterContainer" parent="VBoxContainer" unique_id=1734170377]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="CardMenuUI" parent="VBoxContainer/TooltipCard" instance=ExtResource("2_2y4ub")]
+[node name="CardMenuUI" parent="VBoxContainer/TooltipCard" unique_id=1508786273 instance=ExtResource("2_2y4ub")]
 layout_mode = 2
 
-[node name="CardDescription" type="RichTextLabel" parent="VBoxContainer"]
+[node name="CardDescription" type="RichTextLabel" parent="VBoxContainer" unique_id=1711266134]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2

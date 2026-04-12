@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://dp5dl2iuxju1f"]
 
-[ext_resource type="Script" uid="uid://dbsc38jytyirs" path="res://scenes/weapon_ui/weapon_ui.gd" id="1_uyydt"]
+[ext_resource type="Script" uid="uid://dbsc38jytyirs" path="res://scenes/weapon_handler/weapon_ui.gd" id="1_uyydt"]
 [ext_resource type="Theme" uid="uid://cojqjenomxo7a" path="res://art/themes/weapon_button_theme.tres" id="2_jshob"]
-[ext_resource type="Texture2D" uid="uid://c1isk7hi6qsx" path="res://art/Classic 100/item41.png" id="3_ctihs"]
+[ext_resource type="Texture2D" uid="uid://ym7pnqg6lixq" path="res://art/32_2 Free Weapon icons bonus/Icons/icon_32_2_11.png" id="3_0cduw"]
 [ext_resource type="Material" uid="uid://d30aqi80c1nrc" path="res://art/white_sprite_material.tres" id="4_m2n2c"]
+[ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="5_gvkp5"]
+[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="6_abdjr"]
 
 [sub_resource type="Animation" id="Animation_eknsn"]
 length = 0.001
@@ -67,6 +69,9 @@ _data = {
 &"flash": SubResource("Animation_dig6a")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_abdjr"]
+blend_mode = 2
+
 [node name="WeaponUI" type="Control" unique_id=1748562188]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
@@ -74,18 +79,66 @@ anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_uyydt")
 
-[node name="Icon" type="TextureButton" parent="." unique_id=379480219]
+[node name="Icon" type="TextureRect" parent="." unique_id=1641670766]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
+layout_mode = 1
 offset_right = 64.0
 offset_bottom = 64.0
-pivot_offset = Vector2(8, 8)
+pivot_offset = Vector2(32, 32)
 theme = ExtResource("2_jshob")
-texture_normal = ExtResource("3_ctihs")
+texture = ExtResource("3_0cduw")
 stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=85685316]
 libraries/ = SubResource("AnimationLibrary_4js1w")
 
+[node name="TextureRectAtk" type="TextureRect" parent="." unique_id=1769151175]
+material = SubResource("CanvasItemMaterial_abdjr")
+layout_mode = 0
+offset_left = -32.0
+offset_top = 56.0
+offset_right = 8.0
+offset_bottom = 96.0
+texture = ExtResource("5_gvkp5")
+
+[node name="AtkLabel" type="Label" parent="TextureRectAtk" unique_id=882869703]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 53.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 20
+text = "4"
+
+[node name="AttackIcon" type="TextureRect" parent="TextureRectAtk" unique_id=1126625462]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -3.0
+offset_right = 75.0
+offset_bottom = 42.0
+mouse_filter = 2
+texture = ExtResource("6_abdjr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRectCost" type="TextureRect" parent="." unique_id=270781876]
+material = SubResource("CanvasItemMaterial_abdjr")
+layout_mode = 0
+offset_left = 56.0
+offset_top = -32.0
+offset_right = 96.0
+offset_bottom = 8.0
+texture = ExtResource("5_gvkp5")
+
+[node name="CostLabel" type="Label" parent="TextureRectCost" unique_id=1716541515]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 53.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "3"
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="pressed" from="Icon" to="." method="_on_icon_pressed"]

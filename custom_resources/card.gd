@@ -113,9 +113,9 @@ func get_default_tooltip() -> String:
 func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler) -> String:
 	return tooltip_text
 
-func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler, custom_damage:int = attack) -> void:
 	var damage_effect := AttackDamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
+	damage_effect.amount = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
 	damage_effect.execute(targets)

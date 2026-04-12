@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://bg7p6qyn055g8"]
+
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/Classic 100/item52.png" id="1_xtjui"]
+[ext_resource type="Script" uid="uid://vkcpd5x25jeg" path="res://common_cards/sink_below.gd" id="2_nlky6"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/block.ogg" id="3_a2hq8"]
+
+[resource]
+script = ExtResource("2_nlky6")
+id = "sink_below"
+type = 2
+rarity = 2
+pitch = 3
+defense = 2
+icon = ExtResource("1_xtjui")
+tooltip_text = "[center]Sink 1[/center]"
+sound = ExtResource("3_a2hq8")
+disable_attack = true
