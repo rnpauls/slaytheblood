@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://cb1bmhck13jst"]
+
+[ext_resource type="Texture2D" uid="uid://biqdlwfd104sm" path="res://art/Free-Melee-Weapon-Pixel-Icons-for-Cyberpunk/1 Icons/Icon28_33.png" id="1_e5ena"]
+[ext_resource type="Script" uid="uid://dup6ts2qe62v2" path="res://weapons/sledge_of_anvilheim.gd" id="2_e5ena"]
+
+[resource]
+script = ExtResource("2_e5ena")
+weapon_name = "Sledge of Anvilheim"
+id = "sledge_of_anvilheim"
+type = 3
+hands = 1
+starter_weapon = true
+icon = ExtResource("1_e5ena")
+tooltip = "Enraged: Go Again"
+attack = 6
+cost = 4
+metadata/_custom_type_script = "uid://dm186c77vbsjn"

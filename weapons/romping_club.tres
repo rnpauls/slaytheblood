@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://b0u14laxxwhga"]
+
+[ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/Classic 100/item53.png" id="1_8j7gi"]
+[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="1_ewenh"]
+[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/axe.ogg" id="3_dh1kd"]
+
+[resource]
+script = ExtResource("1_ewenh")
+weapon_name = "Romping Club"
+id = "romping_club"
+type = 4
+character_type = 2
+hands = 1
+icon = ExtResource("1_8j7gi")
+sound = ExtResource("3_dh1kd")
+tooltip = "Enraged: +1atk"
+attack = 4
+cost = 2
+metadata/_custom_type_script = "uid://dm186c77vbsjn"

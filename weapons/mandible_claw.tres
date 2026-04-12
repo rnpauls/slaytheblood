@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bc6bqtk55c1q1"]
 
-[ext_resource type="Texture2D" uid="uid://g28v5xussth6" path="res://art/Classic 100/item61.png" id="1_yy8wy"]
+[ext_resource type="Texture2D" uid="uid://cw374xv0yoj7p" path="res://art/claw.png" id="1_yy8wy"]
 [ext_resource type="Script" uid="uid://3mmytkx4coca" path="res://weapons/mandible_claw.gd" id="2_yy8wy"]
 
 [resource]
