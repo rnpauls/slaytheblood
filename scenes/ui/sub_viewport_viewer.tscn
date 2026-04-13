@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b8hgtlcvsiq3b"]
+
+[ext_resource type="Script" uid="uid://tb20nxgokd1w" path="res://scenes/ui/sub_viewport_viewer.gd" id="1_xot5a"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f66yn"]
+viewport_path = NodePath("SubViewport")
+
+[node name="SubViewportViewer" type="TextureRect" unique_id=1958539626]
+texture = SubResource("ViewportTexture_f66yn")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("1_xot5a")

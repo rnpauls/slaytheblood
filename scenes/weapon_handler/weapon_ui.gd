@@ -42,7 +42,7 @@ func update_labels() -> void:
 	atk_label.text = str(weapon.attack)
 	cost_label.text = str(weapon.cost)
 
-func request_tooltip() -> void:
-	var tt_text: = weapon.get_tooltip()
-	print("Request weapon tooltip %s" % tt_text)
-	
+#func request_tooltip() -> void:
+	#var tt_text: = weapon.get_tooltip()
+	#print("Request weapon tooltip %s" % tt_text)
+	#

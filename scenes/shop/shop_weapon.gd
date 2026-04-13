@@ -1,11 +1,11 @@
 class_name ShopWeapon
 extends VBoxContainer
 
-const WEAPON_UI = preload("res://scenes/weapon_ui/weapon_ui.tscn")
+const WEAPON_CARD_RENDER_CONTAINER = preload("res://scenes/weapon_handler/weapon_card_render_container.tscn")
 
 @export var weapon: Weapon : set = set_weapon
 
-@onready var weapon_container: CenterContainer = %WeaponContainer
+@onready var weapon_container: MarginContainer = %WeaponContainer
 @onready var price: HBoxContainer = %Price
 @onready var price_label: Label = %PriceLabel
 @onready var buy_button: Button = %BuyButton
@@ -33,13 +33,13 @@ func set_weapon(new_weapon: Weapon) -> void:
 
 	weapon = new_weapon
 	
-	for weapon_ui: WeaponUI in weapon_container.get_children():
-		weapon_ui.queue_free()
+	for weapon_card: WeaponCard in weapon_container.get_children():
+		weapon_card.queue_free()
 	
-	var new_weapon_ui := WEAPON_UI.instantiate() as WeaponUI
-	weapon_container.add_child(new_weapon_ui)
-	new_weapon_ui.weapon = weapon
-	#current_weapon_ui = new_weapon_ui
+	var new_weapon_card := WEAPON_CARD_RENDER_CONTAINER.instantiate() as WeaponCardRenderContainer
+	weapon_container.add_child(new_weapon_card)
+	new_weapon_card.weapon = weapon
+	#current_weapon_card = new_weapon_card
 
 func _on_buy_button_pressed() -> void:
 	Events.shop_weapon_bought.emit(weapon, gold_cost)

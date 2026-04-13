@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://crla21tdbt7ul"]
+
+[ext_resource type="Script" uid="uid://cl3ngubjvru5v" path="res://scenes/weapon_handler/weapon_card_render_container.gd" id="1_f66yn"]
+[ext_resource type="PackedScene" uid="uid://cvauk1trfj0lv" path="res://scenes/weapon_handler/weapon_card.tscn" id="2_ji7x6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f66yn"]
+viewport_path = NodePath("SubViewport")
+
+[node name="WeaponCardRenderContainer" type="MarginContainer" unique_id=1508382840]
+custom_minimum_size = Vector2(40, 60)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_f66yn")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=912799138]
+layout_mode = 2
+texture = SubResource("ViewportTexture_f66yn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=473573907]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 300)
+render_target_update_mode = 4
+
+[node name="WeaponCard" parent="SubViewport" unique_id=2142203987 instance=ExtResource("2_ji7x6")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 200.0
+offset_bottom = 300.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 6
+size_flags_vertical = 6
