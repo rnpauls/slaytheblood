@@ -1,11 +1,12 @@
 [gd_resource type="Resource" format=3 uid="uid://bipu07qa8mqvc"]
 
 [ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_kcx5c"]
-[ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/warrior/cards/wild_ride.gd" id="2_q7tx6"]
+[ext_resource type="Script" uid="uid://b2hwcwautfx8p" path="res://characters/warrior/cards/bare_fangs.gd" id="2_kcx5c"]
 
 [resource]
-script = ExtResource("2_q7tx6")
+script = ExtResource("2_kcx5c")
 id = "bare_fangs"
+target = 1
 cost = 2
 pitch = 3
 attack = 4

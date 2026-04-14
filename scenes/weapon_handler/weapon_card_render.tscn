@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b05ptrblwyqt7"]
 
-[ext_resource type="Script" uid="uid://cdkxs70dgiiro" path="res://weapon_card_view.gd" id="1_3m8em"]
+[ext_resource type="Script" uid="uid://cdkxs70dgiiro" path="res://scenes/weapon_handler/weapon_card_view.gd" id="1_3m8em"]
 [ext_resource type="PackedScene" uid="uid://cvauk1trfj0lv" path="res://scenes/weapon_handler/weapon_card.tscn" id="2_c4w2c"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vcqmx"]

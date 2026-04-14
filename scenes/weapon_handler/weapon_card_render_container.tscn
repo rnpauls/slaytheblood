@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://crla21tdbt7ul"]
 
 [ext_resource type="Script" uid="uid://cl3ngubjvru5v" path="res://scenes/weapon_handler/weapon_card_render_container.gd" id="1_f66yn"]
+[ext_resource type="PackedScene" uid="uid://b8hgtlcvsiq3b" path="res://scenes/ui/sub_viewport_viewer.tscn" id="2_cuqdx"]
 [ext_resource type="PackedScene" uid="uid://cvauk1trfj0lv" path="res://scenes/weapon_handler/weapon_card.tscn" id="2_ji7x6"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f66yn"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ji7x6"]
 viewport_path = NodePath("SubViewport")
 
 [node name="WeaponCardRenderContainer" type="MarginContainer" unique_id=1508382840]
@@ -12,11 +13,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_f66yn")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=912799138]
+[node name="SubViewportViewer" parent="." unique_id=1958539626 instance=ExtResource("2_cuqdx")]
 layout_mode = 2
-texture = SubResource("ViewportTexture_f66yn")
-expand_mode = 1
-stretch_mode = 5
+texture = SubResource("ViewportTexture_ji7x6")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=473573907]
 transparent_bg = true

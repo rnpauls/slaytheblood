@@ -3,7 +3,6 @@
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_b23i7"]
 [ext_resource type="Script" uid="uid://c0lc112hi2ygm" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
 [ext_resource type="Script" uid="uid://cuxsjd0iiq5mx" path="res://scenes/card_ui/card_state_machine.gd" id="3_s2iv8"]
-[ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="3_vt4qo"]
 [ext_resource type="Script" uid="uid://cv1grwub7xt37" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_jrm7m"]
 [ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="4_mvnb2"]
 [ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
@@ -29,7 +28,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_b23i7")
 script = ExtResource("2_457t4")
-char_stats = ExtResource("3_vt4qo")
 
 [node name="CardVisuals" parent="." unique_id=1961292440 instance=ExtResource("4_mvnb2")]
 layout_mode = 0
