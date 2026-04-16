@@ -20,7 +20,7 @@ const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 @export var is_blocking: bool = false
 @export var is_selecting: bool = false
 
-var hovered_card: CardUI = null   # ← new
+var hovered_card: CardUI = null 
 
 func _ready() -> void:
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
@@ -79,14 +79,10 @@ func disable_hand() -> void:
 		card.disabled = true
 
 func _arrange_cards() -> void:
-	# Build list of ONLY cards that are physically in the Hand right now
-	#print("arrange")
-	#print(hovered_card)
 	var cards: Array[CardUI] = []
 	for child in get_children():
 		if child is CardUI:
 			cards.append(child)
-			#print(child.global_position)
 
 	if cards.is_empty():
 		return
@@ -108,8 +104,6 @@ func _arrange_cards() -> void:
 	for i in count:
 		var card := cards[i]
 		if card == hovered_card:
-			#print("skipping hovered arrange")
-			#print(card)
 			continue
 		var t: float = float(i) / max(1, count - 1)
 
@@ -130,20 +124,7 @@ func _arrange_cards() -> void:
 		var x: float = lerp(-base_width / 2, base_width / 2, effective_t) + size.x/2 - card.size.x/2
 		var y := _sample_position_curve(effective_t) * height_offset * -1
 		var rot := _sample_rotation_curve(effective_t) * max_rotation_deg - max_rotation_deg / 2
-
-		# Tween
-		#print("cardarranging:")
-		#print(card)
 		card.animate_to_local_position_and_rotation_and_scale(Vector2(x, y), rot, 0.7, 0.25)
-		#var tween := card.create_tween()
-		#tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		#tween.tween_property(card, "position", Vector2(x, y), 0.25)
-		#tween.parallel().tween_property(card, "rotation_degrees", rot, 0.25)
-	
-	for child in get_children():
-		if child is CardUI:
-			#cards.append(child)
-			print(child.global_position)
 
 func _sample_position_curve(t: float) -> float:
 	if position_curve:
@@ -165,7 +146,6 @@ func _on_child_order_changed() -> void:
 	for child in get_children():
 		if child is CardUI:
 			cards.append(child)
-			#print(child.global_position)
 
 	if cards.is_empty():
 		return
