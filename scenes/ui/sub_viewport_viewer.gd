@@ -70,4 +70,4 @@ func _return_to_original_parent() -> void:
 	original_parent.move_child(self, original_index)
 	
 	z_index = 0
-	scale = Vector2.ONE
+	scale = Vector2.ONE*0.6

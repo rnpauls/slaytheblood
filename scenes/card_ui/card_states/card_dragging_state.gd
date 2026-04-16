@@ -4,11 +4,8 @@ const DRAG_MINIMUM_THRESHOLD := 0.05
 var minimum_drag_time_elapsed := false
 
 func enter() ->void:
-	var ui_layer := get_tree().get_first_node_in_group("ui_layer")
-	if ui_layer:
-		card_ui.reparent(ui_layer)
-	
-	card_ui.card_visuals.panel.set("theme_override_styles/panel", card_ui.DRAG_STYLEBOX)
+	print("dragging")
+	card_ui.card_render.card_visuals.panel.set("theme_override_styles/panel", card_ui.DRAG_STYLEBOX)
 	Events.card_drag_started.emit(card_ui)
 	
 	minimum_drag_time_elapsed = false

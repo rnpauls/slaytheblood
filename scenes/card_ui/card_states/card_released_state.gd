@@ -3,7 +3,7 @@ extends CardState
 var played: bool
 
 func enter() -> void:
-	
+	print("released")
 	played = false
 	if not card_ui.targets.is_empty():
 		#print(card_ui.targets[0].get_class())

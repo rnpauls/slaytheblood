@@ -2,9 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_b23i7"]
 [ext_resource type="Script" uid="uid://c0lc112hi2ygm" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
+[ext_resource type="PackedScene" uid="uid://dv8833ny3ov2e" path="res://scenes/card_ui/card_render_container.tscn" id="3_opj8w"]
 [ext_resource type="Script" uid="uid://cuxsjd0iiq5mx" path="res://scenes/card_ui/card_state_machine.gd" id="3_s2iv8"]
+[ext_resource type="Resource" uid="uid://buxq30bk6nuat" path="res://common_cards/toxin.tres" id="4_25o76"]
 [ext_resource type="Script" uid="uid://cv1grwub7xt37" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_jrm7m"]
-[ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="4_mvnb2"]
 [ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
 [ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
 [ext_resource type="Script" uid="uid://dp8udoutyrshc" path="res://scenes/card_ui/card_states/card_pitched_state.gd" id="6_opj8w"]
@@ -19,27 +20,27 @@ size = Vector2(200, 280)
 [node name="CardUI" type="Control" unique_id=1279866730]
 custom_minimum_size = Vector2(200, 280)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -231.0
-offset_bottom = -114.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 280.0
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(100, 140)
 theme = ExtResource("1_b23i7")
 script = ExtResource("2_457t4")
 
-[node name="CardVisuals" parent="." unique_id=1961292440 instance=ExtResource("4_mvnb2")]
-layout_mode = 0
-offset_right = 25.0
-offset_bottom = 30.0
-mouse_filter = 2
+[node name="CardRenderContainer" parent="." unique_id=1508382840 instance=ExtResource("3_opj8w")]
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 280.0
+pivot_offset = Vector2(100, 140)
+card = ExtResource("4_25o76")
 
-[node name="DropPointDetector" type="Area2D" parent="." unique_id=895730316]
+[node name="DropPointDetector" type="Area2D" parent="CardRenderContainer" unique_id=895730316]
+unique_name_in_owner = true
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector" unique_id=1317868265]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardRenderContainer/DropPointDetector" unique_id=1317868265]
 position = Vector2(100, 140)
 shape = SubResource("RectangleShape2D_gup6u")
 
@@ -81,5 +82,5 @@ state = 7
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="area_entered" from="DropPointDetector" to="." method="_on_drop_point_detector_area_entered"]
-[connection signal="area_exited" from="DropPointDetector" to="." method="_on_drop_point_detector_area_exited"]
+[connection signal="area_entered" from="CardRenderContainer/DropPointDetector" to="." method="_on_drop_point_detector_area_entered"]
+[connection signal="area_exited" from="CardRenderContainer/DropPointDetector" to="." method="_on_drop_point_detector_area_exited"]

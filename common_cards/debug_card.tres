@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://godglbrbotnr"]
+
+[ext_resource type="Texture2D" uid="uid://cb7u4juyjpdnx" path="res://art/shopkeeper_blink.png" id="1_p5iet"]
+[ext_resource type="Script" uid="uid://cfq2iolxsas2j" path="res://common_cards/debug_card.gd" id="2_ucrwf"]
+
+[resource]
+script = ExtResource("2_ucrwf")
+id = "debug_card"
+target = 1
+pitch = 1
+attack = 4
+defense = 3
+icon = ExtResource("1_p5iet")
+tooltip_text = "Error"
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

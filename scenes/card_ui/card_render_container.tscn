@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dv8833ny3ov2e"]
+
+[ext_resource type="Script" uid="uid://04oscjhi8h6c" path="res://scenes/card_ui/card_render_container.gd" id="1_d3nd8"]
+[ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="3_d3nd8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_14lqk"]
+viewport_path = NodePath("SubViewport")
+
+[node name="CardRenderContainer" type="MarginContainer" unique_id=1508382840]
+custom_minimum_size = Vector2(40, 60)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_d3nd8")
+
+[node name="ViewportTexture" type="TextureRect" parent="." unique_id=1215619486]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("ViewportTexture_14lqk")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=473573907]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(200, 280)
+render_target_update_mode = 4
+
+[node name="CardVisuals" parent="SubViewport" unique_id=101409697 instance=ExtResource("3_d3nd8")]
+unique_name_in_owner = true

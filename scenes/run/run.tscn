@@ -24,13 +24,14 @@ run_startup = ExtResource("2_g1vxi")
 [node name="CurrentView" type="Node" parent="." unique_id=1456447172]
 
 [node name="HoverOverlay" type="Control" parent="." unique_id=1030301885]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 
 [node name="DebugButtons" type="VBoxContainer" parent="." unique_id=1463792825]
 visible = false

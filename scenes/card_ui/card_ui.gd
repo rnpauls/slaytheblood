@@ -11,19 +11,29 @@ const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.
 @export var player_modifiers: ModifierHandler
 @export var card: Card : set = _set_card
 @export var char_stats: CharacterStats : set = _set_char_stats
+@export var hover_scale := 1.0
+#@export var hover_y_lift := -90.0   # pixels upward
+@export var tween_duration := 0.18
 
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
-@onready var card_visuals: CardVisuals = $CardVisuals
-@onready var drop_point_detector: Area2D = $DropPointDetector
+@onready var card_render: CardRenderContainer = $CardRenderContainer
+@onready var drop_point_detector: Area2D = %DropPointDetector
+@onready var hover_overlay: Control = get_node("/root/Run/HoverOverlay")  # ← full-screen Control above everything
 @onready var targets: Array[Node] = []
 
-var original_index := 0
-var parent: Control
+var original_parent: Node
+var original_index: int = -1
+var original_global_pos: Vector2
+var is_hovered := false
 var tween: Tween
 var playable := true : set = _set_playable
 var disabled := true
 var is_blocking:= false
 var selected:= false
+var tween_callback = null
+
+signal card_hovered(CardUI)
+signal card_unhovered(CardUI)
 
 
 func _ready() -> void:
@@ -38,8 +48,28 @@ func _input(event: InputEvent) -> void:
 	card_state_machine.on_input(event)
 
 func animate_to_position(new_position: Vector2, duration: float) ->void:
+	print("moving")
+	_kill_tween()
 	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "global_position", new_position, duration)
+
+func animate_to_local_position_and_rotation_and_scale(new_position: Vector2, new_rotation: float, new_scale: float, duration: float) ->void:
+	print("moving")
+	_kill_tween()
+	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position", new_position, duration)
+	tween.parallel().tween_property(self, "rotation_degrees", new_rotation, duration)
+	tween.parallel().tween_property(self, "scale", Vector2.ONE*new_scale, duration)
+
+func return_to_hand() -> void:
+	print("returning to hand")
+	#_kill_tween()
+	_return_to_original_parent()
+	#tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	#tween.tween_property(self, "scale", Vector2.ONE*0.7, tween_duration)
+	#tween.parallel().tween_property(self, "global_position:y", original_global_pos.y, tween_duration)
+	#tween_callback = _return_to_original_parent
+	#tween.tween_callback(tween_callback)
 
 func play() -> void:
 	if not card:
@@ -82,7 +112,7 @@ func get_active_enemy_modifiers() -> ModifierHandler:
 	
 	return targets[0].modifier_handler
 
-func is_hovered() -> bool:
+func mouse_is_over() -> bool:
 	var rect := Rect2(Vector2.ZERO, self.size)
 	return rect.has_point(get_local_mouse_position())
 
@@ -96,6 +126,17 @@ func select() -> void:
 
 func deselect() -> void:
 	selected = false
+
+func _return_to_original_parent() -> void:
+	if not is_inside_tree(): return
+	print_debug(original_global_pos)
+	#global_position = original_global_pos  # Final safety
+	
+	reparent_requested.emit(self)
+	
+	z_index = 0
+	scale = Vector2.ONE*0.7
+	tween_callback = null
 
 func _on_gui_input(event: InputEvent) -> void:
 	card_state_machine.on_gui_input(event)
@@ -111,16 +152,16 @@ func _set_card(value: Card) -> void:
 		await ready
 
 	card = value
-	card_visuals.card = card
+	card_render.card = card
 
 func _set_playable(value: bool) -> void:
 	playable = value
 	if not playable:
-		card_visuals.cost.add_theme_color_override("font_color", Color.RED)
-		card_visuals.icon.modulate = Color(1, 1, 1, 0.5)
+		card_render.card_visuals.cost.add_theme_color_override("font_color", Color.RED)
+		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 0.5)
 	else:
-		card_visuals.cost.remove_theme_color_override("font_color")
-		card_visuals.icon.modulate = Color(1, 1, 1, 1)
+		card_render.card_visuals.cost.remove_theme_color_override("font_color")
+		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 1)
 
 func _set_char_stats(value: CharacterStats) -> void:
 	char_stats = value
@@ -131,7 +172,6 @@ func _on_drop_point_detector_area_entered(area):
 	if not targets.has(area):
 		targets.append(area)
 		#print("cardui s" % area)
-
 
 func _on_drop_point_detector_area_exited(area):
 	targets.erase(area)
@@ -151,3 +191,9 @@ func _on_char_stats_changed() -> void:
 
 func _on_card_drawn() -> void:
 	playable = char_stats.can_play_card(card)
+
+func _kill_tween() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	if tween_callback:
+		tween_callback.call()
