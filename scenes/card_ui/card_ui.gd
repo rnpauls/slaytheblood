@@ -18,7 +18,7 @@ const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var card_render: CardRenderContainer = $CardRenderContainer
 @onready var drop_point_detector: Area2D = %DropPointDetector
-@onready var hover_overlay: Control = get_node("/root/Run/HoverOverlay")  # ← full-screen Control above everything
+@onready var hover_overlay: CanvasLayer = get_node("/root/Run/HoverOverlay")  # ← full-screen Control above everything
 @onready var targets: Array[Node] = []
 
 var original_parent: Node

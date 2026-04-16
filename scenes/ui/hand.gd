@@ -64,8 +64,7 @@ func add_card(card: Card) -> void:
 func discard_card(card: CardUI) -> void:
 	if card:
 		card.queue_free()
-	call_deferred("_update_all_original_indices")
-	call_deferred("_arrange_cards")
+
 
 
 func enable_hand() -> void:
@@ -160,6 +159,8 @@ func _sample_rotation_curve(t: float) -> float:
 
 #Set card's original positions for use when returning to hand
 func _on_child_order_changed() -> void:
+	if not is_node_ready():
+		return
 	var cards: Array[CardUI] = []
 	for child in get_children():
 		if child is CardUI:
@@ -179,6 +180,8 @@ func _on_child_order_changed() -> void:
 		var x: float = lerp(-base_width / 2, base_width / 2, t) + size.x/2 - card.size.x/2
 		var y := _sample_position_curve(t) * height_offset * -1
 		card.original_global_pos = global_position + Vector2(x,y)
+	call_deferred("_update_all_original_indices")
+	call_deferred("_arrange_cards")
 
 func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	if not is_instance_valid(child) or child.get_parent() == self:
