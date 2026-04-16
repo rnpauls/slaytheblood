@@ -38,12 +38,12 @@ func on_mouse_entered() -> void:
 	card_ui.original_parent = card_ui.get_parent()
 	card_ui.original_index = card_ui.get_index()
 	
+	card_ui.scale = Vector2.ONE*card_ui.hover_scale
+	card_ui.rotation = 0
 	#Get new y clamped
 	var screen_bottom:= card_ui.get_viewport_rect().size.y - card_ui.size.y
 	var new_y = clampf(card_ui.global_position.y, 0, screen_bottom)
 	card_ui.global_position.y = new_y
-	card_ui.scale = Vector2.ONE*card_ui.hover_scale
-	card_ui.rotation = 0
 	card_ui.z_index = 20   # Bring way to front
 	#card_ui.tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	#card_ui.tween.tween_property(card_ui, "scale", Vector2(card_ui.hover_scale, card_ui.hover_scale), card_ui.tween_duration)

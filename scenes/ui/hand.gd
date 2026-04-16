@@ -180,7 +180,6 @@ func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	child.set_deferred("disabled", false)
 	#for kid in get_children():
 		#if kid.mouse_is_over(): return
-	print_debug("call deferred arrange")
 	call_deferred("_arrange_cards")
 
 func _update_all_original_indices() -> void:
@@ -196,7 +195,6 @@ func _on_card_hovered(card: CardUI) -> void:
 		return
 	#print("hand hovered")
 	hovered_card = card
-	print_debug("call deferred arrange")
 	call_deferred("_arrange_cards")   # spread everything out
 
 
@@ -206,10 +204,9 @@ func _on_card_unhovered(card: CardUI) -> void:
 		hovered_card = null
 		for kid in get_children():
 			if kid.is_hovered: return
-		print_debug("call deferred arrange")
 		call_deferred("_arrange_cards")   # return to normal spacing
 	else:
-		print("hand unhovered but card is diff")
+		print_debug("hand unhovered but card is diff")
 
 func _on_enemy_attack_declared() -> void:
 	is_blocking = true
