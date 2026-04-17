@@ -146,6 +146,8 @@ func _on_child_order_changed() -> void:
 	for child in get_children():
 		if child is CardUI:
 			cards.append(child)
+	if not hovered_card in cards:
+		hovered_card = null
 
 	if cards.is_empty():
 		return

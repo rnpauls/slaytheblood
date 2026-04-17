@@ -1,7 +1,6 @@
 extends CardState
 
 @onready var hand: Hand = get_parent().get_parent().get_parent()
-var is_hovered:=false
 
 func enter() ->void:
 	if not card_ui.is_node_ready():
@@ -28,9 +27,9 @@ func on_gui_input(event: InputEvent) -> void:
 		transition_requested.emit(self, CardState.State.CLICKED)
 
 func on_mouse_entered() -> void:
-	if is_hovered: 
+	if card_ui.is_hovered: 
 		return
-	is_hovered = true
+	card_ui.is_hovered = true
 	if card_ui.tween and card_ui.tween.is_running():
 		card_ui.tween.kill()
 	
@@ -59,13 +58,13 @@ func on_mouse_entered() -> void:
 
 func on_mouse_exited() -> void:
 	#Events.tooltip_hide_requested.emit()
-	if not is_hovered: 
+	if not card_ui.is_hovered: 
 		return
-	is_hovered = false
+	card_ui.is_hovered = false
 	card_ui.z_index=0
 	card_ui.return_to_hand()
 	
-	card_ui.card_unhovered.emit(card_ui)   # tell hand we are hovered
+	card_ui.card_unhovered.emit(card_ui)
 	if not card_ui.playable or card_ui.disabled:
 		return
 	card_ui.card_render.card_visuals.panel.set("theme_override_styles/panel", card_ui.BASE_STYLEBOX)
