@@ -22,7 +22,7 @@ func on_input(event: InputEvent) -> void:
 		card_ui.accept_event()
 		transition_requested.emit(self, CardState.State.BASE)
 		card_ui.targets.clear()
-	elif event.is_action_released("left_mouse") or event.is_action_pressed("left_mouse"):
+	elif (card_ui.targets.size() > 0) and (event.is_action_released("left_mouse") or event.is_action_pressed("left_mouse")):
 		#get_viewport().set_input_as_handled()
 		card_ui.accept_event()
 		transition_requested.emit(self,CardState.State.RELEASED)

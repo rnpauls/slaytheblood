@@ -102,23 +102,27 @@ func _arrange_cards() -> void:
 			logical_hovered_index = cards.find(hovered_card)  # won't find it, but safe
 
 	for i in count:
+		var effective_t: float
 		var card := cards[i]
 		if card == hovered_card:
-			continue
-		var t: float = float(i) / max(1, count - 1)
+				continue
+		if count == 1:
+			effective_t = 0.5
+		else:
+			var t: float = float(i) / max(1, count - 1)
 
-		# === ASYMMETRIC SPREADING around logical hovered position ===
-		var effective_t := t
-		if hovered_card != null and logical_hovered_index != -1:
-			var dist_from_hover := absf(i - logical_hovered_index) / float(max(1, count))
-			var push := (1.0 - dist_from_hover) * 0.1
+			# === ASYMMETRIC SPREADING around logical hovered position ===
+			effective_t = t
+			if hovered_card != null and logical_hovered_index != -1:
+				var dist_from_hover := absf(i - logical_hovered_index) / float(max(1, count))
+				var push := (1.0 - dist_from_hover) * 0.1
 
-			if i < logical_hovered_index:
-				effective_t = t - push
-			elif i > logical_hovered_index:
-				effective_t = t + push
+				if i < logical_hovered_index:
+					effective_t = t - push
+				elif i > logical_hovered_index:
+					effective_t = t + push
 
-			effective_t = clampf(effective_t, 0.0, 1.0)
+				effective_t = clampf(effective_t, 0.0, 1.0)
 
 		# Position & rotation
 		var x: float = lerp(-base_width / 2, base_width / 2, effective_t) + size.x/2 - card.size.x/2

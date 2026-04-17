@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://c0lc112hi2ygm" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
 [ext_resource type="PackedScene" uid="uid://dv8833ny3ov2e" path="res://scenes/card_ui/card_render_container.tscn" id="3_opj8w"]
 [ext_resource type="Script" uid="uid://cuxsjd0iiq5mx" path="res://scenes/card_ui/card_state_machine.gd" id="3_s2iv8"]
-[ext_resource type="Resource" uid="uid://buxq30bk6nuat" path="res://common_cards/toxin.tres" id="4_25o76"]
 [ext_resource type="Script" uid="uid://cv1grwub7xt37" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_jrm7m"]
 [ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
 [ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
@@ -33,7 +32,6 @@ layout_mode = 1
 offset_right = 200.0
 offset_bottom = 280.0
 pivot_offset = Vector2(100, 140)
-card = ExtResource("4_25o76")
 
 [node name="DropPointDetector" type="Area2D" parent="CardRenderContainer" unique_id=895730316]
 unique_name_in_owner = true
