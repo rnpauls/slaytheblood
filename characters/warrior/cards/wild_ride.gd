@@ -17,19 +17,28 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	Events.card_discarded.connect(_on_card_discarded)
 	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
 	var player_handler: PlayerHandler = targets[0].get_tree().get_first_node_in_group("player_handler")
-	player_handler.draw_card()
-	#var discarded_card: Card = player_handler.discard_cards(1)
-	var discard_effect = DiscardRandomEffect.new()
-	discard_effect.amount = 1
-	discard_effect.execute(targets)
-	#var discarded_card: Card = await Events.card_discarded
-	if discarded_card:
-		if discarded_card.attack >= 6:
-			go_again = true
-		else:
-			go_again = false
+	if await rampage(player_handler, 1):
+		go_again = true
+	else:
+		go_again = false
 	do_stock_attack_damage_effect(targets, modifiers)
 	Events.unlock_hand.emit()
 
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card
+
+func rampage(source: Node, qty: int) -> bool:
+	Events.card_discarded.connect(_on_card_discarded)
+	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
+	source.draw_card()
+	discarded_card = null
+	var discard_effect = DiscardRandomEffect.new()
+	discard_effect.amount = qty
+	discard_effect.execute([source])
+	#var discarded_card: Card = await Events.card_discarded
+	var timer = source.get_tree().create_timer(.01)
+	await timer.timeout
+	if discarded_card and (discarded_card.attack >= 6):
+		return true
+	else:
+		return false

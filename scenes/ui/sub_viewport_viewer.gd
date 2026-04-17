@@ -4,7 +4,7 @@ extends TextureRect
 @export var hover_y_lift := -90.0   # pixels upward
 @export var tween_duration := 0.18
 
-@onready var hover_overlay: Control = get_node("/root/Run/HoverOverlay")  # ← full-screen Control above everything
+@onready var hover_overlay: CanvasLayer = get_node("/root/Run/HoverOverlay")  # ← full-screen Control above everything
 
 var original_parent: Node
 var original_index: int = -1

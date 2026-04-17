@@ -47,11 +47,7 @@ const PITCH_COLORS := {
 func is_single_targeted() -> bool:
 	return target == Target.SINGLE_ENEMY
 
-func _get_targets(card_parent: Node, targets: Array[Node]) -> Array[Node]:
-	if targets == null:
-		print("no target array")
-		return []
-	
+func _get_targets(card_parent: Node) -> Array[Node]:
 	var tree := card_parent.get_tree()
 	
 	match target:
@@ -74,10 +70,9 @@ func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, m
 		#if targetx is Enemy:
 			#targetx.defend_attack(attack, modifiers, go_again)
 			#Could emit a signal with this info, and include the targets, then connect to each enemy and await an answer
-	if is_single_targeted():
-		apply_effects(targets, modifiers)
-	else:
-		apply_effects(_get_targets(card_parent, targets), modifiers)
+	if not is_single_targeted():
+		targets = _get_targets(card_parent)
+	await apply_effects(targets, modifiers)
 	for targetx in targets:
 		#if targetx is Enemy:
 		targetx.stats.block = 0
