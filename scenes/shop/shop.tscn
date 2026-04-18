@@ -11,8 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://dsiqp6n72kl03" path="res://scenes/shop/shop_relic.tscn" id="5_iqig7"]
 [ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_x4lmk"]
 [ext_resource type="Resource" uid="uid://bpyxehcf5kwl" path="res://relics/reinforced_armor.tres" id="6_ksdlm"]
+[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="7_5y7fm"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="7_hjjob"]
 [ext_resource type="Resource" uid="uid://rbm1nv0nx2nj" path="res://test_data/test_run_stats.tres" id="8_ropyq"]
+[ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="8_toxgp"]
+[ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="9_u2jek"]
+[ext_resource type="Resource" uid="uid://b0u14laxxwhga" path="res://weapons/romping_club.tres" id="10_bnu54"]
 [ext_resource type="PackedScene" uid="uid://dqb8lmaxydbk6" path="res://scenes/shop/shop_weapon.tscn" id="13_k5co3"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="14_d1450"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="15_tfdun"]
@@ -79,6 +83,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1ldyg")
 shop_relics = Array[ExtResource("2_m2rrw")]([ExtResource("3_rno6l"), ExtResource("4_ntyfo"), ExtResource("5_b714b"), ExtResource("6_ksdlm")])
+shop_weapons = Array[ExtResource("7_5y7fm")]([ExtResource("8_toxgp"), ExtResource("9_u2jek"), ExtResource("10_bnu54"), ExtResource("9_u2jek"), ExtResource("10_bnu54")])
 char_stats = ExtResource("7_hjjob")
 run_stats = ExtResource("8_ropyq")
 
@@ -142,35 +147,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -99.0
-offset_top = -34.0
-offset_right = -59.0
-offset_bottom = -20.0
+offset_left = 429.0
+offset_top = 272.0
+offset_right = 582.0
+offset_bottom = 318.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Leave"
 
 [node name="Weapons" type="HBoxContainer" parent="UILayer" unique_id=500071596]
 unique_name_in_owner = true
-offset_left = 79.0
-offset_top = 99.0
-offset_right = 430.0
-offset_bottom = 312.0
+offset_left = 53.0
+offset_top = 97.0
+offset_right = 542.0
+offset_bottom = 495.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
 [node name="ShopWeapon" parent="UILayer/Weapons" unique_id=509102568 instance=ExtResource("13_k5co3")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="ShopWeapon2" parent="UILayer/Weapons" unique_id=992177089 instance=ExtResource("13_k5co3")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="ShopWeapon3" parent="UILayer/Weapons" unique_id=166107408 instance=ExtResource("13_k5co3")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="ShopContent" type="VBoxContainer" parent="UILayer" unique_id=1988987100]
 anchors_preset = 8
@@ -178,12 +180,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -77.0
-offset_top = -276.0
-offset_right = 553.0
-offset_bottom = 260.0
+offset_left = -36.0
+offset_top = -264.0
+offset_right = 594.0
+offset_bottom = 335.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 15
 
 [node name="Cards" type="HBoxContainer" parent="UILayer/ShopContent" unique_id=1726449760]
 unique_name_in_owner = true

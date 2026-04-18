@@ -8,8 +8,8 @@
 custom_minimum_size = Vector2(100, 100)
 offset_right = 107.0
 offset_bottom = 220.0
-size_flags_horizontal = 6
-size_flags_vertical = 6
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 10
 script = ExtResource("1_0fpeb")
 

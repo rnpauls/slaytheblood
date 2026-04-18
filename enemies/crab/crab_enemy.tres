@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyStats" load_steps=5 format=3 uid="uid://b7kxqdggip08o"]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://b7kxqdggip08o"]
 
 [ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_42m8v"]
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_tye3e"]
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_w4f4c"]
 [ext_resource type="Resource" uid="uid://bq26uippxtt0a" path="res://enemies/crab/crab_enemy_starting_deck.tres" id="4_tye3e"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_15kx7"]
 
 [resource]
 script = ExtResource("1_w4f4c")
@@ -12,4 +13,5 @@ character_name = "Crab"
 art = ExtResource("1_42m8v")
 max_health = 10
 starting_deck = ExtResource("4_tye3e")
+starting_inventory = ExtResource("5_15kx7")
 cards_per_turn = 3

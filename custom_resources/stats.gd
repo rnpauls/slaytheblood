@@ -9,10 +9,14 @@ signal stats_changed
 @export_group("Gameplay Data")
 @export var max_health := 1 : set = set_max_health
 @export var starting_deck: CardPile
+@export var starting_inventory: Inventory
 @export var cards_per_turn: int
+@export var weapon_left: Weapon
+@export var weapon_right: Weapon
 
 var mana: int : set = set_mana
 var action_points: int : set = set_action_points
+var inventory: Inventory
 var deck: CardPile
 var discard: CardPile
 var draw_pile: CardPile
@@ -61,6 +65,7 @@ func create_instance() -> Resource:
 	instance.block = 0
 	instance.reset_mana()
 	instance.reset_action_points()
+	instance.inventory = instance.starting_inventory.duplicate()
 	instance.deck = instance.starting_deck.duplicate()
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
@@ -85,3 +90,9 @@ func mill(amount: int) -> Array[Card]:
 			discard.add_card(milled_card)
 			milled_cards.append(milled_card)
 	return milled_cards
+
+func add_weapon(new_weapon: Weapon) -> void:
+	var cloned: = new_weapon.duplicate()
+	inventory.add_weapon(cloned)
+	if not weapon_left: weapon_left = cloned
+	elif not weapon_right: weapon_right = cloned

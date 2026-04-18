@@ -56,6 +56,8 @@ func end_turn() -> void:
 
 func draw_card() -> void:
 	#reshuffle_deck_from_discard()
+	if not character:
+		await Events.player_set_up
 	var card_drawn: Card = character.draw_pile.draw_card()
 	if card_drawn:
 		hand.add_card(card_drawn)

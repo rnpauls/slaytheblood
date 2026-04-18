@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyStats" load_steps=4 format=3 uid="uid://bnfcjw5vkcx82"]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bnfcjw5vkcx82"]
 
 [ext_resource type="PackedScene" uid="uid://dsqpb2mplbug7" path="res://enemies/commoner/commoner_enemy_ai.tscn" id="1_bso4h"]
 [ext_resource type="Texture2D" uid="uid://b1nj6u7dxl3mh" path="res://art/tile_0085.png" id="1_mtmb2"]
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="2_bso4h"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_nuuag"]
 
 [resource]
 script = ExtResource("2_bso4h")
@@ -10,5 +11,6 @@ ai = ExtResource("1_bso4h")
 character_name = "Commoner"
 art = ExtResource("1_mtmb2")
 max_health = 10
+starting_inventory = ExtResource("4_nuuag")
 cards_per_turn = 4
 metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

@@ -17,6 +17,8 @@ const MAIN_MENU_PATH = "res://scenes/ui/main_menu.tscn"
 @onready var gold_ui: GoldUI = %GoldUI
 @onready var relic_handler: RelicHandler = %RelicHandler
 @onready var relic_tooltip: RelicTooltip = %RelicTooltip
+@onready var inventory_button: TextureButton = %InventoryButton
+@onready var inventory_view: InventoryView = %InventoryView
 @onready var deck_button: CardPileOpener = %DeckButton
 @onready var deck_view: CardPileView = %DeckView
 @onready var pause_menu: PauseMenu = $PauseMenu
@@ -75,6 +77,9 @@ func _save_run(was_on_map: bool) -> void:
 	save_data.map_data = map.map_data.duplicate()
 	save_data.floors_climbed = map.floors_climbed
 	save_data.was_on_map = was_on_map
+	save_data.current_inventory = character.inventory
+	save_data.current_weapon_left = character.weapon_left
+	save_data.current_weapon_right = character.weapon_right
 	save_data.save_data()
 
 func _load_run() -> void:
@@ -85,6 +90,9 @@ func _load_run() -> void:
 	stats = save_data.run_stats
 	character = save_data.char_stats
 	character.deck = save_data.current_deck
+	character.inventory = save_data.current_inventory
+	character.weapon_left = save_data.current_weapon_left
+	character.weapon_right = save_data.current_weapon_right
 	character.health = save_data.current_health
 	relic_handler.add_relics(save_data.relics)
 	_setup_top_bar()
@@ -139,6 +147,8 @@ func _setup_top_bar() -> void:
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
+	inventory_button.pressed.connect(inventory_view.show_current_view)
+	inventory_view.inventory = character.inventory
 
 func _show_regular_battle_rewards() -> void:
 	var reward_scene := _change_view(BATTLE_REWARD_SCENE) as BattleReward

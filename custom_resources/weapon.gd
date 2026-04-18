@@ -4,10 +4,19 @@ extends Resource
 enum Type {SWORD, DAGGER, AXE, HAMMER, CLUB, CLAW, STAFF}
 enum CharacterType {ALL, ASSASSIN, WARRIOR, WIZARD}
 enum Hands {ONEHAND, TWOHAND, OFFHAND}
+enum Rarity {COMMON, UNCOMMON, RARE}
+
+const RARITY_COLORS := {
+	Card.Rarity.COMMON: Color.GRAY,
+	Card.Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,
+	Card.Rarity.RARE: Color.GOLD,
+	
+}
 
 @export var weapon_name: String
 @export var id: String
 @export var type: Type
+@export var rarity: Rarity
 @export var character_type: CharacterType
 @export var hands: Hands
 @export var starter_weapon: bool = false

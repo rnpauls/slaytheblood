@@ -33,7 +33,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 
 	weapon = new_weapon
 	
-	for weapon_card: WeaponCard in weapon_container.get_children():
+	for weapon_card: WeaponCardRenderContainer in weapon_container.get_children():
 		weapon_card.queue_free()
 	
 	var new_weapon_card := WEAPON_CARD_RENDER_CONTAINER.instantiate() as WeaponCardRenderContainer

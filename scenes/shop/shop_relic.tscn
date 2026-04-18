@@ -1,42 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsiqp6n72kl03"]
+[gd_scene format=3 uid="uid://dsiqp6n72kl03"]
 
 [ext_resource type="PackedScene" uid="uid://big0rbu80crno" path="res://scenes/relic_handler/relic_ui.tscn" id="1_bev8e"]
 [ext_resource type="Script" uid="uid://b7w1pmsiruum7" path="res://scenes/shop/shop_relic.gd" id="1_w5qq0"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="4_uorme"]
 
-[node name="ShopRelic" type="VBoxContainer"]
+[node name="ShopRelic" type="VBoxContainer" unique_id=667588539]
 custom_minimum_size = Vector2(40, 42)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/separation = 2
+theme_override_constants/separation = 15
 script = ExtResource("1_w5qq0")
 
-[node name="RelicContainer" type="CenterContainer" parent="."]
+[node name="RelicContainer" type="CenterContainer" parent="." unique_id=638172724]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="RelicUI" parent="RelicContainer" instance=ExtResource("1_bev8e")]
+[node name="RelicUI" parent="RelicContainer" unique_id=1234053349 instance=ExtResource("1_bev8e")]
 layout_mode = 2
 
-[node name="Price" type="HBoxContainer" parent="."]
+[node name="Price" type="HBoxContainer" parent="." unique_id=1315439068]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="PriceLabel" type="Label" parent="Price"]
+[node name="PriceLabel" type="Label" parent="Price" unique_id=498740809]
 unique_name_in_owner = true
 layout_mode = 2
 text = "999"
 
-[node name="GoldIcon" type="TextureRect" parent="Price"]
+[node name="GoldIcon" type="TextureRect" parent="Price" unique_id=1405682779]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 texture = ExtResource("4_uorme")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BuyButton" type="Button" parent="."]
+[node name="BuyButton" type="Button" parent="." unique_id=269824376]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2

@@ -5,5 +5,7 @@ func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, _custom_a
 	var is_enraged: bool = player.status_handler._has_status("enraged")
 	if is_enraged:
 		go_again = true
+	else:
+		go_again = false
 	super.activate_weapon(targets, modifiers)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1ujjxp0k35wf"]
+[gd_scene format=3 uid="uid://b1ujjxp0k35wf"]
 
 [ext_resource type="Script" uid="uid://b84ee0xlq1dfv" path="res://scenes/campfire/campfire.gd" id="1_4dva7"]
 [ext_resource type="Texture2D" uid="uid://bkd3d4xet2f0d" path="res://art/line.png" id="2_5qpty"]
@@ -31,6 +31,7 @@ curve = SubResource("Curve_fvic1")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g35h5"]
 particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 2, 2)
 emission_shape = 1
 emission_sphere_radius = 25.0
 angle_min = 60.0
@@ -44,11 +45,12 @@ linear_accel_min = 15.0
 linear_accel_max = 25.0
 damping_min = 20.0
 damping_max = 50.0
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_jr2sw")
 color_ramp = SubResource("GradientTexture1D_acxpj")
 
 [sub_resource type="LabelSettings" id="LabelSettings_mhg6a"]
-font_size = 12
+font_size = 42
 
 [sub_resource type="Animation" id="Animation_t3wwr"]
 length = 0.001
@@ -124,7 +126,7 @@ _data = {
 &"fade_out": SubResource("Animation_xcu4r")
 }
 
-[node name="Campfire" type="Control"]
+[node name="Campfire" type="Control" unique_id=1702340325]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,10 +137,10 @@ mouse_filter = 2
 script = ExtResource("1_4dva7")
 char_stats = ExtResource("2_bhiml")
 
-[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=631400867]
 layer = 0
 
-[node name="Background" type="TextureRect" parent="BackgroundLayer"]
+[node name="Background" type="TextureRect" parent="BackgroundLayer" unique_id=1262263844]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -146,55 +148,56 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_m5fda")
 
-[node name="ParticlesLayer" type="CanvasLayer" parent="."]
+[node name="ParticlesLayer" type="CanvasLayer" parent="." unique_id=678248837]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ParticlesLayer"]
-position = Vector2(81, 99)
-amount = 128
-process_material = SubResource("ParticleProcessMaterial_g35h5")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParticlesLayer" unique_id=1008062515]
+position = Vector2(640, 420)
+amount = 256
 texture = ExtResource("2_5qpty")
-lifetime = 1.5
+lifetime = 3.17
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_g35h5")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1104641336]
 
-[node name="UI" type="VBoxContainer" parent="UILayer"]
+[node name="UI" type="VBoxContainer" parent="UILayer" unique_id=1458353327]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 7.0
-offset_top = -22.0
-offset_right = 71.0
-offset_bottom = 22.0
+offset_left = -118.0
+offset_top = -253.0
+offset_right = 118.0
+offset_bottom = 253.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 15
 
-[node name="Title" type="Label" parent="UILayer/UI"]
+[node name="Title" type="Label" parent="UILayer/UI" unique_id=2096142135]
 layout_mode = 2
 text = "Campfire"
 label_settings = SubResource("LabelSettings_mhg6a")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="UILayer/UI"]
+[node name="Spacer" type="Control" parent="UILayer/UI" unique_id=1353654679]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="RestButton" type="Button" parent="UILayer/UI"]
+[node name="RestButton" type="Button" parent="UILayer/UI" unique_id=1489379570]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 14)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Rest"
 
-[node name="Description" type="Label" parent="UILayer/UI"]
+[node name="Description" type="Label" parent="UILayer/UI" unique_id=1296635102]
 layout_mode = 2
 text = "+30% HP"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vff7s")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1119471138]
+libraries/ = SubResource("AnimationLibrary_vff7s")
 
 [connection signal="pressed" from="UILayer/UI/RestButton" to="." method="_on_rest_button_pressed"]

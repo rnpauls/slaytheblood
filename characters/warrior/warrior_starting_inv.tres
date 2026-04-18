@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://c4n5peso4ufb8"]
+
+[ext_resource type="Script" uid="uid://s62w0o001fci" path="res://custom_resources/inventory.gd" id="1_clnst"]
+[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="2_oipfx"]
+[ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="3_oipfx"]
+
+[resource]
+script = ExtResource("1_clnst")
+weapons = Array[ExtResource("2_oipfx")]([ExtResource("3_oipfx")])
+metadata/_custom_type_script = "uid://s62w0o001fci"

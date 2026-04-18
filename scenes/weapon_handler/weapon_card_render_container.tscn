@@ -4,22 +4,24 @@
 [ext_resource type="PackedScene" uid="uid://b8hgtlcvsiq3b" path="res://scenes/ui/sub_viewport_viewer.tscn" id="2_cuqdx"]
 [ext_resource type="PackedScene" uid="uid://cvauk1trfj0lv" path="res://scenes/weapon_handler/weapon_card.tscn" id="2_ji7x6"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ji7x6"]
-viewport_path = NodePath("SubViewport")
-
 [node name="WeaponCardRenderContainer" type="MarginContainer" unique_id=1508382840]
 custom_minimum_size = Vector2(40, 60)
+offset_right = 40.0
+offset_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_f66yn")
 
 [node name="SubViewportViewer" parent="." unique_id=1958539626 instance=ExtResource("2_cuqdx")]
+unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
-texture = SubResource("ViewportTexture_ji7x6")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=473573907]
+unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 size = Vector2i(200, 300)
 render_target_update_mode = 4
 

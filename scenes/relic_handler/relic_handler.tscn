@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://big0rbu80crno" path="res://scenes/relic_handler/relic_ui.tscn" id="4_qg6nw"]
 
 [node name="RelicHandler" type="HBoxContainer" unique_id=1149916059]
-offset_right = 272.0
+offset_right = 732.0
 offset_bottom = 80.0
 script = ExtResource("1_nme40")
 
@@ -24,7 +24,7 @@ flip_h = true
 
 [node name="RelicsControl" type="Control" parent="." unique_id=1000520848 node_paths=PackedStringArray("left_button", "right_button")]
 clip_contents = true
-custom_minimum_size = Vector2(700, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 script = ExtResource("3_5nlls")
 left_button = NodePath("../LeftButton")

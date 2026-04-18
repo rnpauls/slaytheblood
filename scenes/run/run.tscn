@@ -10,8 +10,12 @@
 [ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/pixel_rpg_label_settings_smaller.tres" id="5_cnkn7"]
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/Classic 100/item52.png" id="8_7yo0l"]
 [ext_resource type="PackedScene" uid="uid://cfyvr6vvjt3yv" path="res://scenes/relic_handler/relic_tooltip.tscn" id="10_kjras"]
 [ext_resource type="Script" uid="uid://y5m8dbsnnish" path="res://scenes/run/pause_menu.gd" id="11_d0odi"]
+[ext_resource type="PackedScene" uid="uid://c4brrbokqt532" path="res://scenes/ui/inventory_view.tscn" id="13_fo0ly"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fo0ly"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3ve3"]
 
@@ -79,7 +83,7 @@ color = Color(0, 0, 0, 0.490196)
 custom_minimum_size = Vector2(0, 18)
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 16.0
+offset_bottom = 80.0
 grow_horizontal = 2
 
 [node name="HealthUI" parent="TopBar/BarItems" unique_id=796332838 instance=ExtResource("4_ptqfx")]
@@ -100,8 +104,21 @@ size_flags_horizontal = 3
 
 [node name="RelicHandler" parent="TopBar/BarItems/RelicHandlerContainer" unique_id=2006051407 instance=ExtResource("6_a2nef")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(800, 80)
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
+
+[node name="InventoryButton" type="TextureButton" parent="TopBar/BarItems" unique_id=1829506682]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("8_7yo0l")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="TopBar/BarItems" unique_id=1016135043]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_fo0ly")
 
 [node name="DeckButton" parent="TopBar/BarItems" unique_id=336927411 node_paths=PackedStringArray("counter") instance=ExtResource("4_i2rp4")]
 unique_name_in_owner = true
@@ -122,6 +139,17 @@ horizontal_alignment = 1
 [node name="DeckView" parent="TopBar" unique_id=1303857816 instance=ExtResource("6_c0b4k")]
 unique_name_in_owner = true
 visible = false
+
+[node name="InventoryView" parent="TopBar" unique_id=495168532 instance=ExtResource("13_fo0ly")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="RelicTooltip" parent="TopBar" unique_id=474516011 instance=ExtResource("10_kjras")]
 unique_name_in_owner = true

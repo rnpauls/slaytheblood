@@ -17,6 +17,6 @@ func set_weapon(new_weapon: Weapon) -> void:
 	weapon_ui.set_weapon(weapon)
 	text_box.text = weapon.get_tooltip()
 	name_label.text = weapon.weapon_name
-	rarity.modulate = Card.RARITY_COLORS[weapon.rarity]
+	rarity.modulate = Weapon.RARITY_COLORS[weapon.rarity]
 	type_label.text = Weapon.Type.keys()[weapon.type]
 	

@@ -1,44 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj1ggwrpxs7bs"]
+[gd_scene format=3 uid="uid://cj1ggwrpxs7bs"]
 
 [ext_resource type="Script" uid="uid://cbeme2qybb3ro" path="res://scenes/shop/shop_card.gd" id="1_gu12k"]
 [ext_resource type="PackedScene" uid="uid://b2ay04rjh0l4v" path="res://scenes/ui/card_menu_ui.tscn" id="1_jui1i"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="2_amrd3"]
 [ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/warrior/cards/warrior_true_strength.tres" id="2_qhqmp"]
 
-[node name="ShopCard" type="VBoxContainer"]
+[node name="ShopCard" type="VBoxContainer" unique_id=315799312]
 custom_minimum_size = Vector2(40, 56)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/separation = 2
+theme_override_constants/separation = 15
 script = ExtResource("1_gu12k")
 card = ExtResource("2_qhqmp")
 
-[node name="CardContainer" type="CenterContainer" parent="."]
+[node name="CardContainer" type="CenterContainer" parent="." unique_id=1977906023]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="CardMenuUI" parent="CardContainer" instance=ExtResource("1_jui1i")]
+[node name="CardMenuUI" parent="CardContainer" unique_id=1177282318 instance=ExtResource("1_jui1i")]
 layout_mode = 2
 
-[node name="Price" type="HBoxContainer" parent="."]
+[node name="Price" type="HBoxContainer" parent="." unique_id=1101452153]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="PriceLabel" type="Label" parent="Price"]
+[node name="PriceLabel" type="Label" parent="Price" unique_id=822697421]
 unique_name_in_owner = true
 layout_mode = 2
 text = "999"
 
-[node name="GoldIcon" type="TextureRect" parent="Price"]
+[node name="GoldIcon" type="TextureRect" parent="Price" unique_id=662625622]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 texture = ExtResource("2_amrd3")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BuyButton" type="Button" parent="."]
+[node name="BuyButton" type="Button" parent="." unique_id=190036115]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
