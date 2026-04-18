@@ -9,11 +9,12 @@ extends Stats
 @export var draftable_cards: CardPile
 @export var starting_relic: Relic
 
-func take_damage(damage : int) -> void:
+func take_damage(damage : int) -> int:
 	var initial_health := health
-	super.take_damage(damage)
+	var damage_taken:=super.take_damage(damage)
 	if initial_health > health:
 		Events.player_hit.emit()
+	return damage_taken
 
 func create_instance() -> Resource:
 	var instance: CharacterStats = self.duplicate()

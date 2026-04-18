@@ -69,9 +69,6 @@ _data = {
 &"flash": SubResource("Animation_dig6a")
 }
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_abdjr"]
-blend_mode = 2
-
 [node name="WeaponUI" type="Control" unique_id=1748562188]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
@@ -93,7 +90,8 @@ stretch_mode = 5
 libraries/ = SubResource("AnimationLibrary_4js1w")
 
 [node name="TextureRectAtk" type="TextureRect" parent="." unique_id=1769151175]
-material = SubResource("CanvasItemMaterial_abdjr")
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 layout_mode = 0
 offset_left = -32.0
 offset_top = 56.0
@@ -123,7 +121,8 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="TextureRectCost" type="TextureRect" parent="." unique_id=270781876]
-material = SubResource("CanvasItemMaterial_abdjr")
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
 layout_mode = 0
 offset_left = 56.0
 offset_top = -32.0

@@ -71,13 +71,14 @@ func create_instance() -> Resource:
 	instance.discard = CardPile.new()
 	return instance
 
-func take_damage(damage : int) -> void:
+func take_damage(damage : int) -> int:
 	if damage <= 0:
-		return
+		return 0
 	var initial_damage = damage
 	damage = clampi(damage - block, 0, damage)
 	block = 0#clampi(block - initial_damage, 0, block)
 	health -= damage
+	return damage
 
 func heal(amount : int) -> void:
 	health += amount

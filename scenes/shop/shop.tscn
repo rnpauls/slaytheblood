@@ -141,20 +141,6 @@ label_settings = SubResource("LabelSettings_irnh7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="UILayer" unique_id=1069481478]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 429.0
-offset_top = 272.0
-offset_right = 582.0
-offset_bottom = 318.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Leave"
-
 [node name="Weapons" type="HBoxContainer" parent="UILayer" unique_id=500071596]
 unique_name_in_owner = true
 offset_left = 53.0
@@ -215,6 +201,20 @@ layout_mode = 2
 
 [node name="ShopRelic3" parent="UILayer/ShopContent/Relics" unique_id=2041741568 instance=ExtResource("5_iqig7")]
 layout_mode = 2
+
+[node name="BackButton" type="Button" parent="UILayer" unique_id=1069481478]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 429.0
+offset_top = 272.0
+offset_right = 582.0
+offset_bottom = 318.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Leave"
 
 [node name="CardTooltipPopup" parent="UILayer" unique_id=1502570526 instance=ExtResource("5_x4lmk")]
 unique_name_in_owner = true

@@ -35,17 +35,17 @@ func update_player() -> void:
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
 
-func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
+func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
 	if stats.health <= 0:
 		print_debug("Taking damage but already dead!")
-		return
+		return 0
 	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	var modified_damage := modifier_handler.get_modified_value(damage, which_modifier)
 	
+	var damage_taken:=stats.take_damage(modified_damage)
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 16, 0.15))
-	tween.tween_callback(stats.take_damage.bind(modified_damage))
 	tween.tween_interval(0.17)
 	
 	tween.finished.connect(
@@ -56,6 +56,7 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 				Events.player_died.emit()
 				queue_free()
 	)
+	return damage_taken
 
 #func destroy_arsenal() -> bool:
 	#if stats.arsenal == null:

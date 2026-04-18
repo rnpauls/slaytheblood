@@ -36,6 +36,7 @@ offset_right = 133.0
 offset_bottom = 157.0
 
 [node name="Rarity" type="TextureRect" parent="." unique_id=2017334287]
+texture_filter = 1
 layout_mode = 0
 offset_left = 7.0
 offset_top = 7.0

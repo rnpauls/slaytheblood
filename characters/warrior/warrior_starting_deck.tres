@@ -2,16 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="1_vrruq"]
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_wm70o"]
-[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="3_ne0bc"]
-[ext_resource type="Resource" uid="uid://bbegfx4ducysc" path="res://characters/warrior/cards/bare_fangs_yellow.tres" id="6_alsod"]
-[ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/warrior/cards/warrior_big_slam.tres" id="6_m7ai2"]
-[ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/warrior/cards/warrior_slash.tres" id="7_7ljou"]
-[ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/warrior/cards/warrior_true_strength.tres" id="7_g8cso"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="8_j5bvy"]
-[ext_resource type="Resource" uid="uid://bllgno480j4cf" path="res://characters/warrior/cards/wild_ride_red.tres" id="8_m7ai2"]
-[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://common_cards/head_jab_blue.tres" id="9_85nwi"]
+[ext_resource type="Resource" uid="uid://dl0joso87gfpm" path="res://common_cards/concuss_red.tres" id="2_gobyu"]
 [ext_resource type="Resource" uid="uid://de0t0sb7c3tao" path="res://common_cards/critical_strike_blue.tres" id="10_1kjuq"]
 
 [resource]
 script = ExtResource("1_vrruq")
-cards = Array[ExtResource("1_wm70o")]([ExtResource("3_ne0bc"), ExtResource("6_m7ai2"), ExtResource("7_g8cso"), ExtResource("8_m7ai2"), ExtResource("8_m7ai2"), ExtResource("6_alsod"), ExtResource("6_alsod"), ExtResource("7_7ljou"), ExtResource("6_m7ai2"), ExtResource("8_j5bvy"), ExtResource("9_85nwi"), ExtResource("10_1kjuq")])
+cards = Array[ExtResource("1_wm70o")]([ExtResource("2_gobyu"), ExtResource("2_gobyu"), ExtResource("2_gobyu"), ExtResource("10_1kjuq"), ExtResource("10_1kjuq"), ExtResource("10_1kjuq")])

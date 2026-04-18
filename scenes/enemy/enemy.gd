@@ -20,6 +20,7 @@ signal enemy_action_completed
 var enemy_ai: EnemyAI
 #var current_action: EnemyAction: set = set_current_action
 var current_action: Card: set = set_current_action
+var hand: Array
 
 #func _ready() -> void:
 	#await get_tree().create_timer(2).timeout
@@ -49,6 +50,7 @@ func setup_ai() -> void:
 	enemy_ai.enemy = self
 	enemy_ai.setup()
 	enemy_card_ui.update_cards(enemy_ai)
+	hand = enemy_ai.hand
 
 
 func update_stats() -> void:
@@ -137,14 +139,14 @@ func defend_attack(attack: int, go_again: bool) -> void:
 	enemy_card_ui.update_cards(enemy_ai)
 
 
-func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
+func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
 	if stats.health <= 0:
-		return
+		return 0
 	
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
 	
 	var mod_dmg := modifier_handler.get_modified_value(damage, which_modifier)
-	stats.take_damage(mod_dmg)
+	var damage_taken: = stats.take_damage(mod_dmg)
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 16, 0.15))
 	#tween.tween_callback(stats.take_damage.bind(mod_dmg))
@@ -158,6 +160,7 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> void:
 				Events.enemy_died.emit(self)
 				queue_free()
 	)
+	return damage_taken
 	
 func get_num_cards_for_turn() -> int:
 	var player_life = get_tree().get_first_node_in_group("player").stats.health
