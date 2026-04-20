@@ -19,10 +19,10 @@ const HAND_DISCARD_INTERVAL := 0.25
 @export var hand: Hand
 
 var character: CharacterStats
-
+signal attack_completed
 
 func _ready() -> void:
-	Events.card_played.connect(_on_card_played)
+	#Events.card_play_started.connect(_on_card_played) #Replaced with card.card_play_started / finished
 	Events.card_discarded.connect(_on_card_discarded)
 	Events.card_pitched.connect(_on_card_pitched)
 	Events.card_blocked.connect(_on_card_blocked)
@@ -63,6 +63,8 @@ func draw_card() -> void:
 		hand.add_card(card_drawn)
 		#reshuffle_deck_from_discard()
 		Events.player_card_drawn.emit()
+		card_drawn.card_play_finished.connect(_on_card_play_finished)
+		card_drawn.card_play_started.connect(_on_card_play_started)
 
 
 func draw_cards(amount: int, hand_type = null) -> void:
@@ -122,12 +124,15 @@ func reshuffle_deck_from_discard() -> void:
 
 	character.draw_pile.shuffle()
 
+func _on_card_play_started(card: Card) -> void:
+	pass
 
-func _on_card_played(card: Card) -> void:
+func _on_card_play_finished(card: Card) -> void:
+	if card.type == Card.Type.ATTACK:
+		attack_completed.emit()
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		return
-	
-	character.discard.add_card(card)
+	character.discard.add_card(card) #This used to happen at the start of card.play()
 
 func _on_card_discarded(card: Card) -> void:
 	if card.attack >= 6:
@@ -142,6 +147,9 @@ func _on_card_blocked(card: Card) -> void:
 	character.discard.add_card(card)
 
 func _on_card_pitched(card: Card) -> void:
+	if card.cost == 0:
+		var flow_status  := preload("res://statuses/flow.tres").duplicate()
+		player.status_handler.add_status(flow_status)
 	character.draw_pile.add_card(card)
 
 func _on_card_sunk(card: Card) -> void:

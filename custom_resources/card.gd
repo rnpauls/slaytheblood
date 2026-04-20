@@ -31,7 +31,7 @@ const PITCH_COLORS := {
 @export var attack: int
 @export var defense: int
 @export var exhausts: bool = false
-@export var go_again: bool = false
+@export var go_again: bool = false : get = get_go_again
 
 @export_group("Card Visuals")
 @export var icon: Texture
@@ -44,6 +44,10 @@ const PITCH_COLORS := {
 @export var disable_pitch: bool = false
 #@export var disable_cost: bool = false
 
+signal card_play_started(Card)
+signal card_play_finished(Card)
+
+#Used for Draw discard etc
 var discarded_card: Card = null
 
 func is_single_targeted() -> bool:
@@ -64,7 +68,10 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 
 #Currently does not accept non-attack actions targetting enemies
 func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
-	Events.card_played.emit(self)
+	card_play_started.emit(self)
+	if type == Type.ATTACK:
+		if targets[0] is Enemy:
+			Events.player_attack_declared.emit()
 	char_stats.mana -= cost
 	char_stats.action_points -= 1
 	
@@ -74,12 +81,13 @@ func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, m
 			#Could emit a signal with this info, and include the targets, then connect to each enemy and await an answer
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)
-	await apply_effects(targets, modifiers)
+	apply_effects(targets, modifiers)
 	for targetx in targets:
 		#if targetx is Enemy:
 		targetx.stats.block = 0
 	if go_again:
 		char_stats.action_points += 1
+	card_play_finished.emit(self)
 
 func discard_card() -> void:
 	print("Discarded %s" % id)
@@ -89,7 +97,7 @@ func pitch_card(char_stats: CharacterStats) -> void:
 	Events.card_pitched.emit(self)
 	char_stats.mana += pitch
 
-func sink_card(char_stats: CharacterStats) -> void:
+func sink_card(_char_stats: CharacterStats) -> void:
 	Events.card_sunk.emit(self)
 
 func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
@@ -137,3 +145,6 @@ func rampage(source: Node, qty: int) -> bool:
 		return true
 	else:
 		return false
+
+func get_go_again() -> bool:
+	return go_again

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnragedStatus" format=3 uid="uid://cwktoivloveo0"]
+
+[ext_resource type="Texture2D" uid="uid://cgwi1th7a8asb" path="res://art/Classic 100/item25.png" id="1_3b1r0"]
+[ext_resource type="Script" uid="uid://bqqgt8e0x2y7f" path="res://statuses/flow.gd" id="2_6dot0"]
+
+[resource]
+script = ExtResource("2_6dot0")
+id = "flow"
+type = 1
+can_expire = true
+duration = 1
+icon = ExtResource("1_3b1r0")
+tooltip = "Flow state: Has pitched a 0-cost this turn"

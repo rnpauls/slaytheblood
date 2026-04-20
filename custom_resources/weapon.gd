@@ -2,7 +2,7 @@ class_name Weapon
 extends Resource
 
 enum Type {SWORD, DAGGER, AXE, HAMMER, CLUB, CLAW, STAFF}
-enum CharacterType {ALL, ASSASSIN, WARRIOR, WIZARD}
+enum CharacterType {ALL, NINJA, WARRIOR, WIZARD}
 enum Hands {ONEHAND, TWOHAND, OFFHAND}
 enum Rarity {COMMON, UNCOMMON, RARE}
 
@@ -37,6 +37,7 @@ func initialize_weapon(_owner: WeaponUI) -> void:
 
 
 func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_attack:int = attack) -> void:
+	Events.player_attack_declared.emit()
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)
 	var player = targets[0].get_tree().get_first_node_in_group("player") as Player
 	player.stats.mana -= cost

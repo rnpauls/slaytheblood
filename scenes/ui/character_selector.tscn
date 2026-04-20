@@ -159,14 +159,14 @@ texture = ExtResource("4_i3qjr")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AssassinButton" type="Button" parent="CharacterButtons" unique_id=1904629322]
+[node name="NinjaButton" type="Button" parent="CharacterButtons" unique_id=1904629322]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ucmb5")
 
-[node name="Icon" type="TextureRect" parent="CharacterButtons/AssassinButton" unique_id=97791022]
+[node name="Icon" type="TextureRect" parent="CharacterButtons/NinjaButton" unique_id=97791022]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -186,4 +186,4 @@ stretch_mode = 5
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CharacterButtons/WarriorButton" to="." method="_on_warrior_button_pressed"]
 [connection signal="pressed" from="CharacterButtons/WizardButton" to="." method="_on_wizard_button_pressed"]
-[connection signal="pressed" from="CharacterButtons/AssassinButton" to="." method="_on_assassin_button_pressed"]
+[connection signal="pressed" from="CharacterButtons/NinjaButton" to="." method="_on_ninja_button_pressed"]

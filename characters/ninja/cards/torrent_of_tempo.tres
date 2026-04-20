@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://7frogxh0rjom"]
+
+[ext_resource type="Texture2D" uid="uid://jesqh00q1sja" path="res://art/Classic 100/item4.png" id="1_nuuo2"]
+[ext_resource type="Script" uid="uid://bkjby1opn0x5d" path="res://characters/ninja/cards/torrent_of_tempo.gd" id="2_nuuo2"]
+
+[resource]
+script = ExtResource("2_nuuo2")
+id = "torrent_of_tempo"
+target = 1
+cost = 1
+pitch = 1
+attack = 5
+defense = 3
+icon = ExtResource("1_nuuo2")
+tooltip_text = "On hit: Go again"
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

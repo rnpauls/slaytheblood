@@ -2,7 +2,7 @@ class_name Relic
 extends Resource
 
 enum Type {START_OF_TURN, START_OF_COMBAT, END_OF_TURN, END_OF_COMBAT, EVENT_BASED}
-enum CharacterType {ALL, ASSASSIN, WARRIOR, WIZARD}
+enum CharacterType {ALL, NINJA, WARRIOR, WIZARD}
 
 @export var relic_name: String
 @export var id: String

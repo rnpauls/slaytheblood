@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://dda70b1ss7fu1"]
+
+[ext_resource type="Texture2D" uid="uid://jesqh00q1sja" path="res://art/Classic 100/item4.png" id="1_ej2l0"]
+[ext_resource type="Script" uid="uid://lhfvfjnp661q" path="res://characters/ninja/cards/one_inch_punch.gd" id="2_7mun4"]
+
+[resource]
+script = ExtResource("2_7mun4")
+id = "one_inch_punch"
+target = 1
+pitch = 3
+attack = 3
+defense = 3
+icon = ExtResource("1_ej2l0")
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

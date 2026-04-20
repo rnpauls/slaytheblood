@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CouponsRelic" format=3 uid="uid://cpq6w8ligmkxn"]
+
+[ext_resource type="Texture2D" uid="uid://cbteg6lcx42sy" path="res://art/Classic 100/item82.png" id="1_e8bua"]
+[ext_resource type="Script" uid="uid://dnpfv5e2knefi" path="res://relics/ira_pendant.gd" id="2_e8bua"]
+
+[resource]
+script = ExtResource("2_e8bua")
+relic_name = "Ira's Pendant"
+id = "ira_pendant"
+type = 4
+character_type = 1
+starter_relic = true
+icon = ExtResource("1_e8bua")
+tooltip = "[color=\"ffdf00\"]Ira's Pendant[/color]
+Your second attack each turn gets +1atk"

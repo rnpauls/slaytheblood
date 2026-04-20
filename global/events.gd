@@ -6,11 +6,11 @@ signal card_drag_started(card_ui: CardUI)
 signal card_drag_ended(card_ui: CardUI)
 signal card_aim_started(origin: Node)
 signal card_aim_ended(origin: Node)
-signal card_played(card: CardUI)
-signal card_discarded(card: CardUI)
-signal card_pitched(card: CardUI)
-signal card_sunk(card: CardUI)
-signal card_blocked(card: CardUI)
+#signal card_played(card: Card)
+signal card_discarded(card: Card)
+signal card_pitched(card: Card)
+signal card_sunk(card: Card)
+signal card_blocked(card: Card)
 #signal card_milled(card: CardUI)
 signal card_tooltip_requested(icon: Texture, text: String)
 signal tooltip_hide_requested
@@ -31,6 +31,7 @@ signal player_card_drawn
 signal player_action_phase_started
 signal player_blocks_declared
 signal player_set_up #emitted once the player is initialized in the battle
+signal player_attack_declared
 
 #Enemy-related events
 signal enemy_turn_completed(enemy: Enemy) #curently called when enemy is done with all actions, and statuses should be activated to move to next enemy

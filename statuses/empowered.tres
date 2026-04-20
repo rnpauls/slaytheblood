@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EmpoweredStatus" format=3 uid="uid://c1ipkh0jjmd8m"]
+
+[ext_resource type="Texture2D" uid="uid://dmstf3o5o06n6" path="res://art/Classic 100/item94.png" id="1_bp4s2"]
+[ext_resource type="Script" uid="uid://bx2men7u2b6no" path="res://statuses/empowered.gd" id="2_ies5f"]
+
+[resource]
+script = ExtResource("2_ies5f")
+id = "empowered"
+type = 2
+stack_type = 1
+can_expire = true
+duration = 1
+stacks = 1
+icon = ExtResource("1_bp4s2")
+tooltip = "Empower: Next attack this turn gets +%satk"

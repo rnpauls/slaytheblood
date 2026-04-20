@@ -15,6 +15,7 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
 signal enemy_action_completed
+signal attack_completed
 
 #var enemy_action_picker: EnemyActionPicker
 var enemy_ai: EnemyAI
@@ -120,6 +121,7 @@ func do_action() -> void:
 		stats.action_points += 1
 	
 	enemy_action_completed.emit(self)
+	attack_completed.emit()
 	enemy_card_ui.update_cards(enemy_ai)
 
 #Defend player attack
