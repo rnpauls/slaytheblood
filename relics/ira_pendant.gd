@@ -6,7 +6,7 @@ var attacks_this_turn := 0
 
 func initialize_relic(owner: RelicUI) -> void:
 	relic_ui = owner
-	Events.player_attack_declared.connect(activate_relic)
+	Events.player_attack_declared.connect(activate_relic.bind(null))
 	Events.player_end_phase_started.connect(reset)
 
 

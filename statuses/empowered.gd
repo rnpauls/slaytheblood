@@ -17,8 +17,11 @@ func initialize_status(target: Node) -> void:
 	if target is Player:
 		var player_handler: PlayerHandler = target.get_tree().get_first_node_in_group("player_handler")
 		player_handler.attack_completed.connect(apply_status.bind(target))
+		Events.player_turn_ended.connect(apply_status.bind(target))
 	else:
 		target.attack_completed.connect(apply_status.bind(target))
+		Events.enemy_phase_ended.connect(apply_status.bind(target))
+		
 	print_debug("Add bittering thorns modifier")
 
 

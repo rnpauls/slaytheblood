@@ -20,7 +20,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	main_effect.sound = sound
 	main_effect.go_again = go_again
 	main_effect.on_hit_callable = _on_hit_go_again
-	main_effect.args = [self]
+	main_effect.args = [self] as Array[Card]
 	
 	main_effect.execute(targets)
 

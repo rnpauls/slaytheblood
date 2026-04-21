@@ -1,10 +1,10 @@
 [gd_resource type="Resource" format=3 uid="uid://de0t0sb7c3tao"]
 
 [ext_resource type="Texture2D" uid="uid://5a4kk006fk3b" path="res://art/Classic 100/item10.png" id="1_ly60u"]
-[ext_resource type="Script" uid="uid://cvgrfpows1pow" path="res://common_cards/critical_strike.gd" id="2_qe11u"]
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_ly60u"]
 
 [resource]
-script = ExtResource("2_qe11u")
+script = ExtResource("2_ly60u")
 id = "critical_strike"
 target = 1
 cost = 1
