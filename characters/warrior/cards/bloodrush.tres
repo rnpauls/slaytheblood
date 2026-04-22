@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bg6kgdp5pefr7"]
+
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="1_qouyo"]
+
+[resource]
+script = ExtResource("1_qouyo")
+id = "bloodrush"
+type = 1
+rarity = 2
+cost = 1
+pitch = 2
+defense = 3
+disable_attack = true
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

@@ -83,8 +83,9 @@ func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, m
 		targets = _get_targets(card_parent)
 	apply_effects(targets, modifiers)
 	for targetx in targets:
-		#if targetx is Enemy:
-		targetx.stats.block = 0
+		if type == Type.ATTACK:
+			#if targetx is Enemy:
+			targetx.stats.block = 0
 	if go_again:
 		char_stats.action_points += 1
 	card_play_finished.emit(self)
@@ -142,6 +143,23 @@ func rampage(source: Node, qty: int) -> bool:
 	print_debug("Rampage still has timer")
 	await timer.timeout
 	if discarded_card and (discarded_card.attack >= 6):
+		return true
+	else:
+		return false
+
+func sixloot(source: Node, qty: int) -> bool:
+	#Events.card_discarded.connect(_on_card_discarded)
+	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
+	source.draw_cards(qty)
+	discarded_card = null
+	var discard_effect = DiscardRandomSixEffect.new()
+	discard_effect.amount = 1
+	var all_six_discarded:bool = discard_effect.execute([source])
+	#var discarded_card: Card = await Events.card_discarded
+	#var timer = source.get_tree().create_timer(.01)
+	#print_debug("Rampage still has timer")
+	#await timer.timeout
+	if all_six_discarded:
 		return true
 	else:
 		return false

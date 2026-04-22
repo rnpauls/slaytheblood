@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BloodrushedStatus" format=3 uid="uid://x3rg21y3wn5u"]
+
+[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="1_1flo3"]
+[ext_resource type="Script" uid="uid://bpnx4ald3fga8" path="res://statuses/bloodrushed.gd" id="2_1flo3"]
+
+[resource]
+script = ExtResource("2_1flo3")
+id = "bloodrushed"
+type = 1
+stack_type = 1
+can_expire = true
+duration = 1
+stacks = 2
+icon = ExtResource("1_1flo3")
+tooltip = "Bloodrush: Attacks get +2 this turn"
