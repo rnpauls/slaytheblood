@@ -1,16 +1,16 @@
 [gd_resource type="Resource" format=3 uid="uid://7frogxh0rjom"]
 
-[ext_resource type="Texture2D" uid="uid://jesqh00q1sja" path="res://art/Classic 100/item4.png" id="1_nuuo2"]
-[ext_resource type="Script" uid="uid://bkjby1opn0x5d" path="res://characters/ninja/cards/torrent_of_tempo.gd" id="2_nuuo2"]
+[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_nuuo2"]
+[ext_resource type="Script" uid="uid://bik2r6llb7hq" path="res://characters/ninja/cards/poison_the_blade.gd" id="2_34vso"]
 
 [resource]
-script = ExtResource("2_nuuo2")
-id = "torrent_of_tempo"
-target = 1
-cost = 1
+script = ExtResource("2_34vso")
+id = "poison_the_blade"
 pitch = 1
-attack = 5
-defense = 3
+attack = 3
+defense = 2
+go_again = true
 icon = ExtResource("1_nuuo2")
-tooltip_text = "On hit: Go again"
+tooltip_text = "Next attack this turn gets: \"On hit: Deal 3 damage\""
+disable_attack = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

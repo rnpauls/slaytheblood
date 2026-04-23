@@ -11,7 +11,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % modified_dmg
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	var main_effect = OnHitDamageEffect.new()
+	var main_effect = AttackDamageEffect.new()
 	main_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
 	main_effect.sound = sound
 	main_effect.go_again = go_again

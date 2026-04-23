@@ -23,6 +23,8 @@ var enemy_ai: EnemyAI
 var current_action: Card: set = set_current_action
 var hand: Array
 
+var active_on_hits: Array[OnHit]
+
 #func _ready() -> void:
 	#await get_tree().create_timer(2).timeout
 	#take_damage(10)

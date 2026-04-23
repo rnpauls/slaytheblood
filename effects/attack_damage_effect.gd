@@ -2,6 +2,7 @@ class_name AttackDamageEffect
 extends DamageEffect
 
 var go_again:= false
+var on_hit_effects: Array[OnHit]
 
 func execute(targets: Array[Node]) -> void:
 	for target in targets:
@@ -10,4 +11,16 @@ func execute(targets: Array[Node]) -> void:
 		if target is Enemy:
 			target.defend_attack(amount, go_again)
 		if target is Enemy or target is Player:
-			super.execute_single_target(target)
+			execute_single_target(target)
+
+func execute_single_target(target: Node) -> void:
+	var damage_dealt:=0
+	if target is Enemy or target is Player:
+		damage_dealt = target.take_damage(amount, receiver_modifier_type)
+		SFXPlayer.play(sound)
+	if (damage_dealt > 0):
+		for on_hit in on_hit_effects:
+			if on_hit.effect:
+				on_hit.effect.execute([target])
+			if on_hit.custom_func:
+				on_hit.custom_func.call(target, on_hit.args)

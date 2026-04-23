@@ -10,6 +10,8 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
+var active_on_hits: Array[OnHit]
+
 #func _ready() -> void:
 	#var exposed := preload("res://statuses/exposed.tres").duplicate()
 	#exposed.duration = 3

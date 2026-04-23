@@ -45,6 +45,7 @@ const PITCH_COLORS := {
 #@export var disable_cost: bool = false
 
 var owner: Variant
+var on_hits: Array[OnHit]
 signal card_play_started(Card)
 signal card_play_finished(Card)
 
@@ -126,6 +127,9 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 	damage_effect.amount = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
+	
+	damage_effect.on_hit_effects.append_array(on_hits)
+	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
 	damage_effect.execute(targets)
 
 func _on_card_discarded(card: Card) -> void:
