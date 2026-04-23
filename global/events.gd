@@ -38,7 +38,7 @@ signal enemy_turn_completed(enemy: Enemy) #curently called when enemy is done wi
 signal enemy_phase_ended #Called when all enemies are done, move to player turn
 signal enemy_died(enemy: Enemy)
 signal enemy_attack_declared
-
+signal enemy_card_drawn(enemy: Enemy)
 #Battle-related events
 signal battle_over_screen_requested(text: String, type: BattleOverPanel.Type)
 signal battle_won

@@ -3,7 +3,7 @@ extends Node
 
 var enemy: Enemy # Reference to enemy object (with life, intellect)
 #var deck: CardPile # Array of card objects (Card class)
-var hand: Array = [] # Current hand
+var hand: Array # Current hand
 #var life: int
 var arsenal: Card = null # Single Card or null
 var turn_plan = null # Stores the planned turn {damage, pitched, actions, remaining}
@@ -63,7 +63,7 @@ func play_next_action() -> Card:
 
 ## Defending phase: Player attacks AI, returns array of defense values
 func defend(player_attack_power: int, has_go_again: bool) -> Array:
-	var player_hand_size : int = target.get_first_node_in_group("player_hand").get_child_count()
+	var player_hand_size : int = target.get_tree().get_first_node_in_group("player_hand").get_child_count()
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
 	var modified_damage = modifier_handler.get_modified_value(player_attack_power, Modifier.Type.DMG_TAKEN)

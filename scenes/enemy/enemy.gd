@@ -51,10 +51,8 @@ func setup_ai() -> void:
 	enemy_ai.enemy = self
 	enemy_ai.modifier_handler = modifier_handler
 	enemy_ai.setup()
-	draw_cards(stats.cards_per_turn)
+	enemy_ai.hand = hand
 	enemy_card_ui.update_cards(enemy_ai)
-	hand = enemy_ai.hand
-
 
 func update_stats() -> void:
 	stats_ui.update_stats(stats)

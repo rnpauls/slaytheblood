@@ -7,8 +7,8 @@
 script = ExtResource("2_wkn5y")
 id = "head_jab"
 target = 1
-pitch = 1
-attack = 3
+pitch = 3
+attack = 1
 defense = 2
 go_again = true
 icon = ExtResource("1_wkn5y")

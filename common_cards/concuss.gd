@@ -17,6 +17,6 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	main_effect.go_again = go_again
 	var on_hit:= DiscardRandomEffect.new()
 	on_hit.amount = 1
-	main_effect.on_hit=on_hit
+	main_effect.on_hit_effect=on_hit
 	
 	main_effect.execute(targets)

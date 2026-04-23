@@ -37,6 +37,7 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		new_enemy_child.stats.draw_pile.shuffle()
 		new_enemy_child.stats.discard = CardPile.new()
 		new_enemy_child.status_handler.statuses_applied.connect(_on_enemy_statuses_applied.bind(new_enemy_child))
+		new_enemy_child.draw_cards(new_enemy_child.stats.cards_per_turn)
 		new_enemy_child.setup_ai()
 		new_enemy_child.enemy_ai.plan_created.connect(_on_plan_created)
 		new_enemy_child.enemy_action_completed.connect(_on_enemy_action_completed)
