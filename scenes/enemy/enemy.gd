@@ -49,13 +49,35 @@ func setup_ai() -> void:
 	add_child(new_ai)
 	enemy_ai = new_ai
 	enemy_ai.enemy = self
+	enemy_ai.modifier_handler = modifier_handler
 	enemy_ai.setup()
+	draw_cards(stats.cards_per_turn)
 	enemy_card_ui.update_cards(enemy_ai)
 	hand = enemy_ai.hand
 
 
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
+
+##Draw a single card and initialize it
+func draw_card() -> void:
+	#hand.append(stats.draw_pile.draw_card())
+	#if not stats:
+		#await Events.player_set_up
+	var card_drawn: Card = stats.draw_pile.draw_card()
+	if card_drawn:
+		#hand.add_card(card_drawn)
+		hand.append(card_drawn)
+		#reshuffle_deck_from_discard()
+		Events.enemy_card_drawn.emit(self)
+		#card_drawn.card_play_finished.connect(_on_card_play_finished)
+		#card_drawn.card_play_started.connect(_on_card_play_started)
+		card_drawn.owner = self
+
+##Helper function for draw_card()
+func draw_cards(amount: int) -> void:
+	for i in range(amount):
+		draw_card()
 
 func declare_next_attack() -> void:
 	if not enemy_ai:
@@ -130,8 +152,7 @@ func do_action() -> void:
 #go_again: if the attack has go_again
 func defend_attack(attack: int, go_again: bool) -> void:
 	var player_hand_size := get_tree().get_first_node_in_group("player_hand").get_child_count()
-	var modified_damage = modifier_handler.get_modified_value(attack, Modifier.Type.DMG_TAKEN)
-	var defense_array := enemy_ai.defend(modified_damage, go_again, player_hand_size)
+	var defense_array := enemy_ai.defend(attack, go_again, player_hand_size)
 	#if defense_array.is_empty():
 		#return 0
 	#else:
@@ -170,7 +191,8 @@ func get_num_cards_for_turn() -> int:
 	return turn_plan.actions.size()
 
 func cleanup_phase() -> void:
-	enemy_ai.end_turn()
+	#enemy_ai.end_turn()
+	draw_cards(stats.cards_per_turn - hand.size())
 	stats.block = 0
 	stats.action_points = 1
 	enemy_card_ui.update_cards(enemy_ai)

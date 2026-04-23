@@ -44,6 +44,7 @@ const PITCH_COLORS := {
 @export var disable_pitch: bool = false
 #@export var disable_cost: bool = false
 
+var owner: Variant
 signal card_play_started(Card)
 signal card_play_finished(Card)
 

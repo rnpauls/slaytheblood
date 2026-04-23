@@ -65,6 +65,7 @@ func draw_card() -> void:
 		Events.player_card_drawn.emit()
 		card_drawn.card_play_finished.connect(_on_card_play_finished)
 		card_drawn.card_play_started.connect(_on_card_play_started)
+		card_drawn.owner = player
 
 
 func draw_cards(amount: int, hand_type = null) -> void:

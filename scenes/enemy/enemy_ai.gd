@@ -8,25 +8,29 @@ var hand: Array = [] # Current hand
 var arsenal: Card = null # Single Card or null
 var turn_plan = null # Stores the planned turn {damage, pitched, actions, remaining}
 var resources := 0 # Tracks resources available this turn
+var modifier_handler: ModifierHandler
 
 @export var target: Node2D#: set = _set_target
 
 signal plan_created(enemy: Enemy)
 
+## Just assigns the player as target
 func setup():
 	target = get_tree().get_first_node_in_group("player")
 	 #= deck_data.duplicate()
 	#life = enemy.stats.health
-	for i in enemy.stats.cards_per_turn:
-		hand.append(enemy.stats.draw_pile.draw_card())
+	#for i in enemy.stats.cards_per_turn:
+		#hand.append(enemy.stats.draw_pile.draw_card())
 
-# Start the AI's turn by planning actions
+## Start the AI's turn by planning actions
 func start_turn(player_life: int) -> void:
 	turn_plan = calculate_max_offense_now(player_life)
 	resources = 0
 	plan_created.emit(enemy)
 
-# Play the next action, returns card to the enemy node
+## Play the next action in turn_plan, returns card to the enemy node
+## Pitches cards as needed
+## Arsenals if out of actions
 func play_next_action() -> Card:
 	if not turn_plan or turn_plan.actions.size() == 0:
 		if turn_plan and turn_plan.remaining.size() > 0 and not arsenal:
@@ -57,21 +61,22 @@ func play_next_action() -> Card:
 	print_enemy_ai("played %s" % [next_action.id])
 	return next_action
 
-# Defending phase: Player attacks AI, returns array of defense values
+## Defending phase: Player attacks AI, returns array of defense values
 func defend(player_attack_power: int, has_go_again: bool, player_hand_size) -> Array:
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
-	var block_options = calculate_block_options(hand_state, player_attack_power, has_go_again, player_hand_size)
+	var modified_damage = modifier_handler.get_modified_value(player_attack_power, Modifier.Type.DMG_TAKEN)
+	var block_options = calculate_block_options(hand_state, modified_damage, has_go_again, player_hand_size)
 	
 	# Life factor: More blocking when life is low (0.5 at 20+, 2.0 at 5 or less)
 	var life_factor = 1#clamp(2.0 - (float(enemy.stats.health) / 20.0), 0.5, 2.0)
-	var best_option = {"defense_applied": [], "offense_lost": max_offense, "damage_taken": player_attack_power, "raw_damage": max_offense}
+	var best_option = {"defense_applied": [], "offense_lost": max_offense, "damage_taken": modified_damage, "raw_damage": max_offense}
 	
 	# Force blocking if attack is lethal
-	#var is_lethal = player_attack_power >= enemy.stats.health
+	#var is_lethal = modified_damage >= enemy.stats.health
 	
 	for option in block_options:
-		var damage_taken = max(0, player_attack_power - option.defense)
+		var damage_taken = max(0, modified_damage - option.defense)
 		var offense_lost = max_offense - option.offense_after
 		var score = (damage_taken * life_factor) + offense_lost
 		
@@ -94,8 +99,8 @@ func defend(player_attack_power: int, has_go_again: bool, player_hand_size) -> A
 			hand.erase(block.card)
 	return best_option.defense_applied.map(func(c): return c.defense) if best_option.defense_applied else []
 
-# Recursively calculate maximum offense potential
-#TODO: include damage modifiers
+## Recursively calculate maximum offense potential
+##TODO: include damage modifiers
 func calculate_max_offense(state: Dictionary, action_points: int, player_life: int) -> Dictionary:
 	if action_points <= 0 or state.cards.size() == 0:
 		return {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards}
@@ -125,11 +130,14 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	
 	return best_result
 
+##Helper for calculate_max_offense
+##Calls with current hand, zero resources, and one action point
+##Used at start of turn
 func calculate_max_offense_now(player_life: int) -> Dictionary:
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	return calculate_max_offense(hand_state, 1, player_life)
 	
-# Try playing actions with current resources
+## Try playing actions with current resources
 func try_actions(state: Dictionary, action_points: int, player_life: int, lethal_factor: float) -> Dictionary:
 	var best_damage = 0
 	var best_pitched = []
@@ -153,7 +161,7 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	
 	return {"damage": best_damage, "pitched": best_pitched, "actions": best_actions, "remaining": best_remaining}
 
-# Recursively calculate blocking options with Go Again heuristic
+## Recursively calculate blocking options with Go Again heuristic
 func calculate_block_options(state: Dictionary, attack_power: int, has_go_again: bool, player_hand_size: int) -> Array:
 	var options = [{"defense": 0, "defense_applied": [], "offense_after": calculate_max_offense(state, 1, enemy.stats.health)["damage"]}]
 	
@@ -207,7 +215,7 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 		options.remove_at(0)
 	return options
 
-# Pick the best card to arsenal
+## Pick the best card to arsenal
 func pick_best_arsenal(cards: Array) -> Card:
 	if cards.size() == 0:
 		return null
@@ -221,12 +229,13 @@ func pick_best_arsenal(cards: Array) -> Card:
 				best_card = card
 	return best_card
 
-func end_turn() -> void:
+##Draw back up to full
+#func end_turn() -> void:
 	#Should recycle pitch here instead of instantly sending it to the bottom
-	for i in enemy.stats.cards_per_turn - hand.size():
-		var temp_card: Card = enemy.stats.draw_pile.draw_card()
-		if temp_card:
-			hand.append(temp_card)
+	#for i in enemy.stats.cards_per_turn - hand.size():
+		#var temp_card: Card = enemy.stats.draw_pile.draw_card()
+		#if temp_card:
+			#hand.append(temp_card)
 
 func print_enemy_ai(debug_str: String) -> void:
 				print("%s %s: %s" % [enemy.stats.character_name, enemy.name, debug_str])

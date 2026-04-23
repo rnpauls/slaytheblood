@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://vcqlfgcw8ri"]
+
+[ext_resource type="Texture2D" uid="uid://bktlqrqdyqbyg" path="res://art/Free-Melee-Weapon-Pixel-Icons-for-Cyberpunk/1 Icons/Icon28_10.png" id="1_r4erp"]
+[ext_resource type="Script" uid="uid://c8fy7f52nj1ym" path="res://weapons/ball_breaker.gd" id="2_r4erp"]
+[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/axe.ogg" id="3_a32tg"]
+
+[resource]
+script = ExtResource("2_r4erp")
+weapon_name = "Ball Breaker"
+id = "ball_breaker"
+type = 4
+character_type = 2
+icon = ExtResource("1_r4erp")
+sound = ExtResource("3_a32tg")
+tooltip = "Enraged: +1atk"
+attack = 3
+cost = 2
+metadata/_custom_type_script = "uid://dm186c77vbsjn"
