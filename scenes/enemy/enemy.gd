@@ -151,8 +151,7 @@ func do_action() -> void:
 #modifiers: Player modifiers
 #go_again: if the attack has go_again
 func defend_attack(attack: int, go_again: bool) -> void:
-	var player_hand_size := get_tree().get_first_node_in_group("player_hand").get_child_count()
-	var defense_array := enemy_ai.defend(attack, go_again, player_hand_size)
+	var defense_array := enemy_ai.defend(attack, go_again)
 	#if defense_array.is_empty():
 		#return 0
 	#else:

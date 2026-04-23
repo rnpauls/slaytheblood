@@ -62,7 +62,8 @@ func play_next_action() -> Card:
 	return next_action
 
 ## Defending phase: Player attacks AI, returns array of defense values
-func defend(player_attack_power: int, has_go_again: bool, player_hand_size) -> Array:
+func defend(player_attack_power: int, has_go_again: bool) -> Array:
+	var player_hand_size : int = target.get_first_node_in_group("player_hand").get_child_count()
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
 	var modified_damage = modifier_handler.get_modified_value(player_attack_power, Modifier.Type.DMG_TAKEN)
@@ -109,13 +110,14 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	#lethal factor should be reworked to check if can present lethal
 	var lethal_factor = 1#clamp(1.5 - (float(player_life) / 40.0), 1.0, 1.5)
 	
+	#Try pitching each card, make a new state, and then call it again
 	for pitch in state.cards:
 		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch}
 		new_state.cards.erase(pitch)
 		var pitch_result = calculate_max_offense(new_state, action_points, player_life)
 		var total_damage = pitch_result.damage * lethal_factor
-		if total_damage > best_result.damage or \
-		   (total_damage == best_result.damage and pitch_result.damage > best_result.damage / lethal_factor):
+		if total_damage > best_result.damage:# or \
+		   #(total_damage == best_result.damage and pitch_result.damage > best_result.damage / lethal_factor):
 			best_result = {
 				"damage": total_damage,
 				"pitched": [pitch] + pitch_result.pitched,
@@ -123,6 +125,7 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 				"remaining": pitch_result.remaining
 			}
 	
+	#Try current state
 	var action_result = try_actions(state, action_points, player_life, lethal_factor)
 	if action_result.damage > best_result.damage or \
 	   (action_result.damage == best_result.damage and action_result.damage / lethal_factor > best_result.damage / lethal_factor):
@@ -137,7 +140,7 @@ func calculate_max_offense_now(player_life: int) -> Dictionary:
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	return calculate_max_offense(hand_state, 1, player_life)
 	
-## Try playing actions with current resources
+## Try playing actions with hand and resources defined in state
 func try_actions(state: Dictionary, action_points: int, player_life: int, lethal_factor: float) -> Dictionary:
 	var best_damage = 0
 	var best_pitched = []
@@ -150,10 +153,11 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0)
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
-			var total_damage = (action.attack + sub_result.damage) * lethal_factor
+			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)
+			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
 			
-			if total_damage > best_damage or \
-			   (total_damage == best_damage and (action.attack + sub_result.damage) > (best_damage / lethal_factor)):
+			if total_damage > best_damage:# or \
+			   #(total_damage == best_damage and (action.attack + sub_result.damage) > (best_damage / lethal_factor)):
 				best_damage = total_damage
 				best_pitched = sub_result.pitched
 				best_actions = [action] + sub_result.actions
