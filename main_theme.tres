@@ -1,11 +1,11 @@
 [gd_resource type="Theme" format=3 uid="uid://dj6v4tpi0851r"]
 
 [ext_resource type="StyleBox" uid="uid://b4kkmcekqp2t5" path="res://scenes/card_ui/card_hover_stylebox.tres" id="1_ev8mi"]
-[ext_resource type="FontFile" uid="uid://dskmdk146n4rq" path="res://art/pixel_rpg.ttf" id="1_m6vdp"]
 [ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="1_muyvj"]
+[ext_resource type="FontFile" uid="uid://dskmdk146n4rq" path="res://art/themes/pixel_rpg.ttf" id="3_0omi4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufcy6"]
-bg_color = Color(0.631373, 0.34902, 0.321569, 0.368627)
+bg_color = Color(0.096146666, 0.030753499, 0.025724638, 0.36862746)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -22,7 +22,7 @@ border_width_bottom = 1
 border_color = Color(0.524689, 0.43706, 6.73831e-07, 1)
 
 [resource]
-default_font = ExtResource("1_m6vdp")
+default_font = ExtResource("3_0omi4")
 default_font_size = 43
 Button/styles/disabled = SubResource("StyleBoxFlat_ufcy6")
 Button/styles/focus = SubResource("StyleBoxEmpty_pcork")

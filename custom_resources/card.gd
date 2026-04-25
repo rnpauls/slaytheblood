@@ -60,30 +60,29 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 	
 	match target:
 		Target.SELF:
-			return tree.get_nodes_in_group("player")
+			return [owner]
 		Target.ALL_ENEMIES:
 			return tree.get_nodes_in_group("enemies")
 		Target.EVERYONE:
-			return tree.get_nodes_in_group("player") + tree.get_nodes_in_group("enemies")
+			return tree.get_nodes_in_group("enemies") + tree.get_nodes_in_group("player")
 		_:
 			return []
 
 #Currently does not accept non-attack actions targetting enemies
 func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
 	card_play_started.emit(self)
+	
+	
+	if not is_single_targeted():
+		targets = _get_targets(card_parent)
 	if type == Type.ATTACK:
 		if targets[0] is Enemy:
 			Events.player_attack_declared.emit()
+			
 	char_stats.mana -= cost
 	char_stats.action_points -= 1
-	
-	#for targetx in targets:
-		#if targetx is Enemy:
-			#targetx.defend_attack(attack, modifiers, go_again)
-			#Could emit a signal with this info, and include the targets, then connect to each enemy and await an answer
-	if not is_single_targeted():
-		targets = _get_targets(card_parent)
 	apply_effects(targets, modifiers)
+	
 	for targetx in targets:
 		if type == Type.ATTACK:
 			#if targetx is Enemy:

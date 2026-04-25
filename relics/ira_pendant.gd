@@ -2,41 +2,49 @@ class_name IraPendantRelic
 extends Relic
 
 var relic_ui: RelicUI
-var attacks_this_turn := 0
+var activated_this_turn := false
 
 func initialize_relic(owner: RelicUI) -> void:
 	relic_ui = owner
-	Events.player_attack_declared.connect(activate_relic.bind(null))
+	Events.player_attack_completed.connect(activate_relic.bind(owner))
 	Events.player_end_phase_started.connect(reset)
 
 
 func activate_relic(_owner: RelicUI) -> void:
-	if attacks_this_turn == 1:
-		relic_ui.flash()
-		var player := relic_ui.get_tree().get_first_node_in_group("player") as Player
-		var damage_modifier := player.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
-		var dmg_modifier_value = ModifierValue.create_new_modifier("ira_pendant", ModifierValue.Type.FLAT)
-		dmg_modifier_value.flat_value = 1
-		damage_modifier.add_new_value(dmg_modifier_value)
-	if attacks_this_turn > 1:
-		remove_modifier()
-	attacks_this_turn += 1
+	if activated_this_turn:
+		return
+	
+	activated_this_turn = true
+	relic_ui.flash()
+	var status_handler : StatusHandler = relic_ui.get_tree().get_first_node_in_group('player').status_handler
+	#for status_ui: StatusUI in status_handler.get_children(): #Don't have a good way to remove status_ui by id
+		#if status_ui.status.id == "empowered" and status_ui.status.duration < 2:
+			#status_ui.queue_free()
+	var old_emp_status = status_handler._get_status("empowered")
+	if old_emp_status:
+		await old_emp_status.status_applied
+	
+	var empowered_status = preload("res://statuses/empowered.tres").duplicate()
+	empowered_status.duration = 1
+	empowered_status.stacks = 1
+	status_handler.add_status(empowered_status)
+
 
 
 func deactivate_relic(_owner: RelicUI) -> void:
 	#Events.shop_entered.disconnect(add_shop_modifier)
-	Events.player_attack_declared.disconnect(activate_relic)
+	Events.player_attack_completed.disconnect(activate_relic)
 	Events.player_end_phase_started.disconnect(reset)
 	pass
 
 func reset() -> void:
-	attacks_this_turn = 0
-	remove_modifier()
+	activated_this_turn = 0
+	#remove_modifier()
 
-func remove_modifier() -> void:
-	var player := relic_ui.get_tree().get_first_node_in_group("player") as Player
-	var damage_modifier := player.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
-	damage_modifier.remove_value("ira_pendant")
+#func remove_modifier() -> void:
+	#var player := relic_ui.get_tree().get_first_node_in_group("player") as Player
+	#var damage_modifier := player.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
+	#damage_modifier.remove_value("ira_pendant")
 
 #func add_shop_modifier(shop: Shop) -> void:
 	#relic_ui.flash()

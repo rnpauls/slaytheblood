@@ -33,7 +33,7 @@ func set_grey_out(enabled: bool):
 	var mat:= icon.material
 	if enabled:
 		mat.set_shader_parameter("strength", 1.0)
-		icon.modulate =Color(0.6,0.6,0.6)
+		icon.modulate =Color(0.3,0.3,0.3)
 	else:
 		mat.set_shader_parameter("strength", 0.0)
 		icon.modulate =Color(1,1,1)

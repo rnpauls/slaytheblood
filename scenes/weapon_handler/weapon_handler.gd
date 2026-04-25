@@ -3,7 +3,7 @@ extends Control
 
 @export var activable: bool = false
 @export var targeting: bool = false
-@export var owner_of_weapon: Node
+@export var owner_of_weapon: Node #: set = set_owner_of_weapon
 @onready var weapon_ui: WeaponUI = $WeaponButton/WeaponUI
 var targets: Array[Node]
 var weapon: Weapon
@@ -29,6 +29,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 	if new_weapon:
 		weapon_ui.weapon = new_weapon
 		weapon = weapon_ui.weapon
+		weapon.owner = owner_of_weapon
 		weapon.weapon_used_up.connect(_on_weapon_used_up)
 	else:
 		hide()
@@ -79,6 +80,9 @@ func attempt_to_attack() -> void:
 		#if targets[0] is Enemy:
 		weapon.activate_weapon(targets, owner_of_weapon.modifier_handler)
 			#Events.tooltip_hide_requested.emit()
+		owner_of_weapon.attack_completed.emit()
+		if owner_of_weapon is Player:
+			Events.player_attack_completed.emit() #Needed for relics e.g. ira
 
 func _on_weapon_button_pressed() -> void:
 	if can_activate_weapon():

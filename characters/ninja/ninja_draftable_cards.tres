@@ -1,24 +1,20 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://6i5wr118op2u"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_1n65v"]
-[ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/warrior/cards/warrior_slash.tres" id="2_uehnv"]
-[ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/warrior/cards/warrior_big_slam.tres" id="3_qw8gp"]
-[ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/warrior/cards/warrior_true_strength.tres" id="4_s126l"]
 [ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="5_3sgq7"]
 [ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://common_cards/sink_below_red.tres" id="6_bkffl"]
+[ext_resource type="Resource" uid="uid://7frogxh0rjom" path="res://characters/ninja/cards/torrent_of_tempo.tres" id="7_17ur2"]
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="7_glupe"]
-[ext_resource type="Resource" uid="uid://bxiso7x1yngt3" path="res://characters/warrior/cards/swing_big.tres" id="8_4tx0k"]
-[ext_resource type="Resource" uid="uid://b72t3ass05h4u" path="res://characters/warrior/cards/warrior_block.tres" id="9_7hwed"]
-[ext_resource type="Resource" uid="uid://bipu07qa8mqvc" path="res://characters/warrior/cards/bare_fangs_blue.tres" id="10_wbs67"]
-[ext_resource type="Resource" uid="uid://cq4310wmwj2av" path="res://characters/warrior/cards/bare_fangs_red.tres" id="11_mrrby"]
-[ext_resource type="Resource" uid="uid://bkbnku6ry0u2k" path="res://characters/warrior/cards/wild_ride_blue.tres" id="12_arlhw"]
-[ext_resource type="Resource" uid="uid://bllgno480j4cf" path="res://characters/warrior/cards/wild_ride_red.tres" id="13_kw8cn"]
-[ext_resource type="Resource" uid="uid://dlqaaddsmk8dn" path="res://characters/warrior/cards/wild_ride_yellow.tres" id="14_8j5pi"]
+[ext_resource type="Resource" uid="uid://4t0h3cimqt3o" path="res://characters/ninja/cards/poison_the_blade.tres" id="8_mcc34"]
+[ext_resource type="Resource" uid="uid://dda70b1ss7fu1" path="res://characters/ninja/cards/one_inch_punch.tres" id="9_m8dfe"]
+[ext_resource type="Resource" uid="uid://dl0joso87gfpm" path="res://common_cards/concuss_red.tres" id="10_ttfxh"]
+[ext_resource type="Resource" uid="uid://de0t0sb7c3tao" path="res://common_cards/critical_strike_blue.tres" id="11_wsf5e"]
+[ext_resource type="Resource" uid="uid://biyyop47rwhph" path="res://characters/ninja/cards/bittering_thorns_red.tres" id="12_6xfej"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://common_cards/block_red.tres" id="13_17ur2"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="13_evcsx"]
 [ext_resource type="Resource" uid="uid://b8pjbbgq27nko" path="res://common_cards/sink_below_yellow.tres" id="15_mrqsj"]
-[ext_resource type="Resource" uid="uid://bdxdpo8h67w3y" path="res://common_cards/command_and_conquer.tres" id="16_2kjpf"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="17_pk2ea"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="18_k7xau"]
 
 [resource]
 script = ExtResource("18_k7xau")
-cards = Array[ExtResource("1_1n65v")]([ExtResource("2_uehnv"), ExtResource("3_qw8gp"), ExtResource("4_s126l"), ExtResource("5_3sgq7"), ExtResource("6_bkffl"), ExtResource("4_s126l"), ExtResource("7_glupe"), ExtResource("8_4tx0k"), ExtResource("9_7hwed"), ExtResource("10_wbs67"), ExtResource("11_mrrby"), ExtResource("12_arlhw"), ExtResource("13_kw8cn"), ExtResource("14_8j5pi"), ExtResource("15_mrqsj"), ExtResource("16_2kjpf"), ExtResource("17_pk2ea")])
+cards = Array[ExtResource("1_1n65v")]([ExtResource("6_bkffl"), ExtResource("7_glupe"), ExtResource("15_mrqsj"), ExtResource("7_17ur2"), ExtResource("8_mcc34"), ExtResource("9_m8dfe"), ExtResource("10_ttfxh"), ExtResource("11_wsf5e"), ExtResource("12_6xfej"), ExtResource("13_evcsx"), ExtResource("5_3sgq7"), ExtResource("13_17ur2")])

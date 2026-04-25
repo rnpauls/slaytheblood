@@ -40,3 +40,9 @@ func set_duration(new_duration: int) -> void:
 func set_stacks(new_stacks: int) -> void:
 	stacks = new_stacks
 	status_changed.emit()
+
+func update() -> void:
+	pass
+
+func _exit_tree() -> void:
+	pass

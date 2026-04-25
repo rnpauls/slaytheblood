@@ -1,8 +1,8 @@
 [gd_resource type="Resource" format=3 uid="uid://dlqaaddsmk8dn"]
 
-[ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="1_ytnay"]
+[ext_resource type="Texture2D" uid="uid://i5hpae5jm87n" path="res://art/item31.png" id="1_ytnay"]
 [ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/warrior/cards/wild_ride.gd" id="2_ug86f"]
-[ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/true_strength.ogg" id="3_h05x1"]
+[ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="3_h05x1"]
 
 [resource]
 script = ExtResource("2_ug86f")

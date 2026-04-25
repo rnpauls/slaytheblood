@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="2_spkj8"]
 [ext_resource type="PackedScene" uid="uid://behjfqeouf5ky" path="res://scenes/player/player.tscn" id="3_g13cx"]
 [ext_resource type="PackedScene" uid="uid://b7wddw3ex8aun" path="res://scenes/card_target_selector/card_target_selector.tscn" id="3_j5x61"]
+[ext_resource type="AudioStream" uid="uid://cccl81n14imbp" path="res://art/music/dummy_daniel-under-siege-490053.mp3" id="3_pyfix"]
 [ext_resource type="Script" uid="uid://8q3wa6hc2yss" path="res://scenes/enemy/enemy_handler.gd" id="4_2ufbh"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="4_psa3f"]
 [ext_resource type="Resource" uid="uid://b7kxqdggip08o" path="res://enemies/crab/crab_enemy.tres" id="5_247pw"]
@@ -16,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dg4s3vaj75784" path="res://scenes/ui/tooltip.tscn" id="12_qjopr"]
 [ext_resource type="PackedScene" uid="uid://bljd5caaiyxj5" path="res://scenes/ui/action_points_ui.tscn" id="14_5moxy"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
-[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/pixel_rpg_label_settings_smaller.tres" id="16_5moxy"]
+[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="16_5moxy"]
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="18_ajj10"]
@@ -38,6 +39,7 @@ point_count = 3
 [node name="Battle" type="Node2D" unique_id=2090464004]
 script = ExtResource("1_0ser8")
 char_stats = ExtResource("4_psa3f")
+music = ExtResource("3_pyfix")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1702230980]

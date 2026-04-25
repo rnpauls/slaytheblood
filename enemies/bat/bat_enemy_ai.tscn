@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://ysstkjnviojc"]
+[gd_scene format=3 uid="uid://ysstkjnviojc"]
 
 [ext_resource type="Script" uid="uid://bqmo76dmy1geu" path="res://scenes/enemy/enemy_action_picker.gd" id="1_4k6jm"]
 [ext_resource type="Script" uid="uid://b3g80di6ik50b" path="res://enemies/bat/bat_attack_action.gd" id="2_3fg4o"]
 [ext_resource type="Script" uid="uid://b3ars5wc76emj" path="res://enemies/bat/bat_block_action.gd" id="3_jpsbj"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="3_t5t7f"]
 [ext_resource type="Script" uid="uid://cc7faaqgngikx" path="res://custom_resources/intent.gd" id="4_y3ycf"]
-[ext_resource type="AudioStream" uid="uid://de2ryat1pxq6" path="res://art/enemy_attack.ogg" id="5_jf5wa"]
+[ext_resource type="AudioStream" uid="uid://de2ryat1pxq6" path="res://art/music/enemy_attack.ogg" id="5_jf5wa"]
 [ext_resource type="Texture2D" uid="uid://bi6pfjs32f820" path="res://art/tile_0101.png" id="7_javcf"]
-[ext_resource type="AudioStream" uid="uid://k8m4o3hlwm7l" path="res://art/enemy_block.ogg" id="8_weuwb"]
+[ext_resource type="AudioStream" uid="uid://k8m4o3hlwm7l" path="res://art/music/enemy_block.ogg" id="8_weuwb"]
 
 [sub_resource type="Resource" id="Resource_lqj62"]
 script = ExtResource("4_y3ycf")

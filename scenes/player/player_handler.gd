@@ -19,7 +19,6 @@ const HAND_DISCARD_INTERVAL := 0.25
 @export var hand: Hand
 
 var character: CharacterStats
-signal attack_completed
 
 func _ready() -> void:
 	#Events.card_play_started.connect(_on_card_played) #Replaced with card.card_play_started / finished
@@ -130,7 +129,8 @@ func _on_card_play_started(card: Card) -> void:
 
 func _on_card_play_finished(card: Card) -> void:
 	if card.type == Card.Type.ATTACK:
-		attack_completed.emit()
+		player.attack_completed.emit()
+		Events.player_attack_completed.emit() #Needed for relics e.g. ira
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		return
 	character.discard.add_card(card) #This used to happen at the start of card.play()

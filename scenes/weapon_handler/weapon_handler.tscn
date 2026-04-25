@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dd6xjykbymk7u"]
 
 [ext_resource type="Script" uid="uid://ctegkknpe6kuy" path="res://scenes/weapon_handler/weapon_handler.gd" id="1_1mm66"]
+[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="2_lw3a7"]
 [ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_handler/weapon_ui.tscn" id="2_t7f4y"]
 
 [node name="WeaponHandler" type="Control" unique_id=679500354]
@@ -12,6 +13,7 @@ script = ExtResource("1_1mm66")
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+theme = ExtResource("2_lw3a7")
 
 [node name="WeaponUI" parent="WeaponButton" unique_id=1748562188 instance=ExtResource("2_t7f4y")]
 layout_mode = 1

@@ -39,3 +39,6 @@ func _on_status_changed() -> void:
 
 	duration.text = str(status.duration)
 	stacks.text = str(status.stacks)
+
+func _exit_tree() -> void:
+	status._exit_tree()

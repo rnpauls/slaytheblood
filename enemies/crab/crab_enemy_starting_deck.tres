@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bq26uippxtt0a"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_alm8v"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="2_25ls3"]
 [ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="3_h1isr"]
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="4_25ls3"]
 [ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="4_l6cic"]
@@ -9,4 +8,4 @@
 
 [resource]
 script = ExtResource("5_bw58w")
-cards = Array[ExtResource("1_alm8v")]([ExtResource("2_25ls3"), ExtResource("3_h1isr"), ExtResource("3_h1isr"), ExtResource("4_25ls3"), ExtResource("4_25ls3"), ExtResource("4_l6cic"), ExtResource("4_l6cic")])
+cards = Array[ExtResource("1_alm8v")]([ExtResource("3_h1isr"), ExtResource("3_h1isr"), ExtResource("4_25ls3"), ExtResource("4_25ls3"), ExtResource("4_l6cic"), ExtResource("4_l6cic"), ExtResource("4_l6cic"), ExtResource("4_l6cic")])

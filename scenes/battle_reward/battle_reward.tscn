@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://in0ek0c7ygv4" path="res://scenes/battle_reward/battle_reward.gd" id="1_n3dce"]
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="2_6r5gb"]
-[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/pixel_rpg_label_settings.tres" id="3_gdsnt"]
+[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/pixel_rpg_label_settings.tres" id="3_gdsnt"]
 [ext_resource type="PackedScene" uid="uid://cui26vqxgd78n" path="res://scenes/ui/reward_button.tscn" id="3_t7w1q"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="4_exsu3"]
 [ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="5_lhjyq"]

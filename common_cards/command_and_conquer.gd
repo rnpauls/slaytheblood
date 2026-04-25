@@ -11,7 +11,9 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % modified_dmg
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	do_stock_attack_damage_effect(targets, modifiers)
-	
+	var on_hit:= OnHit.new()
 	var cnc_effect := CncEffect.new()
-	cnc_effect.execute(targets)
+	on_hit.effect = cnc_effect
+	on_hits.append(on_hit)
+	
+	do_stock_attack_damage_effect(targets, modifiers)

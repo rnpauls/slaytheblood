@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://di0lkhegtyanm"]
 
-[ext_resource type="Texture2D" uid="uid://c520kgl2fpwc1" path="res://art/32_2 Free Weapon icons bonus/Icons/icon_32_2_16.png" id="1_g6x73"]
+[ext_resource type="Texture2D" uid="uid://c520kgl2fpwc1" path="res://art/icon_32_2_16.png" id="1_g6x73"]
 [ext_resource type="Script" uid="uid://c0bkgv5xemgip" path="res://weapons/kodachi.gd" id="2_fe7qa"]
 
 [resource]

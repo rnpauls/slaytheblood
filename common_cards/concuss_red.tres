@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://dl0joso87gfpm"]
 
-[ext_resource type="Texture2D" uid="uid://bo3xob3d0kfpc" path="res://art/Free-Melee-Weapon-Pixel-Icons-for-Cyberpunk/1 Icons/Icon28_38.png" id="1_ejsuh"]
+[ext_resource type="Texture2D" uid="uid://d38jgpigw6od0" path="res://art/item63.png" id="1_ejsuh"]
 [ext_resource type="Script" uid="uid://bstblp1dw4ip8" path="res://common_cards/concuss.gd" id="2_wwvb5"]
 
 [resource]

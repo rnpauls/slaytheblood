@@ -1,8 +1,8 @@
 [gd_resource type="Resource" format=3 uid="uid://vcqlfgcw8ri"]
 
-[ext_resource type="Texture2D" uid="uid://bktlqrqdyqbyg" path="res://art/Free-Melee-Weapon-Pixel-Icons-for-Cyberpunk/1 Icons/Icon28_10.png" id="1_r4erp"]
+[ext_resource type="Texture2D" uid="uid://bktlqrqdyqbyg" path="res://art/Icon28_10.png" id="1_r4erp"]
 [ext_resource type="Script" uid="uid://c8fy7f52nj1ym" path="res://weapons/ball_breaker.gd" id="2_r4erp"]
-[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/axe.ogg" id="3_a32tg"]
+[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="3_a32tg"]
 
 [resource]
 script = ExtResource("2_r4erp")

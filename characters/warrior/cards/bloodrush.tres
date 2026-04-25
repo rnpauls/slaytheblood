@@ -1,5 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bg6kgdp5pefr7"]
 
+[ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="1_apu1q"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="1_qouyo"]
 
 [resource]
@@ -10,5 +11,6 @@ rarity = 2
 cost = 1
 pitch = 2
 defense = 3
+icon = ExtResource("1_apu1q")
 disable_attack = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

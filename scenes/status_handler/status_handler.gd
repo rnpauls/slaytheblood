@@ -60,6 +60,7 @@ func add_status(status: Status) -> void:
 	if status.stack_type == Status.StackType.INTENSITY:
 		_get_status(status.id).stacks += status.stacks
 		_get_status(status.id).duration = status.duration
+		_get_status(status.id).update()
 		return
 
 func _has_status(id: String) -> bool:
@@ -87,12 +88,11 @@ func _on_status_applied(status: Status) -> void:
 	if status.can_expire:
 		status.duration -= 1
 
-
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):
 		Events.status_tooltip_requested.emit(_get_all_statuses())
 
-func manually_remove_status(id: String) -> void:
-	for status_ui: StatusUI in get_children():
-		if status_ui.status.id == id:
-			status_ui.queue_free()
+#func manually_remove_status(id: String) -> void:
+	#for status_ui: StatusUI in get_children():
+		#if status_ui.status.id == id:
+			#status_ui.queue_free()

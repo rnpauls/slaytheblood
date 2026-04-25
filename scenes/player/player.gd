@@ -1,7 +1,7 @@
 class_name Player
 extends Node2D
 
-const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
+const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.tres")
 
 @export var stats: CharacterStats : set = set_character_stats
 
@@ -11,6 +11,7 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
 var active_on_hits: Array[OnHit]
+signal attack_completed
 
 #func _ready() -> void:
 	#var exposed := preload("res://statuses/exposed.tres").duplicate()

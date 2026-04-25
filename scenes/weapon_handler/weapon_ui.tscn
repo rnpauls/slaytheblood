@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dbsc38jytyirs" path="res://scenes/weapon_handler/weapon_ui.gd" id="1_uyydt"]
 [ext_resource type="Theme" uid="uid://cojqjenomxo7a" path="res://art/themes/weapon_button_theme.tres" id="2_jshob"]
-[ext_resource type="Texture2D" uid="uid://ym7pnqg6lixq" path="res://art/32_2 Free Weapon icons bonus/Icons/icon_32_2_11.png" id="3_0cduw"]
-[ext_resource type="Material" uid="uid://d30aqi80c1nrc" path="res://art/white_sprite_material.tres" id="4_m2n2c"]
+[ext_resource type="Texture2D" uid="uid://ym7pnqg6lixq" path="res://art/icon_32_2_11.png" id="3_0cduw"]
+[ext_resource type="Material" uid="uid://d30aqi80c1nrc" path="res://art/themes/white_sprite_material.tres" id="4_m2n2c"]
 [ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="5_gvkp5"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="6_abdjr"]
 

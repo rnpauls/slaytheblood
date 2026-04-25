@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_lm8oj"]
 [ext_resource type="Script" uid="uid://snyc3vhfffq4" path="res://characters/warrior/cards/warrior_block.gd" id="2_ubj4h"]
-[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/block.ogg" id="3_wy06t"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="3_wy06t"]
 
 [resource]
 script = ExtResource("2_ubj4h")

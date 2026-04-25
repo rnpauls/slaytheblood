@@ -2,7 +2,7 @@ class_name Enemy
 extends Area2D
 
 const ARROW_OFFSET := 45
-const WHITE_SPRITE_MATERIAL := preload("res://art/white_sprite_material.tres")
+const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.tres")
 
 @export var stats: EnemyStats : set = set_enemy_stats
 

@@ -14,4 +14,4 @@ art = ExtResource("1_172rt")
 max_health = 7
 starting_deck = ExtResource("4_18cca")
 starting_inventory = ExtResource("5_snxww")
-cards_per_turn = 3
+cards_per_turn = 2

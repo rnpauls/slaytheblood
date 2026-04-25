@@ -32,6 +32,9 @@ const RARITY_COLORS := {
 
 signal weapon_used_up
 
+var owner: Variant
+var on_hits: Array[OnHit]
+
 func initialize_weapon(_owner: WeaponUI) -> void:
 	pass
 
@@ -76,4 +79,6 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 	damage_effect.amount = modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
+	damage_effect.on_hit_effects.append_array(on_hits)
+	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
 	damage_effect.execute(targets)

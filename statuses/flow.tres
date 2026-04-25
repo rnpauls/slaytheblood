@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnragedStatus" format=3 uid="uid://cwktoivloveo0"]
 
-[ext_resource type="Texture2D" uid="uid://cgwi1th7a8asb" path="res://art/Classic 100/item25.png" id="1_3b1r0"]
+[ext_resource type="Texture2D" uid="uid://cgwi1th7a8asb" path="res://art/item25.png" id="1_3b1r0"]
 [ext_resource type="Script" uid="uid://bqqgt8e0x2y7f" path="res://statuses/flow.gd" id="2_6dot0"]
 
 [resource]

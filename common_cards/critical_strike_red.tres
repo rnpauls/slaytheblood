@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://s8o4e6v14nrd"]
 
-[ext_resource type="Texture2D" uid="uid://5a4kk006fk3b" path="res://art/Classic 100/item10.png" id="1_1y116"]
+[ext_resource type="Texture2D" uid="uid://5a4kk006fk3b" path="res://art/item10.png" id="1_1y116"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="1_bp7xi"]
 
 [resource]

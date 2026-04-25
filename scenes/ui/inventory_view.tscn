@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4lq143p7etjt" path="res://scenes/ui/inventory_view.gd" id="1_12ys7"]
 [ext_resource type="Resource" uid="uid://c4n5peso4ufb8" path="res://characters/warrior/warrior_starting_inv.tres" id="2_k13uw"]
-[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/pixel_rpg_label_settings.tres" id="2_kuo8l"]
+[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/pixel_rpg_label_settings.tres" id="2_kuo8l"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="4_07io4"]
 [ext_resource type="PackedScene" uid="uid://crla21tdbt7ul" path="res://scenes/weapon_handler/weapon_card_render_container.tscn" id="4_kuo8l"]
 [ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_4agyt"]
