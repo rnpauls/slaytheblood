@@ -150,8 +150,8 @@ func do_action() -> void:
 #attack: base attack
 #modifiers: Player modifiers
 #go_again: if the attack has go_again
-func defend_attack(attack: int, go_again: bool) -> void:
-	var defense_array := enemy_ai.defend(attack, go_again)
+func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
+	var defense_array := enemy_ai.defend(attack, go_again, incoming_on_hits)
 	#if defense_array.is_empty():
 		#return 0
 	#else:

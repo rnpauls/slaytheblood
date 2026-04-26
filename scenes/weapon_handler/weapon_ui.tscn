@@ -99,13 +99,21 @@ texture = ExtResource("5_gvkp5")
 
 [node name="AtkLabel" type="Label" parent="TextureRectAtk" unique_id=882869703]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 13.0
-offset_top = 12.0
-offset_right = 53.0
-offset_bottom = 56.0
-theme_override_font_sizes/font_size = 20
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AttackIcon" type="TextureRect" parent="TextureRectAtk" unique_id=1126625462]
 layout_mode = 0
@@ -130,12 +138,20 @@ texture = ExtResource("5_gvkp5")
 
 [node name="CostLabel" type="Label" parent="TextureRectCost" unique_id=1716541515]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 13.0
-offset_top = 11.0
-offset_right = 53.0
-offset_bottom = 55.0
-theme_override_font_sizes/font_size = 20
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

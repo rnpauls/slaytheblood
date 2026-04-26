@@ -4,8 +4,9 @@ extends Control
 @export var card: Card : set = set_card
 
 @onready var panel: Panel = $Panel
+@onready var art_panel: Panel = %ArtPanel
 @onready var cost: Label = $Cost
-@onready var icon: TextureRect = $Icon
+@onready var icon: TextureRect = %Icon
 @export var attack: Label
 @export var defense: Label
 @export var go_again_icon: TextureRect
@@ -23,7 +24,7 @@ func set_card(value: Card) -> void:
 
 	card = value
 	cost.text = str(card.cost)
-	text_box.text = card.tooltip_text
+	text_box.text = card.get_default_tooltip()
 	type_label.text = str(card.TypeString.keys()[card.type])
 	card_name.text = card.id.capitalize()
 	if card.disable_attack or card.type == Card.Type.BLOCK or card.type == Card.Type.NAA:
@@ -39,7 +40,11 @@ func set_card(value: Card) -> void:
 	else:
 		go_again_icon.hide()
 	icon.texture = card.icon
-	panel.border_color = Card.RARITY_COLORS[card.rarity]
+	#panel.add_theme_color_override("border_color",Card.RARITY_COLORS[card.rarity])
+	# Shitty panel mod that creates a new stylebox for every single card
+	var stylebox: StyleBoxFlat = art_panel.get_theme_stylebox("panel").duplicate()
+	stylebox.border_color = Card.RARITY_COLORS[card.rarity] 
+	art_panel.add_theme_stylebox_override("panel", stylebox)
 	pitch_strip.modulate = Card.PITCH_COLORS[card.pitch]
 	#pitch_strip.ColorRect2.modulate = Card.PITCH_COLORS[card.pitch]
 	#pitch_strip.ColorRect3.modulate = Card.PITCH_COLORS[card.pitch]

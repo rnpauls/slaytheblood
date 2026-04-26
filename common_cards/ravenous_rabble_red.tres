@@ -1,25 +1,20 @@
 [gd_resource type="Resource" format=3 uid="uid://btdfqy1dpyi5u"]
 
 [ext_resource type="Texture2D" uid="uid://d2vujk8wvu6ia" path="res://art/tile_0123.png" id="1_w47js"]
-[ext_resource type="Script" uid="uid://dtudl7747thxx" path="res://common_cards/ravenous_rabble.gd" id="2_r3y8p"]
-[ext_resource type="AudioStream" uid="uid://de2ryat1pxq6" path="res://art/music/enemy_attack.ogg" id="3_isp36"]
+[ext_resource type="Script" uid="uid://dtudl7747thxx" path="res://common_cards/ravenous_rabble.gd" id="2_w47js"]
+[ext_resource type="AudioStream" uid="uid://de2ryat1pxq6" path="res://art/music/enemy_attack.ogg" id="3_r3y8p"]
 
 [resource]
-script = ExtResource("2_r3y8p")
+script = ExtResource("2_w47js")
 id = "rabble"
-type = 0
 rarity = 1
 target = 1
-cost = 0
 pitch = 1
 attack = 5
 defense = 2
-exhausts = false
 go_again = true
+ai_value = -1
 icon = ExtResource("1_w47js")
 tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage minus the pitch on top of deck.[/center]"
-sound = ExtResource("3_isp36")
-disable_attack = false
-disable_defense = false
-disable_pitch = false
+sound = ExtResource("3_r3y8p")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

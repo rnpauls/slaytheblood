@@ -5,17 +5,29 @@
 [ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="2_p7yu4"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="3_10ksf"]
 [ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="4_m3e03"]
-[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="5_imfec"]
 [ext_resource type="Texture2D" uid="uid://b0cx7vg3324n2" path="res://art/item11.png" id="6_njcf5"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme.tres" id="8_bp74k"]
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="7_b8ve4"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="8_bp74k"]
 [ext_resource type="Texture2D" uid="uid://cli20nvbbuehk" path="res://art/item56.png" id="8_njcf5"]
+[ext_resource type="Theme" uid="uid://cho0px4v2r182" path="res://art/themes/card_richtext_theme_16.tres" id="10_b8ve4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njcf5"]
+bg_color = Color(0.8586687, 0.8586687, 0.8586687, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="CardVisuals" type="Control" unique_id=101409697 node_paths=PackedStringArray("attack", "defense", "go_again_icon")]
 custom_minimum_size = Vector2(200, 280)
 layout_mode = 3
 anchors_preset = 0
-offset_left = 7.0
-offset_right = 207.0
+offset_left = 6.0
+offset_right = 206.0
 offset_bottom = 280.0
 theme = ExtResource("1_0qctv")
 script = ExtResource("2_4hbsy")
@@ -69,12 +81,38 @@ offset_bottom = 21.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="." unique_id=1088393672]
+[node name="ArtPanel" type="Panel" parent="." unique_id=1422740705]
+unique_name_in_owner = true
+clip_contents = true
 layout_mode = 1
-offset_left = 39.0
-offset_top = 46.0
-offset_right = 163.0
-offset_bottom = 170.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = -94.5
+offset_right = 85.5
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_njcf5")
+
+[node name="Icon" type="TextureRect" parent="ArtPanel" unique_id=1088393672]
+unique_name_in_owner = true
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -67.0
+offset_right = 60.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_10ksf")
 expand_mode = 1
@@ -116,22 +154,22 @@ vertical_alignment = 1
 
 [node name="DefenseIcon" type="TextureRect" parent="." unique_id=1309720383]
 layout_mode = 1
-offset_left = 154.0
+offset_left = 163.0
 offset_top = 233.0
-offset_right = 218.0
+offset_right = 227.0
 offset_bottom = 297.0
 mouse_filter = 2
-texture = ExtResource("5_imfec")
+texture = ExtResource("7_b8ve4")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Defense" type="Label" parent="DefenseIcon" unique_id=681672455]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = -39.0
-offset_top = 5.0
-offset_right = 48.0
-offset_bottom = 49.0
+offset_left = -45.0
+offset_top = 3.0
+offset_right = 42.0
+offset_bottom = 51.0
 text = "8"
 label_settings = ExtResource("4_m3e03")
 horizontal_alignment = 2
@@ -149,6 +187,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="TextBox" type="RichTextLabel" parent="." unique_id=1259037404]
+texture_filter = 1
 layout_mode = 0
 offset_left = 11.0
 offset_top = 168.0
@@ -156,29 +195,31 @@ offset_right = 189.0
 offset_bottom = 247.0
 mouse_filter = 2
 theme = ExtResource("8_bp74k")
+theme_override_constants/line_separation = -10
 bbcode_enabled = true
-text = "On hit destroy arsenal"
+text = "If you can read this there is a bug."
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Name" type="RichTextLabel" parent="." unique_id=1780050353]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 18.0
-offset_right = 178.0
-offset_bottom = 115.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 176.0
+offset_bottom = 52.0
 mouse_filter = 2
 theme = ExtResource("8_bp74k")
 bbcode_enabled = true
-text = "Raging Onslaught"
+text = "Raging Strike"
 horizontal_alignment = 1
 
 [node name="Type" type="RichTextLabel" parent="." unique_id=1578929195]
 layout_mode = 0
 offset_left = 36.0
-offset_top = 247.0
+offset_top = 259.0
 offset_right = 164.0
-offset_bottom = 276.0
+offset_bottom = 279.0
 mouse_filter = 2
-theme = ExtResource("8_bp74k")
+theme = ExtResource("10_b8ve4")
 text = "Attack"
 horizontal_alignment = 1

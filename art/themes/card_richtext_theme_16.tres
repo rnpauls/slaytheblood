@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://cho0px4v2r182"]
+
+[ext_resource type="FontFile" uid="uid://d23tbyvhdcxft" path="res://art/themes/m6x11plus.ttf" id="1_6yhbg"]
+
+[resource]
+default_font = ExtResource("1_6yhbg")
+default_font_size = 16
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 3

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cqcal03735mv8" path="res://art/tile_0118.png" id="1_n1rrn"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_eofgd"]
-[ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="3_2er4u"]
+[ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="3_eofgd"]
 
 [resource]
 script = ExtResource("2_eofgd")
@@ -14,5 +14,5 @@ attack = 3
 defense = 2
 go_again = true
 icon = ExtResource("1_n1rrn")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage to all enemies. Go again[/center]"
-sound = ExtResource("3_2er4u")
+tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage to all enemies[/center]"
+sound = ExtResource("3_eofgd")

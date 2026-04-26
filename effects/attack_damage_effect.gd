@@ -9,7 +9,7 @@ func execute(targets: Array[Node]) -> void:
 		if not target:
 			continue
 		if target is Enemy:
-			target.defend_attack(amount, go_again)
+			target.defend_attack(amount, go_again, on_hit_effects)
 		if target is Enemy or target is Player:
 			execute_single_target(target)
 

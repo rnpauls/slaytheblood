@@ -5,6 +5,7 @@ extends Control
 @export var targeting: bool = false
 @export var owner_of_weapon: Node #: set = set_owner_of_weapon
 @onready var weapon_ui: WeaponUI = $WeaponButton/WeaponUI
+@onready var weapon_button: Button = %WeaponButton
 var targets: Array[Node]
 var weapon: Weapon
 
@@ -45,11 +46,13 @@ func disable_weapon() -> void:
 	if not weapon: return 
 	activable = false
 	weapon_ui.set_grey_out(true)
+	weapon_button.disabled = true
 
 func enable_weapon() -> void:
 	if not weapon: return
 	activable = true
 	weapon_ui.set_grey_out(false)
+	weapon_button.disabled = false
 
 func reset() -> void:
 	if not weapon: return

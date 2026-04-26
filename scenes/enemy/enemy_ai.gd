@@ -62,12 +62,12 @@ func play_next_action() -> Card:
 	return next_action
 
 ## Defending phase: Player attacks AI, returns array of defense values
-func defend(player_attack_power: int, has_go_again: bool) -> Array:
+func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) -> Array:
 	var player_hand_size : int = target.get_tree().get_first_node_in_group("player_hand").get_child_count()
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
 	var modified_damage = modifier_handler.get_modified_value(player_attack_power, Modifier.Type.DMG_TAKEN)
-	var block_options = calculate_block_options(hand_state, modified_damage, has_go_again, player_hand_size)
+	var block_options = calculate_block_options(hand_state, modified_damage, has_go_again, player_hand_size, onhits)
 	
 	# Life factor: More blocking when life is low (0.5 at 20+, 2.0 at 5 or less)
 	var life_factor = 1#clamp(2.0 - (float(enemy.stats.health) / 20.0), 0.5, 2.0)
@@ -147,13 +147,14 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	var best_actions = []
 	var best_remaining = state.cards.duplicate()
 	
-	for action in state.cards:
+	for action in state.cards as Array[Card]:
 		if action.cost <= state.resources and (action.type == Card.Type.ATTACK or action.type == Card.Type.NAA):
 			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost}
 			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0)
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
 			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)
+			current_action_damage_modified += action.ai_value
 			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
 			
 			if total_damage > best_damage:# or \
@@ -166,7 +167,7 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	return {"damage": best_damage, "pitched": best_pitched, "actions": best_actions, "remaining": best_remaining}
 
 ## Recursively calculate blocking options with Go Again heuristic
-func calculate_block_options(state: Dictionary, attack_power: int, has_go_again: bool, player_hand_size: int) -> Array:
+func calculate_block_options(state: Dictionary, attack_power: int, has_go_again: bool, player_hand_size: int, onhits: Array[OnHit]) -> Array:
 	var options = [{"defense": 0, "defense_applied": [], "offense_after": calculate_max_offense(state, 1, enemy.stats.health)["damage"]}]
 	
 	if attack_power > 0:
@@ -175,7 +176,7 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 			new_state.cards.erase(card)
 			var defense = card.defense
 			var remaining_attack = attack_power - defense
-			var sub_options = calculate_block_options(new_state, remaining_attack, has_go_again, player_hand_size)
+			var sub_options = calculate_block_options(new_state, remaining_attack, has_go_again, player_hand_size, onhits)
 			
 			for sub in sub_options:
 				var total_defense = defense + sub.defense
@@ -184,20 +185,23 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 				if has_go_again and remaining_attack <= 0:
 					var second_attack = player_hand_size * 3 # Heuristic: 3 damage per card
 					var go_again_state = {"cards": new_state.cards.duplicate(), "resources": new_state.resources}
-					var second_options = calculate_block_options(go_again_state, second_attack, false, 0)
+					var second_options = calculate_block_options(go_again_state, second_attack, false, 0, [])
 					var best_second = second_options[0]
 					for opt in second_options:
 						if (second_attack - opt.defense) + opt.offense_after < (second_attack - best_second.defense) + best_second.offense_after:
 							best_second = opt
 					offense_after = best_second.offense_after
 				if attack_power - total_defense < enemy.stats.health:
+					if (onhits) and (attack_power <= total_defense): #If theres an on-hit and the attack is fully blocked
+						for tmp_onhit in onhits:
+							offense_after += tmp_onhit.ai_value #Add the expected value of the on-hit to the offense value
 					options.append({"defense": total_defense, "defense_applied": applied, "offense_after": offense_after})
 		
 		if arsenal and arsenal.type == Card.Type.BLOCK:
 			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources}
 			var defense = arsenal.defense
 			var remaining_attack = attack_power - defense
-			var sub_options = calculate_block_options(new_state, remaining_attack, has_go_again, player_hand_size)
+			var sub_options = calculate_block_options(new_state, remaining_attack, has_go_again, player_hand_size, onhits)
 			
 			for sub in sub_options:
 				var total_defense = defense + sub.defense
@@ -206,13 +210,16 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 				if has_go_again and remaining_attack <= 0:
 					var second_attack = player_hand_size * 3
 					var go_again_state = {"cards": new_state.cards.duplicate(), "resources": new_state.resources}
-					var second_options = calculate_block_options(go_again_state, second_attack, false, 0)
+					var second_options = calculate_block_options(go_again_state, second_attack, false, 0, [])
 					var best_second = second_options[0]
 					for opt in second_options:
 						if (second_attack - opt.defense) + opt.offense_after < (second_attack - best_second.defense) + best_second.offense_after:
 							best_second = opt
 					offense_after = best_second.offense_after
 				if attack_power - total_defense < enemy.stats.health:
+					if (onhits) and (attack_power <= total_defense): #If theres an on-hit and the attack is fully blocked
+						for tmp_onhit in onhits:
+							offense_after += tmp_onhit.ai_value #Add the expected value of the on-hit to the offense value
 					options.append({"defense": total_defense, "defense_applied": applied, "offense_after": offense_after})
 	#Remove original non-blocking option if lethal
 	if (attack_power >= enemy.stats.health) and (options.size() > 1):
@@ -225,11 +232,15 @@ func pick_best_arsenal(cards: Array) -> Card:
 		return null
 	var best_card = cards[0]
 	for card in cards:
-		if card.type == Card.Type.BLOCK and best_card.type != Card.Type.BLOCK:
+		if card.type == Card.Type.BLOCK:
+			if best_card.type != Card.Type.BLOCK:
+				best_card = card
+			elif card.defense > best_card.defense:
+				best_card = card
+		elif card.pitch < best_card.pitch:
 			best_card = card
-		elif card.type == best_card.type:
-			if card.defense > best_card.defense or \
-			   (card.defense == best_card.defense and card.attack > best_card.attack):
+		elif card.pitch == best_card.pitch:
+			if (card.attack + card.ai_value) > (best_card.attack + best_card.ai_value):
 				best_card = card
 	return best_card
 

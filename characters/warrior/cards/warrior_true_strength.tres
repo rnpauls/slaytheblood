@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dh7ilk6u3ytba" path="res://characters/warrior/cards/warrior_true_strength.gd" id="1_3dkr1"]
 [ext_resource type="Texture2D" uid="uid://cn2c1psh561cc" path="res://art/tile_0127.png" id="1_7voqq"]
-[ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="3_48tqc"]
+[ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="3_rnlwg"]
 
 [resource]
 script = ExtResource("1_3dkr1")
@@ -13,8 +13,9 @@ cost = 1
 pitch = 3
 defense = 3
 exhausts = true
+ai_value = 6
 icon = ExtResource("1_7voqq")
 tooltip_text = "[center]At the start of your turn, gain 2 [color=\\\"ffdf00\\\"]Muscle[/color].[/center]"
-sound = ExtResource("3_48tqc")
+sound = ExtResource("3_rnlwg")
 disable_attack = true
 disable_defense = true

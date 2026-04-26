@@ -87,17 +87,17 @@ hand = NodePath("../BattleUI/Hand")
 script = ExtResource("7_8utji")
 
 [node name="ManaUI" parent="BattleUI" unique_id=356935032 instance=ExtResource("11_8aauo")]
-offset_left = 33.0
-offset_top = -312.0
-offset_right = 113.0
-offset_bottom = -232.0
+offset_left = 36.0
+offset_top = 430.0
+offset_right = 84.0
+offset_bottom = 478.0
 char_stats = ExtResource("4_psa3f")
 
 [node name="ActionPointsUI" parent="BattleUI" unique_id=1261898973 instance=ExtResource("14_5moxy")]
-offset_left = 31.0
-offset_top = -448.0
-offset_right = 111.0
-offset_bottom = -368.0
+offset_left = 36.0
+offset_top = -385.0
+offset_right = 84.0
+offset_bottom = -337.0
 
 [node name="Tooltip" parent="BattleUI" unique_id=1281849298 instance=ExtResource("12_qjopr")]
 visible = false

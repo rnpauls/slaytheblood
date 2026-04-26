@@ -5,3 +5,4 @@ var id: String
 var effect: Effect
 var custom_func: Callable
 var args: Array
+var ai_value: int

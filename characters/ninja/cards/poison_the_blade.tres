@@ -10,8 +10,8 @@ type = 1
 pitch = 1
 defense = 2
 go_again = true
+ai_value = 3
 icon = ExtResource("1_sd0hr")
-tooltip_text = "Next attack gets: \"On hit: deal 3 damage\".
-Go Again"
+tooltip_text = "Next attack gets: \"On hit: deal 3 damage\"."
 disable_attack = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

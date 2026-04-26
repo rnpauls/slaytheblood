@@ -20,6 +20,7 @@ func initialize_status(target: Node) -> void:
 	dmg_eff.amount = stacks
 	var on_hit:=OnHit.new()
 	on_hit.effect = dmg_eff
+	on_hit.ai_value = on_hit.effect.amount
 	on_hit.id = "poison_tip"
 	target_on_hits.append(on_hit)
 	target.attack_completed.connect(apply_status.bind(target))

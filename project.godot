@@ -38,12 +38,7 @@ window/size/viewport_height=720
 window/size/always_on_top=true
 window/size/window_width_override=2480
 window/size/window_height_override=1440
-window/stretch/mode="viewport"
-
-[editor]
-
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
+window/stretch/mode="canvas_items"
 
 [global_group]
 
@@ -51,6 +46,7 @@ player_hand=""
 
 [gui]
 
+theme/default_font_subpixel_positioning=0
 theme/custom="res://art/themes/main_theme.tres"
 
 [input]
@@ -92,7 +88,7 @@ pause={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=3
 textures/snap/snap_2d_vertices_to_pixel=false
 textures/snap/snap_2d_transforms_to_pixel=false
 textures/screen_space_roughness_limiter/enabled=true

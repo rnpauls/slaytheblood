@@ -32,11 +32,13 @@ const PITCH_COLORS := {
 @export var defense: int
 @export var exhausts: bool = false
 @export var go_again: bool = false : get = get_go_again
+@export var ai_value: int
 
 @export_group("Card Visuals")
 @export var icon: Texture
 @export_multiline var tooltip_text: String
 @export var sound: AudioStream
+@export var block_sound: AudioStream = preload("uid://df64e7qat73gs")
 
 @export_group("Disabled Attributes")
 @export var disable_attack: bool = false
@@ -112,9 +114,9 @@ func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:
 func apply_block_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	var block_effect := BlockEffect.new()
 	block_effect.amount = defense
-	block_effect.sound = sound
+	block_effect.sound = block_sound
 	block_effect.execute(targets)
-	
+
 func get_default_tooltip() -> String:
 	return tooltip_text
 

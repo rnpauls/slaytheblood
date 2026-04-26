@@ -12,4 +12,3 @@ attack = 1
 defense = 2
 go_again = true
 icon = ExtResource("1_wkn5y")
-tooltip_text = "[center][u]Go Again[/u].[/center]"
