@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dws1iv3dr7w52"
+path="res://.godot/imported/water_drop_medium.wav-356118691dffa9a089cd16e4bf18fbd0.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/400 Sounds Pack/Environment/water_drop_medium.wav"
+dest_files=["res://.godot/imported/water_drop_medium.wav-356118691dffa9a089cd16e4bf18fbd0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

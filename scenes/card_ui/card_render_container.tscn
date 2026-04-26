@@ -24,7 +24,7 @@ handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(200, 280)
+size = Vector2i(213, 286)
 render_target_update_mode = 4
 
 [node name="CardVisuals" parent="SubViewport" unique_id=101409697 instance=ExtResource("3_d3nd8")]

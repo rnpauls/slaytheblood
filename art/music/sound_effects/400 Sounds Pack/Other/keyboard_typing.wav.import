@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c2acq1fpqprpn"
+path="res://.godot/imported/keyboard_typing.wav-bb1ac9d9dd079402c14934d7eedbb551.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/400 Sounds Pack/Other/keyboard_typing.wav"
+dest_files=["res://.godot/imported/keyboard_typing.wav-bb1ac9d9dd079402c14934d7eedbb551.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

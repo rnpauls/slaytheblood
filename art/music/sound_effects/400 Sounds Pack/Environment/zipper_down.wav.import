@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tmi5qege086d"
+path="res://.godot/imported/zipper_down.wav-6e51244801d8c49fcb0fc69f82d35534.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/400 Sounds Pack/Environment/zipper_down.wav"
+dest_files=["res://.godot/imported/zipper_down.wav-6e51244801d8c49fcb0fc69f82d35534.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

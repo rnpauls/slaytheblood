@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkyejoneiqanf"
+path="res://.godot/imported/DSGNImpt_MELEE-Hollow Punch_HY_PC-004.wav-e637a3a95cfe5a1d998b75d7f0bd2d51.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/DSGNImpt_MELEE-Hollow Punch_HY_PC-004.wav"
+dest_files=["res://.godot/imported/DSGNImpt_MELEE-Hollow Punch_HY_PC-004.wav-e637a3a95cfe5a1d998b75d7f0bd2d51.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

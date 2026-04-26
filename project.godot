@@ -19,6 +19,10 @@ run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://art/heart.png"
 
+[audio]
+
+buses/default_bus_layout="res://art/music/default_bus_layout.tres"
+
 [autoload]
 
 Events="*res://global/events.gd"
@@ -47,7 +51,7 @@ player_hand=""
 
 [gui]
 
-theme/custom="res://main_theme.tres"
+theme/custom="res://art/themes/main_theme.tres"
 
 [input]
 

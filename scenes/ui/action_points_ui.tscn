@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bljd5caaiyxj5"]
 
-[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_grfoq"]
+[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_grfoq"]
 [ext_resource type="Script" uid="uid://vpjpuov3ou03" path="res://scenes/ui/action_points_ui.gd" id="2_grfoq"]
 
 [node name="ActionPointsUI" type="Panel" unique_id=1207230517]

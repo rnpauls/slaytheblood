@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cx16aw56puiwk"
+path="res://.godot/imported/xylophone_chime_quick.wav-8751a1b5f00da150a3e6b3d012f1ca2e.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/400 Sounds Pack/Musical Effects/xylophone_chime_quick.wav"
+dest_files=["res://.godot/imported/xylophone_chime_quick.wav-8751a1b5f00da150a3e6b3d012f1ca2e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

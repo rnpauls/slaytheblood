@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3oyhe60h5puu"
+path="res://.godot/imported/cough_short.wav-18bcbd3b267bba2a73e9ef6942b795e1.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/400 Sounds Pack/Human/cough_short.wav"
+dest_files=["res://.godot/imported/cough_short.wav-18bcbd3b267bba2a73e9ef6942b795e1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

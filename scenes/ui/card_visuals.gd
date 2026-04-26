@@ -6,9 +6,9 @@ extends Control
 @onready var panel: Panel = $Panel
 @onready var cost: Label = $Cost
 @onready var icon: TextureRect = $Icon
-@onready var rarity: TextureRect = $Rarity
-@onready var defense: Label = $Defense
-@onready var attack: Label = $Attack
+@export var attack: Label
+@export var defense: Label
+@export var go_again_icon: TextureRect
 @onready var pitch_strip: CanvasModulate = $PitchStrip
 @onready var attack_icon: TextureRect = $AttackIcon
 @onready var defense_icon: TextureRect = $DefenseIcon
@@ -34,8 +34,12 @@ func set_card(value: Card) -> void:
 		hide_defense()
 	else:
 		defense.text = str(card.defense)
+	if card.go_again:
+		go_again_icon.show()
+	else:
+		go_again_icon.hide()
 	icon.texture = card.icon
-	rarity.modulate = Card.RARITY_COLORS[card.rarity]
+	panel.border_color = Card.RARITY_COLORS[card.rarity]
 	pitch_strip.modulate = Card.PITCH_COLORS[card.pitch]
 	#pitch_strip.ColorRect2.modulate = Card.PITCH_COLORS[card.pitch]
 	#pitch_strip.ColorRect3.modulate = Card.PITCH_COLORS[card.pitch]

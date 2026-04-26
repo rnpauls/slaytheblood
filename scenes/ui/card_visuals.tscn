@@ -1,22 +1,27 @@
 [gd_scene format=3 uid="uid://s4mgc84jep8h"]
 
-[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://main_theme.tres" id="1_0qctv"]
+[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_0qctv"]
 [ext_resource type="Script" uid="uid://cjhf23ocvv0vi" path="res://scenes/ui/card_visuals.gd" id="2_4hbsy"]
 [ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="2_p7yu4"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="3_10ksf"]
-[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/pixel_rpg_label_settings.tres" id="4_m3e03"]
-[ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="4_n0g3o"]
+[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="4_m3e03"]
 [ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="5_imfec"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/pixel_rpg_label_settings_cardtext.tres" id="8_bp74k"]
+[ext_resource type="Texture2D" uid="uid://b0cx7vg3324n2" path="res://art/item11.png" id="6_njcf5"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme.tres" id="8_bp74k"]
+[ext_resource type="Texture2D" uid="uid://cli20nvbbuehk" path="res://art/item56.png" id="8_njcf5"]
 
-[node name="CardVisuals" type="Control" unique_id=101409697]
+[node name="CardVisuals" type="Control" unique_id=101409697 node_paths=PackedStringArray("attack", "defense", "go_again_icon")]
 custom_minimum_size = Vector2(200, 280)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 200.0
+offset_left = 7.0
+offset_right = 207.0
 offset_bottom = 280.0
 theme = ExtResource("1_0qctv")
 script = ExtResource("2_4hbsy")
+attack = NodePath("AttackIcon/Attack")
+defense = NodePath("DefenseIcon/Defense")
+go_again_icon = NodePath("GoAgainIcon")
 
 [node name="Panel" type="Panel" parent="." unique_id=1886818472]
 layout_mode = 1
@@ -28,115 +33,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("2_p7yu4")
 
-[node name="Cost" type="Label" parent="." unique_id=564548442]
-layout_mode = 1
-offset_left = 105.0
-offset_top = 46.0
-offset_right = 198.0
-offset_bottom = 104.0
-text = "3"
-label_settings = ExtResource("4_m3e03")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Defense" type="Label" parent="." unique_id=681672455]
-layout_mode = 1
-offset_left = 111.0
-offset_top = 235.0
-offset_right = 198.0
-offset_bottom = 279.0
-text = "4"
-label_settings = ExtResource("4_m3e03")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Attack" type="Label" parent="." unique_id=1820418952]
-layout_mode = 1
-offset_left = 9.0
-offset_top = 235.0
-offset_right = 81.0
-offset_bottom = 279.0
-text = "6"
-label_settings = ExtResource("4_m3e03")
-vertical_alignment = 1
-
-[node name="Icon" type="TextureRect" parent="." unique_id=1088393672]
-layout_mode = 1
-offset_left = 39.0
-offset_top = 46.0
-offset_right = 163.0
-offset_bottom = 170.0
-mouse_filter = 2
-texture = ExtResource("3_10ksf")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AttackIcon" type="TextureRect" parent="." unique_id=407441525]
-layout_mode = 1
-offset_top = 189.0
-offset_right = 45.0
-offset_bottom = 234.0
-mouse_filter = 2
-texture = ExtResource("3_10ksf")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="DefenseIcon" type="TextureRect" parent="." unique_id=1309720383]
-layout_mode = 1
-offset_left = 153.0
-offset_top = 193.0
-offset_right = 198.0
-offset_bottom = 238.0
-mouse_filter = 2
-texture = ExtResource("5_imfec")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Rarity" type="TextureRect" parent="." unique_id=1750346003]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 49.0
-offset_right = 52.0
-offset_bottom = 94.0
-texture = ExtResource("4_n0g3o")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextBox" type="RichTextLabel" parent="." unique_id=1259037404]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 168.0
-offset_right = 195.0
-offset_bottom = 265.0
-mouse_filter = 2
-theme = ExtResource("8_bp74k")
-bbcode_enabled = true
-text = "On hit destroy arsenal"
-horizontal_alignment = 1
-
-[node name="Name" type="RichTextLabel" parent="." unique_id=1780050353]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 26.0
-offset_right = 195.0
-offset_bottom = 123.0
-mouse_filter = 2
-theme = ExtResource("8_bp74k")
-bbcode_enabled = true
-text = "Raging Onslaught"
-horizontal_alignment = 1
-
-[node name="Type" type="RichTextLabel" parent="." unique_id=1578929195]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 256.0
-offset_right = 195.0
-offset_bottom = 276.0
-mouse_filter = 2
-theme = ExtResource("8_bp74k")
-text = "Attack"
-horizontal_alignment = 1
-
 [node name="PitchStrip" type="CanvasModulate" parent="." unique_id=868946663]
 position = Vector2(105, 0)
 
@@ -144,9 +40,9 @@ position = Vector2(105, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -104.0
+offset_left = -96.0
 offset_top = 1.0
-offset_right = 94.0
+offset_right = 86.0
 offset_bottom = 7.0
 grow_horizontal = 2
 mouse_filter = 2
@@ -172,3 +68,117 @@ offset_right = 40.0
 offset_bottom = 21.0
 grow_horizontal = 2
 mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1088393672]
+layout_mode = 1
+offset_left = 39.0
+offset_top = 46.0
+offset_right = 163.0
+offset_bottom = 170.0
+mouse_filter = 2
+texture = ExtResource("3_10ksf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cost" type="Label" parent="." unique_id=564548442]
+layout_mode = 1
+offset_left = 105.0
+offset_top = -11.0
+offset_right = 198.0
+offset_bottom = 47.0
+text = "3"
+label_settings = ExtResource("4_m3e03")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AttackIcon" type="TextureRect" parent="." unique_id=407441525]
+layout_mode = 1
+offset_left = -23.0
+offset_top = 226.0
+offset_right = 41.0
+offset_bottom = 290.0
+mouse_filter = 2
+texture = ExtResource("6_njcf5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Attack" type="Label" parent="AttackIcon" unique_id=1820418952]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 24.0
+offset_top = -1.0
+offset_right = 93.384445
+offset_bottom = 68.38443
+theme_override_font_sizes/font_size = 43
+text = "4"
+label_settings = ExtResource("4_m3e03")
+vertical_alignment = 1
+
+[node name="DefenseIcon" type="TextureRect" parent="." unique_id=1309720383]
+layout_mode = 1
+offset_left = 154.0
+offset_top = 233.0
+offset_right = 218.0
+offset_bottom = 297.0
+mouse_filter = 2
+texture = ExtResource("5_imfec")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Defense" type="Label" parent="DefenseIcon" unique_id=681672455]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -39.0
+offset_top = 5.0
+offset_right = 48.0
+offset_bottom = 49.0
+text = "8"
+label_settings = ExtResource("4_m3e03")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GoAgainIcon" type="TextureRect" parent="." unique_id=1750346003]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 41.0
+offset_bottom = 41.0
+texture = ExtResource("8_njcf5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextBox" type="RichTextLabel" parent="." unique_id=1259037404]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 168.0
+offset_right = 189.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme = ExtResource("8_bp74k")
+bbcode_enabled = true
+text = "On hit destroy arsenal"
+horizontal_alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="." unique_id=1780050353]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 18.0
+offset_right = 178.0
+offset_bottom = 115.0
+mouse_filter = 2
+theme = ExtResource("8_bp74k")
+bbcode_enabled = true
+text = "Raging Onslaught"
+horizontal_alignment = 1
+
+[node name="Type" type="RichTextLabel" parent="." unique_id=1578929195]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 247.0
+offset_right = 164.0
+offset_bottom = 276.0
+mouse_filter = 2
+theme = ExtResource("8_bp74k")
+text = "Attack"
+horizontal_alignment = 1
