@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c520kgl2fpwc1" path="res://art/icon_32_2_16.png" id="1_g6x73"]
 [ext_resource type="Script" uid="uid://c0bkgv5xemgip" path="res://weapons/kodachi.gd" id="2_fe7qa"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_fe7qa"]
 
 [resource]
 script = ExtResource("2_fe7qa")
@@ -11,6 +12,7 @@ type = 1
 character_type = 1
 starter_weapon = true
 icon = ExtResource("1_g6x73")
+sound = ExtResource("3_fe7qa")
 tooltip = "Flow state: Go Again"
 attack = 1
 cost = 1

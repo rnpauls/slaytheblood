@@ -1,15 +1,18 @@
 [gd_resource type="Resource" format=3 uid="uid://jk155r0wgw12"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ef3pu"]
 [ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/item53.png" id="1_ejx80"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_l2rf2"]
+[ext_resource type="AudioStream" uid="uid://bip7mkabbj0dt" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/squelching_1.wav" id="4_0r52d"]
 
 [resource]
 script = ExtResource("2_l2rf2")
-id = "raging_onslaught"
+id = "onslaught"
 target = 1
 cost = 3
 pitch = 1
 attack = 7
 defense = 3
 icon = ExtResource("1_ejx80")
+sound = ExtResource("4_0r52d")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

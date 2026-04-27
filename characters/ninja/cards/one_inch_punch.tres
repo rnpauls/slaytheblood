@@ -1,14 +1,17 @@
 [gd_resource type="Resource" format=3 uid="uid://dda70b1ss7fu1"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_1bkbs"]
 [ext_resource type="Texture2D" uid="uid://cacqp7x6uihmy" path="res://art/item48.png" id="1_7mun4"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_7mun4"]
+[ext_resource type="AudioStream" uid="uid://c05gy6ow8x860" path="res://art/music/sound_effects/400 Sounds Pack/Materials/cardboard_hit.wav" id="4_mohfw"]
 
 [resource]
 script = ExtResource("2_7mun4")
-id = "one_inch_punch"
+id = "inch_punch"
 target = 1
 pitch = 3
 attack = 3
 defense = 3
 icon = ExtResource("1_7mun4")
+sound = ExtResource("4_mohfw")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

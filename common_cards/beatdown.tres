@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://7lv1gwvqeo24"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_nxn7q"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="2_fvwlx"]
+
+[resource]
+script = ExtResource("2_fvwlx")
+id = "beatdown"
+type = 1
+target = 1
+pitch = 3
+ai_value = 2
+disable_attack = true
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

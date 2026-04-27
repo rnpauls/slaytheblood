@@ -1,11 +1,13 @@
 [gd_resource type="Resource" format=3 uid="uid://biyyop47rwhph"]
 
 [ext_resource type="Texture2D" uid="uid://ckgyit1x3wnbe" path="res://art/Iicon_32_35.png" id="1_3r622"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ihowx"]
 [ext_resource type="Script" uid="uid://cxxmi8mh70rmu" path="res://characters/ninja/cards/bittering_thorns.gd" id="2_ihowx"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="4_0xt31"]
 
 [resource]
 script = ExtResource("2_ihowx")
-id = "bittering_thorns"
+id = "biting_thorn"
 rarity = 1
 target = 1
 cost = 1
@@ -15,4 +17,5 @@ defense = 3
 go_again = true
 icon = ExtResource("1_3r622")
 tooltip_text = "On hit: Next attack gets +1atk"
+sound = ExtResource("4_0xt31")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

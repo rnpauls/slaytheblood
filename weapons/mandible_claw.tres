@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cw374xv0yoj7p" path="res://art/claw.png" id="1_yy8wy"]
 [ext_resource type="Script" uid="uid://3mmytkx4coca" path="res://weapons/mandible_claw.gd" id="2_yy8wy"]
+[ext_resource type="AudioStream" uid="uid://ulsyac81tfln" path="res://art/music/sound_effects/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav" id="3_1ustq"]
 
 [resource]
 script = ExtResource("2_yy8wy")
@@ -11,6 +12,7 @@ type = 5
 character_type = 2
 starter_weapon = true
 icon = ExtResource("1_yy8wy")
+sound = ExtResource("3_1ustq")
 tooltip = "Enraged: Go Again"
 attack = 3
 cost = 2

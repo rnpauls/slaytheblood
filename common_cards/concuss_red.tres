@@ -1,7 +1,9 @@
 [gd_resource type="Resource" format=3 uid="uid://dl0joso87gfpm"]
 
 [ext_resource type="Texture2D" uid="uid://d38jgpigw6od0" path="res://art/item63.png" id="1_ejsuh"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_wwvb5"]
 [ext_resource type="Script" uid="uid://bstblp1dw4ip8" path="res://common_cards/concuss.gd" id="2_wwvb5"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="4_gyxjt"]
 
 [resource]
 script = ExtResource("2_wwvb5")
@@ -15,4 +17,5 @@ defense = 3
 ai_value = 3
 icon = ExtResource("1_ejsuh")
 tooltip_text = "On hit: Discard random card"
+sound = ExtResource("4_gyxjt")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

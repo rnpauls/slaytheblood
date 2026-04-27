@@ -62,7 +62,7 @@ func play_next_action() -> Card:
 	return next_action
 
 ## Defending phase: Player attacks AI, returns array of defense values
-func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) -> Array:
+func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) -> Array[Card]:
 	var player_hand_size : int = target.get_tree().get_first_node_in_group("player_hand").get_child_count()
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
@@ -90,15 +90,18 @@ func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) 
 		   (score == (best_option.damage_taken * life_factor + best_option.offense_lost) and option.offense_after > best_option.raw_damage)):
 			best_option = {"defense_applied": option.defense_applied, "offense_lost": offense_lost, "damage_taken": damage_taken, "raw_damage": option.offense_after}
 	
+	var blocking_cards: Array[Card]
 	for block in best_option.defense_applied:
 		#Does this actually work? Checking if it equals the arsenal card?
 		if block.card == arsenal:
 			print_enemy_ai("blocked arsenal %s for %d" % [block.card.id, block.card.defense])
 			arsenal = null
+			blocking_cards.append(arsenal)
 		else:
 			print_enemy_ai("blocked %s for %d" % [block.card.id, block.card.defense])
 			hand.erase(block.card)
-	return best_option.defense_applied.map(func(c): return c.defense) if best_option.defense_applied else []
+			blocking_cards.append(block.card)
+	return blocking_cards#best_option.defense_applied.map(func(c): return c.defense) if best_option.defense_applied else []
 
 ## Recursively calculate maximum offense potential
 ##TODO: include damage modifiers

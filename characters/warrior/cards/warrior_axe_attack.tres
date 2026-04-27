@@ -1,6 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://be0pdlwkj8poo"]
 
 [ext_resource type="Texture2D" uid="uid://ck1t4hdip6xrl" path="res://art/tile_0119.png" id="1_ctxlx"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_qn34n"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_6uoki"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="3_cs8ol"]
 

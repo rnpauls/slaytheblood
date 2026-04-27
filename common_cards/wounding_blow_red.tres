@@ -1,5 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bwdwsrg65wk8t"]
 
+[ext_resource type="AudioStream" uid="uid://d0xis2ox56xrv" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_sharpen.wav" id="1_fgrj5"]
 [ext_resource type="Texture2D" uid="uid://jesqh00q1sja" path="res://art/item4.png" id="1_tfyyy"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_tfyyy"]
 
@@ -11,4 +12,5 @@ pitch = 1
 attack = 4
 defense = 3
 icon = ExtResource("1_tfyyy")
+block_sound = ExtResource("1_fgrj5")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

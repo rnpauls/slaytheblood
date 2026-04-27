@@ -40,6 +40,16 @@ window/size/window_width_override=2480
 window/size/window_height_override=1440
 window/stretch/mode="canvas_items"
 
+[file_customization]
+
+folder_colors={
+"res://art/": "red",
+"res://art/music/": "blue",
+"res://characters/": "green",
+"res://enemies/": "orange",
+"res://scenes/": "purple"
+}
+
 [global_group]
 
 player_hand=""

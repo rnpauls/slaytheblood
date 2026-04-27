@@ -124,7 +124,7 @@ func update_intent() -> void:
 		new_intent.icon = preload("res://art/tile_0103.png")
 	else:
 		if enemy_ai and enemy_ai.hand.size() > 0:
-			new_intent.base_text = "?x%s"
+			new_intent.base_text = "? X %s"
 			new_intent.current_text = new_intent.base_text % get_num_cards_for_turn()
 			new_intent.icon = null
 		else:
@@ -155,7 +155,9 @@ func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) 
 	#if defense_array.is_empty():
 		#return 0
 	#else:
-	stats.block += defense_array.reduce(func(sum, plus): return sum + plus, 0)
+	#stats.block += defense_array.reduce(func(sum, plus): return sum + plus, 0)
+	for def_card in defense_array:
+		def_card.apply_block_effects([self],modifier_handler)
 	#return defense_array.reduce(func(sum, plus) : sum + plus, 0)
 	update_intent()
 	enemy_card_ui.update_cards(enemy_ai)

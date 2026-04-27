@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/item53.png" id="1_8j7gi"]
 [ext_resource type="Script" uid="uid://ciikw3pmth838" path="res://weapons/romping_club.gd" id="2_8j7gi"]
-[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="3_dh1kd"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_8j7gi"]
 
 [resource]
 script = ExtResource("2_8j7gi")
@@ -12,7 +12,7 @@ type = 4
 character_type = 2
 hands = 1
 icon = ExtResource("1_8j7gi")
-sound = ExtResource("3_dh1kd")
+sound = ExtResource("3_8j7gi")
 tooltip = "Enraged: +1atk"
 attack = 4
 cost = 2

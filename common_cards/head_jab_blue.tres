@@ -1,7 +1,9 @@
 [gd_resource type="Resource" format=3 uid="uid://dqtd63vqxu3ta"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_52c1l"]
 [ext_resource type="Texture2D" uid="uid://kq1nex3ea5ma" path="res://art/item47.png" id="1_wkn5y"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_wkn5y"]
+[ext_resource type="AudioStream" uid="uid://72ud87ihl25n" path="res://art/music/sound_effects/DSGNImpt_MELEE-Hollow Punch_HY_PC-005.wav" id="4_52c1l"]
 
 [resource]
 script = ExtResource("2_wkn5y")
@@ -12,3 +14,4 @@ attack = 1
 defense = 2
 go_again = true
 icon = ExtResource("1_wkn5y")
+sound = ExtResource("4_52c1l")
