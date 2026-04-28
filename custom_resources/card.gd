@@ -70,10 +70,9 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 		_:
 			return []
 
-#Currently does not accept non-attack actions targetting enemies
-func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
+# char_stats accepts Stats so both CharacterStats (player) and EnemyStats (enemy) work
+func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
 	card_play_started.emit(self)
-	
 	
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)
@@ -97,11 +96,11 @@ func discard_card() -> void:
 	print("Discarded %s" % id)
 	Events.card_discarded.emit(self)
 
-func pitch_card(char_stats: CharacterStats) -> void:
+func pitch_card(char_stats: Stats) -> void:
 	Events.card_pitched.emit(self)
 	char_stats.mana += pitch
 
-func sink_card(_char_stats: CharacterStats) -> void:
+func sink_card(_char_stats: Stats) -> void:
 	Events.card_sunk.emit(self)
 
 func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
