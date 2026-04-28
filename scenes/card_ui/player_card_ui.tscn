@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://player_card_ui_scene"]
+
+[ext_resource type="PackedScene" uid="uid://bfqlf1512o16k" path="res://scenes/card_ui/card_ui.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://player_card_ui_gd" path="res://scenes/card_ui/player_card_ui.gd" id="2_script"]
+
+[node name="PlayerCardUI" instance=ExtResource("1_base")]
+script = ExtResource("2_script")

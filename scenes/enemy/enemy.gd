@@ -3,6 +3,7 @@ extends Area2D
 
 const ARROW_OFFSET := 45
 const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.tres")
+const ENEMY_CARD_UI_SCENE := preload("res://scenes/card_ui/enemy_card_ui.tscn")
 
 @export var stats: EnemyStats : set = set_enemy_stats
 
@@ -10,25 +11,23 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.t
 @onready var arrow: Sprite2D = $Arrow
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
-@onready var enemy_card_ui: EnemyCardUI = $EnemyCardUI
+@onready var enemy_hand_ui: EnemyHandUI = $EnemyHandUI
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
+
+## Container node (HBoxContainer or similar) that holds the EnemyCardUI instances.
+## Created at runtime under the Enemy node.
+var card_display_container: HBoxContainer
 
 signal enemy_action_completed
 signal attack_completed
 
-#var enemy_action_picker: EnemyActionPicker
 var enemy_ai: EnemyAI
-#var current_action: EnemyAction: set = set_current_action
 var current_action: Card: set = set_current_action
 var hand: Array
 
 var active_on_hits: Array[OnHit]
 
-#func _ready() -> void:
-	#await get_tree().create_timer(2).timeout
-	#take_damage(10)
-	#stats.block += 8
 
 func set_current_action(value: Card) -> void:
 	current_action = value
@@ -39,7 +38,6 @@ func set_enemy_stats(value: EnemyStats) -> void:
 	
 	if not stats.stats_changed.is_connected(update_stats):
 		stats.stats_changed.connect(update_stats)
-		#stats.stats_changed.connect(do_action) Used to be update_action
 	
 	update_enemy()
 
@@ -54,24 +52,18 @@ func setup_ai() -> void:
 	enemy_ai.modifier_handler = modifier_handler
 	enemy_ai.setup()
 	enemy_ai.hand = hand
-	enemy_card_ui.update_cards(enemy_ai)
+	_rebuild_card_display()
+	enemy_hand_ui.update_cards(enemy_ai)
 
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
 
 ##Draw a single card and initialize it
 func draw_card() -> void:
-	#hand.append(stats.draw_pile.draw_card())
-	#if not stats:
-		#await Events.player_set_up
 	var card_drawn: Card = stats.draw_pile.draw_card()
 	if card_drawn:
-		#hand.add_card(card_drawn)
 		hand.append(card_drawn)
-		#reshuffle_deck_from_discard()
 		Events.enemy_card_drawn.emit(self)
-		#card_drawn.card_play_finished.connect(_on_card_play_finished)
-		#card_drawn.card_play_started.connect(_on_card_play_started)
 		card_drawn.owner = self
 
 ##Helper function for draw_card()
@@ -82,21 +74,17 @@ func draw_cards(amount: int) -> void:
 func declare_next_attack() -> void:
 	if not enemy_ai:
 		return
-	#if not current_action:
 	current_action = enemy_ai.play_next_action()
 	update_intent()
-	enemy_card_ui.update_cards(enemy_ai)
+	_rebuild_card_display()
+	enemy_hand_ui.update_cards(enemy_ai)
 	if current_action == null:
 		Events.enemy_turn_completed.emit(self)
 	else:
 		stats.action_points -= 1
-			#return
 		Events.enemy_attack_declared.emit()
 		await Events.player_blocks_declared
 		do_action()
-		#var new_conditional_action := enemy_action_picker.get_first_conditional_action()
-		#if new_conditional_action and current_action != new_conditional_action:
-			#current_action = new_conditional_action
 
 func update_enemy() -> void:
 	if not stats is Stats:
@@ -105,8 +93,7 @@ func update_enemy() -> void:
 		await ready
 	
 	sprite_2d.texture = stats.art
-	arrow.position = Vector2.RIGHT * (sprite_2d.get_rect().size.x/2 + ARROW_OFFSET)
-	#setup_ai()
+	arrow.position = Vector2.RIGHT * (sprite_2d.get_rect().size.x / 2 + ARROW_OFFSET)
 	update_stats()
 
 func update_intent() -> void:
@@ -133,8 +120,6 @@ func update_intent() -> void:
 	intent_ui.update_intent(new_intent)
 
 func do_action() -> void:
-	#stats.block = 0
-	#print_debug("Enemy defense used to be set to zero here")
 	if not current_action:
 		return
 	
@@ -144,23 +129,17 @@ func do_action() -> void:
 	
 	enemy_action_completed.emit(self)
 	attack_completed.emit()
-	enemy_card_ui.update_cards(enemy_ai)
+	_rebuild_card_display()
+	enemy_hand_ui.update_cards(enemy_ai)
 
 #Defend player attack
-#attack: base attack
-#modifiers: Player modifiers
-#go_again: if the attack has go_again
 func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
 	var defense_array := enemy_ai.defend(attack, go_again, incoming_on_hits)
-	#if defense_array.is_empty():
-		#return 0
-	#else:
-	#stats.block += defense_array.reduce(func(sum, plus): return sum + plus, 0)
 	for def_card in defense_array:
-		def_card.apply_block_effects([self],modifier_handler)
-	#return defense_array.reduce(func(sum, plus) : sum + plus, 0)
+		def_card.apply_block_effects([self], modifier_handler)
 	update_intent()
-	enemy_card_ui.update_cards(enemy_ai)
+	_rebuild_card_display()
+	enemy_hand_ui.update_cards(enemy_ai)
 
 
 func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
@@ -173,7 +152,6 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
 	var damage_taken: = stats.take_damage(mod_dmg)
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 16, 0.15))
-	#tween.tween_callback(stats.take_damage.bind(mod_dmg))
 	tween.tween_interval(0.17)
 	
 	tween.finished.connect(
@@ -185,18 +163,18 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
 				queue_free()
 	)
 	return damage_taken
-	
+
 func get_num_cards_for_turn() -> int:
 	var player_life = get_tree().get_first_node_in_group("player").stats.health
 	var turn_plan: Dictionary = enemy_ai.calculate_max_offense_now(player_life)
 	return turn_plan.actions.size()
 
 func cleanup_phase() -> void:
-	#enemy_ai.end_turn()
 	draw_cards(stats.cards_per_turn - hand.size())
 	stats.block = 0
 	stats.action_points = 1
-	enemy_card_ui.update_cards(enemy_ai)
+	_rebuild_card_display()
+	enemy_hand_ui.update_cards(enemy_ai)
 
 func destroy_arsenal() -> bool:
 	if enemy_ai.arsenal == null:
@@ -207,9 +185,39 @@ func destroy_arsenal() -> bool:
 		arsenal_card.queue_free()
 		return true
 
+## Rebuild the full-card CardUI display from the current AI hand.
+## Uses EnemyCardUI (non-interactive CardUI subclass) for each card.
+func _rebuild_card_display() -> void:
+	if not enemy_ai:
+		return
+	
+	# Lazily create the container on first use
+	if not card_display_container:
+		card_display_container = HBoxContainer.new()
+		card_display_container.name = "CardDisplayContainer"
+		add_child(card_display_container)
+		# Position below the sprite — adjust as needed in scene
+		card_display_container.position = Vector2(-enemy_ai.hand.size() * 50 / 2.0, 170)
+	
+	# Clear existing card UIs
+	for child in card_display_container.get_children():
+		child.queue_free()
+	
+	# Spawn one EnemyCardUI per card in the AI's current hand + arsenal
+	for c: Card in enemy_ai.hand:
+		var card_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
+		card_display_container.add_child(card_ui)
+		card_ui.setup(c, stats)
+	
+	# Show arsenal card if present
+	if enemy_ai.arsenal:
+		var arsenal_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
+		card_display_container.add_child(arsenal_ui)
+		arsenal_ui.setup(enemy_ai.arsenal, stats)
+		arsenal_ui.modulate = Color(1.0, 0.85, 0.3) # Tint to indicate it's arsenaled
+
 func _on_area_entered(_area):
 	arrow.show()
-
 
 func _on_area_exited(_area):
 	arrow.hide()
