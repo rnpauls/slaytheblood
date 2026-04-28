@@ -1,176 +1,71 @@
 class_name CardUI
 extends Control
 
-signal reparent_requested(which_card_ui: CardUI)
+# Lifecycle signals — connect these when you instantiate the card
+signal played(card_ui: CardUI)
+signal pitched(card_ui: CardUI)
+signal sunk(card_ui: CardUI)
+signal blocked(card_ui: CardUI)
+signal discarded(card_ui: CardUI)
 
-const BASE_STYLEBOX := preload("res://scenes/card_ui/card_base_stylebox.tres")
-const DRAG_STYLEBOX := preload("res://scenes/card_ui/card_dragging_stylebox.tres")
-const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
-const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.tres")
-
-@export var player_modifiers: ModifierHandler
 @export var card: Card : set = _set_card
-@export var char_stats: CharacterStats : set = _set_char_stats
-@export var hover_scale := 1.0
-@export var tween_duration := 0.18
+@export var stats: Stats : set = _set_stats
+@export var modifiers: ModifierHandler
 
-@onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var card_render: CardRenderContainer = $CardRenderContainer
-@onready var drop_point_detector: Area2D = %DropPointDetector
-@onready var hover_overlay: CanvasLayer = get_node("/root/Run/HoverOverlay")  # ← full-screen Control above everything
-@onready var targets: Array[Node] = []
 
-var original_parent: Node
-var original_index: int = -1
-var original_global_pos: Vector2
-var is_hovered := false
+var targets: Array[Node] = []
 var tween: Tween
-var playable := true : set = _set_playable
-var disabled := true
-var is_blocking:= false
-var selected:= false
-
-signal card_hovered(CardUI)
-signal card_unhovered(CardUI)
-
-
-func _ready() -> void:
-	Events.player_card_drawn.connect(_on_card_drawn)
-	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
-	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
-	Events.card_aim_ended.connect(_on_card_drag_or_aim_ended)
-	Events.card_drag_ended.connect(_on_card_drag_or_aim_ended)
-	card_state_machine.init(self)
-
-func _input(event: InputEvent) -> void:
-	card_state_machine.on_input(event)
-
-func animate_to_position(new_position: Vector2, duration: float) ->void:
-	_kill_tween()
-	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "global_position", new_position, duration)
-
-func animate_to_local_position_and_rotation_and_scale(new_position: Vector2, new_rotation: float, new_scale: float, duration: float) ->void:
-	_kill_tween()
-	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "position", new_position, duration)
-	tween.parallel().tween_property(self, "rotation_degrees", new_rotation, duration)
-	tween.parallel().tween_property(self, "scale", Vector2.ONE*new_scale, duration)
-
-func return_to_hand() -> void:
-	#_kill_tween()
-	_return_to_original_parent()
-
-func play() -> void:
-	if not card:
-		return
-	card.play(self, targets,char_stats, player_modifiers)
-	queue_free()
-
-func discard() -> void:
-	if not card:
-		return
-	card.discard_card()
-	queue_free()
-
-func pitch() -> void:
-	if not card:
-		return
-	card.pitch_card(char_stats)#, player_modifiers)
-	queue_free()
-
-func sink() -> void:
-	if not card:
-		return
-	card.sink_card(char_stats)#, player_modifiers)
-	queue_free()
-
-func block() -> void:
-	if not card:
-		return
-	card.block_card([get_tree().get_first_node_in_group("player")], player_modifiers)
-	queue_free()
-
-func get_active_enemy_modifiers() -> ModifierHandler:
-	if targets.is_empty() or targets.size() > 1 or targets[0] is not Enemy:
-		return null
-	return targets[0].modifier_handler
-
-func mouse_is_over() -> bool:
-	var rect := Rect2(Vector2.ZERO, self.size)
-	return rect.has_point(get_local_mouse_position())
-
-func request_tooltip() -> void:
-	var enemy_modifiers := get_active_enemy_modifiers()
-	var updated_tooltip := card.get_updated_tooltip(player_modifiers,enemy_modifiers)
-	Events.card_tooltip_requested.emit(card.icon, updated_tooltip)
-
-func select() -> void:
-	selected = true
-
-func deselect() -> void:
-	selected = false
-
-func _return_to_original_parent() -> void:
-	if not is_inside_tree(): return	
-	reparent_requested.emit(self)
-	
-	z_index = 0
-	scale = Vector2.ONE*0.7
-
-func _on_gui_input(event: InputEvent) -> void:
-	card_state_machine.on_gui_input(event)
-
-func _on_mouse_entered() -> void:
-	card_state_machine.on_mouse_entered()
-
-func _on_mouse_exited() -> void:
-	card_state_machine.on_mouse_exited()
 
 func _set_card(value: Card) -> void:
 	if not is_node_ready():
 		await ready
-
 	card = value
 	card_render.card = card
 
-func _set_playable(value: bool) -> void:
-	playable = value
-	if not playable:
-		card_render.card_visuals.cost.add_theme_color_override("font_color", Color.RED)
-		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 0.5)
-	else:
-		card_render.card_visuals.cost.remove_theme_color_override("font_color")
-		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 1)
+func _set_stats(value: Stats) -> void:
+	stats = value
+	if stats and not stats.stats_changed.is_connected(_on_stats_changed):
+		stats.stats_changed.connect(_on_stats_changed)
 
-func _set_char_stats(value: CharacterStats) -> void:
-	char_stats = value
-	char_stats.stats_changed.connect(_on_char_stats_changed)
-	#_on_char_stats_changed()
+func play() -> void:
+	if not card: return
+	card.play(self, targets, stats, modifiers)
+	played.emit(self)
+	queue_free()
 
-func _on_drop_point_detector_area_entered(area):
-	if not targets.has(area):
-		targets.append(area)
-		#print("cardui s" % area)
+func pitch() -> void:
+	if not card: return
+	card.pitch_card(stats)
+	pitched.emit(self)
+	queue_free()
 
-func _on_drop_point_detector_area_exited(area):
-	targets.erase(area)
+func sink() -> void:
+	if not card: return
+	card.sink_card(stats)
+	sunk.emit(self)
+	queue_free()
 
-func _on_card_drag_or_aiming_started(used_card: Node) -> void:
-	if used_card == self:
-		return
-	
-	disabled = true
+func block() -> void:
+	if not card: return
+	card.block_card(targets, modifiers)
+	blocked.emit(self)
+	queue_free()
 
-func _on_card_drag_or_aim_ended(_card: Node) -> void:
-	disabled = false
-	playable = char_stats.can_play_card(card)
+func discard() -> void:
+	if not card: return
+	card.discard_card()
+	discarded.emit(self)
+	queue_free()
 
-func _on_char_stats_changed() -> void:
-	playable = char_stats.can_play_card(card)
+func _on_stats_changed() -> void:
+	pass  # PlayerCardUI overrides this
 
-func _on_card_drawn() -> void:
-	playable = char_stats.can_play_card(card)
+# Shared tween helpers (both player and enemy cards can use these)
+func animate_to_position(new_position: Vector2, duration: float) -> void:
+	_kill_tween()
+	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", new_position, duration)
 
 func _kill_tween() -> void:
 	if tween and tween.is_running():

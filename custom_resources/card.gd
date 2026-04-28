@@ -11,7 +11,6 @@ const RARITY_COLORS := {
 	Card.Rarity.COMMON: Color.GRAY,
 	Card.Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,
 	Card.Rarity.RARE: Color.GOLD,
-	
 }
 
 const PITCH_COLORS := {
@@ -44,69 +43,54 @@ const PITCH_COLORS := {
 @export var disable_attack: bool = false
 @export var disable_defense: bool = false
 @export var disable_pitch: bool = false
-#@export var disable_cost: bool = false
 
 var owner: Variant
 var on_hits: Array[OnHit]
-signal card_play_started(Card)
-signal card_play_finished(Card)
-
-#Used for Draw discard etc
-var discarded_card: Card = null
 
 func is_single_targeted() -> bool:
 	return target == Target.SINGLE_ENEMY
 
 func _get_targets(card_parent: Node) -> Array[Node]:
 	var tree := card_parent.get_tree()
-	
 	match target:
-		Target.SELF:
-			return [owner]
-		Target.ALL_ENEMIES:
-			return tree.get_nodes_in_group("enemies")
-		Target.EVERYONE:
-			return tree.get_nodes_in_group("enemies") + tree.get_nodes_in_group("player")
-		_:
-			return []
+		Target.SELF: return [owner]
+		Target.ALL_ENEMIES: return tree.get_nodes_in_group("enemies")
+		Target.EVERYONE: return tree.get_nodes_in_group("enemies") + tree.get_nodes_in_group("player")
+		_: return []
 
-#Currently does not accept non-attack actions targetting enemies
-func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
-	card_play_started.emit(self)
-	
-	
+func play(card_parent: Node, targets: Array[Node], stats: Stats, modifiers: ModifierHandler) -> void:
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)
-	if type == Type.ATTACK:
-		if targets[0] is Enemy:
+	
+	if stats is CharacterStats:
+		if type == Type.ATTACK and not targets.is_empty() and targets[0] is Enemy:
 			Events.player_attack_declared.emit()
-			
-	char_stats.mana -= cost
-	char_stats.action_points -= 1
+		stats.mana -= cost
+	
+	stats.action_points -= 1
 	apply_effects(targets, modifiers)
 	
 	for targetx in targets:
 		if type == Type.ATTACK:
-			#if targetx is Enemy:
 			targetx.stats.block = 0
+	
 	if go_again:
-		char_stats.action_points += 1
-	card_play_finished.emit(self)
+		stats.action_points += 1
 
 func discard_card() -> void:
-	print("Discarded %s" % id)
-	Events.card_discarded.emit(self)
+	pass  # no longer emits — CardUI will emit signal
 
-func pitch_card(char_stats: CharacterStats) -> void:
-	Events.card_pitched.emit(self)
-	char_stats.mana += pitch
+func pitch_card(stats: Stats) -> void:
+	stats.mana += pitch
 
-func sink_card(_char_stats: CharacterStats) -> void:
-	Events.card_sunk.emit(self)
+func sink_card(stats: Stats) -> void:
+	pass
 
 func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	apply_block_effects(targets, modifiers)
-	Events.card_blocked.emit(self)
+	var block_effect := BlockEffect.new()
+	block_effect.amount = defense
+	block_effect.sound = block_sound
+	block_effect.execute(targets)
 
 func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:
 	pass
@@ -136,6 +120,8 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card
 
+
+var discarded_card
 func rampage(source: Node, qty: int) -> bool:
 	Events.card_discarded.connect(_on_card_discarded)
 	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")

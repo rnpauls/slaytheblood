@@ -11,42 +11,26 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.t
 @onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
 @onready var enemy_card_ui: EnemyCardUI = $EnemyCardUI
+@onready var enemy_hand: HBoxContainer = $EnemyCardUI/EnemyHand
+
 @onready var status_handler: StatusHandler = $StatusHandler
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
 
 signal enemy_action_completed
 signal attack_completed
 
-#var enemy_action_picker: EnemyActionPicker
 var enemy_ai: EnemyAI
-#var current_action: EnemyAction: set = set_current_action
-var current_action: Card: set = set_current_action
-var hand: Array
-
-var active_on_hits: Array[OnHit]
-
-#func _ready() -> void:
-	#await get_tree().create_timer(2).timeout
-	#take_damage(10)
-	#stats.block += 8
-
-func set_current_action(value: Card) -> void:
-	current_action = value
-	update_intent()
+var current_action: CardUI
+var hand: Array[CardUI] = []
 
 func set_enemy_stats(value: EnemyStats) -> void:
 	stats = value.create_instance()
-	
 	if not stats.stats_changed.is_connected(update_stats):
 		stats.stats_changed.connect(update_stats)
-		#stats.stats_changed.connect(do_action) Used to be update_action
-	
 	update_enemy()
 
 func setup_ai() -> void:
-	if enemy_ai:
-		enemy_ai.queue_free()
-	
+	if enemy_ai: enemy_ai.queue_free()
 	var new_ai: EnemyAI = stats.ai.instantiate()
 	add_child(new_ai)
 	enemy_ai = new_ai
@@ -56,23 +40,50 @@ func setup_ai() -> void:
 	enemy_ai.hand = hand
 	enemy_card_ui.update_cards(enemy_ai)
 
-func update_stats() -> void:
-	stats_ui.update_stats(stats)
-
-##Draw a single card and initialize it
 func draw_card() -> void:
-	#hand.append(stats.draw_pile.draw_card())
-	#if not stats:
-		#await Events.player_set_up
 	var card_drawn: Card = stats.draw_pile.draw_card()
 	if card_drawn:
-		#hand.add_card(card_drawn)
-		hand.append(card_drawn)
-		#reshuffle_deck_from_discard()
-		Events.enemy_card_drawn.emit(self)
-		#card_drawn.card_play_finished.connect(_on_card_play_finished)
-		#card_drawn.card_play_started.connect(_on_card_play_started)
+		var card_ui_scene = preload("res://scenes/card_ui/card_ui.tscn")
+		var card_ui: CardUI = card_ui_scene.instantiate()
+		card_ui.card = card_drawn
+		card_ui.stats = stats
+		card_ui.modifiers = modifier_handler
 		card_drawn.owner = self
+		
+		hand.append(card_ui)
+		enemy_hand.add_child(card_ui)
+		
+		# Connect lifecycle signals for correct enemy discard handling
+		card_ui.played.connect(_on_enemy_card_played.bind(card_ui))
+		card_ui.pitched.connect(_on_enemy_card_pitched.bind(card_ui))
+		card_ui.sunk.connect(_on_enemy_card_sunk.bind(card_ui))
+		card_ui.blocked.connect(_on_enemy_card_blocked.bind(card_ui))
+		card_ui.discarded.connect(_on_enemy_card_discarded.bind(card_ui))
+		
+		Events.enemy_card_drawn.emit(self)
+
+func _on_enemy_card_played(card_ui: CardUI) -> void:
+	hand.erase(card_ui)
+	stats.discard_pile.add_card(card_ui.card)  # ← change if your enemy discard is named differently
+
+func _on_enemy_card_pitched(card_ui: CardUI) -> void:
+	hand.erase(card_ui)
+	stats.discard_pile.add_card(card_ui.card)
+
+func _on_enemy_card_sunk(card_ui: CardUI) -> void:
+	hand.erase(card_ui)
+	stats.discard_pile.add_card(card_ui.card)
+
+func _on_enemy_card_blocked(card_ui: CardUI) -> void:
+	hand.erase(card_ui)
+	stats.discard_pile.add_card(card_ui.card)
+
+func _on_enemy_card_discarded(card_ui: CardUI) -> void:
+	hand.erase(card_ui)
+	stats.discard_pile.add_card(card_ui.card)
+
+func update_stats() -> void:
+	stats_ui.update_stats(stats)
 
 ##Helper function for draw_card()
 func draw_cards(amount: int) -> void:
@@ -202,7 +213,7 @@ func destroy_arsenal() -> bool:
 	if enemy_ai.arsenal == null:
 		return false
 	else:
-		var arsenal_card: Card = enemy_ai.arsenal
+		var arsenal_card: CardUI = enemy_ai.arsenal
 		enemy_ai.arsenal = null
 		arsenal_card.queue_free()
 		return true
