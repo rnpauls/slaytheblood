@@ -1,11 +1,13 @@
 extends CardState
 
-@onready var hand: Hand = get_parent().get_parent().get_parent()
+# May be null if this CardUI is owned by an enemy rather than a player Hand
+@onready var hand: Hand = get_parent().get_parent().get_parent() as Hand
 
 func enter() ->void:
 	if not card_ui.is_node_ready():
 		await card_ui.ready
-	card_ui.return_to_hand()
+	if not card_ui.is_enemy_card:
+		card_ui.return_to_hand()
 	card_ui.is_hovered = false
 	card_ui.z_index = 0
 	card_ui.card_render.card_visuals.panel.set("theme_override_styles/panel", card_ui.BASE_STYLEBOX)
@@ -14,9 +16,11 @@ func enter() ->void:
 	Events.tooltip_hide_requested.emit()
 
 func on_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_mouse") and hand.is_selecting:
+	if card_ui.is_enemy_card:
+		return
+	if hand and event.is_action_pressed("left_mouse") and hand.is_selecting:
 		transition_requested.emit(self, CardState.State.SELECTED)
-	if event.is_action_pressed("left_mouse") and hand.is_blocking:
+	if hand and event.is_action_pressed("left_mouse") and hand.is_blocking:
 		transition_requested.emit(self, CardState.State.BLOCKED)
 	if event.is_action_pressed("right_mouse"):
 		transition_requested.emit(self, CardState.State.PITCHED)
@@ -27,6 +31,8 @@ func on_gui_input(event: InputEvent) -> void:
 		transition_requested.emit(self, CardState.State.CLICKED)
 
 func on_mouse_entered() -> void:
+	if card_ui.is_enemy_card:
+		return
 	if card_ui.is_hovered: 
 		return
 	card_ui.is_hovered = true
@@ -44,11 +50,7 @@ func on_mouse_entered() -> void:
 	var new_y = clampf(card_ui.global_position.y, 0, screen_bottom)
 	card_ui.global_position.y = new_y
 	card_ui.z_index = 20   # Bring way to front
-	#card_ui.tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	#card_ui.tween.tween_property(card_ui, "scale", Vector2(card_ui.hover_scale, card_ui.hover_scale), card_ui.tween_duration)
-	#card_ui.tween.parallel().tween_property(card_ui, "global_position:y", new_y, card_ui.tween_duration)
 	
-	#card_ui.request_tooltip()
 	card_ui.card_hovered.emit(card_ui)
 	if not card_ui.playable or card_ui.disabled:
 		return
@@ -57,6 +59,8 @@ func on_mouse_entered() -> void:
 
 
 func on_mouse_exited() -> void:
+	if card_ui.is_enemy_card:
+		return
 	#Events.tooltip_hide_requested.emit()
 	if not card_ui.is_hovered: 
 		return
