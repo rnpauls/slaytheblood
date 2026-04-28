@@ -3,6 +3,7 @@ extends Area2D
 
 const ARROW_OFFSET := 45
 const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.tres")
+const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 
 @export var stats: EnemyStats : set = set_enemy_stats
 
@@ -17,18 +18,13 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.t
 signal enemy_action_completed
 signal attack_completed
 
-#var enemy_action_picker: EnemyActionPicker
 var enemy_ai: EnemyAI
-#var current_action: EnemyAction: set = set_current_action
+# hand stores CardUI nodes (non-interactive); enemy_ai.hand mirrors the underlying Cards
+var hand: Array[CardUI]
+
 var current_action: Card: set = set_current_action
-var hand: Array
 
 var active_on_hits: Array[OnHit]
-
-#func _ready() -> void:
-	#await get_tree().create_timer(2).timeout
-	#take_damage(10)
-	#stats.block += 8
 
 func set_current_action(value: Card) -> void:
 	current_action = value
@@ -39,7 +35,6 @@ func set_enemy_stats(value: EnemyStats) -> void:
 	
 	if not stats.stats_changed.is_connected(update_stats):
 		stats.stats_changed.connect(update_stats)
-		#stats.stats_changed.connect(do_action) Used to be update_action
 	
 	update_enemy()
 
@@ -53,28 +48,35 @@ func setup_ai() -> void:
 	enemy_ai.enemy = self
 	enemy_ai.modifier_handler = modifier_handler
 	enemy_ai.setup()
-	enemy_ai.hand = hand
+	# Give the AI a Card array mirrored from our CardUI hand
+	enemy_ai.hand = hand.map(func(cui: CardUI) -> Card: return cui.card)
 	enemy_card_ui.update_cards(enemy_ai)
 
 func update_stats() -> void:
 	stats_ui.update_stats(stats)
 
-##Draw a single card and initialize it
+## Create a CardUI wrapper for a Card and add it to the hand
+func _make_card_ui(card: Card) -> CardUI:
+	var cui: CardUI = CARD_UI_SCENE.instantiate()
+	cui.is_enemy_card = true
+	cui.char_stats = stats
+	cui.player_modifiers = modifier_handler
+	cui.card = card
+	return cui
+
+## Draw a single card and initialise it as a CardUI
 func draw_card() -> void:
-	#hand.append(stats.draw_pile.draw_card())
-	#if not stats:
-		#await Events.player_set_up
 	var card_drawn: Card = stats.draw_pile.draw_card()
 	if card_drawn:
-		#hand.add_card(card_drawn)
-		hand.append(card_drawn)
-		#reshuffle_deck_from_discard()
-		Events.enemy_card_drawn.emit(self)
-		#card_drawn.card_play_finished.connect(_on_card_play_finished)
-		#card_drawn.card_play_started.connect(_on_card_play_started)
 		card_drawn.owner = self
+		var cui := _make_card_ui(card_drawn)
+		hand.append(cui)
+		# Keep the AI's card array in sync
+		if enemy_ai:
+			enemy_ai.hand = hand.map(func(c: CardUI) -> Card: return c.card)
+		Events.enemy_card_drawn.emit(self)
 
-##Helper function for draw_card()
+## Helper function for draw_card()
 func draw_cards(amount: int) -> void:
 	for i in range(amount):
 		draw_card()
@@ -82,21 +84,16 @@ func draw_cards(amount: int) -> void:
 func declare_next_attack() -> void:
 	if not enemy_ai:
 		return
-	#if not current_action:
 	current_action = enemy_ai.play_next_action()
 	update_intent()
 	enemy_card_ui.update_cards(enemy_ai)
 	if current_action == null:
 		Events.enemy_turn_completed.emit(self)
 	else:
-		stats.action_points -= 1
-			#return
+		# action_points are decremented by card.play() via char_stats, so don't double-decrement
 		Events.enemy_attack_declared.emit()
 		await Events.player_blocks_declared
 		do_action()
-		#var new_conditional_action := enemy_action_picker.get_first_conditional_action()
-		#if new_conditional_action and current_action != new_conditional_action:
-			#current_action = new_conditional_action
 
 func update_enemy() -> void:
 	if not stats is Stats:
@@ -106,7 +103,6 @@ func update_enemy() -> void:
 	
 	sprite_2d.texture = stats.art
 	arrow.position = Vector2.RIGHT * (sprite_2d.get_rect().size.x/2 + ARROW_OFFSET)
-	#setup_ai()
 	update_stats()
 
 func update_intent() -> void:
@@ -133,32 +129,44 @@ func update_intent() -> void:
 	intent_ui.update_intent(new_intent)
 
 func do_action() -> void:
-	#stats.block = 0
-	#print_debug("Enemy defense used to be set to zero here")
 	if not current_action:
 		return
 	
-	current_action.apply_effects([enemy_ai.target], modifier_handler)
-	if current_action.go_again:
-		stats.action_points += 1
+	# Find the CardUI wrapper for current_action and play it properly.
+	# card.play() handles mana/action_points, emits signals, clears target block, and
+	# calls apply_effects — fixing the previous bypass of these side-effects.
+	var action_cui: CardUI = null
+	for cui in hand:
+		if cui.card == current_action:
+			action_cui = cui
+			break
+	
+	if action_cui:
+		# targets is set to the player by the AI
+		action_cui.targets = [enemy_ai.target]
+		action_cui.play()   # calls card.play() then queue_frees the CardUI
+		hand.erase(action_cui)
+	else:
+		# Fallback: card was already removed from hand (e.g. pitched), play directly
+		current_action.card_play_started.emit(current_action)
+		if current_action.type == Card.Type.ATTACK:
+			enemy_ai.target.stats.block = 0
+		current_action.apply_effects([enemy_ai.target], modifier_handler)
+		current_action.card_play_finished.emit(current_action)
+	
+	# Keep AI hand mirror in sync
+	if enemy_ai:
+		enemy_ai.hand = hand.map(func(c: CardUI) -> Card: return c.card)
 	
 	enemy_action_completed.emit(self)
 	attack_completed.emit()
 	enemy_card_ui.update_cards(enemy_ai)
 
 #Defend player attack
-#attack: base attack
-#modifiers: Player modifiers
-#go_again: if the attack has go_again
 func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
 	var defense_array := enemy_ai.defend(attack, go_again, incoming_on_hits)
-	#if defense_array.is_empty():
-		#return 0
-	#else:
-	#stats.block += defense_array.reduce(func(sum, plus): return sum + plus, 0)
 	for def_card in defense_array:
-		def_card.apply_block_effects([self],modifier_handler)
-	#return defense_array.reduce(func(sum, plus) : sum + plus, 0)
+		def_card.apply_block_effects([self], modifier_handler)
 	update_intent()
 	enemy_card_ui.update_cards(enemy_ai)
 
@@ -173,7 +181,6 @@ func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
 	var damage_taken: = stats.take_damage(mod_dmg)
 	var tween := create_tween()
 	tween.tween_callback(Shaker.shake.bind(self, 16, 0.15))
-	#tween.tween_callback(stats.take_damage.bind(mod_dmg))
 	tween.tween_interval(0.17)
 	
 	tween.finished.connect(
@@ -192,7 +199,6 @@ func get_num_cards_for_turn() -> int:
 	return turn_plan.actions.size()
 
 func cleanup_phase() -> void:
-	#enemy_ai.end_turn()
 	draw_cards(stats.cards_per_turn - hand.size())
 	stats.block = 0
 	stats.action_points = 1
