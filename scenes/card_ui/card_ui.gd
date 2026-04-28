@@ -10,9 +10,14 @@ const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.
 
 @export var player_modifiers: ModifierHandler
 @export var card: Card : set = _set_card
-@export var char_stats: CharacterStats : set = _set_char_stats
+# Stats base type so both CharacterStats (player) and EnemyStats (enemy) are accepted
+@export var char_stats: Stats : set = _set_char_stats
 @export var hover_scale := 1.0
 @export var tween_duration := 0.18
+
+# When true, all input handling and playability checks are skipped.
+# Set this on CardUI nodes owned by an enemy.
+var is_enemy_card: bool = false
 
 @onready var card_state_machine: CardStateMachine = $CardStateMachine as CardStateMachine
 @onready var card_render: CardRenderContainer = $CardRenderContainer
@@ -35,6 +40,10 @@ signal card_unhovered(CardUI)
 
 
 func _ready() -> void:
+	if is_enemy_card:
+		# Enemy cards are never interactive — skip all player-side event hooks
+		card_state_machine.init(self)
+		return
 	Events.player_card_drawn.connect(_on_card_drawn)
 	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
 	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
@@ -43,6 +52,8 @@ func _ready() -> void:
 	card_state_machine.init(self)
 
 func _input(event: InputEvent) -> void:
+	if is_enemy_card:
+		return
 	card_state_machine.on_input(event)
 
 func animate_to_position(new_position: Vector2, duration: float) ->void:
@@ -58,13 +69,12 @@ func animate_to_local_position_and_rotation_and_scale(new_position: Vector2, new
 	tween.parallel().tween_property(self, "scale", Vector2.ONE*new_scale, duration)
 
 func return_to_hand() -> void:
-	#_kill_tween()
 	_return_to_original_parent()
 
 func play() -> void:
 	if not card:
 		return
-	card.play(self, targets,char_stats, player_modifiers)
+	card.play(self, targets, char_stats, player_modifiers)
 	queue_free()
 
 func discard() -> void:
@@ -119,12 +129,18 @@ func _return_to_original_parent() -> void:
 	scale = Vector2.ONE*0.7
 
 func _on_gui_input(event: InputEvent) -> void:
+	if is_enemy_card:
+		return
 	card_state_machine.on_gui_input(event)
 
 func _on_mouse_entered() -> void:
+	if is_enemy_card:
+		return
 	card_state_machine.on_mouse_entered()
 
 func _on_mouse_exited() -> void:
+	if is_enemy_card:
+		return
 	card_state_machine.on_mouse_exited()
 
 func _set_card(value: Card) -> void:
@@ -143,15 +159,15 @@ func _set_playable(value: bool) -> void:
 		card_render.card_visuals.cost.remove_theme_color_override("font_color")
 		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 1)
 
-func _set_char_stats(value: CharacterStats) -> void:
+func _set_char_stats(value: Stats) -> void:
 	char_stats = value
-	char_stats.stats_changed.connect(_on_char_stats_changed)
-	#_on_char_stats_changed()
+	# Only connect the playability listener for player cards
+	if not is_enemy_card:
+		char_stats.stats_changed.connect(_on_char_stats_changed)
 
 func _on_drop_point_detector_area_entered(area):
 	if not targets.has(area):
 		targets.append(area)
-		#print("cardui s" % area)
 
 func _on_drop_point_detector_area_exited(area):
 	targets.erase(area)
