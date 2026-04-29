@@ -212,8 +212,9 @@ func _rebuild_card_display() -> void:
 	# Spawn one EnemyCardUI per card in the AI's current hand + arsenal
 	for c: Card in enemy_ai.hand:
 		var card_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
-		card_display_container.add_child(card_ui)
+		await card_ui.ready
 		card_ui.setup(c, stats, modifier_handler)
+		card_display_container.add_child(card_ui)
 	
 	# Show arsenal card if present
 	if enemy_ai.arsenal:
