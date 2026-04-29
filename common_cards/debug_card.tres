@@ -1,16 +1,15 @@
-[gd_resource type="Resource" format=3 uid="uid://cjoba8887re31"]
+[gd_resource type="Resource" format=3 uid="uid://godglbrbotnr"]
 
-[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ucrwf"]
-[ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="2_kd23f"]
+[ext_resource type="Texture2D" uid="uid://cb7u4juyjpdnx" path="res://art/shopkeeper_blink.png" id="1_p5iet"]
 [ext_resource type="Script" uid="uid://cfq2iolxsas2j" path="res://common_cards/debug_card.gd" id="2_ucrwf"]
-[ext_resource type="AudioStream" uid="uid://l5cyrdxhemry" path="res://art/music/sound_effects/400 Sounds Pack/Materials/cardboard_tear.wav" id="4_jq5es"]
 
 [resource]
 script = ExtResource("2_ucrwf")
-id = "debug"
-exhausts = true
-go_again = true
-icon = ExtResource("2_kd23f")
-tooltip_text = "error"
-sound = ExtResource("4_jq5es")
+id = "debug_card"
+target = 1
+pitch = 1
+attack = 4
+defense = 3
+icon = ExtResource("1_p5iet")
+tooltip_text = "Error"
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

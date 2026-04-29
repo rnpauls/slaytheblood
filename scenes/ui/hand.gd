@@ -1,9 +1,7 @@
 class_name Hand
 extends Control
 
-const CARD_UI_SCENE = preload("res://scenes/card_ui/player_card_ui.tscn")
-#const CARD_UI_SCENE = preload("uid://c8jhetww6oc2a")
-#const CARD_UI_SCENE = preload("uid://c8jhetww6oc2a")
+const CARD_UI_SCENE := preload("res://scenes/card_ui/player_card_ui.tscn")
 
 # ── Fanout settings ─────────────────────────────────────────────────────
 @export var max_width := 1200.0
@@ -35,7 +33,7 @@ func _ready() -> void:
 
 func add_card(card: Card) -> void:
 	var new_card_ui := CARD_UI_SCENE.instantiate() as PlayerCardUI
-	
+	add_child(new_card_ui)
 	
 	new_card_ui.original_parent = self
 	new_card_ui.original_index = get_child_count() - 1   # ← its position in the hand
@@ -53,7 +51,6 @@ func add_card(card: Card) -> void:
 	
 	new_card_ui.scale = Vector2.ZERO
 	new_card_ui.modulate = Color(1, 1, 1, 0)
-	add_child(new_card_ui)
 	
 	_arrange_cards()
 	

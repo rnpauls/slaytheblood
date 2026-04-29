@@ -1,51 +1,7 @@
-[gd_scene format=3 uid="uid://c8jhetww6oc2a"]
+[gd_scene format=3 uid="uid://player_card_ui_scene"]
 
 [ext_resource type="PackedScene" uid="uid://bfqlf1512o16k" path="res://scenes/card_ui/card_ui.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://dqek8cptn8nhq" path="res://scenes/card_ui/player_card_ui.gd" id="2_script"]
-[ext_resource type="Script" uid="uid://cuxsjd0iiq5mx" path="res://scenes/card_ui/card_state_machine.gd" id="3_cl038"]
-[ext_resource type="Script" uid="uid://dp8udoutyrshc" path="res://scenes/card_ui/card_states/card_pitched_state.gd" id="4_8s2hi"]
-[ext_resource type="Script" uid="uid://cqvkgse7bithh" path="res://scenes/card_ui/card_states/card_blocked_state.gd" id="5_iaxrg"]
-[ext_resource type="Script" uid="uid://cv1grwub7xt37" path="res://scenes/card_ui/card_states/card_base_state.gd" id="6_sqtdc"]
-[ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="7_njomk"]
-[ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="8_u886p"]
-[ext_resource type="Script" uid="uid://b1q7qqo14l5rt" path="res://scenes/card_ui/card_states/card_released_state.gd" id="9_6v17i"]
-[ext_resource type="Script" uid="uid://tes4lojr5he7" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="10_ucnfe"]
-[ext_resource type="Script" uid="uid://b8o2bjvw074qn" path="res://scenes/card_ui/card_states/card_selected_state.gd" id="11_rqnnx"]
+[ext_resource type="Script" uid="uid://player_card_ui_gd" path="res://scenes/card_ui/player_card_ui.gd" id="2_script"]
 
-[node name="PlayerCardUI" unique_id=1949267551 instance=ExtResource("1_base")]
+[node name="PlayerCardUI" instance=ExtResource("1_base")]
 script = ExtResource("2_script")
-
-[node name="CardStateMachine" type="Node" parent="." index="1" unique_id=375929089 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_cl038")
-initial_state = NodePath("CardBaseState")
-
-[node name="CardPitchedState" type="Node" parent="CardStateMachine" index="0" unique_id=157295838]
-script = ExtResource("4_8s2hi")
-state = 5
-
-[node name="CardBlockedState" type="Node" parent="CardStateMachine" index="1" unique_id=1699901970]
-script = ExtResource("5_iaxrg")
-state = 6
-
-[node name="CardBaseState" type="Node" parent="CardStateMachine" index="2" unique_id=1057107885]
-script = ExtResource("6_sqtdc")
-
-[node name="CardClickedState" type="Node" parent="CardStateMachine" index="3" unique_id=696290775]
-script = ExtResource("7_njomk")
-state = 1
-
-[node name="CardDraggingState" type="Node" parent="CardStateMachine" index="4" unique_id=1042974387]
-script = ExtResource("8_u886p")
-state = 2
-
-[node name="CardReleasedState" type="Node" parent="CardStateMachine" index="5" unique_id=1348755794]
-script = ExtResource("9_6v17i")
-state = 4
-
-[node name="CardAimingState" type="Node" parent="CardStateMachine" index="6" unique_id=1138060152]
-script = ExtResource("10_ucnfe")
-state = 3
-
-[node name="CardSelectedState" type="Node" parent="CardStateMachine" index="7" unique_id=1778344127]
-script = ExtResource("11_rqnnx")
-state = 7

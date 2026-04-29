@@ -103,12 +103,10 @@ func _return_to_original_parent() -> void:
 	scale = Vector2.ONE * 0.7
 
 func _set_card(value: Card) -> void:
-	if not value:
-		return
 	if not is_node_ready():
 		await ready
 	card = value
-	card_render.card = card as Card
+	card_render.card = card
 
 func _set_char_stats(value: Stats) -> void:
 	char_stats = value

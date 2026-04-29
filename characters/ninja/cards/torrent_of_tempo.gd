@@ -10,7 +10,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 		modified_dmg = enemy_modifiers.get_modified_value(modified_dmg, Modifier.Type.DMG_TAKEN)
 	return tooltip_text % modified_dmg
 
-func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
+func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
 	super.play(card_parent, targets, char_stats, modifiers)
 	go_again = false
 

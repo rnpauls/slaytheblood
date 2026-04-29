@@ -3,6 +3,15 @@
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_b23i7"]
 [ext_resource type="Script" uid="uid://c0lc112hi2ygm" path="res://scenes/card_ui/card_ui.gd" id="2_457t4"]
 [ext_resource type="PackedScene" uid="uid://dv8833ny3ov2e" path="res://scenes/card_ui/card_render_container.tscn" id="3_opj8w"]
+[ext_resource type="Script" uid="uid://cuxsjd0iiq5mx" path="res://scenes/card_ui/card_state_machine.gd" id="3_s2iv8"]
+[ext_resource type="Script" uid="uid://cv1grwub7xt37" path="res://scenes/card_ui/card_states/card_base_state.gd" id="4_jrm7m"]
+[ext_resource type="Script" uid="uid://whipis5dejh0" path="res://scenes/card_ui/card_states/card_clicked_state.gd" id="5_tju8c"]
+[ext_resource type="Script" uid="uid://b3d8ufqbauivt" path="res://scenes/card_ui/card_states/card_dragging_state.gd" id="6_7p5h4"]
+[ext_resource type="Script" uid="uid://dp8udoutyrshc" path="res://scenes/card_ui/card_states/card_pitched_state.gd" id="6_opj8w"]
+[ext_resource type="Script" uid="uid://cqvkgse7bithh" path="res://scenes/card_ui/card_states/card_blocked_state.gd" id="6_qeblu"]
+[ext_resource type="Script" uid="uid://b1q7qqo14l5rt" path="res://scenes/card_ui/card_states/card_released_state.gd" id="7_qxlhx"]
+[ext_resource type="Script" uid="uid://tes4lojr5he7" path="res://scenes/card_ui/card_states/card_aiming_state.gd" id="8_fkyii"]
+[ext_resource type="Script" uid="uid://b8o2bjvw074qn" path="res://scenes/card_ui/card_states/card_selected_state.gd" id="13_25o76"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gup6u"]
 size = Vector2(200, 280)
@@ -33,6 +42,41 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardRenderContainer/DropPointDetector" unique_id=1317868265]
 position = Vector2(100, 140)
 shape = SubResource("RectangleShape2D_gup6u")
+
+[node name="CardStateMachine" type="Node" parent="." unique_id=1059288392 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_s2iv8")
+initial_state = NodePath("CardBaseState")
+
+[node name="CardPitchedState" type="Node" parent="CardStateMachine" unique_id=69214213]
+script = ExtResource("6_opj8w")
+state = 5
+
+[node name="CardBlockedState" type="Node" parent="CardStateMachine" unique_id=1322577104]
+script = ExtResource("6_qeblu")
+state = 6
+
+[node name="CardBaseState" type="Node" parent="CardStateMachine" unique_id=1101665734]
+script = ExtResource("4_jrm7m")
+
+[node name="CardClickedState" type="Node" parent="CardStateMachine" unique_id=1835159945]
+script = ExtResource("5_tju8c")
+state = 1
+
+[node name="CardDraggingState" type="Node" parent="CardStateMachine" unique_id=1261931260]
+script = ExtResource("6_7p5h4")
+state = 2
+
+[node name="CardReleasedState" type="Node" parent="CardStateMachine" unique_id=1987782750]
+script = ExtResource("7_qxlhx")
+state = 4
+
+[node name="CardAimingState" type="Node" parent="CardStateMachine" unique_id=1857761790]
+script = ExtResource("8_fkyii")
+state = 3
+
+[node name="CardSelectedState" type="Node" parent="CardStateMachine" unique_id=1869714343]
+script = ExtResource("13_25o76")
+state = 7
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
