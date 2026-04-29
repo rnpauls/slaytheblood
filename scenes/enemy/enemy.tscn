@@ -7,7 +7,7 @@
 [ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="5_hvxgb"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="6_4c52q"]
-[ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_hand_ui.tscn" id="6_4efjx"]
+[ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_card_ui.tscn" id="6_4efjx"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="7_ipda1"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="8_3uufv"]
 

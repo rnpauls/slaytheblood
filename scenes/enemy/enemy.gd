@@ -81,6 +81,7 @@ func declare_next_attack() -> void:
 	if current_action == null:
 		Events.enemy_turn_completed.emit(self)
 	else:
+		stats.action_points -= 1
 		Events.enemy_attack_declared.emit()
 		await Events.player_blocks_declared
 		do_action()
@@ -122,12 +123,9 @@ func do_action() -> void:
 	if not current_action:
 		return
 	
-	# Route through EnemyCardUI; card.play() manages AP/mana/go_again consistently.
-	var card_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
-	add_child(card_ui)
-	card_ui.setup(current_action, stats, modifier_handler)
-	card_ui.targets = [enemy_ai.target]
-	card_ui.play()
+	current_action.apply_effects([enemy_ai.target], modifier_handler)
+	if current_action.go_again:
+		stats.action_points += 1
 	
 	enemy_action_completed.emit(self)
 	attack_completed.emit()
@@ -137,12 +135,8 @@ func do_action() -> void:
 #Defend player attack
 func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
 	var defense_array := enemy_ai.defend(attack, go_again, incoming_on_hits)
-	for def_card: Card in defense_array:
-		# Route through EnemyCardUI so block() uses card.owner (set to self in draw_card()).
-		var card_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
-		add_child(card_ui)
-		card_ui.setup(def_card, stats, modifier_handler)
-		card_ui.block()
+	for def_card in defense_array:
+		def_card.apply_block_effects([self], modifier_handler)
 	update_intent()
 	_rebuild_card_display()
 	enemy_hand_ui.update_cards(enemy_ai)
@@ -213,13 +207,13 @@ func _rebuild_card_display() -> void:
 	for c: Card in enemy_ai.hand:
 		var card_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
 		card_display_container.add_child(card_ui)
-		card_ui.setup(c, stats, modifier_handler)
+		card_ui.setup(c, stats)
 	
 	# Show arsenal card if present
 	if enemy_ai.arsenal:
 		var arsenal_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
 		card_display_container.add_child(arsenal_ui)
-		arsenal_ui.setup(enemy_ai.arsenal, stats, modifier_handler)
+		arsenal_ui.setup(enemy_ai.arsenal, stats)
 		arsenal_ui.modulate = Color(1.0, 0.85, 0.3) # Tint to indicate it's arsenaled
 
 func _on_area_entered(_area):
