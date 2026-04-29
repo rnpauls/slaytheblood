@@ -1,19 +1,5 @@
-class_name EnemyCardUI
-extends HBoxContainer
-
-
-@onready var pitch_count: Label = $PitchCount
-@onready var arsenal_icon: TextureRect = $ArsenalIcon
-@onready var hand_icons: HBoxContainer = $HandIcons
-@onready var deck_count: Label = $DeckCount
-
-
-func update_cards(ai: EnemyAI) -> void:
-	pitch_count.text = "%s" % ai.resources
-	arsenal_icon.visible = (ai.arsenal != null)
-	deck_count.text = "+%s" % ai.enemy.stats.draw_pile.cards.size()
-	var idx = 0
-	for card_icon in hand_icons.get_children():
-		card_icon.visible = (ai.hand.size() > idx)
-		idx += 1
-		
+## Compact hand-state summary widget for the enemy: card icons, arsenal, deck count.
+## Renamed from EnemyCardUI to EnemyHandUI; this file kept for tscn compatibility.
+## See scenes/ui/enemy_hand_ui.gd for the current class definition.
+## @deprecated Use EnemyHandUI class_name from enemy_hand_ui.gd directly.
+extends EnemyHandUI
