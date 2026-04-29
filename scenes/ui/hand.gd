@@ -1,7 +1,7 @@
 class_name Hand
 extends Control
 
-const CARD_UI_SCENE := preload("res://scenes/card_ui/player_card_ui.tscn")
+const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 
 # ── Fanout settings ─────────────────────────────────────────────────────
 @export var max_width := 1200.0
@@ -20,7 +20,7 @@ const CARD_UI_SCENE := preload("res://scenes/card_ui/player_card_ui.tscn")
 @export var is_blocking: bool = false
 @export var is_selecting: bool = false
 
-var hovered_card: PlayerCardUI = null 
+var hovered_card: CardUI = null 
 
 func _ready() -> void:
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
@@ -32,7 +32,7 @@ func _ready() -> void:
 	self.child_order_changed.connect(_on_child_order_changed)
 
 func add_card(card: Card) -> void:
-	var new_card_ui := CARD_UI_SCENE.instantiate() as PlayerCardUI
+	var new_card_ui := CARD_UI_SCENE.instantiate() as CardUI
 	add_child(new_card_ui)
 	
 	new_card_ui.original_parent = self
@@ -61,27 +61,27 @@ func add_card(card: Card) -> void:
 	tween.parallel().tween_property(new_card_ui, "modulate", Color.WHITE, 0.25)
 
 
-func discard_card(card: PlayerCardUI) -> void:
+func discard_card(card: CardUI) -> void:
 	if card:
 		card.queue_free()
 
 
 
 func enable_hand() -> void:
-	for card: PlayerCardUI in get_children():
+	for card: CardUI in get_children():
 		card.disabled = false
 		if card.mouse_is_over():
 			card.card_state_machine.on_mouse_entered()
 
 
 func disable_hand() -> void:
-	for card: PlayerCardUI in get_children():
+	for card: CardUI in get_children():
 		card.disabled = true
 
 func _arrange_cards() -> void:
-	var cards: Array[PlayerCardUI] = []
+	var cards: Array[CardUI] = []
 	for child in get_children():
-		if child is PlayerCardUI:
+		if child is CardUI:
 			cards.append(child)
 
 	if cards.is_empty():
@@ -95,9 +95,11 @@ func _arrange_cards() -> void:
 	# Get the logical index the hovered card *should* have
 	var logical_hovered_index := -1
 	if hovered_card != null:
+		# Find where it was before reparenting (using original_index if saved)
 		logical_hovered_index = hovered_card.original_index
+		# Fallback: try to guess based on current hand order
 		if logical_hovered_index < 0 or logical_hovered_index >= get_child_count() + 1:
-			logical_hovered_index = cards.find(hovered_card)
+			logical_hovered_index = cards.find(hovered_card)  # won't find it, but safe
 
 	for i in count:
 		var effective_t: float
@@ -144,9 +146,9 @@ func _sample_rotation_curve(t: float) -> float:
 func _on_child_order_changed() -> void:
 	if not is_node_ready():
 		return
-	var cards: Array[PlayerCardUI] = []
+	var cards: Array[CardUI] = []
 	for child in get_children():
-		if child is PlayerCardUI:
+		if child is CardUI:
 			cards.append(child)
 	if not hovered_card in cards:
 		hovered_card = null
@@ -167,7 +169,7 @@ func _on_child_order_changed() -> void:
 	call_deferred("_update_all_original_indices")
 	call_deferred("_arrange_cards")
 
-func _on_card_ui_reparent_requested(child: PlayerCardUI) -> void:
+func _on_card_ui_reparent_requested(child: CardUI) -> void:
 	if not is_instance_valid(child) or child.get_parent() == self:
 		return
 	
@@ -182,25 +184,29 @@ func _on_card_ui_reparent_requested(child: PlayerCardUI) -> void:
 	_update_all_original_indices()
 	
 	child.set_deferred("disabled", false)
+	#for kid in get_children():
+		#if kid.mouse_is_over(): return
 	call_deferred("_arrange_cards")
 
 func _update_all_original_indices() -> void:
 	for i in get_child_count():
-		var card := get_child(i) as PlayerCardUI
+		var card := get_child(i) as CardUI
 		if card:
 			card.original_index = i
 
 
-func _on_card_hovered(card: PlayerCardUI) -> void:
+func _on_card_hovered(card: CardUI) -> void:
 	if hovered_card == card: 
 		print("hand onhovered but already hovered")
 		return
+	#print("hand hovered")
 	hovered_card = card
 	call_deferred("_arrange_cards")   # spread everything out
 
 
-func _on_card_unhovered(card: PlayerCardUI) -> void:
+func _on_card_unhovered(card: CardUI) -> void:
 	if hovered_card == card:
+		#print("hand on unhovered")
 		hovered_card = null
 		for kid in get_children():
 			if kid.is_hovered: return
@@ -217,9 +223,9 @@ func _on_player_blocks_declared() -> void:
 func _on_selecting_cards_from_hand() -> void:
 	is_selecting = true
 
-func _on_finished_selecting_cards_from_hand(_cards: Array[PlayerCardUI]) -> void:
+func _on_finished_selecting_cards_from_hand(_cards: Array[CardUI]) -> void:
 	is_selecting = false
-	for handcard in get_children() as Array[PlayerCardUI]:
+	for handcard in get_children() as Array[CardUI]:
 		handcard.card_state_machine.force_return_to_base_state()
 
 func _on_lock_hand() -> void:
