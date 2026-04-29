@@ -48,8 +48,15 @@ const PITCH_COLORS := {
 
 var owner: Variant
 var on_hits: Array[OnHit]
+
 signal card_play_started(Card)
 signal card_play_finished(Card)
+
+## Per-card lifecycle signals — connect these on the owner (player/enemy) at draw time
+## instead of using the global Events bus, so enemy card actions don't trigger player handlers.
+signal pitched(card: Card)
+signal sunk(card: Card)
+signal blocked(card: Card)
 
 #Used for Draw discard etc
 var discarded_card: Card = null
@@ -71,9 +78,8 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 			return []
 
 #Currently does not accept non-attack actions targetting enemies
-func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, modifiers: ModifierHandler) -> void:
+func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
 	card_play_started.emit(self)
-	
 	
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)
@@ -95,18 +101,22 @@ func play(card_parent: Node, targets: Array[Node], char_stats: CharacterStats, m
 
 func discard_card() -> void:
 	print("Discarded %s" % id)
+	## card_discarded stays on the global bus — rampage() listens to it for cross-card tracking.
 	Events.card_discarded.emit(self)
 
-func pitch_card(char_stats: CharacterStats) -> void:
-	Events.card_pitched.emit(self)
+func pitch_card(char_stats: Stats) -> void:
+	## Emit per-card signal so only the owning character's handler responds.
+	pitched.emit(self)
 	char_stats.mana += pitch
 
-func sink_card(_char_stats: CharacterStats) -> void:
-	Events.card_sunk.emit(self)
+func sink_card(_char_stats: Stats) -> void:
+	## Emit per-card signal so only the owning character's handler responds.
+	sunk.emit(self)
 
 func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	apply_block_effects(targets, modifiers)
-	Events.card_blocked.emit(self)
+	## Emit per-card signal so only the owning character's handler responds.
+	blocked.emit(self)
 
 func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:
 	pass

@@ -23,9 +23,8 @@ var character: CharacterStats
 func _ready() -> void:
 	#Events.card_play_started.connect(_on_card_played) #Replaced with card.card_play_started / finished
 	Events.card_discarded.connect(_on_card_discarded)
-	Events.card_pitched.connect(_on_card_pitched)
-	Events.card_blocked.connect(_on_card_blocked)
-	Events.card_sunk.connect(_on_card_sunk)
+	# pitched / sunk / blocked are per-card signals now — connected in draw_card() so that
+	# only player cards trigger these handlers (enemy cards never connect to them).
 
 
 func start_battle(char_stats: CharacterStats) -> void:
@@ -64,6 +63,9 @@ func draw_card() -> void:
 		Events.player_card_drawn.emit()
 		card_drawn.card_play_finished.connect(_on_card_play_finished)
 		card_drawn.card_play_started.connect(_on_card_play_started)
+		card_drawn.pitched.connect(_on_card_pitched)
+		card_drawn.sunk.connect(_on_card_sunk)
+		card_drawn.blocked.connect(_on_card_blocked)
 		card_drawn.owner = player
 
 
@@ -92,6 +94,7 @@ func draw_cards(amount: int, hand_type = null) -> void:
 			func(): 
 				Events.player_hand_drawn.emit()
 		)
+
 func end_turn_cleanup() -> void:
 	character.reset_mana()
 	character.action_points = 0

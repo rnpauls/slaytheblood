@@ -11,7 +11,7 @@ const DRAG_STYLEBOX := preload("res://scenes/card_ui/card_dragging_stylebox.tres
 const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.tres")
 
-@export var player_modifiers: ModifierHandler
+@export var modifier_handler: ModifierHandler
 @export var card: Card : set = _set_card
 ## Accepts both CharacterStats and EnemyStats since both extend Stats.
 @export var char_stats: Stats : set = _set_char_stats
@@ -49,7 +49,7 @@ func return_to_hand() -> void:
 func play() -> void:
 	if not card:
 		return
-	card.play(self, targets, char_stats, player_modifiers)
+	card.play(self, targets, char_stats, modifier_handler)
 	queue_free()
 
 func discard() -> void:
@@ -73,7 +73,7 @@ func sink() -> void:
 func block() -> void:
 	if not card:
 		return
-	card.block_card([get_tree().get_first_node_in_group("player")], player_modifiers)
+	card.block_card([card.owner], modifier_handler)
 	queue_free()
 
 func get_active_enemy_modifiers() -> ModifierHandler:
@@ -87,7 +87,7 @@ func mouse_is_over() -> bool:
 
 func request_tooltip() -> void:
 	var enemy_modifiers := get_active_enemy_modifiers()
-	var updated_tooltip := card.get_updated_tooltip(player_modifiers, enemy_modifiers)
+	var updated_tooltip := card.get_updated_tooltip(modifier_handler, enemy_modifiers)
 	Events.card_tooltip_requested.emit(card.icon, updated_tooltip)
 
 func select() -> void:
