@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="7_ipda1"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="8_3uufv"]
 [ext_resource type="PackedScene" path="res://scenes/enemy/enemy_hand.tscn" id="9_ehand"]
-[ext_resource type="Script" path="res://scenes/enemy/enemy_staged_display.gd" id="10_staged"]
+[ext_resource type="Script" uid="uid://bi3sysr02rwq3" path="res://scenes/enemy/enemy_staged_display.gd" id="10_staged"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 size = Vector2(82, 82)
@@ -59,11 +59,12 @@ grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="EnemyHand" parent="." unique_id=-1293967295 instance=ExtResource("9_ehand")]
-position = Vector2(0, 65)
+position = Vector2(0, 158)
 
 [node name="StagedDisplay" type="Node2D" parent="." unique_id=-1293967294]
-position = Vector2(0, -130)
+position = Vector2(-80, -53)
 script = ExtResource("10_staged")
+staged_scale = 0.1
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -83.0

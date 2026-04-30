@@ -43,6 +43,16 @@ func animate_to_local_position_and_rotation_and_scale(new_position: Vector2, new
 	tween.parallel().tween_property(self, "rotation_degrees", new_rotation, duration)
 	tween.parallel().tween_property(self, "scale", Vector2.ONE * new_scale, duration)
 
+## Animate to a global screen position. Used when the card is a Control child of a
+## Node2D parent (e.g. EnemyHand), where local `position` is not in the same space
+## as the Node2D's world transform.
+func animate_to_global_position_and_rotation_and_scale(new_global_position: Vector2, new_rotation: float, new_scale: float, duration: float) -> void:
+	_kill_tween()
+	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", new_global_position, duration)
+	tween.parallel().tween_property(self, "rotation_degrees", new_rotation, duration)
+	tween.parallel().tween_property(self, "scale", Vector2.ONE * new_scale, duration)
+
 func return_to_hand() -> void:
 	_return_to_original_parent()
 

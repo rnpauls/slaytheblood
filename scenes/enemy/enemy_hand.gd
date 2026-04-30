@@ -100,20 +100,21 @@ func _arrange_cards() -> void:
 		# Rotation: left edge tilts left (negative), right edge tilts right (positive)
 		var rot: float = (eff_t - 0.5) * max_rotation_deg
 
-		# card.position is its top-left corner.
-		# pivot_offset=(100,140) so visual top-center is at (position.x + 100*scale, position.y)
-		# We want visual top-center at (cx, cy), so top-left x = cx - 100*scale
-		var pos := Vector2(cx - 100.0 * card_scale, cy)
-		card.animate_to_local_position_and_rotation_and_scale(pos, rot, card_scale, 0.2)
+		# Cards are Control nodes; their global_position is their top-left corner in
+		# screen space. We want the visual top-center (pivot_offset.x=100 at scale) to
+		# sit at (cx, cy) relative to EnemyHand's global origin, so:
+		#   top-left global x = hand_global.x + cx - 100*card_scale
+		#   top-left global y = hand_global.y + cy
+		var hand_global := global_position
+		var gpos := hand_global + Vector2(cx - 100.0 * card_scale, cy)
+		card.animate_to_global_position_and_rotation_and_scale(gpos, rot, card_scale, 0.2)
 
-	# Hovered card: raise slightly and scale up
+	# Hovered card: keep its current x, raise it upward, and scale up slightly.
+	# We read global_position.x from the card itself so it stays in column — no x drift.
 	if hovered_card != null and hovered_card in cards:
-		var ht  := float(hovered_index) / float(max(1, count - 1))
-		var hcx: float = lerp(-base_width * 0.5, base_width * 0.5, ht)
-		var hcy: float = 4.0 * (ht - 0.5) * (ht - 0.5) * height_offset - 8.0
-		var hpos := Vector2(hcx - 100.0 * card_scale, hcy)
-		hovered_card.animate_to_local_position_and_rotation_and_scale(
-			hpos, 0.0, card_scale * 1.15, 0.15
+		var hgpos := Vector2(hovered_card.global_position.x, global_position.y - 12.0)
+		hovered_card.animate_to_global_position_and_rotation_and_scale(
+			hgpos, 0.0, card_scale * 1.15, 0.15
 		)
 
 # ── Hover callbacks ───────────────────────────────────────────────────────────

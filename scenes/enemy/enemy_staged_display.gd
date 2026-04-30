@@ -43,13 +43,15 @@ func stage(card_ui: EnemyCardUI) -> void:
 	if not card_ui.card_unhovered.is_connected(_on_card_unhovered):
 		card_ui.card_unhovered.connect(_on_card_unhovered)
 
-	# Target position: card top-center at (0,0) in this node's local space.
-	# pivot_offset = (100, 140) on CardUI, so card top-left = (-100*scale, -140*scale)
-	# to have the visual center land at (0,0).
-	var target_pos := Vector2(-100.0, -140.0) * staged_scale
+	# Cards are Control nodes — use global_position to avoid Control-in-Node2D offset issues.
+	# Card size is 200×280 with pivot_offset=(100,140). Bottom-center is at (100, 280) from
+	# the top-left corner. To place bottom-center at this node's global origin:
+	#   top-left global x = global_position.x - 100 * staged_scale
+	#   top-left global y = global_position.y - 280 * staged_scale
+	var target_gpos := global_position + Vector2(-100.0, -280.0) * staged_scale
 
 	var t := card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(card_ui, "position",         target_pos,              0.3)
+	t.tween_property(card_ui, "global_position",  target_gpos,             0.3)
 	t.parallel().tween_property(card_ui, "scale", Vector2.ONE * staged_scale, 0.3)
 	t.parallel().tween_property(card_ui, "rotation_degrees", 0.0,          0.3)
 
@@ -130,13 +132,26 @@ func _on_card_hovered(_card: EnemyCardUI) -> void:
 	if not is_instance_valid(_card_ui) or _is_hovered:
 		return
 	_is_hovered = true
+
+	# Scale up in-place, but clamp so the card top never overlaps the TopBar.
+	# The staged rest position anchors the card's bottom-center to this node's origin,
+	# so at hovered_scale the top-left y = global_position.y - 280 * hovered_scale.
+	# If that sits above the bar, shift the card down by the overlap.
+	var top_edge_at_hovered := global_position.y - 280.0 * hovered_scale
+	var offset_y := maxf(0.0, float(Constants.TOP_BAR_HEIGHT) - top_edge_at_hovered)
+	var target_gpos := Vector2(global_position.x - 100.0 * hovered_scale,
+							   global_position.y - 280.0 * hovered_scale + offset_y)
+
 	var t := _card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(_card_ui, "scale", Vector2.ONE * hovered_scale, 0.15)
-	t.parallel().tween_property(_card_ui, "rotation_degrees", 0.0, 0.15)
+	t.tween_property(_card_ui, "global_position", target_gpos,          0.15)
+	t.parallel().tween_property(_card_ui, "scale", Vector2.ONE * hovered_scale, 0.15)
+	t.parallel().tween_property(_card_ui, "rotation_degrees", 0.0,      0.15)
 
 func _on_card_unhovered(_card: EnemyCardUI) -> void:
 	if not is_instance_valid(_card_ui) or not _is_hovered:
 		return
 	_is_hovered = false
+	var target_gpos := global_position + Vector2(-100.0, -280.0) * staged_scale
 	var t := _card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	t.tween_property(_card_ui, "scale", Vector2.ONE * staged_scale, 0.15)
+	t.tween_property(_card_ui, "global_position", target_gpos,         0.15)
+	t.parallel().tween_property(_card_ui, "scale", Vector2.ONE * staged_scale, 0.15)
