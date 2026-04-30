@@ -12,11 +12,13 @@ offset_left = -55.0
 offset_right = 55.0
 offset_bottom = 36.0
 grow_horizontal = 2
+mouse_filter = 2
 theme = ExtResource("1_u4kfk")
 script = ExtResource("2_o5b0k")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1720940792]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
@@ -24,11 +26,13 @@ theme_override_constants/margin_bottom = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=847242771]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TooltipIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1730401851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("3_08dln")
 expand_mode = 1
 stretch_mode = 5
@@ -37,6 +41,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/line_separation = 2
 bbcode_enabled = true
 text = "sample

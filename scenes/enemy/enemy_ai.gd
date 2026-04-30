@@ -13,6 +13,9 @@ var modifier_handler: ModifierHandler
 @export var target: Node2D#: set = _set_target
 
 signal plan_created(enemy: Enemy)
+## Emitted whenever the AI removes a card from its hand (pitch, play, block, arsenal).
+## Enemy.gd connects to this to keep the visual hand in sync.
+signal card_removed_from_hand(card: Card)
 
 ## Just assigns the player as target
 func setup():
@@ -36,6 +39,7 @@ func play_next_action() -> Card:
 		if turn_plan and turn_plan.remaining.size() > 0 and not arsenal:
 			arsenal = pick_best_arsenal(turn_plan.remaining)
 			hand.erase(arsenal)
+			card_removed_from_hand.emit(arsenal)
 			print_enemy_ai("arsenaled %s" % arsenal.id)
 		turn_plan = null
 		return null
@@ -47,6 +51,7 @@ func play_next_action() -> Card:
 		resources += pitch.pitch
 		enemy.stats.draw_pile.add_card(pitch)
 		hand.erase(pitch)
+		card_removed_from_hand.emit(pitch)
 		turn_plan.pitched.erase(pitch)
 		print_enemy_ai("pitched %s for %d" % [pitch.id, pitch.pitch])
 	
@@ -57,6 +62,7 @@ func play_next_action() -> Card:
 	
 	resources -= next_action.cost
 	hand.erase(next_action)
+	card_removed_from_hand.emit(next_action)
 	turn_plan.actions.erase(next_action)
 	print_enemy_ai("played %s" % [next_action.id])
 	return next_action
@@ -95,11 +101,13 @@ func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) 
 		#Does this actually work? Checking if it equals the arsenal card?
 		if block.card == arsenal:
 			print_enemy_ai("blocked arsenal %s for %d" % [block.card.id, block.card.defense])
+			var used_arsenal := arsenal
 			arsenal = null
-			blocking_cards.append(arsenal)
+			blocking_cards.append(used_arsenal)
 		else:
 			print_enemy_ai("blocked %s for %d" % [block.card.id, block.card.defense])
 			hand.erase(block.card)
+			card_removed_from_hand.emit(block.card)
 			blocking_cards.append(block.card)
 	return blocking_cards#best_option.defense_applied.map(func(c): return c.defense) if best_option.defense_applied else []
 

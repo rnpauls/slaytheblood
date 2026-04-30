@@ -99,13 +99,6 @@ offset_top = -385.0
 offset_right = 84.0
 offset_bottom = -337.0
 
-[node name="Tooltip" parent="BattleUI" unique_id=1281849298 instance=ExtResource("12_qjopr")]
-visible = false
-offset_left = -392.0
-offset_top = 104.0
-offset_right = 392.0
-offset_bottom = 376.0
-
 [node name="EndTurnButton" type="Button" parent="BattleUI" unique_id=1995290884]
 unique_name_in_owner = true
 anchors_preset = 3
@@ -158,6 +151,20 @@ offset_bottom = 17.0
 text = "99"
 horizontal_alignment = 1
 
+[node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
+unique_name_in_owner = true
+offset_left = 184.0
+offset_top = 202.0
+offset_right = 184.0
+offset_bottom = 202.0
+
+[node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
+unique_name_in_owner = true
+offset_left = 397.0
+offset_top = 202.0
+offset_right = 397.0
+offset_bottom = 202.0
+
 [node name="ChoiceScreen" type="ColorRect" parent="BattleUI" unique_id=293939386]
 unique_name_in_owner = true
 visible = false
@@ -200,6 +207,13 @@ grow_vertical = 0
 theme = ExtResource("16_5moxy")
 text = "CONFIRM"
 
+[node name="Tooltip" parent="BattleUI" unique_id=1281849298 instance=ExtResource("12_qjopr")]
+visible = false
+offset_left = -392.0
+offset_top = 104.0
+offset_right = 392.0
+offset_bottom = 376.0
+
 [node name="Hand" type="Control" parent="BattleUI" unique_id=126863975 node_paths=PackedStringArray("player") groups=["player_hand"]]
 unique_name_in_owner = true
 layout_mode = 3
@@ -223,20 +237,6 @@ max_rotation_deg = 18.0
 position_curve = SubResource("Curve_156m4")
 rotation_curve = SubResource("Curve_pyfix")
 player = NodePath("../../Player")
-
-[node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
-unique_name_in_owner = true
-offset_left = 184.0
-offset_top = 202.0
-offset_right = 184.0
-offset_bottom = 202.0
-
-[node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
-unique_name_in_owner = true
-offset_left = 397.0
-offset_top = 202.0
-offset_right = 397.0
-offset_bottom = 202.0
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=811855806]
 layer = 2

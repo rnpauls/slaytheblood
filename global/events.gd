@@ -40,6 +40,13 @@ signal enemy_phase_ended #Called when all enemies are done, move to player turn
 signal enemy_died(enemy: Enemy)
 signal enemy_attack_declared
 signal enemy_card_drawn(enemy: Enemy)
+## Emitted when an enemy stages its attack card to the center of the screen
+signal attack_card_staged(card_ui: EnemyCardUI)
+## Emitted when the staged card should be removed (attack resolved or enemy died)
+signal attack_card_unstaged
+## Emitted when the player hovers the intent UI (used for on-hit tooltip)
+signal intent_hovered(enemy: Enemy)
+signal intent_unhovered(enemy: Enemy)
 #Battle-related events
 signal battle_over_screen_requested(text: String, type: BattleOverPanel.Type)
 signal battle_won

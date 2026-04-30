@@ -6,6 +6,18 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_14lqk"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back"]
+bg_color = Color(0.1, 0.12, 0.22, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.25, 0.35, 0.6, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="CardRenderContainer" type="MarginContainer" unique_id=1508382840]
 custom_minimum_size = Vector2(40, 60)
 size_flags_horizontal = 3
@@ -16,6 +28,17 @@ script = ExtResource("1_d3nd8")
 texture_filter = 3
 layout_mode = 2
 texture = SubResource("ViewportTexture_14lqk")
+
+[node name="CardBackPanel" type="Panel" parent="." unique_id=2001000001]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_back")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=473573907]
 disable_3d = true
