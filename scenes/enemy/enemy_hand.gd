@@ -62,7 +62,9 @@ func clear_cards() -> void:
 func _arrange_cards() -> void:
 	var cards: Array[EnemyCardUI] = []
 	for child in get_children():
-		if child is EnemyCardUI:
+		# Skip cards that are currently staged (z_as_relative=false means they've
+		# been lifted out of the normal hand layout by EnemyStagedDisplay).
+		if child is EnemyCardUI and (child as CanvasItem).z_as_relative:
 			cards.append(child)
 
 	if cards.is_empty():

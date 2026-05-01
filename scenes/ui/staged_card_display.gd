@@ -30,7 +30,9 @@ func _on_attack_card_staged(card_ui: EnemyCardUI) -> void:
 
 	_card_ui = card_ui
 	_original_parent   = card_ui.get_parent()
-	_original_position = card_ui.position
+	# Save global_position because EnemyHand positions cards via global_position
+	# (not local position), so restoring local position would place the card wrong.
+	_original_position = card_ui.global_position
 	_original_scale    = card_ui.scale
 	_original_rotation = card_ui.rotation_degrees
 
@@ -83,7 +85,7 @@ func _return_card() -> void:
 		card_ui.reparent(_original_parent)
 		card_ui.z_index = 0
 		var t := card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-		t.tween_property(card_ui, "position", _original_position, 0.2)
+		t.tween_property(card_ui, "global_position", _original_position, 0.2)
 		t.parallel().tween_property(card_ui, "scale", _original_scale, 0.2)
 		t.parallel().tween_property(card_ui, "rotation_degrees", _original_rotation, 0.2)
 	elif is_instance_valid(card_ui):
@@ -100,7 +102,7 @@ func _on_card_hovered(_card: EnemyCardUI) -> void:
 	# around the card center automatically — no position adjustment needed.
 	var t := _card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.tween_property(_card_ui, "scale", Vector2.ONE * hovered_scale, 0.15)
-	t.parallel().tween_property(_card_ui, "rotation_degrees", 0.0, 0.15)
+	#t.parallel().tween_property(_card_ui, "rotation_degrees", 0.0, 0.15)
 
 func _on_card_unhovered(_card: EnemyCardUI) -> void:
 	if not is_instance_valid(_card_ui) or not _is_hovered:

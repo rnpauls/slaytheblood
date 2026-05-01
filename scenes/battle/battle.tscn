@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b50ekork55ljq" path="res://scenes/ui/mana_ui.tscn" id="11_8aauo"]
 [ext_resource type="PackedScene" uid="uid://dg4s3vaj75784" path="res://scenes/ui/tooltip.tscn" id="12_qjopr"]
 [ext_resource type="PackedScene" uid="uid://bljd5caaiyxj5" path="res://scenes/ui/action_points_ui.tscn" id="14_5moxy"]
+[ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="15_8eh2s"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
 [ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="16_5moxy"]
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
@@ -60,19 +61,19 @@ debug_color = Color(0, 0.6, 0.701961, 0.211765)
 script = ExtResource("4_2ufbh")
 
 [node name="CrabEnemy" parent="EnemyHandler" unique_id=311269398 instance=ExtResource("2_spkj8")]
-position = Vector2(1136, 344)
+position = Vector2(1120, 271)
 stats = ExtResource("5_247pw")
 
 [node name="BatEnemy" parent="EnemyHandler" unique_id=721559201 instance=ExtResource("2_spkj8")]
-position = Vector2(916, 315)
+position = Vector2(896, 271)
 stats = ExtResource("8_u75mi")
 
 [node name="BatEnemy2" parent="EnemyHandler" unique_id=1602055530 instance=ExtResource("2_spkj8")]
-position = Vector2(786, 404)
+position = Vector2(669, 271)
 stats = ExtResource("8_u75mi")
 
 [node name="Player" parent="." unique_id=1140780656 instance=ExtResource("3_g13cx")]
-position = Vector2(320, 256)
+position = Vector2(179, 326)
 stats = ExtResource("4_psa3f")
 
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
@@ -87,17 +88,17 @@ hand = NodePath("../BattleUI/Hand")
 script = ExtResource("7_8utji")
 
 [node name="ManaUI" parent="BattleUI" unique_id=356935032 instance=ExtResource("11_8aauo")]
-offset_left = 36.0
-offset_top = 430.0
-offset_right = 84.0
-offset_bottom = 478.0
+offset_left = 53.0
+offset_top = 520.0
+offset_right = 101.0
+offset_bottom = 568.0
 char_stats = ExtResource("4_psa3f")
 
 [node name="ActionPointsUI" parent="BattleUI" unique_id=1261898973 instance=ExtResource("14_5moxy")]
-offset_left = 36.0
-offset_top = -385.0
-offset_right = 84.0
-offset_bottom = -337.0
+offset_left = 140.0
+offset_top = -201.0
+offset_right = 188.0
+offset_bottom = -153.0
 
 [node name="EndTurnButton" type="Button" parent="BattleUI" unique_id=1995290884]
 unique_name_in_owner = true
@@ -112,7 +113,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("16_5moxy")
+theme = ExtResource("15_8eh2s")
 disabled = true
 text = "END"
 
@@ -136,9 +137,9 @@ horizontal_alignment = 1
 [node name="DiscardPileButton" parent="BattleUI" unique_id=1643009583 node_paths=PackedStringArray("counter") instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
 offset_left = 1158.0
-offset_top = 488.0
+offset_top = 501.0
 offset_right = 1258.0
-offset_bottom = 588.0
+offset_bottom = 601.0
 texture_normal = ExtResource("18_ajj10")
 counter = NodePath("Counter")
 
@@ -153,17 +154,17 @@ horizontal_alignment = 1
 
 [node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 184.0
-offset_top = 202.0
-offset_right = 184.0
-offset_bottom = 202.0
+offset_left = 44.0
+offset_top = 285.0
+offset_right = 44.0
+offset_bottom = 285.0
 
 [node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 397.0
-offset_top = 202.0
-offset_right = 397.0
-offset_bottom = 202.0
+offset_left = 263.0
+offset_top = 284.0
+offset_right = 263.0
+offset_bottom = 284.0
 
 [node name="ChoiceScreen" type="ColorRect" parent="BattleUI" unique_id=293939386]
 unique_name_in_owner = true
@@ -278,5 +279,10 @@ layer = 4
 
 [node name="StatusView" parent="StatusViewLayer" unique_id=877282367 instance=ExtResource("21_hb0k1")]
 visible = false
+
+[node name="Panel" type="Panel" parent="." unique_id=1094455537]
+visible = false
+custom_minimum_size = Vector2(1280, 80)
+offset_bottom = 80.0
 
 [connection signal="pressed" from="BattleUI/ChoiceScreen/ConfirmButton" to="BattleUI" method="_on_confirm_button_pressed"]

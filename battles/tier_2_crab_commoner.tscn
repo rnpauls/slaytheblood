@@ -7,13 +7,13 @@
 [node name="Tier2CrabCommoner" type="Node2D" unique_id=215508035]
 
 [node name="Enemy" parent="." unique_id=171155132 instance=ExtResource("1_qedx2")]
-position = Vector2(748, 367)
+position = Vector2(679, 352)
 stats = ExtResource("2_tp4gr")
 
 [node name="Enemy2" parent="." unique_id=830231401 instance=ExtResource("1_qedx2")]
-position = Vector2(965, 188)
+position = Vector2(895, 246)
 stats = ExtResource("3_xr6i6")
 
 [node name="Enemy3" parent="." unique_id=844617398 instance=ExtResource("1_qedx2")]
-position = Vector2(1139, 338)
+position = Vector2(1118, 318)
 stats = ExtResource("3_xr6i6")
