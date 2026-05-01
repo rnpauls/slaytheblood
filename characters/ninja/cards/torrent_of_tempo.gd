@@ -11,7 +11,7 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % modified_dmg
 
 func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
-	super.play(card_parent, targets, char_stats, modifiers)
+	await super.play(card_parent, targets, char_stats, modifiers)
 	go_again = false
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:

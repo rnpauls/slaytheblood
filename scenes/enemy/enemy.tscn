@@ -16,8 +16,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 size = Vector2(82, 82)
 
-[node name="Enemy" type="Area2D" unique_id=844617398 groups=["enemies"]]
-collision_layer = 4
+[node name="Enemy" type="Node2D" unique_id=844617398 groups=["enemies"]]
 script = ExtResource("1_dl80c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=919184121]
@@ -31,7 +30,10 @@ rotation = -1.5708
 scale = Vector2(5, 5)
 texture = ExtResource("2_ywvjq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=703996517]
+[node name="HoverArea" type="Area2D" parent="." unique_id=703996516]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea" unique_id=703996517]
 shape = SubResource("RectangleShape2D_54tcg")
 
 [node name="StatsUI" parent="." unique_id=408535621 instance=ExtResource("3_p3m4l")]
@@ -80,5 +82,5 @@ status_owner = NodePath("..")
 [node name="DamageTakenModifier" parent="ModifierHandler" unique_id=2052155626 instance=ExtResource("8_3uufv")]
 type = 1
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="HoverArea" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="HoverArea" to="." method="_on_area_exited"]

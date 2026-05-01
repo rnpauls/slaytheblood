@@ -69,14 +69,14 @@ func draw_card() -> void:
 		card_drawn.owner = player
 
 
-func draw_cards(amount: int, hand_type = null) -> void:
+func draw_cards(amount: int, hand_type = null) -> Tween:
 	if amount == 0:
 		if hand_type == 'init':
 			hand.enable_hand()
-			return
+			return null
 		elif hand_type == 'end':
 			Events.player_hand_drawn.emit()
-		return
+		return null
 
 	var tween := create_tween()
 	for i in range(amount):
@@ -84,16 +84,16 @@ func draw_cards(amount: int, hand_type = null) -> void:
 		tween.tween_interval(HAND_DRAW_INTERVAL)
 	if hand_type == 'init':
 		tween.finished.connect(
-			#func(): Events.player_hand_drawn.emit()
-			func(): 
+			func():
 				hand.enable_hand()
 				Events.player_initial_hand_drawn.emit()
 		)
 	if hand_type == 'end':
 		tween.finished.connect(
-			func(): 
+			func():
 				Events.player_hand_drawn.emit()
 		)
+	return tween
 
 func end_turn_cleanup() -> void:
 	character.reset_mana()

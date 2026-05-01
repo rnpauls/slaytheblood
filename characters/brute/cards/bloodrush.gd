@@ -1,7 +1,7 @@
 extends Card
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	var success:=sixloot(modifiers.getparent(),2)
+	var success:= await sixloot(modifiers.getparent(),2)
 	if success:
 		var status_handler : StatusHandler = modifiers.get_parent().status_handler
 		go_again = true

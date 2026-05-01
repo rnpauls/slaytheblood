@@ -5,7 +5,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	Events.card_discarded.connect(_on_card_discarded)
 	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
 	var player_handler: PlayerHandler = targets[0].get_tree().get_first_node_in_group("player_handler")
-	if sixloot(player_handler, 1):
+	if await sixloot(player_handler, 1):
 		go_again = true
 	else:
 		go_again = false

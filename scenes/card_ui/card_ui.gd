@@ -59,7 +59,7 @@ func return_to_hand() -> void:
 func play() -> void:
 	if not card:
 		return
-	card.play(self, targets, char_stats, modifier_handler)
+	await card.play(self, targets, char_stats, modifier_handler)
 	queue_free()
 
 func discard() -> void:

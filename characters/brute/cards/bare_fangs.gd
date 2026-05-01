@@ -14,7 +14,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	Events.lock_hand.emit()
 	var player_handler: PlayerHandler = targets[0].get_tree().get_first_node_in_group("player_handler")
 	var custom_attack: int
-	if sixloot(player_handler, 1):
+	if await sixloot(player_handler, 1):
 		custom_attack = attack + 2
 	else:
 		custom_attack = attack

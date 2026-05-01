@@ -80,17 +80,17 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 #Currently does not accept non-attack actions targetting enemies
 func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
 	card_play_started.emit(self)
-	
+
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)
 	if type == Type.ATTACK:
 		if targets[0] is Enemy:
 			Events.player_attack_declared.emit()
-			
+
 	char_stats.mana -= cost
 	char_stats.action_points -= 1
-	apply_effects(targets, modifiers)
-	
+	await apply_effects(targets, modifiers)
+
 	for targetx in targets:
 		if type == Type.ATTACK:
 			#if targetx is Enemy:
@@ -165,17 +165,13 @@ func _on_card_discarded(card: Card) -> void:
 		#return false
 
 func sixloot(source: Node, qty: int) -> bool:
-	#Events.card_discarded.connect(_on_card_discarded)
-	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
-	source.draw_cards(qty)
+	var tween = source.draw_cards(qty)
+	if tween:
+		await tween.finished
 	discarded_card = null
 	var discard_effect = DiscardRandomSixEffect.new()
 	discard_effect.amount = 1
 	var all_six_discarded:bool = discard_effect.execute([source])
-	#var discarded_card: Card = await Events.card_discarded
-	#var timer = source.get_tree().create_timer(.01)
-	#print_debug("Rampage still has timer")
-	#await timer.timeout
 	if all_six_discarded:
 		return true
 	else:

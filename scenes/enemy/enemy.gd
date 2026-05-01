@@ -1,33 +1,23 @@
 class_name Enemy
-extends Area2D
+extends Combatant
 
 const ARROW_OFFSET := 45
-const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.tres")
 const ENEMY_CARD_UI_SCENE := preload("res://scenes/card_ui/enemy_card_ui.tscn")
 
 ## Delay between successive card draws (seconds), matching player hand feel.
 const DRAW_INTERVAL := 0.12
 
-@export var stats: EnemyStats : set = set_enemy_stats
-
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var arrow: Sprite2D = $Arrow
-@onready var stats_ui: StatsUI = $StatsUI as StatsUI
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
 @onready var enemy_hand_ui: EnemyHandUI = $EnemyHandUI
 @onready var enemy_hand: EnemyHand = $EnemyHand
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
-@onready var status_handler: StatusHandler = $StatusHandler
-@onready var modifier_handler: ModifierHandler = $ModifierHandler
 
 signal enemy_action_completed
-signal attack_completed
 
 var enemy_ai: EnemyAI
 var current_action: Card: set = set_current_action
 var hand: Array
-
-var active_on_hits: Array[OnHit]
 
 ## Maps Card → EnemyCardUI so we can look up the visual for any card in O(1).
 var card_ui_map: Dictionary = {}
@@ -44,12 +34,10 @@ func set_current_action(value: Card) -> void:
 	current_action = value
 	update_intent()
 
-func set_enemy_stats(value: EnemyStats) -> void:
-	stats = value.create_instance()
+func _init_stats(value: Stats) -> Stats:
+	return value.create_instance()
 
-	if not stats.stats_changed.is_connected(update_stats):
-		stats.stats_changed.connect(update_stats)
-
+func _on_stats_set() -> void:
 	update_enemy()
 
 func setup_ai() -> void:
@@ -73,9 +61,6 @@ func setup_ai() -> void:
 
 	enemy_hand_ui.update_cards(enemy_ai)
 
-func update_stats() -> void:
-	stats_ui.update_stats(stats)
-
 ## Draw a single card, add it to the hand, and animate it into EnemyHand.
 func draw_card() -> void:
 	var card_drawn: Card = stats.draw_pile.draw_card()
@@ -88,11 +73,13 @@ func draw_card() -> void:
 		_log("drew %s  (hand %d, ui_map %d)" % [card_drawn.id, hand.size(), card_ui_map.size()])
 
 ## Draw multiple cards with a stagger delay between each.
-func draw_cards(amount: int) -> void:
+func draw_cards(amount: int) -> Tween:
+	var tween := create_tween()
 	for i in range(amount):
-		draw_card()
+		tween.tween_callback(draw_card)
 		if i < amount - 1:
-			await get_tree().create_timer(DRAW_INTERVAL).timeout
+			tween.tween_interval(DRAW_INTERVAL)
+	return tween
 
 func declare_next_attack() -> void:
 	if not enemy_ai:
@@ -119,7 +106,7 @@ func declare_next_attack() -> void:
 		_stage_attack_card_ui(current_action, pending_card_ui)
 		Events.enemy_attack_declared.emit()
 		await Events.player_blocks_declared
-		do_action()
+		await do_action()
 
 func update_enemy() -> void:
 	if not stats is Stats:
@@ -171,7 +158,7 @@ func do_action() -> void:
 		card_ui_map.erase(current_action)
 
 	card_ui.targets = [enemy_ai.target]
-	card_ui.play()
+	await card_ui.play()
 
 	enemy_action_completed.emit(self)
 	attack_completed.emit()
@@ -189,29 +176,6 @@ func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) 
 	update_intent()
 	enemy_hand_ui.update_cards(enemy_ai)
 	_log("after defend  hand=%d  ai_hand=%d  ui_map=%d" % [hand.size(), enemy_ai.hand.size(), card_ui_map.size()])
-
-
-func take_damage(damage: int, which_modifier: Modifier.Type) -> int:
-	if stats.health <= 0:
-		return 0
-
-	sprite_2d.material = WHITE_SPRITE_MATERIAL
-
-	var mod_dmg := modifier_handler.get_modified_value(damage, which_modifier)
-	var damage_taken: = stats.take_damage(mod_dmg)
-	var tween := create_tween()
-	tween.tween_callback(Shaker.shake.bind(self, 16, 0.15))
-	tween.tween_interval(0.17)
-
-	tween.finished.connect(
-		func():
-			sprite_2d.material = null
-
-			if stats.health <= 0:
-				Events.enemy_died.emit(self)
-				queue_free()
-	)
-	return damage_taken
 
 func get_num_cards_for_turn() -> int:
 	var player_life = get_tree().get_first_node_in_group("player").stats.health
@@ -236,6 +200,10 @@ func destroy_arsenal() -> bool:
 		enemy_ai.arsenal = null
 		arsenal_card.queue_free()
 		return true
+
+func _on_death() -> void:
+	Events.enemy_died.emit(self)
+	queue_free()
 
 # ── Staged attack card ────────────────────────────────────────────────────────
 

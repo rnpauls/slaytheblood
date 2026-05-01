@@ -60,15 +60,15 @@ func _on_card_aim_ended(_card: Node) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if not current_card or not targeting:
 		return
-	
-	if not current_card.targets.has(area):
-		current_card.targets.append(area)
-		#print("targetselector added %s" % area)
-		#current_card.request_tooltip()
+	var target := _resolve_target(area)
+	if not current_card.targets.has(target):
+		current_card.targets.append(target)
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if not current_card or not targeting:
 		return
-	
-	current_card.targets.erase(area)
-	#current_card.request_tooltip()
+	current_card.targets.erase(_resolve_target(area))
+
+func _resolve_target(area: Area2D) -> Node:
+	var parent := area.get_parent()
+	return parent if parent is Combatant else area

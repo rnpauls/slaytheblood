@@ -1,6 +1,6 @@
 ## Animated card-back fan displayed below each enemy sprite.
 ## Cards are shown face-down (EnemyCardUI.show_back = true) by default.
-## Extends Node2D so it sits cleanly in the Enemy Area2D hierarchy with no
+## Extends Node2D so it sits cleanly in the Enemy hierarchy with no
 ## Control-layout interference — position is set directly in enemy.tscn.
 class_name EnemyHand
 extends Node2D
