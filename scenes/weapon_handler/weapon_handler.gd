@@ -84,6 +84,7 @@ func attempt_to_attack() -> void:
 		weapon.activate_weapon(targets, owner_of_weapon.modifier_handler)
 			#Events.tooltip_hide_requested.emit()
 		owner_of_weapon.attack_completed.emit()
+		Hook.after_attack_completed(owner_of_weapon, {})
 		if owner_of_weapon is Player:
 			Events.player_attack_completed.emit() #Needed for relics e.g. ira
 

@@ -49,6 +49,10 @@ const PITCH_COLORS := {
 var owner: Variant
 var on_hits: Array[OnHit]
 
+## Incremented each time play() is called. Used by Hook to build a unique
+## per-play key so models registered mid-play can skip their trigger card.
+var play_count: int = 0
+
 signal card_play_started(Card)
 signal card_play_finished(Card)
 
@@ -79,6 +83,7 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 
 #Currently does not accept non-attack actions targetting enemies
 func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
+	play_count += 1
 	card_play_started.emit(self)
 
 	if not is_single_targeted():
@@ -98,6 +103,8 @@ func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers:
 	if go_again:
 		char_stats.action_points += 1
 	card_play_finished.emit(self)
+	var ctx := {"dealer": owner, "targets": targets}
+	Hook.after_card_played(self, ctx)
 
 func discard_card() -> void:
 	print("Discarded %s" % id)
@@ -139,7 +146,8 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 	damage_effect.amount = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
-	
+	damage_effect.dealer = owner
+
 	damage_effect.on_hit_effects.append_array(on_hits)
 	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
 	damage_effect.execute(targets)

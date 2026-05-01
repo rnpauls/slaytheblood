@@ -133,6 +133,7 @@ func _on_card_play_started(_card: Card) -> void:
 func _on_card_play_finished(card: Card) -> void:
 	if card.type == Card.Type.ATTACK:
 		player.attack_completed.emit()
+		Hook.after_attack_completed(player, {})
 		Events.player_attack_completed.emit() #Needed for relics e.g. ira
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		return

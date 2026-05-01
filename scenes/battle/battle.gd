@@ -53,6 +53,7 @@ func start_battle() ->void:
 	player_handler.draw_cards(player.stats.cards_per_turn, 'init')
 
 func _on_enemy_phase_ended() ->void:
+	Hook.after_turn_end("enemy")
 	player_handler.start_turn()
 	enemy_handler.reset_enemy_actions()
 
@@ -61,6 +62,7 @@ func _on_enemies_child_order_changed() -> void:
 		relics.activate_relics_by_type(Relic.Type.END_OF_COMBAT)
 
 func _on_player_died() -> void:
+	Hook.clear()
 	Events.battle_over_screen_requested.emit("Game Over!", BattleOverPanel.Type.LOSE)
 	SaveGame.delete_data()
 
@@ -70,4 +72,5 @@ func _on_relics_activated(type: Relic.Type) -> void:
 			player_handler.start_battle(char_stats)
 			battle_ui.initialize_card_pile_ui()
 		Relic.Type.END_OF_COMBAT:
+			Hook.clear()
 			Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)

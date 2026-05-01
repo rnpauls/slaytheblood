@@ -162,6 +162,7 @@ func do_action() -> void:
 
 	enemy_action_completed.emit(self)
 	attack_completed.emit()
+	Hook.after_attack_completed(self, {})
 	enemy_hand_ui.update_cards(enemy_ai)
 
 ## Defend player attack

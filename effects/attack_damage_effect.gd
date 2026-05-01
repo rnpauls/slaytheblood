@@ -3,6 +3,8 @@ extends DamageEffect
 
 var go_again:= false
 var on_hit_effects: Array[OnHit]
+## The combatant dealing the damage. Set by do_stock_attack_damage_effect.
+var dealer: Node = null
 
 func execute(targets: Array[Node]) -> void:
 	for target in targets:
@@ -24,3 +26,6 @@ func execute_single_target(target: Node) -> void:
 				on_hit.effect.execute([target])
 			if on_hit.custom_func:
 				on_hit.custom_func.call(target, on_hit.args)
+		var ctx := {"damage": damage_dealt}
+		Hook.on_hit_dealt(dealer, target, ctx)
+		Hook.on_hit_received(dealer, target, ctx)

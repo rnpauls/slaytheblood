@@ -51,6 +51,7 @@ func _set_char_stats(value: CharacterStats) -> void:
 func _on_player_hand_drawn() -> void:
 	end_turn_button.disabled = true
 	print_debug("End turn is emitted from battle_ui, but it does nothing here anymore")
+	Hook.after_turn_end("player")
 	Events.player_turn_ended.emit()
 
 func _on_player_initial_hand_drawn() -> void:
