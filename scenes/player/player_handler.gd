@@ -127,7 +127,7 @@ func reshuffle_deck_from_discard() -> void:
 
 	character.draw_pile.shuffle()
 
-func _on_card_play_started(card: Card) -> void:
+func _on_card_play_started(_card: Card) -> void:
 	pass
 
 func _on_card_play_finished(card: Card) -> void:

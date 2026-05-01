@@ -76,7 +76,7 @@ func take_damage(damage : int) -> int:
 		return 0
 	var initial_damage = damage
 	damage = clampi(damage - block, 0, damage)
-	block = 0#clampi(block - initial_damage, 0, block)
+	block = clampi(block - initial_damage, 0, block)
 	health -= damage
 	return damage
 

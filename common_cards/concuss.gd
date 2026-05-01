@@ -1,8 +1,5 @@
 extends Card
 
-func get_default_tooltip() -> String:
-	return tooltip_text % attack
-
 func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
 	var modified_dmg := player_modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
 	

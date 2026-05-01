@@ -42,6 +42,8 @@ func initialize_weapon(_owner: WeaponUI) -> void:
 func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_attack:int = attack) -> void:
 	Events.player_attack_declared.emit()
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)
+	for target in targets:
+		target.stats.block = 0
 	var player = targets[0].get_tree().get_first_node_in_group("player") as Player
 	player.stats.mana -= cost
 	if not go_again: player.stats.action_points -= 1

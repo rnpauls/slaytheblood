@@ -14,7 +14,6 @@ func execute(targets: Array[Node]) -> bool:
 		var original_hand :Array
 		var hand_only_sixes: Array
 		var hand_non_sixes: Array
-		var hand_randomized: Array
 		if target is Enemy:
 			original_hand = target.hand.duplicate() #Array cards
 			hand_only_sixes = original_hand.filter(func(card: CardUI): return card.card.attack > 5)

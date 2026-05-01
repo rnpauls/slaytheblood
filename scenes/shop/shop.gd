@@ -88,7 +88,6 @@ func _generate_shop_relics() -> void:
 		new_shop_relic.update(run_stats)
 
 func _generate_shop_weapons() -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
 	var shop_weapons_array: Array[Weapon] = []
 	var available_weapons := shop_weapons.filter(
 		func(weapon: Weapon):

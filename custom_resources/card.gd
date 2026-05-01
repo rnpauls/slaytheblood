@@ -118,12 +118,13 @@ func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	## Emit per-card signal so only the owning character's handler responds.
 	blocked.emit(self)
 
-func apply_effects(_targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	pass
 
 func apply_block_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	var block_effect := BlockEffect.new()
-	block_effect.amount = defense
+	var mod_def : = modifiers.get_modified_value(defense, Modifier.Type.BLOCK_GAINED)
+	block_effect.amount = mod_def
 	block_effect.sound = block_sound
 	block_effect.execute(targets)
 

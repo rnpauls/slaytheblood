@@ -8,9 +8,3 @@ func apply_block_effects(targets: Array[Node], _modifiers: ModifierHandler) -> v
 	card_to_sink[0].sink()
 	targets[0].get_tree().get_first_node_in_group("player_handler").draw_card()
 	return 
-
-func get_default_tooltip() -> String:
-	return tooltip_text % defense
-
-func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
-	return tooltip_text % defense
