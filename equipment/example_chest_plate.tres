@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Equipment" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/equipment.gd" id="1_eqex"]
+[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_eqex"]
+
+[resource]
+script = ExtResource("1_eqex")
+equipment_name = "Iron Chestplate"
+id = "iron_chestplate"
+slot = 1
+rarity = 0
+character_type = 0
+persistence = 0
+break_on_use = true
+starter_equipment = false
+icon = ExtResource("2_eqex")
+tooltip = "Absorbs one attack of up to 4 damage. Destroyed on use."
+max_block = 4
+metadata/_custom_type_script = "res://custom_resources/equipment.gd"

@@ -11,8 +11,18 @@ signal stats_changed
 @export var starting_deck: CardPile
 @export var starting_inventory: Inventory
 @export var cards_per_turn: int
-@export var weapon_left: Weapon
-@export var weapon_right: Weapon
+
+@export_group("Equipped Hands")
+## hand_left and hand_right each hold either a Weapon or an Equipment (offhand).
+## Typed as Resource because GDScript doesn't support union types.
+@export var hand_left: Resource
+@export var hand_right: Resource
+
+@export_group("Equipped Equipment")
+@export var equipment_head: Equipment
+@export var equipment_chest: Equipment
+@export var equipment_arms: Equipment
+@export var equipment_legs: Equipment
 
 var mana: int : set = set_mana
 var action_points: int : set = set_action_points
@@ -30,12 +40,12 @@ func set_health(value : int) -> void:
 func set_max_health(value : int) -> void:
 	var diff := value - max_health
 	max_health = value
-	
+
 	if diff > 0:
 		health += diff
 	elif health > max_health:
 		health = max_health
-	
+
 	stats_changed.emit()
 
 func set_block(value : int) -> void:
@@ -45,7 +55,7 @@ func set_block(value : int) -> void:
 func set_mana(value: int) -> void:
 	mana = value
 	stats_changed.emit()
-	
+
 func set_action_points(value: int) -> void:
 	action_points = value
 	stats_changed.emit()
@@ -92,8 +102,41 @@ func mill(amount: int) -> Array[Card]:
 			milled_cards.append(milled_card)
 	return milled_cards
 
+
+## True if a slot can hold either a Weapon or an offhand Equipment.
+func _is_hand_free(slot: Resource) -> bool:
+	return slot == null
+
+
 func add_weapon(new_weapon: Weapon) -> void:
 	var cloned: = new_weapon.duplicate()
 	inventory.add_weapon(cloned)
-	if not weapon_left: weapon_left = cloned
-	elif not weapon_right: weapon_right = cloned
+	if _is_hand_free(hand_left):
+		hand_left = cloned
+	elif _is_hand_free(hand_right):
+		hand_right = cloned
+
+
+## Adds equipment to the inventory. If the matching slot is empty, equips it automatically
+## (offhand equipment goes into hand_left/hand_right just like an offhand weapon).
+func add_equipment(new_equipment: Equipment) -> void:
+	var cloned: Equipment = new_equipment.duplicate()
+	inventory.add_equipment(cloned)
+	_auto_equip(cloned)
+
+
+func _auto_equip(eq: Equipment) -> void:
+	match eq.slot:
+		Equipment.Slot.HEAD:
+			if equipment_head == null: equipment_head = eq
+		Equipment.Slot.CHEST:
+			if equipment_chest == null: equipment_chest = eq
+		Equipment.Slot.ARMS:
+			if equipment_arms == null: equipment_arms = eq
+		Equipment.Slot.LEGS:
+			if equipment_legs == null: equipment_legs = eq
+		Equipment.Slot.OFFHAND:
+			if _is_hand_free(hand_left):
+				hand_left = eq
+			elif _is_hand_free(hand_right):
+				hand_right = eq

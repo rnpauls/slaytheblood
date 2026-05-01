@@ -15,8 +15,12 @@ const SAVE_PATH := "user://savegame.tres"
 @export var floors_climbed: int
 @export var was_on_map: bool
 @export var current_inventory: Inventory
-@export var current_weapon_left: Weapon
-@export var current_weapon_right: Weapon
+@export var current_hand_left: Resource
+@export var current_hand_right: Resource
+@export var current_equipment_head: Equipment
+@export var current_equipment_chest: Equipment
+@export var current_equipment_arms: Equipment
+@export var current_equipment_legs: Equipment
 
 
 func save_data() -> void:

@@ -1,9 +1,9 @@
 # Player turn order:
-# 1. START_OF_TURN Relics 
+# 1. START_OF_TURN Relics
 # 2. START_OF_TURN Statuses
 # 3. Action phase started signal
 # 4. End turn button
-# 5. END_OF_TURN Relics 
+# 5. END_OF_TURN Relics
 # 6. END_OF_TURN Statuses
 # 7. End of turn cleanup (reset mana, action points, and draw back up)
 class_name PlayerHandler
@@ -13,8 +13,14 @@ const HAND_DRAW_INTERVAL := 0.25
 const HAND_DISCARD_INTERVAL := 0.25
 
 @export var relics: RelicHandler
-@export var weapon_left: WeaponHandler
-@export var weapon_right: WeaponHandler
+@export var hand_left_weapon: WeaponHandler
+@export var hand_right_weapon: WeaponHandler
+@export var hand_left_equipment: EquipmentHandler
+@export var hand_right_equipment: EquipmentHandler
+@export var equipment_head: EquipmentHandler
+@export var equipment_chest: EquipmentHandler
+@export var equipment_arms: EquipmentHandler
+@export var equipment_legs: EquipmentHandler
 @export var player: Player
 @export var hand: Hand
 
@@ -32,12 +38,55 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.draw_pile = character.deck.custom_duplicate()
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
-	weapon_left.set_weapon(character.weapon_left)
-	weapon_right.set_weapon(character.weapon_right)
+
+	_assign_hand_slot(character.hand_left, hand_left_weapon, hand_left_equipment)
+	_assign_hand_slot(character.hand_right, hand_right_weapon, hand_right_equipment)
+
+	_assign_body_equipment_slot(character.equipment_head, equipment_head)
+	_assign_body_equipment_slot(character.equipment_chest, equipment_chest)
+	_assign_body_equipment_slot(character.equipment_arms, equipment_arms)
+	_assign_body_equipment_slot(character.equipment_legs, equipment_legs)
+
 	relics.relics_activated.connect(_on_relics_activated)
 	player.status_handler.statuses_applied.connect(_on_statuses_applied)
 	Events.player_set_up.emit()
 	start_turn()
+
+
+## Decide whether the slot holds a Weapon or an offhand Equipment, and route accordingly.
+## The unused handler is hidden so only one is visible per side.
+func _assign_hand_slot(slot_value: Resource, weapon_handler: WeaponHandler, equip_handler: EquipmentHandler) -> void:
+	if slot_value is Weapon:
+		weapon_handler.set_weapon(slot_value)
+		weapon_handler.show()
+		if equip_handler:
+			equip_handler.set_equipment(null)
+			equip_handler.hide()
+	elif slot_value is Equipment:
+		if equip_handler:
+			equip_handler.owner_of_equipment = player
+			equip_handler.set_equipment(slot_value)
+			equip_handler.show()
+		weapon_handler.set_weapon(null)
+		weapon_handler.hide()
+	else:
+		# Empty slot.
+		weapon_handler.set_weapon(null)
+		weapon_handler.hide()
+		if equip_handler:
+			equip_handler.set_equipment(null)
+			equip_handler.hide()
+
+
+func _assign_body_equipment_slot(eq: Equipment, handler: EquipmentHandler) -> void:
+	if not handler:
+		return
+	handler.owner_of_equipment = player
+	handler.set_equipment(eq)
+	if eq:
+		handler.show()
+	else:
+		handler.hide()
 
 
 func start_turn() -> void:
@@ -111,7 +160,7 @@ func discard_cards() -> void:
 		tween.tween_callback(character.discard.add_card.bind(card_ui.card))
 		tween.tween_callback(hand.discard_card.bind(card_ui))
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
-	
+
 	tween.finished.connect(
 		func():
 			Events.player_hand_discarded.emit()
@@ -142,7 +191,7 @@ func _on_card_discarded(card: Card) -> void:
 	if card.attack >= 6:
 		var enr_status  := preload("res://statuses/enraged.tres").duplicate()
 		player.status_handler.add_status(enr_status)
-	
+
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		return
 	character.discard.add_card(card)
@@ -175,7 +224,22 @@ func _on_relics_activated(type: Relic.Type) -> void:
 			player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 		Relic.Type.END_OF_TURN:
 			player.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
+		Relic.Type.END_OF_COMBAT:
+			restore_equipment_for_battle()
+
 
 func reset_weapons() -> void:
-	for wep in [weapon_left, weapon_right] as Array[WeaponHandler]:
-		wep.reset()
+	for wep in [hand_left_weapon, hand_right_weapon] as Array[WeaponHandler]:
+		if wep and wep.weapon:
+			wep.reset()
+
+
+## Called at end of combat: REUSABLE equipment refreshes; ONE_SHOT was already cleaned up
+## per-destruction in EquipmentHandler.
+func restore_equipment_for_battle() -> void:
+	for handler in [
+		hand_left_equipment, hand_right_equipment,
+		equipment_head, equipment_chest, equipment_arms, equipment_legs,
+	] as Array[EquipmentHandler]:
+		if handler:
+			handler.restore_for_battle()

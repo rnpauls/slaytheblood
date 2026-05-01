@@ -4,9 +4,11 @@ extends Control
 const SHOP_CARD = preload("res://scenes/shop/shop_card.tscn")
 const SHOP_RELIC = preload("res://scenes/shop/shop_relic.tscn")
 const SHOP_WEAPON = preload("res://scenes/shop/shop_weapon.tscn")
+const SHOP_EQUIPMENT = preload("res://scenes/shop/shop_equipment.tscn")
 
 @export var shop_relics: Array[Relic]
 @export var shop_weapons: Array[Weapon]
+@export var shop_equipment: Array[Equipment]
 @export var char_stats: CharacterStats
 @export var run_stats: RunStats
 @export var relic_handler: RelicHandler
@@ -15,6 +17,8 @@ const SHOP_WEAPON = preload("res://scenes/shop/shop_weapon.tscn")
 @onready var cards: HBoxContainer = %Cards
 @onready var relics: HBoxContainer = %Relics
 @onready var weapons: HBoxContainer = %Weapons
+## Optional: only present once the shop scene has an %Equipment HBoxContainer.
+@onready var equipment_container: HBoxContainer = get_node_or_null("%Equipment")
 @onready var shopkeeper_animation: AnimationPlayer = %ShopkeeperAnimation
 @onready var blink_timer: Timer = %BlinkTimer
 @onready var card_tooltip_popup: CardTooltipPopup = %CardTooltipPopup
@@ -33,6 +37,7 @@ func _ready() -> void:
 	Events.shop_card_bought.connect(_on_shop_card_bought)
 	Events.shop_relic_bought.connect(_on_shop_relic_bought)
 	Events.shop_weapon_bought.connect(_on_shop_weapon_bought)
+	Events.shop_equipment_bought.connect(_on_shop_equipment_bought)
 
 	_blink_timer_setup()
 	blink_timer.timeout.connect(_on_blink_timer_timeout)
@@ -45,6 +50,7 @@ func populate_shop() -> void:
 	_generate_shop_cards()
 	_generate_shop_relics()
 	_generate_shop_weapons()
+	_generate_shop_equipment()
 
 func _blink_timer_setup() -> void:
 	blink_timer.wait_time = randf_range(1.0, 5.0)
@@ -157,6 +163,31 @@ func _on_shop_weapon_bought(weapon: Weapon, gold_cost: int) -> void:
 	char_stats.add_weapon(weapon)
 	run_stats.gold -= gold_cost
 	_update_items()
+
+func _on_shop_equipment_bought(equipment: Equipment, gold_cost: int) -> void:
+	char_stats.add_equipment(equipment)
+	run_stats.gold -= gold_cost
+	_update_items()
+
+func _generate_shop_equipment() -> void:
+	if not equipment_container:
+		return
+	for child in equipment_container.get_children():
+		child.queue_free()
+	var available := shop_equipment.filter(
+		func(eq: Equipment):
+			var can_appear := eq.can_appear_as_reward(char_stats)
+			var already_had_it := char_stats.inventory.has_equipment(eq.id)
+			return can_appear and not already_had_it
+	)
+	RNG.array_shuffle(available)
+	var picked := available.slice(0, 3)
+	for eq: Equipment in picked:
+		var entry := SHOP_EQUIPMENT.instantiate() as ShopEquipment
+		equipment_container.add_child(entry)
+		entry.equipment = eq
+		entry.gold_cost = _get_updated_shop_cost(entry.gold_cost)
+		entry.update(run_stats)
 
 func _on_blink_timer_timeout() -> void:
 	shopkeeper_animation.play("Blink")

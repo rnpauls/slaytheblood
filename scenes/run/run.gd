@@ -78,8 +78,12 @@ func _save_run(was_on_map: bool) -> void:
 	save_data.floors_climbed = map.floors_climbed
 	save_data.was_on_map = was_on_map
 	save_data.current_inventory = character.inventory
-	save_data.current_weapon_left = character.weapon_left
-	save_data.current_weapon_right = character.weapon_right
+	save_data.current_hand_left = character.hand_left
+	save_data.current_hand_right = character.hand_right
+	save_data.current_equipment_head = character.equipment_head
+	save_data.current_equipment_chest = character.equipment_chest
+	save_data.current_equipment_arms = character.equipment_arms
+	save_data.current_equipment_legs = character.equipment_legs
 	save_data.save_data()
 
 func _load_run() -> void:
@@ -91,8 +95,12 @@ func _load_run() -> void:
 	character = save_data.char_stats
 	character.deck = save_data.current_deck
 	character.inventory = save_data.current_inventory
-	character.weapon_left = save_data.current_weapon_left
-	character.weapon_right = save_data.current_weapon_right
+	character.hand_left = save_data.current_hand_left
+	character.hand_right = save_data.current_hand_right
+	character.equipment_head = save_data.current_equipment_head
+	character.equipment_chest = save_data.current_equipment_chest
+	character.equipment_arms = save_data.current_equipment_arms
+	character.equipment_legs = save_data.current_equipment_legs
 	character.health = save_data.current_health
 	relic_handler.add_relics(save_data.relics)
 	_setup_top_bar()
@@ -149,6 +157,7 @@ func _setup_top_bar() -> void:
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
 	inventory_button.pressed.connect(inventory_view.show_current_view)
 	inventory_view.inventory = character.inventory
+	inventory_view.character = character
 
 func _show_regular_battle_rewards() -> void:
 	var reward_scene := _change_view(BATTLE_REWARD_SCENE) as BattleReward

@@ -23,11 +23,20 @@ func create_instance() -> Resource:
 	instance.reset_mana()
 	instance.reset_action_points()
 	instance.deck = instance.starting_deck.duplicate()
-	instance.inventory = Inventory.new() #Weapons are added to characters, and the character adds it to their inventory
-	#instance.starting_inventory.duplicate()
+	instance.inventory = Inventory.new() # Items are added to the character, who adds them to their inventory.
+	# Clear out any per-instance equipped slots so add_weapon/add_equipment can fill them fresh.
+	instance.hand_left = null
+	instance.hand_right = null
+	instance.equipment_head = null
+	instance.equipment_chest = null
+	instance.equipment_arms = null
+	instance.equipment_legs = null
+
 	for new_wep in instance.starting_inventory.weapons:
 		instance.add_weapon(new_wep)
-			
+	for new_eq in instance.starting_inventory.equips:
+		instance.add_equipment(new_eq)
+
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
 	return instance

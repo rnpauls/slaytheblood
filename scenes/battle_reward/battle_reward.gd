@@ -50,6 +50,16 @@ func add_relic_reward(relic: Relic) -> void:
 	relic_reward.pressed.connect(_on_relic_reward_taken.bind(relic))
 	rewards.add_child.call_deferred(relic_reward)
 
+func add_equipment_reward(equipment: Equipment) -> void:
+	if not equipment:
+		return
+
+	var eq_reward := REWARD_BUTTON.instantiate() as RewardButton
+	eq_reward.reward_icon = equipment.icon
+	eq_reward.reward_text = equipment.equipment_name
+	eq_reward.pressed.connect(_on_equipment_reward_taken.bind(equipment))
+	rewards.add_child.call_deferred(eq_reward)
+
 func _show_card_rewards() -> void:
 	if not run_stats or not character_stats:
 		return
@@ -110,8 +120,14 @@ func _on_card_reward_taken(card: Card) -> void:
 func _on_relic_reward_taken(relic: Relic) -> void:
 	if not relic or not relic_handler:
 		return
-		
+
 	relic_handler.add_relic(relic)
+
+func _on_equipment_reward_taken(equipment: Equipment) -> void:
+	if not equipment or not character_stats:
+		return
+
+	character_stats.add_equipment(equipment)
 
 func _on_back_button_pressed() -> void:
 	Events.battle_reward_exited.emit()
