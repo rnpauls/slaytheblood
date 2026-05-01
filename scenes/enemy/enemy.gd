@@ -144,6 +144,8 @@ func update_intent() -> void:
 			new_intent.base_text = "%s"
 		new_intent.current_text = new_intent.base_text % modified_damage
 		new_intent.icon = preload("res://art/tile_0103.png")
+	elif current_action and current_action.type == Card.Type.NAA:
+		new_intent.current_text = "NAA"
 	else:
 		if enemy_ai and enemy_ai.hand.size() > 0:
 			new_intent.base_text = "? X %s"

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cbeme2qybb3ro" path="res://scenes/shop/shop_card.gd" id="1_gu12k"]
 [ext_resource type="PackedScene" uid="uid://b2ay04rjh0l4v" path="res://scenes/ui/card_menu_ui.tscn" id="1_jui1i"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="2_amrd3"]
-[ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/warrior/cards/warrior_true_strength.tres" id="2_qhqmp"]
+[ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/brute/cards/warrior_true_strength.tres" id="2_qhqmp"]
 
 [node name="ShopCard" type="VBoxContainer" unique_id=315799312]
 custom_minimum_size = Vector2(40, 56)

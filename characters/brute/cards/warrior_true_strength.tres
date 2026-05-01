@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://b4oavmlo7ueax"]
 
-[ext_resource type="Script" uid="uid://dh7ilk6u3ytba" path="res://characters/warrior/cards/warrior_true_strength.gd" id="1_3dkr1"]
+[ext_resource type="Script" uid="uid://dh7ilk6u3ytba" path="res://characters/brute/cards/warrior_true_strength.gd" id="1_3dkr1"]
 [ext_resource type="Texture2D" uid="uid://cn2c1psh561cc" path="res://art/tile_0127.png" id="1_7voqq"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ehbwc"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="3_rnlwg"]

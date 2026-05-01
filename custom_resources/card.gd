@@ -147,22 +147,22 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card
 
-func rampage(source: Node, qty: int) -> bool:
-	Events.card_discarded.connect(_on_card_discarded)
-	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
-	source.draw_card()
-	discarded_card = null
-	var discard_effect = DiscardRandomEffect.new()
-	discard_effect.amount = qty
-	discard_effect.execute([source])
-	#var discarded_card: Card = await Events.card_discarded
-	var timer = source.get_tree().create_timer(.01)
-	print_debug("Rampage still has timer")
-	await timer.timeout
-	if discarded_card and (discarded_card.attack >= 6):
-		return true
-	else:
-		return false
+#func rampage(source: Node, qty: int) -> bool:
+	#Events.card_discarded.connect(_on_card_discarded)
+	##var player: Player = targets[0].get_tree().get_first_node_in_group("player")
+	#source.draw_card()
+	#discarded_card = null
+	#var discard_effect = DiscardRandomEffect.new()
+	#discard_effect.amount = qty
+	#discard_effect.execute([source])
+	##var discarded_card: Card = await Events.card_discarded
+	#var timer = source.get_tree().create_timer(.01)
+	#print_debug("Rampage still has timer")
+	#await timer.timeout
+	#if discarded_card and (discarded_card.attack >= 6):
+		#return true
+	#else:
+		#return false
 
 func sixloot(source: Node, qty: int) -> bool:
 	#Events.card_discarded.connect(_on_card_discarded)

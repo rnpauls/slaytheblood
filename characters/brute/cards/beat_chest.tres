@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://7lv1gwvqeo24"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_0k3fs"]
+[ext_resource type="Texture2D" uid="uid://bv2wpbh3uv4x3" path="res://art/tile_0109.png" id="2_m8xfe"]
+[ext_resource type="Script" uid="uid://bbt11nsgn333p" path="res://characters/brute/cards/beat_chest.gd" id="2_x8ib1"]
+[ext_resource type="AudioStream" uid="uid://bwqypbxyj2f11" path="res://art/music/sound_effects/400 Sounds Pack/Human/cough_double.wav" id="4_7vjuk"]
+
+[resource]
+script = ExtResource("2_x8ib1")
+id = "beat_chest"
+type = 1
+target = 1
+pitch = 3
+defense = 2
+go_again = true
+icon = ExtResource("2_m8xfe")
+tooltip_text = "Intimidate 1. 
+Empower 3."
+sound = ExtResource("4_7vjuk")
+disable_attack = true
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

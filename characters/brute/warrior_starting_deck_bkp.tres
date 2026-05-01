@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://dgsn5ln7u7ef5"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_ypldm"]
-[ext_resource type="Resource" uid="uid://be0pdlwkj8poo" path="res://characters/warrior/cards/warrior_axe_attack.tres" id="2_gdodh"]
-[ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/warrior/cards/warrior_slash.tres" id="3_8tpeo"]
-[ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/warrior/cards/warrior_big_slam.tres" id="4_1vfwm"]
-[ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/warrior/cards/warrior_true_strength.tres" id="5_qwghv"]
+[ext_resource type="Resource" uid="uid://be0pdlwkj8poo" path="res://characters/brute/cards/warrior_axe_attack.tres" id="2_gdodh"]
+[ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/brute/cards/warrior_slash.tres" id="3_8tpeo"]
+[ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/brute/cards/warrior_big_slam.tres" id="4_1vfwm"]
+[ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/brute/cards/warrior_true_strength.tres" id="5_qwghv"]
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="6_3yam2"]
 [ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://common_cards/sink_below_red.tres" id="7_e6ikx"]
-[ext_resource type="Resource" uid="uid://bllgno480j4cf" path="res://characters/warrior/cards/wild_ride_red.tres" id="8_563qf"]
+[ext_resource type="Resource" uid="uid://bllgno480j4cf" path="res://characters/brute/cards/wild_ride_red.tres" id="8_563qf"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="9_mkesn"]
 
 [resource]

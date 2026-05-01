@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_odk1c")
-id = "warrior_big_slam"
+id = "big_slam"
 rarity = 1
 target = 1
 cost = 3

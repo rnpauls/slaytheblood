@@ -47,7 +47,7 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 func reset_enemy_actions() -> void:
 	for enemy: Enemy in get_children():
 		enemy.current_action = null
-		enemy.update_intent()
+		#enemy.update_intent()
 
 func start_turn() -> void:
 	if get_child_count() == 0:

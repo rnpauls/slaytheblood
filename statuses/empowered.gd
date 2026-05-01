@@ -22,6 +22,8 @@ func initialize_status(target: Node) -> void:
 		
 	print_debug("Add empowered modifier")
 
+func update() -> void:
+	damage_modifier.set_value_flat_value("empowered", stacks)
 
 func apply_status(_target) -> void:
 	status_applied.emit(self)

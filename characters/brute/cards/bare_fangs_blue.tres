@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_fq1na"]
 [ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_kcx5c"]
-[ext_resource type="Script" uid="uid://b2hwcwautfx8p" path="res://characters/warrior/cards/bare_fangs.gd" id="2_kcx5c"]
+[ext_resource type="Script" uid="uid://b2hwcwautfx8p" path="res://characters/brute/cards/bare_fangs.gd" id="2_kcx5c"]
 [ext_resource type="AudioStream" uid="uid://cnup57sd22nks" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/crunch.wav" id="4_42qgn"]
 
 [resource]

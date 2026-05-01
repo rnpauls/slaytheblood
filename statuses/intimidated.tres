@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="IntimidatedStatus" format=3 uid="uid://dop3f76f5l4o7"]
+
+[ext_resource type="Script" uid="uid://djoffxw2to1cp" path="res://statuses/intimidated.gd" id="1_intim"]
+[ext_resource type="Texture2D" uid="uid://cgopx2ponr1qi" path="res://art/tile_0121.png" id="1_yxd1j"]
+
+[resource]
+script = ExtResource("1_intim")
+id = "intimidated"
+type = 1
+stack_type = 1
+can_expire = true
+duration = 1
+stacks = 1
+icon = ExtResource("1_yxd1j")
+tooltip = "Intimidated: A random card cannot be used to block this turn."

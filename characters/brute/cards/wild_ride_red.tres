@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://i5hpae5jm87n" path="res://art/item31.png" id="1_3cbwq"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_khkg5"]
-[ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/warrior/cards/wild_ride.gd" id="2_3cbwq"]
+[ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/brute/cards/wild_ride.gd" id="2_3cbwq"]
 [ext_resource type="AudioStream" uid="uid://fi38usv6fgm5" path="res://art/music/sound_effects/FGHTImpt_HIT-Strong Smack_HY_PC-005.wav" id="4_c5ahh"]
 
 [resource]

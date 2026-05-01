@@ -8,6 +8,8 @@ var hand: Array # Current hand
 var arsenal: Card = null # Single Card or null
 var turn_plan = null # Stores the planned turn {damage, pitched, actions, remaining}
 var resources := 0 # Tracks resources available this turn
+## Cards that cannot be used to block this turn due to Intimidate. Set by IntimidatedStatus.
+var intimidated_cards: Array[Card] = []
 var modifier_handler: ModifierHandler
 
 @export var target: Node2D#: set = _set_target
@@ -183,6 +185,9 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 	
 	if attack_power > 0:
 		for card in state.cards:
+			# Skip cards that are intimidated — they cannot be used to block this turn.
+			if card in intimidated_cards:
+				continue
 			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources}
 			new_state.cards.erase(card)
 			var defense = card.defense

@@ -2,7 +2,7 @@ class_name Weapon
 extends Resource
 
 enum Type {SWORD, DAGGER, AXE, HAMMER, CLUB, CLAW, STAFF}
-enum CharacterType {ALL, NINJA, WARRIOR, WIZARD}
+enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
 enum Hands {ONEHAND, TWOHAND, OFFHAND}
 enum Rarity {COMMON, UNCOMMON, RARE}
 

@@ -2,8 +2,8 @@ extends Control
 
 const RUN_SCENE := preload("res://scenes/run/run.tscn")
 const NINJA_STATS = preload("res://characters/ninja/ninja.tres")
-const WIZARD_STATS = preload("res://characters/wizard/wizard.tres")
-const WARRIOR_STATS = preload("res://characters/warrior/warrior.tres")
+const RUNEBLADE_STATS = preload("res://characters/runeblade/runeblade.tres")
+const BRUTE_STATS = preload("res://characters/brute/brute.tres")
 
 @export var run_startup: RunStartup
 
@@ -14,7 +14,7 @@ const WARRIOR_STATS = preload("res://characters/warrior/warrior.tres")
 var current_character: CharacterStats : set = set_current_character
 
 func _ready() -> void:
-	set_current_character(WARRIOR_STATS)
+	set_current_character(BRUTE_STATS)
 
 func set_current_character(new_character: CharacterStats) -> void:
 	current_character = new_character
@@ -29,12 +29,12 @@ func _on_start_button_pressed() ->void:
 	get_tree().change_scene_to_packed(RUN_SCENE)
 
 
-func _on_warrior_button_pressed() ->void:
-	current_character = WARRIOR_STATS
+func _on_brute_button_pressed() ->void:
+	current_character = BRUTE_STATS
 
 
-func _on_wizard_button_pressed() ->void:
-	current_character = WIZARD_STATS
+func _on_runeblade_button_pressed() ->void:
+	current_character = RUNEBLADE_STATS
 
 
 func _on_ninja_button_pressed() ->void:

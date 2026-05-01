@@ -8,10 +8,11 @@ extends CardUI
 var show_back: bool = true : set = _set_show_back
 
 func _ready() -> void:
-	# Wire hover signals so EnemyHand can respond to mouse-over
+	# Wire hover signals so EnemyHand can respond to mouse-over.
+	# NOTE: mouse_entered/mouse_exited are already connected to _on_mouse_entered/_on_mouse_exited
+	# via the inherited card_ui.tscn scene file — don't reconnect here or Godot raises
+	# "Signal already connected" errors.
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
 	# Apply initial back state once the render node exists
 	_apply_show_back()
 

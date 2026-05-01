@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_x4lmk"]
 [ext_resource type="Resource" uid="uid://bpyxehcf5kwl" path="res://relics/reinforced_armor.tres" id="6_ksdlm"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="7_5y7fm"]
-[ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="7_hjjob"]
+[ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/brute/brute.tres" id="7_hjjob"]
 [ext_resource type="Resource" uid="uid://rbm1nv0nx2nj" path="res://test_data/test_run_stats.tres" id="8_ropyq"]
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="8_toxgp"]
 [ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="9_u2jek"]

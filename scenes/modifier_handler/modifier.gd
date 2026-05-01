@@ -12,6 +12,13 @@ func get_value(source: String) -> ModifierValue:
 	
 	return null
 
+func set_value_flat_value(source:String, new_flat_val: int) -> void:
+	for value: ModifierValue in get_children():
+		if value.source == source:
+			value.flat_value = new_flat_val
+			return
+	print_debug("Failed to find flat_value %s" % source)
+
 func add_new_value(value: ModifierValue) -> void:
 	var modifier_value := get_value(value.source)
 	if not modifier_value:

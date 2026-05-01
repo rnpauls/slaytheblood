@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="RunStartup" load_steps=3 format=3 uid="uid://c6y7qo3oyjpal"]
+[gd_resource type="Resource" script_class="RunStartup" format=3 uid="uid://c6y7qo3oyjpal"]
 
 [ext_resource type="Script" uid="uid://b4j5p5ot6duuq" path="res://custom_resources/run_startup.gd" id="1_4cwut"]
-[ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/warrior/warrior.tres" id="1_amcnc"]
+[ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/brute/brute.tres" id="1_amcnc"]
 
 [resource]
 script = ExtResource("1_4cwut")
