@@ -3,15 +3,8 @@ extends Card
 func get_default_tooltip() -> String:
 	return tooltip_text % attack
 
-func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
-	var modified_dmg := player_modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	
-	if enemy_modifiers:
-		modified_dmg = enemy_modifiers.get_modified_value(modified_dmg, Modifier.Type.DMG_TAKEN)
-	return tooltip_text % modified_dmg
+func get_updated_tooltip(dealer: Node, target: Node) -> String:
+	return tooltip_text % Hook.get_damage(dealer, target, attack)
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	var damage_effect := DamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
-	damage_effect.execute(targets)
+func apply_effects(targets: Array[Node]) -> void:
+	do_stock_attack_damage_effect(targets)

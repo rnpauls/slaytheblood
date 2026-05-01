@@ -9,23 +9,23 @@ const STATUS_UI = preload("res://scenes/status_handler/status_ui.tscn")
 @export var status_owner: Node2D
 
 func apply_statuses_by_type(type: Status.Type) -> void:
+	# Status effects now fire via Hook at the appropriate lifecycle point.
+	# This method exists only to drive the turn-flow signal with a visual delay
+	# so the UI has time to show status icons activating.
 	if type == Status.Type.EVENT_BASED:
 		return
-	
+
 	var status_queue: Array[Status] = _get_all_statuses().filter(
-		func(status: Status):
-			return status.type == type
+		func(s: Status): return s.type == type
 	)
-	
+
 	if status_queue.is_empty():
 		statuses_applied.emit(type)
 		return
-	
+
+	# Brief delay so the UI reads as "statuses activating", then continue turn flow.
 	var tween := create_tween()
-	for status: Status in status_queue:
-		tween.tween_callback(status.apply_status.bind(status_owner))
-		tween.tween_interval(STATUS_APPLY_INTERVAL)
-	
+	tween.tween_interval(STATUS_APPLY_INTERVAL * status_queue.size())
 	tween.finished.connect(func(): statuses_applied.emit(type))
 
 #func _ready():
@@ -41,22 +41,23 @@ func apply_statuses_by_type(type: Status.Type) -> void:
 
 func add_status(status: Status) -> void:
 	var stackable := status.stack_type != Status.StackType.NONE
-	
+
 	if not _has_status(status.id):
 		var new_status_ui := STATUS_UI.instantiate() as StatusUI
 		add_child(new_status_ui)
 		new_status_ui.set_status(status)
-		new_status_ui.status.status_applied.connect(_on_status_applied)
+		# initialize_status still needed for statuses that act immediately on add
+		# (e.g. IntimidatedStatus picks cards at add-time rather than at hook-time).
 		new_status_ui.status.initialize_status(status_owner)
 		return
-	
+
 	if not status.can_expire and not stackable:
 		return
-	
+
 	if status.can_expire and status.stack_type == Status.StackType.DURATION:
 		_get_status(status.id).duration += status.duration
 		return
-		
+
 	if status.stack_type == Status.StackType.INTENSITY:
 		_get_status(status.id).stacks += status.stacks
 		_get_status(status.id).duration = status.duration
@@ -83,10 +84,6 @@ func _get_all_statuses() -> Array[Status]:
 		statuses.append(status_ui.status)
 	
 	return statuses
-
-func _on_status_applied(status: Status) -> void:
-	if status.can_expire:
-		status.duration -= 1
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):

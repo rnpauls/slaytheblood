@@ -12,23 +12,41 @@ enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
 @export var icon: Texture
 @export_multiline var tooltip: String
 
-func initialize_relic(_owner: RelicUI) -> void:
-	pass
-
-
-func activate_relic(_owner: RelicUI) -> void:
-	pass
-
-
-# This method should be implemented by event-based relics
-# which connect to the EventBus to make sure that they are
-# disconnected when a relic gets removed.
-func deactivate_relic(_owner: RelicUI) -> void:
-	pass
-
-
 func get_tooltip() -> String:
 	return tooltip
+
+# --- Hook virtuals (called by RelicUI delegation) ---
+# ui: the RelicUI node registered with Hook.
+
+func modify_damage_additive(_dealer: Node, _target: Node, _vp: ValueProp, _ui: Node) -> int:
+	return 0
+
+func modify_damage_multiplicative(_dealer: Node, _target: Node, _vp: ValueProp, _ui: Node) -> float:
+	return 1.0
+
+func modify_block_additive(_blocker: Node, _vp: ValueProp, _ui: Node) -> int:
+	return 0
+
+func modify_block_multiplicative(_blocker: Node, _vp: ValueProp, _ui: Node) -> float:
+	return 1.0
+
+func before_card_played(_card: Card, _ctx: Dictionary, _ui: Node) -> void:
+	pass
+
+func after_card_played(_card: Card, _ctx: Dictionary, _ui: Node) -> void:
+	pass
+
+func after_turn_end(_side: String, _ui: Node) -> void:
+	pass
+
+func after_attack_completed(_attacker: Node, _ctx: Dictionary, _ui: Node) -> void:
+	pass
+
+func on_hit_dealt(_dealer: Node, _target: Node, _ctx: Dictionary, _ui: Node) -> void:
+	pass
+
+func on_hit_received(_dealer: Node, _target: Node, _ctx: Dictionary, _ui: Node) -> void:
+	pass
 
 
 func can_appear_as_reward(character: CharacterStats) -> bool:

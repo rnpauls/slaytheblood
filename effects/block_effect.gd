@@ -8,5 +8,5 @@ func execute(targets: Array[Node]) -> void:
 		if not target:
 			continue
 		if target is Enemy or target is Player:
-			target.stats.block += amount
+			target.stats.block += Hook.get_block(target, amount)
 			SFXPlayer.play(sound)

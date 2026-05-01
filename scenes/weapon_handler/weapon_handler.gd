@@ -81,7 +81,7 @@ func attempt_to_attack() -> void:
 	if not targets.is_empty():
 		#print(card_ui.targets[0].get_class())
 		#if targets[0] is Enemy:
-		weapon.activate_weapon(targets, owner_of_weapon.modifier_handler)
+		weapon.activate_weapon(targets)
 			#Events.tooltip_hide_requested.emit()
 		owner_of_weapon.attack_completed.emit()
 		Hook.after_attack_completed(owner_of_weapon, {})

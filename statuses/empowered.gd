@@ -1,32 +1,22 @@
 class_name EmpoweredStatus
 extends Status
 
-var damage_modifier: Modifier
-
-#Adds "stacks" to next attack power
-#Set duration to 2 if created by an attack (it will reduce duration by 1 when attack is completed)
+## Whether the current attack has consumed this empowered instance.
+## Set true in modify_damage_additive so after_attack_completed knows to remove it.
+var _consumed := false
 
 func get_tooltip() -> String:
 	return tooltip % stacks
 
-func initialize_status(target: Node) -> void:
-	damage_modifier = target.modifier_handler.get_modifier(Modifier.Type.DMG_DEALT)
-	var dmg_modifier_value: ModifierValue = ModifierValue.create_new_modifier("empowered", ModifierValue.Type.FLAT)
-	dmg_modifier_value.flat_value = stacks
-	damage_modifier.add_new_value(dmg_modifier_value)
-	target.attack_completed.connect(apply_status.bind(target))
-	if target is Player:
-		Events.player_turn_ended.connect(apply_status.bind(target))
-	else:
-		Events.enemy_phase_ended.connect(apply_status.bind(target))
-		
-	print_debug("Add empowered modifier")
+func modify_damage_additive(dealer: Node, _target: Node, _vp: ValueProp, ui: Node) -> int:
+	if dealer == Status.get_status_owner(ui) and not _consumed:
+		_consumed = true
+		return stacks
+	return 0
 
-func update() -> void:
-	damage_modifier.set_value_flat_value("empowered", stacks)
+func after_attack_completed(attacker: Node, _ctx: Dictionary, ui: Node) -> void:
+	if attacker == Status.get_status_owner(ui) and _consumed:
+		ui.queue_free()
 
-func apply_status(_target) -> void:
-	status_applied.emit(self)
-
-func _exit_tree() -> void:
-	damage_modifier.remove_value("empowered")
+func after_turn_end(_side: String, ui: Node) -> void:
+	ui.queue_free()

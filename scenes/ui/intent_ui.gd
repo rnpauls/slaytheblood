@@ -47,11 +47,7 @@ func _build_tooltip_text() -> String:
 
 	# Damage line (only for attacks)
 	if action.type == Card.Type.ATTACK:
-		var dmg: int = action.attack
-		if enemy.modifier_handler:
-			dmg = enemy.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_DEALT)
-		if enemy.enemy_ai and enemy.enemy_ai.target and enemy.enemy_ai.target.modifier_handler:
-			dmg = enemy.enemy_ai.target.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_TAKEN)
+		var dmg := Hook.get_damage(enemy, enemy.enemy_ai.target, action.attack)
 		lines.append("[b]Deals %d damage[/b]" % dmg)
 		if action.go_again:
 			lines.append("Go Again")

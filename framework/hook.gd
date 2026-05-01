@@ -1,46 +1,47 @@
 ## Hook — global autoload
 ##
-## Central registry and dispatcher for AbstractModel lifecycle hooks.
-## All combat entities (statuses, relics, card effects) register here;
-## combat flow code calls the dispatch methods at named lifecycle points.
+## Central registry and dispatcher for the AbstractModel hook system.
+## Any Node that follows the AbstractModel protocol calls on_model_entered(self)
+## in _ready and on_model_exited(self) in _exit_tree to participate.
+##
+## Dispatch uses duck typing: each method checks has_method before calling,
+## so nodes only need to implement the hooks they care about.
 ##
 ## Snapshot safety: every dispatch duplicates the registry before iterating,
-## so a model registered or unregistered during a dispatch does not affect
-## the current iteration.
+## so a model entering or exiting during a dispatch doesn't affect the current pass.
 ##
-## Lifecycle: call Hook.clear() when a battle ends to flush all registered
-## models and prevent stale hooks firing in the next battle.
+## Lifecycle: call Hook.clear() when a battle ends (battle.gd) to flush all
+## registered models and prevent stale hooks in the next battle.
 
 extends Node
 
-signal model_registered(model: AbstractModel)
-signal model_unregistered(model: AbstractModel)
+signal model_registered(model: Node)
+signal model_unregistered(model: Node)
 
-var _models: Array[AbstractModel] = []
+var _models: Array[Node] = []
 
-# True while we are inside a dispatch loop. Used to tag newly registered
-# models with the current play key so they can skip their trigger card.
-var _dispatching_play_key: String = ""
+# Set during after_card_played / before_card_played dispatches so StatusUI
+# nodes registered mid-dispatch can read the current card's play key.
+var current_play_key: String = ""
 
 
 # ---------------------------------------------------------------------------
-# Registry
+# Registration — called from _ready / _exit_tree on participant nodes
 # ---------------------------------------------------------------------------
 
-func register(model: AbstractModel, owner: Node) -> void:
-	model._owner_ref = weakref(owner)
-	if _dispatching_play_key != "":
-		model._registered_during_play_key = _dispatching_play_key
+func on_model_entered(model: Node) -> void:
+	if _models.has(model):
+		return
 	_models.append(model)
 	model_registered.emit(model)
 
 
-func unregister(model: AbstractModel) -> void:
+func on_model_exited(model: Node) -> void:
 	if _models.erase(model):
 		model_unregistered.emit(model)
 
 
-## Remove all registered models. Call at the end of every battle.
+## Flush all registered models. Call at the end of every battle.
 func clear() -> void:
 	var snapshot := _models.duplicate()
 	_models.clear()
@@ -49,92 +50,86 @@ func clear() -> void:
 
 
 # ---------------------------------------------------------------------------
-# Aggregating dispatches (damage / block)
+# Aggregating dispatches — damage / block
 # ---------------------------------------------------------------------------
 
-## Returns the final damage value after all additive then multiplicative hooks.
+## Returns the final damage value after additive then multiplicative passes.
 func get_damage(dealer: Node, target: Node, base: int) -> int:
 	var vp := ValueProp.new(base)
 	var snapshot := _models.duplicate()
-	# Additive pass
-	for m: AbstractModel in snapshot:
-		vp.value += m.modify_damage_additive(dealer, target, vp)
-	# Multiplicative pass
+	for m: Node in snapshot:
+		if m.has_method("modify_damage_additive"):
+			vp.value += m.modify_damage_additive(dealer, target, vp)
 	var mult := 1.0
-	for m: AbstractModel in snapshot:
-		mult *= m.modify_damage_multiplicative(dealer, target, vp)
+	for m: Node in snapshot:
+		if m.has_method("modify_damage_multiplicative"):
+			mult *= m.modify_damage_multiplicative(dealer, target, vp)
 	return floori(vp.value * mult)
 
 
-## Returns the final block value after all additive then multiplicative hooks.
-func get_block(owner_node: Node, base: int) -> int:
+## Returns the final block value after additive then multiplicative passes.
+func get_block(blocker: Node, base: int) -> int:
 	var vp := ValueProp.new(base)
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		vp.value += m.modify_block_additive(owner_node, vp)
+	for m: Node in snapshot:
+		if m.has_method("modify_block_additive"):
+			vp.value += m.modify_block_additive(blocker, vp)
 	var mult := 1.0
-	for m: AbstractModel in snapshot:
-		mult *= m.modify_block_multiplicative(owner_node, vp)
+	for m: Node in snapshot:
+		if m.has_method("modify_block_multiplicative"):
+			mult *= m.modify_block_multiplicative(blocker, vp)
 	return floori(vp.value * mult)
 
 
 # ---------------------------------------------------------------------------
-# Side-effect dispatches (lifecycle)
+# Side-effect dispatches — lifecycle
 # ---------------------------------------------------------------------------
 
 func before_card_played(card: Card, ctx: Dictionary) -> void:
-	var play_key := _make_play_key(card)
-	_dispatching_play_key = play_key
+	current_play_key = _make_play_key(card)
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		if not is_instance_valid(m.owner()):
-			continue
-		m.before_card_played(card, ctx)
-	_dispatching_play_key = ""
+	for m: Node in snapshot:
+		if m.has_method("before_card_played"):
+			m.before_card_played(card, ctx)
+	current_play_key = ""
 
 
 func after_card_played(card: Card, ctx: Dictionary) -> void:
-	var play_key := _make_play_key(card)
-	_dispatching_play_key = play_key
+	current_play_key = _make_play_key(card)
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		if not is_instance_valid(m.owner()):
-			continue
-		m.after_card_played(card, ctx)
-	_dispatching_play_key = ""
+	for m: Node in snapshot:
+		if m.has_method("after_card_played"):
+			m.after_card_played(card, ctx)
+	current_play_key = ""
 
 
 ## side: "player" or "enemy"
 func after_turn_end(side: String) -> void:
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		if not is_instance_valid(m.owner()):
-			continue
-		m.after_turn_end(side)
+	for m: Node in snapshot:
+		if m.has_method("after_turn_end"):
+			m.after_turn_end(side)
 
 
 func after_attack_completed(attacker: Node, ctx: Dictionary) -> void:
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		if not is_instance_valid(m.owner()):
-			continue
-		m.after_attack_completed(attacker, ctx)
+	for m: Node in snapshot:
+		if m.has_method("after_attack_completed"):
+			m.after_attack_completed(attacker, ctx)
 
 
 func on_hit_dealt(dealer: Node, target: Node, ctx: Dictionary) -> void:
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		if not is_instance_valid(m.owner()):
-			continue
-		m.on_hit_dealt(dealer, target, ctx)
+	for m: Node in snapshot:
+		if m.has_method("on_hit_dealt"):
+			m.on_hit_dealt(dealer, target, ctx)
 
 
 func on_hit_received(dealer: Node, target: Node, ctx: Dictionary) -> void:
 	var snapshot := _models.duplicate()
-	for m: AbstractModel in snapshot:
-		if not is_instance_valid(m.owner()):
-			continue
-		m.on_hit_received(dealer, target, ctx)
+	for m: Node in snapshot:
+		if m.has_method("on_hit_received"):
+			m.on_hit_received(dealer, target, ctx)
 
 
 # ---------------------------------------------------------------------------

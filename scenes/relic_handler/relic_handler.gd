@@ -20,9 +20,15 @@ func _ready() -> void:
 	#add_relic(preload("res://relics/explosive_barrel.tres"))
 
 func activate_relics_by_type(type: Relic.Type) -> void:
-	if type == Relic.Type.EVENT_BASED:
+	# Turn-based types (START_OF_TURN, END_OF_TURN) are now handled via Hook dispatch.
+	# EVENT_BASED relics use initialize_relic/deactivate_relic, not this path.
+	# Only START_OF_COMBAT and END_OF_COMBAT go through activate_relic here.
+	if type == Relic.Type.EVENT_BASED \
+			or type == Relic.Type.START_OF_TURN \
+			or type == Relic.Type.END_OF_TURN:
+		relics_activated.emit(type)
 		return
-	
+
 	var relic_queue: Array[RelicUI] = _get_all_relic_ui_nodes().filter(
 		func(relic_ui: RelicUI):
 			return relic_ui.relic.type == type
@@ -30,12 +36,12 @@ func activate_relics_by_type(type: Relic.Type) -> void:
 	if relic_queue.is_empty():
 		relics_activated.emit(type)
 		return
-	
+
 	var tween := create_tween()
 	for relic_ui: RelicUI in relic_queue:
 		tween.tween_callback(relic_ui.relic.activate_relic.bind(relic_ui))
 		tween.tween_interval(RELIC_APPLY_INTERVAL)
-	
+
 	tween.finished.connect(func(): relics_activated.emit(type))
 
 func add_relics(relics_array: Array[Relic]) -> void:
@@ -48,7 +54,8 @@ func add_relic(relic: Relic) -> void:
 	var new_relic_ui := RELIC_UI.instantiate() as RelicUI
 	relics.add_child(new_relic_ui)
 	new_relic_ui.relic = relic
-	new_relic_ui.relic.initialize_relic(new_relic_ui)
+	if relic.type == Relic.Type.EVENT_BASED:
+		relic.initialize_relic(new_relic_ui)
 
 func has_relic(id: String) -> bool:
 	for relic_ui: RelicUI in relics.get_children():
@@ -77,6 +84,6 @@ func _get_all_relic_ui_nodes() -> Array[RelicUI]:
 func _on_relics_child_exiting_tree(relic_ui: RelicUI) -> void:
 	if not relic_ui:
 		return
-	
-	if relic_ui.relic:
+
+	if relic_ui.relic and relic_ui.relic.type == Relic.Type.EVENT_BASED:
 		relic_ui.relic.deactivate_relic(relic_ui)

@@ -42,7 +42,6 @@ func add_card(card: Card) -> void:
 	
 	new_card_ui.card = card
 	new_card_ui.char_stats = char_stats
-	new_card_ui.modifier_handler = player.modifier_handler
 	
 	new_card_ui.pivot_offset = new_card_ui.size / 2
 	

@@ -1,13 +1,9 @@
 extends Card
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node]) -> void:
 	Events.lock_hand.emit()
 	Events.card_discarded.connect(_on_card_discarded)
-	#var player: Player = targets[0].get_tree().get_first_node_in_group("player")
 	var player_handler: PlayerHandler = targets[0].get_tree().get_first_node_in_group("player_handler")
-	if await sixloot(player_handler, 1):
-		go_again = true
-	else:
-		go_again = false
-	do_stock_attack_damage_effect(targets, modifiers)
+	go_again = await sixloot(player_handler, 1)
+	do_stock_attack_damage_effect(targets)
 	Events.unlock_hand.emit()

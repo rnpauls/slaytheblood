@@ -1,3 +1,6 @@
+## Participates in the Hook system: registers on _ready, unregisters on _exit_tree.
+## Override hook methods in StatusUI subclasses (modify_damage_additive,
+## after_turn_end, etc.) to give individual statuses their combat behavior.
 class_name StatusUI
 extends Control
 
@@ -40,5 +43,56 @@ func _on_status_changed() -> void:
 	duration.text = str(status.duration)
 	stacks.text = str(status.stacks)
 
+func _ready() -> void:
+	Hook.on_model_entered(self)
+
 func _exit_tree() -> void:
-	status._exit_tree()
+	Hook.on_model_exited(self)
+	if status:
+		status._exit_tree(self)
+
+# --- Hook protocol — delegates to the Status resource ---
+
+func modify_damage_additive(dealer: Node, target: Node, vp: ValueProp) -> int:
+	if status:
+		return status.modify_damage_additive(dealer, target, vp, self)
+	return 0
+
+func modify_damage_multiplicative(dealer: Node, target: Node, vp: ValueProp) -> float:
+	if status:
+		return status.modify_damage_multiplicative(dealer, target, vp, self)
+	return 1.0
+
+func modify_block_additive(blocker: Node, vp: ValueProp) -> int:
+	if status:
+		return status.modify_block_additive(blocker, vp, self)
+	return 0
+
+func modify_block_multiplicative(blocker: Node, vp: ValueProp) -> float:
+	if status:
+		return status.modify_block_multiplicative(blocker, vp, self)
+	return 1.0
+
+func before_card_played(card: Card, ctx: Dictionary) -> void:
+	if status:
+		status.before_card_played(card, ctx, self)
+
+func after_card_played(card: Card, ctx: Dictionary) -> void:
+	if status:
+		status.after_card_played(card, ctx, self)
+
+func after_turn_end(side: String) -> void:
+	if status:
+		status.after_turn_end(side, self)
+
+func after_attack_completed(attacker: Node, ctx: Dictionary) -> void:
+	if status:
+		status.after_attack_completed(attacker, ctx, self)
+
+func on_hit_dealt(dealer: Node, target: Node, ctx: Dictionary) -> void:
+	if status:
+		status.on_hit_dealt(dealer, target, ctx, self)
+
+func on_hit_received(dealer: Node, target: Node, ctx: Dictionary) -> void:
+	if status:
+		status.on_hit_received(dealer, target, ctx, self)

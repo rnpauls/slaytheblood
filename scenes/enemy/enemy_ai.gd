@@ -10,7 +10,6 @@ var turn_plan = null # Stores the planned turn {damage, pitched, actions, remain
 var resources := 0 # Tracks resources available this turn
 ## Cards that cannot be used to block this turn due to Intimidate. Set by IntimidatedStatus.
 var intimidated_cards: Array[Card] = []
-var modifier_handler: ModifierHandler
 
 @export var target: Node2D#: set = _set_target
 
@@ -74,7 +73,7 @@ func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) 
 	var player_hand_size : int = target.get_tree().get_first_node_in_group("player_hand").get_child_count()
 	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
-	var modified_damage = modifier_handler.get_modified_value(player_attack_power, Modifier.Type.DMG_TAKEN)
+	var modified_damage = Hook.get_damage(target, enemy, player_attack_power)
 	var block_options = calculate_block_options(hand_state, modified_damage, has_go_again, player_hand_size, onhits)
 	
 	# Life factor: More blocking when life is low (0.5 at 20+, 2.0 at 5 or less)
@@ -166,7 +165,7 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0)
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
-			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)
+			var current_action_damage_modified = Hook.get_damage(enemy, target, action.attack)
 			current_action_damage_modified += action.ai_value
 			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
 			

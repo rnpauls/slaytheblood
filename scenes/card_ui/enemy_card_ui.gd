@@ -8,6 +8,7 @@ extends CardUI
 var show_back: bool = true : set = _set_show_back
 
 func _ready() -> void:
+	super._ready()
 	# Wire hover signals so EnemyHand can respond to mouse-over.
 	# NOTE: mouse_entered/mouse_exited are already connected to _on_mouse_entered/_on_mouse_exited
 	# via the inherited card_ui.tscn scene file — don't reconnect here or Godot raises
@@ -16,10 +17,9 @@ func _ready() -> void:
 	# Apply initial back state once the render node exists
 	_apply_show_back()
 
-## Convenience helper: set stats, modifiers, and card at once.
-func setup(p_card: Card, p_stats: EnemyStats, p_modifiers: ModifierHandler) -> void:
+## Convenience helper: set stats and card at once.
+func setup(p_card: Card, p_stats: EnemyStats) -> void:
 	char_stats = p_stats
-	modifier_handler = p_modifiers
 	card = p_card
 	_apply_show_back()
 

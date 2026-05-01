@@ -1,16 +1,13 @@
 extends Card
 
-const EMPOWER_STATUS = preload("res://statuses/empowered.tres")
 const INTIMIDATE_STATUS = preload("res://statuses/intimidated.tres")
+const EMPOWERED_STATUS = preload("res://statuses/empowered.tres")
 
-func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node]) -> void:
 	# Apply Empower 3 to the player (card owner).
-	var player: Node = owner
-	if player and player.status_handler:
-		var empower := EMPOWER_STATUS.duplicate()
-		empower.stacks = 3
-		empower.duration = 1
-		player.status_handler.add_status(empower)
+	var empowered := EMPOWERED_STATUS.duplicate()
+	empowered.stacks = 3
+	owner.status_handler.add_status(empowered)
 
 	# Apply Intimidate 1 to the targeted enemy.
 	for enemy_target in targets:

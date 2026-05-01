@@ -1,6 +1,10 @@
 ## Base card display + data class.
 ## Does NOT connect to any Events, does NOT have a state machine.
 ## PlayerCardUI and EnemyCardUI extend this.
+##
+## Participates in the Hook system: registers on _ready, unregisters on _exit_tree.
+## Override hook methods (after_card_played, on_hit_dealt, etc.) in card-specific
+## subclasses to give individual cards lifecycle behavior.
 class_name CardUI
 extends Control
 
@@ -11,7 +15,6 @@ const DRAG_STYLEBOX := preload("res://scenes/card_ui/card_dragging_stylebox.tres
 const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.tres")
 
-@export var modifier_handler: ModifierHandler
 @export var card: Card : set = _set_card
 ## Accepts both CharacterStats and EnemyStats since both extend Stats.
 @export var char_stats: Stats : set = _set_char_stats
@@ -59,7 +62,7 @@ func return_to_hand() -> void:
 func play() -> void:
 	if not card:
 		return
-	await card.play(self, targets, char_stats, modifier_handler)
+	await card.play(self, targets, char_stats)
 	queue_free()
 
 func discard() -> void:
@@ -83,21 +86,16 @@ func sink() -> void:
 func block() -> void:
 	if not card:
 		return
-	card.block_card([card.owner], modifier_handler)
+	card.block_card([card.owner])
 	queue_free()
-
-func get_active_enemy_modifiers() -> ModifierHandler:
-	if targets.is_empty() or targets.size() > 1 or targets[0] is not Enemy:
-		return null
-	return targets[0].modifier_handler
 
 func mouse_is_over() -> bool:
 	var rect := Rect2(Vector2.ZERO, self.size)
 	return rect.has_point(get_local_mouse_position())
 
 func request_tooltip() -> void:
-	var enemy_modifiers := get_active_enemy_modifiers()
-	var updated_tooltip := card.get_updated_tooltip(modifier_handler, enemy_modifiers)
+	var target: Node = targets[0] if targets.size() == 1 and targets[0] is Enemy else null
+	var updated_tooltip := card.get_updated_tooltip(card.owner, target)
 	Events.card_tooltip_requested.emit(card.icon, updated_tooltip)
 
 func select() -> void:
@@ -105,6 +103,12 @@ func select() -> void:
 
 func deselect() -> void:
 	pass
+
+func _ready() -> void:
+	Hook.on_model_entered(self)
+
+func _exit_tree() -> void:
+	Hook.on_model_exited(self)
 
 func _return_to_original_parent() -> void:
 	if not is_inside_tree(): return

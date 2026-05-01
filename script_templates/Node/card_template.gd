@@ -7,8 +7,8 @@ extends Card
 func get_default_tooltip() -> String:
 	return tooltip_text
 
-func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler) -> String:
+func get_updated_tooltip(_dealer: Node, _target: Node) -> String:
 	return tooltip_text
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node]) -> void:
 	print_debug("card played targets: %s" % targets)

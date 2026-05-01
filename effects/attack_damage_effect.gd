@@ -18,7 +18,8 @@ func execute(targets: Array[Node]) -> void:
 func execute_single_target(target: Node) -> void:
 	var damage_dealt:=0
 	if target is Enemy or target is Player:
-		damage_dealt = target.take_damage(amount, receiver_modifier_type)
+		var final_damage := Hook.get_damage(dealer, target, amount)
+		damage_dealt = target.take_damage(final_damage)
 		SFXPlayer.play(sound)
 	if (damage_dealt > 0):
 		for on_hit in on_hit_effects:

@@ -39,9 +39,9 @@ func initialize_weapon(_owner: WeaponUI) -> void:
 	pass
 
 
-func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_attack:int = attack) -> void:
+func activate_weapon(targets: Array[Node], custom_attack: int = attack) -> void:
 	Events.player_attack_declared.emit()
-	do_stock_attack_damage_effect(targets, modifiers, custom_attack)
+	do_stock_attack_damage_effect(targets, custom_attack)
 	for target in targets:
 		target.stats.block = 0
 	var player = targets[0].get_tree().get_first_node_in_group("player") as Player
@@ -76,9 +76,9 @@ func can_appear_as_reward(character: CharacterStats) -> bool:
 	
 	return weapon_char_name == char_name
 
-func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler, custom_attack: int = attack) -> void:
+func do_stock_attack_damage_effect(targets: Array[Node], custom_attack: int = attack) -> void:
 	var damage_effect := AttackDamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
+	damage_effect.amount = custom_attack
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
 	damage_effect.on_hit_effects.append_array(on_hits)

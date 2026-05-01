@@ -18,12 +18,12 @@ var hovered_card: EnemyCardUI = null
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
-func add_card(card: Card, stats: EnemyStats, modifier_handler: ModifierHandler) -> EnemyCardUI:
+func add_card(card: Card, stats: EnemyStats) -> EnemyCardUI:
 	var card_ui := ENEMY_CARD_UI_SCENE.instantiate() as EnemyCardUI
 	card_ui.scale    = Vector2.ZERO
 	card_ui.modulate = Color(1, 1, 1, 0)
 	add_child(card_ui)
-	card_ui.setup(card, stats, modifier_handler)
+	card_ui.setup(card, stats)
 
 	card_ui.card_hovered.connect(_on_card_hovered)
 	card_ui.card_unhovered.connect(_on_card_unhovered)

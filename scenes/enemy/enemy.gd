@@ -48,7 +48,6 @@ func setup_ai() -> void:
 	add_child(new_ai)
 	enemy_ai = new_ai
 	enemy_ai.enemy = self
-	enemy_ai.modifier_handler = modifier_handler
 	enemy_ai.setup()
 	enemy_ai.hand = hand
 
@@ -68,7 +67,7 @@ func draw_card() -> void:
 		hand.append(card_drawn)
 		Events.enemy_card_drawn.emit(self)
 		card_drawn.owner = self
-		var card_ui := enemy_hand.add_card(card_drawn, stats, modifier_handler)
+		var card_ui := enemy_hand.add_card(card_drawn, stats)
 		card_ui_map[card_drawn] = card_ui
 		_log("drew %s  (hand %d, ui_map %d)" % [card_drawn.id, hand.size(), card_ui_map.size()])
 
@@ -122,8 +121,7 @@ func update_intent() -> void:
 	var new_intent = Intent.new()
 	if current_action and current_action.type == Card.Type.ATTACK:
 		var og_atk = current_action.attack
-		var modified_damage := modifier_handler.get_modified_value(og_atk, Modifier.Type.DMG_DEALT)
-		modified_damage = enemy_ai.target.modifier_handler.get_modified_value(modified_damage, Modifier.Type.DMG_TAKEN)
+		var modified_damage := Hook.get_damage(self, enemy_ai.target, og_atk)
 
 		if current_action.go_again:
 			new_intent.base_text = "%s GA"
@@ -247,7 +245,7 @@ func _get_or_create_card_ui(card: Card) -> EnemyCardUI:
 	_log("WARNING: creating transient card_ui for %s (not in ui_map)" % card.id)
 	var card_ui: EnemyCardUI = ENEMY_CARD_UI_SCENE.instantiate()
 	add_child(card_ui)
-	card_ui.setup(card, stats, modifier_handler)
+	card_ui.setup(card, stats)
 	card_ui.show_back = false
 	return card_ui
 

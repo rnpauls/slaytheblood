@@ -82,7 +82,7 @@ func _get_targets(card_parent: Node) -> Array[Node]:
 			return []
 
 #Currently does not accept non-attack actions targetting enemies
-func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
+func play(card_parent: Node, targets: Array[Node], char_stats: Stats) -> void:
 	play_count += 1
 	card_play_started.emit(self)
 
@@ -94,7 +94,7 @@ func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers:
 
 	char_stats.mana -= cost
 	char_stats.action_points -= 1
-	await apply_effects(targets, modifiers)
+	await apply_effects(targets)
 
 	for targetx in targets:
 		if type == Type.ATTACK:
@@ -120,30 +120,29 @@ func sink_card(_char_stats: Stats) -> void:
 	## Emit per-card signal so only the owning character's handler responds.
 	sunk.emit(self)
 
-func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	apply_block_effects(targets, modifiers)
+func block_card(targets: Array[Node]) -> void:
+	apply_block_effects(targets)
 	## Emit per-card signal so only the owning character's handler responds.
 	blocked.emit(self)
 
-func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
+func apply_effects(_targets: Array[Node]) -> void:
 	pass
 
-func apply_block_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_block_effects(targets: Array[Node]) -> void:
 	var block_effect := BlockEffect.new()
-	var mod_def : = modifiers.get_modified_value(defense, Modifier.Type.BLOCK_GAINED)
-	block_effect.amount = mod_def
+	block_effect.amount = defense
 	block_effect.sound = block_sound
 	block_effect.execute(targets)
 
 func get_default_tooltip() -> String:
 	return tooltip_text
 
-func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler) -> String:
+func get_updated_tooltip(_dealer: Node, _target: Node) -> String:
 	return tooltip_text
 
-func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler, custom_damage:int = attack) -> void:
+func do_stock_attack_damage_effect(targets: Array[Node], custom_damage: int = attack) -> void:
 	var damage_effect := AttackDamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
+	damage_effect.amount = custom_damage
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
 	damage_effect.dealer = owner

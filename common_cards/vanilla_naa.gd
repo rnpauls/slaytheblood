@@ -1,4 +1,4 @@
 extends Card
 
-func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
+func apply_effects(targets: Array[Node]) -> void:
 	pass

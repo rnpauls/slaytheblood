@@ -29,9 +29,6 @@ func perform_action():
 	#SFXPlayer.play(sound)
 
 func update_intent_text() -> void:
-	var player:= target as Player
-	if not player:
+	if not target:
 		return
-	
-	var modified_dmg := player.modifier_handler.get_modified_value(damage, Modifier.Type.DMG_TAKEN)
-	intent.current_text = intent.base_text % modified_dmg
+	intent.current_text = intent.base_text % Hook.get_damage(enemy, target, damage)

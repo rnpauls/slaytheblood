@@ -15,6 +15,7 @@ var selected := false
 
 
 func _ready() -> void:
+	super._ready()
 	Events.player_card_drawn.connect(_on_card_drawn)
 	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
 	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
