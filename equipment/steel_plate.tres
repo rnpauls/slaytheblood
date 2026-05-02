@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://da8os8m7cgqqm"]
+
+[ext_resource type="Texture2D" uid="uid://kg1e0ue1x8sd" path="res://art/custom_art/steel_plate.png" id="1_okyg7"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_vts6u"]
+
+[resource]
+script = ExtResource("2_vts6u")
+equipment_name = "Steel Plate"
+id = "steel_plate"
+slot = 1
+rarity = 1
+persistence = 1
+icon = ExtResource("1_okyg7")
+max_block = 2
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

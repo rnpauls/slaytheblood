@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://b0wcw2dy8qh8e"]
+
+[ext_resource type="Texture2D" uid="uid://ocwwiq2hjmnc" path="res://art/custom_art/iron_rot_plate.png" id="1_jp0d4"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_d7o4a"]
+
+[resource]
+script = ExtResource("2_d7o4a")
+equipment_name = "Rusty Plate"
+id = "iron_rot_plate"
+slot = 1
+break_on_use = true
+starter_equipment = true
+icon = ExtResource("1_jp0d4")
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

@@ -17,8 +17,18 @@
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="8_toxgp"]
 [ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="9_u2jek"]
 [ext_resource type="Resource" uid="uid://b0u14laxxwhga" path="res://weapons/romping_club.tres" id="10_bnu54"]
+[ext_resource type="Resource" uid="uid://vcqlfgcw8ri" path="res://weapons/ball_breaker.tres" id="11_cxrsv"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="11_f8gqx"]
+[ext_resource type="Resource" uid="uid://di0lkhegtyanm" path="res://weapons/kodachi.tres" id="12_8jxaa"]
+[ext_resource type="Resource" uid="uid://clfqia836mtu6" path="res://equipment/steel_boots.tres" id="12_wjgtv"]
+[ext_resource type="Resource" uid="uid://baygstotj2pli" path="res://weapons/decimator.tres" id="13_a1v00"]
+[ext_resource type="Resource" uid="uid://dg6bklewy1u3g" path="res://equipment/steel_gauntlets.tres" id="13_cxrsv"]
 [ext_resource type="PackedScene" uid="uid://dqb8lmaxydbk6" path="res://scenes/shop/shop_weapon.tscn" id="13_k5co3"]
+[ext_resource type="Resource" uid="uid://b4y4lw03v8och" path="res://weapons/ninja_star.tres" id="14_4yy74"]
+[ext_resource type="Resource" uid="uid://ben0yhw3hsk4y" path="res://equipment/steel_helmet.tres" id="14_8jxaa"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="14_d1450"]
+[ext_resource type="Resource" uid="uid://da8os8m7cgqqm" path="res://equipment/steel_plate.tres" id="15_ncc2j"]
+[ext_resource type="Resource" uid="uid://citg2gxgih72i" path="res://weapons/tiger_staff.tres" id="15_njv4s"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="15_tfdun"]
 
 [sub_resource type="Gradient" id="Gradient_p5i2f"]
@@ -83,7 +93,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1ldyg")
 shop_relics = Array[ExtResource("2_m2rrw")]([ExtResource("3_rno6l"), ExtResource("4_ntyfo"), ExtResource("5_b714b"), ExtResource("6_ksdlm")])
-shop_weapons = Array[ExtResource("7_5y7fm")]([ExtResource("8_toxgp"), ExtResource("9_u2jek"), ExtResource("10_bnu54"), ExtResource("9_u2jek"), ExtResource("10_bnu54")])
+shop_weapons = Array[ExtResource("7_5y7fm")]([ExtResource("8_toxgp"), ExtResource("9_u2jek"), ExtResource("10_bnu54"), ExtResource("11_cxrsv"), ExtResource("12_8jxaa"), ExtResource("13_a1v00"), ExtResource("14_4yy74"), ExtResource("15_njv4s")])
+shop_equipment = Array[ExtResource("11_f8gqx")]([ExtResource("12_wjgtv"), ExtResource("13_cxrsv"), ExtResource("14_8jxaa"), ExtResource("15_ncc2j")])
 char_stats = ExtResource("7_hjjob")
 run_stats = ExtResource("8_ropyq")
 

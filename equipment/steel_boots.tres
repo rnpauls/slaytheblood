@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://clfqia836mtu6"]
+
+[ext_resource type="Texture2D" uid="uid://6jbhqa52jkxx" path="res://art/custom_art/steel_boots.png" id="1_827l6"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_p6mu1"]
+
+[resource]
+script = ExtResource("2_p6mu1")
+equipment_name = "Steel Boots"
+id = "steel_boots"
+slot = 3
+rarity = 1
+persistence = 1
+icon = ExtResource("1_827l6")
+max_block = 2
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

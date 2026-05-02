@@ -17,7 +17,7 @@ func execute(targets: Array[Node]) -> void:
 		if target is Enemy:
 			hand_randomized = target.hand.duplicate() #Array cards
 		else:
-			hand_randomized = target.hand.get_children().duplicate() #Aeray cardui
+			hand_randomized = target.hand.get_children().duplicate() #Array cardui
 		RNG.array_shuffle(hand_randomized)
 		var cards = hand_randomized.slice(0, amount)
 		

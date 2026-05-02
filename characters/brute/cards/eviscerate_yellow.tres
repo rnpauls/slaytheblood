@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://brrt40uevivhv"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_5t8gj"]
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="2_4nma4"]
+[ext_resource type="Script" uid="uid://cf4xsulmv8bu8" path="res://characters/brute/cards/eviscerate.gd" id="3_qpcky"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="4_5y0vn"]
+
+[resource]
+script = ExtResource("3_qpcky")
+id = "eviscerate"
+rarity = 1
+target = 1
+cost = 2
+pitch = 2
+attack = 6
+defense = 3
+ai_value = 3
+icon = ExtResource("2_4nma4")
+tooltip_text = "Intimidate"
+sound = ExtResource("4_5y0vn")

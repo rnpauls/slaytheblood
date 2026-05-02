@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://ben0yhw3hsk4y"]
+
+[ext_resource type="Texture2D" uid="uid://pdukewrp614j" path="res://art/custom_art/steel_helmet.png" id="1_t0h8p"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_5pgmu"]
+
+[resource]
+script = ExtResource("2_5pgmu")
+equipment_name = "Steel Helmet"
+id = "steel_helmet"
+rarity = 1
+persistence = 1
+icon = ExtResource("1_t0h8p")
+max_block = 2
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

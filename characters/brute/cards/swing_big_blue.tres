@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bncp6hyys8f5e"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_7weci"]
+[ext_resource type="Texture2D" uid="uid://c2t6r0k11hap5" path="res://art/item29.png" id="2_vf0me"]
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="3_at5qr"]
+[ext_resource type="AudioStream" uid="uid://cpsnh1ghb6fqi" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/punch_3.wav" id="4_4n2uv"]
+
+[resource]
+script = ExtResource("3_at5qr")
+id = "swing_big"
+rarity = 2
+target = 1
+cost = 2
+pitch = 3
+attack = 6
+defense = 3
+icon = ExtResource("2_vf0me")
+sound = ExtResource("4_4n2uv")

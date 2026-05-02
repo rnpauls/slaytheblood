@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://bvboibfq7ytq2"]
+
+[ext_resource type="Texture2D" uid="uid://c3tyg5usmvqmd" path="res://art/custom_art/iron_rot_boots.png" id="1_15kp1"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="1_vd3ve"]
+
+[resource]
+script = ExtResource("1_vd3ve")
+equipment_name = "Rusty Boots"
+id = "iron_rot_boots"
+slot = 3
+break_on_use = true
+starter_equipment = true
+icon = ExtResource("1_15kp1")
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

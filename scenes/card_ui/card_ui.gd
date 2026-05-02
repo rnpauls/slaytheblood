@@ -59,6 +59,8 @@ func return_to_hand() -> void:
 func play() -> void:
 	if not card:
 		return
+	self.reparent(null)
+	get_parent().remove_child(self)
 	await card.play(self, targets, char_stats, modifier_handler)
 	queue_free()
 

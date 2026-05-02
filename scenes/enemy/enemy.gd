@@ -71,6 +71,13 @@ func draw_card() -> void:
 		var card_ui := enemy_hand.add_card(card_drawn, stats, modifier_handler)
 		card_ui_map[card_drawn] = card_ui
 		_log("drew %s  (hand %d, ui_map %d)" % [card_drawn.id, hand.size(), card_ui_map.size()])
+		if enemy_ai:
+			# Recalculate the turn plan if one already exists (mid-turn card draw).
+			if enemy_ai.turn_plan != null:
+				var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+				enemy_ai.recalculate_plan(player_life)
+			# Always refresh intent so the "? X N" card count stays current.
+			update_intent()
 
 ## Draw multiple cards with a stagger delay between each.
 func draw_cards(amount: int) -> Tween:
@@ -272,12 +279,22 @@ func _on_ai_card_removed_from_hand(card: Card) -> void:
 	if card == _pending_stage_card:
 		_log("  → skipping visual removal for '%s' (will be staged)" % card.id)
 		card_ui_map.erase(card)
+		# Recalculate after the removal so the remaining plan stays accurate.
+		if enemy_ai.turn_plan != null:
+			var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+			enemy_ai.recalculate_plan(player_life)
+			update_intent()
 		return
 
 	var card_ui: EnemyCardUI = card_ui_map.get(card, null)
 	if is_instance_valid(card_ui) and card_ui.get_parent() == enemy_hand:
 		enemy_hand.remove_card(card_ui)
 	card_ui_map.erase(card)
+	# Recalculate after the removal so the remaining plan stays accurate.
+	if enemy_ai.turn_plan != null:
+		var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+		enemy_ai.recalculate_plan(player_life)
+		update_intent()
 
 ## Lightweight debug printer — prefixes with enemy name so multi-enemy logs are easy to read.
 func _log(msg: String) -> void:

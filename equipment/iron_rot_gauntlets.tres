@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://cny6qsqey3des"]
+
+[ext_resource type="Texture2D" uid="uid://x4ru4hg4irbj" path="res://art/custom_art/iron_rot_gauntlets.png" id="1_n4u2d"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_kop77"]
+
+[resource]
+script = ExtResource("2_kop77")
+equipment_name = "Rusty Gauntlets"
+id = "iron_rot_gauntlets"
+slot = 2
+break_on_use = true
+starter_equipment = true
+icon = ExtResource("1_n4u2d")
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

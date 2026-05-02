@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/brute/cards/warrior_true_strength.tres" id="5_1qht6"]
 [ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://common_cards/sink_below_red.tres" id="6_1qg6x"]
 [ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="7_11m5d"]
-[ext_resource type="Resource" uid="uid://bxiso7x1yngt3" path="res://characters/brute/cards/swing_big.tres" id="8_2ypy4"]
+[ext_resource type="Resource" uid="uid://bxiso7x1yngt3" path="res://characters/brute/cards/swing_big_red.tres" id="8_1xvak"]
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="9_2ypy4"]
 [ext_resource type="Resource" uid="uid://b72t3ass05h4u" path="res://characters/brute/cards/warrior_block.tres" id="9_wlxe0"]
 [ext_resource type="Resource" uid="uid://bipu07qa8mqvc" path="res://characters/brute/cards/bare_fangs_blue.tres" id="10_brp3f"]
@@ -18,7 +18,11 @@
 [ext_resource type="Resource" uid="uid://b8pjbbgq27nko" path="res://common_cards/sink_below_yellow.tres" id="15_fw1py"]
 [ext_resource type="Resource" uid="uid://bdxdpo8h67w3y" path="res://common_cards/command_and_conquer.tres" id="16_e52y7"]
 [ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="17_afu21"]
+[ext_resource type="Resource" uid="uid://bqlicy44qadj7" path="res://characters/brute/cards/eviscerate_red.tres" id="18_kcywi"]
+[ext_resource type="Resource" uid="uid://brrt40uevivhv" path="res://characters/brute/cards/eviscerate_yellow.tres" id="19_qwcd2"]
+[ext_resource type="Resource" uid="uid://bncp6hyys8f5e" path="res://characters/brute/cards/swing_big_blue.tres" id="20_ygm28"]
+[ext_resource type="Resource" uid="uid://bg6kgdp5pefr7" path="res://characters/brute/cards/bloodrush.tres" id="21_ygm28"]
 
 [resource]
 script = ExtResource("2_tp1qw")
-cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("7_11m5d"), ExtResource("6_1qg6x"), ExtResource("5_1qht6"), ExtResource("9_2ypy4"), ExtResource("8_2ypy4"), ExtResource("9_wlxe0"), ExtResource("10_brp3f"), ExtResource("11_q8gyr"), ExtResource("12_w0piq"), ExtResource("13_2eavu"), ExtResource("14_wmius"), ExtResource("15_fw1py"), ExtResource("16_e52y7"), ExtResource("17_afu21")])
+cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("7_11m5d"), ExtResource("6_1qg6x"), ExtResource("5_1qht6"), ExtResource("9_2ypy4"), ExtResource("8_1xvak"), ExtResource("9_wlxe0"), ExtResource("10_brp3f"), ExtResource("11_q8gyr"), ExtResource("12_w0piq"), ExtResource("13_2eavu"), ExtResource("14_wmius"), ExtResource("15_fw1py"), ExtResource("16_e52y7"), ExtResource("17_afu21"), ExtResource("18_kcywi"), ExtResource("19_qwcd2"), ExtResource("20_ygm28"), ExtResource("21_ygm28")])

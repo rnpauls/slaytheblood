@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://d1n4q76pajrtp"]
+
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_2mpbg"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://common_cards/block_red.tres" id="2_1pu37"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_bwqdf"]
+[ext_resource type="Resource" uid="uid://dl0joso87gfpm" path="res://common_cards/concuss_red.tres" id="3_dyl2j"]
+[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="4_3w8mo"]
+[ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://common_cards/wounding_blow_red.tres" id="5_38mf7"]
+[ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://common_cards/wounding_blow_blue.tres" id="6_wl2j5"]
+
+[resource]
+script = ExtResource("2_bwqdf")
+cards = Array[ExtResource("1_2mpbg")]([ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("3_dyl2j"), ExtResource("3_dyl2j"), ExtResource("4_3w8mo"), ExtResource("4_3w8mo"), ExtResource("5_38mf7"), ExtResource("5_38mf7"), ExtResource("6_wl2j5"), ExtResource("6_wl2j5"), ExtResource("6_wl2j5"), ExtResource("6_wl2j5")])
+metadata/_custom_type_script = "uid://dejd2uv2w4475"

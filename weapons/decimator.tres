@@ -1,0 +1,25 @@
+[gd_resource type="Resource" format=3 uid="uid://baygstotj2pli"]
+
+[ext_resource type="Texture2D" uid="uid://bj73oqujng3n2" path="res://art/Icon28_09.png" id="1_8wuip"]
+[ext_resource type="Script" uid="uid://ccbgouaqt8o3h" path="res://weapons/decimator.gd" id="2_tbjlk"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_q4g6v"]
+
+[resource]
+script = ExtResource("2_tbjlk")
+weapon_name = "Decimator"
+id = "decimator"
+type = 2
+rarity = 1
+character_type = 2
+hands = 1
+starter_weapon = null
+icon = ExtResource("1_8wuip")
+sound = ExtResource("3_q4g6v")
+tooltip = "Intimidate"
+attack = 4
+cost = 2
+go_again = null
+is_single_use = null
+attacks_per_turn = null
+attacks_this_turn = null
+metadata/_custom_type_script = "uid://dm186c77vbsjn"

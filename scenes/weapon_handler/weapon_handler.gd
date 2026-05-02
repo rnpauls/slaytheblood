@@ -40,6 +40,12 @@ func flash() -> void:
 	weapon_ui.animation_player.play("flash")
 	
 func _on_weapon_used_up() -> void:
+	if weapon.is_single_use:
+		if owner_of_weapon is Player:
+			owner_of_weapon.stats.inventory.remove_equipment(weapon)
+		weapon.queue_free()
+		hide()
+		
 	disable_weapon()
 
 func disable_weapon() -> void:

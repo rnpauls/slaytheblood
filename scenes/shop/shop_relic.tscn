@@ -38,7 +38,7 @@ stretch_mode = 5
 
 [node name="BuyButton" type="Button" parent="." unique_id=269824376]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 12)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Buy"
 

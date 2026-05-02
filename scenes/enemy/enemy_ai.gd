@@ -33,6 +33,11 @@ func start_turn(player_life: int) -> void:
 	resources = 0
 	plan_created.emit(enemy)
 
+## Recalculate turn_plan mid-turn (e.g. after drawing or discarding a card).
+## Does NOT reset resources or re-emit plan_created — the turn is already underway.
+func recalculate_plan(player_life: int) -> void:
+	turn_plan = calculate_max_offense_now(player_life)
+
 ## Play the next action in turn_plan, returns card to the enemy node
 ## Pitches cards as needed
 ## Arsenals if out of actions

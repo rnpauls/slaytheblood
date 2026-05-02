@@ -27,6 +27,7 @@ const RARITY_COLORS := {
 @export var attack: int
 @export var cost: int 
 @export var go_again: bool = false
+@export var is_single_use: bool = false
 @export var attacks_per_turn: int = 1
 @export var attacks_this_turn: int = 0
 

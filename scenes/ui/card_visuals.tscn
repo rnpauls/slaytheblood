@@ -96,6 +96,7 @@ offset_right = 85.5
 offset_bottom = 18.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_njcf5")
 
 [node name="Icon" type="TextureRect" parent="ArtPanel" unique_id=1088393672]

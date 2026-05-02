@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://dg6bklewy1u3g"]
+
+[ext_resource type="Texture2D" uid="uid://dc7ckeospqmlx" path="res://art/custom_art/steel_gauntlets.png" id="1_24yhq"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_5ftyc"]
+
+[resource]
+script = ExtResource("2_5ftyc")
+equipment_name = "Steel Gauntlets"
+id = "steel_gauntlets"
+slot = 2
+rarity = 1
+persistence = 1
+icon = ExtResource("1_24yhq")
+max_block = 2
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

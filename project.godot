@@ -48,6 +48,7 @@ folder_colors={
 "res://art/music/": "blue",
 "res://characters/": "green",
 "res://enemies/": "orange",
+"res://equipment/": "pink",
 "res://scenes/": "purple"
 }
 

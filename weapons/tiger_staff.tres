@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://citg2gxgih72i"]
+
+[ext_resource type="Texture2D" uid="uid://bwbymh43ndcch" path="res://art/item38.png" id="1_yt0rb"]
+[ext_resource type="Script" uid="uid://xka66fdkok6k" path="res://weapons/tiger_staff.gd" id="2_4bdrj"]
+[ext_resource type="AudioStream" uid="uid://ccsyihfmo03i3" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_2.wav" id="3_tx41t"]
+
+[resource]
+script = ExtResource("2_4bdrj")
+weapon_name = "Tiger Staff"
+id = "tiger_staff"
+type = 6
+character_type = 1
+hands = 1
+starter_weapon = true
+icon = ExtResource("1_yt0rb")
+sound = ExtResource("3_tx41t")
+tooltip = "Empower 1"
+attack = 1
+cost = 2
+go_again = true
+metadata/_custom_type_script = "uid://dm186c77vbsjn"
