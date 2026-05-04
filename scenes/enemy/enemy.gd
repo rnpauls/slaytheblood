@@ -104,16 +104,14 @@ func declare_next_attack() -> void:
 	update_intent()
 	enemy_hand_ui.update_cards(enemy_ai)
 
-	if current_action == null:
-		Events.enemy_turn_completed.emit(self)
-	else:
+	# When current_action is null the enemy's plan is exhausted; EnemyActingState
+	# observes that directly and exits its loop. Otherwise stage the card and
+	# announce the attack — the state owns the await player_blocks_declared
+	# and the do_action call so cancellation on death is deterministic.
+	if current_action != null:
 		_log("declaring attack: %s" % current_action.id)
-		# Stage the attack card near this enemy, face-up.
-		# Use the pre-captured card_ui since the map entry may already be gone.
 		_stage_attack_card_ui(current_action, pending_card_ui)
 		Events.enemy_attack_declared.emit()
-		await Events.player_blocks_declared
-		await do_action()
 
 func update_enemy() -> void:
 	if not stats is Stats:

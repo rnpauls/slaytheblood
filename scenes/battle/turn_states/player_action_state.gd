@@ -1,13 +1,8 @@
-# Hand is live; player plays cards, pitches, blocks, etc.
-# All of that machinery lives elsewhere (CardStateMachine, hand.gd,
-# weapon handlers) and is driven by per-card signals on Events. The
-# turn SM doesn't try to track those — it just waits for the end-turn
-# button to fire Events.player_end_phase_started.
-#
-# Replaces the connect at battle.gd:21 pre-refactor:
-#   Events.player_end_phase_started.connect(player_handler.end_turn)
-# Now PLAYER_EOT.enter() makes that call instead, after this state
-# transitions out.
+# Hand is live; player plays cards, pitches, blocks, etc. All of that
+# machinery lives elsewhere (CardStateMachine, hand.gd, weapon handlers)
+# and is driven by per-card signals on Events. The turn SM doesn't try
+# to track those — it just waits for the end-turn button to fire
+# Events.player_end_phase_started, then hands off to PLAYER_EOT.
 class_name PlayerActionState
 extends TurnState
 

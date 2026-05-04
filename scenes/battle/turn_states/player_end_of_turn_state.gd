@@ -6,11 +6,9 @@
 #   → tween finishes → Events.player_hand_drawn
 #
 # We listen for player_hand_drawn as the "EOT cascade is done" signal
-# and transition to ENEMY_SOT.
-#
-# (BattleUI also emits Events.player_turn_ended off player_hand_drawn,
-# but with the connect in Battle._ready disabled, that signal becomes
-# a no-op fanout. Left in place for pass 1; can be removed in pass 2.)
+# and transition to ENEMY_SOT. (player_turn_ended is also emitted off
+# player_hand_drawn by BattleUI — kept because status effects like
+# intimidated / poison_tip / empowered hook into it.)
 class_name PlayerEndOfTurnState
 extends TurnState
 

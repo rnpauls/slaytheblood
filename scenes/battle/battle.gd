@@ -25,16 +25,8 @@ extends Node2D
 var turn_state_machine: TurnStateMachine
 
 func _ready() -> void:
-
 	enemy_handler.child_order_changed.connect(_on_enemies_child_order_changed)
 	Events.player_died.connect(_on_player_died)
-	# --- Pass 1 refactor: outer phase signals are now driven by the
-	# TurnStateMachine (see _setup_turn_state_machine + the states under
-	# scenes/battle/turn_states/). Left commented for one playtest cycle
-	# in case we need to revert; remove in pass 2.
-	#Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
-	#Events.player_end_phase_started.connect(player_handler.end_turn)
-	#Events.player_turn_ended.connect(enemy_handler.start_turn)
 
 func start_battle() ->void:
 	get_tree().paused = false

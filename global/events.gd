@@ -35,7 +35,6 @@ signal player_attack_declared
 signal player_attack_completed
 
 #Enemy-related events
-signal enemy_turn_completed(enemy: Enemy) #curently called when enemy is done with all actions, and statuses should be activated to move to next enemy
 signal enemy_phase_ended #Called when all enemies are done, move to player turn
 signal enemy_died(enemy: Enemy)
 signal enemy_attack_declared

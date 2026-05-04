@@ -1,29 +1,92 @@
-# Pass 1 scope: this state covers the entire enemy action phase as a
-# single block. EnemyHandler internally iterates enemies, applies SOT
-# statuses, runs the declare/await-block/do-action loop, applies EOT
-# statuses, and finally emits Events.enemy_phase_ended.
+# Per-enemy action loop with explicit cancellation.
 #
-# We just wait for that one signal and transition to ENEMY_EOT.
+# Why a state owns this loop:
+#   The await Events.player_blocks_declared used to live inside
+#   Enemy.declare_next_attack, which made it impossible to cancel from
+#   outside. If the enemy died mid-block, the coroutine on the freed
+#   enemy was orphaned and the turn would deadlock. Pulling the await
+#   into a state means exit() can flip a cancellation flag that the
+#   loop checks after every await — single, deterministic interrupt.
 #
-# Replaces the connect at battle.gd:19 pre-refactor:
-#   Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
-#
-# Pass 2 will split this state per-enemy and own the
-#   declare → await(player_blocks_declared) → do_action
-# loop directly, which is the place the current code can deadlock if
-# blocks are never declared.
+# Cancellation cases handled:
+#   - Current enemy dies (DOT, retaliation, AOE): _on_enemy_died flips
+#     _current_enemy_died, loop exits, transitions to ENEMY_SOT to pick
+#     the next enemy (skipping EOT statuses on the corpse).
+#   - Player dies during do_action: Battle._on_player_died forces
+#     DEFEAT, our exit() flips _cancelled, loop returns silently.
+#   - Last enemy dies: Battle._on_enemies_child_order_changed forces
+#     VICTORY, our exit() flips _cancelled, loop returns silently.
 class_name EnemyActingState
 extends TurnState
 
+var _current_enemy: Enemy
+var _cancelled := false  # exit() called externally — bail without requesting
+var _current_enemy_died := false  # current enemy died mid-loop — go to next ENEMY_SOT
+
 
 func enter() -> void:
-	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
+	_cancelled = false
+	_current_enemy_died = false
+
+	if enemy_handler.acting_enemies.is_empty():
+		# Shouldn't normally happen — ENEMY_SOT would have routed elsewhere.
+		_request.call_deferred(State.PLAYER_SOT)
+		return
+
+	_current_enemy = enemy_handler.acting_enemies[0]
+	if not is_instance_valid(_current_enemy):
+		_request.call_deferred(State.ENEMY_SOT)
+		return
+
+	Events.enemy_died.connect(_on_enemy_died)
+	_run_action_loop()
 
 
 func exit() -> void:
-	if Events.enemy_phase_ended.is_connected(_on_enemy_phase_ended):
-		Events.enemy_phase_ended.disconnect(_on_enemy_phase_ended)
+	_cancelled = true
+	if Events.enemy_died.is_connected(_on_enemy_died):
+		Events.enemy_died.disconnect(_on_enemy_died)
 
 
-func _on_enemy_phase_ended() -> void:
-	_request(State.ENEMY_EOT)
+func _on_enemy_died(enemy: Enemy) -> void:
+	if enemy == _current_enemy:
+		_current_enemy_died = true
+
+
+func _run_action_loop() -> void:
+	while true:
+		# declare_next_attack is now synchronous: it sets current_action,
+		# stages the card UI, and emits enemy_attack_declared (which flips
+		# the END button to BLOCK in BattleUI). It no longer awaits.
+		_current_enemy.declare_next_attack()
+		if _cancelled:
+			return
+		if _current_enemy_died:
+			break
+		if _current_enemy.current_action == null:
+			# Plan exhausted — normal end of this enemy's actions.
+			break
+
+		# Wait for the player to declare blocks (END button in BLOCK mode).
+		await Events.player_blocks_declared
+		if _cancelled:
+			return
+		if _current_enemy_died:
+			break
+
+		# do_action awaits card_ui.play() internally (animation), then
+		# emits enemy_action_completed + attack_completed.
+		await _current_enemy.do_action()
+		if _cancelled:
+			return
+		if _current_enemy_died:
+			break
+
+	if _cancelled:
+		return
+	if _current_enemy_died:
+		# Skip EOT statuses (no live owner to apply them to) and pick
+		# the next enemy.
+		_request(State.ENEMY_SOT)
+	else:
+		_request(State.ENEMY_EOT)
