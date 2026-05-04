@@ -97,9 +97,20 @@ func mouse_is_over() -> bool:
 	return rect.has_point(get_local_mouse_position())
 
 func request_tooltip() -> void:
+	if not card:
+		return
 	var enemy_modifiers := get_active_enemy_modifiers()
 	var updated_tooltip := card.get_updated_tooltip(modifier_handler, enemy_modifiers)
-	Events.card_tooltip_requested.emit(card.icon, updated_tooltip)
+
+	# Cards already show their own name + body on the face when hovered, so
+	# only emit boxes for keywords referenced in the description.
+	var entries: Array[TooltipData] = KeywordRegistry.build_tooltip_chain(updated_tooltip)
+	if entries.is_empty():
+		return
+
+	# Card-anchored: tooltip sits next to the card. TooltipLayer flips
+	# horizontally + vertically against viewport edges as needed.
+	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
 
 func select() -> void:
 	pass

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://c2nsq18tn8muy"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_ar5vo"]
+
+[resource]
+script = ExtResource("1_ar5vo")
+id = &"intim"
+display_name = "Intimidate"
+description = "A random card in target's hand cannot be blocked with this turn"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

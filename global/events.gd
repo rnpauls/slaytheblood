@@ -12,7 +12,10 @@ signal card_pitched(card: Card)
 signal card_sunk(card: Card)
 signal card_blocked(card: Card)
 #signal card_milled(card: CardUI)
-signal card_tooltip_requested(icon: Texture, text: String)
+## Show one or more tooltip boxes (e.g. main card description + one box per
+## keyword). Pass anchor_rect in canvas/global coords to anchor next to a source
+## (right-of-source, flips left); pass Rect2() to anchor to the mouse instead.
+signal tooltip_show_requested(entries: Array[TooltipData], anchor_rect: Rect2)
 signal tooltip_hide_requested
 signal selecting_cards_from_hand
 signal finished_selecting_cards_from_hand(selected_cards: Array[CardUI])
@@ -70,9 +73,6 @@ signal battle_reward_exited
 
 # Treasure Room-related events
 signal treasure_room_exited(found_relic: Relic)
-
-# Relic-related events
-signal relic_tooltip_requested(relic: Relic)
 
 #Random Event room-related events
 signal event_room_exited

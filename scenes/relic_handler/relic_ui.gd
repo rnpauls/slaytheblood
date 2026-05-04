@@ -21,6 +21,16 @@ func set_relic(new_relic: Relic) -> void:
 func flash() -> void:
 	animation_player.play("flash")
 
-func _on_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_mouse"):
-		Events.relic_tooltip_requested.emit(relic)
+func _on_mouse_entered() -> void:
+	if not relic:
+		return
+	var body := relic.get_tooltip()
+	var entries: Array[TooltipData] = [
+		TooltipData.make(relic.icon, relic.relic_name, body),
+	]
+	entries.append_array(KeywordRegistry.build_tooltip_chain(body))
+	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
+
+
+func _on_mouse_exited() -> void:
+	Events.tooltip_hide_requested.emit()

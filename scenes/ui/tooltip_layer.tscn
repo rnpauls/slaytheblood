@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b8tlay001a26v"]
+
+[ext_resource type="Script" path="res://scenes/ui/tooltip_layer.gd" id="1_layer"]
+
+[node name="TooltipLayer" type="VBoxContainer"]
+mouse_filter = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_layer")
+fade_seconds = 0.0
+screen_padding = 0.0
+source_offset = 12.0

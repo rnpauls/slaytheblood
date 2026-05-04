@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://dmr00vq3egdqr" path="res://scenes/player/player_handler.gd" id="8_r04wr"]
 [ext_resource type="Resource" uid="uid://p755tj1qwgr3" path="res://enemies/bat/bat_enemy.tres" id="8_u75mi"]
 [ext_resource type="PackedScene" uid="uid://b50ekork55ljq" path="res://scenes/ui/mana_ui.tscn" id="11_8aauo"]
-[ext_resource type="PackedScene" uid="uid://dg4s3vaj75784" path="res://scenes/ui/tooltip.tscn" id="12_qjopr"]
 [ext_resource type="PackedScene" uid="uid://bljd5caaiyxj5" path="res://scenes/ui/action_points_ui.tscn" id="14_5moxy"]
 [ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="15_8eh2s"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
@@ -257,13 +256,6 @@ grow_vertical = 0
 theme = ExtResource("16_5moxy")
 text = "CONFIRM"
 
-[node name="Tooltip" parent="BattleUI" unique_id=1281849298 instance=ExtResource("12_qjopr")]
-visible = false
-offset_left = -392.0
-offset_top = 104.0
-offset_right = 392.0
-offset_bottom = 376.0
-
 [node name="Hand" type="Control" parent="BattleUI" unique_id=126863975 node_paths=PackedStringArray("player") groups=["player_hand"]]
 unique_name_in_owner = true
 layout_mode = 3
@@ -329,7 +321,7 @@ layer = 4
 [node name="StatusView" parent="StatusViewLayer" unique_id=877282367 instance=ExtResource("21_hb0k1")]
 visible = false
 
-[node name="Panel" type="Panel" parent="." unique_id=1094455537]
+[node name="TopbarSizeForDev" type="Panel" parent="." unique_id=1094455537]
 visible = false
 custom_minimum_size = Vector2(1280, 80)
 offset_bottom = 80.0

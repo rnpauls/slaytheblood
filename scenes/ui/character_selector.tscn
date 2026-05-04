@@ -110,7 +110,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="WarriorButton" type="Button" parent="CharacterButtons" unique_id=463812315]
+[node name="BruteButton" type="Button" parent="CharacterButtons" unique_id=463812315]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -118,7 +118,7 @@ toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_ucmb5")
 
-[node name="Icon" type="TextureRect" parent="CharacterButtons/WarriorButton" unique_id=1482183687]
+[node name="Icon" type="TextureRect" parent="CharacterButtons/BruteButton" unique_id=1482183687]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -135,14 +135,14 @@ texture = ExtResource("3_fow04")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WizardButton" type="Button" parent="CharacterButtons" unique_id=2020625225]
+[node name="RunebladeButton" type="Button" parent="CharacterButtons" unique_id=2020625225]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ucmb5")
 
-[node name="Icon" type="TextureRect" parent="CharacterButtons/WizardButton" unique_id=1531259455]
+[node name="Icon" type="TextureRect" parent="CharacterButtons/RunebladeButton" unique_id=1531259455]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,6 +184,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CharacterButtons/WarriorButton" to="." method="_on_warrior_button_pressed"]
-[connection signal="pressed" from="CharacterButtons/WizardButton" to="." method="_on_wizard_button_pressed"]
+[connection signal="pressed" from="CharacterButtons/BruteButton" to="." method="_on_brute_button_pressed"]
+[connection signal="pressed" from="CharacterButtons/RunebladeButton" to="." method="_on_runeblade_button_pressed"]
 [connection signal="pressed" from="CharacterButtons/NinjaButton" to="." method="_on_ninja_button_pressed"]

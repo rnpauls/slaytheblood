@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://cfqb7i380owtc"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_ndgym"]
+
+[resource]
+script = ExtResource("1_ndgym")
+id = &"brittle"
+display_name = "Brittle"
+description = "Target takes 25% more damage"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

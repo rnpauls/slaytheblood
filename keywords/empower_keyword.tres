@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://d11r1vtrliyc3"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_em555"]
+
+[resource]
+script = ExtResource("1_em555")
+id = &"empower"
+display_name = "Empower"
+description = "Next attack will get +3atk"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

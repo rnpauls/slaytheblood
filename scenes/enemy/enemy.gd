@@ -303,3 +303,19 @@ func _on_area_entered(_area):
 
 func _on_area_exited(_area):
 	arrow.hide()
+
+func _on_hover_area_mouse_entered() -> void:
+	var sh := get_node_or_null("StatusHandler") as StatusHandler
+	if sh == null:
+		return
+	var entries := sh.get_tooltip_entries()
+	if entries.is_empty():
+		return
+	# Anchor to the sprite's canvas-space rect so the tooltip sits beside the
+	# enemy. get_global_transform_with_canvas folds in any camera/zoom so the
+	# rect lands in the same coordinate system the TooltipLayer uses.
+	var rect := sprite_2d.get_global_transform_with_canvas() * sprite_2d.get_rect()
+	Events.tooltip_show_requested.emit(entries, rect)
+
+func _on_hover_area_mouse_exited() -> void:
+	Events.tooltip_hide_requested.emit()

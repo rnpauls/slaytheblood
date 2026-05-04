@@ -7,12 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="5_7r1uk"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="6_x5300"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player_hover"]
+size = Vector2(80, 80)
+
 [node name="Player" type="Node2D" unique_id=1759816572 groups=["player"]]
 script = ExtResource("1_g61l3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=617256268]
 scale = Vector2(5, 5)
 texture = ExtResource("1_cf0j3")
+
+[node name="MouseHoverArea" type="Area2D" parent="." unique_id=100200300]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseHoverArea" unique_id=100200301]
+shape = SubResource("RectangleShape2D_player_hover")
 
 [node name="StatsUI" parent="." unique_id=411925854 instance=ExtResource("2_ukskc")]
 offset_left = -139.0
@@ -36,3 +46,6 @@ type = 1
 
 [node name="CardCostModifier" parent="ModifierHandler" unique_id=1882914202 instance=ExtResource("6_x5300")]
 type = 2
+
+[connection signal="mouse_entered" from="MouseHoverArea" to="." method="_on_mouse_hover_entered"]
+[connection signal="mouse_exited" from="MouseHoverArea" to="." method="_on_mouse_hover_exited"]

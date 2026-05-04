@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://b4kkmcekqp2t5" path="res://scenes/card_ui/card_hover_stylebox.tres" id="1_yk4v8"]
 [ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="2_qb3tv"]
-[ext_resource type="FontFile" uid="uid://d23tbyvhdcxft" path="res://art/themes/m6x11plus.ttf" id="3_fycnr"]
+[ext_resource type="FontFile" uid="uid://4qsm1c4ky7u6" path="res://art/themes/Beholden/Beholden-Medium.ttf" id="3_yk4v8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufcy6"]
 bg_color = Color(0.096146666, 0.030753499, 0.025724638, 0.36862746)
@@ -30,8 +30,8 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [resource]
-default_font = ExtResource("3_fycnr")
-default_font_size = 36
+default_font = ExtResource("3_yk4v8")
+default_font_size = 20
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 10
 Button/font_sizes/font_size = 36

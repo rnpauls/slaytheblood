@@ -15,5 +15,5 @@ pitch = 1
 attack = 6
 defense = 3
 icon = ExtResource("1_wqqw1")
-tooltip_text = "[center]Apply 2 [color=\\\"ffdf00\\\"]Exposed[/color].[/center]"
+tooltip_text = "Apply 2 [kw=brittle]Brittle[/kw]"
 sound = ExtResource("3_ocq4c")

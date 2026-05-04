@@ -152,8 +152,14 @@ func _on_equipment_button_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
-	if equipment:
-		Events.card_tooltip_requested.emit(equipment.icon, equipment.get_tooltip())
+	if not equipment:
+		return
+	var body := equipment.get_tooltip()
+	var entries: Array[TooltipData] = [
+		TooltipData.make(equipment.icon, equipment.equipment_name, body),
+	]
+	entries.append_array(KeywordRegistry.build_tooltip_chain(body))
+	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
 
 
 func _on_mouse_exited() -> void:

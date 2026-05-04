@@ -36,12 +36,12 @@ func on_mouse_entered() -> void:
 	#card_ui.tween.tween_property(card_ui, "scale", Vector2(card_ui.hover_scale, card_ui.hover_scale), card_ui.tween_duration)
 	#card_ui.tween.parallel().tween_property(card_ui, "global_position:y", new_y, card_ui.tween_duration)
 	
-	#card_ui.request_tooltip()
+	card_ui.request_tooltip()
 	card_ui.card_hovered.emit(card_ui)
-	
+
 
 func on_mouse_exited() -> void:
-	#Events.tooltip_hide_requested.emit()
+	Events.tooltip_hide_requested.emit()
 	if not card_ui.is_hovered: 
 		return
 	card_ui.is_hovered = false

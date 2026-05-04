@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="8_7yo0l"]
-[ext_resource type="PackedScene" uid="uid://cfyvr6vvjt3yv" path="res://scenes/relic_handler/relic_tooltip.tscn" id="10_kjras"]
 [ext_resource type="Script" uid="uid://y5m8dbsnnish" path="res://scenes/run/pause_menu.gd" id="11_d0odi"]
 [ext_resource type="PackedScene" uid="uid://c4brrbokqt532" path="res://scenes/ui/inventory_view.tscn" id="13_fo0ly"]
+[ext_resource type="PackedScene" uid="uid://b8tlay001a26v" path="res://scenes/ui/tooltip_layer.tscn" id="14_ttip"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fo0ly"]
 
@@ -151,9 +151,10 @@ offset_bottom = 720.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="RelicTooltip" parent="TopBar" unique_id=474516011 instance=ExtResource("10_kjras")]
-unique_name_in_owner = true
-visible = false
+[node name="TooltipCanvas" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="TooltipLayer" parent="TooltipCanvas" instance=ExtResource("14_ttip")]
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1260299461]
 process_mode = 3

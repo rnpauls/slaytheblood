@@ -26,10 +26,12 @@ func update_intent(intent: Intent) -> void:
 func _on_mouse_entered() -> void:
 	if not enemy or not enemy.current_action:
 		return
-	Events.card_tooltip_requested.emit(
-		enemy.current_action.icon,
-		_build_tooltip_text()
-	)
+	var body := _build_tooltip_text()
+	var entries: Array[TooltipData] = [
+		TooltipData.make(enemy.current_action.icon, "", body),
+	]
+	entries.append_array(KeywordRegistry.build_tooltip_chain(body))
+	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
 	Events.intent_hovered.emit(enemy)
 
 func _on_mouse_exited() -> void:

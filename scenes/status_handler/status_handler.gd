@@ -8,6 +8,20 @@ const STATUS_UI = preload("res://scenes/status_handler/status_ui.tscn")
 
 @export var status_owner: Node2D
 
+func _ready() -> void:
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
+## Build a TooltipData entry per active status. Public so character sprites
+## (Enemy / Player) can call this from their own hover handlers too — the
+## status grid is positioned outside the sprite hover area, so both can fire
+## without the nested mouse-exit conflict that would otherwise break things.
+func get_tooltip_entries() -> Array[TooltipData]:
+	var entries: Array[TooltipData] = []
+	for status: Status in _get_all_statuses():
+		entries.append(TooltipData.make(status.icon, status.id.capitalize(), status.get_tooltip()))
+	return entries
+
 func apply_statuses_by_type(type: Status.Type) -> void:
 	if type == Status.Type.EVENT_BASED:
 		return
@@ -91,6 +105,15 @@ func _on_status_applied(status: Status) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):
 		Events.status_tooltip_requested.emit(_get_all_statuses())
+
+func _on_mouse_entered() -> void:
+	var entries := get_tooltip_entries()
+	if entries.is_empty():
+		return
+	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
+
+func _on_mouse_exited() -> void:
+	Events.tooltip_hide_requested.emit()
 
 #func manually_remove_status(id: String) -> void:
 	#for status_ui: StatusUI in get_children():

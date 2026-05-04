@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://cho0px4v2r182"]
 
-[ext_resource type="FontFile" uid="uid://d23tbyvhdcxft" path="res://art/themes/m6x11plus.ttf" id="1_6yhbg"]
+[ext_resource type="FontFile" uid="uid://4qsm1c4ky7u6" path="res://art/themes/Beholden/Beholden-Medium.ttf" id="1_6yhbg"]
 
 [resource]
 default_font = ExtResource("1_6yhbg")

@@ -87,4 +87,5 @@ stretch_mode = 5
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=85685316]
 libraries/ = SubResource("AnimationLibrary_4js1w")
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
