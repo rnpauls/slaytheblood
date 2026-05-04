@@ -19,14 +19,22 @@ extends Node2D
 @onready var enemy_handler: EnemyHandler = $EnemyHandler as EnemyHandler
 @onready var player: Player = $Player as Player
 
+# Set up in start_battle() once handler refs are wired. Owns outer
+# turn-phase transitions (player turn / enemy turn / victory / defeat).
+# See scenes/battle/turn_state_machine.gd for the design.
+var turn_state_machine: TurnStateMachine
+
 func _ready() -> void:
 
 	enemy_handler.child_order_changed.connect(_on_enemies_child_order_changed)
-	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
-
-	Events.player_end_phase_started.connect(player_handler.end_turn)
-	Events.player_turn_ended.connect(enemy_handler.start_turn)
 	Events.player_died.connect(_on_player_died)
+	# --- Pass 1 refactor: outer phase signals are now driven by the
+	# TurnStateMachine (see _setup_turn_state_machine + the states under
+	# scenes/battle/turn_states/). Left commented for one playtest cycle
+	# in case we need to revert; remove in pass 2.
+	#Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
+	#Events.player_end_phase_started.connect(player_handler.end_turn)
+	#Events.player_turn_ended.connect(enemy_handler.start_turn)
 
 func start_battle() ->void:
 	get_tree().paused = false
@@ -53,6 +61,11 @@ func start_battle() ->void:
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
 
+	# Spin up the turn state machine BEFORE the relic cascade kicks off,
+	# so COMBAT_START is active and listening when player_initial_hand_drawn
+	# eventually fires at the end of the setup chain.
+	_setup_turn_state_machine()
+
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_type(Relic.Type.START_OF_COMBAT)
 	print_debug("TODO: Implement random start turn?")
@@ -60,15 +73,44 @@ func start_battle() ->void:
 		await Events.player_set_up
 	player_handler.draw_cards(player.stats.cards_per_turn, 'init')
 
-func _on_enemy_phase_ended() ->void:
-	player_handler.start_turn()
-	enemy_handler.reset_enemy_actions()
+# Builds the SM as a child node and registers all 9 phase states.
+# Done programmatically rather than in battle.tscn to keep the scene
+# file untouched in pass 1 — the SM and its states can be moved into
+# the scene tree later if scene-based editing becomes useful.
+func _setup_turn_state_machine() -> void:
+	turn_state_machine = TurnStateMachine.new()
+	turn_state_machine.name = "TurnStateMachine"
+	add_child(turn_state_machine)
+
+	_add_turn_state(CombatStartState.new(), TurnState.State.COMBAT_START)
+	_add_turn_state(PlayerStartOfTurnState.new(), TurnState.State.PLAYER_SOT)
+	_add_turn_state(PlayerActionState.new(), TurnState.State.PLAYER_ACTION)
+	_add_turn_state(PlayerEndOfTurnState.new(), TurnState.State.PLAYER_EOT)
+	_add_turn_state(EnemyStartOfTurnState.new(), TurnState.State.ENEMY_SOT)
+	_add_turn_state(EnemyActingState.new(), TurnState.State.ENEMY_ACTING)
+	_add_turn_state(EnemyEndOfTurnState.new(), TurnState.State.ENEMY_EOT)
+	_add_turn_state(VictoryState.new(), TurnState.State.VICTORY)
+	_add_turn_state(DefeatState.new(), TurnState.State.DEFEAT)
+
+	turn_state_machine.init(self)
+
+func _add_turn_state(state_node: TurnState, key: TurnState.State) -> void:
+	state_node.state = key
+	state_node.name = TurnState.State.keys()[key]
+	turn_state_machine.add_child(state_node)
 
 func _on_enemies_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):
+		# Mark the SM terminal first so any in-flight transitions (e.g. an
+		# enemy_phase_ended fired the same frame the last enemy died)
+		# become no-ops once we leave the current state.
+		if turn_state_machine:
+			turn_state_machine.force_transition(TurnState.State.VICTORY)
 		relics.activate_relics_by_type(Relic.Type.END_OF_COMBAT)
 
 func _on_player_died() -> void:
+	if turn_state_machine:
+		turn_state_machine.force_transition(TurnState.State.DEFEAT)
 	Events.battle_over_screen_requested.emit("Game Over!", BattleOverPanel.Type.LOSE)
 	SaveGame.delete_data()
 
