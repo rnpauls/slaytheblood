@@ -13,6 +13,8 @@ target = 1
 pitch = 3
 defense = 2
 go_again = true
+ai_value = 5
+ai_value_needs_attack = true
 icon = ExtResource("2_m8xfe")
 tooltip_text = "[kw=intim:1]Intimidate 1[/kw]
 [kw=empower:3]Empower 3[/kw]"

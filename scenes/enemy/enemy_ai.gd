@@ -176,7 +176,10 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			var next_ap = action_points - 1 + (1 if action.go_again else 0)
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
 			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)
-			current_action_damage_modified += action.ai_value
+			var bonus = action.ai_value
+			if action.ai_value_needs_attack and not sub_result.actions.any(func(c): return c.type == Card.Type.ATTACK):
+				bonus = 0
+			current_action_damage_modified += bonus
 			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
 			
 			if total_damage > best_damage or \

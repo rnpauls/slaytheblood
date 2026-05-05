@@ -13,6 +13,7 @@ pitch = 1
 defense = 2
 go_again = true
 ai_value = 3
+ai_value_needs_attack = true
 icon = ExtResource("1_sd0hr")
 tooltip_text = "Next attack gets: \"On hit: deal 3 damage\"."
 sound = ExtResource("4_g23bi")

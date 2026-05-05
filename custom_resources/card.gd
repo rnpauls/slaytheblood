@@ -33,6 +33,7 @@ const PITCH_COLORS := {
 @export var exhausts: bool = false
 @export var go_again: bool = false : get = get_go_again
 @export var ai_value: int
+@export var ai_value_needs_attack: bool = false
 
 @export_group("Card Visuals")
 @export var icon: Texture
