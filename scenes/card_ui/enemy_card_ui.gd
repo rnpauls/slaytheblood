@@ -23,6 +23,11 @@ func setup(p_card: Card, p_stats: EnemyStats, p_modifiers: ModifierHandler) -> v
 	card = p_card
 	_apply_show_back()
 
+## Tint the card-back to reflect the AI plan and toggle the on-hit "!" overlay.
+func set_plan_color(color: Color, show_exclamation: bool) -> void:
+	if card_render:
+		card_render.set_plan_color(color, show_exclamation)
+
 ## Flip from card-back to card-face with a brief horizontal squish tween.
 func flip_reveal() -> void:
 	if not show_back:

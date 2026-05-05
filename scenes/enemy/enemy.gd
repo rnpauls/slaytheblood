@@ -124,6 +124,12 @@ func update_enemy() -> void:
 	update_stats()
 
 func update_intent() -> void:
+	# Build a preview plan when one isn't active (between or before enemy turns)
+	# so the intent text and hand colors share a single source of truth.
+	if enemy_ai and enemy_ai.turn_plan == null and enemy_ai.hand.size() > 0:
+		var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+		enemy_ai.turn_plan = enemy_ai.calculate_max_offense_now(player_life)
+
 	var new_intent = Intent.new()
 	if current_action and current_action.type == Card.Type.ATTACK:
 		var og_atk = current_action.attack
@@ -141,12 +147,37 @@ func update_intent() -> void:
 	else:
 		if enemy_ai and enemy_ai.hand.size() > 0:
 			new_intent.base_text = "? X %s"
-			new_intent.current_text = new_intent.base_text % get_num_cards_for_turn()
+			new_intent.current_text = new_intent.base_text % enemy_ai.turn_plan.actions.size()
 			new_intent.icon = null
 		else:
 			new_intent.current_text = "EMPTY"
 			new_intent.icon = null
 	intent_ui.update_intent(new_intent)
+	_update_hand_plan_colors()
+
+## Color each card in the hand to reflect the AI's turn plan:
+##   red = attack to be played (+ "!" if it has on-hit), green = NAA,
+##   blue = to be pitched, black = not played.
+func _update_hand_plan_colors() -> void:
+	if not enemy_ai:
+		return
+	var plan = enemy_ai.turn_plan
+	for card in card_ui_map:
+		var card_ui: EnemyCardUI = card_ui_map[card]
+		if not is_instance_valid(card_ui):
+			continue
+		var color := Color.BLACK
+		var show_exclamation := false
+		if plan != null:
+			if card in plan.actions:
+				if card.type == Card.Type.ATTACK:
+					color = Color.RED
+					show_exclamation = card.on_hits.size() > 0 or active_on_hits.size() > 0
+				else:
+					color = Color.GREEN
+			elif card in plan.pitched:
+				color = Color.BLUE
+		card_ui.set_plan_color(color, show_exclamation)
 
 func do_action() -> void:
 	if not current_action:
@@ -181,11 +212,6 @@ func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) 
 	update_intent()
 	enemy_hand_ui.update_cards(enemy_ai)
 	_log("after defend  hand=%d  ai_hand=%d  ui_map=%d" % [hand.size(), enemy_ai.hand.size(), card_ui_map.size()])
-
-func get_num_cards_for_turn() -> int:
-	var player_life = get_tree().get_first_node_in_group("player").stats.health
-	var turn_plan: Dictionary = enemy_ai.calculate_max_offense_now(player_life)
-	return turn_plan.actions.size()
 
 func cleanup_phase() -> void:
 	_log("cleanup  hand=%d  ai_hand=%d  ui_map=%d" % [hand.size(), enemy_ai.hand.size(), card_ui_map.size()])
