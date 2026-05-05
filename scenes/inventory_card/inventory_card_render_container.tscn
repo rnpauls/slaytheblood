@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://binvcardrcrcn"]
 
-[ext_resource type="Script" path="res://scenes/inventory_card/inventory_card_render_container.gd" id="1_invccc"]
+[ext_resource type="Script" uid="uid://steihm0k7gbb" path="res://scenes/inventory_card/inventory_card_render_container.gd" id="1_invccc"]
 [ext_resource type="PackedScene" uid="uid://b8hgtlcvsiq3b" path="res://scenes/ui/sub_viewport_viewer.tscn" id="2_invsvv"]
 [ext_resource type="PackedScene" uid="uid://binvcardscena" path="res://scenes/inventory_card/inventory_card.tscn" id="3_invcs"]
+[ext_resource type="Resource" uid="uid://bvboibfq7ytq2" path="res://equipment/iron_rot_boots.tres" id="4_aw4x6"]
 
-[node name="InventoryCardRenderContainer" type="MarginContainer"]
+[node name="InventoryCardRenderContainer" type="MarginContainer" unique_id=2054887772]
 custom_minimum_size = Vector2(40, 60)
 offset_right = 40.0
 offset_bottom = 60.0
@@ -12,34 +13,38 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_invccc")
 
-[node name="Stack" type="Control" parent="."]
+[node name="Stack" type="Control" parent="." unique_id=237239472]
 layout_mode = 2
 
-[node name="SubViewportViewer" parent="Stack" instance=ExtResource("2_invsvv")]
+[node name="SubViewportViewer" parent="Stack" unique_id=1516864064 instance=ExtResource("2_invsvv")]
 unique_name_in_owner = true
-texture_filter = 1
+texture_filter = 4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Button" type="Button" parent="Stack"]
+[node name="Button" type="Button" parent="Stack" unique_id=946935939]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 flat = true
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1887769969]
 unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
-canvas_item_default_texture_filter = 3
+canvas_item_default_texture_filter = 2
 size = Vector2i(200, 300)
 render_target_update_mode = 4
 
-[node name="InventoryCard" parent="SubViewport" instance=ExtResource("3_invcs")]
+[node name="InventoryCard" parent="SubViewport" unique_id=1205531682 instance=ExtResource("3_invcs")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -49,3 +54,4 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 6
 size_flags_vertical = 6
+equipment = ExtResource("4_aw4x6")
