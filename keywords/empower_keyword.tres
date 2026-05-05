@@ -6,5 +6,5 @@
 script = ExtResource("1_em555")
 id = &"empower"
 display_name = "Empower"
-description = "Next attack will get +3atk"
+description = "Next attack will get +{x}atk"
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

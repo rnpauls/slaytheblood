@@ -6,5 +6,5 @@
 script = ExtResource("1_6wrwx")
 id = &"sink"
 display_name = "Sink"
-description = "You may bottom a card. If you do, draw a card"
+description = "You may bottom up to {x} card(s). If you do, draw {x} cards"
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

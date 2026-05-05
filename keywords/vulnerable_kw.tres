@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://7gk67jrtikrd"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_th6n5"]
+
+[resource]
+script = ExtResource("1_th6n5")
+id = &"vulnerable"
+display_name = "Vulnerable"
+description = "Unit takes 50% more damage"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

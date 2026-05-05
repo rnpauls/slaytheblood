@@ -14,8 +14,8 @@ pitch = 3
 defense = 2
 go_again = true
 icon = ExtResource("2_m8xfe")
-tooltip_text = "[kw=intim]Intimidate 1[/kw]
-[kw=empower]Empower 3[/kw]"
+tooltip_text = "[kw=intim:1]Intimidate 1[/kw]
+[kw=empower:3]Empower 3[/kw]"
 sound = ExtResource("4_7vjuk")
 disable_attack = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

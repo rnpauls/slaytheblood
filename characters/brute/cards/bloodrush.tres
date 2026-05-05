@@ -13,6 +13,6 @@ cost = 1
 pitch = 2
 defense = 3
 icon = ExtResource("1_apu1q")
-tooltip_text = "[kw=rampage]Rampage[/kw] 2: Draw two cards, gain 1AP, +2 strength this turn"
+tooltip_text = "[kw=rampage:2]Rampage 2[/kw]: Draw two cards, gain 1AP, +2 strength this turn"
 disable_attack = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"
