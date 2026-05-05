@@ -60,7 +60,6 @@ player_hand=""
 
 [gui]
 
-theme/default_font_subpixel_positioning=0
 theme/custom="res://art/themes/main_theme.tres"
 
 [input]

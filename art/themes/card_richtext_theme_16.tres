@@ -1,9 +1,16 @@
 [gd_resource type="Theme" format=3 uid="uid://cho0px4v2r182"]
 
 [ext_resource type="FontFile" uid="uid://4qsm1c4ky7u6" path="res://art/themes/Beholden/Beholden-Medium.ttf" id="1_6yhbg"]
+[ext_resource type="FontFile" uid="uid://bhnj7kqo3h0ri" path="res://art/themes/Beholden/Beholden-Bold.ttf" id="2_bold"]
+[ext_resource type="FontFile" uid="uid://cbtjptoyub8kg" path="res://art/themes/Beholden/Beholden-Medium-Italic.ttf" id="3_italic"]
+[ext_resource type="FontFile" uid="uid://btn58vdx7mh3u" path="res://art/themes/Beholden/Beholden-Bold-Italic.ttf" id="4_bolditalic"]
 
 [resource]
 default_font = ExtResource("1_6yhbg")
 default_font_size = 16
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 3
+RichTextLabel/fonts/normal_font = ExtResource("1_6yhbg")
+RichTextLabel/fonts/bold_font = ExtResource("2_bold")
+RichTextLabel/fonts/italic_font = ExtResource("3_italic")
+RichTextLabel/fonts/bold_italic_font = ExtResource("4_bolditalic")
