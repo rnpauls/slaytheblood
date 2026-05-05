@@ -128,27 +128,31 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	#lethal factor should be reworked to check if can present lethal
 	var lethal_factor = 1#clamp(1.5 - (float(player_life) / 40.0), 1.0, 1.5)
 	
-	#Try pitching each card, make a new state, and then call it again
+	#Try pitching each card, make a new state, and then call it again.
+	#Tie-break on equal damage by preferring fewer pitches — play_next_action
+	#only pitches as needed at runtime, so over-pitching in the plan would
+	#cause the displayed pitch list to disagree with what actually happens.
 	for pitch in state.cards:
 		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch}
 		new_state.cards.erase(pitch)
 		var pitch_result = calculate_max_offense(new_state, action_points, player_life)
 		var total_damage = pitch_result.damage * lethal_factor
-		if total_damage > best_result.damage:# or \
-		   #(total_damage == best_result.damage and pitch_result.damage > best_result.damage / lethal_factor):
+		var new_pitched_size: int = 1 + pitch_result.pitched.size()
+		if total_damage > best_result.damage or \
+		   (total_damage > 0 and total_damage == best_result.damage and new_pitched_size < best_result.pitched.size()):
 			best_result = {
 				"damage": total_damage,
 				"pitched": [pitch] + pitch_result.pitched,
 				"actions": pitch_result.actions,
 				"remaining": pitch_result.remaining
 			}
-	
-	#Try current state
+
+	#Try current state — same fewer-pitches tie-break.
 	var action_result = try_actions(state, action_points, player_life, lethal_factor)
 	if action_result.damage > best_result.damage or \
-	   (action_result.damage == best_result.damage and action_result.damage / lethal_factor > best_result.damage / lethal_factor):
+	   (action_result.damage > 0 and action_result.damage == best_result.damage and action_result.pitched.size() < best_result.pitched.size()):
 		best_result = action_result
-	
+
 	return best_result
 
 ##Helper for calculate_max_offense
@@ -175,8 +179,8 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			current_action_damage_modified += action.ai_value
 			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
 			
-			if total_damage > best_damage:# or \
-			   #(total_damage == best_damage and (action.attack + sub_result.damage) > (best_damage / lethal_factor)):
+			if total_damage > best_damage or \
+			   (total_damage > 0 and total_damage == best_damage and sub_result.pitched.size() < best_pitched.size()):
 				best_damage = total_damage
 				best_pitched = sub_result.pitched
 				best_actions = [action] + sub_result.actions
