@@ -7,7 +7,7 @@ extends MarginContainer
 
 @onready var card_visuals: CardVisuals = %CardVisuals
 @onready var viewport_texture: TextureRect = $ViewportTexture
-@onready var card_back_panel: Panel = $CardBackPanel
+@onready var card_back_panel: Panel = %CardBackPanel
 
 func set_card(new_card: Card) -> void:
 	if not is_node_ready():

@@ -20,6 +20,8 @@ corner_radius_bottom_left = 4
 
 [node name="CardRenderContainer" type="MarginContainer" unique_id=1508382840]
 custom_minimum_size = Vector2(40, 60)
+offset_right = 226.0
+offset_bottom = 291.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_d3nd8")
@@ -29,7 +31,14 @@ texture_filter = 4
 layout_mode = 2
 texture = SubResource("ViewportTexture_14lqk")
 
-[node name="CardBackPanel" type="Panel" parent="." unique_id=2001000001]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=823658456]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 11
+
+[node name="CardBackPanel" type="Panel" parent="MarginContainer" unique_id=2001000001]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 2
