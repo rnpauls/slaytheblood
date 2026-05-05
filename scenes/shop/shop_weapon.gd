@@ -1,7 +1,7 @@
 class_name ShopWeapon
 extends VBoxContainer
 
-const WEAPON_CARD_RENDER_CONTAINER = preload("res://scenes/weapon_handler/weapon_card_render_container.tscn")
+const INVENTORY_CARD_RENDER_CONTAINER = preload("res://scenes/inventory_card/inventory_card_render_container.tscn")
 
 @export var weapon: Weapon : set = set_weapon
 
@@ -33,13 +33,12 @@ func set_weapon(new_weapon: Weapon) -> void:
 
 	weapon = new_weapon
 	
-	for weapon_card: WeaponCardRenderContainer in weapon_container.get_children():
-		weapon_card.queue_free()
-	
-	var new_weapon_card := WEAPON_CARD_RENDER_CONTAINER.instantiate() as WeaponCardRenderContainer
+	for child in weapon_container.get_children():
+		child.queue_free()
+
+	var new_weapon_card := INVENTORY_CARD_RENDER_CONTAINER.instantiate() as InventoryCardRenderContainer
 	weapon_container.add_child(new_weapon_card)
 	new_weapon_card.weapon = weapon
-	#current_weapon_card = new_weapon_card
 
 func _on_buy_button_pressed() -> void:
 	Events.shop_weapon_bought.emit(weapon, gold_cost)

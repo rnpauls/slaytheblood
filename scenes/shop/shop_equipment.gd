@@ -1,7 +1,7 @@
 class_name ShopEquipment
 extends VBoxContainer
 
-const EQUIPMENT_RENDER_CONTAINER = preload("res://scenes/equipment_handler/equipment_card_render_container.tscn")
+const INVENTORY_CARD_RENDER_CONTAINER = preload("res://scenes/inventory_card/inventory_card_render_container.tscn")
 
 @export var equipment: Equipment : set = set_equipment
 
@@ -36,10 +36,9 @@ func set_equipment(new_equipment: Equipment) -> void:
 	for child in equipment_container.get_children():
 		child.queue_free()
 
-	var new_render := EQUIPMENT_RENDER_CONTAINER.instantiate() as EquipmentCardRenderContainer
+	var new_render := INVENTORY_CARD_RENDER_CONTAINER.instantiate() as InventoryCardRenderContainer
 	equipment_container.add_child(new_render)
 	new_render.equipment = equipment
-	new_render.clickable = false
 
 func _on_buy_button_pressed() -> void:
 	Events.shop_equipment_bought.emit(equipment, gold_cost)

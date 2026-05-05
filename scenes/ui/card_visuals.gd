@@ -24,7 +24,7 @@ func set_card(value: Card) -> void:
 
 	card = value
 	cost.text = str(card.cost)
-	text_box.text = card.get_default_tooltip()
+	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(card.get_default_tooltip()))
 	type_label.text = str(card.TypeString.keys()[card.type])
 	card_name.text = card.id.capitalize()
 	if card.disable_attack or card.type == Card.Type.BLOCK or card.type == Card.Type.NAA:

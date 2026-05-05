@@ -16,5 +16,5 @@ attack = 7
 defense = 3
 ai_value = 3
 icon = ExtResource("2_2x02u")
-tooltip_text = "Intimidate"
+tooltip_text = "[kw=intim]Intimidate[/kw]"
 sound = ExtResource("4_5hgke")

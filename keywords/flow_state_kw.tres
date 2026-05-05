@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://woqcqv0i0feo"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_kye6d"]
+
+[resource]
+script = ExtResource("1_kye6d")
+id = &"flow"
+display_name = "Flow State"
+description = "Checks if unit has pitched a zero cost card this turn"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

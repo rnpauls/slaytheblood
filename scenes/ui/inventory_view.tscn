@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://c4n5peso4ufb8" path="res://characters/brute/brute_starting_inv.tres" id="2_k13uw"]
 [ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="2_kuo8l"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="4_07io4"]
-[ext_resource type="PackedScene" uid="uid://crla21tdbt7ul" path="res://scenes/weapon_handler/weapon_card_render_container.tscn" id="4_kuo8l"]
+[ext_resource type="PackedScene" uid="uid://binvcardrcrcn" path="res://scenes/inventory_card/inventory_card_render_container.tscn" id="4_kuo8l"]
 [ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_4agyt"]
 
 [node name="InventoryView" type="Control" unique_id=495168532]
@@ -70,14 +70,6 @@ theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 6
 
-[node name="WeaponCardRenderContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/Weapons" unique_id=1508382840 instance=ExtResource("4_kuo8l")]
-layout_mode = 2
-
-[node name="WeaponCardRenderContainer2" parent="MarginContainer/VBoxContainer/ScrollContainer/Weapons" unique_id=1748974327 instance=ExtResource("4_kuo8l")]
-layout_mode = 2
-
-[node name="WeaponCardRenderContainer3" parent="MarginContainer/VBoxContainer/ScrollContainer/Weapons" unique_id=325548591 instance=ExtResource("4_kuo8l")]
-layout_mode = 2
 
 [node name="BackButton" type="Button" parent="." unique_id=984134959]
 unique_name_in_owner = true

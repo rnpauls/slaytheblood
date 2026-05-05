@@ -18,10 +18,16 @@ func _on_visuals_gui_input(event: InputEvent) -> void:
 
 func _on_visuals_mouse_entered() -> void:
 	visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
+	if not card:
+		return
+	var entries: Array[TooltipData] = KeywordRegistry.build_tooltip_chain(card.get_default_tooltip())
+	if not entries.is_empty():
+		Events.tooltip_show_requested.emit(entries, Rect2(visuals.global_position, visuals.size))
 
 
 func _on_visuals_mouse_exited() -> void:
 	visuals.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
+	Events.tooltip_hide_requested.emit()
 
 
 func set_card(value: Card) -> void:

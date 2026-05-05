@@ -1,8 +1,7 @@
 class_name InventoryView
 extends Control
 
-const WEAPON_CARD_RENDER_CONTAINER_SCENE := preload("res://scenes/weapon_handler/weapon_card_render_container.tscn")
-const EQUIPMENT_RENDER_SCENE := preload("res://scenes/equipment_handler/equipment_card_render_container.tscn")
+const INVENTORY_CARD_RENDER_CONTAINER_SCENE := preload("res://scenes/inventory_card/inventory_card_render_container.tscn")
 
 @export var inventory: Inventory
 ## Optional: when set, the view shows equipped slots and supports click-to-equip/unequip.
@@ -11,7 +10,6 @@ const EQUIPMENT_RENDER_SCENE := preload("res://scenes/equipment_handler/equipmen
 @onready var title: Label = %Title
 @onready var weapons: GridContainer = %Weapons
 @onready var back_button: Button = %BackButton
-@onready var card_tooltip_popup: CardTooltipPopup = %CardTooltipPopup
 
 func _ready() -> void:
 	back_button.pressed.connect(hide)
@@ -22,17 +20,13 @@ func _ready() -> void:
 
 func _input(event:InputEvent) ->void:
 	if event.is_action_pressed("ui_cancel"):
-		if card_tooltip_popup.visible:
-			card_tooltip_popup.hide_tooltip()
-		else:
-			hide()
+		hide()
 
 
 func show_current_view() ->void:
 	for child in weapons.get_children():
 		child.queue_free()
 
-	card_tooltip_popup.hide_tooltip()
 	_update_view.call_deferred()
 
 
@@ -41,17 +35,17 @@ func _update_view() ->void:
 		return
 
 	for w: Weapon in inventory.weapons.duplicate():
-		var new_w := WEAPON_CARD_RENDER_CONTAINER_SCENE.instantiate() as WeaponCardRenderContainer
+		var new_w := INVENTORY_CARD_RENDER_CONTAINER_SCENE.instantiate() as InventoryCardRenderContainer
 		weapons.add_child(new_w)
 		new_w.weapon = w
 
 	for eq: Equipment in inventory.equips.duplicate():
-		var new_eq := EQUIPMENT_RENDER_SCENE.instantiate() as EquipmentCardRenderContainer
+		var new_eq := INVENTORY_CARD_RENDER_CONTAINER_SCENE.instantiate() as InventoryCardRenderContainer
 		weapons.add_child(new_eq)
 		new_eq.equipment = eq
 		if character:
-			new_eq.pressed.connect(_on_equipment_clicked)
-		new_eq.tooltip_requested.connect(card_tooltip_popup.show_tooltip)
+			new_eq.clickable = true
+			new_eq.equipment_pressed.connect(_on_equipment_clicked)
 
 	show()
 

@@ -19,6 +19,9 @@ const KEYWORDS: Dictionary = {
 	&"intim" : preload("uid://c2nsq18tn8muy"),
 	# &"vulnerable": preload("res://keywords/vulnerable.tres"),
 	&"brittle" : preload("uid://cfqb7i380owtc"),
+	&"enraged" : preload("uid://qe37tcwulr8q"),
+	&"flow" : preload("uid://woqcqv0i0feo"),
+	&"sink" : preload("uid://d30viny6t8iuu"),
 }
 
 const _KW_TAG_REGEX := r"\[kw=([\w-]+)\](.*?)\[/kw\]"

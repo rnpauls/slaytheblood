@@ -12,6 +12,6 @@ rarity = 1
 pitch = 2
 defense = 3
 icon = ExtResource("1_d5l7k")
-tooltip_text = "[center]Sink 1[/center]"
+tooltip_text = "[kw=sink]Sink[/kw] 1"
 block_sound = ExtResource("1_in82h")
 disable_attack = true

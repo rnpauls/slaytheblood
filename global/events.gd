@@ -17,6 +17,11 @@ signal card_blocked(card: Card)
 ## (right-of-source, flips left); pass Rect2() to anchor to the mouse instead.
 signal tooltip_show_requested(entries: Array[TooltipData], anchor_rect: Rect2)
 signal tooltip_hide_requested
+## Show the big InventoryCard preview for a weapon or equipment on hover. Pass
+## anchor_rect to position next to the source (right-of-source, flips left).
+## Exactly one of `weapon` or `equipment` should be set; the other is null.
+signal inventory_preview_show_requested(weapon: Weapon, equipment: Equipment, anchor_rect: Rect2)
+signal inventory_preview_hide_requested
 signal selecting_cards_from_hand
 signal finished_selecting_cards_from_hand(selected_cards: Array[CardUI])
 signal lock_hand()

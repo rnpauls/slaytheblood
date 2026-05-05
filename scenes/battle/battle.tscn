@@ -156,15 +156,15 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 offset_left = 47.0
 offset_top = 293.0
-offset_right = 47.0
-offset_bottom = 293.0
+offset_right = 111.0
+offset_bottom = 357.0
 
 [node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
 offset_left = 266.0
 offset_top = 292.0
-offset_right = 266.0
-offset_bottom = 292.0
+offset_right = 330.0
+offset_bottom = 356.0
 
 [node name="LeftOffhandEquipmentHandler" parent="BattleUI" unique_id=746134647 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
@@ -184,6 +184,7 @@ offset_bottom = 356.0
 
 [node name="HeadEquipmentHandler" parent="BattleUI" unique_id=958391557 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
+z_index = 1
 visible = false
 offset_left = 146.0
 offset_top = 116.0

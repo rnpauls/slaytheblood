@@ -13,7 +13,7 @@ character_type = 1
 starter_weapon = true
 icon = ExtResource("1_g6x73")
 sound = ExtResource("3_fe7qa")
-tooltip = "Flow state: Go Again"
+tooltip = "[kw=flow]Flow state[/kw]: Go Again"
 attack = 1
 cost = 1
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

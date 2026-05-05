@@ -16,7 +16,7 @@ defense = 3
 exhausts = true
 ai_value = 6
 icon = ExtResource("1_7voqq")
-tooltip_text = "[center]At the start of your turn, gain 2 [color=\\\"ffdf00\\\"]Muscle[/color].[/center]"
+tooltip_text = "At the start of your turn, gain 2 [kw=strength]Strength[/kw]"
 sound = ExtResource("3_rnlwg")
 disable_attack = true
 disable_defense = true

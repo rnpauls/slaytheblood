@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://y5m8dbsnnish" path="res://scenes/run/pause_menu.gd" id="11_d0odi"]
 [ext_resource type="PackedScene" uid="uid://c4brrbokqt532" path="res://scenes/ui/inventory_view.tscn" id="13_fo0ly"]
 [ext_resource type="PackedScene" uid="uid://b8tlay001a26v" path="res://scenes/ui/tooltip_layer.tscn" id="14_ttip"]
+[ext_resource type="PackedScene" uid="uid://cjjtuwl338t1b" path="res://scenes/ui/inventory_preview_layer.tscn" id="15_invpl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fo0ly"]
 
@@ -152,13 +153,15 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="TooltipCanvas" type="CanvasLayer" parent="."]
-layer = 4
+layer = 6
 
 [node name="TooltipLayer" parent="TooltipCanvas" instance=ExtResource("14_ttip")]
 
+[node name="InventoryPreviewLayer" parent="TooltipCanvas" instance=ExtResource("15_invpl")]
+
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1260299461]
 process_mode = 3
-layer = 5
+layer = 7
 visible = false
 script = ExtResource("11_d0odi")
 

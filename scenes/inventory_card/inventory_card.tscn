@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://binvcardscena"]
+
+[ext_resource type="Script" uid="uid://t7dyqiwioeka" path="res://scenes/inventory_card/inventory_card.gd" id="1_invcs"]
+[ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_handler/weapon_ui.tscn" id="2_invwu"]
+[ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="3_invsb"]
+[ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="4_invrar"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="5_invth"]
+
+[node name="InventoryCard" type="Control" unique_id=1079373947]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1080.0
+offset_bottom = -420.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_invcs")
+
+[node name="Panel" type="Panel" parent="." unique_id=349105755]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_invsb")
+
+[node name="WeaponUI" parent="." unique_id=261593189 instance=ExtResource("2_invwu")]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 98.0
+offset_right = 133.0
+offset_bottom = 162.0
+
+[node name="EquipmentDisplay" type="Control" parent="." unique_id=1828750525]
+visible = false
+anchors_preset = 0
+offset_left = 69.0
+offset_top = 98.0
+offset_right = 133.0
+offset_bottom = 162.0
+mouse_filter = 2
+
+[node name="EquipIcon" type="TextureRect" parent="EquipmentDisplay" unique_id=995165665]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="BlockBadge" type="TextureRect" parent="EquipmentDisplay" unique_id=1405699440]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 56.0
+offset_top = 56.0
+offset_right = 96.0
+offset_bottom = 96.0
+mouse_filter = 2
+texture = ExtResource("4_invrar")
+
+[node name="BlockLabel" type="Label" parent="EquipmentDisplay/BlockBadge" unique_id=1041434115]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rarity" type="TextureRect" parent="." unique_id=1071544369]
+texture_filter = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 52.0
+offset_bottom = 52.0
+mouse_filter = 2
+texture = ExtResource("4_invrar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextBox" type="RichTextLabel" parent="." unique_id=892735793]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 195.0
+offset_right = 195.0
+offset_bottom = 266.0
+mouse_filter = 2
+theme = ExtResource("5_invth")
+theme_override_constants/line_separation = -10
+bbcode_enabled = true
+text = "On hit destroy arsenal"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="RichTextLabel" parent="." unique_id=238359469]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 7.0
+offset_right = 194.0
+offset_bottom = 63.0
+mouse_filter = 2
+theme = ExtResource("5_invth")
+theme_override_constants/line_separation = -10
+bbcode_enabled = true
+text = "Sledge of Anvilheim"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypeLabel" type="RichTextLabel" parent="." unique_id=155581673]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 264.0
+offset_right = 194.0
+offset_bottom = 297.0
+mouse_filter = 2
+theme = ExtResource("5_invth")
+text = "Hammer"
+horizontal_alignment = 1

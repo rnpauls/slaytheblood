@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://qe37tcwulr8q"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_ryb5v"]
+
+[resource]
+script = ExtResource("1_ryb5v")
+id = &"enraged"
+display_name = "Enraged"
+description = "Checks if unit has discarded a 6+atk card this turn"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

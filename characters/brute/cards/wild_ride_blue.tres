@@ -13,6 +13,6 @@ cost = 2
 pitch = 3
 attack = 4
 icon = ExtResource("1_63hpg")
-tooltip_text = "[center]Rampage 1: Go again.[/center]"
+tooltip_text = "[kw=rampage]Rampage[/kw] 1: Go again."
 sound = ExtResource("4_0i5um")
 disable_defense = true

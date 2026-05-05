@@ -81,6 +81,7 @@ layout_mode = 1
 offset_right = 64.0
 offset_bottom = 64.0
 pivot_offset = Vector2(32, 32)
+mouse_filter = 2
 texture = ExtResource("3_0cduw")
 stretch_mode = 5
 
@@ -95,6 +96,7 @@ offset_left = -32.0
 offset_top = 56.0
 offset_right = 8.0
 offset_bottom = 96.0
+mouse_filter = 2
 texture = ExtResource("5_gvkp5")
 
 [node name="AtkLabel" type="Label" parent="TextureRectAtk" unique_id=882869703]
@@ -111,6 +113,7 @@ offset_right = 20.0
 offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 text = "4"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -134,6 +137,7 @@ offset_left = 56.0
 offset_top = -32.0
 offset_right = 96.0
 offset_bottom = 8.0
+mouse_filter = 2
 texture = ExtResource("5_gvkp5")
 
 [node name="CostLabel" type="Label" parent="TextureRectCost" unique_id=1716541515]
@@ -150,8 +154,8 @@ offset_right = 20.0
 offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]

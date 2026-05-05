@@ -98,7 +98,10 @@ func _on_weapon_button_pressed() -> void:
 		begin_targeting()
 
 func _on_mouse_entered() -> void:
-	weapon_ui.request_tooltip()
+	if not weapon:
+		return
+	var anchor_rect := Rect2(weapon_button.global_position, weapon_button.size)
+	Events.inventory_preview_show_requested.emit(weapon, null, anchor_rect)
 
 func _on_mouse_exited() -> void:
-	Events.tooltip_hide_requested.emit()
+	Events.inventory_preview_hide_requested.emit()

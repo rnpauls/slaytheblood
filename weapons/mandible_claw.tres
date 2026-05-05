@@ -13,7 +13,7 @@ character_type = 2
 starter_weapon = true
 icon = ExtResource("1_yy8wy")
 sound = ExtResource("3_1ustq")
-tooltip = "Enraged: Go Again"
+tooltip = "[kw=enraged]Enraged[/kw]: Go Again"
 attack = 3
 cost = 2
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

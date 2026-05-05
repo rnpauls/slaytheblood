@@ -154,13 +154,9 @@ func _on_equipment_button_pressed() -> void:
 func _on_mouse_entered() -> void:
 	if not equipment:
 		return
-	var body := equipment.get_tooltip()
-	var entries: Array[TooltipData] = [
-		TooltipData.make(equipment.icon, equipment.equipment_name, body),
-	]
-	entries.append_array(KeywordRegistry.build_tooltip_chain(body))
-	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
+	var anchor_rect := Rect2(global_position, size)
+	Events.inventory_preview_show_requested.emit(null, equipment, anchor_rect)
 
 
 func _on_mouse_exited() -> void:
-	Events.tooltip_hide_requested.emit()
+	Events.inventory_preview_hide_requested.emit()

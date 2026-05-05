@@ -31,6 +31,6 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(32, 32)
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="EquipmentButton" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="EquipmentButton" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="EquipmentButton" to="." method="_on_equipment_button_pressed"]

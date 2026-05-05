@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://d30viny6t8iuu"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_6wrwx"]
+
+[resource]
+script = ExtResource("1_6wrwx")
+id = &"sink"
+display_name = "Sink"
+description = "You may bottom a card. If you do, draw a card"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

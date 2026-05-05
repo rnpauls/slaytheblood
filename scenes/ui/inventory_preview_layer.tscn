@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cjjtuwl338t1b"]
+
+[ext_resource type="Script" uid="uid://b5evu3f3vb5uc" path="res://scenes/ui/inventory_preview_layer.gd" id="1_invpl"]
+
+[node name="InventoryPreviewLayer" type="VBoxContainer" unique_id=594173268]
+mouse_filter = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_invpl")
+fade_seconds = 0.0
