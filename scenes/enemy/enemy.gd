@@ -13,6 +13,9 @@ const DRAW_INTERVAL := 0.12
 @onready var enemy_hand: EnemyHand = $EnemyHand
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
 
+## Position (relative to the Enemy node) where the arsenal card_ui sits when one is held.
+@export var arsenal_offset: Vector2 = Vector2(-90, 158)
+
 signal enemy_action_completed
 
 var enemy_ai: EnemyAI
@@ -28,6 +31,9 @@ var _staged_card_ui: EnemyCardUI = null
 ## Set just before play_next_action() so the signal handler knows not to
 ## animate this card out of EnemyHand — staged_display.stage() will reparent it.
 var _pending_stage_card: Card = null
+
+## EnemyCardUI displayed in the arsenal slot (or null when arsenal is empty).
+var _arsenal_card_ui: EnemyCardUI = null
 
 
 func set_current_action(value: Card) -> void:
@@ -153,6 +159,7 @@ func update_intent() -> void:
 			new_intent.current_text = "EMPTY"
 			new_intent.icon = null
 	intent_ui.update_intent(new_intent)
+	_refresh_arsenal_card_ui()
 	_update_hand_plan_colors()
 
 ## Color each card in the hand to reflect the AI's turn plan:
@@ -178,6 +185,39 @@ func _update_hand_plan_colors() -> void:
 			elif card in plan.pitched:
 				color = Color.BLUE
 		card_ui.set_plan_color(color, show_exclamation)
+
+	# Arsenal card_ui follows the same rules (it can't be pitched, so no blue case).
+	if is_instance_valid(_arsenal_card_ui) and enemy_ai.arsenal != null:
+		var ars: Card = enemy_ai.arsenal
+		var ars_color := Color.BLACK
+		var ars_excl := false
+		if plan != null and ars in plan.actions:
+			if ars.type == Card.Type.ATTACK:
+				ars_color = Color.RED
+				ars_excl = ars.on_hits.size() > 0 or active_on_hits.size() > 0
+			else:
+				ars_color = Color.GREEN
+		_arsenal_card_ui.set_plan_color(ars_color, ars_excl)
+
+## Create, update, or destroy the arsenal slot card_ui to mirror enemy_ai.arsenal.
+func _refresh_arsenal_card_ui() -> void:
+	if not enemy_ai:
+		return
+	var current_arsenal: Card = enemy_ai.arsenal
+	if current_arsenal == null:
+		if is_instance_valid(_arsenal_card_ui):
+			_arsenal_card_ui.queue_free()
+		_arsenal_card_ui = null
+		return
+	if not is_instance_valid(_arsenal_card_ui):
+		_arsenal_card_ui = ENEMY_CARD_UI_SCENE.instantiate() as EnemyCardUI
+		add_child(_arsenal_card_ui)
+		_arsenal_card_ui.scale = Vector2.ONE * enemy_hand.card_scale
+		_arsenal_card_ui.position = arsenal_offset
+	if _arsenal_card_ui.card != current_arsenal:
+		_arsenal_card_ui.setup(current_arsenal, stats, modifier_handler)
+		_arsenal_card_ui.show_back = true
+		_arsenal_card_ui.set_arsenal_marker(true)
 
 func do_action() -> void:
 	if not current_action:
@@ -230,6 +270,7 @@ func destroy_arsenal() -> bool:
 		var arsenal_card: Card = enemy_ai.arsenal
 		enemy_ai.arsenal = null
 		arsenal_card.queue_free()
+		_refresh_arsenal_card_ui()
 		return true
 
 func _on_death() -> void:
@@ -246,8 +287,8 @@ func _stage_attack_card_ui(card: Card, card_ui: EnemyCardUI) -> void:
 	if not is_instance_valid(card_ui):
 		card_ui = card_ui_map.get(card, null)
 	if not is_instance_valid(card_ui):
-		_log("WARNING: _stage_attack_card — no card_ui found for %s" % card.id)
-		return
+		# Card isn't in the hand display (e.g. arsenal) — create a transient ui to stage.
+		card_ui = _get_or_create_card_ui(card)
 
 	_staged_card_ui = card_ui
 

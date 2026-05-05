@@ -44,10 +44,18 @@ func recalculate_plan(player_life: int) -> void:
 func play_next_action() -> Card:
 	if not turn_plan or turn_plan.actions.size() == 0:
 		if turn_plan and turn_plan.remaining.size() > 0 and not arsenal:
-			arsenal = pick_best_arsenal(turn_plan.remaining)
-			hand.erase(arsenal)
-			card_removed_from_hand.emit(arsenal)
-			print_enemy_ai("arsenaled %s" % arsenal.id)
+			# Don't arsenal the lone remaining card if it's costly — arsenal can't
+			# be pitched, so it'd be stranded if next turn's draws don't bring
+			# enough resources to play it. Keeping it in hand at least preserves
+			# its pitch utility.
+			var only_costly: bool = turn_plan.remaining.size() == 1 and turn_plan.remaining[0].cost > 0
+			if not only_costly:
+				arsenal = pick_best_arsenal(turn_plan.remaining)
+				hand.erase(arsenal)
+				card_removed_from_hand.emit(arsenal)
+				print_enemy_ai("arsenaled %s" % arsenal.id)
+			else:
+				print_enemy_ai("kept %s in hand (lone costly card)" % turn_plan.remaining[0].id)
 		turn_plan = null
 		return null
 	
@@ -68,10 +76,14 @@ func play_next_action() -> Card:
 		return null
 	
 	resources -= next_action.cost
-	hand.erase(next_action)
-	card_removed_from_hand.emit(next_action)
+	if next_action == arsenal:
+		arsenal = null
+		print_enemy_ai("played arsenal %s" % [next_action.id])
+	else:
+		hand.erase(next_action)
+		card_removed_from_hand.emit(next_action)
+		print_enemy_ai("played %s" % [next_action.id])
 	turn_plan.actions.erase(next_action)
-	print_enemy_ai("played %s" % [next_action.id])
 	return next_action
 
 ## Defending phase: Player attacks AI, returns array of defense values
@@ -121,19 +133,21 @@ func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) 
 ## Recursively calculate maximum offense potential
 ##TODO: include damage modifiers
 func calculate_max_offense(state: Dictionary, action_points: int, player_life: int) -> Dictionary:
-	if action_points <= 0 or state.cards.size() == 0:
+	var arsenal_card = state.get("arsenal")
+	if action_points <= 0 or (state.cards.size() == 0 and not arsenal_card):
 		return {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards}
-	
+
 	var best_result = {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards.duplicate()}
 	#lethal factor should be reworked to check if can present lethal
 	var lethal_factor = 1#clamp(1.5 - (float(player_life) / 40.0), 1.0, 1.5)
-	
+
 	#Try pitching each card, make a new state, and then call it again.
 	#Tie-break on equal damage by preferring fewer pitches — play_next_action
 	#only pitches as needed at runtime, so over-pitching in the plan would
 	#cause the displayed pitch list to disagree with what actually happens.
+	#Note: arsenal cannot be pitched (F&B rule) — only carried through state.
 	for pitch in state.cards:
-		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch}
+		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch, "arsenal": arsenal_card}
 		new_state.cards.erase(pitch)
 		var pitch_result = calculate_max_offense(new_state, action_points, player_life)
 		var total_damage = pitch_result.damage * lethal_factor
@@ -159,7 +173,7 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 ##Calls with current hand, zero resources, and one action point
 ##Used at start of turn
 func calculate_max_offense_now(player_life: int) -> Dictionary:
-	var hand_state = {"cards": hand.duplicate(), "resources": 0}
+	var hand_state = {"cards": hand.duplicate(), "resources": 0, "arsenal": arsenal}
 	return calculate_max_offense(hand_state, 1, player_life)
 	
 ## Try playing actions with hand and resources defined in state
@@ -168,11 +182,20 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	var best_pitched = []
 	var best_actions = []
 	var best_remaining = state.cards.duplicate()
-	
-	for action in state.cards as Array[Card]:
+
+	var arsenal_card = state.get("arsenal")
+	var candidates = state.cards.duplicate()
+	if arsenal_card:
+		candidates.append(arsenal_card)
+
+	for action in candidates as Array[Card]:
 		if action.cost <= state.resources and (action.type == Card.Type.ATTACK or action.type == Card.Type.NAA):
-			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost}
-			new_state.cards.erase(action)
+			var new_state: Dictionary
+			if action == arsenal_card:
+				new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost, "arsenal": null}
+			else:
+				new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost, "arsenal": arsenal_card}
+				new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0)
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
 			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)

@@ -60,6 +60,27 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ArsenalLabel" type="Label" parent="MarginContainer/CardBackPanel" unique_id=2001000003]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_top = 4.0
+offset_right = -10.0
+offset_bottom = 84.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 80
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="SubViewport" type="SubViewport" parent="." unique_id=473573907]
 disable_3d = true
 transparent_bg = true
