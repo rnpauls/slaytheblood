@@ -113,23 +113,27 @@ func _load_run() -> void:
 		_on_map_exited(save_data.last_room)
 
 func _change_view(scene: PackedScene) -> Node:
+	# Outgoing view is queue_freed below — its tooltip-emitting children won't
+	# get a paired mouse_exited, so clear any open tooltip up front.
+	Events.tooltip_hide_requested.emit()
 	if current_view.get_child_count() > 0:
 		current_view.get_child(0).queue_free()
-	
+
 	get_tree().paused = false
 	var new_view := scene.instantiate()
 	current_view.add_child(new_view)
 	map.hide_map()
-	
+
 	return new_view
 
 func _show_map() -> void:
+	Events.tooltip_hide_requested.emit()
 	if current_view.get_child_count() > 0:
 		current_view.get_child(0).queue_free()
-	
+
 	map.show_map()
 	map.unlock_next_rooms()
-	
+
 	_save_run(true)
 
 func _setup_event_connections() -> void:

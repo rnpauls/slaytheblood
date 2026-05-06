@@ -38,26 +38,46 @@ func on_mouse_exited() -> void:
 
 func _on_transition_requested(from: CardState, to: CardState.State) -> void:
 		if from != current_state:
+			_log("transition rejected: requested %s → %s, but current is %s" % [
+				_state_name(from.state),
+				_state_name(to),
+				_state_name(current_state.state) if current_state else "<none>",
+			])
 			return
-		
+
 		var new_state: CardState = states[to]
 		if not new_state:
+			_log("transition failed: no state for %s" % _state_name(to))
 			return
-		
+
+		_log("%s → %s" % [_state_name(current_state.state), _state_name(to)])
+
 		if current_state:
 			current_state.exit()
-		
+
 		new_state.enter()
 		current_state = new_state
 		new_state.post_enter()
-	
+
 #func _on_finished_selecting_cards_from_hand(_cards: Array[CardUI]) -> void:
 func force_return_to_base_state() -> void:
 	var new_state: CardState = states[CardState.State.BASE]
-		
+	_log("force_return_to_base_state from %s" % (_state_name(current_state.state) if current_state else "<none>"))
+
 	if current_state:
 		current_state.exit()
-	
+
 	new_state.enter()
 	current_state = new_state
 	new_state.post_enter()
+
+
+func _state_name(s: int) -> String:
+	return CardState.State.keys()[s]
+
+
+func _log(msg: String) -> void:
+	var id := "?"
+	if current_state and current_state.card_ui and current_state.card_ui.card:
+		id = current_state.card_ui.card.id
+	print("[CardSM][%s] %s" % [id, msg])

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cxcm2s6evmy36"]
 
 [ext_resource type="Script" uid="uid://bpq3l77qluekc" path="res://scenes/battle/battle.gd" id="1_0ser8"]
-[ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_hkrb3"]
 [ext_resource type="Script" uid="uid://dn6sbbsk51rtt" path="res://scenes/ui/hand.gd" id="2_bgimw"]
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="2_spkj8"]
 [ext_resource type="PackedScene" uid="uid://behjfqeouf5ky" path="res://scenes/player/player.tscn" id="3_g13cx"]
@@ -9,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cccl81n14imbp" path="res://art/music/dummy_daniel-under-siege-490053.mp3" id="3_pyfix"]
 [ext_resource type="Script" uid="uid://8q3wa6hc2yss" path="res://scenes/enemy/enemy_handler.gd" id="4_2ufbh"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/brute/brute.tres" id="4_psa3f"]
+[ext_resource type="Texture2D" uid="uid://del2yqjjiqwse" path="res://art/backgrounds/de5fb9bc-cd93-40b6-9e0c-502e21629fe3.jpg" id="4_pyfix"]
 [ext_resource type="Resource" uid="uid://b7kxqdggip08o" path="res://enemies/crab/crab_enemy.tres" id="5_247pw"]
 [ext_resource type="Script" uid="uid://bvtdi6mp3ltqf" path="res://scenes/ui/battle_ui.gd" id="7_8utji"]
 [ext_resource type="Script" uid="uid://dmr00vq3egdqr" path="res://scenes/player/player_handler.gd" id="8_r04wr"]
@@ -43,9 +43,7 @@ music = ExtResource("3_pyfix")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1702230980]
-modulate = Color(0.349065, 0.349065, 0.349065, 1)
-scale = Vector2(5, 4.9999995)
-texture = ExtResource("1_hkrb3")
+texture = ExtResource("4_pyfix")
 centered = false
 
 [node name="CardDropArea" type="Area2D" parent="." unique_id=603537003]

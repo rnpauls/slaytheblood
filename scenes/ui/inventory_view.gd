@@ -13,9 +13,17 @@ const INVENTORY_CARD_RENDER_CONTAINER_SCENE := preload("res://scenes/inventory_c
 
 func _ready() -> void:
 	back_button.pressed.connect(hide)
+	# Hiding the view doesn't reliably fire mouse_exited on the card hover
+	# sources inside it, so clear any tooltip whenever the view becomes hidden.
+	visibility_changed.connect(_on_visibility_changed)
 
 	for child in weapons.get_children():
 		child.queue_free()
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		Events.tooltip_hide_requested.emit()
 
 
 func _input(event:InputEvent) ->void:

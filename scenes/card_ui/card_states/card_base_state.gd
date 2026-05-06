@@ -15,17 +15,23 @@ func enter() ->void:
 
 func on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse") and hand.is_selecting:
+		_log("BASE on_gui_input: LMB (is_selecting=true) → SELECTED")
 		transition_requested.emit(self, CardState.State.SELECTED)
 	if event.is_action_pressed("left_mouse") and hand.is_blocking:
 		var player: Player = hand.player
 		var is_intimidated := player and card_ui.card in player.intimidated_cards
 		if not is_intimidated and not card_ui.card.disable_defense:
+			_log("BASE on_gui_input: LMB (is_blocking=true) → BLOCKED")
 			transition_requested.emit(self, CardState.State.BLOCKED)
 	if event.is_action_pressed("right_mouse"):
+		_log("BASE on_gui_input: RMB → PITCHED")
 		transition_requested.emit(self, CardState.State.PITCHED)
 	if not card_ui.playable or card_ui.disabled:
+		if event.is_action_pressed("left_mouse"):
+			_log("BASE on_gui_input: LMB IGNORED (playable=%s, disabled=%s)" % [card_ui.playable, card_ui.disabled])
 		return
 	if event.is_action_pressed("left_mouse"):
+		_log("BASE on_gui_input: LMB → CLICKED (playable=%s, disabled=%s)" % [card_ui.playable, card_ui.disabled])
 		card_ui.pivot_offset = card_ui.get_global_mouse_position() - card_ui.global_position
 		transition_requested.emit(self, CardState.State.CLICKED)
 

@@ -11,6 +11,9 @@ func _on_stats_set() -> void:
 	update_stats()
 
 func _on_death() -> void:
+	# queue_free skips mouse_exited on our hover sources (StatusHandler, sprite
+	# hover area), so a tooltip shown for the player would otherwise stay on screen.
+	Events.tooltip_hide_requested.emit()
 	Events.player_died.emit()
 	queue_free()
 

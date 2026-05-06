@@ -12,11 +12,19 @@ const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 
 func _ready() -> void:
 	back_button.pressed.connect(hide)
-	
+	# Hiding the view doesn't reliably fire mouse_exited on the CardMenuUI
+	# children, so clear any tooltip whenever the view becomes hidden.
+	visibility_changed.connect(_on_visibility_changed)
+
 	for card: Node in cards.get_children():
 		card.queue_free()
-	
+
 	card_tooltip_popup.hide_tooltip()
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		Events.tooltip_hide_requested.emit()
 
 func _input(event:InputEvent) ->void:
 	if event.is_action_pressed("ui_cancel"):

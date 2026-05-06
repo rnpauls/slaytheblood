@@ -29,3 +29,9 @@ func on_mouse_entered() -> void:
 
 func on_mouse_exited() -> void:
 	pass
+
+func _log(msg: String) -> void:
+	var id := "?"
+	if card_ui and card_ui.card:
+		id = card_ui.card.id
+	print("[CardSM][%s] %s" % [id, msg])
