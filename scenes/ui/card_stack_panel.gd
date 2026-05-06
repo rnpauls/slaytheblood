@@ -27,23 +27,20 @@ const PILE_SCALE := 0.6
 const TOP_VISIBLE_FRAC := 0.2
 # Animation timing.
 const REARRANGE_DURATION := 0.18
-const ZOOM_DURATION := 0.15
-
-const SIDE_LEFT := 0
-const SIDE_RIGHT := 1
 
 @export var card_pile: CardPile : set = set_card_pile
 ## When true, new visuals show the card-back; when false, the face is visible.
 @export var face_down: bool = true
-## Anchor side for hover-preview clamping of the top card. 0=LEFT, 1=RIGHT.
-@export_enum("LEFT", "RIGHT") var anchor_side: int = SIDE_LEFT
+## When true, an incoming card lands at the BACK of the visible stack (north,
+## peeked from above) instead of the front. Use for the draw pile, where a
+## pitched/sunk card goes to the bottom of the conceptual deck. Discard piles
+## leave this false so the most-recently-discarded card sits on top.
+@export var add_to_back_of_deck: bool = false
 
 @onready var click_area: Button = %ClickArea
 @onready var counter: Label = %Counter
 
 var _hovered: bool = false
-# When non-null, this card is in the zoomed-preview state and skips normal layout.
-var _zoomed_top: CardUI = null
 
 
 func _ready() -> void:
@@ -74,8 +71,6 @@ func release_top_visual() -> CardUI:
 	if visuals.is_empty():
 		return null
 	var top: CardUI = visuals.back()
-	if top == _zoomed_top:
-		_zoomed_top = null
 	var gpos: Vector2 = top.global_position
 	var grot: float = top.rotation_degrees
 	var gscale: Vector2 = top.scale
@@ -88,9 +83,11 @@ func release_top_visual() -> CardUI:
 	return top
 
 
-## Accept an existing CardUI as the new top of the stack. Caller should call
+## Accept an existing CardUI as a new member of the stack. Caller should call
 ## this BEFORE mutating the resource pile via add_card(). The card_ui keeps its
 ## current global transform (no visual jump on reparent) and tweens to its slot.
+## When add_to_back_of_deck is true (draw pile), the new card sinks to the BACK
+## of the visible stack (peeked from the north) instead of becoming the new top.
 func accept_incoming_visual(card_ui: CardUI) -> void:
 	# Kill any in-flight tween from the previous parent (e.g. Hand's _arrange_cards),
 	# otherwise it'll keep interpolating toward stale local-space targets after reparent.
@@ -101,7 +98,18 @@ func accept_incoming_visual(card_ui: CardUI) -> void:
 	if prev_parent:
 		prev_parent.remove_child(card_ui)
 	add_child(card_ui)
-	move_child(card_ui, get_child_count() - 1)  # last child = visual top
+	# Discard pile: last child = south (most-visible) → new card on top.
+	# Draw pile: first child = north (peeked) → pitched card slides under the rest.
+	if add_to_back_of_deck:
+		move_child(card_ui, 0)
+	else:
+		move_child(card_ui, get_child_count() - 1)
+	# Reset pivot to the card's center: the drag interaction (card_base_state)
+	# rewrites pivot_offset to the click point so the card grabs from there, but
+	# _slot_position assumes pivot == CARD_PIVOT when converting visible-top-left
+	# to position. Without this, played cards land with a horizontal offset in
+	# the column (block/pitch don't hit that code path so they look fine).
+	card_ui.pivot_offset = CARD_PIVOT
 	# Preserve only the y of the hand-spot so the fly-in slides DOWN into the
 	# slot. Snap x to the slot column immediately so the discard column stays
 	# vertically aligned during the fly-in (otherwise multiple cards mid-tween
@@ -148,8 +156,6 @@ func _sync_to_resource() -> void:
 		# a handoff (defensive).
 		for i in -diff:
 			var top: CardUI = _visuals().back()
-			if top == _zoomed_top:
-				_zoomed_top = null
 			top.queue_free()
 	_update_counter()
 	_arrange()
@@ -185,9 +191,11 @@ func _visuals() -> Array[CardUI]:
 ## Local-space position for a card at stack index i.
 ## i=0 (first child, drawn BEHIND) sits at the visual top of the column
 ## (most-north, smallest y). i=N-1 (drawn ON TOP) sits at the bottom of the
-## column (most-south). The most-recently-added card (last child) is therefore
-## the most-south one — fully visible, with older cards' top edges peeking
-## above it. Same ordering for both piles.
+## column (most-south). For discard piles the most-recently-added card is the
+## last child — fully visible, with older cards peeking above it. For draw piles
+## (add_to_back_of_deck=true) the most-recently-added card is instead the first
+## child, so a freshly pitched card peeks from the north and the next-to-draw
+## card stays on the visible bottom.
 func _slot_position(i: int) -> Vector2:
 	var n := _visuals().size()
 	var max_height: float = 70.0 if _hovered else 50.0
@@ -209,41 +217,39 @@ func _slot_position(i: int) -> Vector2:
 func _arrange() -> void:
 	var visuals := _visuals()
 	var n := visuals.size()
+	_update_click_area(n)
 	if n == 0:
 		return
 	for i in n:
 		var card := visuals[i]
-		if card == _zoomed_top:
-			continue
 		var target_pos := _slot_position(i)
-		var t := card.create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-		t.tween_property(card, "position", target_pos, REARRANGE_DURATION)
-		t.parallel().tween_property(card, "scale", Vector2(PILE_SCALE, PILE_SCALE), REARRANGE_DURATION)
-		t.parallel().tween_property(card, "rotation_degrees", 0.0, REARRANGE_DURATION)
-	_update_top_card_hover_wiring()
+		# Kill any in-flight tween on this card so a stale tween from the previous
+		# arrange (e.g. one started by accept_incoming_visual ~150ms before the
+		# resource size_changed handler re-runs arrange) doesn't fight the new one
+		# on the same position/scale/rotation properties.
+		if card.tween and card.tween.is_running():
+			card.tween.kill()
+		card.tween = card.create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+		card.tween.tween_property(card, "position", target_pos, REARRANGE_DURATION)
+		card.tween.parallel().tween_property(card, "scale", Vector2(PILE_SCALE, PILE_SCALE), REARRANGE_DURATION)
+		card.tween.parallel().tween_property(card, "rotation_degrees", 0.0, REARRANGE_DURATION)
 
 
-## Only the top card listens for hover-zoom, and only when the pile is face-up
-## (showing the discard pile). Face-down piles get no zoom — there's nothing to
-## reveal. PASS lets clicks fall through to ClickArea so click-to-open still works.
-func _update_top_card_hover_wiring() -> void:
-	var visuals := _visuals()
-	var zoom_enabled: bool = not face_down
-	for i in visuals.size():
-		var card := visuals[i]
-		var is_top := i == visuals.size() - 1
-		if is_top and zoom_enabled:
-			card.mouse_filter = Control.MOUSE_FILTER_PASS
-			if not card.mouse_entered.is_connected(_on_top_card_hover_entered):
-				card.mouse_entered.connect(_on_top_card_hover_entered)
-			if not card.mouse_exited.is_connected(_on_top_card_hover_exited):
-				card.mouse_exited.connect(_on_top_card_hover_exited)
-		else:
-			card.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			if card.mouse_entered.is_connected(_on_top_card_hover_entered):
-				card.mouse_entered.disconnect(_on_top_card_hover_entered)
-			if card.mouse_exited.is_connected(_on_top_card_hover_exited):
-				card.mouse_exited.disconnect(_on_top_card_hover_exited)
+## Shrink the click/hover region to just the visible card stack, so hovering the
+## empty space above the cards (the panel extends taller than the cards' actual
+## peek-out region) doesn't register as a pile hover. The ClickArea is anchored
+## to the panel's bottom edge (anchor_top = anchor_bottom = 1.0), so a negative
+## offset_top sets its height in pixels above the panel bottom.
+func _update_click_area(n: int) -> void:
+	if not click_area:
+		return
+	if n == 0:
+		click_area.offset_top = 0.0
+		return
+	# Slot 0 is the topmost (north) card. _slot_position returns Control.position;
+	# the visible top edge sits pivot_y * (1 - scale) below that.
+	var topmost_visible_y: float = _slot_position(0).y + (1.0 - PILE_SCALE) * CARD_PIVOT.y
+	click_area.offset_top = topmost_visible_y - size.y
 
 
 # ── Hover: spread the stack ──────────────────────────────────────────────────
@@ -260,36 +266,6 @@ func _on_pile_hover_exited() -> void:
 		return
 	_hovered = false
 	_arrange()
-
-
-# ── Hover: zoom the top card to a clamped full-size preview ──────────────────
-
-func _on_top_card_hover_entered() -> void:
-	var visuals := _visuals()
-	if visuals.is_empty():
-		return
-	var top: CardUI = visuals.back()
-	_zoomed_top = top
-	top.z_index = 100
-	var target_local := _zoom_target_position()
-	var t: Tween = top.create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	t.tween_property(top, "position", target_local, ZOOM_DURATION)
-	t.parallel().tween_property(top, "scale", Vector2.ONE, ZOOM_DURATION)
-
-
-func _on_top_card_hover_exited() -> void:
-	if _zoomed_top == null:
-		return
-	var leaving := _zoomed_top
-	_zoomed_top = null
-	leaving.z_index = 0
-	var idx := _visuals().find(leaving)
-	if idx == -1:
-		return
-	var slot := _slot_position(idx)
-	var t := leaving.create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
-	t.tween_property(leaving, "position", slot, ZOOM_DURATION)
-	t.parallel().tween_property(leaving, "scale", Vector2(PILE_SCALE, PILE_SCALE), ZOOM_DURATION)
 
 
 ## Animate the topmost visual through a peek-flip-return cycle revealing the
@@ -338,23 +314,3 @@ func reveal_top(card: Card) -> void:
 		if is_instance_valid(top):
 			top.z_index = 0
 		Events.top_card_reveal_finished.emit())
-
-
-## Compute the local-space position to zoom the top card to, clamped so its
-## bounding box stays inside the viewport.
-func _zoom_target_position() -> Vector2:
-	var visible_size := CARD_SIZE_UNSCALED  # at scale 1.0
-	var viewport_size := get_viewport_rect().size
-	var panel_global := global_position
-	# Ideal: anchored side hugs the screen edge.
-	var ideal_global_x: float = panel_global.x
-	if anchor_side == SIDE_RIGHT:
-		ideal_global_x = panel_global.x + size.x - visible_size.x
-	# Anchor the bottom edge of the zoomed card to the bottom of the viewport.
-	var ideal_global_y: float = viewport_size.y - visible_size.y
-	var clamped_x: float = clampf(ideal_global_x, 0.0, viewport_size.x - visible_size.x)
-	var clamped_y: float = clampf(ideal_global_y, 0.0, viewport_size.y - visible_size.y)
-	var target_visible_global := Vector2(clamped_x, clamped_y)
-	var target_visible_local := target_visible_global - panel_global
-	# Convert visible-top-left back to position (scale=1.0 → no pivot adjustment).
-	return target_visible_local

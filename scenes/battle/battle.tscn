@@ -127,6 +127,7 @@ offset_top = -120.0
 offset_right = 144.0
 offset_bottom = 0.0
 grow_vertical = 0
+add_to_back_of_deck = true
 
 [node name="DiscardPile" parent="BattleUI" unique_id=1643009583 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
@@ -143,7 +144,6 @@ offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
 face_down = false
-anchor_side = 1
 
 [node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
