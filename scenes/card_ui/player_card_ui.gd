@@ -52,12 +52,16 @@ func _set_playable(value: bool) -> void:
 	playable = value
 	if not is_node_ready():
 		return
+	# Pile cards keep their stats_changed connection but aren't interactable;
+	# never glow them, even face-up in the discard pile.
+	if _in_pile():
+		card_render.set_glow(false)
+		return
+	card_render.set_glow(playable)
 	if not playable:
 		card_render.card_visuals.cost.add_theme_color_override("font_color", Color.RED)
-		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 0.5)
 	else:
 		card_render.card_visuals.cost.remove_theme_color_override("font_color")
-		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 1)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if _in_pile():

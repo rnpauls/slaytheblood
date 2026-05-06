@@ -18,6 +18,15 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glow"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(1, 0.95, 0.3, 0.8)
+shadow_size = 16
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [node name="CardRenderContainer" type="MarginContainer" unique_id=1508382840]
 custom_minimum_size = Vector2(40, 60)
 offset_right = 226.0
@@ -25,6 +34,13 @@ offset_bottom = 291.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_d3nd8")
+
+[node name="GlowPanel" type="Panel" parent="." unique_id=4000000001]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+visible = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_glow")
 
 [node name="ViewportTexture" type="TextureRect" parent="." unique_id=1215619486]
 texture_filter = 4

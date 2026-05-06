@@ -126,6 +126,7 @@ func accept_incoming_visual(card_ui: CardUI) -> void:
 	card_ui.z_index = 0
 	if card_ui.card_render:
 		card_ui.card_render.show_back = face_down
+		card_ui.card_render.set_glow(false)
 	_arrange()
 
 

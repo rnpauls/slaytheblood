@@ -16,6 +16,6 @@ defense = 2
 go_again = true
 ai_value = -1
 icon = ExtResource("1_w47js")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage minus the pitch on top of deck.[/center]"
+tooltip_text = "Reveal the top card of owner's deck. Subtract the pitch value from this card's atk"
 sound = ExtResource("4_isp36")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

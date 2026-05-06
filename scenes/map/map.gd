@@ -26,9 +26,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("scroll_down"):
 		camera_2d.position.y -= SCROLL_SPEED
-		
+
 	if event.is_action_pressed("scroll_up"):
 		camera_2d.position.y += SCROLL_SPEED
+
+	if event is InputEventPanGesture:
+		camera_2d.position.y -= event.delta.y * SCROLL_SPEED
+
+	camera_2d.position.y = clampf(camera_2d.position.y, -camera_edge_y, 0)
 
 func generate_new_map() -> void:
 	floors_climbed = 0

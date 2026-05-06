@@ -11,8 +11,10 @@ extends MarginContainer
 @onready var plan_exclamation: Label = %PlanExclamation
 @onready var arsenal_label: Label = %ArsenalLabel
 @onready var sub_viewport: SubViewport = $SubViewport
+@onready var glow_panel: Panel = %GlowPanel
 
 var _plan_stylebox: StyleBoxFlat
+var _glow_enabled: bool = false
 
 func set_card(new_card: Card) -> void:
 	if not is_node_ready():
@@ -30,6 +32,20 @@ func set_show_back(value: bool) -> void:
 	sub_viewport.render_target_update_mode = (
 		SubViewport.UPDATE_DISABLED if show_back else SubViewport.UPDATE_ALWAYS
 	)
+	_update_glow_visibility()
+
+
+## Toggles the playability glow halo behind the card face. Suppressed while the
+## card back is showing so face-down piles never glow.
+func set_glow(enabled: bool) -> void:
+	_glow_enabled = enabled
+	if not is_node_ready():
+		await ready
+	_update_glow_visibility()
+
+
+func _update_glow_visibility() -> void:
+	glow_panel.visible = _glow_enabled and not show_back
 
 ## Tints the card-back background and toggles the on-hit "!" overlay.
 ## Used by enemy cards to visualize the AI's turn plan: red=attack, green=NAA,

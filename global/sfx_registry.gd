@@ -24,3 +24,22 @@ func play(sfx_name: StringName, pitch: float = 1.0) -> void:
 		push_warning("SFXRegistry: unknown SFX '%s'" % sfx_name)
 		return
 	SFXPlayer.play(stream, false, pitch)
+
+# ── Auto-attach: every Button gets CLICK_BUTTON and HOVER_UI by default. ──
+# Add a Button to the &"no_sfx" group (in the editor or via add_to_group)
+# to opt out — useful for gameplay-context buttons like card click areas.
+func _ready() -> void:
+	get_tree().node_added.connect(_on_node_added)
+
+func _on_node_added(node: Node) -> void:
+	if node is Button and not node.is_in_group(&"no_sfx"):
+		if not node.pressed.is_connected(_play_button_click):
+			node.pressed.connect(_play_button_click)
+		if not node.mouse_entered.is_connected(_play_button_hover):
+			node.mouse_entered.connect(_play_button_hover)
+
+func _play_button_click() -> void:
+	play(&"CLICK_BUTTON")
+
+func _play_button_hover() -> void:
+	play(&"HOVER_UI")

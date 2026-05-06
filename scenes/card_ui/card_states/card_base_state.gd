@@ -19,7 +19,7 @@ func on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse") and hand.is_blocking:
 		var player: Player = hand.player
 		var is_intimidated := player and card_ui.card in player.intimidated_cards
-		if not is_intimidated:
+		if not is_intimidated and not card_ui.card.disable_defense:
 			transition_requested.emit(self, CardState.State.BLOCKED)
 	if event.is_action_pressed("right_mouse"):
 		transition_requested.emit(self, CardState.State.PITCHED)

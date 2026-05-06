@@ -7,6 +7,7 @@ extends Control
 #@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var atk_label: Label = %AtkLabel
 @onready var cost_label: Label = %CostLabel
+@onready var glow_panel: Panel = %GlowPanel
 
 func _ready() -> void:
 	shader_material = ShaderMaterial.new()
@@ -37,6 +38,11 @@ func set_grey_out(enabled: bool):
 	else:
 		mat.set_shader_parameter("strength", 0.0)
 		icon.modulate =Color(1,1,1)
+
+func set_glow(enabled: bool) -> void:
+	if not is_node_ready():
+		await ready
+	glow_panel.visible = enabled and weapon != null
 
 func update_labels() -> void:
 	atk_label.text = str(weapon.attack)

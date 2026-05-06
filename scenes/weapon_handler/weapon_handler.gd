@@ -32,8 +32,24 @@ func set_weapon(new_weapon: Weapon) -> void:
 		weapon = weapon_ui.weapon
 		weapon.owner = owner_of_weapon
 		weapon.weapon_used_up.connect(_on_weapon_used_up)
+		_connect_stats_for_glow()
+		_update_glow()
 	else:
 		hide()
+
+
+# Connects to the player's stats_changed signal so the glow reflects mana / AP
+# in real time. Safe to call repeatedly — duplicate connections are skipped.
+func _connect_stats_for_glow() -> void:
+	var player: Player = get_tree().get_first_node_in_group("player")
+	if player and player.stats:
+		if not player.stats.stats_changed.is_connected(_update_glow):
+			player.stats.stats_changed.connect(_update_glow)
+
+
+func _update_glow() -> void:
+	if weapon_ui:
+		weapon_ui.set_glow(can_activate_weapon())
 
 
 func flash() -> void:
@@ -49,16 +65,18 @@ func _on_weapon_used_up() -> void:
 	disable_weapon()
 
 func disable_weapon() -> void:
-	if not weapon: return 
+	if not weapon: return
 	activable = false
 	weapon_ui.set_grey_out(true)
 	weapon_button.disabled = true
+	_update_glow()
 
 func enable_weapon() -> void:
 	if not weapon: return
 	activable = true
 	weapon_ui.set_grey_out(false)
 	weapon_button.disabled = false
+	_update_glow()
 
 func reset() -> void:
 	if not weapon: return

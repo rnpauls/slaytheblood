@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://d2vujk8wvu6ia" path="res://art/tile_0123.png" id="1_6v8r4"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_f73ua"]
-[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_6v8r4"]
+[ext_resource type="Script" uid="uid://dtudl7747thxx" path="res://common_cards/ravenous_rabble.gd" id="3_f73ua"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="4_re7em"]
 
 [resource]
-script = ExtResource("2_6v8r4")
+script = ExtResource("3_f73ua")
 id = "called_shot"
 rarity = 1
 target = 1
@@ -16,6 +16,6 @@ defense = 2
 go_again = true
 ai_value = -1
 icon = ExtResource("1_6v8r4")
-tooltip_text = "[center]Deal [color=\"ff0000\"]%s[/color] damage minus the pitch on top of deck.[/center]"
+tooltip_text = "Reveal the top card of owner's deck. Subtract the pitch value from this card's atk"
 sound = ExtResource("4_re7em")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"
