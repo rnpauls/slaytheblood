@@ -105,9 +105,15 @@ func draw_card() -> void:
 	#reshuffle_deck_from_discard()
 	if not character:
 		await Events.player_set_up
+	# Release the top visual from the draw pile BEFORE popping the resource so
+	# the panel's size_changed handler sees matching counts and skips auto-removal.
+	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
+	var source_visual: CardUI = null
+	if battle_ui and battle_ui.draw_pile:
+		source_visual = battle_ui.draw_pile.release_top_visual()
 	var card_drawn: Card = character.draw_pile.draw_card()
 	if card_drawn:
-		hand.add_card(card_drawn)
+		hand.add_card(card_drawn, source_visual)
 		#reshuffle_deck_from_discard()
 		Events.player_card_drawn.emit()
 		card_drawn.card_play_finished.connect(_on_card_play_finished)
@@ -116,6 +122,9 @@ func draw_card() -> void:
 		card_drawn.sunk.connect(_on_card_sunk)
 		card_drawn.blocked.connect(_on_card_blocked)
 		card_drawn.owner = player
+	elif source_visual:
+		# Edge case: visual released but no card to draw (resource desync). Free it.
+		source_visual.queue_free()
 
 
 func draw_cards(amount: int, hand_type = null) -> Tween:
@@ -157,8 +166,10 @@ func discard_cards() -> void:
 
 	var tween := create_tween()
 	for card_ui: CardUI in hand.get_children():
-		tween.tween_callback(character.discard.add_card.bind(card_ui.card))
-		tween.tween_callback(hand.discard_card.bind(card_ui))
+		# card_ui.discard() flies the live visual to the discard pile AND triggers
+		# card.discard_card() → Events.card_discarded → _on_card_discarded, which
+		# adds the card to the resource pile (skipping exhaust cards).
+		tween.tween_callback(card_ui.discard)
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
 
 	tween.finished.connect(

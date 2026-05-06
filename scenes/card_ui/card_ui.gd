@@ -59,33 +59,97 @@ func return_to_hand() -> void:
 func play() -> void:
 	if not card:
 		return
-	get_parent().remove_child(self)
+	# Hand off to discard BEFORE awaiting effects so the in-flight card_play_finished
+	# signal (which adds to the resource pile) sees a matching visual count and skips
+	# the auto-spawn. Only player cards route to the visible discard pile; enemy
+	# cards (and exhaust) fall through to queue_free as before.
+	var goes_to_player_pile: bool = not card.exhausts and _is_player_card()
+	var pile = _get_discard_pile() if goes_to_player_pile else null
+	if pile:
+		pile.accept_incoming_visual(self)
+	elif get_parent():
+		# Detach so it disappears during effects (matches pre-pile-visual behavior).
+		get_parent().remove_child(self)
 	await card.play(self, targets, char_stats, modifier_handler)
-	queue_free()
+	if not pile:
+		queue_free()
 
 func discard() -> void:
 	if not card:
 		return
-	card.discard_card()
-	queue_free()
+	var pile = _get_discard_pile() if _is_player_card() else null
+	if pile:
+		pile.accept_incoming_visual(self)
+		card.discard_card()
+	else:
+		card.discard_card()
+		queue_free()
 
 func pitch() -> void:
 	if not card:
 		return
-	card.pitch_card(char_stats)
-	queue_free()
+	var pile = _get_draw_pile() if _is_player_card() else null
+	if pile:
+		pile.accept_incoming_visual(self)
+		card.pitch_card(char_stats)
+	else:
+		card.pitch_card(char_stats)
+		queue_free()
 
 func sink() -> void:
 	if not card:
 		return
-	card.sink_card(char_stats)
-	queue_free()
+	var pile = _get_draw_pile() if _is_player_card() else null
+	if pile:
+		pile.accept_incoming_visual(self)
+		card.sink_card(char_stats)
+	else:
+		card.sink_card(char_stats)
+		queue_free()
 
 func block() -> void:
 	if not card:
 		return
-	card.block_card([card.owner], modifier_handler)
-	queue_free()
+	var pile = _get_discard_pile() if _is_player_card() else null
+	if pile:
+		pile.accept_incoming_visual(self)
+		card.block_card([card.owner], modifier_handler)
+	else:
+		card.block_card([card.owner], modifier_handler)
+		queue_free()
+
+
+func _is_player_card() -> bool:
+	return card and card.owner is Player
+
+
+# Subclasses override these to hook into hover/click; base no-ops keep the
+# scene's signal connections valid when CardUI is instantiated directly
+# (e.g. as anonymous backs in CardStackPanel).
+func _on_mouse_entered() -> void:
+	pass
+
+func _on_mouse_exited() -> void:
+	pass
+
+func _on_gui_input(_event: InputEvent) -> void:
+	pass
+
+
+func _get_battle_ui() -> BattleUI:
+	return get_tree().get_first_node_in_group("ui_layer") as BattleUI
+
+
+# Returns CardStackPanel; the type annotation is dropped to break the
+# class_name dependency cycle with card_stack_panel.gd (which references CardUI).
+func _get_draw_pile():
+	var bu := _get_battle_ui()
+	return bu.draw_pile if bu else null
+
+
+func _get_discard_pile():
+	var bu := _get_battle_ui()
+	return bu.discard_pile if bu else null
 
 func get_active_enemy_modifiers() -> ModifierHandler:
 	if targets.is_empty() or targets.size() > 1 or targets[0] is not Enemy:

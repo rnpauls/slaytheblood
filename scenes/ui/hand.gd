@@ -33,41 +33,60 @@ func _ready() -> void:
 	Events.unlock_hand.connect(_on_unlock_hand)
 	self.child_order_changed.connect(_on_child_order_changed)
 
-func add_card(card: Card) -> void:
+## Add a card to the hand. If `source_visual` is provided (typically a card-back
+## released from the draw pile), the new hand card starts at that visual's
+## position and flips face-up after landing in the hand slot. Otherwise, falls
+## back to the original scale-from-zero fade-in.
+func add_card(card: Card, source_visual: CardUI = null) -> void:
 	var new_card_ui := CARD_UI_SCENE.instantiate() as PlayerCardUI
-	
-	
+
 	new_card_ui.original_parent = self
 	new_card_ui.original_index = get_child_count() - 1   # ← its position in the hand
-	
+
 	new_card_ui.card = card
 	new_card_ui.char_stats = char_stats
 	new_card_ui.modifier_handler = player.modifier_handler
-	
+
 	new_card_ui.pivot_offset = new_card_ui.size / 2
-	
+
 	# Connect signals
 	new_card_ui.reparent_requested.connect(_on_card_ui_reparent_requested)
 	new_card_ui.card_hovered.connect(_on_card_hovered)
 	new_card_ui.card_unhovered.connect(_on_card_unhovered)
-	
-	new_card_ui.scale = Vector2.ZERO
-	new_card_ui.modulate = Color(1, 1, 1, 0)
-	add_child(new_card_ui)
-	
+
+	if source_visual and is_instance_valid(source_visual):
+		add_child(new_card_ui)
+		# Match the draw pile's top card so the flight starts seamlessly from there.
+		new_card_ui.global_position = source_visual.global_position
+		new_card_ui.scale = source_visual.scale
+		new_card_ui.rotation_degrees = source_visual.rotation_degrees
+		new_card_ui.card_render.show_back = true
+		source_visual.queue_free()
+	else:
+		new_card_ui.scale = Vector2.ZERO
+		new_card_ui.modulate = Color(1, 1, 1, 0)
+		add_child(new_card_ui)
+
 	_arrange_cards()
-	
-	# Nice draw animation
-	var tween := new_card_ui.create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(new_card_ui, "scale", Vector2.ONE * 0.7, 0.25)
-	tween.parallel().tween_property(new_card_ui, "modulate", Color.WHITE, 0.25)
 
-
-func discard_card(card: PlayerCardUI) -> void:
-	if card:
-		card.queue_free()
-
+	if source_visual:
+		# After the position tween lands, do an x-squish flip from back to face.
+		# Driven by a separate tween so it doesn't fight the scale tween from
+		# animate_to_local_position_and_rotation_and_scale (which runs in parallel).
+		var flight_duration := 0.25
+		var t := new_card_ui.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		t.tween_interval(flight_duration)
+		t.tween_property(new_card_ui, "scale:x", 0.0, 0.10)
+		t.tween_callback(func():
+			if is_instance_valid(new_card_ui) and new_card_ui.card_render:
+				new_card_ui.card_render.show_back = false)
+		t.tween_property(new_card_ui, "scale:x", 0.7, 0.10)
+	else:
+		# Original scale-up fade-in for non-pile spawns.
+		var tween := new_card_ui.create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(new_card_ui, "scale", Vector2.ONE * 0.7, 0.25)
+		tween.parallel().tween_property(new_card_ui, "modulate", Color.WHITE, 0.25)
 
 
 func enable_hand() -> void:

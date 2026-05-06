@@ -10,6 +10,7 @@ extends MarginContainer
 @onready var card_back_panel: Panel = %CardBackPanel
 @onready var plan_exclamation: Label = %PlanExclamation
 @onready var arsenal_label: Label = %ArsenalLabel
+@onready var sub_viewport: SubViewport = $SubViewport
 
 var _plan_stylebox: StyleBoxFlat
 
@@ -25,6 +26,10 @@ func set_show_back(value: bool) -> void:
 		await ready
 	viewport_texture.visible = not show_back
 	card_back_panel.visible = show_back
+	# Skip rendering the face into the SubViewport while the back is shown.
+	sub_viewport.render_target_update_mode = (
+		SubViewport.UPDATE_DISABLED if show_back else SubViewport.UPDATE_ALWAYS
+	)
 
 ## Tints the card-back background and toggles the on-hit "!" overlay.
 ## Used by enemy cards to visualize the AI's turn plan: red=attack, green=NAA,

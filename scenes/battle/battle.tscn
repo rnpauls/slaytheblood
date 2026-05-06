@@ -18,9 +18,8 @@
 [ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="15_8eh2s"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
 [ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="16_5moxy"]
-[ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="17_3u6fe"]
+[ext_resource type="PackedScene" uid="uid://b8stk2cstkp01" path="res://scenes/ui/card_stack_panel.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
-[ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="18_ajj10"]
 [ext_resource type="PackedScene" uid="uid://dd6xjykbymk7u" path="res://scenes/weapon_handler/weapon_handler.tscn" id="19_156m4"]
 [ext_resource type="PackedScene" uid="uid://b4eqphandler1" path="res://scenes/equipment_handler/equipment_handler.tscn" id="20_eqphd"]
 [ext_resource type="PackedScene" uid="uid://c7640ve4l6kcn" path="res://scenes/ui/status_view.tscn" id="21_hb0k1"]
@@ -108,49 +107,43 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -216.0
-offset_top = -108.0
+offset_top = -213.0
 offset_right = -20.0
-offset_bottom = -20.0
+offset_bottom = -125.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("15_8eh2s")
 disabled = true
 text = "END"
 
-[node name="DrawPileButton" parent="BattleUI" unique_id=1843257857 node_paths=PackedStringArray("counter") instance=ExtResource("17_3u6fe")]
+[node name="DrawPile" parent="BattleUI" unique_id=1843257857 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = 600.0
-offset_right = 124.0
-offset_bottom = 700.0
-counter = NodePath("Counter")
+offset_top = -120.0
+offset_right = 144.0
+offset_bottom = 0.0
+grow_vertical = 0
 
-[node name="Counter" type="Label" parent="BattleUI/DrawPileButton" unique_id=1401742662]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 12.0
-offset_right = 20.0
-offset_bottom = 18.0
-text = "99"
-horizontal_alignment = 1
-
-[node name="DiscardPileButton" parent="BattleUI" unique_id=1643009583 node_paths=PackedStringArray("counter") instance=ExtResource("17_3u6fe")]
+[node name="DiscardPile" parent="BattleUI" unique_id=1643009583 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
-offset_left = 1158.0
-offset_top = 501.0
-offset_right = 1258.0
-offset_bottom = 601.0
-texture_normal = ExtResource("18_ajj10")
-counter = NodePath("Counter")
-
-[node name="Counter" type="Label" parent="BattleUI/DiscardPileButton" unique_id=1272321107]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 11.0
-offset_right = 8.0
-offset_bottom = 17.0
-text = "99"
-horizontal_alignment = 1
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -120.0
+offset_right = -24.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+face_down = false
+anchor_side = 1
 
 [node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
@@ -184,8 +177,8 @@ offset_bottom = 356.0
 
 [node name="HeadEquipmentHandler" parent="BattleUI" unique_id=958391557 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-z_index = 1
 visible = false
+z_index = 1
 offset_left = 146.0
 offset_top = 116.0
 offset_right = 210.0

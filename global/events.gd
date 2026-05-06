@@ -26,6 +26,12 @@ signal selecting_cards_from_hand
 signal finished_selecting_cards_from_hand(selected_cards: Array[CardUI])
 signal lock_hand()
 signal unlock_hand()
+## Request a flip-reveal of the top card of `source_owner`'s draw pile (player
+## or enemy). Listeners (BattleUI router) animate the reveal and emit
+## `top_card_reveal_finished` when done. Card scripts await the finished signal
+## to gate downstream effects (e.g. ravenous_rabble's pitch read).
+signal top_card_reveal_requested(card: Card, source_owner: Node)
+signal top_card_reveal_finished
 
 #Player-related events
 signal player_initial_hand_drawn

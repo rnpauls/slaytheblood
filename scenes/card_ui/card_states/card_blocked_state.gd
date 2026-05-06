@@ -1,12 +1,8 @@
 extends CardState
 
 func enter() -> void:
-	
-	#played = false
-	#if not card_ui.targets.is_empty():
-		#played = true
 	card_ui.block()
 	Events.tooltip_hide_requested.emit()
 
-func post_enter() -> void:
-	transition_requested.emit(self, CardState.State.BASE)
+# No post_enter transition: card_ui.block() has already handed the visual off
+# to the discard pile. Same reasoning as card_released_state.gd.

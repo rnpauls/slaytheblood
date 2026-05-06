@@ -11,17 +11,17 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % modified_dmg
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	var top_card_arr : Array[Card]
-	var top_pitch = 0
-	#if target[0] is Player:
-		#topPitch = targets[0].stats.draw_pile[0].pitch
-	#elif target[0] is Enemy:
-	top_card_arr = modifiers.get_parent().stats.draw_pile.reveal_top_cards(1)
+	var source_owner: Node = modifiers.get_parent()
+	var top_card_arr: Array[Card] = source_owner.stats.draw_pile.reveal_top_cards(1)
+	var top_pitch := 0
 	if top_card_arr.is_empty():
-		top_pitch = 0
 		print_debug("rabble on empty deck")
 	else:
 		top_pitch = top_card_arr[0].pitch
-		print_debug("Revealed %s to rabble" % 	top_card_arr[0].id)
-	
-	do_stock_attack_damage_effect(targets, modifiers, attack-top_pitch)
+		print_debug("Revealed %s to rabble" % top_card_arr[0].id)
+		# Animate the reveal so the player sees what was on top before damage hits.
+		# BattleUI routes by owner (player → draw pile, enemy → transient overlay).
+		Events.top_card_reveal_requested.emit(top_card_arr[0], source_owner)
+		await Events.top_card_reveal_finished
+
+	do_stock_attack_damage_effect(targets, modifiers, attack - top_pitch)

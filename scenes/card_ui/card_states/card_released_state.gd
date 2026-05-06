@@ -12,7 +12,12 @@ func enter() -> void:
 			_release_and_play()
 
 func post_enter() -> void:
-	transition_requested.emit(self, CardState.State.BASE)
+	# When the card was actually played, card_ui.play() has already reparented
+	# it to the discard pile. Transitioning to BASE here would call return_to_hand
+	# and yank it back, which both leaves a ghost in hand AND causes the discard
+	# pile to spawn a phantom anonymous card to fill the resource/visual gap.
+	if not played:
+		transition_requested.emit(self, CardState.State.BASE)
 
 func _release_and_play() -> void:
 	played = true

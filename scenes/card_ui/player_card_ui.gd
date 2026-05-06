@@ -23,7 +23,17 @@ func _ready() -> void:
 	card_state_machine.init(self)
 
 func _input(event: InputEvent) -> void:
+	if _in_pile():
+		return
 	card_state_machine.on_input(event)
+
+
+# True once the card has been handed off to a CardStackPanel (draw or discard).
+# Used to gate hand-card behavior — state machine, hover-zoom, drag — on cards
+# that are now decorative pile contents.
+func _in_pile() -> bool:
+	var p := get_parent()
+	return p != null and p.has_method("accept_incoming_visual")
 
 func select() -> void:
 	selected = true
@@ -50,12 +60,18 @@ func _set_playable(value: bool) -> void:
 		card_render.card_visuals.icon.modulate = Color(1, 1, 1, 1)
 
 func _on_gui_input(event: InputEvent) -> void:
+	if _in_pile():
+		return
 	card_state_machine.on_gui_input(event)
 
 func _on_mouse_entered() -> void:
+	if _in_pile():
+		return
 	card_state_machine.on_mouse_entered()
 
 func _on_mouse_exited() -> void:
+	if _in_pile():
+		return
 	card_state_machine.on_mouse_exited()
 
 func _on_card_drag_or_aiming_started(used_card: Node) -> void:
