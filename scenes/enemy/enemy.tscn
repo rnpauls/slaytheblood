@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_srxb5"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="2_ywvjq"]
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="3_p3m4l"]
-[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="5_hvxgb"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="6_4c52q"]
 [ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_hand_ui.tscn" id="6_4efjx"]
@@ -41,7 +40,6 @@ offset_left = -126.0
 offset_top = 42.0
 offset_right = 126.0
 offset_bottom = 106.0
-theme = ExtResource("5_hvxgb")
 
 [node name="IntentUI" parent="." unique_id=257861735 instance=ExtResource("5_rbfua")]
 offset_left = -27.0
@@ -68,14 +66,14 @@ position = Vector2(0, -118)
 script = ExtResource("10_staged")
 staged_scale = 0.15
 
-[node name="BlockDisplay" type="Node2D" parent="."]
+[node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
 position = Vector2(-105, 0)
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
-offset_left = -83.0
-offset_top = 104.0
-offset_right = -83.0
-offset_bottom = 117.0
+offset_left = -71.0
+offset_top = 75.0
+offset_right = -71.0
+offset_bottom = 88.0
 status_owner = NodePath("..")
 
 [node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]

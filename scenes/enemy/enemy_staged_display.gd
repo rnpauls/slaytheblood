@@ -82,6 +82,19 @@ func release() -> EnemyCardUI:
 	card_ui.reparent(_original_parent)
 	return card_ui
 
+## Like release() but does NOT reparent — caller takes the card_ui in place,
+## leaving it parented to this StagedDisplay. Used for NAAs that should fade
+## out from the staged position without flashing back to the hand.
+func clear_staged() -> EnemyCardUI:
+	if not is_instance_valid(_card_ui):
+		_card_ui = null
+		return null
+	_disconnect_hover(_card_ui)
+	var card_ui  := _card_ui
+	_card_ui     = null
+	_is_hovered  = false
+	return card_ui
+
 # ── Private ───────────────────────────────────────────────────────────────────
 
 func _return_to_hand(card_ui: EnemyCardUI) -> void:

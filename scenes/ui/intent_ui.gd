@@ -49,7 +49,7 @@ func _build_tooltip_text() -> String:
 
 	# Damage line (only for attacks)
 	if action.type == Card.Type.ATTACK:
-		var dmg: int = action.attack
+		var dmg: int = action.get_attack_value()
 		if enemy.modifier_handler:
 			dmg = enemy.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_DEALT)
 		if enemy.enemy_ai and enemy.enemy_ai.target and enemy.enemy_ai.target.modifier_handler:

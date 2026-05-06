@@ -18,6 +18,10 @@ const BLOCK_BADGE_LOCAL_OFFSET := Vector2(0, -110)  # Above the displayed card (
 const BLOCK_BADGE_SIZE := Vector2(80, 40)           # Must match block_badge.tscn custom_minimum_size.
 const BLOCK_BADGE_Z_INDEX := 20                     # Above card_ui.z_index (10) so the badge always reads on top.
 
+## NAA fade-out duration after effects resolve. The pre-play hold lives in
+## EnemyActingState (NAA_HOLD_DURATION) so it can be cancelled cleanly on death.
+const NAA_FADE_DURATION := 0.25
+
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
 @onready var enemy_hand_ui: EnemyHandUI = $EnemyHandUI
@@ -126,10 +130,25 @@ func declare_next_attack() -> void:
 	# observes that directly and exits its loop. Otherwise stage the card and
 	# announce the attack — the state owns the await player_blocks_declared
 	# and the do_action call so cancellation on death is deterministic.
+	#
+	# enemy_attack_declared flips the END button to BLOCK in BattleUI, so we
+	# only emit it for actual attacks. NAAs deal no damage to the player, so
+	# they auto-resolve after a brief hold (handled in EnemyActingState).
 	if current_action != null:
-		_log("declaring attack: %s" % current_action.id)
+		_log("declaring %s: %s" % [Card.Type.keys()[current_action.type], current_action.id])
 		_stage_attack_card_ui(current_action, pending_card_ui)
-		Events.enemy_attack_declared.emit()
+		if current_action.type == Card.Type.ATTACK:
+			Events.enemy_attack_declared.emit()
+
+## Run any pre-block reveal effects on the staged card (e.g. ravenous_rabble
+## flipping the top card of the deck), then refresh the intent so the displayed
+## damage reflects the reveal. Awaited by EnemyActingState before the player
+## declares blocks.
+func run_pre_block_reveal() -> void:
+	if not current_action:
+		return
+	await current_action.pre_block_reveal(self)
+	update_intent()
 
 func update_enemy() -> void:
 	if not stats is Stats:
@@ -150,7 +169,7 @@ func update_intent() -> void:
 
 	var new_intent = Intent.new()
 	if current_action and current_action.type == Card.Type.ATTACK:
-		var og_atk = current_action.attack
+		var og_atk = current_action.get_attack_value()
 		var modified_damage := modifier_handler.get_modified_value(og_atk, Modifier.Type.DMG_DEALT)
 		modified_damage = enemy_ai.target.modifier_handler.get_modified_value(modified_damage, Modifier.Type.DMG_TAKEN)
 
@@ -185,15 +204,13 @@ func _update_hand_plan_colors() -> void:
 		var card_ui: EnemyCardUI = card_ui_map[card]
 		if not is_instance_valid(card_ui):
 			continue
-		var color := Color.BLACK
-		var show_exclamation := false
+		var color: Color = Color.BLACK
+		var show_exclamation: bool = false
 		if plan != null:
 			if card in plan.actions:
-				if card.type == Card.Type.ATTACK:
-					color = Color.RED
-					show_exclamation = card.on_hits.size() > 0 or active_on_hits.size() > 0
-				else:
-					color = Color.GREEN
+				color = _action_plan_color(card)
+				show_exclamation = card.type == Card.Type.ATTACK \
+					and (card.on_hits.size() > 0 or active_on_hits.size() > 0)
 			elif card in plan.pitched:
 				color = Color.BLUE
 		card_ui.set_plan_color(color, show_exclamation)
@@ -201,15 +218,25 @@ func _update_hand_plan_colors() -> void:
 	# Arsenal card_ui follows the same rules (it can't be pitched, so no blue case).
 	if is_instance_valid(_arsenal_card_ui) and enemy_ai.arsenal != null:
 		var ars: Card = enemy_ai.arsenal
-		var ars_color := Color.BLACK
-		var ars_excl := false
+		var ars_color: Color = Color.BLACK
+		var ars_excl: bool = false
 		if plan != null and ars in plan.actions:
-			if ars.type == Card.Type.ATTACK:
-				ars_color = Color.RED
-				ars_excl = ars.on_hits.size() > 0 or active_on_hits.size() > 0
-			else:
-				ars_color = Color.GREEN
+			ars_color = _action_plan_color(ars)
+			ars_excl = ars.type == Card.Type.ATTACK \
+				and (ars.on_hits.size() > 0 or active_on_hits.size() > 0)
 		_arsenal_card_ui.set_plan_color(ars_color, ars_excl)
+
+## Plan color for a card the AI intends to play this turn. Explicit per-type
+## branch (rather than "ATTACK or default") so a stray BLOCK in plan.actions
+## would surface as BLACK instead of being silently mis-colored as a NAA.
+func _action_plan_color(card: Card) -> Color:
+	match card.type:
+		Card.Type.ATTACK:
+			return Color.RED
+		Card.Type.NAA:
+			return Color.GREEN
+		_:
+			return Color.BLACK
 
 ## Create, update, or destroy the arsenal slot card_ui to mirror enemy_ai.arsenal.
 func _refresh_arsenal_card_ui() -> void:
@@ -235,7 +262,22 @@ func do_action() -> void:
 	if not current_action:
 		return
 
-	# Release the staged card directly — no return-to-hand animation, caller takes it.
+	var played_attack: bool = current_action.type == Card.Type.ATTACK
+	if played_attack:
+		await _do_attack_action()
+	else:
+		await _do_naa_action()
+
+	enemy_action_completed.emit(self)
+	# Only attacks should fire attack_completed — otherwise statuses that decrement on it
+	# (poison_tip, empowered) get burned by NAAs like poison_the_blade played beforehand.
+	if played_attack:
+		attack_completed.emit()
+	enemy_hand_ui.update_cards(enemy_ai)
+
+## Attack path: release the staged card and let card_ui.play() run its full
+## attack/hit animation pipeline. card_ui detaches itself and queue_frees.
+func _do_attack_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
 		card_ui = staged_display.release()
@@ -248,9 +290,42 @@ func do_action() -> void:
 	card_ui.targets = [enemy_ai.target]
 	await card_ui.play()
 
-	enemy_action_completed.emit(self)
-	attack_completed.emit()
-	enemy_hand_ui.update_cards(enemy_ai)
+## NAA path: apply effects in-place at the staged position, fade the card out,
+## then drop the Card resource into stats.discard. We bypass card_ui.play() so
+## the visual stays at center during effects (no flash back to hand) and we get
+## a clean fade-out instead of a hard queue_free.
+func _do_naa_action() -> void:
+	var card_ui: EnemyCardUI
+	if is_instance_valid(_staged_card_ui):
+		card_ui = staged_display.clear_staged()
+		_staged_card_ui = null
+	else:
+		card_ui = _get_or_create_card_ui(current_action)
+		hand.erase(current_action)
+		card_ui_map.erase(current_action)
+
+	if not is_instance_valid(card_ui):
+		return
+
+	card_ui.targets = [enemy_ai.target]
+	var played_card := current_action
+
+	# Effects resolve while the card is still visible at the staged position.
+	# Most NAAs target SELF and apply a status; card.play handles target lookup.
+	await played_card.play(card_ui, card_ui.targets, stats, modifier_handler)
+	if not is_instance_valid(card_ui):
+		return
+
+	var t := card_ui.create_tween()
+	t.tween_property(card_ui, "scale", Vector2.ZERO, NAA_FADE_DURATION)
+	t.parallel().tween_property(card_ui, "modulate:a", 0.0, NAA_FADE_DURATION)
+	await t.finished
+
+	if not played_card.exhausts:
+		stats.discard.add_card(played_card)
+
+	if is_instance_valid(card_ui):
+		card_ui.queue_free()
 
 ## Defend player attack
 func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
@@ -351,6 +426,9 @@ func destroy_arsenal() -> bool:
 		return true
 
 func _on_death() -> void:
+	# queue_free skips mouse_exited on our hover sources (HoverArea, StatusHandler,
+	# IntentUI), so a tooltip shown for this enemy would otherwise stay on screen.
+	Events.tooltip_hide_requested.emit()
 	Events.enemy_died.emit(self)
 	queue_free()
 

@@ -19,6 +19,10 @@
 class_name EnemyActingState
 extends TurnState
 
+## Time the staged NAA card holds at center before auto-resolving. Long enough
+## for the player to read the card; short enough that NAA-heavy turns don't drag.
+const NAA_HOLD_DURATION := 0.6
+
 var _current_enemy: Enemy
 var _cancelled := false  # exit() called externally — bail without requesting
 var _current_enemy_died := false  # current enemy died mid-loop — go to next ENEMY_SOT
@@ -67,8 +71,23 @@ func _run_action_loop() -> void:
 			# Plan exhausted — normal end of this enemy's actions.
 			break
 
-		# Wait for the player to declare blocks (END button in BLOCK mode).
-		await Events.player_blocks_declared
+		# Run any pre-block reveal on the staged card (e.g. ravenous_rabble flips
+		# the top of the deck) so the player sees the actual damage and reveal
+		# before deciding how to block.
+		await _current_enemy.run_pre_block_reveal()
+		if _cancelled:
+			return
+		if _current_enemy_died:
+			break
+
+		# Attacks: wait for the player to declare blocks (END button in BLOCK mode).
+		# NAAs: deal no player damage, so we hold briefly at the staged position
+		# instead of prompting — Enemy.declare_next_attack skips the
+		# enemy_attack_declared emit for NAAs so the END button never flips.
+		if _current_enemy.current_action.type == Card.Type.ATTACK:
+			await Events.player_blocks_declared
+		else:
+			await get_tree().create_timer(NAA_HOLD_DURATION).timeout
 		if _cancelled:
 			return
 		if _current_enemy_died:

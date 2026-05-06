@@ -122,6 +122,19 @@ func block_card(targets: Array[Node], modifiers: ModifierHandler) -> void:
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	pass
 
+## Optional hook run after an enemy declares this card but before the player
+## declares blocks. Override to reveal cards, roll values, etc., so the intent
+## (and any reveal animation) reflects the actual damage before the player commits.
+## Default is a no-op. Awaited by EnemyActingState.
+func pre_block_reveal(_source_owner: Node) -> void:
+	pass
+
+## Returns the base attack value used by the enemy intent display. Defaults to
+## the static `attack` field; override when the value depends on runtime state
+## set up in pre_block_reveal (e.g. ravenous_rabble subtracts top-card pitch).
+func get_attack_value() -> int:
+	return attack
+
 func apply_block_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	var block_effect := BlockEffect.new()
 	var mod_def : = modifiers.get_modified_value(defense, Modifier.Type.BLOCK_GAINED)
