@@ -114,6 +114,7 @@ func draw_card() -> void:
 	var card_drawn: Card = character.draw_pile.draw_card()
 	if card_drawn:
 		hand.add_card(card_drawn, source_visual)
+		SFXRegistry.play(&"DRAW_CARD")
 		#reshuffle_deck_from_discard()
 		Events.player_card_drawn.emit()
 		card_drawn.card_play_finished.connect(_on_card_play_finished)

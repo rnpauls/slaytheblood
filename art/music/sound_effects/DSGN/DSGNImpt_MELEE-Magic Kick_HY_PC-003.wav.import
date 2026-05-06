@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dicqwcnpjknww"
+path="res://.godot/imported/DSGNImpt_MELEE-Magic Kick_HY_PC-003.wav-db6261f175c69ab962f3c2120cec38ca.sample"
+
+[deps]
+
+source_file="res://art/music/sound_effects/DSGN/DSGNImpt_MELEE-Magic Kick_HY_PC-003.wav"
+dest_files=["res://.godot/imported/DSGNImpt_MELEE-Magic Kick_HY_PC-003.wav-db6261f175c69ab962f3c2120cec38ca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

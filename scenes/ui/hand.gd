@@ -213,10 +213,15 @@ func _update_all_original_indices() -> void:
 
 
 func _on_card_hovered(card: PlayerCardUI) -> void:
-	if hovered_card == card: 
+	if hovered_card == card:
 		print("hand onhovered but already hovered")
 		return
 	hovered_card = card
+
+	var count := get_child_count()
+	var pitch := 1.0 if count <= 1 else lerpf(0.85, 1.15, card.original_index / float(count - 1))
+	SFXRegistry.play(&"HOVER_CARD", pitch)
+
 	call_deferred("_arrange_cards")   # spread everything out
 
 

@@ -34,6 +34,7 @@ RNG="*res://global/rng.gd"
 KeywordRegistry="*res://global/keyword_registry.gd"
 IconRegistry="*res://global/icon_registry.gd"
 DebugPause="*res://global/debug_pause.gd"
+SFXRegistry="*res://global/sfx_registry.gd"
 
 [display]
 

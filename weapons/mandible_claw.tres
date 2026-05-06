@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cw374xv0yoj7p" path="res://art/claw.png" id="1_yy8wy"]
 [ext_resource type="Script" uid="uid://3mmytkx4coca" path="res://weapons/mandible_claw.gd" id="2_yy8wy"]
-[ext_resource type="AudioStream" uid="uid://ulsyac81tfln" path="res://art/music/sound_effects/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav" id="3_1ustq"]
+[ext_resource type="AudioStream" uid="uid://ulsyac81tfln" path="res://art/music/sound_effects/DSGN/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav" id="3_1ustq"]
 
 [resource]
 script = ExtResource("2_yy8wy")
