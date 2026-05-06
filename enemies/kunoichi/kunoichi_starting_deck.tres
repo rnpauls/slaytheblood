@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://dis18wg57qasf"]
+
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_ixber"]
+[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="2_2gbi0"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_f38eu"]
+[ext_resource type="Resource" uid="uid://dl0joso87gfpm" path="res://common_cards/concuss_red.tres" id="3_40tkk"]
+[ext_resource type="Resource" uid="uid://biyyop47rwhph" path="res://characters/ninja/cards/bittering_thorns_red.tres" id="4_jnjdq"]
+[ext_resource type="Resource" uid="uid://4t0h3cimqt3o" path="res://characters/ninja/cards/poison_the_blade.tres" id="5_uyr5x"]
+[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://common_cards/head_jab_blue.tres" id="6_jsou6"]
+
+[resource]
+script = ExtResource("2_f38eu")
+cards = Array[ExtResource("1_ixber")]([ExtResource("2_2gbi0"), ExtResource("2_2gbi0"), ExtResource("2_2gbi0"), ExtResource("3_40tkk"), ExtResource("3_40tkk"), ExtResource("4_jnjdq"), ExtResource("4_jnjdq"), ExtResource("5_uyr5x"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6")])
+metadata/_custom_type_script = "uid://dejd2uv2w4475"

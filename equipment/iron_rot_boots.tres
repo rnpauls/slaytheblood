@@ -10,5 +10,6 @@ id = "iron_rot_boots"
 slot = 3
 break_on_use = true
 starter_equipment = true
+allow_duplicate_in_draft = true
 icon = ExtResource("1_15kp1")
 metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

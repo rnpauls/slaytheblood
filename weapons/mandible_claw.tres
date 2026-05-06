@@ -11,6 +11,7 @@ id = "mandible_claw"
 type = 5
 character_type = 2
 starter_weapon = true
+allow_duplicate_in_draft = true
 icon = ExtResource("1_yy8wy")
 sound = ExtResource("3_1ustq")
 tooltip = "[kw=enraged]Enraged[/kw]: Go Again"

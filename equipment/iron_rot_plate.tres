@@ -10,5 +10,6 @@ id = "iron_rot_plate"
 slot = 1
 break_on_use = true
 starter_equipment = true
+allow_duplicate_in_draft = true
 icon = ExtResource("1_jp0d4")
 metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

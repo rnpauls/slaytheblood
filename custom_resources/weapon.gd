@@ -20,6 +20,8 @@ const RARITY_COLORS := {
 @export var character_type: CharacterType
 @export var hands: Hands
 @export var starter_weapon: bool = false
+## If false, this item is filtered out of post-battle drafts when already owned.
+@export var allow_duplicate_in_draft: bool = false
 @export var icon: Texture
 @export var sound: AudioStream
 @export_multiline var tooltip: String

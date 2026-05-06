@@ -70,9 +70,9 @@ staged_scale = 0.15
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -83.0
-offset_top = 163.0
+offset_top = 104.0
 offset_right = -83.0
-offset_bottom = 176.0
+offset_bottom = 117.0
 status_owner = NodePath("..")
 
 [node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]

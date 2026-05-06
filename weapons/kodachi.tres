@@ -11,6 +11,7 @@ id = "harmonized_kodachi"
 type = 1
 character_type = 1
 starter_weapon = true
+allow_duplicate_in_draft = true
 icon = ExtResource("1_g6x73")
 sound = ExtResource("3_fe7qa")
 tooltip = "[kw=flow]Flow state[/kw]: Go Again"

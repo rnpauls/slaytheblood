@@ -2,6 +2,7 @@ class_name InventoryCardRenderContainer
 extends MarginContainer
 
 signal equipment_pressed(equipment: Equipment)
+signal pressed(item: Resource)
 
 @export var weapon: Weapon : set = set_weapon
 @export var equipment: Equipment : set = set_equipment
@@ -55,6 +56,9 @@ func set_equipment(new_equipment: Equipment) -> void:
 func _on_pressed() -> void:
 	if equipment:
 		equipment_pressed.emit(equipment)
+		pressed.emit(equipment)
+	elif weapon:
+		pressed.emit(weapon)
 
 
 func _on_mouse_entered() -> void:

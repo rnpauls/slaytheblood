@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://bax2ufsjfstta"]
+
+[ext_resource type="PackedScene" uid="uid://ddwlhreap47lu" path="res://battles/tier_1_kunoichi.tscn" id="1_6o2wq"]
+[ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="1_b27hx"]
+
+[resource]
+script = ExtResource("1_b27hx")
+battle_tier = 1
+weight = 2.0
+gold_reward_min = 61
+gold_reward_max = 91
+enemies = ExtResource("1_6o2wq")
+metadata/_custom_type_script = "uid://cuif6toyg7yqh"

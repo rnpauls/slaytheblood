@@ -7,7 +7,9 @@ const CAMPFIRE_SCENE := preload("res://scenes/campfire/campfire.tscn")
 const SHOP_SCENE := preload("res://scenes/shop/shop.tscn")
 const TREASURE_SCENE := preload("res://scenes/treasure/treasure.tscn")
 const WIN_SCREEN_SCENE = preload("res://scenes/win_screen/win_screen.tscn")
+const DRAFTABLE_INVENTORY := preload("res://custom_resources/draftable_inventory.tres")
 const MAIN_MENU_PATH = "res://scenes/ui/main_menu.tscn"
+const NON_COMBAT_MUSIC := preload("res://art/music/deuslower-medieval-ambient-236809.mp3")
 
 @export var run_startup: RunStartup
 
@@ -41,6 +43,7 @@ func _ready() -> void:
 		func():
 			get_tree().change_scene_to_file(MAIN_MENU_PATH)
 	)
+	MusicPlayer.play(NON_COMBAT_MUSIC, true)
 	match run_startup.type:
 		RunStartup.Type.NEW_RUN:
 			character = run_startup.picked_character.create_instance()
@@ -161,7 +164,8 @@ func _show_regular_battle_rewards() -> void:
 	var reward_scene := _change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats
 	reward_scene.character_stats = character
-	
+	reward_scene.draftable_inventory = DRAFTABLE_INVENTORY
+
 	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
 	reward_scene.add_card_reward()
 
@@ -205,6 +209,7 @@ func _on_event_room_entered(room: Room) -> void:
 	event_room.setup()
 
 func _on_battle_won() -> void:
+	MusicPlayer.play(NON_COMBAT_MUSIC, true)
 	if map.floors_climbed == MapGenerator.FLOORS:
 		var win_screen := _change_view(WIN_SCREEN_SCENE) as WinScreen
 		win_screen.character = character

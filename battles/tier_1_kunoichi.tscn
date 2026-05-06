@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ddwlhreap47lu"]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_nf7sc"]
+[ext_resource type="Resource" uid="uid://cvixtqsyntvmf" path="res://enemies/kunoichi/kunoichi.tres" id="2_cnpyu"]
+
+[node name="Tier2CrabCommoner" type="Node2D" unique_id=215508035]
+
+[node name="Enemy" parent="." unique_id=171155132 instance=ExtResource("1_nf7sc")]
+position = Vector2(929, 302)
+stats = ExtResource("2_cnpyu")

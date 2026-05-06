@@ -25,6 +25,8 @@ const RARITY_COLORS := {
 ## If false: current_block decrements by 1 per use; equipment is destroyed when current_block reaches 0.
 @export var break_on_use: bool = false
 @export var starter_equipment: bool = false
+## If false, this item is filtered out of post-battle drafts when already owned.
+@export var allow_duplicate_in_draft: bool = false
 
 @export_group("Visuals")
 @export var icon: Texture

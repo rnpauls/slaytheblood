@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://cvixtqsyntvmf"]
+
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_4e1ws"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_hclkl"]
+[ext_resource type="Texture2D" uid="uid://dxg7y1wlh86kj" path="res://art/tile_0100.png" id="2_oy0ur"]
+[ext_resource type="Resource" uid="uid://dis18wg57qasf" path="res://enemies/kunoichi/kunoichi_starting_deck.tres" id="4_je347"]
+
+[resource]
+script = ExtResource("1_4e1ws")
+character_name = "Kunoichi"
+art = ExtResource("2_oy0ur")
+max_health = 22
+starting_deck = ExtResource("4_je347")
+cards_per_turn = 3
+metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

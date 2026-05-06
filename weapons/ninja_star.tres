@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cli20nvbbuehk" path="res://art/item56.png" id="1_rv5y4"]
 [ext_resource type="Script" uid="uid://bcy3ycvnyso4r" path="res://weapons/ninja_star.gd" id="2_rv5y4"]
-[ext_resource type="AudioStream" uid="uid://bcg6e4bahaphj" path="res://art/music/sound_effects/DSGN/SWSH_MOVEMENT-Bamboo Whip_HY_PC-003.wav" id="3_13ha1"]
+[ext_resource type="AudioStream" uid="uid://bcg6e4bahaphj" path="res://art/music/sound_effects/DSGN/SWSH_MOVEMENT-Bamboo Whip_HY_PC-003.wav" id="3_rv5y4"]
 
 [resource]
 script = ExtResource("2_rv5y4")
@@ -10,8 +10,9 @@ weapon_name = "Ninja Star"
 id = "ninja_star"
 type = 1
 character_type = 1
+allow_duplicate_in_draft = true
 icon = ExtResource("1_rv5y4")
-sound = ExtResource("3_13ha1")
+sound = ExtResource("3_rv5y4")
 tooltip = "Destroyed on use"
 attack = 1
 go_again = true

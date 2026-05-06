@@ -9,5 +9,6 @@ equipment_name = "Rusty Helmet"
 id = "iron_rot_helmet"
 break_on_use = true
 starter_equipment = true
+allow_duplicate_in_draft = true
 icon = ExtResource("1_yuful")
 metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

@@ -2,8 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://b2ay04rjh0l4v" path="res://scenes/ui/card_menu_ui.tscn" id="1_n81ba"]
 [ext_resource type="Script" uid="uid://cmkh4f8nqpnsw" path="res://scenes/ui/card_rewards.gd" id="1_xu1dp"]
-[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="2_63613"]
-[ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="2_d5vtp"]
 [ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/brute/cards/warrior_slash.tres" id="3_c5rll"]
 [ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/brute/cards/warrior_big_slam.tres" id="4_wq3xp"]
 [ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/brute/cards/warrior_true_strength.tres" id="5_g26cv"]
@@ -16,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.690196)
 script = ExtResource("1_xu1dp")
-rewards = Array[ExtResource("2_63613")]([ExtResource("3_c5rll"), ExtResource("4_wq3xp"), ExtResource("5_g26cv")])
+rewards = Array[Resource]([ExtResource("3_c5rll"), ExtResource("4_wq3xp"), ExtResource("5_g26cv")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -53,24 +51,3 @@ custom_minimum_size = Vector2(50, 14)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Skip"
-
-[node name="CardTooltipPopup" parent="." instance=ExtResource("2_d5vtp")]
-visible = false
-layout_mode = 1
-background_color = Color(0.0980392, 0.0627451, 0.247059, 0.945098)
-
-[node name="TakeButton" type="Button" parent="CardTooltipPopup"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -28.0
-offset_right = 30.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Take"

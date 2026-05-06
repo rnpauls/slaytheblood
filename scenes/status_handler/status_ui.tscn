@@ -14,8 +14,8 @@ status = ExtResource("2_qr1tb")
 [node name="Icon" type="TextureRect" parent="." unique_id=1440612700]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 0
-offset_right = 10.0
-offset_bottom = 10.0
+offset_right = 48.0
+offset_bottom = 48.0
 texture = ExtResource("2_pe7yq")
 expand_mode = 1
 stretch_mode = 5

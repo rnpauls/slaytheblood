@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cgopx2ponr1qi" path="res://art/tile_0121.png" id="5_vxe4u"]
 [ext_resource type="Texture2D" uid="uid://con6y7mc74c5a" path="res://art/tile_0120.png" id="6_b3udk"]
 [ext_resource type="Texture2D" uid="uid://ukld5o613i0a" path="res://art/tile_0122.png" id="7_yoaod"]
+[ext_resource type="AudioStream" uid="uid://bf6x110ucleeo" path="res://art/music/17406877-battle-of-the-dragons-8037.mp3" id="8_music"]
 
 [sub_resource type="Gradient" id="Gradient_xoidu"]
 colors = PackedColorArray(0.105882, 0, 0, 1, 0.460509, 0.308384, 0.229435, 1)
@@ -26,6 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lsjs7")
 run_startup = ExtResource("2_8aaed")
+music = ExtResource("8_music")
 
 [node name="Background" type="TextureRect" parent="." unique_id=553310176]
 layout_mode = 1

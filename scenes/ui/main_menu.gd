@@ -4,14 +4,17 @@ const CHAR_SELECTOR_SCENE := preload("res://scenes/ui/character_selector.tscn")
 const RUN_SCENE = preload("res://scenes/run/run.tscn")
 
 @export var run_startup: RunStartup
+@export var music: AudioStream
 
 @onready var continue_button: Button = %Continue
 
 func _ready() -> void:
 	get_tree().paused = false
 	continue_button.disabled = SaveGame.load_data() == null
+	MusicPlayer.play(music, true)
 
 func _on_continue_pressed() -> void:
+	MusicPlayer.stop()
 	run_startup.type = RunStartup.Type.CONTINUED_RUN
 	get_tree().change_scene_to_packed(RUN_SCENE)
 

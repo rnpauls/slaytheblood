@@ -152,12 +152,12 @@ offset_bottom = 720.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="TooltipCanvas" type="CanvasLayer" parent="."]
+[node name="TooltipCanvas" type="CanvasLayer" parent="." unique_id=1648810082]
 layer = 6
 
-[node name="TooltipLayer" parent="TooltipCanvas" instance=ExtResource("14_ttip")]
+[node name="TooltipLayer" parent="TooltipCanvas" unique_id=535737336 instance=ExtResource("14_ttip")]
 
-[node name="InventoryPreviewLayer" parent="TooltipCanvas" instance=ExtResource("15_invpl")]
+[node name="InventoryPreviewLayer" parent="TooltipCanvas" unique_id=1376735095 instance=ExtResource("15_invpl")]
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1260299461]
 process_mode = 3

@@ -2,9 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://01cnuv5m4n6f" path="res://art/tile_0112.png" id="1_btt60"]
 [ext_resource type="Resource" uid="uid://6i5wr118op2u" path="res://characters/ninja/ninja_draftable_cards.tres" id="2_u8x1n"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_7xeg5"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="3_134v8"]
+[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="4_tnwy8"]
 [ext_resource type="Resource" uid="uid://b1ntebn42q2l5" path="res://characters/ninja/ninja_starting_deck.tres" id="5_fhfql"]
+[ext_resource type="Resource" uid="uid://di0lkhegtyanm" path="res://weapons/kodachi.tres" id="5_j05nd"]
+[ext_resource type="Resource" uid="uid://citg2gxgih72i" path="res://weapons/tiger_staff.tres" id="6_kjhjj"]
 [ext_resource type="Resource" uid="uid://buxa3aoc70x0u" path="res://characters/ninja/ninja_starting_inv.tres" id="6_wrrns"]
+[ext_resource type="Resource" uid="uid://b4y4lw03v8och" path="res://weapons/ninja_star.tres" id="7_5pfox"]
 [ext_resource type="Resource" uid="uid://cpq6w8ligmkxn" path="res://relics/ira_pendant.tres" id="7_fhfql"]
 
 [resource]
@@ -13,6 +18,7 @@ description = "Sneaky little bastard.
 He will kill you"
 portrait = ExtResource("1_btt60")
 draftable_cards = ExtResource("2_u8x1n")
+draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtResource("6_kjhjj"), ExtResource("7_5pfox")])
 starting_relic = ExtResource("7_fhfql")
 character_name = "Ninja"
 art = ExtResource("1_btt60")

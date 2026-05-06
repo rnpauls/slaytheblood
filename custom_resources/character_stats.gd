@@ -7,6 +7,8 @@ extends Stats
 
 @export_group("Gameplay Data")
 @export var draftable_cards: CardPile
+@export var draftable_equipment: Array[Equipment] = []
+@export var draftable_weapons: Array[Weapon] = []
 @export var starting_relic: Relic
 
 func take_damage(damage : int) -> int:
