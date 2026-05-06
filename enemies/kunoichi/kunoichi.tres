@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_hclkl"]
 [ext_resource type="Texture2D" uid="uid://dxg7y1wlh86kj" path="res://art/tile_0100.png" id="2_oy0ur"]
 [ext_resource type="Resource" uid="uid://dis18wg57qasf" path="res://enemies/kunoichi/kunoichi_starting_deck.tres" id="4_je347"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_je347"]
 
 [resource]
 script = ExtResource("1_4e1ws")
@@ -11,5 +12,6 @@ character_name = "Kunoichi"
 art = ExtResource("2_oy0ur")
 max_health = 22
 starting_deck = ExtResource("4_je347")
+starting_inventory = ExtResource("5_je347")
 cards_per_turn = 3
 metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.690196)
+color = Color(0, 0, 0, 1)
 script = ExtResource("1_xu1dp")
 rewards = Array[Resource]([ExtResource("3_c5rll"), ExtResource("4_wq3xp"), ExtResource("5_g26cv")])
 
@@ -34,7 +34,7 @@ theme_override_constants/separation = 10
 [node name="Cards" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
 
 [node name="CardMenuUI" parent="VBoxContainer/Cards" instance=ExtResource("1_n81ba")]
 layout_mode = 2

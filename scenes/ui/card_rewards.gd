@@ -47,6 +47,7 @@ func set_rewards(new_rewards: Array[Resource]) -> void:
 			new_card.tooltip_requested.connect(_take_reward)
 		elif reward is Weapon or reward is Equipment:
 			var new_item := INVENTORY_CARD_RENDER_CONTAINER.instantiate() as InventoryCardRenderContainer
+			new_item.custom_minimum_size = Vector2(200, 300)
 			cards.add_child(new_item)
 			if reward is Weapon:
 				new_item.weapon = reward
