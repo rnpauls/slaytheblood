@@ -12,30 +12,30 @@ script = ExtResource("1_nijyk")
 status = ExtResource("2_qr1tb")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1440612700]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_right = 16.0
+offset_bottom = 16.0
 texture = ExtResource("2_pe7yq")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Duration" type="Label" parent="." unique_id=2117168035]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 17.0
-offset_right = 81.0
-offset_bottom = 61.0
+offset_left = -11.0
+offset_top = -3.0
+offset_right = 61.0
+offset_bottom = 41.0
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Stacks" type="Label" parent="." unique_id=1632973502]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 17.0
-offset_right = 81.0
-offset_bottom = 61.0
+offset_left = -11.0
+offset_top = -3.0
+offset_right = 61.0
+offset_bottom = 41.0
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1

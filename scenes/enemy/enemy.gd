@@ -3,15 +3,27 @@ extends Combatant
 
 const ARROW_OFFSET := 45
 const ENEMY_CARD_UI_SCENE := preload("res://scenes/card_ui/enemy_card_ui.tscn")
+const BLOCK_BADGE_SCENE := preload("res://scenes/enemy/block_badge.tscn")
 
 ## Delay between successive card draws (seconds), matching player hand feel.
 const DRAW_INTERVAL := 0.12
+
+## Block-card visualization tunables.
+const CARD_PIVOT_OFFSET := Vector2(100, 140)  # Matches CardUI scene pivot.
+const BLOCK_DISPLAY_SCALE := 0.55
+const BLOCK_TRAVEL_DURATION := 0.3
+const BLOCK_HOLD_DURATION := 0.5
+const BLOCK_FADE_DURATION := 0.25
+const BLOCK_BADGE_LOCAL_OFFSET := Vector2(0, -110)  # Above the displayed card (card top sits at y≈-77 at BLOCK_DISPLAY_SCALE).
+const BLOCK_BADGE_SIZE := Vector2(80, 40)           # Must match block_badge.tscn custom_minimum_size.
+const BLOCK_BADGE_Z_INDEX := 20                     # Above card_ui.z_index (10) so the badge always reads on top.
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
 @onready var enemy_hand_ui: EnemyHandUI = $EnemyHandUI
 @onready var enemy_hand: EnemyHand = $EnemyHand
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
+@onready var block_display: Node2D = $BlockDisplay
 
 ## Position (relative to the Enemy node) where the arsenal card_ui sits when one is held.
 @export var arsenal_offset: Vector2 = Vector2(-90, 158)
@@ -245,13 +257,78 @@ func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) 
 	_log("defending attack=%d  go_again=%s  hand=%d  ai_hand=%d" % [
 		attack, go_again, hand.size(), enemy_ai.hand.size()])
 	var defense_array := enemy_ai.defend(attack, go_again, incoming_on_hits)
+
+	# Apply block synchronously so AttackDamageEffect.execute_single_target sees the
+	# updated stats.block when it calls take_damage immediately after this returns.
+	var anim_queue: Array = []
 	for def_card: Card in defense_array:
-		var card_ui := _get_or_create_card_ui(def_card)
-		_remove_card_from_hand(def_card)
-		card_ui.block()
+		var amount: int = modifier_handler.get_modified_value(def_card.defense, Modifier.Type.BLOCK_GAINED)
+		stats.block += amount
+		anim_queue.append({"card": def_card, "amount": amount})
+
+	_log("after defend  hand=%d  ai_hand=%d  ui_map=%d" % [hand.size(), enemy_ai.hand.size(), card_ui_map.size()])
+
+	# Animation runs as a fire-and-forget coroutine so defend_attack stays sync.
+	_play_block_sequence(anim_queue)
+
+## Run the per-card block animation sequentially. Hand removal is deferred into
+## each card's animation so cards stay in EnemyHand until their own turn comes —
+## otherwise multi-card blocks would all hover above the hand at once.
+func _play_block_sequence(queue: Array) -> void:
+	for entry in queue:
+		await _animate_block_card(entry.card, entry.amount)
+
+func _animate_block_card(card: Card, amount: int) -> void:
+	var card_ui: EnemyCardUI = _get_or_create_card_ui(card)
+	if not is_instance_valid(card_ui):
+		return
+
+	# Pluck from hand: erase data, reparent to BlockDisplay (preserves global pos
+	# so the card visibly travels from where it was — no shrink animation).
+	hand.erase(card)
+	card_ui_map.erase(card)
+	if card_ui.get_parent() != block_display:
+		card_ui.reparent(block_display)
+	enemy_hand._arrange_cards()
 	update_intent()
 	enemy_hand_ui.update_cards(enemy_ai)
-	_log("after defend  hand=%d  ai_hand=%d  ui_map=%d" % [hand.size(), enemy_ai.hand.size(), card_ui_map.size()])
+	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	card_ui.z_index = 10
+	card_ui.z_as_relative = true
+
+	# 1 + 2. Travel to BlockDisplay's centered position while flipping face-up.
+	# flip_reveal targets card_render.scale:x (an inner Control), so it doesn't
+	# fight the outer scale tween from animate_to_local_*.
+	card_ui.animate_to_local_position_and_rotation_and_scale(
+		-CARD_PIVOT_OFFSET, 0.0, BLOCK_DISPLAY_SCALE, BLOCK_TRAVEL_DURATION
+	)
+	card_ui.flip_reveal()
+	await get_tree().create_timer(BLOCK_TRAVEL_DURATION).timeout
+	if not is_instance_valid(card_ui):
+		return
+
+	# 3. Pop the +X badge above the card; play sound at the moment of feedback.
+	var badge: BlockBadge = BLOCK_BADGE_SCENE.instantiate()
+	add_child(badge)
+	# Center the badge on (block_display.position + BLOCK_BADGE_LOCAL_OFFSET) by
+	# offsetting its top-left back by half its known size.
+	badge.position = block_display.position + BLOCK_BADGE_LOCAL_OFFSET - BLOCK_BADGE_SIZE * 0.5
+	badge.z_index = BLOCK_BADGE_Z_INDEX
+	badge.pop(amount)
+	SFXPlayer.play(card.block_sound)
+
+	await get_tree().create_timer(BLOCK_HOLD_DURATION).timeout
+	if not is_instance_valid(card_ui):
+		return
+
+	# 4. Send to discard: data-side add + visual fadeout.
+	stats.discard.add_card(card)
+	var t := card_ui.create_tween()
+	t.tween_property(card_ui, "scale", Vector2.ZERO, BLOCK_FADE_DURATION)
+	t.parallel().tween_property(card_ui, "modulate:a", 0.0, BLOCK_FADE_DURATION)
+	await t.finished
+	if is_instance_valid(card_ui):
+		card_ui.queue_free()
 
 func cleanup_phase() -> void:
 	_log("cleanup  hand=%d  ai_hand=%d  ui_map=%d" % [hand.size(), enemy_ai.hand.size(), card_ui_map.size()])

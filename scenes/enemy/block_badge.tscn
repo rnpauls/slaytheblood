@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cn50xk2pq8vrh"]
+
+[ext_resource type="Script" path="res://scenes/enemy/block_badge.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="2_shield"]
+
+[node name="BlockBadge" type="HBoxContainer"]
+custom_minimum_size = Vector2(80, 40)
+pivot_offset = Vector2(40, 20)
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("1_script")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+texture = ExtResource("2_shield")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+text = "+0"
+horizontal_alignment = 1
+vertical_alignment = 1

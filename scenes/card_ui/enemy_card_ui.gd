@@ -34,15 +34,18 @@ func set_arsenal_marker(value: bool) -> void:
 		card_render.set_arsenal_marker(value)
 
 ## Flip from card-back to card-face with a brief horizontal squish tween.
+## Targets card_render.scale:x (an inner Control) instead of self.scale so this
+## tween can run in parallel with an outer position/scale tween on the CardUI
+## without two tweens fighting over the same property.
 func flip_reveal() -> void:
 	if not show_back:
 		return
 	var t := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(self, "scale:x", 0.0, 0.12)
+	t.tween_property(card_render, "scale:x", 0.0, 0.12)
 	t.tween_callback(func():
 		show_back = false
 	)
-	t.tween_property(self, "scale:x", scale.y, 0.12)  # restore to current y scale
+	t.tween_property(card_render, "scale:x", 1.0, 0.12)
 
 # ── internals ────────────────────────────────────────────────────────────────
 

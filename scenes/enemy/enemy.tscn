@@ -68,6 +68,9 @@ position = Vector2(0, -118)
 script = ExtResource("10_staged")
 staged_scale = 0.15
 
+[node name="BlockDisplay" type="Node2D" parent="."]
+position = Vector2(-105, 0)
+
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -83.0
 offset_top = 104.0
