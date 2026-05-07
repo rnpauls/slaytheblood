@@ -35,7 +35,14 @@ func execute_single_target(target: Node) -> void:
 		atk.on_hit_effects = on_hit_effects
 		atk.execute([target])
 	if arcane > 0:
+		# Arcane reaction window: enemy AI gets to decide how much to prevent
+		# (and pitch cards if needed) before the damage lands. Player defaults
+		# to -1 (auto-spend everything available) — manual UI is a future hook.
+		var prevention := -1
+		if target is Enemy and target.enemy_ai:
+			prevention = target.enemy_ai.decide_arcane_prevention(self)
 		var zap := ZapEffect.new()
 		zap.amount = arcane
 		zap.sound = sound
+		zap.prevention = prevention
 		zap.execute([target])

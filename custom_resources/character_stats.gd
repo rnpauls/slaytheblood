@@ -13,9 +13,9 @@ const GENERIC_DRAFTABLE_CARDS := preload("res://generic_cards/generic_draftable_
 @export var draftable_weapons: Array[Weapon] = []
 @export var starting_relic: Relic
 
-func take_damage(damage : int, damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL) -> int:
+func take_damage(damage : int, damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL, prevention: int = -1) -> int:
 	var initial_health := health
-	var damage_taken := super.take_damage(damage, damage_kind)
+	var damage_taken := super.take_damage(damage, damage_kind, prevention)
 	if initial_health > health:
 		Events.player_hit.emit()
 	return damage_taken

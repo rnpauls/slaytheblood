@@ -283,6 +283,63 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 		options.remove_at(0)
 	return options
 
+## Decide how much arcane from this incoming packet to prevent by spending
+## mana (and pitching additional cards from hand if needed). Returns the
+## amount to prevent — DamagePacket then routes the residual into take_damage,
+## which spends exactly that much mana.
+##
+## Heuristic V1:
+##   - Lethal arcane (>= current HP): pitch up to the full arcane amount.
+##     Survival trumps offense — if we die there's no future plan to protect.
+##   - Non-lethal: spend only currently-pooled mana, don't burn hand cards.
+##     Saves cards for our own offense; small zaps just get through.
+##
+## This is a deliberately simple start. Future work (matches the design note in
+## the proposal): factor in visible future arcane (Zap values in the player's
+## hand, runechants on the field, active channels) and value each card's
+## offensive cost via calculate_max_offense_now to set a smarter reserve.
+func decide_arcane_prevention(packet: DamagePacket) -> int:
+	var arcane: int = packet.arcane
+	if arcane <= 0:
+		return 0
+
+	var current_mana: int = enemy.stats.mana
+	var current_hp: int = enemy.stats.health
+
+	if arcane < current_hp:
+		return mini(arcane, current_mana)
+
+	# Lethal incoming — pitch defensively until we either fund full prevention
+	# or run out of pitchable cards.
+	var to_prevent: int = arcane
+	while enemy.stats.mana < to_prevent:
+		var c := find_best_defensive_pitch_card()
+		if c == null:
+			break
+		enemy.stats.mana += c.pitch
+		enemy.stats.draw_pile.add_card(c)
+		hand.erase(c)
+		card_removed_from_hand.emit(c)
+		print_enemy_ai("pitched %s defensively for %d (against %d arcane)" % [c.id, c.pitch, arcane])
+
+	return mini(to_prevent, enemy.stats.mana)
+
+## Highest-pitch card we can sacrifice without breaking the planned offense.
+## Returns null if every pitchable card is reserved for an action this turn.
+func find_best_defensive_pitch_card() -> Card:
+	var best: Card = null
+	var planned_actions: Array = []
+	if turn_plan and turn_plan.actions:
+		planned_actions = turn_plan.actions
+	for c: Card in hand:
+		if c.disable_pitch:
+			continue
+		if c in planned_actions:
+			continue
+		if best == null or c.pitch > best.pitch:
+			best = c
+	return best
+
 ## Pick the best card to arsenal
 func pick_best_arsenal(cards: Array) -> Card:
 	var eligible: Array = cards.filter(func(c): return not c.unplayable)
