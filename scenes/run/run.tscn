@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="8_7yo0l"]
-[ext_resource type="Texture2D" uid="uid://6o51ywnkxdwg" path="res://art/Icon28_19.png" id="9_mapicn"]
+[ext_resource type="Texture2D" uid="uid://csywvves1qlvd" path="res://art/item96.png" id="8_l6p45"]
 [ext_resource type="Script" uid="uid://y5m8dbsnnish" path="res://scenes/run/pause_menu.gd" id="11_d0odi"]
 [ext_resource type="PackedScene" uid="uid://c4brrbokqt532" path="res://scenes/ui/inventory_view.tscn" id="13_fo0ly"]
 [ext_resource type="PackedScene" uid="uid://b8tlay001a26v" path="res://scenes/ui/tooltip_layer.tscn" id="14_ttip"]
@@ -113,7 +113,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("9_mapicn")
+texture_normal = ExtResource("8_l6p45")
 ignore_texture_size = true
 stretch_mode = 5
 

@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://f41icikq7jpu" path="res://custom_resources/battle_stats_pool.gd" id="6_cquyn"]
 [ext_resource type="Resource" uid="uid://c0phbx8gtujhs" path="res://battles/tier_2_karnus.tres" id="7_hpysq"]
 [ext_resource type="Resource" uid="uid://bax2ufsjfstta" path="res://battles/tier_1_kunoichi.tres" id="8_a7oj0"]
+[ext_resource type="Resource" uid="uid://bsl1m0t0tres0" path="res://battles/tier_0_slime.tres" id="9_t0sli"]
+[ext_resource type="Resource" uid="uid://bsl1m0t1tres0" path="res://battles/tier_1_slime_commoner.tres" id="10_t1sli"]
 
 [resource]
 script = ExtResource("6_cquyn")
-pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0")])
+pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("9_t0sli"), ExtResource("10_t1sli")])

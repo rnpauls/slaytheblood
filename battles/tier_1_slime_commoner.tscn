@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bsl1m0t1scn00"]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
+[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_commn"]
+[ext_resource type="Resource" uid="uid://bsl1m00enmy00" path="res://enemies/slime/slime_enemy.tres" id="3_slime"]
+
+[node name="Tier1SlimeCommoner" type="Node2D" unique_id=1685917986]
+
+[node name="Enemy" parent="." unique_id=2004645267 instance=ExtResource("1_enemy")]
+position = Vector2(747, 264)
+stats = ExtResource("2_commn")
+
+[node name="Enemy2" parent="." unique_id=2004645268 instance=ExtResource("1_enemy")]
+position = Vector2(1051, 258)
+stats = ExtResource("3_slime")

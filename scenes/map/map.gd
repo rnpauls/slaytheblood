@@ -87,9 +87,8 @@ func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room)
 	map_data = map
 	last_room = last_room_climbed
 	create_map()
-	
+
 	if floors_climbed > 0:
-		unlock_next_rooms()
 		camera_2d.position.y = clampf(-floors_climbed * MapGenerator.Y_DIST, -camera_edge_y, 0)
 	else:
 		unlock_floor()

@@ -81,6 +81,11 @@ func _build_loadout() -> void:
 
 func _place_slot(slot_key: String, item: Resource, slot_label: String) -> void:
 	var pos: Vector2 = LOADOUT_POSITIONS[slot_key]
+	if slot_key == "rhand" and character.is_two_handed_equipped():
+		var locked := _make_empty_slot("2-Handed")
+		locked.position = pos
+		loadout.add_child(locked)
+		return
 	if item == null:
 		var slot := _make_empty_slot(slot_label)
 		slot.position = pos
@@ -211,6 +216,13 @@ func _equip_weapon(w: Weapon) -> void:
 
 
 func _equip_to_hand(item: Resource) -> void:
+	if Stats.is_two_handed_weapon(item):
+		character.hand_left = item
+		character.hand_right = null
+		return
+	if character.is_two_handed_equipped():
+		character.hand_left = item
+		return
 	if character.hand_left == null:
 		character.hand_left = item
 	elif character.hand_right == null:

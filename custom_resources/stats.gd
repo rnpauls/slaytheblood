@@ -108,13 +108,28 @@ func _is_hand_free(slot: Resource) -> bool:
 	return slot == null
 
 
+static func is_two_handed_weapon(item: Resource) -> bool:
+	return item is Weapon and item.hands == Weapon.Hands.TWOHAND
+
+
+## A 2H weapon is stored only in hand_left; hand_right stays null while it's equipped.
+func is_two_handed_equipped() -> bool:
+	return is_two_handed_weapon(hand_left)
+
+
 func add_weapon(new_weapon: Weapon) -> void:
 	var cloned: = new_weapon.duplicate()
 	inventory.add_weapon(cloned)
-	if _is_hand_free(hand_left):
-		hand_left = cloned
-	elif _is_hand_free(hand_right):
-		hand_right = cloned
+	if is_two_handed_weapon(cloned):
+		if hand_left == null and hand_right == null:
+			hand_left = cloned
+	else:
+		if is_two_handed_equipped():
+			return
+		if _is_hand_free(hand_left):
+			hand_left = cloned
+		elif _is_hand_free(hand_right):
+			hand_right = cloned
 
 
 ## Adds equipment to the inventory. If the matching slot is empty, equips it automatically
@@ -136,6 +151,8 @@ func _auto_equip(eq: Equipment) -> void:
 		Equipment.Slot.LEGS:
 			if equipment_legs == null: equipment_legs = eq
 		Equipment.Slot.OFFHAND:
+			if is_two_handed_equipped():
+				return
 			if _is_hand_free(hand_left):
 				hand_left = eq
 			elif _is_hand_free(hand_right):

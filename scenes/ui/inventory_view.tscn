@@ -4,8 +4,14 @@
 [ext_resource type="Resource" uid="uid://c4n5peso4ufb8" path="res://characters/brute/brute_starting_inv.tres" id="2_k13uw"]
 [ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="2_kuo8l"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="4_07io4"]
-[ext_resource type="PackedScene" uid="uid://binvcardrcrcn" path="res://scenes/inventory_card/inventory_card_render_container.tscn" id="4_kuo8l"]
 [ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_4agyt"]
+
+[sub_resource type="Gradient" id="Gradient_12ys7"]
+offsets = PackedFloat32Array(0, 0.005859375, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.11340966, 0.038714994, 0.018705115, 1, 0.536433, 0.27940246, 0.19520977, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kuo8l"]
+gradient = SubResource("Gradient_12ys7")
 
 [node name="InventoryView" type="Control" unique_id=495168532]
 layout_mode = 3
@@ -20,14 +26,14 @@ mouse_force_pass_scroll_events = false
 script = ExtResource("1_12ys7")
 inventory = ExtResource("2_k13uw")
 
-[node name="Background" type="ColorRect" parent="." unique_id=195916487]
+[node name="Background" type="TextureRect" parent="." unique_id=356313675]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.431373)
+texture = SubResource("GradientTexture2D_kuo8l")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1145974458]
 layout_mode = 1
@@ -55,32 +61,32 @@ label_settings = ExtResource("2_kuo8l")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MainHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=829711766]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 24
 
-[node name="LoadoutPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox"]
+[node name="LoadoutPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox" unique_id=1050604312]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 8
 
-[node name="LoadoutLabel" type="Label" parent="MarginContainer/VBoxContainer/MainHBox/LoadoutPanel"]
+[node name="LoadoutLabel" type="Label" parent="MarginContainer/VBoxContainer/MainHBox/LoadoutPanel" unique_id=748270340]
 layout_mode = 2
 text = "Equipped"
 horizontal_alignment = 1
 
-[node name="Loadout" type="Control" parent="MarginContainer/VBoxContainer/MainHBox/LoadoutPanel"]
+[node name="Loadout" type="Control" parent="MarginContainer/VBoxContainer/MainHBox/LoadoutPanel" unique_id=1723320549]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(283, 241)
 layout_mode = 2
 
-[node name="PoolPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox"]
+[node name="PoolPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox" unique_id=50744697]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="PoolLabel" type="Label" parent="MarginContainer/VBoxContainer/MainHBox/PoolPanel"]
+[node name="PoolLabel" type="Label" parent="MarginContainer/VBoxContainer/MainHBox/PoolPanel" unique_id=2068792379]
 layout_mode = 2
 text = "Inventory"
 horizontal_alignment = 1
@@ -100,7 +106,6 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 5
-
 
 [node name="BackButton" type="Button" parent="." unique_id=984134959]
 unique_name_in_owner = true

@@ -113,6 +113,8 @@ func _load_run() -> void:
 	map.load_map(save_data.map_data, save_data.floors_climbed, save_data.last_room)
 	if save_data.last_room and not save_data.was_on_map:
 		_on_map_exited(save_data.last_room)
+	elif save_data.last_room:
+		map.unlock_next_rooms()
 
 func _change_view(scene: PackedScene) -> Node:
 	# Outgoing view is queue_freed below — its tooltip-emitting children won't
@@ -201,6 +203,7 @@ func _show_regular_battle_rewards() -> void:
 	reward_scene.draftable_inventory = DRAFTABLE_INVENTORY
 
 	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
+	reward_scene.add_card_reward()
 	reward_scene.add_card_reward()
 
 func _on_battle_room_entered(room: Room) -> void:
