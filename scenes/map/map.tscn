@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dpol4nlmb6yic" path="res://scenes/map/map_generator.gd" id="2_blka6"]
 [ext_resource type="Resource" uid="uid://b03opgk5gd1bn" path="res://battles/battle_stats_pool.tres" id="3_l33wd"]
 [ext_resource type="Resource" uid="uid://demadyqgdrutk" path="res://scenes/event_rooms/event_room_pool.tres" id="4_h8dso"]
+[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="5_legend"]
 
 [sub_resource type="Gradient" id="Gradient_frlm1"]
 colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.440866, 0.251865, 0.199336, 1)
@@ -41,3 +42,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_4tcgx")
+
+[node name="Legend" type="CanvasLayer" parent="." unique_id=1734820001]
+unique_name_in_owner = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Legend"]
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 168.0
+offset_bottom = 360.0
+mouse_filter = 2
+theme = ExtResource("5_legend")
+
+[node name="MarginContainer" type="MarginContainer" parent="Legend/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="Legend/PanelContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Legend/PanelContainer/MarginContainer/VBox"]
+layout_mode = 2
+text = "Legend"
+horizontal_alignment = 1
+
+[node name="LegendRows" type="VBoxContainer" parent="Legend/PanelContainer/MarginContainer/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4

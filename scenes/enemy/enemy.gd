@@ -24,10 +24,11 @@ const NAA_FADE_DURATION := 0.25
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
-@onready var enemy_hand_ui: EnemyHandUI = $EnemyHandUI
+@onready var enemy_resource_ui: EnemyResourceUI = $EnemyResourceUI
 @onready var enemy_hand: EnemyHand = $EnemyHand
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
 @onready var block_display: Node2D = $BlockDisplay
+@onready var name_label: Label = $NameLabel
 
 ## Position (relative to the Enemy node) where the arsenal card_ui sits when one is held.
 @export var arsenal_offset: Vector2 = Vector2(-90, 158)
@@ -81,7 +82,7 @@ func setup_ai() -> void:
 	# Wire IntentUI so hover events carry this enemy reference (for tooltip)
 	intent_ui.enemy = self
 
-	enemy_hand_ui.update_cards(enemy_ai)
+	enemy_resource_ui.update_display(enemy_ai)
 
 ## Draw a single card, add it to the hand, and animate it into EnemyHand.
 func draw_card() -> void:
@@ -124,7 +125,7 @@ func declare_next_attack() -> void:
 	current_action = enemy_ai.play_next_action()
 	_pending_stage_card = null
 	update_intent()
-	enemy_hand_ui.update_cards(enemy_ai)
+	enemy_resource_ui.update_display(enemy_ai)
 
 	# When current_action is null the enemy's plan is exhausted; EnemyActingState
 	# observes that directly and exits its loop. Otherwise stage the card and
@@ -158,6 +159,7 @@ func update_enemy() -> void:
 
 	sprite_2d.texture = stats.art
 	arrow.position = Vector2.RIGHT * (sprite_2d.get_rect().size.x / 2 + ARROW_OFFSET)
+	name_label.text = stats.character_name
 	update_stats()
 
 func update_intent() -> void:
@@ -273,7 +275,7 @@ func do_action() -> void:
 	# (poison_tip, empowered) get burned by NAAs like poison_the_blade played beforehand.
 	if played_attack:
 		attack_completed.emit()
-	enemy_hand_ui.update_cards(enemy_ai)
+	enemy_resource_ui.update_display(enemy_ai)
 
 ## Attack path: release the staged card and let card_ui.play() run its full
 ## attack/hit animation pipeline. card_ui detaches itself and queue_frees.
@@ -366,7 +368,7 @@ func _animate_block_card(card: Card, amount: int) -> void:
 		card_ui.reparent(block_display)
 	enemy_hand._arrange_cards()
 	update_intent()
-	enemy_hand_ui.update_cards(enemy_ai)
+	enemy_resource_ui.update_display(enemy_ai)
 	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	card_ui.z_index = 10
 	card_ui.z_as_relative = true
@@ -413,7 +415,7 @@ func cleanup_phase() -> void:
 		draw_cards(to_draw)
 	stats.block = 0
 	stats.action_points = 1
-	enemy_hand_ui.update_cards(enemy_ai)
+	enemy_resource_ui.update_display(enemy_ai)
 
 func destroy_arsenal() -> bool:
 	if enemy_ai.arsenal == null:
@@ -527,6 +529,7 @@ func _on_area_exited(_area):
 	arrow.hide()
 
 func _on_hover_area_mouse_entered() -> void:
+	name_label.show()
 	var sh := get_node_or_null("StatusHandler") as StatusHandler
 	if sh == null:
 		return
@@ -540,4 +543,5 @@ func _on_hover_area_mouse_entered() -> void:
 	Events.tooltip_show_requested.emit(entries, rect)
 
 func _on_hover_area_mouse_exited() -> void:
+	name_label.hide()
 	Events.tooltip_hide_requested.emit()

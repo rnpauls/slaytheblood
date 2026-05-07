@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bt1g356h2qppc"]
+
+[ext_resource type="Script" uid="uid://2k7m42jipsq4" path="res://scenes/ui/enemy_resource_ui.gd" id="1_d8wvt"]
+[ext_resource type="Texture2D" uid="uid://c50m0leqqs44k" path="res://art/draw.png" id="2_levgj"]
+[ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="3_gold"]
+
+[node name="EnemyResourceUI" type="HBoxContainer" unique_id=1222570682]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -136.0
+offset_right = 16.0
+offset_bottom = 80.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 4
+alignment = 1
+script = ExtResource("1_d8wvt")
+
+[node name="DeckIcon" type="TextureRect" parent="." unique_id=2099223660]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_levgj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DeckCount" type="Label" parent="." unique_id=904183583]
+layout_mode = 2
+size_flags_vertical = 1
+text = "%s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResourceIcon" type="TextureRect" parent="." unique_id=879142191]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_gold")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ResourceCount" type="Label" parent="." unique_id=1708981912]
+layout_mode = 2
+size_flags_vertical = 1
+text = "%s"
+horizontal_alignment = 1
+vertical_alignment = 1

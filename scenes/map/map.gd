@@ -5,11 +5,23 @@ const SCROLL_SPEED := 60
 const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
+const LEGEND_ENTRIES := [
+	[Room.Type.MONSTER, "Monster"],
+	[Room.Type.EVENT, "Event"],
+	[Room.Type.CAMPFIRE, "Campfire"],
+	[Room.Type.SHOP, "Shop"],
+	[Room.Type.TREASURE, "Treasure"],
+	[Room.Type.BOSS, "Boss"],
+]
+const LEGEND_ICON_SIZE := Vector2(28, 28)
+
 @onready var map_generator: MapGenerator = $MapGenerator
 @onready var visuals: Node2D = $Visuals
 @onready var lines: Node2D = %Lines
 @onready var rooms: Node2D = %Rooms
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var legend: CanvasLayer = %Legend
+@onready var legend_rows: VBoxContainer = %LegendRows
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -18,6 +30,35 @@ var camera_edge_y: float
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
+	_populate_legend()
+
+
+func _populate_legend() -> void:
+	for entry: Array in LEGEND_ENTRIES:
+		var type: Room.Type = entry[0]
+		var icon_texture: Texture2D = MapRoom.ICONS[type][0]
+		if icon_texture == null:
+			continue
+
+		var row := HBoxContainer.new()
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_theme_constant_override("separation", 8)
+
+		var icon := TextureRect.new()
+		icon.texture = icon_texture
+		icon.custom_minimum_size = LEGEND_ICON_SIZE
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(icon)
+
+		var label := Label.new()
+		label.text = entry[1]
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(label)
+
+		legend_rows.add_child(row)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -82,11 +123,13 @@ func unlock_next_rooms() -> void:
 func show_map() -> void:
 	show()
 	camera_2d.enabled = true
+	legend.visible = true
 
 
 func hide_map() -> void:
 	hide()
 	camera_2d.enabled = false
+	legend.visible = false
 
 
 func _spawn_room(room: Room) -> void:

@@ -1,6 +1,12 @@
 class_name InventoryCard
 extends Control
 
+const HANDS_LABELS := {
+	Weapon.Hands.ONEHAND: "One-Handed",
+	Weapon.Hands.TWOHAND: "Two-Handed",
+	Weapon.Hands.OFFHAND: "Off-Hand",
+}
+
 @onready var weapon_ui: WeaponUI = $WeaponUI
 @onready var equipment_display: Control = $EquipmentDisplay
 @onready var equip_icon: TextureRect = $EquipmentDisplay/EquipIcon
@@ -26,7 +32,10 @@ func set_weapon(new_weapon: Weapon) -> void:
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(weapon.get_tooltip()))
 	name_label.text = weapon.weapon_name
 	rarity.modulate = Weapon.RARITY_COLORS[weapon.rarity]
-	type_label.text = Weapon.Type.keys()[weapon.type]
+	type_label.text = "%s\n[font_size=20]%s[/font_size]" % [
+		Weapon.Type.keys()[weapon.type],
+		HANDS_LABELS[weapon.hands],
+	]
 
 
 func set_equipment(new_equipment: Equipment) -> void:

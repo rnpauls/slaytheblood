@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="3_p3m4l"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="6_4c52q"]
-[ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_hand_ui.tscn" id="6_4efjx"]
+[ext_resource type="PackedScene" uid="uid://bt1g356h2qppc" path="res://scenes/ui/enemy_resource_ui.tscn" id="6_4efjx"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="7_ipda1"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="8_3uufv"]
 [ext_resource type="PackedScene" uid="uid://be755sb3hx1sv" path="res://scenes/enemy/enemy_hand.tscn" id="9_ehand"]
 [ext_resource type="Script" uid="uid://bi3sysr02rwq3" path="res://scenes/enemy/enemy_staged_display.gd" id="10_staged"]
+[ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="11_name"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 size = Vector2(82, 82)
@@ -47,7 +48,7 @@ offset_top = -96.0
 offset_right = 35.0
 offset_bottom = -59.0
 
-[node name="EnemyHandUI" parent="." unique_id=1222570682 instance=ExtResource("6_4efjx")]
+[node name="EnemyResourceUI" parent="." unique_id=1222570682 instance=ExtResource("6_4efjx")]
 anchors_preset = 8
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -68,6 +69,23 @@ staged_scale = 0.15
 
 [node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
 position = Vector2(-105, 0)
+
+[node name="NameLabel" type="Label" parent="." unique_id=-1293967293]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = 110.0
+offset_right = 120.0
+offset_bottom = 138.0
+grow_horizontal = 2
+mouse_filter = 2
+theme = ExtResource("11_name")
+theme_override_font_sizes/font_size = 18
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -71.0
