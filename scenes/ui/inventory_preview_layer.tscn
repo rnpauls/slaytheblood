@@ -7,3 +7,5 @@ mouse_filter = 2
 theme_override_constants/separation = 4
 script = ExtResource("1_invpl")
 fade_seconds = 0.0
+hover_delay = 0.5
+prefer_left_of_source = true
