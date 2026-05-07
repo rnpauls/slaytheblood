@@ -158,20 +158,45 @@ func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers: M
 	return tooltip_text
 
 func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler, custom_damage:int = attack) -> void:
-	var damage_effect := AttackDamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
-	damage_effect.damage_kind = damage_kind
-	damage_effect.sound = sound
-	damage_effect.go_again = go_again
+	var packet := build_attack_packet(modifiers, custom_damage)
+	packet.execute(targets)
 
-	damage_effect.on_hit_effects.append_array(on_hits)
-	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
-	damage_effect.execute(targets)
-	do_runechant_trigger(targets)
+## Build a DamagePacket for this card's attack. Folds in the main hit (routed
+## by damage_kind), the card's `zap` value, and any runechants on the owner
+## (consumed here). Used by do_stock_attack_damage_effect and exposed so the
+## enemy intent system / damage previews can inspect a card's full hit profile
+## without firing it.
+func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack) -> DamagePacket:
+	var packet := DamagePacket.new()
+	packet.source_card = self
+	packet.source_owner = owner
+	packet.sound = sound
+	packet.go_again = go_again
+	packet.on_hit_effects.append_array(on_hits)
+	if owner:
+		packet.on_hit_effects.append_array(owner.active_on_hits)
 
-## Fires the card's `zap` value as arcane damage at the given targets. No-op if
-## zap is 0. Called automatically by vanilla_attack after the physical hit;
-## scripted cards can call this themselves (or skip it for custom behavior).
+	var modified_main := modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
+	if damage_kind == DamageKind.PHYSICAL:
+		packet.physical = modified_main
+	else:
+		packet.arcane = modified_main
+
+	if zap > 0:
+		packet.arcane += modifiers.get_modified_value(zap, Modifier.Type.DMG_DEALT)
+
+	# Runechants on the attacker pop into the same packet — single decision
+	# point for the defender instead of a sequence of small arcane events.
+	if owner and owner.status_handler:
+		var rune := owner.status_handler.get_status_by_id("runechant")
+		if rune is RunechantStatus:
+			packet.arcane += (rune as RunechantStatus).consume()
+
+	return packet
+
+## Fires the card's `zap` value as arcane damage at the given targets, with no
+## physical component. For non-attack spells (NAAs that just zap) — attack
+## cards already fold zap into their packet via do_stock_attack_damage_effect.
 func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap: int = zap) -> void:
 	if custom_zap <= 0:
 		return
@@ -179,24 +204,6 @@ func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap:
 	zap_effect.amount = modifiers.get_modified_value(custom_zap, Modifier.Type.DMG_DEALT)
 	zap_effect.sound = sound
 	zap_effect.execute(targets)
-
-## If the owner has runechants stacked, pop them all and deal that many arcane
-## damage to the targets. Called automatically at the end of the stock attack
-## pipeline so any attack triggers them; non-attack effects (Zap-only spells)
-## do NOT trigger runechants, matching Flesh and Blood's "weapon attack" rule.
-func do_runechant_trigger(targets: Array[Node]) -> void:
-	if owner == null or owner.status_handler == null:
-		return
-	var rune := owner.status_handler.get_status_by_id("runechant")
-	if rune == null or not rune is RunechantStatus:
-		return
-	var amount: int = (rune as RunechantStatus).consume()
-	if amount <= 0:
-		return
-	var rune_zap := ZapEffect.new()
-	rune_zap.amount = amount
-	rune_zap.sound = sound
-	rune_zap.execute(targets)
 
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card
