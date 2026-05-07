@@ -2,12 +2,14 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
 [ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="2_icon0"]
+[ext_resource type="Script" uid="uid://d2mhqqkkw7egc" path="res://generic_cards/block.gd" id="3_blksc"]
 
 [resource]
+script = ExtResource("3_blksc")
 id = "pummel_blue"
 type = 2
 pitch = 3
 defense = 4
 icon = ExtResource("2_icon0")
+sound = ExtResource("1_blkau")
 disable_attack = true
-block_sound = ExtResource("1_blkau")
