@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://crbsd1runebd0"]
+
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="1_pile0"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="2_card0"]
+[ext_resource type="Resource" uid="uid://crspktryrunb4" path="res://characters/runeblade/cards/runic_spike_yellow.tres" id="3_rsy00"]
+[ext_resource type="Resource" uid="uid://crsred1runebd0" path="res://characters/runeblade/cards/runic_spike_red.tres" id="4_rsr00"]
+[ext_resource type="Resource" uid="uid://crrtrt1runebd" path="res://characters/runeblade/cards/read_the_runes_yellow.tres" id="5_rry00"]
+[ext_resource type="Resource" uid="uid://caesyl1runebd0" path="res://characters/runeblade/cards/aether_spindle_yellow.tres" id="6_asy00"]
+[ext_resource type="Resource" uid="uid://csbylw1runebd0" path="res://characters/runeblade/cards/spellbinding_bolt_yellow.tres" id="7_sby00"]
+[ext_resource type="Resource" uid="uid://cpmblu1runebd0" path="res://characters/runeblade/cards/pummel_blue.tres" id="8_pmb00"]
+[ext_resource type="Resource" uid="uid://cpwhrd1runebd0" path="res://characters/runeblade/cards/pulsewave_harpoon_red.tres" id="9_phr00"]
+
+[resource]
+script = ExtResource("1_pile0")
+cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rry00"), ExtResource("5_rry00"), ExtResource("6_asy00"), ExtResource("6_asy00"), ExtResource("7_sby00"), ExtResource("8_pmb00"), ExtResource("8_pmb00"), ExtResource("9_phr00")])

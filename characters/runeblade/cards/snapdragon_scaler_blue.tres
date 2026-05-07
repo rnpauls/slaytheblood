@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://csnsbl1runebd0"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
+[ext_resource type="Texture2D" uid="uid://hva3iy5hon7a" path="res://art/tile_0089.png" id="2_icon0"]
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="3_vatk0"]
+[ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="4_sndsl"]
+
+[resource]
+script = ExtResource("3_vatk0")
+id = "snapdragon_scaler_blue"
+type = 0
+rarity = 1
+target = 1
+cost = 0
+pitch = 3
+attack = 0
+defense = 3
+icon = ExtResource("2_icon0")
+tooltip_text = "Discharge: every runechant on the field becomes 1 arcane damage to the target."
+sound = ExtResource("4_sndsl")
+block_sound = ExtResource("1_blkau")

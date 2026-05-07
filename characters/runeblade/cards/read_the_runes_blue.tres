@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://crrbu1runebd0"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
+[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_icon0"]
+[ext_resource type="Script" uid="uid://crrtrune1ru4ge" path="res://characters/runeblade/cards/read_the_runes.gd" id="3_rdrns"]
+
+[resource]
+script = ExtResource("3_rdrns")
+id = "read_the_runes_blue"
+type = 1
+target = 0
+cost = 0
+pitch = 3
+attack = 0
+defense = 0
+runechant_amount = 1
+icon = ExtResource("2_icon0")
+tooltip_text = "Draw 1. Create a runechant."
+block_sound = ExtResource("1_blkau")

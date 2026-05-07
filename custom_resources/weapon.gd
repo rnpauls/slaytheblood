@@ -27,7 +27,12 @@ const RARITY_COLORS := {
 @export_multiline var tooltip: String
 
 @export var attack: int
-@export var cost: int 
+@export var damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL
+## Arcane damage applied alongside the main weapon hit (split-damage weapons).
+## Resolves through the same DamagePacket as `attack`, so runechants and the
+## defender's mana spend see one bundled hit, not two events.
+@export var zap: int = 0
+@export var cost: int
 @export var go_again: bool = false
 @export var is_single_use: bool = false
 @export var attacks_per_turn: int = 1
@@ -80,10 +85,33 @@ func can_appear_as_reward(character: CharacterStats) -> bool:
 	return weapon_char_name == char_name
 
 func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler, custom_attack: int = attack) -> void:
-	var damage_effect := AttackDamageEffect.new()
-	damage_effect.amount = modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
-	damage_effect.sound = sound
-	damage_effect.go_again = go_again
-	damage_effect.on_hit_effects.append_array(on_hits)
-	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
-	damage_effect.execute(targets)
+	var packet := build_attack_packet(modifiers, custom_attack)
+	packet.execute(targets)
+
+## Build a DamagePacket for this weapon's swing. Mirrors Card.build_attack_packet
+## so weapons participate in the same arcane / runechant pipeline as cards —
+## a Runeblade weapon attack will pop runechants and split into one packet.
+func build_attack_packet(modifiers: ModifierHandler, custom_attack: int = attack) -> DamagePacket:
+	var packet := DamagePacket.new()
+	packet.source_owner = owner
+	packet.sound = sound
+	packet.go_again = go_again
+	packet.on_hit_effects.append_array(on_hits)
+	if owner:
+		packet.on_hit_effects.append_array(owner.active_on_hits)
+
+	var modified_main := modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
+	if damage_kind == Card.DamageKind.PHYSICAL:
+		packet.physical = modified_main
+	else:
+		packet.arcane = modified_main
+
+	if zap > 0:
+		packet.arcane += modifiers.get_modified_value(zap, Modifier.Type.DMG_DEALT)
+
+	if owner and owner.status_handler:
+		var rune := owner.status_handler.get_status_by_id("runechant")
+		if rune is RunechantStatus:
+			packet.arcane += (rune as RunechantStatus).consume()
+
+	return packet

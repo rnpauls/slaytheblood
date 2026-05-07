@@ -1,0 +1,22 @@
+[gd_resource type="Resource" format=3 uid="uid://cpwhrd1runebd0"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
+[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_icon0"]
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="3_vatk0"]
+[ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="4_sndsl"]
+
+[resource]
+script = ExtResource("3_vatk0")
+id = "pulsewave_harpoon_red"
+type = 0
+rarity = 1
+target = 1
+cost = 3
+pitch = 1
+attack = 6
+damage_kind = 1
+defense = 1
+icon = ExtResource("2_icon0")
+tooltip_text = "Pure arcane attack. Bypasses block; the defender spends mana to prevent."
+sound = ExtResource("4_sndsl")
+block_sound = ExtResource("1_blkau")

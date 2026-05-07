@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://caetha1runebd0"]
+
+[ext_resource type="Texture2D" uid="uid://dbtr2qc4xom0d" path="res://art/Icon28_08.png" id="1_aaicn"]
+[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="2_aascr"]
+[ext_resource type="AudioStream" uid="uid://ccsyihfmo03i3" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_2.wav" id="3_aasnd"]
+
+[resource]
+script = ExtResource("2_aascr")
+weapon_name = "Aether Ash Runeblade"
+id = "aether_ash_runeblade"
+type = 0
+rarity = 1
+character_type = 3
+hands = 1
+icon = ExtResource("1_aaicn")
+sound = ExtResource("3_aasnd")
+tooltip = "Pure arcane swing. Bypasses block; the defender spends mana to prevent."
+attack = 4
+damage_kind = 1
+cost = 2
+metadata/_custom_type_script = "uid://dm186c77vbsjn"

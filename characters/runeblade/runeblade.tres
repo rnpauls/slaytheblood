@@ -1,16 +1,26 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bhual6q3jy6t4"]
 
-[ext_resource type="Texture2D" uid="uid://dpfqok8tuy4r7" path="res://art/tile_0084.png" id="1_1ubld"]
-[ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="1_eqo3r"]
-[ext_resource type="Resource" uid="uid://vslleebj8tkt" path="res://characters/brute/brute_starting_deck.tres" id="3_p5as2"]
+[ext_resource type="Texture2D" uid="uid://dpfqok8tuy4r7" path="res://art/tile_0084.png" id="1_portt"]
+[ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="2_chst0"]
+[ext_resource type="Resource" uid="uid://crbsd1runebd0" path="res://characters/runeblade/runeblade_starting_deck.tres" id="3_sdck0"]
+[ext_resource type="Resource" uid="uid://crbinv1runebd0" path="res://characters/runeblade/runeblade_starting_inv.tres" id="4_sinv0"]
+[ext_resource type="Resource" uid="uid://crbdr1runebd0" path="res://characters/runeblade/runeblade_draftable_cards.tres" id="5_drft0"]
+[ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="6_wpn00"]
+[ext_resource type="Resource" uid="uid://caetha1runebd0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
+[ext_resource type="Resource" uid="uid://cgvslg1runebd0" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]
+[ext_resource type="Resource" uid="uid://crbcrvtr1runeb" path="res://weapons/runeblood_carver.tres" id="9_rbc00"]
+[ext_resource type="Resource" uid="uid://dhg8g1wnj0oft" path="res://relics/healing_potion.tres" id="10_rlc0"]
 
 [resource]
-script = ExtResource("1_eqo3r")
-description = "30+ years Confirmed Virginity.
-Hopefully many more to come"
-portrait = ExtResource("1_1ubld")
+script = ExtResource("2_chst0")
+description = "Channels arcane through steel. Build runechants, set the field humming, then deliver one untyped strike that bypasses everything."
+portrait = ExtResource("1_portt")
+draftable_cards = ExtResource("5_drft0")
+draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00")])
+starting_relic = ExtResource("10_rlc0")
 character_name = "Runeblade"
-art = ExtResource("1_1ubld")
+art = ExtResource("1_portt")
 max_health = 27
-starting_deck = ExtResource("3_p5as2")
-cards_per_turn = 3
+starting_deck = ExtResource("3_sdck0")
+starting_inventory = ExtResource("4_sinv0")
+cards_per_turn = 4

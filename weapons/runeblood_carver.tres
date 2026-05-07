@@ -1,0 +1,22 @@
+[gd_resource type="Resource" format=3 uid="uid://crbcrvtr1runeb"]
+
+[ext_resource type="Texture2D" uid="uid://c4db7ggurfpek" path="res://art/Icon28_05.png" id="1_rcicn"]
+[ext_resource type="Script" uid="uid://crbcrv1runebd" path="res://weapons/runeblood_carver.gd" id="2_rcscr"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_rcsnd"]
+
+[resource]
+script = ExtResource("2_rcscr")
+weapon_name = "Runeblood Carver"
+id = "runeblood_carver"
+type = 0
+character_type = 3
+hands = 0
+starter_weapon = true
+allow_duplicate_in_draft = true
+icon = ExtResource("1_rcicn")
+sound = ExtResource("3_rcsnd")
+tooltip = "On hit: create 1 runechant on yourself."
+attack = 1
+cost = 0
+go_again = true
+metadata/_custom_type_script = "uid://dm186c77vbsjn"
