@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="8_7yo0l"]
+[ext_resource type="Texture2D" uid="uid://6o51ywnkxdwg" path="res://art/Icon28_19.png" id="9_mapicn"]
 [ext_resource type="Script" uid="uid://y5m8dbsnnish" path="res://scenes/run/pause_menu.gd" id="11_d0odi"]
 [ext_resource type="PackedScene" uid="uid://c4brrbokqt532" path="res://scenes/ui/inventory_view.tscn" id="13_fo0ly"]
 [ext_resource type="PackedScene" uid="uid://b8tlay001a26v" path="res://scenes/ui/tooltip_layer.tscn" id="14_ttip"]
@@ -39,10 +40,10 @@ offset_right = 2.0
 grow_vertical = 2
 alignment = 1
 
-[node name="MapButton" type="Button" parent="DebugButtons" unique_id=1018327408]
+[node name="DebugMapButton" type="Button" parent="DebugButtons" unique_id=1018327408]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Map"
+text = "Map (unlock all)"
 
 [node name="BattleButton" type="Button" parent="DebugButtons" unique_id=1426318882]
 unique_name_in_owner = true
@@ -107,6 +108,14 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
+
+[node name="MapButton" type="TextureButton" parent="TopBar/BarItems" unique_id=1500000042]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("9_mapicn")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="InventoryButton" type="TextureButton" parent="TopBar/BarItems" unique_id=1829506682]
 unique_name_in_owner = true

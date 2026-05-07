@@ -22,6 +22,7 @@ const LEGEND_ICON_SIZE := Vector2(28, 28)
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var legend: CanvasLayer = %Legend
 @onready var legend_rows: VBoxContainer = %LegendRows
+@onready var current_room_marker: Sprite2D = %CurrentRoomMarker
 
 var map_data: Array[Array]
 var floors_climbed: int
@@ -118,6 +119,20 @@ func unlock_next_rooms() -> void:
 	for map_room: MapRoom in rooms.get_children():
 		if last_room.next_rooms.has(map_room.room):
 			map_room.available = true
+
+
+func unlock_all_rooms() -> void:
+	for map_room: MapRoom in rooms.get_children():
+		map_room.available = true
+
+
+func show_current_marker(room: Room) -> void:
+	current_room_marker.position = room.position + Vector2(0, -50)
+	current_room_marker.visible = true
+
+
+func hide_current_marker() -> void:
+	current_room_marker.visible = false
 
 
 func show_map() -> void:

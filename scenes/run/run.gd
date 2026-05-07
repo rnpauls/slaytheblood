@@ -25,7 +25,8 @@ const NON_COMBAT_MUSIC := preload("res://art/music/deuslower-medieval-ambient-23
 @onready var pause_menu: PauseMenu = $PauseMenu
 
 @onready var battle_button: Button = %BattleButton
-@onready var map_button: Button = %MapButton
+@onready var map_button: TextureButton = %MapButton
+@onready var debug_map_button: Button = %DebugMapButton
 @onready var shop_button: Button = %ShopButton
 @onready var treasure_button: Button = %TreasureButton
 @onready var rewards_button: Button = %RewardsButton
@@ -34,6 +35,7 @@ const NON_COMBAT_MUSIC := preload("res://art/music/deuslower-medieval-ambient-23
 var stats: RunStats
 var character: CharacterStats
 var save_data: SaveGame
+var peeked_view: Node = null
 
 func _ready() -> void:
 	if not run_startup:
@@ -135,10 +137,33 @@ func _show_map() -> void:
 		current_view.get_child(0).queue_free()
 
 	map.show_map()
+	map.hide_current_marker()
 	map.unlock_next_rooms()
 	inventory_view.combat_locked = false
 
 	_save_run(true)
+
+func _debug_show_map() -> void:
+	_show_map()
+	map.unlock_all_rooms()
+
+func _peek_map() -> void:
+	if peeked_view:
+		current_view.add_child(peeked_view)
+		peeked_view = null
+		map.hide_current_marker()
+		map.hide_map()
+		return
+
+	if current_view.get_child_count() == 0:
+		return
+
+	Events.tooltip_hide_requested.emit()
+	peeked_view = current_view.get_child(0)
+	current_view.remove_child(peeked_view)
+	map.show_map()
+	if map.last_room:
+		map.show_current_marker(map.last_room)
 
 func _setup_event_connections() -> void:
 	Events.battle_won.connect(_on_battle_won)
@@ -151,7 +176,8 @@ func _setup_event_connections() -> void:
 	
 	battle_button.pressed.connect(_change_view.bind(BATTLE_SCENE))
 	campfire_button.pressed.connect(_change_view.bind(CAMPFIRE_SCENE))
-	map_button.pressed.connect(_show_map)
+	map_button.pressed.connect(_peek_map)
+	debug_map_button.pressed.connect(_debug_show_map)
 	rewards_button.pressed.connect(_change_view.bind(BATTLE_REWARD_SCENE))
 	shop_button.pressed.connect(_change_view.bind(SHOP_SCENE))
 	treasure_button.pressed.connect(_change_view.bind(TREASURE_SCENE))

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://bgnkupncrd5x4"]
+
+[ext_resource type="Script" uid="uid://duc51h6uwv1t8" path="res://generic_cards/gunk_up.gd" id="1_gnkup"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_r2lol"]
+[ext_resource type="Texture2D" uid="uid://bmai5ivrb4q5x" path="res://art/item79.png" id="2_20xhh"]
+[ext_resource type="AudioStream" uid="uid://bip7mkabbj0dt" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/squelching_1.wav" id="4_p2edg"]
+
+[resource]
+script = ExtResource("1_gnkup")
+id = "gunk_up"
+type = 1
+target = 1
+pitch = 1
+defense = 2
+go_again = true
+ai_value = 3
+icon = ExtResource("2_20xhh")
+tooltip_text = "Add a [kw=trash]Trash[/kw] card to the target's draw pile"
+sound = ExtResource("4_p2edg")
+disable_attack = true

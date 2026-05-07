@@ -67,7 +67,7 @@ func reset_action_points() -> void:
 	action_points = 1
 
 func can_play_card(card:Card) -> bool:
-	return mana >= card.cost and action_points >= 1
+	return mana >= card.cost and action_points >= 1 and not card.unplayable
 
 func create_instance() -> Resource:
 	var instance: Stats = self.duplicate()

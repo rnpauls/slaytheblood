@@ -24,6 +24,9 @@ func on_gui_input(event: InputEvent) -> void:
 			_log("BASE on_gui_input: LMB (is_blocking=true) → BLOCKED")
 			transition_requested.emit(self, CardState.State.BLOCKED)
 	if event.is_action_pressed("right_mouse"):
+		if card_ui.card.disable_pitch:
+			_log("BASE on_gui_input: RMB IGNORED (disable_pitch=true)")
+			return
 		_log("BASE on_gui_input: RMB → PITCHED")
 		transition_requested.emit(self, CardState.State.PITCHED)
 	if not card_ui.playable or card_ui.disabled:

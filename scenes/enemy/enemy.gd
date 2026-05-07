@@ -84,6 +84,33 @@ func setup_ai() -> void:
 
 	enemy_resource_ui.update_display(enemy_ai)
 
+## Remove cards with `exhausts: true` from the enemy's hand at end of turn.
+## Enemy hands persist across turns (no auto-discard), so this is the only
+## hook that prevents permanent clutter from cards added by player effects.
+func exhaust_eot_cards_in_hand() -> void:
+	var to_exhaust: Array[Card] = []
+	for card in hand:
+		if card.exhausts:
+			to_exhaust.append(card)
+	for card in to_exhaust:
+		hand.erase(card)
+		if enemy_ai:
+			enemy_ai.card_removed_from_hand.emit(card)
+
+## Add a card directly to the enemy's hand (skipping the draw pile). Used by
+## CardAddEffect's HAND destination. Mirrors the hand/visual setup in draw_card.
+func add_card_to_hand(card: Card) -> void:
+	hand.append(card)
+	Events.enemy_card_drawn.emit(self)
+	card.owner = self
+	var card_ui := enemy_hand.add_card(card, stats, modifier_handler)
+	card_ui_map[card] = card_ui
+	_log("added to hand %s  (hand %d, ui_map %d)" % [card.id, hand.size(), card_ui_map.size()])
+	if enemy_ai and enemy_ai.turn_plan != null:
+		var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+		enemy_ai.recalculate_plan(player_life)
+		update_intent()
+
 ## Draw a single card, add it to the hand, and animate it into EnemyHand.
 func draw_card() -> void:
 	var card_drawn: Card = stats.draw_pile.draw_card()

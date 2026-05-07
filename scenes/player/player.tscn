@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://behjfqeouf5ky"]
 
-[ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="1_cf0j3"]
 [ext_resource type="Script" uid="uid://bljhj80f6512h" path="res://scenes/player/player.gd" id="1_g61l3"]
+[ext_resource type="Texture2D" uid="uid://ca57uv3wfqp45" path="res://art/custom_art/brute.png" id="2_75vfm"]
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="2_ukskc"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="4_yap0n"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="5_7r1uk"]
@@ -14,8 +14,8 @@ size = Vector2(80, 80)
 script = ExtResource("1_g61l3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=617256268]
-scale = Vector2(5, 5)
-texture = ExtResource("1_cf0j3")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_75vfm")
 
 [node name="MouseHoverArea" type="Area2D" parent="." unique_id=100200300]
 collision_layer = 0

@@ -147,6 +147,8 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	#cause the displayed pitch list to disagree with what actually happens.
 	#Note: arsenal cannot be pitched (F&B rule) — only carried through state.
 	for pitch in state.cards:
+		if pitch.disable_pitch:
+			continue
 		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch, "arsenal": arsenal_card}
 		new_state.cards.erase(pitch)
 		var pitch_result = calculate_max_offense(new_state, action_points, player_life)
@@ -189,6 +191,8 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 		candidates.append(arsenal_card)
 
 	for action in candidates as Array[Card]:
+		if action.unplayable:
+			continue
 		if action.cost <= state.resources and (action.type == Card.Type.ATTACK or action.type == Card.Type.NAA):
 			var new_state: Dictionary
 			if action == arsenal_card:
@@ -196,7 +200,7 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			else:
 				new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost, "arsenal": arsenal_card}
 				new_state.cards.erase(action)
-			var next_ap = action_points - 1 + (1 if action.go_again else 0)
+			var next_ap = action_points - 1 + (1 if action.go_again else 0) + action.action_points_granted
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
 			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)
 			var bonus = action.ai_value
@@ -222,6 +226,8 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 		for card in state.cards:
 			# Skip cards that are intimidated — they cannot be used to block this turn.
 			if card in intimidated_cards:
+				continue
+			if card.disable_defense:
 				continue
 			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources}
 			new_state.cards.erase(card)
@@ -279,10 +285,11 @@ func calculate_block_options(state: Dictionary, attack_power: int, has_go_again:
 
 ## Pick the best card to arsenal
 func pick_best_arsenal(cards: Array) -> Card:
-	if cards.size() == 0:
+	var eligible: Array = cards.filter(func(c): return not c.unplayable)
+	if eligible.size() == 0:
 		return null
-	var best_card = cards[0]
-	for card in cards:
+	var best_card = eligible[0]
+	for card in eligible:
 		if card.type == Card.Type.BLOCK:
 			if best_card.type != Card.Type.BLOCK:
 				best_card = card

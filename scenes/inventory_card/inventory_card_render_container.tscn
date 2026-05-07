@@ -7,12 +7,12 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inv_glow"]
 bg_color = Color(0, 0, 0, 0)
-shadow_color = Color(1, 1, 1, 0.65)
-shadow_size = 12
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+shadow_color = Color(1, 1, 1, 0.65)
+shadow_size = 12
 
 [node name="InventoryCardRenderContainer" type="MarginContainer" unique_id=2054887772]
 custom_minimum_size = Vector2(40, 60)
@@ -27,7 +27,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="GlowPanel" type="Panel" parent="Stack"]
+[node name="GlowPanel" type="Panel" parent="Stack" unique_id=452462280]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

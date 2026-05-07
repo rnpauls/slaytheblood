@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bgnrcdrftxbac"]
+
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_5jay3"]
+[ext_resource type="Resource" uid="uid://bn1mb1ec4rdxa" path="res://generic_cards/nimble.tres" id="2_kb2gv"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="3_ar66p"]
+
+[resource]
+script = ExtResource("3_ar66p")
+cards = Array[ExtResource("1_5jay3")]([ExtResource("2_kb2gv")])

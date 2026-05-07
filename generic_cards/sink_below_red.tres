@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://dws1iv3dr7w52" path="res://art/music/sound_effects/400 Sounds Pack/Environment/water_drop_medium.wav" id="1_238bp"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="1_vu1fo"]
-[ext_resource type="Script" uid="uid://vkcpd5x25jeg" path="res://common_cards/sink_below.gd" id="2_vu1fo"]
+[ext_resource type="Script" uid="uid://vkcpd5x25jeg" path="res://generic_cards/sink_below.gd" id="2_vu1fo"]
 
 [resource]
 script = ExtResource("2_vu1fo")

@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ef3pu"]
 [ext_resource type="Texture2D" uid="uid://oginf17ad771" path="res://art/item53.png" id="1_ejx80"]
-[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="2_l2rf2"]
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="2_l2rf2"]
 [ext_resource type="AudioStream" uid="uid://bip7mkabbj0dt" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/squelching_1.wav" id="4_0r52d"]
 
 [resource]

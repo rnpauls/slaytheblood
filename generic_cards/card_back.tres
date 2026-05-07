@@ -1,7 +1,8 @@
 [gd_resource type="Resource" format=3 uid="uid://bwcyy7f6lg84s"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_asmsy"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="1_egvxh"]
-[ext_resource type="Script" uid="uid://cfq2iolxsas2j" path="res://common_cards/debug_card.gd" id="2_31uhj"]
+[ext_resource type="Script" uid="uid://cfq2iolxsas2j" path="res://generic_cards/debug_card.gd" id="2_31uhj"]
 
 [resource]
 script = ExtResource("2_31uhj")

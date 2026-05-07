@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://bn1mb1ec4rdxa"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_wwalm"]
+[ext_resource type="Texture2D" uid="uid://b23uexaietdbt" path="res://art/item36.png" id="2_x1hd6"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="3_wsmxw"]
+[ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="4_e6wnt"]
+
+[resource]
+script = ExtResource("3_wsmxw")
+id = "nimble"
+type = 1
+pitch = 1
+defense = 2
+go_again = true
+action_points_granted = 1
+icon = ExtResource("2_x1hd6")
+tooltip_text = "Gain 1 Action Point"
+sound = ExtResource("4_e6wnt")
+disable_attack = true
+disable_defense = true

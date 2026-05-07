@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://btr8shg4nkxy0"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_r52w2"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_trash"]
+[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="2_trash"]
+
+[resource]
+script = ExtResource("1_trash")
+id = "trash"
+type = 1
+exhausts = true
+unplayable = true
+icon = ExtResource("2_trash")
+tooltip_text = "Cannot be played, pitched, or used to block. Exhausts at end of turn if in hand"
+disable_attack = true
+disable_defense = true
+disable_pitch = true

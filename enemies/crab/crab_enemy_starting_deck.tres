@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bq26uippxtt0a"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_alm8v"]
-[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="3_h1isr"]
-[ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://common_cards/ravenous_rabble_red.tres" id="4_25ls3"]
-[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="4_l6cic"]
+[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="3_h1isr"]
+[ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://generic_cards/ravenous_rabble_red.tres" id="4_25ls3"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="4_l6cic"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="5_bw58w"]
 
 [resource]

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bos4xvkdp51nx"]
 
-[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://common_cards/vanilla_attack.gd" id="1_dhq18"]
+[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="1_dhq18"]
 [ext_resource type="Texture2D" uid="uid://dnbp5vseufxes" path="res://art/item26.png" id="1_tjwku"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_vyi33"]
 [ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="4_3x3lq"]

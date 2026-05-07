@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="1_vrruq"]
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_wm70o"]
 [ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/brute/cards/warrior_big_slam.tres" id="3_m7ai2"]
-[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://common_cards/head_jab_blue.tres" id="4_g8cso"]
-[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="7_7ljou"]
+[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="4_g8cso"]
+[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="7_7ljou"]
 
 [resource]
 script = ExtResource("1_vrruq")

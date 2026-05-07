@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://b03opgk5gd1bn" path="res://battles/battle_stats_pool.tres" id="3_l33wd"]
 [ext_resource type="Resource" uid="uid://demadyqgdrutk" path="res://scenes/event_rooms/event_room_pool.tres" id="4_h8dso"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="5_legend"]
+[ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="6_marker"]
 
 [sub_resource type="Gradient" id="Gradient_frlm1"]
 colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.440866, 0.251865, 0.199336, 1)
@@ -23,6 +24,13 @@ unique_name_in_owner = true
 
 [node name="Rooms" type="Node2D" parent="Visuals" unique_id=951261988]
 unique_name_in_owner = true
+
+[node name="CurrentRoomMarker" type="Sprite2D" parent="Visuals" unique_id=1500000099]
+unique_name_in_owner = true
+visible = false
+rotation = 1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("6_marker")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1895497469]
 offset = Vector2(640, 360)

@@ -59,6 +59,8 @@ func return_to_hand() -> void:
 func play() -> void:
 	if not card:
 		return
+	if card.unplayable:
+		return
 	# Hand off to discard BEFORE awaiting effects so the in-flight card_play_finished
 	# signal (which adds to the resource pile) sees a matching visual count and skips
 	# the auto-spawn. Only player cards route to the visible discard pile; enemy

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bu02uj2lp60de"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_ydssv"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="2_c7o7g"]
-[ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://common_cards/wounding_blow_red.tres" id="3_c7o7g"]
-[ext_resource type="Resource" uid="uid://s8o4e6v14nrd" path="res://common_cards/critical_strike_red.tres" id="4_cx2g5"]
-[ext_resource type="Resource" uid="uid://bbjmrnssffhvv" path="res://common_cards/struggle.tres" id="5_cx2g5"]
+[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://generic_cards/head_jab_red.tres" id="2_c7o7g"]
+[ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://generic_cards/wounding_blow_red.tres" id="3_c7o7g"]
+[ext_resource type="Resource" uid="uid://s8o4e6v14nrd" path="res://generic_cards/critical_strike_red.tres" id="4_cx2g5"]
+[ext_resource type="Resource" uid="uid://bbjmrnssffhvv" path="res://generic_cards/struggle.tres" id="5_cx2g5"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="7_83t2a"]
 
 [resource]

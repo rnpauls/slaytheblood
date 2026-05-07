@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://cbylwjhaa6h2a"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_jr4pb"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://common_cards/head_jab_red.tres" id="2_5rsm8"]
+[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://generic_cards/head_jab_red.tres" id="2_5rsm8"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_evohs"]
-[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://common_cards/raging_onslaught_red.tres" id="3_2ckkr"]
-[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://common_cards/raging_onslaught_blue.tres" id="4_lra8a"]
+[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="3_2ckkr"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="4_lra8a"]
 
 [resource]
 script = ExtResource("2_evohs")

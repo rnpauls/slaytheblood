@@ -30,6 +30,7 @@ const KEYWORDS: Dictionary = {
 	&"flow" : preload("uid://woqcqv0i0feo"),
 	&"sink" : preload("uid://d30viny6t8iuu"),
 	&"rampage" : preload("uid://gfx457xrk4at"),
+	&"trash" : preload("uid://btrshkw9xm1c2"),
 }
 
 const _KW_TAG_REGEX := r"\[kw=([\w-]+)(?::([^\]]+))?\](.*?)\[/kw\]"

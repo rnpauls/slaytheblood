@@ -32,6 +32,8 @@ const PITCH_COLORS := {
 @export var defense: int
 @export var exhausts: bool = false
 @export var go_again: bool = false : get = get_go_again
+@export var action_points_granted: int = 0
+@export var unplayable: bool = false
 @export var ai_value: int
 @export var ai_value_needs_attack: bool = false
 
@@ -98,6 +100,7 @@ func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers:
 			targetx.stats.block = 0
 	if go_again:
 		char_stats.action_points += 1
+	char_stats.action_points += action_points_granted
 	card_play_finished.emit(self)
 
 func discard_card() -> void:

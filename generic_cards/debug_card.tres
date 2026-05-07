@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ucrwf"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="2_kd23f"]
-[ext_resource type="Script" uid="uid://cfq2iolxsas2j" path="res://common_cards/debug_card.gd" id="2_ucrwf"]
+[ext_resource type="Script" uid="uid://cfq2iolxsas2j" path="res://generic_cards/debug_card.gd" id="2_ucrwf"]
 [ext_resource type="AudioStream" uid="uid://l5cyrdxhemry" path="res://art/music/sound_effects/400 Sounds Pack/Materials/cardboard_tear.wav" id="4_jq5es"]
 
 [resource]
