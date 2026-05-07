@@ -81,15 +81,20 @@ func _has_status(id: String) -> bool:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:
 			return true
-	
+
 	return false
 
 func _get_status(id: String) -> Status:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:
 			return status_ui.status
-	
+
 	return null
+
+## Public lookup so other systems (e.g. Card.do_runechant_trigger) can find a
+## status without reaching into the underscore-private internals.
+func get_status_by_id(id: String) -> Status:
+	return _get_status(id)
 
 func _get_all_statuses() -> Array[Status]:
 	var statuses: Array[Status] = []

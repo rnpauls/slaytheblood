@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RunechantStatus" format=3 uid="uid://crchntst1ru4r"]
+
+[ext_resource type="Script" uid="uid://crchnts1ruge4" path="res://statuses/runechant.gd" id="1_rch01"]
+[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_rchic"]
+
+[resource]
+script = ExtResource("1_rch01")
+id = "runechant"
+type = 2
+stack_type = 1
+can_expire = false
+icon = ExtResource("2_rchic")
+tooltip = "Runechant: pops on your next attack to deal 1 arcane damage to the target. Bypasses block."

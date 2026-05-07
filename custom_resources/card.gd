@@ -167,6 +167,7 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 	damage_effect.on_hit_effects.append_array(on_hits)
 	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
 	damage_effect.execute(targets)
+	do_runechant_trigger(targets)
 
 ## Fires the card's `zap` value as arcane damage at the given targets. No-op if
 ## zap is 0. Called automatically by vanilla_attack after the physical hit;
@@ -178,6 +179,24 @@ func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap:
 	zap_effect.amount = modifiers.get_modified_value(custom_zap, Modifier.Type.DMG_DEALT)
 	zap_effect.sound = sound
 	zap_effect.execute(targets)
+
+## If the owner has runechants stacked, pop them all and deal that many arcane
+## damage to the targets. Called automatically at the end of the stock attack
+## pipeline so any attack triggers them; non-attack effects (Zap-only spells)
+## do NOT trigger runechants, matching Flesh and Blood's "weapon attack" rule.
+func do_runechant_trigger(targets: Array[Node]) -> void:
+	if owner == null or owner.status_handler == null:
+		return
+	var rune := owner.status_handler.get_status_by_id("runechant")
+	if rune == null or not rune is RunechantStatus:
+		return
+	var amount: int = (rune as RunechantStatus).consume()
+	if amount <= 0:
+		return
+	var rune_zap := ZapEffect.new()
+	rune_zap.amount = amount
+	rune_zap.sound = sound
+	rune_zap.execute(targets)
 
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card
