@@ -41,11 +41,11 @@ func flip_reveal() -> void:
 	if not show_back:
 		return
 	var t := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(card_render, "scale:x", 0.0, 0.12)
+	t.tween_property(card_render, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP_ENEMY)
 	t.tween_callback(func():
 		show_back = false
 	)
-	t.tween_property(card_render, "scale:x", 1.0, 0.12)
+	t.tween_property(card_render, "scale:x", 1.0, Constants.TWEEN_CARD_FLIP_ENEMY)
 
 # ── internals ────────────────────────────────────────────────────────────────
 

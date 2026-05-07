@@ -40,11 +40,8 @@ func set_card(value: Card) -> void:
 	else:
 		go_again_icon.hide()
 	icon.texture = card.icon
-	#panel.add_theme_color_override("border_color",Card.RARITY_COLORS[card.rarity])
-	# Shitty panel mod that creates a new stylebox for every single card
-	var stylebox: StyleBoxFlat = art_panel.get_theme_stylebox("panel").duplicate()
-	stylebox.border_color = Card.RARITY_COLORS[card.rarity] 
-	art_panel.add_theme_stylebox_override("panel", stylebox)
+	# StyleBoxCache returns one shared StyleBoxFlat per rarity (cached on first use).
+	art_panel.add_theme_stylebox_override("panel", StyleBoxCache.get_rarity_border(art_panel, card.rarity))
 	pitch_strip.modulate = Card.PITCH_COLORS[card.pitch]
 	#pitch_strip.ColorRect2.modulate = Card.PITCH_COLORS[card.pitch]
 	#pitch_strip.ColorRect3.modulate = Card.PITCH_COLORS[card.pitch]

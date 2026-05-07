@@ -292,25 +292,25 @@ func reveal_top(card: Card) -> void:
 
 	var t: Tween = top.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	# Lift + grow.
-	t.tween_property(top, "position", preview_pos, 0.20)
-	t.parallel().tween_property(top, "scale", Vector2.ONE * preview_scale, 0.20)
+	t.tween_property(top, "position", preview_pos, Constants.TWEEN_PANEL_SLIDE)
+	t.parallel().tween_property(top, "scale", Vector2.ONE * preview_scale, Constants.TWEEN_PANEL_SLIDE)
 	# Flip back → face.
-	t.tween_property(top, "scale:x", 0.0, 0.08)
+	t.tween_property(top, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP_FAST)
 	t.tween_callback(func():
 		if is_instance_valid(top) and top.card_render:
 			top.card_render.show_back = false)
-	t.tween_property(top, "scale:x", preview_scale, 0.08)
+	t.tween_property(top, "scale:x", preview_scale, Constants.TWEEN_CARD_FLIP_FAST)
 	# Hold for the player to read it.
 	t.tween_interval(0.6)
 	# Flip face → back.
-	t.tween_property(top, "scale:x", 0.0, 0.08)
+	t.tween_property(top, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP_FAST)
 	t.tween_callback(func():
 		if is_instance_valid(top) and top.card_render:
 			top.card_render.show_back = true)
-	t.tween_property(top, "scale:x", preview_scale, 0.08)
+	t.tween_property(top, "scale:x", preview_scale, Constants.TWEEN_CARD_FLIP_FAST)
 	# Return to slot.
-	t.tween_property(top, "position", slot_pos, 0.20)
-	t.parallel().tween_property(top, "scale", slot_scale, 0.20)
+	t.tween_property(top, "position", slot_pos, Constants.TWEEN_PANEL_SLIDE)
+	t.parallel().tween_property(top, "scale", slot_scale, Constants.TWEEN_PANEL_SLIDE)
 	t.tween_callback(func():
 		if is_instance_valid(top):
 			top.z_index = 0

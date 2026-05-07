@@ -31,8 +31,8 @@ func add_card(card: Card, stats: EnemyStats, modifier_handler: ModifierHandler) 
 	_arrange_cards()
 
 	var t := card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(card_ui, "scale",    Vector2.ONE * card_scale, 0.2)
-	t.parallel().tween_property(card_ui, "modulate", Color.WHITE,   0.2)
+	t.tween_property(card_ui, "scale",    Vector2.ONE * card_scale, Constants.TWEEN_PANEL_SLIDE)
+	t.parallel().tween_property(card_ui, "modulate", Color.WHITE,   Constants.TWEEN_PANEL_SLIDE)
 
 	return card_ui
 
@@ -43,8 +43,8 @@ func remove_card(card_ui: EnemyCardUI) -> void:
 		hovered_card = null
 
 	var t := card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	t.tween_property(card_ui, "scale",    Vector2.ZERO,             0.15)
-	t.parallel().tween_property(card_ui, "modulate", Color(1,1,1,0), 0.15)
+	t.tween_property(card_ui, "scale",    Vector2.ZERO,             Constants.TWEEN_UI_HOVER)
+	t.parallel().tween_property(card_ui, "modulate", Color(1,1,1,0), Constants.TWEEN_UI_HOVER)
 	t.tween_callback(card_ui.queue_free)
 	_arrange_cards()
 

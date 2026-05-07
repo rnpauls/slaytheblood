@@ -75,17 +75,17 @@ func add_card(card: Card, source_visual: CardUI = null) -> void:
 		# the flip targets card_render.scale (a child) instead of new_card_ui.scale
 		# so the two tweens don't fight on the same property.
 		var t := new_card_ui.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		t.tween_property(new_card_ui.card_render, "scale:x", 0.0, 0.10)
+		t.tween_property(new_card_ui.card_render, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP)
 		t.tween_callback(func():
 			if is_instance_valid(new_card_ui) and new_card_ui.card_render:
 				new_card_ui.card_render.show_back = false)
-		t.tween_property(new_card_ui.card_render, "scale:x", 1.0, 0.10)
+		t.tween_property(new_card_ui.card_render, "scale:x", 1.0, Constants.TWEEN_CARD_FLIP)
 	else:
 		# Original scale-up fade-in for non-pile spawns.
 		var tween := new_card_ui.create_tween()
 		tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		tween.tween_property(new_card_ui, "scale", Vector2.ONE * 0.7, 0.25)
-		tween.parallel().tween_property(new_card_ui, "modulate", Color.WHITE, 0.25)
+		tween.tween_property(new_card_ui, "scale", Vector2.ONE * 0.7, Constants.TWEEN_HAND_ENTRY)
+		tween.parallel().tween_property(new_card_ui, "modulate", Color.WHITE, Constants.TWEEN_HAND_ENTRY)
 
 
 func enable_hand() -> void:

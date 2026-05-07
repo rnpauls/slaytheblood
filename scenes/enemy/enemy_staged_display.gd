@@ -58,7 +58,7 @@ func stage(card_ui: EnemyCardUI) -> void:
 	# Animate so the card's visible center aligns with this node's origin
 	# (clamped so the top edge never goes past the TopBar).
 	card_ui.animate_to_local_position_and_rotation_and_scale(
-		_scale_target(staged_scale), 0.0, staged_scale, 0.3
+		_scale_target(staged_scale), 0.0, staged_scale, Constants.TWEEN_CARD_STAGE
 	)
 
 func unstage() -> void:
@@ -130,7 +130,7 @@ func _on_card_hovered(_card: EnemyCardUI) -> void:
 	# Center stays pinned; scaling expands symmetrically around it,
 	# but clamp so the card's top edge doesn't slide under the TopBar.
 	_card_ui.animate_to_local_position_and_rotation_and_scale(
-		_scale_target(hovered_scale), 0.0, hovered_scale, 0.25
+		_scale_target(hovered_scale), 0.0, hovered_scale, Constants.TWEEN_FADE
 	)
 
 func _on_card_unhovered(_card: EnemyCardUI) -> void:
@@ -138,5 +138,5 @@ func _on_card_unhovered(_card: EnemyCardUI) -> void:
 		return
 	_is_hovered = false
 	_card_ui.animate_to_local_position_and_rotation_and_scale(
-		_scale_target(staged_scale), 0.0, staged_scale, 0.25
+		_scale_target(staged_scale), 0.0, staged_scale, Constants.TWEEN_FADE
 	)

@@ -60,9 +60,9 @@ func _on_attack_card_staged(card_ui: EnemyCardUI) -> void:
 	var target_pos := local_center - Vector2(100.0, 140.0) * staged_scale
 
 	var t := card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(card_ui, "position", target_pos, 0.3)
-	t.parallel().tween_property(card_ui, "scale", Vector2.ONE * staged_scale, 0.3)
-	t.parallel().tween_property(card_ui, "rotation_degrees", 0.0, 0.3)
+	t.tween_property(card_ui, "position", target_pos, Constants.TWEEN_CARD_STAGE)
+	t.parallel().tween_property(card_ui, "scale", Vector2.ONE * staged_scale, Constants.TWEEN_CARD_STAGE)
+	t.parallel().tween_property(card_ui, "rotation_degrees", 0.0, Constants.TWEEN_CARD_STAGE)
 
 func _on_attack_card_unstaged() -> void:
 	_return_card()
@@ -85,9 +85,9 @@ func _return_card() -> void:
 		card_ui.reparent(_original_parent)
 		card_ui.z_index = 0
 		var t := card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-		t.tween_property(card_ui, "global_position", _original_position, 0.2)
-		t.parallel().tween_property(card_ui, "scale", _original_scale, 0.2)
-		t.parallel().tween_property(card_ui, "rotation_degrees", _original_rotation, 0.2)
+		t.tween_property(card_ui, "global_position", _original_position, Constants.TWEEN_PANEL_SLIDE)
+		t.parallel().tween_property(card_ui, "scale", _original_scale, Constants.TWEEN_PANEL_SLIDE)
+		t.parallel().tween_property(card_ui, "rotation_degrees", _original_rotation, Constants.TWEEN_PANEL_SLIDE)
 	elif is_instance_valid(card_ui):
 		card_ui.queue_free()
 
@@ -101,7 +101,7 @@ func _on_card_hovered(_card: EnemyCardUI) -> void:
 	# Only tween scale. pivot_offset=(100,140) on the card means Godot scales
 	# around the card center automatically — no position adjustment needed.
 	var t := _card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.tween_property(_card_ui, "scale", Vector2.ONE * hovered_scale, 0.15)
+	t.tween_property(_card_ui, "scale", Vector2.ONE * hovered_scale, Constants.TWEEN_UI_HOVER)
 	#t.parallel().tween_property(_card_ui, "rotation_degrees", 0.0, 0.15)
 
 func _on_card_unhovered(_card: EnemyCardUI) -> void:
@@ -111,4 +111,4 @@ func _on_card_unhovered(_card: EnemyCardUI) -> void:
 
 	# Only tween scale back — pivot_offset keeps the center stable.
 	var t := _card_ui.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	t.tween_property(_card_ui, "scale", Vector2.ONE * staged_scale, 0.15)
+	t.tween_property(_card_ui, "scale", Vector2.ONE * staged_scale, Constants.TWEEN_UI_HOVER)

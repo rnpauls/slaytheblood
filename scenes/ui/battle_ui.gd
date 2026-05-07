@@ -116,18 +116,18 @@ func _transient_top_card_reveal(card: Card) -> void:
 	visual.z_index = 100
 
 	var t := visual.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_interval(0.10)
-	t.tween_property(visual, "scale:x", 0.0, 0.10)
+	t.tween_interval(Constants.TWEEN_CARD_FLIP)
+	t.tween_property(visual, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP)
 	t.tween_callback(func():
 		if is_instance_valid(visual) and visual.card_render:
 			visual.card_render.show_back = false)
-	t.tween_property(visual, "scale:x", 1.0, 0.10)
+	t.tween_property(visual, "scale:x", 1.0, Constants.TWEEN_CARD_FLIP)
 	t.tween_interval(0.6)
-	t.tween_property(visual, "scale:x", 0.0, 0.10)
+	t.tween_property(visual, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP)
 	t.tween_callback(func():
 		if is_instance_valid(visual) and visual.card_render:
 			visual.card_render.show_back = true)
-	t.tween_property(visual, "scale:x", 1.0, 0.10)
+	t.tween_property(visual, "scale:x", 1.0, Constants.TWEEN_CARD_FLIP)
 	t.tween_callback(func():
 		if is_instance_valid(visual):
 			visual.queue_free()

@@ -2,7 +2,6 @@ class_name RelicsControl
 extends Control
 
 const RELICS_PER_PAGE := 5
-const TWEEN_SCROLL_DURATION := 0.2
 
 @export var left_button: TextureButton
 @export var right_button: TextureButton
@@ -38,7 +37,7 @@ func _tween_to(x_position: float) -> void:
 		tween.kill()
 	
 	tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_property(relics, "position:x", x_position, TWEEN_SCROLL_DURATION)
+	tween.tween_property(relics, "position:x", x_position, Constants.TWEEN_RELIC_SCROLL)
 
 func _on_left_button_pressed() -> void:
 	if current_page > 1:

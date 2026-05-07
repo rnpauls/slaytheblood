@@ -16,7 +16,7 @@ const INVENTORY_CARD_SCENE := preload("res://scenes/inventory_card/inventory_car
 const TOOLTIP_BOX := preload("res://scenes/ui/tooltip_box.tscn")
 const CARD_SIZE := Vector2(200, 300)
 
-@export var fade_seconds := 0.2
+@export var fade_seconds := Constants.TWEEN_FADE
 ## Longer than TooltipLayer's 0.15s — the inventory preview is bigger UI and
 ## should only commit after the user has clearly settled on the source.
 @export var hover_delay := 0.5

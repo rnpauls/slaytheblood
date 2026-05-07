@@ -13,14 +13,13 @@ const CARD_PIVOT_OFFSET := Vector2(100, 140)  # Matches CardUI scene pivot.
 const BLOCK_DISPLAY_SCALE := 0.55
 const BLOCK_TRAVEL_DURATION := 0.3
 const BLOCK_HOLD_DURATION := 0.5
-const BLOCK_FADE_DURATION := 0.25
 const BLOCK_BADGE_LOCAL_OFFSET := Vector2(0, -110)  # Above the displayed card (card top sits at y≈-77 at BLOCK_DISPLAY_SCALE).
 const BLOCK_BADGE_SIZE := Vector2(80, 40)           # Must match block_badge.tscn custom_minimum_size.
 const BLOCK_BADGE_Z_INDEX := 20                     # Above card_ui.z_index (10) so the badge always reads on top.
 
-## NAA fade-out duration after effects resolve. The pre-play hold lives in
-## EnemyActingState (NAA_HOLD_DURATION) so it can be cancelled cleanly on death.
-const NAA_FADE_DURATION := 0.25
+## NAA fade-out duration after effects resolve uses Constants.TWEEN_FADE.
+## The pre-play hold lives in EnemyActingState (NAA_HOLD_DURATION) so it can be
+## cancelled cleanly on death.
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
@@ -346,8 +345,8 @@ func _do_naa_action() -> void:
 		return
 
 	var t := card_ui.create_tween()
-	t.tween_property(card_ui, "scale", Vector2.ZERO, NAA_FADE_DURATION)
-	t.parallel().tween_property(card_ui, "modulate:a", 0.0, NAA_FADE_DURATION)
+	t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
+	t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)
 	await t.finished
 
 	if not played_card.exhausts:
@@ -428,8 +427,8 @@ func _animate_block_card(card: Card, amount: int) -> void:
 	# 4. Send to discard: data-side add + visual fadeout.
 	stats.discard.add_card(card)
 	var t := card_ui.create_tween()
-	t.tween_property(card_ui, "scale", Vector2.ZERO, BLOCK_FADE_DURATION)
-	t.parallel().tween_property(card_ui, "modulate:a", 0.0, BLOCK_FADE_DURATION)
+	t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
+	t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)
 	await t.finished
 	if is_instance_valid(card_ui):
 		card_ui.queue_free()

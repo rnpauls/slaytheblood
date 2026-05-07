@@ -13,7 +13,7 @@ extends VBoxContainer
 
 const TOOLTIP_BOX := preload("res://scenes/ui/tooltip_box.tscn")
 
-@export var fade_seconds := 0.2
+@export var fade_seconds := Constants.TWEEN_FADE
 ## Filter out brief hovers — flicking the mouse across the hand shouldn't
 ## strobe tooltips. Set to 0 to show immediately.
 @export var hover_delay := 0.15
