@@ -81,9 +81,19 @@ func create_instance() -> Resource:
 	instance.discard = CardPile.new()
 	return instance
 
-func take_damage(damage : int) -> int:
+func take_damage(damage : int, damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL) -> int:
 	if damage <= 0:
 		return 0
+	if damage_kind == Card.DamageKind.ARCANE:
+		# Arcane bypasses block. Defender spends mana 1:1 to prevent it; any
+		# excess hits health. Phase 5 will let the enemy AI decide a partial
+		# spend before this point — for now we auto-spend everything available,
+		# which is the right default for the player too.
+		var prevented := mini(damage, mana)
+		mana -= prevented
+		var unprevented := damage - prevented
+		health -= unprevented
+		return unprevented
 	var initial_damage = damage
 	damage = clampi(damage - block, 0, damage)
 	block = clampi(block - initial_damage, 0, block)

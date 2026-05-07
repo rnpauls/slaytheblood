@@ -8,7 +8,9 @@ func execute(targets: Array[Node]) -> void:
 	for target in targets:
 		if not target:
 			continue
-		if target is Enemy:
+		# Block-declaration only applies to physical attacks; arcane bypasses block
+		# entirely and is mitigated by mana spend in Stats.take_damage.
+		if target is Enemy and damage_kind == Card.DamageKind.PHYSICAL:
 			target.defend_attack(amount, go_again, on_hit_effects)
 		if target is Enemy or target is Player:
 			execute_single_target(target)
@@ -16,7 +18,7 @@ func execute(targets: Array[Node]) -> void:
 func execute_single_target(target: Node) -> void:
 	var damage_dealt:=0
 	if target is Enemy or target is Player:
-		damage_dealt = target.take_damage(amount, receiver_modifier_type)
+		damage_dealt = target.take_damage(amount, receiver_modifier_type, damage_kind)
 		SFXPlayer.play(sound)
 	if (damage_dealt > 0):
 		for on_hit in on_hit_effects:

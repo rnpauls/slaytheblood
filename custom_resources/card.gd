@@ -6,6 +6,7 @@ enum Type {ATTACK, NAA, BLOCK}
 enum TypeString {Attack, Action, Block}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
+enum DamageKind {PHYSICAL, ARCANE}
 
 const RARITY_COLORS := {
 	Card.Rarity.COMMON: Color.GRAY,
@@ -29,6 +30,7 @@ const PITCH_COLORS := {
 @export var cost: int
 @export var pitch: int
 @export var attack: int
+@export var damage_kind: DamageKind = DamageKind.PHYSICAL
 @export var defense: int
 @export var exhausts: bool = false
 @export var go_again: bool = false : get = get_go_again
@@ -154,9 +156,10 @@ func get_updated_tooltip(_player_modifiers: ModifierHandler, _enemy_modifiers: M
 func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHandler, custom_damage:int = attack) -> void:
 	var damage_effect := AttackDamageEffect.new()
 	damage_effect.amount = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
+	damage_effect.damage_kind = damage_kind
 	damage_effect.sound = sound
 	damage_effect.go_again = go_again
-	
+
 	damage_effect.on_hit_effects.append_array(on_hits)
 	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
 	damage_effect.execute(targets)
