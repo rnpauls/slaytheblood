@@ -39,6 +39,9 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
 
+	# Materialize the symmetric HandFacade for effects targeting the player.
+	player.hand_facade = PlayerHandFacade.new(player, self)
+
 	_assign_hand_slot(character.hand_left, hand_left_weapon, hand_left_equipment)
 	_assign_hand_slot(character.hand_right, hand_right_weapon, hand_right_equipment)
 

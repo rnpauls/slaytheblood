@@ -108,6 +108,9 @@ func setup_ai() -> void:
 	# Wire IntentUI so hover events carry this enemy reference (for tooltip).
 	intent_ui.enemy = self
 
+	# Now that the AI exists, materialize the symmetric HandFacade for effects.
+	hand_facade = EnemyHandFacade.new(self)
+
 	enemy_resource_ui.update_display(enemy_ai)
 
 

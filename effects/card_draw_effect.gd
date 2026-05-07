@@ -5,12 +5,6 @@ var cards_to_draw := 1
 
 
 func execute(targets: Array[Node]) -> void:
-	if targets.is_empty():
-		return
-		
-	var player_handler := targets[0].get_tree().get_first_node_in_group("player_handler") as PlayerHandler
-	
-	if not player_handler:
-		return
-	
-	player_handler.draw_cards(cards_to_draw)
+	for target in targets:
+		if target is Combatant and target.hand_facade:
+			target.hand_facade.draw_cards(cards_to_draw)

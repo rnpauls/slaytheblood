@@ -128,6 +128,17 @@ func untrack_card_ui(card: Card) -> void:
 	card_ui_map.erase(card)
 
 
+## Move every card in the discard pile back to the draw pile and shuffle.
+## Mirrors PlayerHandler.reshuffle_deck_from_discard so HandFacade sees a
+## symmetric API on both sides.
+func reshuffle_discard() -> void:
+	if not _enemy.stats.draw_pile.empty():
+		return
+	while not _enemy.stats.discard.empty():
+		_enemy.stats.draw_pile.add_card(_enemy.stats.discard.draw_card())
+	_enemy.stats.draw_pile.shuffle()
+
+
 # ── Queries ───────────────────────────────────────────────────────────────────
 
 func get_card_ui(card: Card) -> EnemyCardUI:

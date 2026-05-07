@@ -11,6 +11,12 @@ const WHITE_SPRITE_MATERIAL := preload("res://art/themes/white_sprite_material.t
 @export var stats: Stats : set = set_stats
 var active_on_hits: Array[OnHit]
 
+## Symmetric hand-operation interface for effects. Concrete subclasses
+## (Player, Enemy) instantiate the matching HandFacade subclass during their
+## own setup (player_handler.start_battle for the player, enemy.setup_ai
+## for the enemy). Effects call e.g. target.hand_facade.discard_random(2).
+var hand_facade: HandFacade
+
 signal attack_completed
 
 func set_stats(value: Stats) -> void:
