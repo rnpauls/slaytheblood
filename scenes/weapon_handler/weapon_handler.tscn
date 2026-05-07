@@ -4,16 +4,36 @@
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="2_lw3a7"]
 [ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_handler/weapon_ui.tscn" id="2_t7f4y"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weapon_hover_glow"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(1, 1, 1, 0.65)
+shadow_size = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="WeaponHandler" type="Control" unique_id=679500354]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_1mm66")
+
+[node name="HoverGlowPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_weapon_hover_glow")
 
 [node name="WeaponButton" type="Button" parent="." unique_id=181195202]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+pivot_offset = Vector2(32, 32)
 theme = ExtResource("2_lw3a7")
 
 [node name="WeaponUI" parent="WeaponButton" unique_id=1748562188 instance=ExtResource("2_t7f4y")]

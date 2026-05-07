@@ -5,6 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://binvcardscena" path="res://scenes/inventory_card/inventory_card.tscn" id="3_invcs"]
 [ext_resource type="Resource" uid="uid://bvboibfq7ytq2" path="res://equipment/iron_rot_boots.tres" id="4_aw4x6"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inv_glow"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(1, 1, 1, 0.65)
+shadow_size = 12
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="InventoryCardRenderContainer" type="MarginContainer" unique_id=2054887772]
 custom_minimum_size = Vector2(40, 60)
 offset_right = 40.0
@@ -14,7 +23,21 @@ size_flags_vertical = 3
 script = ExtResource("1_invccc")
 
 [node name="Stack" type="Control" parent="." unique_id=237239472]
+unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
+
+[node name="GlowPanel" type="Panel" parent="Stack"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inv_glow")
 
 [node name="SubViewportViewer" parent="Stack" unique_id=1516864064 instance=ExtResource("2_invsvv")]
 unique_name_in_owner = true

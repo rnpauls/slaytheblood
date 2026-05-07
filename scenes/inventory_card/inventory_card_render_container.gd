@@ -1,6 +1,9 @@
 class_name InventoryCardRenderContainer
 extends MarginContainer
 
+const HOVER_SCALE := Vector2(1.08, 1.08)
+const HOVER_TWEEN_TIME := 0.1
+
 signal equipment_pressed(equipment: Equipment)
 signal pressed(item: Resource)
 
@@ -12,6 +15,10 @@ signal pressed(item: Resource)
 @onready var inventory_card: InventoryCard = $SubViewport/InventoryCard
 @onready var sub_viewport: SubViewport = %SubViewport
 @onready var button: Button = %Button
+@onready var stack: Control = %Stack
+@onready var glow_panel: Panel = %GlowPanel
+
+var _hover_tween: Tween
 
 
 func _ready() -> void:
@@ -22,7 +29,13 @@ func _ready() -> void:
 	# clickable for equip/unequip.
 	button.mouse_entered.connect(_on_mouse_entered)
 	button.mouse_exited.connect(_on_mouse_exited)
+	stack.resized.connect(_update_pivot)
+	_update_pivot()
 	_apply_clickable()
+
+
+func _update_pivot() -> void:
+	stack.pivot_offset = stack.size * 0.5
 
 
 func set_clickable(value: bool) -> void:
@@ -62,6 +75,7 @@ func _on_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
+	_set_hovered(true)
 	var tooltip_text := ""
 	if weapon:
 		tooltip_text = weapon.get_tooltip()
@@ -76,4 +90,15 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	_set_hovered(false)
 	Events.tooltip_hide_requested.emit()
+
+
+func _set_hovered(value: bool) -> void:
+	glow_panel.visible = value
+	# Lift above sibling cards so the scaled card overflows on top of neighbors.
+	z_index = 10 if value else 0
+	if _hover_tween and _hover_tween.is_running():
+		_hover_tween.kill()
+	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_hover_tween.tween_property(stack, "scale", HOVER_SCALE if value else Vector2.ONE, HOVER_TWEEN_TIME)

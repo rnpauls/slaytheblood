@@ -55,20 +55,51 @@ label_settings = ExtResource("2_kuo8l")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=2076825111]
+[node name="MainHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="LoadoutPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="LoadoutLabel" type="Label" parent="MarginContainer/VBoxContainer/MainHBox/LoadoutPanel"]
+layout_mode = 2
+text = "Equipped"
+horizontal_alignment = 1
+
+[node name="Loadout" type="Control" parent="MarginContainer/VBoxContainer/MainHBox/LoadoutPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(283, 241)
+layout_mode = 2
+
+[node name="PoolPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PoolLabel" type="Label" parent="MarginContainer/VBoxContainer/MainHBox/PoolPanel"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MainHBox/PoolPanel" unique_id=2076825111]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 2
 
-[node name="Weapons" type="GridContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=1721125897]
+[node name="Pool" type="GridContainer" parent="MarginContainer/VBoxContainer/MainHBox/PoolPanel/ScrollContainer" unique_id=1721125897]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
-columns = 6
+columns = 5
 
 
 [node name="BackButton" type="Button" parent="." unique_id=984134959]

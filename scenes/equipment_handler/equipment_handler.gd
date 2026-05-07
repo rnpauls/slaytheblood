@@ -7,14 +7,26 @@ extends Control
 
 signal equipment_destroyed(equipment: Equipment)
 
+const HOVER_SCALE := Vector2(1.08, 1.08)
+const HOVER_TWEEN_TIME := 0.1
+
+## When false: skip combat-event listeners and the click handler does nothing.
+## Used by the inventory view to display equipped items without resetting their
+## current_block (which would clobber a partially-used piece mid-battle) and
+## without wiring any combat behavior. The button still emits `pressed`.
+@export var interactive: bool = true
 @export var owner_of_equipment: Node
 @onready var equipment_ui: EquipmentUI = $EquipmentButton/EquipmentUI
 @onready var equipment_button: Button = %EquipmentButton
+@onready var hover_glow_panel: Panel = %HoverGlowPanel
 
 var equipment: Equipment
 var is_blocking: bool = false
+var _hover_tween: Tween
 
 func _ready() -> void:
+	if not interactive:
+		return
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
 	Events.player_blocks_declared.connect(_on_player_blocks_declared)
 
@@ -25,8 +37,9 @@ func set_equipment(new_equipment: Equipment) -> void:
 	if new_equipment:
 		equipment_ui.equipment = new_equipment
 		equipment = equipment_ui.equipment
-		equipment.owner = owner_of_equipment
-		equipment.initialize_equipment(owner_of_equipment)
+		if interactive:
+			equipment.owner = owner_of_equipment
+			equipment.initialize_equipment(owner_of_equipment)
 		show()
 		_refresh_button_state()
 	else:
@@ -73,6 +86,13 @@ func _refresh_button_state() -> void:
 	if not equipment:
 		equipment_button.disabled = true
 		equipment_ui.set_grey_out(true)
+		return
+	if not interactive:
+		# Viewer mode: show as lit; the containing UI manages click-disabling
+		# (e.g. when combat is in progress and equipment swaps are forbidden).
+		equipment_button.disabled = false
+		equipment_ui.set_grey_out(false)
+		equipment_ui.update_block_label()
 		return
 	var available := can_block()
 	equipment_button.disabled = not available
@@ -148,15 +168,27 @@ func _clear_equipped_slot_on_character(eq: Equipment) -> void:
 
 
 func _on_equipment_button_pressed() -> void:
+	if not interactive:
+		return
 	attempt_to_block()
 
 
 func _on_mouse_entered() -> void:
 	if not equipment:
 		return
+	_set_hovered(true)
 	var anchor_rect := Rect2(global_position, size)
 	Events.inventory_preview_show_requested.emit(null, equipment, anchor_rect)
 
 
 func _on_mouse_exited() -> void:
+	_set_hovered(false)
 	Events.inventory_preview_hide_requested.emit()
+
+
+func _set_hovered(value: bool) -> void:
+	hover_glow_panel.visible = value
+	if _hover_tween and _hover_tween.is_running():
+		_hover_tween.kill()
+	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_hover_tween.tween_property(equipment_button, "scale", HOVER_SCALE if value else Vector2.ONE, HOVER_TWEEN_TIME)

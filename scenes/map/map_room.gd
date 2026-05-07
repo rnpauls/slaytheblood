@@ -27,6 +27,7 @@ func set_available(new_value: bool) -> void:
 	
 	if available:
 		animation_player.play("highlight")
+		animation_player.seek(randf() * animation_player.current_animation_length, true)
 	elif not room.selected:
 		animation_player.play("RESET")
 

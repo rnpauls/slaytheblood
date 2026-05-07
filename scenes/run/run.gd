@@ -124,6 +124,9 @@ func _change_view(scene: PackedScene) -> Node:
 	current_view.add_child(new_view)
 	map.hide_map()
 
+	# Lock equip/unequip in the inventory view for the duration of combat.
+	inventory_view.combat_locked = scene == BATTLE_SCENE
+
 	return new_view
 
 func _show_map() -> void:
@@ -133,6 +136,7 @@ func _show_map() -> void:
 
 	map.show_map()
 	map.unlock_next_rooms()
+	inventory_view.combat_locked = false
 
 	_save_run(true)
 

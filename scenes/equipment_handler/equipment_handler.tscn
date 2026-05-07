@@ -4,16 +4,36 @@
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="2_eqtheme"]
 [ext_resource type="PackedScene" uid="uid://b3eqp1uihandler" path="res://scenes/equipment_handler/equipment_ui.tscn" id="3_eqpacked"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_equipment_hover_glow"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(1, 1, 1, 0.65)
+shadow_size = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="EquipmentHandler" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_eqhgd")
+
+[node name="HoverGlowPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_equipment_hover_glow")
 
 [node name="EquipmentButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+pivot_offset = Vector2(32, 32)
 theme = ExtResource("2_eqtheme")
 
 [node name="EquipmentUI" parent="EquipmentButton" instance=ExtResource("3_eqpacked")]

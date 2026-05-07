@@ -1,19 +1,33 @@
 class_name WeaponHandler
 extends Control
 
+const HOVER_SCALE := Vector2(1.08, 1.08)
+const HOVER_TWEEN_TIME := 0.1
+
+## When false: skip combat-event listeners, swallow combat input, and the click
+## handler does nothing — used by the inventory view to display equipped weapons
+## without wiring any combat behavior. The button still emits `pressed` so the
+## containing UI can connect its own handler (e.g. unequip).
+@export var interactive: bool = true
 @export var activable: bool = false
 @export var targeting: bool = false
 @export var owner_of_weapon: Node #: set = set_owner_of_weapon
 @onready var weapon_ui: WeaponUI = $WeaponButton/WeaponUI
 @onready var weapon_button: Button = %WeaponButton
+@onready var hover_glow_panel: Panel = %HoverGlowPanel
 var targets: Array[Node]
 var weapon: Weapon
+var _hover_tween: Tween
 
 func _ready() -> void:
+	if not interactive:
+		return
 	Events.player_initial_hand_drawn.connect(enable_weapon)
 	Events.enemy_phase_ended.connect(enable_weapon)
 
 func _input(event: InputEvent) -> void:
+	if not interactive:
+		return
 	if targeting:
 		if event.is_action_pressed("right_mouse") or event.is_action_pressed("ui_cancel"):
 			end_targeting()
@@ -30,10 +44,11 @@ func set_weapon(new_weapon: Weapon) -> void:
 	if new_weapon:
 		weapon_ui.weapon = new_weapon
 		weapon = weapon_ui.weapon
-		weapon.owner = owner_of_weapon
-		weapon.weapon_used_up.connect(_on_weapon_used_up)
-		_connect_stats_for_glow()
-		_update_glow()
+		if interactive:
+			weapon.owner = owner_of_weapon
+			weapon.weapon_used_up.connect(_on_weapon_used_up)
+			_connect_stats_for_glow()
+			_update_glow()
 	else:
 		hide()
 
@@ -112,14 +127,26 @@ func attempt_to_attack() -> void:
 			Events.player_attack_completed.emit() #Needed for relics e.g. ira
 
 func _on_weapon_button_pressed() -> void:
+	if not interactive:
+		return
 	if can_activate_weapon():
 		begin_targeting()
 
 func _on_mouse_entered() -> void:
 	if not weapon:
 		return
+	_set_hovered(true)
 	var anchor_rect := Rect2(weapon_button.global_position, weapon_button.size)
 	Events.inventory_preview_show_requested.emit(weapon, null, anchor_rect)
 
 func _on_mouse_exited() -> void:
+	_set_hovered(false)
 	Events.inventory_preview_hide_requested.emit()
+
+
+func _set_hovered(value: bool) -> void:
+	hover_glow_panel.visible = value
+	if _hover_tween and _hover_tween.is_running():
+		_hover_tween.kill()
+	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_hover_tween.tween_property(weapon_button, "scale", HOVER_SCALE if value else Vector2.ONE, HOVER_TWEEN_TIME)
