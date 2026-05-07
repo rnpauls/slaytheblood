@@ -31,6 +31,10 @@ const PITCH_COLORS := {
 @export var pitch: int
 @export var attack: int
 @export var damage_kind: DamageKind = DamageKind.PHYSICAL
+## Arcane damage applied alongside the main attack (for split-damage cards).
+## Resolves as a separate ZapEffect after the physical hit. Skills/NAAs can also
+## set this to deal arcane without an attack component.
+@export var zap: int = 0
 @export var defense: int
 @export var exhausts: bool = false
 @export var go_again: bool = false : get = get_go_again
@@ -163,6 +167,17 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 	damage_effect.on_hit_effects.append_array(on_hits)
 	damage_effect.on_hit_effects.append_array(owner.active_on_hits)
 	damage_effect.execute(targets)
+
+## Fires the card's `zap` value as arcane damage at the given targets. No-op if
+## zap is 0. Called automatically by vanilla_attack after the physical hit;
+## scripted cards can call this themselves (or skip it for custom behavior).
+func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap: int = zap) -> void:
+	if custom_zap <= 0:
+		return
+	var zap_effect := ZapEffect.new()
+	zap_effect.amount = modifiers.get_modified_value(custom_zap, Modifier.Type.DMG_DEALT)
+	zap_effect.sound = sound
+	zap_effect.execute(targets)
 
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://czapkw1runeb4"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_zap01"]
+
+[resource]
+script = ExtResource("1_zap01")
+id = &"zap"
+display_name = "Zap"
+description = "Deal {x} arcane damage. Arcane bypasses block but can be prevented by spending mana."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"
