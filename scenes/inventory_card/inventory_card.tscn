@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dp5dl2iuxju1f" path="res://scenes/weapon_handler/weapon_ui.tscn" id="2_invwu"]
 [ext_resource type="StyleBox" uid="uid://c8bda0h1c5owr" path="res://scenes/card_ui/card_base_stylebox.tres" id="3_invsb"]
 [ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="4_invrar"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="5_invth"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="5_invth"]
 
 [node name="InventoryCard" type="Control" unique_id=1079373947]
 custom_minimum_size = Vector2(200, 300)

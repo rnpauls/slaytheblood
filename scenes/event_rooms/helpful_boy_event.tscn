@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="1_b586u"]
 [ext_resource type="Script" uid="uid://ccysrh6ro8exo" path="res://scenes/event_rooms/helpful_boy_event.gd" id="1_laoq4"]
 [ext_resource type="Texture2D" uid="uid://wt8b2gn7a1kr" path="res://art/backgrounds/helpful_boy.jpeg" id="2_55tfd"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="3_jfl6l"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="3_jfl6l"]
 
 [node name="HelpfulBoyEvent" type="Control" unique_id=1283257992]
 layout_mode = 3

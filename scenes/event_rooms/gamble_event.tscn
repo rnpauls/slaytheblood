@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bsswdvdjuuabr" path="res://scenes/event_rooms/gamble_event.gd" id="1_jjfvp"]
 [ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="1_vc0fc"]
 [ext_resource type="Texture2D" uid="uid://cyoh7oerow1kx" path="res://art/backgrounds/slot_machine.jpeg" id="2_1wr75"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="3_8v7cw"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="3_8v7cw"]
 
 [node name="GambleEvent" type="Control" unique_id=67905769]
 layout_mode = 3

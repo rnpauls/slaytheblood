@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cndru6o0yiyst" path="res://scenes/win_screen/win_screen.gd" id="1_4ovr7"]
 [ext_resource type="Texture2D" uid="uid://b4osn4gmurrij" path="res://art/backgrounds/win.jpeg" id="2_8vb36"]
 [ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="3_4p0n6"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="4_70qtx"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="4_70qtx"]
 
 [node name="WinScreen" type="Control" unique_id=1964020349]
 layout_mode = 3

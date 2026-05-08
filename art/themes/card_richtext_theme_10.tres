@@ -1,0 +1,15 @@
+[gd_resource type="Theme" format=3 uid="uid://cho0px4v2r182"]
+
+[ext_resource type="FontFile" uid="uid://dqblqg0f8hv28" path="res://art/themes/lt_cushion/LTCushion-Bold.ttf" id="1_eqsa6"]
+[ext_resource type="FontFile" uid="uid://d2aiw8cpu13w8" path="res://art/themes/lt_cushion/LTCushion-Black.ttf" id="2_0flnu"]
+[ext_resource type="FontFile" uid="uid://ksr31mnenfhw" path="res://art/themes/lt_cushion/LTCushion-Light.ttf" id="4_g14wv"]
+[ext_resource type="FontFile" uid="uid://c1a6to6bnimqu" path="res://art/themes/lt_cushion/LTCushion-VF.ttf" id="5_0flnu"]
+
+[resource]
+default_font_size = 10
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 3
+RichTextLabel/fonts/bold_font = ExtResource("1_eqsa6")
+RichTextLabel/fonts/bold_italic_font = ExtResource("2_0flnu")
+RichTextLabel/fonts/italic_font = ExtResource("5_0flnu")
+RichTextLabel/fonts/normal_font = ExtResource("4_g14wv")

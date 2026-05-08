@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://isan6btj7dwy" path="res://art/tile_0091.png" id="5_opp3a"]
 [ext_resource type="Resource" uid="uid://bpyxehcf5kwl" path="res://relics/reinforced_armor.tres" id="5_tmyoj"]
 [ext_resource type="Texture2D" uid="uid://dcri7r5nvl48m" path="res://art/backgrounds/empty_treasure_room.jpeg" id="6_8auyv"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_32.tres" id="7_bbvtr"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="7_bbvtr"]
 
 [sub_resource type="Animation" id="Animation_31ci2"]
 length = 0.001

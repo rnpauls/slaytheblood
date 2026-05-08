@@ -10,13 +10,19 @@ extends Control
 @export var attack: Label
 @export var defense: Label
 @export var go_again_icon: TextureRect
-@onready var pitch_strip: CanvasModulate = $PitchStrip
+@onready var pitch_strip: CanvasModulate = %PitchStrip
+@onready var pitch_pips: TextureRect = %PitchPips
 @onready var attack_icon: TextureRect = $AttackIcon
 @onready var defense_icon: TextureRect = $DefenseIcon
 @onready var text_box: RichTextLabel = $TextBox
 @onready var type_label: RichTextLabel = $Type
 @onready var card_name: RichTextLabel = $Name
 
+const FIVE_PIP_4_PITCH_BAR = preload("uid://b7aopbfcwmbtv")
+const FOUR_PIP_4_PITCH_BAR = preload("uid://dnwth2rfebm4q")
+const ONE_PIP_4_PITCH_BAR = preload("uid://b7u7lguwohkop")
+const THREE_PIP_4_PITCH_BAR = preload("uid://diodbu8p6vfm6")
+const TWO_PIP_4_PITCH_BAR = preload("uid://7g08eoj27y8j")
 
 func set_card(value: Card) -> void:
 	if not is_node_ready():
@@ -43,8 +49,17 @@ func set_card(value: Card) -> void:
 	# StyleBoxCache returns one shared StyleBoxFlat per rarity (cached on first use).
 	art_panel.add_theme_stylebox_override("panel", StyleBoxCache.get_rarity_border(art_panel, card.rarity))
 	pitch_strip.modulate = Card.PITCH_COLORS[card.pitch]
-	#pitch_strip.ColorRect2.modulate = Card.PITCH_COLORS[card.pitch]
-	#pitch_strip.ColorRect3.modulate = Card.PITCH_COLORS[card.pitch]
+	match card.pitch:
+		1:
+			pitch_pips.texture = ONE_PIP_4_PITCH_BAR
+		2:
+			pitch_pips.texture = TWO_PIP_4_PITCH_BAR
+		3:
+			pitch_pips.texture = THREE_PIP_4_PITCH_BAR
+		4:
+			pitch_pips.texture = FOUR_PIP_4_PITCH_BAR
+		5:
+			pitch_pips.texture = FIVE_PIP_4_PITCH_BAR
 
 func hide_attack() ->void:
 	attack.hide()
