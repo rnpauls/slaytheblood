@@ -3,8 +3,8 @@ extends Control
 
 @export var card: Card : set = set_card
 
-@onready var panel: Panel = $Panel
-@onready var art_panel: Panel = %ArtPanel
+@onready var panel: NinePatchRect = $Panel
+@onready var art_panel: TextureRect = %ArtPanel
 @onready var cost: Label = $Cost
 @onready var icon: TextureRect = %Icon
 @export var attack: Label
@@ -16,7 +16,7 @@ extends Control
 @onready var defense_icon: TextureRect = $DefenseIcon
 @onready var text_box: RichTextLabel = $TextBox
 @onready var type_label: RichTextLabel = $Type
-@onready var card_name: RichTextLabel = $Name
+@onready var card_name: RichTextLabel = %Name
 
 const FIVE_PIP_4_PITCH_BAR = preload("uid://b7aopbfcwmbtv")
 const FOUR_PIP_4_PITCH_BAR = preload("uid://dnwth2rfebm4q")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://stbrelic005b"]
+
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbrelic005a" path="res://relics/aether_veil.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Aether Veil"
+id = "aether_veil"
+type = 0
+character_type = 3
+icon = ExtResource("1_icon")
+tooltip = "[color=\"ffdf00\"]Aether Veil[/color]
+At the start of each turn, if you have a [kw=runechant]runechant[/kw], gain 1 [kw=block]block[/kw]."

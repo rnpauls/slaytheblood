@@ -10,6 +10,7 @@ const WIN_SCREEN_SCENE = preload("res://scenes/win_screen/win_screen.tscn")
 const DRAFTABLE_INVENTORY := preload("res://custom_resources/draftable_inventory.tres")
 const MAIN_MENU_PATH = "res://scenes/ui/main_menu.tscn"
 const NON_COMBAT_MUSIC := preload("res://art/music/deuslower-medieval-ambient-236809.mp3")
+const EVENT_ROOM_POOL := preload("res://scenes/event_rooms/event_room_pool.tres")
 
 @export var run_startup: RunStartup
 
@@ -169,6 +170,7 @@ func _peek_map() -> void:
 
 func _setup_event_connections() -> void:
 	Events.battle_won.connect(_on_battle_won)
+	Events.battle_stalemated.connect(_show_map)
 	Events.battle_reward_exited.connect(_show_map)
 	Events.campfire_exited.connect(_show_map)
 	Events.map_exited.connect(_on_map_exited)
@@ -183,6 +185,25 @@ func _setup_event_connections() -> void:
 	rewards_button.pressed.connect(_change_view.bind(BATTLE_REWARD_SCENE))
 	shop_button.pressed.connect(_change_view.bind(SHOP_SCENE))
 	treasure_button.pressed.connect(_change_view.bind(TREASURE_SCENE))
+	_setup_debug_event_buttons()
+
+
+func _setup_debug_event_buttons() -> void:
+	var debug_buttons := $DebugButtons as VBoxContainer
+	if not debug_buttons:
+		return
+	for scene: PackedScene in EVENT_ROOM_POOL.event_rooms:
+		var btn := Button.new()
+		btn.text = "event: " + scene.resource_path.get_file().get_basename()
+		btn.pressed.connect(_debug_enter_event.bind(scene))
+		debug_buttons.add_child(btn)
+
+
+func _debug_enter_event(scene: PackedScene) -> void:
+	var event_room := _change_view(scene) as EventRoom
+	event_room.character_stats = character
+	event_room.run_stats = stats
+	event_room.setup()
 
 func _setup_top_bar() -> void:
 	character.stats_changed.connect(health_ui.update_stats.bind(character))

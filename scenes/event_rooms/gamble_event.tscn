@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cyoh7oerow1kx" path="res://art/backgrounds/slot_machine.jpeg" id="2_1wr75"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="3_8v7cw"]
 
-[node name="GambleEvent" type="Control"]
+[node name="GambleEvent" type="Control" node_paths=PackedStringArray("background", "choice_container", "resolution_container", "resolution_label", "continue_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -80,6 +80,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Name" type="RichTextLabel" parent="ArtPanel" unique_id=1780050353]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 0.5
 offset_top = 12.0

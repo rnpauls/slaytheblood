@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://ddntfmnq37i48"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://ck1t4hdip6xrl" path="res://art/tile_0119.png" id="1_icon"]
+[ext_resource type="Script" path="res://characters/brute/cards/heavy_cleave.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+id = "heavy_cleave"
+target = 1
+cost = 2
+pitch = 1
+attack = 5
+defense = 3
+ai_value = 1
+ai_value_needs_attack = true
+icon = ExtResource("1_icon")
+tooltip_text = "On hit: gain 1 [kw=action_point]Action Point[/kw]."
+sound = ExtResource("3_sound")

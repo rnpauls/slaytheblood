@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MarkedStatus" format=3 uid="uid://ddocg15uj7iy8"]
+
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbstatus001a" path="res://statuses/marked.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "marked"
+type = 1
+stack_type = 1
+can_expire = true
+duration = 1
+stacks = 4
+icon = ExtResource("1_icon")
+tooltip = "Marked: attacks against this target deal +%s damage this turn."

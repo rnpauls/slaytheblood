@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://stbrelic008b"]
+
+[ext_resource type="Texture2D" uid="uid://b23uexaietdbt" path="res://art/item36.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbrelic008a" path="res://relics/resonance_ring.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Resonance Ring"
+id = "resonance_ring"
+type = 4
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "[color=\"ffdf00\"]Resonance Ring[/color]
+When a card exhausts, draw 1 card."

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://ddntfmnq37i18"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://bv2wpbh3uv4x3" path="res://art/tile_0109.png" id="1_icon"]
+[ext_resource type="Script" path="res://characters/brute/cards/battle_cry.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://bwqypbxyj2f11" path="res://art/music/sound_effects/400 Sounds Pack/Human/cough_double.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+id = "battle_cry"
+type = 1
+rarity = 1
+cost = 1
+pitch = 3
+ai_value = 4
+ai_value_needs_attack = true
+icon = ExtResource("1_icon")
+tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: gain [kw=empower:4]Empower 4[/kw]."
+sound = ExtResource("3_sound")
+disable_attack = true
+disable_defense = true

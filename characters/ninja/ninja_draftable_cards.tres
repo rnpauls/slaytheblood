@@ -13,8 +13,12 @@
 [ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="13_17ur2"]
 [ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="13_evcsx"]
 [ext_resource type="Resource" uid="uid://b8pjbbgq27nko" path="res://generic_cards/sink_below_yellow.tres" id="15_mrqsj"]
+[ext_resource type="Resource" uid="uid://ddn55fnq37iy8" path="res://characters/ninja/cards/whisper_strike.tres" id="16_whisp"]
+[ext_resource type="Resource" uid="uid://ddn55fnq37i08" path="res://characters/ninja/cards/flicker_step.tres" id="17_flick"]
+[ext_resource type="Resource" uid="uid://stbnincrd003b" path="res://characters/ninja/cards/mark_for_death.tres" id="19_mfd"]
+[ext_resource type="Resource" uid="uid://stbnincrd004b" path="res://characters/ninja/cards/twin_strike.tres" id="20_twin"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="18_k7xau"]
 
 [resource]
 script = ExtResource("18_k7xau")
-cards = Array[ExtResource("1_1n65v")]([ExtResource("6_bkffl"), ExtResource("7_glupe"), ExtResource("15_mrqsj"), ExtResource("7_17ur2"), ExtResource("8_mcc34"), ExtResource("9_m8dfe"), ExtResource("10_ttfxh"), ExtResource("11_wsf5e"), ExtResource("12_6xfej"), ExtResource("13_evcsx"), ExtResource("5_3sgq7"), ExtResource("13_17ur2")])
+cards = Array[ExtResource("1_1n65v")]([ExtResource("6_bkffl"), ExtResource("7_glupe"), ExtResource("15_mrqsj"), ExtResource("7_17ur2"), ExtResource("8_mcc34"), ExtResource("9_m8dfe"), ExtResource("10_ttfxh"), ExtResource("11_wsf5e"), ExtResource("12_6xfej"), ExtResource("13_evcsx"), ExtResource("5_3sgq7"), ExtResource("13_17ur2"), ExtResource("16_whisp"), ExtResource("17_flick"), ExtResource("19_mfd"), ExtResource("20_twin")])

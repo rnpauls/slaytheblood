@@ -11,12 +11,13 @@ func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: Mod
 	return tooltip_text % modified_dmg
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	Events.lock_hand.emit()
-	var player_handler: PlayerHandler = targets[0].get_tree().get_first_node_in_group("player_handler")
+	if owner is Player:
+		Events.lock_hand.emit()
 	var custom_attack: int
-	if await sixloot(player_handler, 1):
+	if await sixloot(owner, 1):
 		custom_attack = attack + 2
 	else:
 		custom_attack = attack
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)
-	Events.unlock_hand.emit()
+	if owner is Player:
+		Events.unlock_hand.emit()

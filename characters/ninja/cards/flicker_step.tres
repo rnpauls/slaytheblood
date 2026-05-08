@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://ddn55fnq37i08"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="1_icon"]
+[ext_resource type="Script" path="res://characters/ninja/cards/flicker_step.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+id = "flicker_step"
+type = 1
+pitch = 3
+go_again = true
+icon = ExtResource("1_icon")
+tooltip_text = "[kw=sink:2]Sink 2[/kw], draw 1."
+sound = ExtResource("3_sound")
+disable_attack = true
+disable_defense = true

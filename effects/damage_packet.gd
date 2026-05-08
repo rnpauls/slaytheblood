@@ -33,6 +33,7 @@ func execute_single_target(target: Node) -> void:
 		atk.sound = sound
 		atk.go_again = go_again
 		atk.on_hit_effects = on_hit_effects
+		atk.source_owner = source_owner
 		atk.execute([target])
 	if arcane > 0:
 		# Arcane reaction window: enemy AI gets to decide how much to prevent

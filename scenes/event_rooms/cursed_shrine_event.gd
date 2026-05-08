@@ -32,4 +32,4 @@ func defile() -> void:
 	var lost := run_stats.gold / 2
 	run_stats.gold -= lost
 	character_stats.max_health += DEFILE_MAX_HP_GAIN
-	resolve("You scatter %d gold across the altar. Max HP +%d." % [lost, DEFILE_MAX_HP_GAIN])
+	resolve("You defiled the shrine. Was it worth it?")

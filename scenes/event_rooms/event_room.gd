@@ -39,7 +39,7 @@ func random_card_of_rarity(rarity: Card.Rarity) -> Card:
 			pool.append(c)
 	if pool.is_empty():
 		return null
-	var picked: Card = RNG.instance.array_pick_random(pool)
+	var picked: Card = RNG.array_pick_random(pool)
 	return picked.duplicate() as Card
 
 func format_card_name(card: Card) -> String:

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BerserkerHelmEquipment" format=3 uid="uid://stbequip002b"]
+
+[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbequip002a" path="res://equipment/berserker_helm.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Berserker Helm"
+id = "berserker_helm"
+slot = 0
+rarity = 1
+character_type = 2
+persistence = 1
+break_on_use = false
+icon = ExtResource("1_icon")
+tooltip = "Berserker Helm: when used to block, gain [kw=muscle:1]Muscle 1[/kw] this turn."
+max_block = 2

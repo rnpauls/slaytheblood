@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HeavyGreavesEquipment" format=3 uid="uid://stbequip003b"]
+
+[ext_resource type="Texture2D" uid="uid://ck1t4hdip6xrl" path="res://art/tile_0119.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbequip003a" path="res://equipment/heavy_greaves.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Heavy Greaves"
+id = "heavy_greaves"
+slot = 3
+rarity = 1
+character_type = 2
+persistence = 0
+break_on_use = true
+icon = ExtResource("1_icon")
+tooltip = "Heavy Greaves: 6 block. When destroyed, gain [kw=empower:2]Empower 2[/kw]."
+max_block = 6

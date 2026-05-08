@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://stbrelic004b"]
+
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/spell_binder.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Spell Binder"
+id = "spell_binder"
+type = 1
+character_type = 3
+starter_relic = true
+icon = ExtResource("1_icon")
+tooltip = "[color=\"ffdf00\"]Spell Binder[/color]
+At the start of combat, create 2 [kw=runechant]runechants[/kw]."

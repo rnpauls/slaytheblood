@@ -11,6 +11,9 @@
 [ext_resource type="Resource" uid="uid://buxa3aoc70x0u" path="res://characters/ninja/ninja_starting_inv.tres" id="6_wrrns"]
 [ext_resource type="Resource" uid="uid://b4y4lw03v8och" path="res://weapons/ninja_star.tres" id="7_5pfox"]
 [ext_resource type="Resource" uid="uid://cpq6w8ligmkxn" path="res://relics/ira_pendant.tres" id="7_fhfql"]
+[ext_resource type="Resource" uid="uid://stbequip001b" path="res://equipment/smoke_capsule.tres" id="8_smoke"]
+[ext_resource type="Resource" uid="uid://stbequip005b" path="res://equipment/tabi_boots.tres" id="9_tabi"]
+[ext_resource type="Resource" uid="uid://stbequip006b" path="res://equipment/bandolier.tres" id="10_band"]
 
 [resource]
 script = ExtResource("3_134v8")
@@ -18,6 +21,7 @@ description = "Sneaky little bastard.
 He will kill you"
 portrait = ExtResource("1_7xeg5")
 draftable_cards = ExtResource("2_u8x1n")
+draftable_equipment = Array[ExtResource("3_7xeg5")]([ExtResource("8_smoke"), ExtResource("9_tabi"), ExtResource("10_band")])
 draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtResource("6_kjhjj"), ExtResource("7_5pfox")])
 starting_relic = ExtResource("7_fhfql")
 character_name = "Ninja"

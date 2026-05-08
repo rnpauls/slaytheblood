@@ -37,6 +37,11 @@ func _ready() -> void:
 func set_equipment(new_equipment: Equipment) -> void:
 	if not is_node_ready():
 		await ready
+	# Deactivate the equipment we're replacing so it can disconnect signal hooks
+	# (Tabi Boots etc. listen on the global Events bus and would otherwise
+	# linger as zombie listeners after the swap).
+	if equipment and equipment != new_equipment and interactive:
+		equipment.deactivate_equipment(owner_of_equipment)
 	if new_equipment:
 		equipment_ui.equipment = new_equipment
 		equipment = equipment_ui.equipment
@@ -165,6 +170,11 @@ func attempt_to_block() -> void:
 		block_effect.sound = equipment.sound
 		block_effect.execute([player])
 
+	# Fire the on-block hook (Smoke Capsule draws a card, Berserker Helm gains
+	# Muscle, Spiked Pauldrons applies Thorns, etc.). Runs whether or not the
+	# equipment was destroyed by this use, so dying-use effects still trigger.
+	equipment.on_block_consumed(owner_of_equipment)
+
 	flash()
 
 	if equipment.is_destroyed():
@@ -175,6 +185,11 @@ func attempt_to_block() -> void:
 
 func _destroy_equipment() -> void:
 	var destroyed := equipment
+	# Fire the on-destroyed hook before we tear it down so Heavy Greaves etc.
+	# can grant their last-rites effect.
+	destroyed.on_destroyed(owner_of_equipment)
+	# Disconnect any global-signal hooks the equipment registered.
+	destroyed.deactivate_equipment(owner_of_equipment)
 	equipment_destroyed.emit(destroyed)
 	# ONE_SHOT: remove from inventory entirely so it's gone after battle.
 	# REUSABLE: keep in inventory; restore_for_battle will refresh it.

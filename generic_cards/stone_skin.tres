@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://ddnx1fnq37i08"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbgencrd002a" path="res://generic_cards/stone_skin.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "stone_skin"
+type = 1
+pitch = 1
+defense = 6
+ai_value = 3
+icon = ExtResource("1_icon")
+tooltip_text = "Gain 6 [kw=block]block[/kw]."
+disable_attack = true

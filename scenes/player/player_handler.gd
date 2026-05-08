@@ -26,6 +26,12 @@ const HAND_DISCARD_INTERVAL := 0.25
 
 var character: CharacterStats
 
+# First-card / first-attack tracking (per turn). Reset in start_turn() and
+# polled in _on_card_play_finished to fire the corresponding global signals
+# exactly once per turn.
+var _first_card_played_this_turn: bool = false
+var _first_attack_played_this_turn: bool = false
+
 func _ready() -> void:
 	#Events.card_play_started.connect(_on_card_played) #Replaced with card.card_play_started / finished
 	Events.card_discarded.connect(_on_card_discarded)
@@ -96,6 +102,8 @@ func start_turn() -> void:
 	character.block = 0
 	character.reset_mana()
 	character.reset_action_points()
+	_first_card_played_this_turn = false
+	_first_attack_played_this_turn = false
 	relics.activate_relics_by_type(Relic.Type.START_OF_TURN)
 	reset_weapons()
 
@@ -198,7 +206,14 @@ func _on_card_play_finished(card: Card) -> void:
 	if card.type == Card.Type.ATTACK:
 		player.attack_completed.emit()
 		Events.player_attack_completed.emit() #Needed for relics e.g. ira
+		if not _first_attack_played_this_turn:
+			_first_attack_played_this_turn = true
+			Events.player_first_attack_played.emit(card)
+	if not _first_card_played_this_turn:
+		_first_card_played_this_turn = true
+		Events.player_first_card_played.emit(card)
 	if card.exhausts:# or card.type == Card.Type.POWER:
+		Events.card_exhausted.emit(card)
 		return
 	character.discard.add_card(card) #This used to happen at the start of card.play()
 
@@ -208,6 +223,7 @@ func _on_card_discarded(card: Card) -> void:
 		player.status_handler.add_status(enr_status)
 
 	if card.exhausts:# or card.type == Card.Type.POWER:
+		Events.card_exhausted.emit(card)
 		return
 	character.discard.add_card(card)
 

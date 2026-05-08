@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://ddnx1fnq37iy8"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbgencrd001a" path="res://generic_cards/pack_hunt.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://bwqypbxyj2f11" path="res://art/music/sound_effects/400 Sounds Pack/Human/cough_double.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+id = "pack_hunt"
+type = 1
+target = 1
+pitch = 1
+ai_value = 5
+icon = ExtResource("1_icon")
+tooltip_text = "All other allies gain [kw=muscle:1]Muscle 1[/kw]."
+sound = ExtResource("3_sound")
+disable_attack = true
+disable_defense = true

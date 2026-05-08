@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SmokeCapsuleEquipment" format=3 uid="uid://stbequip001b"]
+
+[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbequip001a" path="res://equipment/smoke_capsule.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Smoke Capsule"
+id = "smoke_capsule"
+slot = 4
+rarity = 1
+character_type = 1
+persistence = 0
+break_on_use = true
+icon = ExtResource("1_icon")
+tooltip = "Smoke Capsule: when used to block, draw 1 card. (One-shot.)"
+max_block = 1

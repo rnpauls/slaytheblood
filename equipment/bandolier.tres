@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BandolierEquipment" format=3 uid="uid://stbequip006b"]
+
+[ext_resource type="Texture2D" uid="uid://b23uexaietdbt" path="res://art/item36.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbequip006a" path="res://equipment/bandolier.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Bandolier"
+id = "bandolier"
+slot = 3
+rarity = 1
+character_type = 1
+persistence = 0
+break_on_use = true
+icon = ExtResource("1_icon")
+tooltip = "Bandolier: when used to block, discard your highest-attack card and gain block equal to its attack. (One-shot.)"
+max_block = 1

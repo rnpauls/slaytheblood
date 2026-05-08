@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://ddn55fnq37iy8"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_icon"]
+[ext_resource type="Script" path="res://characters/ninja/cards/whisper_strike.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+id = "whisper_strike"
+target = 1
+cost = 1
+pitch = 1
+attack = 3
+defense = 3
+ai_value = 1
+ai_value_needs_attack = true
+icon = ExtResource("1_icon")
+tooltip_text = "On hit: next attack gets \"On hit: deal 2 damage.\""
+sound = ExtResource("3_sound")

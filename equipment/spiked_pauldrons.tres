@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SpikedPauldronsEquipment" format=3 uid="uid://stbequip004b"]
+
+[ext_resource type="Texture2D" uid="uid://ckgyit1x3wnbe" path="res://art/Iicon_32_35.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbequip004a" path="res://equipment/spiked_pauldrons.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Spiked Pauldrons"
+id = "spiked_pauldrons"
+slot = 1
+rarity = 1
+character_type = 2
+persistence = 1
+break_on_use = false
+icon = ExtResource("1_icon")
+tooltip = "Spiked Pauldrons: when used to block, gain [kw=thorns:2]Thorns 2[/kw] this turn."
+max_block = 3

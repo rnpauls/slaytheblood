@@ -86,6 +86,28 @@ func reset_for_attack() -> void:
 	used_this_attack = false
 
 
+## Hook fired by EquipmentHandler.attempt_to_block right after the block has been
+## applied. Subclasses override to add reactive effects (draw a card, gain muscle,
+## reflect damage, etc.). Fires whether or not the equipment was destroyed by the
+## block — so a one-shot equipment can still bank an effect on its dying use.
+func on_block_consumed(_owner_node: Node) -> void:
+	pass
+
+
+## Hook fired by EquipmentHandler._destroy_equipment right before the equipment
+## is removed/disabled. Subclasses override to grant a "death rattle" effect.
+func on_destroyed(_owner_node: Node) -> void:
+	pass
+
+
+## Cleanup hook fired by EquipmentHandler when the equipment is being removed
+## from a slot (destroyed or swapped out). Subclasses that connect to global
+## signals in initialize_equipment MUST disconnect them here, or stale instances
+## will keep responding after they're gone.
+func deactivate_equipment(_owner_node: Node) -> void:
+	pass
+
+
 ## Restore equipment to full at end of battle (REUSABLE only).
 func restore_for_battle() -> void:
 	if persistence == Persistence.REUSABLE:

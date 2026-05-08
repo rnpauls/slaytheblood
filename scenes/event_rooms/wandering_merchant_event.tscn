@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lpiqmrhpl8l2" path="res://art/backgrounds/medieval-castle-dungeon-wall-game-cartoon-free-vector-3577067215.jpg" id="3_wm_bg"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="4_wm_theme"]
 
-[node name="WanderingMerchantEvent" type="Control"]
+[node name="WanderingMerchantEvent" type="Control" node_paths=PackedStringArray("background", "choice_container", "resolution_container", "resolution_label", "continue_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

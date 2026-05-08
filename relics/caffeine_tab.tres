@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://stbrelic010b"]
+
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://stbrelic010a" path="res://relics/caffeine_tab.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Caffeine Tab"
+id = "caffeine_tab"
+type = 4
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "[color=\"ffdf00\"]Caffeine Tab[/color]
+After the first card you play each turn, gain 1 mana (effectively: it costs 1 less)."

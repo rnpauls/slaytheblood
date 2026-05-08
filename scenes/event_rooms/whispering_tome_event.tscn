@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://del2yqjjiqwse" path="res://art/backgrounds/de5fb9bc-cd93-40b6-9e0c-502e21629fe3.jpg" id="3_wt_bg"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="4_wt_theme"]
 
-[node name="WhisperingTomeEvent" type="Control"]
+[node name="WhisperingTomeEvent" type="Control" node_paths=PackedStringArray("background", "choice_container", "resolution_container", "resolution_label", "continue_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

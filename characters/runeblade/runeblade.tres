@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://covn825k1xfh0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
 [ext_resource type="Resource" uid="uid://bg118yb2wjnyh" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]
 [ext_resource type="Resource" uid="uid://dmwlkidfeph" path="res://weapons/runeblood_carver.tres" id="9_rbc00"]
-[ext_resource type="Resource" uid="uid://dhg8g1wnj0oft" path="res://relics/healing_potion.tres" id="10_rlc0"]
+[ext_resource type="Resource" uid="uid://stbrelic004b" path="res://relics/spell_binder.tres" id="10_rlc0"]
 
 [resource]
 script = ExtResource("2_chst0")

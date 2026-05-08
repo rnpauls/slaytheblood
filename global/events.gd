@@ -11,6 +11,21 @@ signal card_discarded(card: Card)
 signal card_pitched(card: Card)
 signal card_sunk(card: Card)
 signal card_blocked(card: Card)
+signal card_exhausted(card: Card)
+
+## Fires after a physical attack lands and damage is actually applied. Carries
+## attacker reference so reactive effects (Bloodied Pelt's "first time hit",
+## healing-on-damage relics, etc.) can target the source. Skipped for fully
+## blocked attacks — use combatant_attacked for "you were targeted" reactions.
+## Reflect-style effects should use a plain DamageEffect to avoid re-firing
+## this signal infinitely.
+signal combatant_damaged(victim: Node, attacker: Node, damage: int)
+## Fires for EVERY physical attack against a combatant — including ones that
+## block fully absorbs (where damage_dealt is 0). Used by reactive defenders
+## that punish the attempt rather than the damage (Thorns, Spiked Pauldrons).
+## `attempted` is the pre-block amount; `damage_dealt` is the post-block
+## residual that actually hit health.
+signal combatant_attacked(victim: Node, attacker: Node, attempted: int, damage_dealt: int)
 #signal card_milled(card: CardUI)
 ## Show one or more tooltip boxes (e.g. main card description + one box per
 ## keyword). Pass anchor_rect in canvas/global coords to anchor next to a source
@@ -47,6 +62,12 @@ signal player_blocks_declared
 signal player_set_up #emitted once the player is initialized in the battle
 signal player_attack_declared
 signal player_attack_completed
+## Fires the first time a card is played in a given player turn (after that
+## card resolves). Used by Tabi Boots, Caffeine Tab, etc.
+signal player_first_card_played(card: Card)
+## Fires the first time an attack card is played in a given player turn.
+## Used by Crow's Feather.
+signal player_first_attack_played(card: Card)
 
 #Enemy-related events
 signal enemy_phase_ended #Called when all enemies are done, move to player turn
@@ -63,6 +84,7 @@ signal intent_unhovered(enemy: Enemy)
 #Battle-related events
 signal battle_over_screen_requested(text: String, type: BattleOverPanel.Type)
 signal battle_won
+signal battle_stalemated
 signal status_tooltip_requested(statuses: Array[Status])
 
 # Map-related events

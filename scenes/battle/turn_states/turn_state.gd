@@ -19,6 +19,7 @@ enum State {
 	ENEMY_EOT,
 	VICTORY,
 	DEFEAT,
+	STALEMATE,
 }
 
 signal transition_requested(from: TurnState, to: State)
