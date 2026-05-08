@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://dxkms3e6ja0wr"]
 
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="1_i5v26"]
+[ext_resource type="Texture2D" uid="uid://c3b3xjx3gtm1f" path="res://art/brute.png" id="1_pbyxb"]
 [ext_resource type="Resource" uid="uid://bg8v8osd0axpy" path="res://characters/brute/brute_draftable_cards.tres" id="2_s65w1"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_pbyxb"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="4_3gwwx"]
@@ -10,18 +11,17 @@
 [ext_resource type="Resource" uid="uid://dhg8g1wnj0oft" path="res://relics/healing_potion.tres" id="5_md8iq"]
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="6_hmg1o"]
 [ext_resource type="Resource" uid="uid://b0u14laxxwhga" path="res://weapons/romping_club.tres" id="7_pb6lu"]
-[ext_resource type="Texture2D" uid="uid://ca57uv3wfqp45" path="res://art/custom_art/brute.png" id="8_3gwwx"]
 
 [resource]
 script = ExtResource("1_i5v26")
 description = "Likes to fuck shit up.
 Extra girthy."
-portrait = ExtResource("8_3gwwx")
+portrait = ExtResource("1_pbyxb")
 draftable_cards = ExtResource("2_s65w1")
 draftable_weapons = Array[ExtResource("4_3gwwx")]([ExtResource("5_aq6wg"), ExtResource("6_hmg1o"), ExtResource("7_pb6lu")])
 starting_relic = ExtResource("5_md8iq")
 character_name = "Brute"
-art = ExtResource("8_3gwwx")
+art = ExtResource("1_pbyxb")
 max_health = 66
 starting_deck = ExtResource("4_6x0nb")
 starting_inventory = ExtResource("5_imjtc")

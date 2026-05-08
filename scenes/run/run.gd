@@ -196,6 +196,12 @@ func _setup_top_bar() -> void:
 	inventory_view.inventory = character.inventory
 	inventory_view.character = character
 
+	inventory_view.visibility_changed.connect(_update_map_scroll_lock)
+	deck_view.visibility_changed.connect(_update_map_scroll_lock)
+
+func _update_map_scroll_lock() -> void:
+	map.scroll_locked = inventory_view.visible or deck_view.visible
+
 func _show_regular_battle_rewards() -> void:
 	var reward_scene := _change_view(BATTLE_REWARD_SCENE) as BattleReward
 	reward_scene.run_stats = stats

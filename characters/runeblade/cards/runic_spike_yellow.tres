@@ -1,20 +1,19 @@
 [gd_resource type="Resource" format=3 uid="uid://crspktryrunb4"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
-[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_icon0"]
+[ext_resource type="Texture2D" uid="uid://djf1tu042kihm" path="res://art/icon_32_2_10.png" id="2_0k5tc"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="3_vatk0"]
 [ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="4_sndsl"]
 
 [resource]
 script = ExtResource("3_vatk0")
-id = "runic_spike_yellow"
+id = "runic_spike"
 target = 1
 cost = 1
 pitch = 2
 attack = 3
 zap = 2
 defense = 2
-icon = ExtResource("2_icon0")
+icon = ExtResource("2_0k5tc")
 tooltip_text = "[kw=zap:2]Zap 2[/kw]"
 sound = ExtResource("4_sndsl")
-block_sound = ExtResource("1_blkau")

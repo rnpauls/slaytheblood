@@ -1,15 +1,17 @@
-## Pure runechant generator — no draw, just stack the field. Used by
-## Spellbinding Bolt and any future "create N runechants" card. Targets SELF
-## so the runechants land on the caster.
 extends Card
 
 const RUNECHANT_STATUS = preload("res://statuses/runechant.tres")
 
-@export var runechant_amount: int = 2
+@export var runechant_amount: int = 1
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	if runechant_amount <= 0:
-		return
+	# Draw 1 card.
+	var card_draw := CardDrawEffect.new()
+	card_draw.cards_to_draw = 1
+	card_draw.execute([owner])
+
+	# Add `runechant_amount` runechants to the owner. SELF targets resolves to
+	# [owner], so we use the targets array as-is.
 	var rune := RUNECHANT_STATUS.duplicate()
 	rune.stacks = runechant_amount
 	var status_effect := StatusEffect.new()

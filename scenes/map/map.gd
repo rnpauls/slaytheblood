@@ -28,6 +28,7 @@ var map_data: Array[Array]
 var floors_climbed: int
 var last_room: Room
 var camera_edge_y: float
+var scroll_locked := false
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
@@ -63,9 +64,9 @@ func _populate_legend() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not visible:
+	if not visible or scroll_locked:
 		return
-	
+
 	if event.is_action_pressed("scroll_down"):
 		camera_2d.position.y -= SCROLL_SPEED
 

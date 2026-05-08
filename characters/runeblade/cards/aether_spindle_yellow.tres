@@ -1,20 +1,19 @@
-[gd_resource type="Resource" format=3 uid="uid://caesyl1runebd0"]
+[gd_resource type="Resource" format=3 uid="uid://cou6k25k1xfh0"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
-[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_icon0"]
+[ext_resource type="Texture2D" uid="uid://pgj8vfpj6tc5" path="res://art/tile_0130.png" id="2_2m8pt"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="3_vatk0"]
 [ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="4_sndsl"]
 
 [resource]
 script = ExtResource("3_vatk0")
-id = "aether_spindle_yellow"
+id = "aether_spindle"
 target = 1
 cost = 2
 pitch = 2
 attack = 4
+damage_kind = 1
 defense = 2
 go_again = true
-icon = ExtResource("2_icon0")
-tooltip_text = "Go again."
+icon = ExtResource("2_2m8pt")
 sound = ExtResource("4_sndsl")
-block_sound = ExtResource("1_blkau")

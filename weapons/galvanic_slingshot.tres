@@ -1,6 +1,6 @@
-[gd_resource type="Resource" format=3 uid="uid://bg118yb2wjnyh"]
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://bg118yb2wjnyh"]
 
-[ext_resource type="Texture2D" uid="uid://pu2lekmmrgox" path="res://art/Icon28_03.png" id="1_gsicn"]
+[ext_resource type="Texture2D" uid="uid://c1gvqgvgs3xc8" path="res://art/tile_0131.png" id="1_85g7i"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="2_gsscr"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_gssnd"]
 
@@ -11,10 +11,9 @@ id = "galvanic_slingshot"
 type = 6
 character_type = 3
 hands = 2
-icon = ExtResource("1_gsicn")
+icon = ExtResource("1_85g7i")
 sound = ExtResource("3_gssnd")
 tooltip = "[kw=zap:2]Zap 2[/kw]"
-attack = 0
 zap = 2
 cost = 1
 go_again = true

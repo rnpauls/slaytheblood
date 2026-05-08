@@ -70,7 +70,7 @@ position = Vector2(669, 271)
 stats = ExtResource("8_u75mi")
 
 [node name="Player" parent="." unique_id=1140780656 instance=ExtResource("3_g13cx")]
-position = Vector2(179, 335)
+position = Vector2(208, 357)
 stats = ExtResource("4_psa3f")
 
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
@@ -90,12 +90,14 @@ offset_top = 520.0
 offset_right = 101.0
 offset_bottom = 568.0
 char_stats = ExtResource("4_psa3f")
+metadata/_edit_use_anchors_ = true
 
 [node name="ActionPointsUI" parent="BattleUI" unique_id=1261898973 instance=ExtResource("14_5moxy")]
 offset_left = 140.0
 offset_top = -201.0
 offset_right = 188.0
 offset_bottom = -153.0
+metadata/_edit_use_anchors_ = true
 
 [node name="EndTurnButton" type="Button" parent="BattleUI" unique_id=1995290884]
 unique_name_in_owner = true
@@ -113,6 +115,7 @@ grow_vertical = 0
 theme = ExtResource("15_8eh2s")
 disabled = true
 text = "END"
+metadata/_edit_use_anchors_ = true
 
 [node name="DrawPile" parent="BattleUI" unique_id=1843257857 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
@@ -126,6 +129,7 @@ offset_right = 144.0
 offset_bottom = 0.0
 grow_vertical = 0
 add_to_back_of_deck = true
+metadata/_edit_use_anchors_ = true
 
 [node name="DiscardPile" parent="BattleUI" unique_id=1643009583 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
@@ -142,69 +146,64 @@ offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
 face_down = false
+metadata/_edit_use_anchors_ = true
 
 [node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 47.0
-offset_top = 293.0
-offset_right = 111.0
-offset_bottom = 357.0
+offset_left = 56.0
+offset_top = 315.0
+offset_right = 120.0
+offset_bottom = 379.0
 
 [node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 266.0
-offset_top = 292.0
-offset_right = 330.0
-offset_bottom = 356.0
+offset_left = 295.0
+offset_top = 314.0
+offset_right = 359.0
+offset_bottom = 378.0
 
 [node name="LeftOffhandEquipmentHandler" parent="BattleUI" unique_id=746134647 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-visible = false
-offset_left = 47.0
-offset_top = 293.0
-offset_right = 111.0
-offset_bottom = 357.0
+offset_left = 56.0
+offset_top = 315.0
+offset_right = 120.0
+offset_bottom = 379.0
 
 [node name="RightOffhandEquipmentHandler" parent="BattleUI" unique_id=1685207277 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-visible = false
-offset_left = 266.0
-offset_top = 292.0
-offset_right = 330.0
-offset_bottom = 356.0
+offset_left = 295.0
+offset_top = 314.0
+offset_right = 359.0
+offset_bottom = 378.0
 
 [node name="HeadEquipmentHandler" parent="BattleUI" unique_id=958391557 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-visible = false
 z_index = 1
-offset_left = 146.0
-offset_top = 116.0
-offset_right = 210.0
-offset_bottom = 180.0
+offset_left = 174.0
+offset_top = 107.0
+offset_right = 238.0
+offset_bottom = 171.0
 
 [node name="ChestEquipmentHandler" parent="BattleUI" unique_id=491197610 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-visible = false
-offset_left = 146.0
-offset_top = 186.0
-offset_right = 210.0
-offset_bottom = 250.0
+offset_left = 174.0
+offset_top = 177.0
+offset_right = 238.0
+offset_bottom = 241.0
 
 [node name="ArmsEquipmentHandler" parent="BattleUI" unique_id=815727987 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-visible = false
-offset_left = 76.0
-offset_top = 186.0
-offset_right = 140.0
-offset_bottom = 250.0
+offset_left = 104.0
+offset_top = 177.0
+offset_right = 168.0
+offset_bottom = 241.0
 
 [node name="LegsEquipmentHandler" parent="BattleUI" unique_id=132559581 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-visible = false
-offset_left = 216.0
-offset_top = 186.0
-offset_right = 280.0
-offset_bottom = 250.0
+offset_left = 244.0
+offset_top = 177.0
+offset_right = 308.0
+offset_bottom = 241.0
 
 [node name="ChoiceScreen" type="ColorRect" parent="BattleUI" unique_id=293939386]
 unique_name_in_owner = true

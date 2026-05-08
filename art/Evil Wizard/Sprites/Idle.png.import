@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca57uv3wfqp45"
-path="res://.godot/imported/brute.png-ed19179c54605d6f16d35dccad7bbfd6.ctex"
+uid="uid://b8pney47cci34"
+path="res://.godot/imported/Idle.png-9f7b56e2dfdb6f5f6fdb5ff0aac7dd02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/custom_art/brute.png"
-dest_files=["res://.godot/imported/brute.png-ed19179c54605d6f16d35dccad7bbfd6.ctex"]
+source_file="res://art/Evil Wizard/Sprites/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-9f7b56e2dfdb6f5f6fdb5ff0aac7dd02.ctex"]
 
 [params]
 

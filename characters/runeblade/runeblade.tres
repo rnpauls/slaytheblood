@@ -1,25 +1,26 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bhual6q3jy6t4"]
 
-[ext_resource type="Texture2D" uid="uid://dpfqok8tuy4r7" path="res://art/tile_0084.png" id="1_portt"]
+[ext_resource type="Texture2D" uid="uid://cbvhepsjtfeo" path="res://art/nerd.png" id="1_np4oh"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="2_chst0"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_np4oh"]
 [ext_resource type="Resource" uid="uid://crbsd1runebd0" path="res://characters/runeblade/runeblade_starting_deck.tres" id="3_sdck0"]
-[ext_resource type="Resource" uid="uid://crbinv1runebd0" path="res://characters/runeblade/runeblade_starting_inv.tres" id="4_sinv0"]
+[ext_resource type="Resource" uid="uid://jiwskb7w1o6" path="res://characters/runeblade/runeblade_starting_inv.tres" id="4_sinv0"]
 [ext_resource type="Resource" uid="uid://crbdr1runebd0" path="res://characters/runeblade/runeblade_draftable_cards.tres" id="5_drft0"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="6_wpn00"]
-[ext_resource type="Resource" uid="uid://caetha1runebd0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
-[ext_resource type="Resource" uid="uid://cgvslg1runebd0" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]
-[ext_resource type="Resource" uid="uid://crbcrvtr1runeb" path="res://weapons/runeblood_carver.tres" id="9_rbc00"]
+[ext_resource type="Resource" uid="uid://covn825k1xfh0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
+[ext_resource type="Resource" uid="uid://bg118yb2wjnyh" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]
+[ext_resource type="Resource" uid="uid://dmwlkidfeph" path="res://weapons/runeblood_carver.tres" id="9_rbc00"]
 [ext_resource type="Resource" uid="uid://dhg8g1wnj0oft" path="res://relics/healing_potion.tres" id="10_rlc0"]
 
 [resource]
 script = ExtResource("2_chst0")
 description = "Channels arcane through steel. Build runechants, set the field humming, then deliver one untyped strike that bypasses everything."
-portrait = ExtResource("1_portt")
+portrait = ExtResource("1_np4oh")
 draftable_cards = ExtResource("5_drft0")
 draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00")])
 starting_relic = ExtResource("10_rlc0")
 character_name = "Runeblade"
-art = ExtResource("1_portt")
+art = ExtResource("1_np4oh")
 max_health = 27
 starting_deck = ExtResource("3_sdck0")
 starting_inventory = ExtResource("4_sinv0")

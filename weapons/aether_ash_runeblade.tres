@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://covn825k1xfh0"]
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://covn825k1xfh0"]
 
 [ext_resource type="Texture2D" uid="uid://dbtr2qc4xom0d" path="res://art/Icon28_08.png" id="1_aaicn"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="2_aascr"]
@@ -8,13 +8,12 @@
 script = ExtResource("2_aascr")
 weapon_name = "Aether Ash Runeblade"
 id = "aether_ash_runeblade"
-type = 0
 rarity = 1
 character_type = 3
 hands = 1
 icon = ExtResource("1_aaicn")
 sound = ExtResource("3_aasnd")
-tooltip = "Pure arcane swing. Bypasses block; the defender spends mana to prevent."
+tooltip = "Arcane damage"
 attack = 4
 damage_kind = 1
 cost = 2

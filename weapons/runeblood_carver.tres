@@ -8,15 +8,12 @@
 script = ExtResource("2_rcscr")
 weapon_name = "Runeblood Carver"
 id = "runeblood_carver"
-type = 0
 character_type = 3
-hands = 0
 starter_weapon = true
 allow_duplicate_in_draft = true
 icon = ExtResource("1_rcicn")
 sound = ExtResource("3_rcsnd")
-tooltip = "On hit: create 1 runechant on yourself."
+tooltip = "On hit: create 1 runechant"
 attack = 1
-cost = 0
 go_again = true
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

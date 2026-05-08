@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bm0786xi0batq"]
 
-[ext_resource type="Texture2D" uid="uid://01cnuv5m4n6f" path="res://art/tile_0112.png" id="1_btt60"]
+[ext_resource type="Texture2D" uid="uid://dh4x623krw7e5" path="res://art/samurai.png" id="1_7xeg5"]
 [ext_resource type="Resource" uid="uid://6i5wr118op2u" path="res://characters/ninja/ninja_draftable_cards.tres" id="2_u8x1n"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_7xeg5"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="3_134v8"]
@@ -16,12 +16,12 @@
 script = ExtResource("3_134v8")
 description = "Sneaky little bastard.
 He will kill you"
-portrait = ExtResource("1_btt60")
+portrait = ExtResource("1_7xeg5")
 draftable_cards = ExtResource("2_u8x1n")
 draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtResource("6_kjhjj"), ExtResource("7_5pfox")])
 starting_relic = ExtResource("7_fhfql")
 character_name = "Ninja"
-art = ExtResource("1_btt60")
+art = ExtResource("1_7xeg5")
 max_health = 25
 starting_deck = ExtResource("5_fhfql")
 starting_inventory = ExtResource("6_wrrns")
