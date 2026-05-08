@@ -42,15 +42,24 @@ const RARITY_COLORS := {
 ## block value is added to player.stats.block.
 @export var trigger_relic: Relic
 
+@export_group("Active Ability")
+## When true, the equipment can be clicked during the player's action phase to
+## trigger a per-turn active ability. Subclasses override use_active_ability().
+@export var has_active_ability: bool = false
+
 # Runtime state — not exported.
 var current_block: int
 var used_this_attack: bool = false
+var ability_used_this_turn: bool = false
 var owner: Variant
 
 
 func initialize_equipment(_owner) -> void:
 	current_block = max_block
 	used_this_attack = false
+	# Reset here so the flag never leaks across battles via the saved Resource
+	# (Godot serializes script `var`s, not just `@export`s).
+	ability_used_this_turn = false
 
 
 ## Called when an equipment is used to defend against an incoming attack.
@@ -82,6 +91,27 @@ func restore_for_battle() -> void:
 	if persistence == Persistence.REUSABLE:
 		current_block = max_block
 		used_this_attack = false
+		ability_used_this_turn = false
+
+
+## Returns true if the equipment's active ability can be triggered right now
+## (has the ability, not yet used this turn, and the owner has at least 1 AP).
+func can_use_active_ability(owner_node: Node) -> bool:
+	if not has_active_ability or ability_used_this_turn:
+		return false
+	var p := owner_node as Player
+	return p != null and p.stats != null and p.stats.action_points >= 1
+
+
+## Trigger the active ability. Subclasses override this with their effect, then
+## call super.use_active_ability(owner_node) to mark the per-turn cooldown.
+## Callers should gate on can_use_active_ability() first.
+func use_active_ability(_owner_node: Node) -> void:
+	ability_used_this_turn = true
+
+
+func reset_active_ability() -> void:
+	ability_used_this_turn = false
 
 
 func get_tooltip() -> String:

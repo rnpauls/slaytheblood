@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cwm4kpr8q2nva"]
+
+[ext_resource type="Script" path="res://scenes/event_rooms/wandering_merchant_event.gd" id="1_wm_script"]
+[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="2_wm_button"]
+[ext_resource type="Texture2D" uid="uid://lpiqmrhpl8l2" path="res://art/backgrounds/medieval-castle-dungeon-wall-game-cartoon-free-vector-3577067215.jpg" id="3_wm_bg"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="4_wm_theme"]
+
+[node name="WanderingMerchantEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wm_script")
+background = NodePath("Background")
+choice_container = NodePath("ChoiceContainer")
+resolution_container = NodePath("ResolutionContainer")
+resolution_label = NodePath("ResolutionContainer/ResolutionLabel")
+continue_button = NodePath("ResolutionContainer/ContinueButton")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wm_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -180.0
+offset_right = 180.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="ChoiceContainer"]
+layout_mode = 2
+theme = ExtResource("4_wm_theme")
+text = "Wandering Merchant"
+horizontal_alignment = 1
+
+[node name="Flavor" type="Label" parent="ChoiceContainer"]
+layout_mode = 2
+theme = ExtResource("4_wm_theme")
+text = "A hooded trader spreads
+their wares before you."
+horizontal_alignment = 1
+
+[node name="CommonButton" parent="ChoiceContainer" instance=ExtResource("2_wm_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 70)
+layout_mode = 2
+text = "Buy a Common card (75g)"
+
+[node name="UncommonButton" parent="ChoiceContainer" instance=ExtResource("2_wm_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 70)
+layout_mode = 2
+text = "Buy an Uncommon card (150g)"
+
+[node name="LeaveButton" parent="ChoiceContainer" instance=ExtResource("2_wm_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 70)
+layout_mode = 2
+text = "Walk past"
+
+[node name="ResolutionContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ResolutionLabel" type="Label" parent="ResolutionContainer"]
+layout_mode = 2
+theme = ExtResource("4_wm_theme")
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueButton" parent="ResolutionContainer" instance=ExtResource("2_wm_button")]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "Continue"

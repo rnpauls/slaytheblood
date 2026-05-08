@@ -22,6 +22,7 @@ const HOVER_TWEEN_TIME := 0.1
 
 var equipment: Equipment
 var is_blocking: bool = false
+var is_action_phase: bool = false
 var _hover_tween: Tween
 
 func _ready() -> void:
@@ -29,6 +30,8 @@ func _ready() -> void:
 		return
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
 	Events.player_blocks_declared.connect(_on_player_blocks_declared)
+	Events.player_action_phase_started.connect(_on_player_action_phase_started)
+	Events.player_end_phase_started.connect(_on_player_end_phase_started)
 
 
 func set_equipment(new_equipment: Equipment) -> void:
@@ -40,12 +43,22 @@ func set_equipment(new_equipment: Equipment) -> void:
 		if interactive:
 			equipment.owner = owner_of_equipment
 			equipment.initialize_equipment(owner_of_equipment)
+			_connect_stats_for_glow()
 		show()
 		_refresh_button_state()
 	else:
 		equipment = null
 		equipment_ui.equipment = null
 		hide()
+
+
+# Mirrors WeaponHandler._connect_stats_for_glow so the active-ability glow
+# refreshes whenever AP changes mid-turn.
+func _connect_stats_for_glow() -> void:
+	var player := owner_of_equipment as Player
+	if player and player.stats:
+		if not player.stats.stats_changed.is_connected(_refresh_button_state):
+			player.stats.stats_changed.connect(_refresh_button_state)
 
 
 func flash() -> void:
@@ -67,6 +80,18 @@ func _on_player_blocks_declared() -> void:
 	_refresh_button_state()
 
 
+func _on_player_action_phase_started() -> void:
+	is_action_phase = true
+	_refresh_button_state()
+
+
+func _on_player_end_phase_started() -> void:
+	is_action_phase = false
+	if equipment:
+		equipment.reset_active_ability()
+	_refresh_button_state()
+
+
 ## End-of-battle restore for REUSABLE equipment.
 func restore_for_battle() -> void:
 	if not equipment:
@@ -82,22 +107,40 @@ func can_block() -> bool:
 		and equipment.current_block > 0
 
 
+func can_use_active_ability() -> bool:
+	return equipment != null \
+		and is_action_phase \
+		and equipment.can_use_active_ability(owner_of_equipment)
+
+
 func _refresh_button_state() -> void:
 	if not equipment:
 		equipment_button.disabled = true
 		equipment_ui.set_grey_out(true)
+		equipment_ui.set_glow(false)
 		return
 	if not interactive:
 		# Viewer mode: show as lit; the containing UI manages click-disabling
 		# (e.g. when combat is in progress and equipment swaps are forbidden).
 		equipment_button.disabled = false
 		equipment_ui.set_grey_out(false)
+		equipment_ui.set_glow(false)
 		equipment_ui.update_block_label()
 		return
-	var available := can_block()
+	var ability_ready := can_use_active_ability()
+	var available := can_block() or ability_ready
 	equipment_button.disabled = not available
 	equipment_ui.set_grey_out(not available)
+	equipment_ui.set_glow(ability_ready)
 	equipment_ui.update_block_label()
+
+
+func attempt_to_use_ability() -> void:
+	if not can_use_active_ability():
+		return
+	equipment.use_active_ability(owner_of_equipment)
+	flash()
+	_refresh_button_state()
 
 
 func attempt_to_block() -> void:
@@ -170,7 +213,11 @@ func _clear_equipped_slot_on_character(eq: Equipment) -> void:
 func _on_equipment_button_pressed() -> void:
 	if not interactive:
 		return
-	attempt_to_block()
+	# Blocking takes precedence: when an enemy is attacking, a click defends.
+	if is_blocking:
+		attempt_to_block()
+	elif can_use_active_ability():
+		attempt_to_use_ability()
 
 
 func _on_mouse_entered() -> void:

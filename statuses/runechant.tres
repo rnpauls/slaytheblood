@@ -8,6 +8,5 @@ script = ExtResource("1_rch01")
 id = "runechant"
 type = 2
 stack_type = 1
-can_expire = false
 icon = ExtResource("2_rchic")
 tooltip = "Runechant: pops on your next attack to deal 1 arcane damage to the target. Bypasses block."

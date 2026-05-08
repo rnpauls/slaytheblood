@@ -6,6 +6,7 @@ extends Control
 @onready var icon: TextureRect = $Icon
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var block_label: Label = %BlockLabel
+@onready var glow_panel: Panel = %GlowPanel
 
 func _ready() -> void:
 	shader_material = ShaderMaterial.new()
@@ -45,6 +46,12 @@ func update_block_label() -> void:
 		block_label.add_theme_color_override("font_color", Color(1, 0.6, 0.4))
 	else:
 		block_label.remove_theme_color_override("font_color")
+
+func set_glow(enabled: bool) -> void:
+	if not is_node_ready():
+		await ready
+	glow_panel.visible = enabled and equipment != null
+
 
 func flash() -> void:
 	if animation_player and animation_player.has_animation("flash"):

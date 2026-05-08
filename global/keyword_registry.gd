@@ -21,7 +21,7 @@ extends Node
 
 ## id (StringName) -> KeywordEntry (preloaded .tres). Populate as you go.
 const KEYWORDS: Dictionary = {
-	&"strength": preload("uid://dwwwgbh3j5nri"),
+	&"muscle": preload("uid://dwwwgbh3j5nri"),
 	&"empower" : preload("uid://d11r1vtrliyc3"),
 	&"intim" : preload("uid://c2nsq18tn8muy"),
 	&"vulnerable": preload("uid://7gk67jrtikrd"),

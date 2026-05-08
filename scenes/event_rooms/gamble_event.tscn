@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://ca3btftum1s8f"]
+[gd_scene load_steps=5 format=3 uid="uid://ca3btftum1s8f"]
 
 [ext_resource type="Script" uid="uid://bsswdvdjuuabr" path="res://scenes/event_rooms/gamble_event.gd" id="1_jjfvp"]
 [ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="1_vc0fc"]
 [ext_resource type="Texture2D" uid="uid://cyoh7oerow1kx" path="res://art/backgrounds/slot_machine.jpeg" id="2_1wr75"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="3_8v7cw"]
 
-[node name="GambleEvent" type="Control" unique_id=67905769]
+[node name="GambleEvent" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,8 +13,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jjfvp")
+background = NodePath("Background")
+choice_container = NodePath("ChoiceContainer")
+resolution_container = NodePath("ResolutionContainer")
+resolution_label = NodePath("ResolutionContainer/ResolutionLabel")
+continue_button = NodePath("ResolutionContainer/ContinueButton")
 
-[node name="ColorRect" type="TextureRect" parent="." unique_id=175403516]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -28,7 +33,7 @@ grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("2_1wr75")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1411502617]
+[node name="ChoiceContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=465093759]
+[node name="Label" type="Label" parent="ChoiceContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_8v7cw")
@@ -51,22 +56,50 @@ text = "Bet your
 money"
 horizontal_alignment = 1
 
-[node name="FiftyButton" parent="VBoxContainer" unique_id=1266087778 instance=ExtResource("1_vc0fc")]
+[node name="FiftyButton" parent="ChoiceContainer" instance=ExtResource("1_vc0fc")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-text = "Bet 50g: 50% chance 
+text = "Bet 50g: 50% chance
 to win 100G"
 
-[node name="ThirtyButton" parent="VBoxContainer" unique_id=2051907348 instance=ExtResource("1_vc0fc")]
+[node name="ThirtyButton" parent="ChoiceContainer" instance=ExtResource("1_vc0fc")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-text = "Bet 50g: 30% chance 
+text = "Bet 50g: 30% chance
 to win 200G"
 
-[node name="SkipButton" parent="VBoxContainer" unique_id=739296978 instance=ExtResource("1_vc0fc")]
+[node name="SkipButton" parent="ChoiceContainer" instance=ExtResource("1_vc0fc")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "No thanks!"
+
+[node name="ResolutionContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 95.0
+offset_top = -100.0
+offset_right = 435.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ResolutionLabel" type="Label" parent="ResolutionContainer"]
+layout_mode = 2
+theme = ExtResource("3_8v7cw")
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueButton" parent="ResolutionContainer" instance=ExtResource("1_vc0fc")]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "Continue"

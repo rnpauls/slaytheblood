@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dcs7hxn5bvk3p"]
+
+[ext_resource type="Script" path="res://scenes/event_rooms/cursed_shrine_event.gd" id="1_cs_script"]
+[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="2_cs_button"]
+[ext_resource type="Texture2D" uid="uid://7rrkay26jl73" path="res://art/backgrounds/medieval-dungeon-interior-with-stone-brick-walls-torches-empty-cellar-medieval-temple-palace-fort-tower-lit-by-night-modern-cartoon-illustration_76964-343786-915309253.jpg" id="3_cs_bg"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="4_cs_theme"]
+
+[node name="CursedShrineEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cs_script")
+background = NodePath("Background")
+choice_container = NodePath("ChoiceContainer")
+resolution_container = NodePath("ResolutionContainer")
+resolution_label = NodePath("ResolutionContainer/ResolutionLabel")
+continue_button = NodePath("ResolutionContainer/ContinueButton")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cs_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="ChoiceContainer"]
+layout_mode = 2
+theme = ExtResource("4_cs_theme")
+text = "Cursed Shrine"
+horizontal_alignment = 1
+
+[node name="Flavor" type="Label" parent="ChoiceContainer"]
+layout_mode = 2
+theme = ExtResource("4_cs_theme")
+text = "An old altar smeared in
+dried blood waits for you."
+horizontal_alignment = 1
+
+[node name="PrayButton" parent="ChoiceContainer" instance=ExtResource("2_cs_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 70)
+layout_mode = 2
+text = "Pray (-8 HP, gain a Rare card)"
+
+[node name="DefileButton" parent="ChoiceContainer" instance=ExtResource("2_cs_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 70)
+layout_mode = 2
+text = "Defile (-half gold, +12 Max HP)"
+
+[node name="LeaveButton" parent="ChoiceContainer" instance=ExtResource("2_cs_button")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 70)
+layout_mode = 2
+text = "Leave"
+
+[node name="ResolutionContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -100.0
+offset_right = 220.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ResolutionLabel" type="Label" parent="ResolutionContainer"]
+layout_mode = 2
+theme = ExtResource("4_cs_theme")
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueButton" parent="ResolutionContainer" instance=ExtResource("2_cs_button")]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "Continue"

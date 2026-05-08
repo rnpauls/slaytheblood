@@ -66,12 +66,31 @@ _data = {
 &"flash": SubResource("Animation_eqflash")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_equipment_glow"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(1, 0.95, 0.3, 0.8)
+shadow_size = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="EquipmentUI" type="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_equiui")
+
+[node name="GlowPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+visible = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_equipment_glow")
 
 [node name="Icon" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(64, 64)
