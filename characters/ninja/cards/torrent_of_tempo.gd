@@ -1,15 +1,5 @@
 extends Card
 
-func get_default_tooltip() -> String:
-	return tooltip_text % attack
-
-func get_updated_tooltip(player_modifiers: ModifierHandler, enemy_modifiers: ModifierHandler) -> String:
-	var modified_dmg := player_modifiers.get_modified_value(attack, Modifier.Type.DMG_DEALT)
-	
-	if enemy_modifiers:
-		modified_dmg = enemy_modifiers.get_modified_value(modified_dmg, Modifier.Type.DMG_TAKEN)
-	return tooltip_text % modified_dmg
-
 func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
 	await super.play(card_parent, targets, char_stats, modifiers)
 	go_again = false

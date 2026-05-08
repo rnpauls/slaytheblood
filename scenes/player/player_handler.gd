@@ -44,6 +44,7 @@ func start_battle(char_stats: CharacterStats) -> void:
 	character.draw_pile = character.deck.custom_duplicate()
 	character.draw_pile.shuffle()
 	character.discard = CardPile.new()
+	character.exhaust = CardPile.new()
 
 	# Materialize the symmetric HandFacade for effects targeting the player.
 	player.hand_facade = PlayerHandFacade.new(player, self)
@@ -113,9 +114,13 @@ func end_turn() -> void:
 
 
 func draw_card() -> void:
-	#reshuffle_deck_from_discard()
 	if not character:
 		await Events.player_set_up
+	# Auto-recycle: when the draw pile is empty, flip the discard pile back onto
+	# it (no shuffle). reshuffle_deck_from_discard handles the visual handoff +
+	# the synchronous resource swap; subsequent draws work immediately.
+	if character.draw_pile.empty() and not character.discard.empty():
+		reshuffle_deck_from_discard()
 	# Release the top visual from the draw pile BEFORE popping the resource so
 	# the panel's size_changed handler sees matching counts and skips auto-removal.
 	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
@@ -126,7 +131,6 @@ func draw_card() -> void:
 	if card_drawn:
 		hand.add_card(card_drawn, source_visual)
 		SFXRegistry.play(&"DRAW_CARD")
-		#reshuffle_deck_from_discard()
 		Events.player_card_drawn.emit()
 		card_drawn.card_play_finished.connect(_on_card_play_finished)
 		card_drawn.card_play_started.connect(_on_card_play_started)
@@ -190,14 +194,23 @@ func discard_cards() -> void:
 	)
 
 
+## Flip the discard pile onto the draw pile in original order — NOT shuffled.
+## discard.draw_card() pops index 0 (oldest first) and draw_pile.add_card()
+## appends, so the resulting draw pile order is oldest-on-top (next to draw)
+## and newest-on-bottom (last to draw / "bottom of deck" per user spec).
 func reshuffle_deck_from_discard() -> void:
 	if not character.draw_pile.empty():
 		return
 
+	# Animate the visual handoff first so the size_changed handlers see matching
+	# counts and skip auto-spawn/free. The animation runs fire-and-forget; the
+	# resource swap below happens immediately so subsequent draws work.
+	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
+	if battle_ui and battle_ui.discard_pile and battle_ui.draw_pile:
+		battle_ui.discard_pile.reshuffle_to(battle_ui.draw_pile)
+
 	while not character.discard.empty():
 		character.draw_pile.add_card(character.discard.draw_card())
-
-	character.draw_pile.shuffle()
 
 func _on_card_play_started(_card: Card) -> void:
 	pass
@@ -213,6 +226,7 @@ func _on_card_play_finished(card: Card) -> void:
 		_first_card_played_this_turn = true
 		Events.player_first_card_played.emit(card)
 	if card.exhausts:# or card.type == Card.Type.POWER:
+		character.exhaust.add_card(card)
 		Events.card_exhausted.emit(card)
 		return
 	character.discard.add_card(card) #This used to happen at the start of card.play()
@@ -223,6 +237,7 @@ func _on_card_discarded(card: Card) -> void:
 		player.status_handler.add_status(enr_status)
 
 	if card.exhausts:# or card.type == Card.Type.POWER:
+		character.exhaust.add_card(card)
 		Events.card_exhausted.emit(card)
 		return
 	character.discard.add_card(card)
@@ -234,7 +249,7 @@ func _on_card_pitched(card: Card) -> void:
 	if card.cost == 0:
 		var flow_status  := preload("res://statuses/flow.tres").duplicate()
 		player.status_handler.add_status(flow_status)
-	character.draw_pile.add_card(card)
+	character.discard.add_card(card)
 
 func _on_card_sunk(card: Card) -> void:
 	character.draw_pile.add_card(card)

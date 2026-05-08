@@ -27,6 +27,7 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		new_enemy_child.stats.draw_pile = new_enemy_child.stats.starting_deck.custom_duplicate()
 		new_enemy_child.stats.draw_pile.shuffle()
 		new_enemy_child.stats.discard = CardPile.new()
+		new_enemy_child.stats.exhaust = CardPile.new()
 		new_enemy_child.draw_cards(new_enemy_child.stats.cards_per_turn)
 		new_enemy_child.setup_ai()
 

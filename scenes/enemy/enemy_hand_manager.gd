@@ -61,6 +61,9 @@ func is_pending_stage(card: Card) -> bool:
 # ── Mutations ────────────────────────────────────────────────────────────────
 
 func draw_card() -> void:
+	# Auto-recycle: empty draw pile flips the discard back onto draw (no shuffle).
+	if _enemy.stats.draw_pile.empty() and not _enemy.stats.discard.empty():
+		reshuffle_discard()
 	var card_drawn: Card = _enemy.stats.draw_pile.draw_card()
 	if card_drawn == null:
 		return
@@ -95,16 +98,20 @@ func add_card_to_hand(card: Card) -> void:
 	hand_changed.emit()
 
 
-## Remove cards with `exhausts: true` at end of turn. Enemy hands persist across
-## turns (no auto-discard), so this is the only hook that prevents permanent
-## clutter from cards added by player effects.
+## Remove cards with `unplayable: true` at end of turn. Enemy hands persist
+## across turns (no auto-discard), so this hook prevents clutter from cards
+## added by player effects (e.g. Trash from Gunkshot). With the post-refactor
+## default of exhausts=true on every card, gating EOT cleanup on unplayable
+## (instead of exhausts) keeps normal enemy cards in hand across turns and
+## still cleans up curses/trash that the player has injected.
 func exhaust_eot_cards_in_hand() -> void:
 	var to_exhaust: Array[Card] = []
 	for card in hand:
-		if card.exhausts:
+		if card.unplayable:
 			to_exhaust.append(card)
 	for card in to_exhaust:
 		hand.erase(card)
+		_enemy.stats.exhaust.add_card(card)
 		if _enemy.enemy_ai:
 			# AI removes from its own hand and re-plans via the signal handler below.
 			_enemy.enemy_ai.card_removed_from_hand.emit(card)
@@ -128,15 +135,14 @@ func untrack_card_ui(card: Card) -> void:
 	card_ui_map.erase(card)
 
 
-## Move every card in the discard pile back to the draw pile and shuffle.
+## Flip the discard pile onto the draw pile in original order — NOT shuffled.
 ## Mirrors PlayerHandler.reshuffle_deck_from_discard so HandFacade sees a
-## symmetric API on both sides.
+## symmetric API on both sides. Resource-only — enemies have no visual pile.
 func reshuffle_discard() -> void:
 	if not _enemy.stats.draw_pile.empty():
 		return
 	while not _enemy.stats.discard.empty():
 		_enemy.stats.draw_pile.add_card(_enemy.stats.discard.draw_card())
-	_enemy.stats.draw_pile.shuffle()
 
 
 # ── Queries ───────────────────────────────────────────────────────────────────

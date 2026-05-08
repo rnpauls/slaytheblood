@@ -27,15 +27,18 @@ func _on_action_phase_started() -> void:
 	_request(State.PLAYER_ACTION)
 
 
-# Stalemate fires when neither side can take a meaningful action: the
-# player has no cards in hand or draw pile, and every alive enemy has
-# no cards in hand, no draw pile, and no playable arsenal (a BLOCK or
-# NAA arsenal — or an attack the enemy can't afford — doesn't count).
-# Discard piles are intentionally not part of the check.
+# Stalemate fires when neither side can draw or play another card. Each side
+# is "stuck" only when hand AND draw pile AND discard pile are all empty —
+# discard is part of the check because an empty draw pile auto-recycles from
+# the discard (no shuffle) on the next draw. Exhaust pile is NOT part of the
+# check: exhausted cards never come back. An enemy with a playable arsenal
+# (an attack it can afford) is also not stuck.
 func _is_stalemate() -> bool:
 	if player_handler.hand.get_child_count() > 0:
 		return false
 	if not player_handler.character.draw_pile.empty():
+		return false
+	if not player_handler.character.discard.empty():
 		return false
 
 	for enemy in enemy_handler.get_children():
@@ -44,6 +47,8 @@ func _is_stalemate() -> bool:
 		if not enemy.hand_manager.hand.is_empty():
 			return false
 		if not enemy.stats.draw_pile.empty():
+			return false
+		if not enemy.stats.discard.empty():
 			return false
 		if _has_playable_arsenal(enemy):
 			return false

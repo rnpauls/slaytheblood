@@ -9,8 +9,10 @@ extends CanvasLayer
 @onready var end_turn_button: Button = %EndTurnButton
 @onready var draw_pile: CardStackPanel = %DrawPile
 @onready var discard_pile: CardStackPanel = %DiscardPile
+@onready var exhaust_button: TextureButton = %ExhaustButton
 @onready var draw_pile_view: CardPileView = %DrawPileView
 @onready var discard_pile_view: CardPileView = %DiscardPileView
+@onready var exhaust_pile_view: CardPileView = %ExhaustPileView
 @onready var choice_screen: ColorRect = %ChoiceScreen
 @onready var choice_screen_label: RichTextLabel = %ChoiceScreenLabel
 
@@ -24,7 +26,8 @@ func _ready() -> void:
 	Events.player_action_phase_started.connect(_on_player_action_phase_started)
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 	draw_pile.pressed.connect(draw_pile_view.show_current_view.bind("Draw Pile", true))
-	discard_pile.pressed.connect(discard_pile_view.show_current_view.bind("Discard Pile"))
+	discard_pile.pressed.connect(_on_discard_pile_pressed)
+	exhaust_button.pressed.connect(exhaust_pile_view.show_current_view.bind("Exhaust Pile"))
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
 	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
 	Events.top_card_reveal_requested.connect(_on_top_card_reveal_requested)
@@ -34,6 +37,23 @@ func initialize_card_pile_ui() ->void:
 	draw_pile_view.card_pile = char_stats.draw_pile
 	discard_pile.card_pile = char_stats.discard
 	discard_pile_view.card_pile = char_stats.discard
+	exhaust_pile_view.card_pile = char_stats.exhaust
+
+
+## The player's discard pile click rebinds the view to the player's discard
+## first — this is the trigger that resets the view if it was retargeted to
+## an enemy's discard via show_card_pile().
+func _on_discard_pile_pressed() -> void:
+	discard_pile_view.card_pile = char_stats.discard
+	discard_pile_view.show_current_view("Discard Pile")
+
+
+## Open the discard-pile viewer retargeted to an arbitrary CardPile (used by
+## the EnemyResourceUI trash button to show an enemy's discard). The next click
+## on the player's discard pile re-binds back to char_stats.discard.
+func show_card_pile(pile: CardPile, title: String) -> void:
+	discard_pile_view.card_pile = pile
+	discard_pile_view.show_current_view(title)
 
 func choose_cards_in_hand(num_cards: int) -> Array[CardUI]:
 	num_cards_to_choose = num_cards

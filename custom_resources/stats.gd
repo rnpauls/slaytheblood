@@ -30,6 +30,7 @@ var inventory: Inventory
 var deck: CardPile
 var discard: CardPile
 var draw_pile: CardPile
+var exhaust: CardPile
 var health: int : set = set_health
 var block: int : set = set_block
 
@@ -79,6 +80,7 @@ func create_instance() -> Resource:
 	instance.deck = instance.starting_deck.duplicate()
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
+	instance.exhaust = CardPile.new()
 	return instance
 
 ## prevention: how much arcane to mana-spend on. -1 = auto-spend everything

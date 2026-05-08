@@ -36,7 +36,7 @@ const PITCH_COLORS := {
 ## set this to deal arcane without an attack component.
 @export var zap: int = 0
 @export var defense: int
-@export var exhausts: bool = false
+@export var exhausts: bool = true
 @export var go_again: bool = false : get = get_go_again
 @export var action_points_granted: int = 0
 @export var unplayable: bool = false
@@ -73,9 +73,11 @@ var discarded_card: Card = null
 func is_single_targeted() -> bool:
 	return target == Target.SINGLE_ENEMY
 
-func _get_targets(card_parent: Node) -> Array[Node]:
-	var tree := card_parent.get_tree()
-	
+func _get_targets(_card_parent: Node) -> Array[Node]:
+	# Resolve via owner: the CardUI may have been detached by card_ui.play()
+	# before effects resolve, but owner (Player/Enemy) stays in the tree.
+	var tree = owner.get_tree()
+
 	match target:
 		Target.SELF:
 			return [owner]

@@ -65,6 +65,7 @@ func exhaust_random(n: int) -> Array[Card]:
 	var exhausted: Array[Card] = []
 	for card_ui: PlayerCardUI in to_exhaust:
 		exhausted.append(card_ui.card)
+		_player_handler.character.exhaust.add_card(card_ui.card)
 		card_ui.queue_free()
 	return exhausted
 

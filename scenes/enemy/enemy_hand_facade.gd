@@ -63,6 +63,7 @@ func exhaust_random(n: int) -> Array[Card]:
 	for c in pool.slice(0, n):
 		to_exhaust.append(c)
 	for card in to_exhaust:
+		_enemy.stats.exhaust.add_card(card)
 		_hand_manager.remove_card(card)
 	return to_exhaust
 

@@ -10,6 +10,11 @@ const BASE_STYLEBOX := preload("res://scenes/card_ui/card_base_stylebox.tres")
 const DRAG_STYLEBOX := preload("res://scenes/card_ui/card_dragging_stylebox.tres")
 const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 const SELECTED_STYLEBOX := preload("res://scenes/card_ui/card_selected_stylebox.tres")
+const BURN_SHADER := preload("res://art/shaders/card_burn.gdshader")
+
+const PLAY_EMPHASIS_DURATION := 0.18
+const PLAY_EMPHASIS_SCALE_MULT := 1.18
+const BURN_DURATION := 0.55
 
 @export var modifier_handler: ModifierHandler
 @export var card: Card : set = _set_card
@@ -63,17 +68,21 @@ func play() -> void:
 		return
 	# Hand off to discard BEFORE awaiting effects so the in-flight card_play_finished
 	# signal (which adds to the resource pile) sees a matching visual count and skips
-	# the auto-spawn. Only player cards route to the visible discard pile; enemy
-	# cards (and exhaust) fall through to queue_free as before.
+	# the auto-spawn. Only non-exhausting player cards route to the visible discard
+	# pile; exhausting cards and enemy cards burn up after effects (data side
+	# tracking happens in player_handler / enemy_action_sequencer).
 	var goes_to_player_pile: bool = not card.exhausts and _is_player_card()
 	var pile = _get_discard_pile() if goes_to_player_pile else null
 	if pile:
 		pile.accept_incoming_visual(self)
-	elif get_parent():
-		# Detach so it disappears during effects (matches pre-pile-visual behavior).
-		get_parent().remove_child(self)
-	await card.play(self, targets, char_stats, modifier_handler)
-	if not pile:
+		await card.play(self, targets, char_stats, modifier_handler)
+	else:
+		# Reparent to a sibling of Hand so the card stays visible during effects
+		# AND afterwards while it burns. Hand layout no longer includes it.
+		_reparent_to_play_overlay()
+		await _play_emphasis()
+		await card.play(self, targets, char_stats, modifier_handler)
+		await _burn_up()
 		queue_free()
 
 func discard() -> void:
@@ -90,9 +99,13 @@ func discard() -> void:
 func pitch() -> void:
 	if not card:
 		return
-	var pile = _get_draw_pile() if _is_player_card() else null
+	var pile = _get_discard_pile() if _is_player_card() else null
 	if pile:
-		pile.accept_incoming_visual(self)
+		# accept_pitched_visual is a single-card variant: the card slides
+		# diagonally from hand to the top-of-stack slot in one continuous arc
+		# (no x-snap-then-slide that accept_incoming_visual does for multi-card
+		# discards), and tweens scale/rotation smoothly instead of snapping.
+		pile.accept_pitched_visual(self)
 		card.pitch_card(char_stats)
 	else:
 		card.pitch_card(char_stats)
@@ -216,3 +229,68 @@ func _on_drop_point_detector_area_exited(area: Area2D) -> void:
 func _kill_tween() -> void:
 	if tween and tween.is_running():
 		tween.kill()
+
+
+## Reparent the card to a sibling of Hand so it stays visible (and on top of
+## the hand) during effects + burn. Preserves global transform.
+func _reparent_to_play_overlay() -> void:
+	var bu := _get_battle_ui()
+	if not bu:
+		# No overlay available — leave parent alone; card just stays where it is.
+		return
+	var gpos := global_position
+	var grot := rotation_degrees
+	var gscale := scale
+	var prev := get_parent()
+	if prev == bu:
+		return
+	if prev:
+		prev.remove_child(self)
+	bu.add_child(self)
+	# Last child draws on top among CanvasLayer children.
+	bu.move_child(self, bu.get_child_count() - 1)
+	global_position = gpos
+	rotation_degrees = grot
+	scale = gscale
+	z_index = 50
+
+
+## Brief scale pop + brightness flash to punctuate a card being played. Always
+## resolves at the original transform so the subsequent effects don't fight a
+## modified scale.
+func _play_emphasis() -> void:
+	_kill_tween()
+	var base_scale := scale
+	var pop_scale := base_scale * PLAY_EMPHASIS_SCALE_MULT
+	var half := PLAY_EMPHASIS_DURATION * 0.5
+	tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "scale", pop_scale, half).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "modulate", Color(1.6, 1.5, 1.2, 1.0), half).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", base_scale, half).set_ease(Tween.EASE_IN)
+	tween.parallel().tween_property(self, "modulate", Color.WHITE, half).set_ease(Tween.EASE_IN)
+	await tween.finished
+
+
+## Burn-up dissolve: applies the burn shader to the rendered card face and
+## tweens its `progress` uniform from 0 to 1, then resolves. Caller queue_frees.
+## The shader material is created per-call so cards in flight don't share
+## state, and so we don't need to clean up the original (unset) material.
+func _burn_up() -> void:
+	if not card_render or not card_render.viewport_texture:
+		return
+	var mat := ShaderMaterial.new()
+	mat.shader = BURN_SHADER
+	mat.set_shader_parameter("progress", 0.0)
+	# The card face renders into a SubViewport and is shown by ViewportTexture
+	# (a TextureRect). Putting the shader on that single TextureRect burns the
+	# whole face uniformly without needing use_parent_material on every child.
+	card_render.viewport_texture.material = mat
+	# Hide playability glow during burn so it doesn't outline the dissolving card.
+	card_render.set_glow(false)
+	_kill_tween()
+	tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_method(
+		func(v: float) -> void: mat.set_shader_parameter("progress", v),
+		0.0, 1.0, BURN_DURATION
+	)
+	await tween.finished

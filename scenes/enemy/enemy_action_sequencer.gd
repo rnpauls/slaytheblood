@@ -98,6 +98,8 @@ func do_action() -> void:
 
 ## Attack path: release the staged card and let card_ui.play() run its full
 ## attack/hit animation pipeline. card_ui detaches itself and queue_frees.
+## After play resolves, the card resource is routed to exhaust or discard so
+## AI replanning + reshuffle_discard see a correct mirror of the deck cycle.
 func _do_attack_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
@@ -107,14 +109,20 @@ func _do_attack_action() -> void:
 		card_ui = _hand_manager.get_or_create_card_ui(current_action)
 		_hand_manager.remove_card(current_action)
 
+	var played_card := current_action
 	card_ui.targets = [_enemy.enemy_ai.target]
 	await card_ui.play()
 
+	if played_card.exhausts:
+		_enemy.stats.exhaust.add_card(played_card)
+	else:
+		_enemy.stats.discard.add_card(played_card)
 
-## NAA path: apply effects in-place at the staged position, fade the card out,
-## then drop the Card resource into stats.discard. We bypass card_ui.play() so
-## the visual stays at center during effects (no flash back to hand) and we
-## get a clean fade-out instead of a hard queue_free.
+
+## NAA path: apply effects in-place at the staged position, then burn the card
+## up before dropping the Card resource into stats.discard. We bypass
+## card_ui.play() so the visual stays at center during effects (no flash back
+## to hand).
 func _do_naa_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
@@ -132,16 +140,16 @@ func _do_naa_action() -> void:
 
 	# Effects resolve while the card is still visible at the staged position.
 	# Most NAAs target SELF and apply a status; card.play handles target lookup.
+	await card_ui._play_emphasis()
 	await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
 	if not is_instance_valid(card_ui):
 		return
 
-	var t := card_ui.create_tween()
-	t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
-	t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)
-	await t.finished
+	await card_ui._burn_up()
 
-	if not played_card.exhausts:
+	if played_card.exhausts:
+		_enemy.stats.exhaust.add_card(played_card)
+	else:
 		_enemy.stats.discard.add_card(played_card)
 
 	if is_instance_valid(card_ui):

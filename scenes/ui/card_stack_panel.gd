@@ -41,6 +41,10 @@ const REARRANGE_DURATION := 0.18
 @onready var counter: Label = %Counter
 
 var _hovered: bool = false
+# A pitched card flying in via accept_pitched_visual gets its own continuous
+# tween (diagonal slide with smooth scale/rotation). _arrange skips it so the
+# size_changed-driven re-arrange doesn't kill the in-flight tween mid-flight.
+var _pitched_in_flight: CardUI = null
 
 
 func _ready() -> void:
@@ -137,6 +141,66 @@ func _set_descendants_mouse_filter(node: Node, filter: int) -> void:
 		_set_descendants_mouse_filter(child, filter)
 
 
+## Pitched-card variant of accept_incoming_visual. Reparents the card and
+## tweens it directly from its current global transform (hand position, full
+## scale, any rotation) to the top-of-stack slot in one continuous motion —
+## no x-snap, no instant scale snap. The diagonal slide reads as a clean arc
+## from hand to discard top, instead of the teleport-then-slide that
+## accept_incoming_visual produces (intentional for multi-card discards but
+## ugly for a single pitched card).
+func accept_pitched_visual(card_ui: CardUI) -> void:
+	if card_ui.tween and card_ui.tween.is_running():
+		card_ui.tween.kill()
+	var gpos: Vector2 = card_ui.global_position
+	var gscale: Vector2 = card_ui.scale
+	var grot: float = card_ui.rotation_degrees
+	var prev_parent: Node = card_ui.get_parent()
+	if prev_parent:
+		prev_parent.remove_child(card_ui)
+	add_child(card_ui)
+	# Discard pile (add_to_back_of_deck=false) → last child = visible top.
+	move_child(card_ui, get_child_count() - 1)
+	card_ui.pivot_offset = CARD_PIVOT
+	# Restore original global transform so the card visibly starts where the
+	# user dragged/clicked it from. NO x-snap, NO scale/rotation snap —
+	# everything tweens together.
+	card_ui.global_position = gpos
+	card_ui.scale = gscale
+	card_ui.rotation_degrees = grot
+	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_set_descendants_mouse_filter(card_ui, Control.MOUSE_FILTER_IGNORE)
+	card_ui.z_index = 1
+	if card_ui.card_render:
+		card_ui.card_render.show_back = face_down
+		card_ui.card_render.set_glow(false)
+
+	_pitched_in_flight = card_ui
+	# The card is now the last visual child; _slot_position uses _visuals().size().
+	var target_index: int = _visuals().size() - 1
+	var target_pos: Vector2 = _slot_position(target_index)
+	# Slightly longer than REARRANGE_DURATION for emphasis. TRANS_CUBIC.EASE_OUT
+	# decelerates smoothly into the slot. A tiny scale "settle" via TRANS_BACK
+	# adds a satisfying pop on landing without overshooting position.
+	var fly_duration := 0.32
+	var t := card_ui.create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.tween_property(card_ui, "position", target_pos, fly_duration)
+	t.tween_property(card_ui, "rotation_degrees", 0.0, fly_duration)
+	t.tween_property(card_ui, "scale", Vector2(PILE_SCALE, PILE_SCALE), fly_duration) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	t.chain().tween_callback(func():
+		if _pitched_in_flight == card_ui:
+			_pitched_in_flight = null
+		card_ui.z_index = 0
+	)
+	card_ui.tween = t
+
+	# Rearrange the other cards in the pile to make room (their slots shift
+	# slightly). _arrange skips _pitched_in_flight so the in-flight tween isn't
+	# killed and restarted with the standard ease.
+	_arrange()
+	_update_counter()
+
+
 # ── Internal: spawn/free to match resource size ───────────────────────────────
 
 func _on_pile_size_changed(_new_size: int) -> void:
@@ -223,6 +287,10 @@ func _arrange() -> void:
 		return
 	for i in n:
 		var card := visuals[i]
+		# A pitched card flying in via accept_pitched_visual owns its own tween
+		# to the slot; skip it so we don't override the smooth diagonal motion.
+		if card == _pitched_in_flight:
+			continue
 		var target_pos := _slot_position(i)
 		# Kill any in-flight tween on this card so a stale tween from the previous
 		# arrange (e.g. one started by accept_incoming_visual ~150ms before the
@@ -267,6 +335,24 @@ func _on_pile_hover_exited() -> void:
 		return
 	_hovered = false
 	_arrange()
+
+
+## Move every visual CardUI from this panel into target panel, reusing the
+## existing accept_incoming_visual handoff. The caller is responsible for the
+## resource-side mutation immediately after, mirroring the standard handoff
+## invariant: visuals first, resources second, so the size_changed handlers
+## see matching counts on both panels and skip auto-spawn/free.
+##
+## accept_incoming_visual sets show_back = target.face_down on accept, so cards
+## flying from the (face-up) discard pile to the (face-down) draw pile flip to
+## face-down as part of the handoff. The arrange tween provides the slide.
+func reshuffle_to(target: CardStackPanel) -> void:
+	# _visuals() returns children in order; iterate as-is so the visual that
+	# was on top of the discard ends up at the back of the draw stack.
+	var visuals := _visuals()
+	for v in visuals:
+		target.accept_incoming_visual(v)
+	_update_counter()
 
 
 ## Animate the topmost visual through a peek-flip-return cycle revealing the

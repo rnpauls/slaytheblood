@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://2k7m42jipsq4" path="res://scenes/ui/enemy_resource_ui.gd" id="1_d8wvt"]
 [ext_resource type="Texture2D" uid="uid://c50m0leqqs44k" path="res://art/draw.png" id="2_levgj"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="3_gold"]
+[ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="4_disc"]
 
 [node name="EnemyResourceUI" type="HBoxContainer" unique_id=1222570682]
 anchors_preset = 5
@@ -42,6 +43,21 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="ResourceCount" type="Label" parent="." unique_id=1708981912]
+layout_mode = 2
+size_flags_vertical = 1
+text = "%s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiscardButton" type="TextureButton" parent="." unique_id=1708981913]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("4_disc")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DiscardCount" type="Label" parent="." unique_id=1708981914]
 layout_mode = 2
 size_flags_vertical = 1
 text = "%s"
