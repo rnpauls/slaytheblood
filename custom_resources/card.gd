@@ -188,7 +188,7 @@ func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack
 	# Runechants on the attacker pop into the same packet — single decision
 	# point for the defender instead of a sequence of small arcane events.
 	if owner and owner.status_handler:
-		var rune := owner.status_handler.get_status_by_id("runechant")
+		var rune: Status = owner.status_handler.get_status_by_id("runechant")
 		if rune is RunechantStatus:
 			packet.arcane += (rune as RunechantStatus).consume()
 

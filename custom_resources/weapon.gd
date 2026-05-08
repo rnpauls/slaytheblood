@@ -110,7 +110,7 @@ func build_attack_packet(modifiers: ModifierHandler, custom_attack: int = attack
 		packet.arcane += modifiers.get_modified_value(zap, Modifier.Type.DMG_DEALT)
 
 	if owner and owner.status_handler:
-		var rune := owner.status_handler.get_status_by_id("runechant")
+		var rune: Status = owner.status_handler.get_status_by_id("runechant")
 		if rune is RunechantStatus:
 			packet.arcane += (rune as RunechantStatus).consume()
 
