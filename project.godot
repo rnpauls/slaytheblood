@@ -26,6 +26,7 @@ buses/default_bus_layout="res://art/music/default_bus_layout.tres"
 [autoload]
 
 Constants="*res://global/constants.gd"
+Palette="*res://global/palette.gd"
 Events="*res://global/events.gd"
 Shaker="*res://global/shaker.gd"
 MusicPlayer="*res://global/music_player.tscn"

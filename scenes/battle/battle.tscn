@@ -15,9 +15,7 @@
 [ext_resource type="Resource" uid="uid://p755tj1qwgr3" path="res://enemies/bat/bat_enemy.tres" id="8_u75mi"]
 [ext_resource type="PackedScene" uid="uid://b50ekork55ljq" path="res://scenes/ui/mana_ui.tscn" id="11_8aauo"]
 [ext_resource type="PackedScene" uid="uid://bljd5caaiyxj5" path="res://scenes/ui/action_points_ui.tscn" id="14_5moxy"]
-[ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="15_8eh2s"]
 [ext_resource type="Script" uid="uid://b5b0vhps4sog5" path="res://scenes/ui/red_flash.gd" id="15_gxsdl"]
-[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="16_5moxy"]
 [ext_resource type="PackedScene" uid="uid://b8stk2cstkp01" path="res://scenes/ui/card_stack_panel.tscn" id="17_3u6fe"]
 [ext_resource type="PackedScene" uid="uid://b5dlduholql8" path="res://scenes/ui/battle_over_panel.tscn" id="17_rerbi"]
 [ext_resource type="PackedScene" uid="uid://dd6xjykbymk7u" path="res://scenes/weapon_handler/weapon_handler.tscn" id="19_156m4"]
@@ -113,9 +111,8 @@ offset_right = -20.0
 offset_bottom = -125.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("15_8eh2s")
 disabled = true
-text = "END"
+text = "END TURN"
 metadata/_edit_use_anchors_ = true
 
 [node name="DrawPile" parent="BattleUI" unique_id=1843257857 instance=ExtResource("17_3u6fe")]
@@ -263,7 +260,6 @@ offset_right = -20.0
 offset_bottom = -336.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("16_5moxy")
 text = "CONFIRM"
 
 [node name="Hand" type="Control" parent="BattleUI" unique_id=126863975 node_paths=PackedStringArray("player")]

@@ -2,27 +2,16 @@
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_4afxj"]
 [ext_resource type="Script" uid="uid://b2f0dnj6esxg3" path="res://scenes/ui/mana_ui.gd" id="2_f04lp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwxui"]
-bg_color = Color(0.49994218, 0.5658054, 0.94168127, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.09667946, 5.390644e-06, 0.44882017, 1)
-border_blend = true
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 20
+[ext_resource type="StyleBox" path="res://art/themes/styleboxes/mana_socket.tres" id="3_socket"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_number.tres" id="4_typenum"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_small.tres" id="5_typesml"]
 
 [node name="ManaUI" type="Panel" unique_id=1912161309]
 custom_minimum_size = Vector2(48, 48)
 offset_right = 48.0
 offset_bottom = 48.0
 theme = ExtResource("1_4afxj")
-theme_override_styles/panel = SubResource("StyleBoxFlat_jwxui")
+theme_override_styles/panel = ExtResource("3_socket")
 script = ExtResource("2_f04lp")
 
 [node name="ManaLabel" type="Label" parent="." unique_id=3342296]
@@ -32,20 +21,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -18.0
-offset_right = 18.0
-offset_bottom = 18.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "3"
+label_settings = ExtResource("4_typenum")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label" type="Label" parent="." unique_id=1530748202]
 layout_mode = 0
-offset_left = 1.0
-offset_top = -24.0
-offset_right = 61.0
-offset_bottom = 12.0
+offset_left = 0.0
+offset_top = -22.0
+offset_right = 60.0
+offset_bottom = -4.0
 text = "Mana"
+label_settings = ExtResource("5_typesml")
+horizontal_alignment = 1

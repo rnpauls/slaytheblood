@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c50m0leqqs44k" path="res://art/draw.png" id="2_levgj"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="3_gold"]
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="4_disc"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_small.tres" id="5_typesml"]
 
 [node name="EnemyResourceUI" type="HBoxContainer" unique_id=1222570682]
 anchors_preset = 5
@@ -31,6 +32,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 1
 text = "%s"
+label_settings = ExtResource("5_typesml")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -46,6 +48,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 1
 text = "%s"
+label_settings = ExtResource("5_typesml")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -61,5 +64,6 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 1
 text = "%s"
+label_settings = ExtResource("5_typesml")
 horizontal_alignment = 1
 vertical_alignment = 1

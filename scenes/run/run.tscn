@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dg030i3ximmfl" path="res://scenes/ui/card_pile_opener.tscn" id="4_i2rp4"]
 [ext_resource type="PackedScene" uid="uid://dddovy5g11sne" path="res://scenes/ui/health_ui.tscn" id="4_ptqfx"]
 [ext_resource type="Texture2D" uid="uid://d3p1vffksgu74" path="res://art/deck.png" id="5_048qf"]
-[ext_resource type="Theme" uid="uid://pdxyc2utcr37" path="res://art/themes/pixel_rpg_label_settings_smaller.tres" id="5_cnkn7"]
 [ext_resource type="PackedScene" uid="uid://b3ineiqcx3j0p" path="res://scenes/relic_handler/relic_handler.tscn" id="6_a2nef"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="6_c0b4k"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="8_7yo0l"]
@@ -92,7 +91,6 @@ grow_horizontal = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
-theme = ExtResource("5_cnkn7")
 show_max_hp = true
 
 [node name="GoldUI" parent="TopBar/BarItems" unique_id=982445713 instance=ExtResource("4_3b4mu")]

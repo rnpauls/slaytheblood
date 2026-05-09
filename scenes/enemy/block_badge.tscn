@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/enemy/block_badge.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="2_shield"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_heading.tres" id="3_typehd"]
 
 [node name="BlockBadge" type="HBoxContainer"]
 custom_minimum_size = Vector2(80, 40)
@@ -22,5 +23,6 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 1
 text = "+0"
+label_settings = ExtResource("3_typehd")
 horizontal_alignment = 1
 vertical_alignment = 1

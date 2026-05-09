@@ -2,6 +2,8 @@ class_name BattleOverPanel
 extends Panel
 
 const MAIN_MENU = "res://scenes/ui/main_menu.tscn"
+const TYPE_VICTORY := preload("res://art/themes/typography/type_display.tres")
+const TYPE_DEFEAT := preload("res://art/themes/typography/type_display_lose.tres")
 
 enum Type {WIN, LOSE, STALEMATE}
 
@@ -21,6 +23,8 @@ func _ready() -> void:
 func show_screen(text: String, type: Type) -> void:
 	_current_type = type
 	label.text = text
+	# Gold for victory/stalemate, crimson for defeat — matches HUD palette.
+	label.label_settings = TYPE_DEFEAT if type == Type.LOSE else TYPE_VICTORY
 	continue_button.visible = type == Type.WIN or type == Type.STALEMATE
 	main_menu_button.visible = type == Type.LOSE
 	show()

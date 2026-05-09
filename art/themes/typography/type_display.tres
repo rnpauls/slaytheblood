@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" format=3]
+
+[ext_resource type="FontFile" uid="uid://d2aiw8cpu13w8" path="res://art/themes/lt_cushion/LTCushion-Black.ttf" id="1_font"]
+
+[resource]
+font = ExtResource("1_font")
+font_size = 56
+font_color = Color(0.96, 0.84, 0.48, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)

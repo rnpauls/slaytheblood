@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bvdyajh4cg1pf" path="res://scenes/status_handler/status_ui.gd" id="1_nijyk"]
 [ext_resource type="Texture2D" uid="uid://d0edy7thj8ce6" path="res://art/heart.png" id="2_pe7yq"]
 [ext_resource type="Resource" uid="uid://ygl75v6sitj" path="res://statuses/true_strength_form.tres" id="2_qr1tb"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_small.tres" id="3_typesml"]
 
 [node name="StatusUI" type="Control" unique_id=70340359]
 layout_mode = 3
@@ -27,6 +28,7 @@ offset_top = -3.0
 offset_right = 61.0
 offset_bottom = 41.0
 text = "99"
+label_settings = ExtResource("3_typesml")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -37,5 +39,6 @@ offset_top = -3.0
 offset_right = 61.0
 offset_bottom = 41.0
 text = "99"
+label_settings = ExtResource("3_typesml")
 horizontal_alignment = 1
 vertical_alignment = 1
