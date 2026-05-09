@@ -7,6 +7,7 @@ const BASE_STYLEBOX := preload("res://scenes/card_ui/card_base_stylebox.tres")
 const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 
 @export var card: Card : set = set_card
+@export var hover_scale := 1.1
 
 @onready var visuals: CardVisuals = $Visuals
 
@@ -18,6 +19,9 @@ func _on_visuals_gui_input(event: InputEvent) -> void:
 
 func _on_visuals_mouse_entered() -> void:
 	visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
+	visuals.pivot_offset = visuals.size / 2.0
+	visuals.scale = Vector2.ONE * hover_scale
+	z_index = 20
 	if not card:
 		return
 	var entries: Array[TooltipData] = KeywordRegistry.build_tooltip_chain(card.get_default_tooltip())
@@ -27,6 +31,8 @@ func _on_visuals_mouse_entered() -> void:
 
 func _on_visuals_mouse_exited() -> void:
 	visuals.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
+	visuals.scale = Vector2.ONE
+	z_index = 0
 	Events.tooltip_hide_requested.emit()
 
 

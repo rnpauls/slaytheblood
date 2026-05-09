@@ -141,12 +141,6 @@ func do_action() -> void:
 	await action_sequencer.do_action()
 
 
-# ── Defense delegation ────────────────────────────────────────────────────────
-
-func defend_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
-	defense_sequencer.defend_against_attack(attack, go_again, incoming_on_hits)
-
-
 # ── Phase / lifecycle ─────────────────────────────────────────────────────────
 
 func cleanup_phase() -> void:
@@ -155,6 +149,7 @@ func cleanup_phase() -> void:
 	if to_draw > 0:
 		hand_manager.draw_cards(to_draw)
 	stats.block = 0
+	stats.mana = 0
 	stats.action_points = 1
 	enemy_resource_ui.update_display(enemy_ai)
 

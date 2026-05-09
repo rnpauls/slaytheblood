@@ -8,7 +8,8 @@ var hand: Array # Current hand
 var arsenal: Card = null # Single Card or null
 var turn_plan = null # Stores the planned turn {damage, pitched, actions, remaining}
 var resources := 0 # Tracks resources available this turn
-## Cards that cannot be used to block this turn due to Intimidate. Set by IntimidatedStatus.
+## Cards that cannot be used to block or pitch this turn due to Intimidate.
+## Set by IntimidatedStatus.
 var intimidated_cards: Array[Card] = []
 var modifier_handler: ModifierHandler
 
@@ -64,6 +65,14 @@ func play_next_action() -> Card:
 	while resources < next_action.cost and turn_plan.pitched.size() > 0:
 		var pitch = turn_plan.pitched[0]
 		resources += pitch.pitch
+		# Mirror the increment into stats.mana so that Card.play (which
+		# decrements char_stats.mana -= cost for any player) leaves stats.mana
+		# at a non-negative value. Without this mirror, every enemy action that
+		# costs > 0 drives stats.mana negative, corrupting arcane prevention
+		# (defend_packet reads stats.mana, and Stats.take_damage's clampi math
+		# misbehaves on negative mana). cleanup_phase resets stats.mana at end
+		# of enemy phase so leftover mana doesn't accumulate across turns.
+		enemy.stats.mana += pitch.pitch
 		enemy.stats.draw_pile.add_card(pitch)
 		hand.erase(pitch)
 		card_removed_from_hand.emit(pitch)
@@ -86,49 +95,199 @@ func play_next_action() -> Card:
 	turn_plan.actions.erase(next_action)
 	return next_action
 
-## Defending phase: Player attacks AI, returns array of defense values
-func defend(player_attack_power: int, has_go_again: bool, onhits: Array[OnHit]) -> Array[Card]:
-	var player_hand_size : int = target.get_tree().get_first_node_in_group("player_hand").get_child_count()
-	var hand_state = {"cards": hand.duplicate(), "resources": 0}
-	var max_offense = calculate_max_offense(hand_state, 1, enemy.stats.health)["damage"]
-	var modified_damage = modifier_handler.get_modified_value(player_attack_power, Modifier.Type.DMG_TAKEN)
-	var block_options = calculate_block_options(hand_state, modified_damage, has_go_again, player_hand_size, onhits)
-	
-	# Life factor: More blocking when life is low (0.5 at 20+, 2.0 at 5 or less)
-	var life_factor = 1#clamp(2.0 - (float(enemy.stats.health) / 20.0), 0.5, 2.0)
-	var best_option = {"defense_applied": [], "offense_lost": max_offense, "damage_taken": modified_damage, "raw_damage": max_offense}
-	
-	# Force blocking if attack is lethal
-	#var is_lethal = modified_damage >= enemy.stats.health
-	
-	for option in block_options:
-		var damage_taken = max(0, modified_damage - option.defense)
-		var offense_lost = max_offense - option.offense_after
-		var score = (damage_taken * life_factor) + offense_lost
-		
-		# Block lethal damage regardless of score
-		#if is_lethal and damage_taken == 0:
-			#best_option = {"defense_applied": option.defense_applied, "offense_lost": offense_lost, "damage_taken": damage_taken, "raw_damage": option.offense_after}
-			#break
-		# Normal comparison with tiebreaker on raw damage
-		if (score < (best_option.damage_taken * life_factor + best_option.offense_lost) or \
-		   (score == (best_option.damage_taken * life_factor + best_option.offense_lost) and option.offense_after > best_option.raw_damage)):
-			best_option = {"defense_applied": option.defense_applied, "offense_lost": offense_lost, "damage_taken": damage_taken, "raw_damage": option.offense_after}
-	
-	var blocking_cards: Array[Card]
-	for block in best_option.defense_applied:
-		#Does this actually work? Checking if it equals the arsenal card?
-		if block.card == arsenal:
-			print_enemy_ai("blocked arsenal %s for %d" % [block.card.id, block.card.defense])
-			var used_arsenal := arsenal
+## Defending phase: Player sends a DamagePacket (physical + arcane combined).
+## Picks the best allocation of hand cards across {BLOCK, PITCH, KEEP} by
+## enumerating all combinations and scoring each. Survival-first: any
+## allocation that keeps the enemy alive beats any that doesn't, regardless
+## of offense preserved. Side effects: applies block to stats.block, pitch
+## values to stats.mana, removes used cards from hand (emits
+## card_removed_from_hand so _on_hand_changed re-plans the turn). Returns
+## a Dictionary {"blocked": Array[Card], "pitched": Array[Card],
+## "prevention": int} for the sequencer to animate.
+##
+## Replaces the old split decision (defend() for physical,
+## decide_arcane_prevention() for arcane) which couldn't see the combined
+## damage and let the enemy die to {phys + arc} totals when neither portion
+## was lethal alone.
+##
+## Combinatorics: 3^N over hand-size N. With N <= 6, ~729 options; per
+## option, calculate_max_offense is recursively O(2^N). Total work is
+## small at typical enemy hand sizes.
+##
+## Note on DMG_TAKEN: this evaluates against modifier-adjusted physical
+## (so block sufficiency is judged correctly). Stats.take_damage applies
+## DMG_TAKEN once on its own; both halves see the same modified value so
+## block math stays consistent.
+##
+## BLOCK_GAINED: applied per-card during option scoring AND at commit,
+## so the AI never under-counts buffed defense.
+func defend_packet(packet: DamagePacket) -> Dictionary:
+	var physical_raw: int = packet.physical
+	var arcane: int = packet.arcane
+	if physical_raw <= 0 and arcane <= 0:
+		return {"blocked": [] as Array[Card], "pitched": [] as Array[Card], "prevention": 0}
+
+	var physical: int = 0
+	if physical_raw > 0:
+		physical = modifier_handler.get_modified_value(physical_raw, Modifier.Type.DMG_TAKEN)
+
+	# Defensive clamp: stats.mana can drift negative if pre-existing accounting
+	# bugs leak through (Card.play decrements stats.mana for any player), so we
+	# treat negative mana as 0 for scoring purposes — preventing the algorithm
+	# from over-pitching to "make up" phantom arcane damage from the
+	# `max(0, arcane - negative_prevention)` term.
+	var current_mana: int = max(0, enemy.stats.mana)
+	var current_hp: int = enemy.stats.health
+
+	# Build candidate list. Hand cards may take any role subject to flags.
+	# Arsenal can BLOCK only if it's a Type.BLOCK card (F&B rule); never PITCH.
+	var candidates: Array = []
+	for c: Card in hand:
+		var can_block_c: bool = (not c.disable_defense) and (not (c in intimidated_cards))
+		var can_pitch_c: bool = (not c.disable_pitch) and (not (c in intimidated_cards))
+		candidates.append({"card": c, "is_arsenal": false, "can_block": can_block_c, "can_pitch": can_pitch_c})
+	var arsenal_in_candidates := false
+	if arsenal and arsenal.type == Card.Type.BLOCK:
+		var can_block_arsenal: bool = (not arsenal.disable_defense) and (not (arsenal in intimidated_cards))
+		if can_block_arsenal:
+			candidates.append({"card": arsenal, "is_arsenal": true, "can_block": true, "can_pitch": false})
+			arsenal_in_candidates = true
+
+	# Baseline offense if we keep everything (no defense). Used for offense_lost.
+	var max_offense_baseline: int = calculate_max_offense(
+		{"cards": hand.duplicate(), "resources": 0, "arsenal": arsenal}, 1, enemy.stats.health
+	)["damage"]
+
+	var n: int = candidates.size()
+	var total: int = 1
+	for _i in n:
+		total *= 3
+
+	var best: Dictionary = {}
+	var best_survives: bool = false
+	var best_score: float = INF
+	var best_offense_after: int = -1
+	var best_cards_used: int = 1 << 30  # higher = worse; tiebreaker prefers fewer cards spent
+
+	for mask in total:
+		var blocked_cards: Array[Card] = []
+		var pitched_cards: Array[Card] = []
+		var keep_cards: Array[Card] = []
+		var keep_arsenal: Card = arsenal if not arsenal_in_candidates else null
+		var valid := true
+		var rem := mask
+		for i in n:
+			var role: int = rem % 3  # 0=KEEP, 1=BLOCK, 2=PITCH
+			@warning_ignore("integer_division") rem = rem / 3
+			var ent: Dictionary = candidates[i]
+			match role:
+				0:
+					if ent.is_arsenal:
+						keep_arsenal = ent.card
+					else:
+						keep_cards.append(ent.card)
+				1:
+					if not ent.can_block:
+						valid = false
+						break
+					blocked_cards.append(ent.card)
+				2:
+					if not ent.can_pitch:
+						valid = false
+						break
+					pitched_cards.append(ent.card)
+		if not valid:
+			continue
+
+		var block_total := 0
+		for c: Card in blocked_cards:
+			block_total += modifier_handler.get_modified_value(c.defense, Modifier.Type.BLOCK_GAINED)
+		var mana_gained := 0
+		for c: Card in pitched_cards:
+			mana_gained += c.pitch
+		var prevention: int = mini(arcane, current_mana + mana_gained)
+		var damage_taken: int = max(0, physical - block_total) + max(0, arcane - prevention)
+		var survives: bool = damage_taken < current_hp
+
+		var offense_after: int = calculate_max_offense(
+			{"cards": keep_cards, "resources": 0, "arsenal": keep_arsenal}, 1, enemy.stats.health
+		)["damage"]
+		var offense_lost: int = max_offense_baseline - offense_after
+		var score: float = float(damage_taken) + float(offense_lost)
+
+		var cards_used: int = blocked_cards.size() + pitched_cards.size()
+		var should_replace := false
+		if best.is_empty():
+			should_replace = true
+		elif survives and not best_survives:
+			should_replace = true
+		elif survives == best_survives:
+			if score < best_score:
+				should_replace = true
+			elif score == best_score:
+				if offense_after > best_offense_after:
+					should_replace = true
+				elif offense_after == best_offense_after and cards_used < best_cards_used:
+					# Final tiebreaker: prefer using fewer cards (preserve hand
+					# for future turns). Without this, the enumerator picks the
+					# first survival mask found, which can over-spend cards on a
+					# zero-marginal-utility allocation (e.g. 1B+2P when 1B+1P+1K
+					# already survives).
+					should_replace = true
+
+		if should_replace:
+			best = {
+				"blocked": blocked_cards,
+				"pitched": pitched_cards,
+				"prevention": prevention,
+				"score": score,
+				"survives": survives,
+				"offense_after": offense_after,
+				"damage_taken": damage_taken,
+				"mask": mask,
+				"cards_used": cards_used,
+			}
+			best_survives = survives
+			best_score = score
+			best_offense_after = offense_after
+			best_cards_used = cards_used
+
+	# Commit the chosen allocation. Block-card removal mirrors the old
+	# defend() flow: arsenal is cleared by direct assignment; hand cards
+	# emit card_removed_from_hand (drives _on_hand_changed -> recalc plan).
+	# stats.block / stats.mana are applied here so that the AttackDamageEffect
+	# / ZapEffect that fire immediately after defend_packet returns see the
+	# right values when they call take_damage.
+	var blocked_out: Array[Card] = best.get("blocked", [] as Array[Card])
+	var pitched_out: Array[Card] = best.get("pitched", [] as Array[Card])
+	print_enemy_ai("defend_packet pkt=(p:%d a:%d) hp=%d mana=%d picked mask=%s blocked=%d pitched=%d prevention=%d damage=%s survives=%s" % [
+		physical, arcane, current_hp, current_mana, str(best.get("mask", -1)),
+		blocked_out.size(), pitched_out.size(), int(best.get("prevention", 0)),
+		str(best.get("damage_taken", -1)), str(best.get("survives", false))])
+	for c: Card in blocked_out:
+		var block_amount: int = modifier_handler.get_modified_value(c.defense, Modifier.Type.BLOCK_GAINED)
+		enemy.stats.block += block_amount
+		if c == arsenal:
 			arsenal = null
-			blocking_cards.append(used_arsenal)
+			print_enemy_ai("blocked arsenal %s for %d" % [c.id, block_amount])
 		else:
-			print_enemy_ai("blocked %s for %d" % [block.card.id, block.card.defense])
-			hand.erase(block.card)
-			card_removed_from_hand.emit(block.card)
-			blocking_cards.append(block.card)
-	return blocking_cards#best_option.defense_applied.map(func(c): return c.defense) if best_option.defense_applied else []
+			hand.erase(c)
+			card_removed_from_hand.emit(c)
+			print_enemy_ai("blocked %s for %d" % [c.id, block_amount])
+	for c: Card in pitched_out:
+		var pre_mana: int = enemy.stats.mana
+		enemy.stats.mana += c.pitch
+		var post_add_mana: int = enemy.stats.mana
+		enemy.stats.draw_pile.add_card(c)
+		hand.erase(c)
+		card_removed_from_hand.emit(c)
+		print_enemy_ai("pitched %s defensively pre=%d +%d post_add=%d final=%d" % [c.id, pre_mana, c.pitch, post_add_mana, enemy.stats.mana])
+
+	return {
+		"blocked": blocked_out,
+		"pitched": pitched_out,
+		"prevention": int(best.get("prevention", 0)),
+	}
 
 ## Recursively calculate maximum offense potential
 ##TODO: include damage modifiers
@@ -217,128 +376,6 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 				best_remaining = sub_result.remaining
 	
 	return {"damage": best_damage, "pitched": best_pitched, "actions": best_actions, "remaining": best_remaining}
-
-## Recursively calculate blocking options with Go Again heuristic
-func calculate_block_options(state: Dictionary, attack_power: int, has_go_again: bool, player_hand_size: int, onhits: Array[OnHit]) -> Array:
-	var options = [{"defense": 0, "defense_applied": [], "offense_after": calculate_max_offense(state, 1, enemy.stats.health)["damage"]}]
-	
-	if attack_power > 0:
-		for card in state.cards:
-			# Skip cards that are intimidated — they cannot be used to block this turn.
-			if card in intimidated_cards:
-				continue
-			if card.disable_defense:
-				continue
-			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources}
-			new_state.cards.erase(card)
-			var defense = card.defense
-			var remaining_attack = attack_power - defense
-			var sub_options = calculate_block_options(new_state, remaining_attack, has_go_again, player_hand_size, onhits)
-			
-			for sub in sub_options:
-				var total_defense = defense + sub.defense
-				var applied = [{"card": card, "defense": defense}] + sub.defense_applied
-				var offense_after = sub.offense_after
-				if has_go_again and remaining_attack <= 0:
-					var second_attack = player_hand_size * 3 # Heuristic: 3 damage per card
-					var go_again_state = {"cards": new_state.cards.duplicate(), "resources": new_state.resources}
-					var second_options = calculate_block_options(go_again_state, second_attack, false, 0, [])
-					var best_second = second_options[0]
-					for opt in second_options:
-						if (second_attack - opt.defense) + opt.offense_after < (second_attack - best_second.defense) + best_second.offense_after:
-							best_second = opt
-					offense_after = best_second.offense_after
-				if attack_power - total_defense < enemy.stats.health:
-					if (onhits) and (attack_power <= total_defense): #If theres an on-hit and the attack is fully blocked
-						for tmp_onhit in onhits:
-							offense_after += tmp_onhit.ai_value #Add the expected value of the on-hit to the offense value
-					options.append({"defense": total_defense, "defense_applied": applied, "offense_after": offense_after})
-		
-		if arsenal and arsenal.type == Card.Type.BLOCK:
-			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources}
-			var defense = arsenal.defense
-			var remaining_attack = attack_power - defense
-			var sub_options = calculate_block_options(new_state, remaining_attack, has_go_again, player_hand_size, onhits)
-			
-			for sub in sub_options:
-				var total_defense = defense + sub.defense
-				var applied = [{"card": arsenal, "defense": defense}] + sub.defense_applied
-				var offense_after = sub.offense_after
-				if has_go_again and remaining_attack <= 0:
-					var second_attack = player_hand_size * 3
-					var go_again_state = {"cards": new_state.cards.duplicate(), "resources": new_state.resources}
-					var second_options = calculate_block_options(go_again_state, second_attack, false, 0, [])
-					var best_second = second_options[0]
-					for opt in second_options:
-						if (second_attack - opt.defense) + opt.offense_after < (second_attack - best_second.defense) + best_second.offense_after:
-							best_second = opt
-					offense_after = best_second.offense_after
-				if attack_power - total_defense < enemy.stats.health:
-					if (onhits) and (attack_power <= total_defense): #If theres an on-hit and the attack is fully blocked
-						for tmp_onhit in onhits:
-							offense_after += tmp_onhit.ai_value #Add the expected value of the on-hit to the offense value
-					options.append({"defense": total_defense, "defense_applied": applied, "offense_after": offense_after})
-	#Remove original non-blocking option if lethal
-	if (attack_power >= enemy.stats.health) and (options.size() > 1):
-		options.remove_at(0)
-	return options
-
-## Decide how much arcane from this incoming packet to prevent by spending
-## mana (and pitching additional cards from hand if needed). Returns the
-## amount to prevent — DamagePacket then routes the residual into take_damage,
-## which spends exactly that much mana.
-##
-## Heuristic V1:
-##   - Lethal arcane (>= current HP): pitch up to the full arcane amount.
-##     Survival trumps offense — if we die there's no future plan to protect.
-##   - Non-lethal: spend only currently-pooled mana, don't burn hand cards.
-##     Saves cards for our own offense; small zaps just get through.
-##
-## This is a deliberately simple start. Future work (matches the design note in
-## the proposal): factor in visible future arcane (Zap values in the player's
-## hand, runechants on the field, active channels) and value each card's
-## offensive cost via calculate_max_offense_now to set a smarter reserve.
-func decide_arcane_prevention(packet: DamagePacket) -> int:
-	var arcane: int = packet.arcane
-	if arcane <= 0:
-		return 0
-
-	var current_mana: int = enemy.stats.mana
-	var current_hp: int = enemy.stats.health
-
-	if arcane < current_hp:
-		return mini(arcane, current_mana)
-
-	# Lethal incoming — pitch defensively until we either fund full prevention
-	# or run out of pitchable cards.
-	var to_prevent: int = arcane
-	while enemy.stats.mana < to_prevent:
-		var c := find_best_defensive_pitch_card()
-		if c == null:
-			break
-		enemy.stats.mana += c.pitch
-		enemy.stats.draw_pile.add_card(c)
-		hand.erase(c)
-		card_removed_from_hand.emit(c)
-		print_enemy_ai("pitched %s defensively for %d (against %d arcane)" % [c.id, c.pitch, arcane])
-
-	return mini(to_prevent, enemy.stats.mana)
-
-## Highest-pitch card we can sacrifice without breaking the planned offense.
-## Returns null if every pitchable card is reserved for an action this turn.
-func find_best_defensive_pitch_card() -> Card:
-	var best: Card = null
-	var planned_actions: Array = []
-	if turn_plan and turn_plan.actions:
-		planned_actions = turn_plan.actions
-	for c: Card in hand:
-		if c.disable_pitch:
-			continue
-		if c in planned_actions:
-			continue
-		if best == null or c.pitch > best.pitch:
-			best = c
-	return best
 
 ## Pick the best card to arsenal
 func pick_best_arsenal(cards: Array) -> Card:

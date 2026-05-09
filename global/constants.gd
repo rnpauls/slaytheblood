@@ -38,3 +38,8 @@ const TWEEN_FADE             := 0.25
 const TWEEN_HAND_ENTRY       := 0.25
 ## Staged-card center move (player and enemy staged displays).
 const TWEEN_CARD_STAGE       := 0.30
+
+#Colors
+const RED_PITCH = 0xb83c3c
+const YELLOW_PITCH = 0xd8ae3b
+const BLUE_PITCH = 0x4988be

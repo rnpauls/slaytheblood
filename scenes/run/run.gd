@@ -150,7 +150,16 @@ func _debug_show_map() -> void:
 	_show_map()
 	map.unlock_all_rooms()
 
+
+func _on_inventory_pressed() -> void:
+	if peeked_view:
+		_peek_map()
+	inventory_view.show_current_view()
+
 func _peek_map() -> void:
+	if inventory_view.visible:
+		inventory_view.hide()
+
 	if peeked_view:
 		current_view.add_child(peeked_view)
 		peeked_view = null
@@ -213,7 +222,7 @@ func _setup_top_bar() -> void:
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
 	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
-	inventory_button.pressed.connect(inventory_view.show_current_view)
+	inventory_button.pressed.connect(_on_inventory_pressed)
 	inventory_view.inventory = character.inventory
 	inventory_view.character = character
 

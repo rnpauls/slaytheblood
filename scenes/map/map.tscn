@@ -8,11 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="6_marker"]
 
 [sub_resource type="Gradient" id="Gradient_frlm1"]
-colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.440866, 0.251865, 0.199336, 1)
+interpolation_mode = 2
+colors = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.7343659, 0.5699403, 0.46926284, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4tcgx"]
 gradient = SubResource("Gradient_frlm1")
 width = 50
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jcaow"]
+color = Color(0.8, 0.8, 0.8, 1)
+grow_begin = -20.0
+grow_end = -20.0
+thickness = 2
 
 [node name="Map" type="Node2D" unique_id=1346441814]
 script = ExtResource("1_yuly5")
@@ -54,15 +61,15 @@ texture = SubResource("GradientTexture1D_4tcgx")
 [node name="Legend" type="CanvasLayer" parent="." unique_id=1734820001]
 unique_name_in_owner = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Legend"]
+[node name="PanelContainer" type="PanelContainer" parent="Legend" unique_id=77349947]
 offset_left = 16.0
-offset_top = 80.0
+offset_top = 217.0
 offset_right = 168.0
-offset_bottom = 360.0
+offset_bottom = 460.0
 mouse_filter = 2
 theme = ExtResource("5_legend")
 
-[node name="MarginContainer" type="MarginContainer" parent="Legend/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Legend/PanelContainer" unique_id=1427372780]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -70,17 +77,21 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="Legend/PanelContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Legend/PanelContainer/MarginContainer" unique_id=1911086820]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 6
 
-[node name="Title" type="Label" parent="Legend/PanelContainer/MarginContainer/VBox"]
+[node name="Title" type="Label" parent="Legend/PanelContainer/MarginContainer/VBox" unique_id=1141320423]
 layout_mode = 2
 text = "Legend"
 horizontal_alignment = 1
 
-[node name="LegendRows" type="VBoxContainer" parent="Legend/PanelContainer/MarginContainer/VBox"]
+[node name="HSeparator" type="HSeparator" parent="Legend/PanelContainer/MarginContainer/VBox" unique_id=2144365452]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_jcaow")
+
+[node name="LegendRows" type="VBoxContainer" parent="Legend/PanelContainer/MarginContainer/VBox" unique_id=1770603127]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 4

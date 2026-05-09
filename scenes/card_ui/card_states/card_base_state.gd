@@ -9,46 +9,59 @@ func enter() ->void:
 	card_ui.is_hovered = false
 	card_ui.z_index = 0
 	card_ui.card_render.card_visuals.panel.set("theme_override_styles/panel", card_ui.BASE_STYLEBOX)
+	card_ui.card_render.modulate = Color.WHITE
 	card_ui.pivot_offset = card_ui.size/2
-	
+
 	Events.tooltip_hide_requested.emit()
 
 func on_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_mouse") and hand.is_selecting:
+	var lmb := event.is_action_pressed("left_mouse")
+	var rmb := event.is_action_pressed("right_mouse")
+
+	if lmb and hand.is_selecting:
 		_log("BASE on_gui_input: LMB (is_selecting=true) → SELECTED")
 		transition_requested.emit(self, CardState.State.SELECTED)
-	if event.is_action_pressed("left_mouse") and hand.is_blocking:
-		var player: Player = hand.player
-		var is_intimidated := player and card_ui.card in player.intimidated_cards
-		if not is_intimidated and not card_ui.card.disable_defense:
-			_log("BASE on_gui_input: LMB (is_blocking=true) → BLOCKED")
-			transition_requested.emit(self, CardState.State.BLOCKED)
-	if event.is_action_pressed("right_mouse"):
+		return
+
+	if rmb:
 		if card_ui.card.disable_pitch:
 			_log("BASE on_gui_input: RMB IGNORED (disable_pitch=true)")
 			return
 		_log("BASE on_gui_input: RMB → PITCHED")
 		transition_requested.emit(self, CardState.State.PITCHED)
+		return
+
+	if lmb and hand.is_blocking:
+		var player: Player = hand.player
+		var is_intimidated := player and card_ui.card in player.intimidated_cards
+		if not is_intimidated and not card_ui.card.disable_defense:
+			_log("BASE on_gui_input: LMB (is_blocking=true) → BLOCKED")
+			transition_requested.emit(self, CardState.State.BLOCKED)
+		else:
+			_log("BASE on_gui_input: LMB IGNORED (intimidated=%s, disable_defense=%s)" % [is_intimidated, card_ui.card.disable_defense])
+		return
+
 	if not card_ui.playable or card_ui.disabled:
-		if event.is_action_pressed("left_mouse"):
+		if lmb:
 			_log("BASE on_gui_input: LMB IGNORED (playable=%s, disabled=%s)" % [card_ui.playable, card_ui.disabled])
 		return
-	if event.is_action_pressed("left_mouse"):
+
+	if lmb:
 		_log("BASE on_gui_input: LMB → CLICKED (playable=%s, disabled=%s)" % [card_ui.playable, card_ui.disabled])
 		card_ui.pivot_offset = card_ui.get_global_mouse_position() - card_ui.global_position
 		transition_requested.emit(self, CardState.State.CLICKED)
 
 func on_mouse_entered() -> void:
-	if card_ui.is_hovered: 
+	if card_ui.is_hovered:
 		return
 	card_ui.is_hovered = true
 	if card_ui.tween and card_ui.tween.is_running():
 		card_ui.tween.kill()
-	
+
 	# Remember where it was in the hand
 	card_ui.original_parent = card_ui.get_parent()
 	card_ui.original_index = card_ui.get_index()
-	
+
 	card_ui.scale = Vector2.ONE*card_ui.hover_scale
 	card_ui.rotation = 0
 	#Get new y clamped
@@ -59,7 +72,7 @@ func on_mouse_entered() -> void:
 	#card_ui.tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	#card_ui.tween.tween_property(card_ui, "scale", Vector2(card_ui.hover_scale, card_ui.hover_scale), card_ui.tween_duration)
 	#card_ui.tween.parallel().tween_property(card_ui, "global_position:y", new_y, card_ui.tween_duration)
-	
+
 	card_ui.request_tooltip()
 	card_ui.card_hovered.emit(card_ui)
 	if not card_ui.playable or card_ui.disabled:
@@ -70,14 +83,14 @@ func on_mouse_entered() -> void:
 
 func on_mouse_exited() -> void:
 	Events.tooltip_hide_requested.emit()
-	if not card_ui.is_hovered: 
+	if not card_ui.is_hovered:
 		return
 	card_ui.is_hovered = false
 	card_ui.z_index=0
 	card_ui.return_to_hand()
-	
+
 	card_ui.card_unhovered.emit(card_ui)
 	if not card_ui.playable or card_ui.disabled:
 		return
 	card_ui.card_render.card_visuals.panel.set("theme_override_styles/panel", card_ui.BASE_STYLEBOX)
-	
+

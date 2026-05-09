@@ -9,13 +9,12 @@ var on_hit_effects: Array[OnHit]
 var source_owner: Node = null
 
 func execute(targets: Array[Node]) -> void:
+	# Defense (block/pitch decision) is resolved upstream in
+	# DamagePacket.execute_single_target — by the time we reach here,
+	# stats.block / stats.mana are already populated. We only land damage.
 	for target in targets:
 		if not target:
 			continue
-		# Block-declaration only applies to physical attacks; arcane bypasses block
-		# entirely and is mitigated by mana spend in Stats.take_damage.
-		if target is Enemy and damage_kind == Card.DamageKind.PHYSICAL:
-			target.defend_attack(amount, go_again, on_hit_effects)
 		if target is Enemy or target is Player:
 			execute_single_target(target)
 

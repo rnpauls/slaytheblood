@@ -1,27 +1,33 @@
-## Animates an enemy's multi-card block sequence: pluck card from hand, travel
-## to BlockDisplay, pop "+X" badge, hold, fade to discard. Extracted from
-## enemy.gd so the timing-sensitive tween chain has a single owner.
+## Animates an enemy's defense reaction (blocks + defensive pitches) per
+## DamagePacket. EnemyAI.defend_packet does the data-side work (chooses the
+## allocation, mutates stats.block / stats.mana, and removes cards from
+## hand); this sequencer turns the result into the per-card travel +
+## badge-pop animation. Extracted from enemy.gd so the timing-sensitive
+## tween chain has a single owner.
 ##
 ## Public surface:
-##   defend_against_attack(attack, go_again, on_hits)
+##   animate_defense(result)
+##   where `result` is the Dictionary returned by EnemyAI.defend_packet:
+##     {"blocked": Array[Card], "pitched": Array[Card], "prevention": int}
 ##
-## Block stats are applied synchronously inside defend_against_attack so that
-## AttackDamageEffect.execute_single_target sees the updated stats.block when
-## it calls take_damage immediately after this returns. The animation runs as
-## a fire-and-forget coroutine.
+## Block stats (stats.block) and pitched mana (stats.mana) are already in
+## place by the time this is called — defend_packet committed them up
+## front so AttackDamageEffect / ZapEffect see the right values when they
+## run immediately after. The animation is a fire-and-forget coroutine.
 class_name EnemyDefenseSequencer
 extends Node
 
 const BLOCK_BADGE_SCENE := preload("res://scenes/enemy/block_badge.tscn")
+const MANA_ICON := preload("res://art/gold.png")
 
-## Block-card visualization tunables.
+## Defense-card visualization tunables.
 const CARD_PIVOT_OFFSET := Vector2(100, 140)  # Matches CardUI scene pivot.
-const BLOCK_DISPLAY_SCALE := 0.55
-const BLOCK_TRAVEL_DURATION := 0.3
-const BLOCK_HOLD_DURATION := 0.5
-const BLOCK_BADGE_LOCAL_OFFSET := Vector2(0, -110)  # Above the displayed card.
-const BLOCK_BADGE_SIZE := Vector2(80, 40)           # Must match block_badge.tscn.
-const BLOCK_BADGE_Z_INDEX := 20                     # Above card_ui.z_index (10).
+const DEFENSE_DISPLAY_SCALE := 0.55
+const DEFENSE_TRAVEL_DURATION := 0.3
+const DEFENSE_HOLD_DURATION := 0.5
+const DEFENSE_BADGE_LOCAL_OFFSET := Vector2(0, -110)  # Above the displayed card.
+const DEFENSE_BADGE_SIZE := Vector2(80, 40)           # Must match block_badge.tscn.
+const DEFENSE_BADGE_Z_INDEX := 20                     # Above card_ui.z_index (10).
 
 var _enemy: Enemy
 var _hand_manager: EnemyHandManager
@@ -37,47 +43,42 @@ func setup(enemy: Enemy, hand_manager: EnemyHandManager,
 	_block_display = block_display
 
 
-func defend_against_attack(attack: int, go_again: bool, incoming_on_hits: Array[OnHit]) -> void:
-	_log("defending attack=%d  go_again=%s  hand=%d  ai_hand=%d" % [
-		attack, go_again, _hand_manager.hand.size(), _enemy.enemy_ai.hand.size()])
-	var defense_array := _enemy.enemy_ai.defend(attack, go_again, incoming_on_hits)
+func animate_defense(result: Dictionary) -> void:
+	var blocked: Array = result.get("blocked", [])
+	var pitched: Array = result.get("pitched", [])
+	if blocked.is_empty() and pitched.is_empty():
+		return
+	_log("animating defense  blocked=%d  pitched=%d" % [blocked.size(), pitched.size()])
 
-	# Apply block synchronously so AttackDamageEffect.execute_single_target sees
-	# the updated stats.block when it calls take_damage right after this returns.
 	var anim_queue: Array = []
-	for def_card: Card in defense_array:
+	for card: Card in blocked:
+		# Block amount with BLOCK_GAINED applied; mirrors what defend_packet
+		# committed to stats.block, so the badge label matches reality.
 		var amount: int = _enemy.modifier_handler.get_modified_value(
-			def_card.defense, Modifier.Type.BLOCK_GAINED)
-		_enemy.stats.block += amount
-		anim_queue.append({"card": def_card, "amount": amount})
+			card.defense, Modifier.Type.BLOCK_GAINED)
+		anim_queue.append({"card": card, "amount": amount, "kind": "block"})
+	for card: Card in pitched:
+		anim_queue.append({"card": card, "amount": card.pitch, "kind": "pitch"})
 
-	_log("after defend  hand=%d  ai_hand=%d  ui_map=%d" % [
-		_hand_manager.hand.size(), _enemy.enemy_ai.hand.size(),
-		_hand_manager.card_ui_map.size()])
-
-	# Animation runs as a fire-and-forget coroutine so defend stays sync.
-	_play_block_sequence(anim_queue)
+	# Coroutine — this returns immediately so DamagePacket can land damage
+	# without waiting for the visual sequence.
+	_play_defense_sequence(anim_queue)
 
 
-## Run the per-card block animation sequentially. Hand removal is deferred into
-## each card's animation so cards stay in EnemyHand until their own turn comes —
-## otherwise multi-card blocks would all hover above the hand at once.
-func _play_block_sequence(queue: Array) -> void:
+## Run each defensive card animation sequentially.
+func _play_defense_sequence(queue: Array) -> void:
 	for entry in queue:
-		await _animate_block_card(entry.card, entry.amount)
+		await _animate_defense_card(entry.card, entry.amount, entry.kind)
 
 
-func _animate_block_card(card: Card, amount: int) -> void:
+func _animate_defense_card(card: Card, amount: int, kind: String) -> void:
 	var card_ui: EnemyCardUI = _hand_manager.get_or_create_card_ui(card)
 	if not is_instance_valid(card_ui):
 		return
 
-	# Pluck from hand: erase data, reparent to BlockDisplay (preserves global pos
-	# so the card visibly travels from where it was — no shrink animation).
-	# We don't call _hand_manager.remove_card() here because that would also
-	# call EnemyHand.remove_card (a tween-out animation we don't want — the
-	# card visibly travels to BlockDisplay instead).
-	_hand_manager.hand.erase(card)
+	# Reparent the card_ui to the defense display. We don't go through
+	# _hand_manager.remove_card here because the card has already been
+	# removed from the data hand by defend_packet; this is purely visual.
 	_hand_manager.untrack_card_ui(card)
 	if card_ui.get_parent() != _block_display:
 		card_ui.reparent(_block_display)
@@ -88,33 +89,35 @@ func _animate_block_card(card: Card, amount: int) -> void:
 	card_ui.z_index = 10
 	card_ui.z_as_relative = true
 
-	# 1 + 2. Travel to BlockDisplay's centered position while flipping face-up.
-	# flip_reveal targets card_render.scale:x (an inner Control), so it doesn't
-	# fight the outer scale tween from animate_to_local_*.
+	# Travel to defense display while flipping face-up. flip_reveal targets
+	# card_render.scale:x (an inner Control), so it doesn't fight the outer
+	# scale tween from animate_to_local_*.
 	card_ui.animate_to_local_position_and_rotation_and_scale(
-		-CARD_PIVOT_OFFSET, 0.0, BLOCK_DISPLAY_SCALE, BLOCK_TRAVEL_DURATION
+		-CARD_PIVOT_OFFSET, 0.0, DEFENSE_DISPLAY_SCALE, DEFENSE_TRAVEL_DURATION
 	)
 	card_ui.flip_reveal()
-	await _enemy.get_tree().create_timer(BLOCK_TRAVEL_DURATION).timeout
+	await _enemy.get_tree().create_timer(DEFENSE_TRAVEL_DURATION).timeout
 	if not is_instance_valid(card_ui):
 		return
 
-	# 3. Pop the +X badge above the card; play sound at the moment of feedback.
+	# Pop the badge above the card; play sound at the moment of feedback.
 	var badge: BlockBadge = BLOCK_BADGE_SCENE.instantiate()
 	_enemy.add_child(badge)
-	# Center the badge on (block_display.position + BLOCK_BADGE_LOCAL_OFFSET)
-	# by offsetting its top-left back by half its known size.
-	badge.position = _block_display.position + BLOCK_BADGE_LOCAL_OFFSET - BLOCK_BADGE_SIZE * 0.5
-	badge.z_index = BLOCK_BADGE_Z_INDEX
+	badge.position = _block_display.position + DEFENSE_BADGE_LOCAL_OFFSET - DEFENSE_BADGE_SIZE * 0.5
+	badge.z_index = DEFENSE_BADGE_Z_INDEX
+	if kind == "pitch":
+		badge.set_icon(MANA_ICON)
 	badge.pop(amount)
 	SFXPlayer.play(card.block_sound)
 
-	await _enemy.get_tree().create_timer(BLOCK_HOLD_DURATION).timeout
+	await _enemy.get_tree().create_timer(DEFENSE_HOLD_DURATION).timeout
 	if not is_instance_valid(card_ui):
 		return
 
-	# 4. Send to discard: data-side add + visual fadeout.
-	_enemy.stats.discard.add_card(card)
+	# For blocks, send the card to the discard pile (data side); pitched
+	# cards already went to draw_pile in defend_packet.
+	if kind == "block":
+		_enemy.stats.discard.add_card(card)
 	var t := card_ui.create_tween()
 	t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
 	t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)

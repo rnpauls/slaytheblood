@@ -59,9 +59,12 @@ func _on_enemy_died(enemy: Enemy) -> void:
 
 func _run_action_loop() -> void:
 	while true:
-		# declare_next_attack is now synchronous: it sets current_action,
-		# stages the card UI, and emits enemy_attack_declared (which flips
-		# the END button to BLOCK in BattleUI). It no longer awaits.
+		# declare_next_attack is synchronous: it sets current_action and
+		# stages the card UI. enemy_attack_declared (which flips the END
+		# button to BLOCK in BattleUI) is emitted later in
+		# run_pre_block_reveal, after any reveal animation completes —
+		# arming BLOCK earlier would let a click race the reveal await
+		# and soft-lock the turn.
 		_current_enemy.declare_next_attack()
 		if _cancelled:
 			return

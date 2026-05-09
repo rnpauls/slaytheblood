@@ -15,12 +15,12 @@ const RARITY_COLORS := {
 	
 }
 
-const PITCH_COLORS := {
-	0: Color.GRAY,
-	1: Color.RED,
-	2: Color.YELLOW,
-	3: Color.BLUE
-}
+#const PITCH_COLORS := {
+	#0: Color.GRAY,
+	#1: Color.RED,
+	#2: Color.YELLOW,
+	#3: Color.BLUE
+#}
 
 @export_group("Card Attributes")
 @export var id: String

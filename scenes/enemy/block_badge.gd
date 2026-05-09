@@ -1,11 +1,19 @@
-## "+X" shield popup spawned when an enemy resolves a block card.
-## Self-cleaning: queue_frees after pop+hold+fade completes.
+## "+X" popup spawned when an enemy resolves a defensive card. Default icon
+## is the shield (block); call set_icon() before pop() to swap to a mana
+## glyph for defensive pitches. Self-cleaning: queue_frees after
+## pop+hold+fade completes.
 class_name BlockBadge
 extends HBoxContainer
 
 const HOLD_DURATION := 0.5
 
 @onready var label: Label = $Label
+@onready var icon: TextureRect = $Icon
+
+func set_icon(texture: Texture2D) -> void:
+	if not is_node_ready():
+		await ready
+	icon.texture = texture
 
 func pop(amount: int) -> void:
 	if not is_node_ready():

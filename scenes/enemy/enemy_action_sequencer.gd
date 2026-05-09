@@ -51,28 +51,33 @@ func declare_next_attack() -> void:
 	_enemy_resource_ui.update_display(enemy_ai)
 
 	# When current_action is null the enemy's plan is exhausted; EnemyActingState
-	# observes that directly and exits its loop. Otherwise stage the card and
-	# announce the attack — the state owns the await player_blocks_declared
-	# and the do_action call so cancellation on death is deterministic.
-	#
-	# enemy_attack_declared flips the END button to BLOCK in BattleUI, so we
-	# only emit it for actual attacks. NAAs deal no damage to the player, so
-	# they auto-resolve after a brief hold (handled in EnemyActingState).
+	# observes that directly and exits its loop. Otherwise stage the card —
+	# enemy_attack_declared is emitted in run_pre_block_reveal AFTER the reveal
+	# so the BLOCK button can't be armed mid-reveal (which would lose the
+	# player_blocks_declared signal and soft-lock the turn).
 	if current_action != null:
 		_log("declaring %s: %s" % [Card.Type.keys()[current_action.type], current_action.id])
 		_stage_attack_card_ui(current_action, pending_card_ui)
-		if current_action.type == Card.Type.ATTACK:
-			Events.enemy_attack_declared.emit()
 
 
 ## Run any pre-block reveal effects on the staged card (e.g. ravenous_rabble
 ## flipping the top card of the deck), then refresh the intent so the displayed
 ## damage reflects the reveal. Awaited by EnemyActingState before player blocks.
+##
+## enemy_attack_declared is emitted here (post-reveal) rather than in
+## declare_next_attack so the BLOCK button only arms after the reveal animation
+## finishes. Otherwise a click during the reveal would emit
+## player_blocks_declared while the state is still awaiting the reveal — the
+## signal would be lost and the turn would soft-lock at the next await.
+## NAAs deal no player damage and auto-resolve after a brief hold, so they
+## skip the emit.
 func run_pre_block_reveal() -> void:
 	if not current_action:
 		return
 	await current_action.pre_block_reveal(_enemy)
 	_enemy.update_intent()
+	if current_action.type == Card.Type.ATTACK:
+		Events.enemy_attack_declared.emit()
 
 
 # ── Play ──────────────────────────────────────────────────────────────────────

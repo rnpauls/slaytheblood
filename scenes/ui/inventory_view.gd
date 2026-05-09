@@ -13,8 +13,8 @@ const LOADOUT_POSITIONS := {
 	"arms":  Vector2(29, 70),
 	"chest": Vector2(99, 70),
 	"legs":  Vector2(169, 70),
-	"lhand": Vector2(0, 177),
-	"rhand": Vector2(219, 177),
+	"lhand": Vector2(55, 177),
+	"rhand": Vector2(160, 177),
 }
 
 @export var inventory: Inventory
