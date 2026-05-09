@@ -89,7 +89,7 @@ func _on_death() -> void:
 
 # ── AI setup ──────────────────────────────────────────────────────────────────
 
-func setup_ai() -> void:
+func setup_ai(player_target: Player = null) -> void:
 	if enemy_ai:
 		enemy_ai.queue_free()
 
@@ -98,7 +98,7 @@ func setup_ai() -> void:
 	enemy_ai = new_ai
 	enemy_ai.enemy = self
 	enemy_ai.modifier_handler = modifier_handler
-	enemy_ai.setup()
+	enemy_ai.setup(player_target)
 	enemy_ai.hand = hand_manager.hand
 
 	# Keep EnemyHand display in sync whenever EnemyAI removes a card internally
@@ -185,7 +185,7 @@ func update_intent() -> void:
 	# Build a preview plan when one isn't active (between or before enemy
 	# turns) so the intent text and hand colors share a single source of truth.
 	if enemy_ai and enemy_ai.turn_plan == null and enemy_ai.hand.size() > 0:
-		var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+		var player_life: int = enemy_ai.target.stats.health
 		enemy_ai.turn_plan = enemy_ai.calculate_max_offense_now(player_life)
 
 	var new_intent = Intent.new()
@@ -293,7 +293,7 @@ func _on_hand_changed() -> void:
 	if not enemy_ai:
 		return
 	if enemy_ai.turn_plan != null:
-		var player_life: int = get_tree().get_first_node_in_group("player").stats.health
+		var player_life: int = enemy_ai.target.stats.health
 		enemy_ai.recalculate_plan(player_life)
 	update_intent()
 

@@ -8,6 +8,10 @@ extends Node2D
 
 var acting_enemies: Array[Enemy] = []
 
+## Set by Battle.start_battle so each enemy's AI gets the player ref by
+## injection instead of a get_first_node_in_group lookup at setup time.
+var player_target: Player
+
 func _ready() -> void:
 	Events.enemy_died.connect(_on_enemy_died)
 	Events.player_action_phase_started.connect(_on_player_action_phase_started)
@@ -29,7 +33,7 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		new_enemy_child.stats.discard = CardPile.new()
 		new_enemy_child.stats.exhaust = CardPile.new()
 		new_enemy_child.draw_cards(new_enemy_child.stats.cards_per_turn)
-		new_enemy_child.setup_ai()
+		new_enemy_child.setup_ai(player_target)
 
 	all_new_enemies.queue_free()
 

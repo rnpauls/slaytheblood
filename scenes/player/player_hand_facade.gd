@@ -29,6 +29,18 @@ func get_hand() -> Array[Card]:
 			result.append((child as PlayerCardUI).card)
 	return result
 
+
+## Live array of CardUI nodes currently in the player's hand. Used by
+## IntimidatedStatus (and any other system that needs to tint or otherwise
+## reach a specific card's UI). Companion to get_hand() which returns the
+## Card resources without their visual.
+func get_card_uis() -> Array[CardUI]:
+	var result: Array[CardUI] = []
+	for child in _player_handler.hand.get_children():
+		if child is CardUI:
+			result.append(child as CardUI)
+	return result
+
 func size() -> int:
 	return _player_handler.hand.get_child_count()
 

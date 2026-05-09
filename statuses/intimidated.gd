@@ -36,16 +36,13 @@ func update() -> void:
 
 
 func _pick_and_intimidate(target: Node) -> void:
-	# Build available list from cards not already intimidated.
-	var all_cards: Array = []
-	if target is Enemy:
-		all_cards = target.hand
-	else:
-		var hand_node: Hand = target.get_tree().get_first_node_in_group("player_hand")
-		if hand_node:
-			for child in hand_node.get_children():
-				if child is PlayerCardUI:
-					all_cards.append(child.card)
+	# Build available list from cards not already intimidated. Both sides
+	# expose their hand via Combatant.hand_facade.get_hand(); the player
+	# adds the parallel get_card_uis() so we can tint the right visual.
+	var combatant := target as Combatant
+	if combatant == null or combatant.hand_facade == null:
+		return
+	var all_cards: Array[Card] = combatant.hand_facade.get_hand()
 
 	var available: Array = all_cards.filter(
 		func(c: Card) -> bool: return not c in intimidated_cards
@@ -63,14 +60,14 @@ func _pick_and_intimidate(target: Node) -> void:
 			card_ui.modulate = INTIMIDATE_MODULATE
 			_intimidated_uis.append(card_ui)
 	else:
-		target.intimidated_cards.append(card)
-		# Tint the matching PlayerCardUI in the hand.
-		var hand_node: Hand = target.get_tree().get_first_node_in_group("player_hand")
-		if hand_node:
-			for child in hand_node.get_children():
-				if child is PlayerCardUI and child.card == card:
-					child.modulate = INTIMIDATE_MODULATE
-					_intimidated_uis.append(child)
+		(target as Player).intimidated_cards.append(card)
+		# Tint the matching PlayerCardUI by walking the hand_facade's CardUIs.
+		var facade := combatant.hand_facade as PlayerHandFacade
+		if facade:
+			for card_ui in facade.get_card_uis():
+				if card_ui is PlayerCardUI and (card_ui as PlayerCardUI).card == card:
+					card_ui.modulate = INTIMIDATE_MODULATE
+					_intimidated_uis.append(card_ui)
 					break
 
 

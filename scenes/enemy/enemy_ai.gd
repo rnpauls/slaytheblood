@@ -20,13 +20,10 @@ signal plan_created(enemy: Enemy)
 ## Enemy.gd connects to this to keep the visual hand in sync.
 signal card_removed_from_hand(card: Card)
 
-## Just assigns the player as target
-func setup():
-	target = get_tree().get_first_node_in_group("player")
-	 #= deck_data.duplicate()
-	#life = enemy.stats.health
-	#for i in enemy.stats.cards_per_turn:
-		#hand.append(enemy.stats.draw_pile.draw_card())
+## Assign the player as target. Caller (Enemy.setup_ai via EnemyHandler)
+## passes the player ref so we don't have to look it up by group.
+func setup(player_target: Player = null) -> void:
+	target = player_target
 
 ## Start the AI's turn by planning actions
 func start_turn(player_life: int) -> void:

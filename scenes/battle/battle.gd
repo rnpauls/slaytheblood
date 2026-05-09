@@ -50,6 +50,9 @@ func start_battle() ->void:
 		if eq_handler:
 			eq_handler.owner_of_equipment = player
 
+	# Inject the player ref so each enemy's AI gets target via setup, not
+	# via a group lookup at setup time.
+	enemy_handler.player_target = player
 	enemy_handler.setup_enemies(battle_stats)
 	enemy_handler.reset_enemy_actions()
 
