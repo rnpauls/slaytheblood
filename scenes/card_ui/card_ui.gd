@@ -125,10 +125,12 @@ func sink() -> void:
 func block() -> void:
 	if not card:
 		return
-	var pile = _get_discard_pile() if _is_player_card() else null
-	if pile:
-		pile.accept_incoming_visual(self)
+	if _is_player_card():
+		_reparent_to_play_overlay()
+		await _play_emphasis()
 		card.block_card([card.owner], modifier_handler)
+		await _burn_up()
+		queue_free()
 	else:
 		card.block_card([card.owner], modifier_handler)
 		queue_free()

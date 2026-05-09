@@ -49,9 +49,8 @@ func _insert_at(pile: CardPile, card: Card, idx: int) -> void:
 
 
 func _add_to_hand(target: Node, card: Card) -> void:
-	if target is Enemy:
+	# Both Enemy and Player expose add_card_to_hand on the Combatant; the
+	# implementations diverge (Enemy routes through hand_manager, Player
+	# through PlayerHandler.hand) but the call site is symmetric.
+	if target is Combatant and target.has_method("add_card_to_hand"):
 		target.add_card_to_hand(card)
-	elif target is Player:
-		var hand_node := target.get_tree().get_first_node_in_group("player_hand")
-		if hand_node and hand_node.has_method("add_card"):
-			hand_node.add_card(card)

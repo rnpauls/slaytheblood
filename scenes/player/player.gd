@@ -4,6 +4,20 @@ extends Combatant
 ## Cards that cannot be used to block this turn due to Intimidate. Set by IntimidatedStatus.
 var intimidated_cards: Array[Card] = []
 
+## Back-reference to the PlayerHandler that owns this player. Set by
+## PlayerHandler.start_battle. Lets effects / relics that need the handler
+## reach it via combatant.player_handler instead of a scene-tree group lookup.
+var player_handler: PlayerHandler
+
+
+## Mirror of Enemy.add_card_to_hand: add a Card to the player's hand,
+## skipping the draw pile. Used by CardAddEffect when destination is HAND so
+## effects don't have to branch on `target is Player` vs `target is Enemy`.
+func add_card_to_hand(card: Card) -> void:
+	if player_handler == null or player_handler.hand == null:
+		return
+	player_handler.hand.add_card(card)
+
 func _on_stats_set() -> void:
 	if not is_inside_tree():
 		await ready

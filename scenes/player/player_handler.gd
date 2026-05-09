@@ -48,6 +48,9 @@ func start_battle(char_stats: CharacterStats) -> void:
 
 	# Materialize the symmetric HandFacade for effects targeting the player.
 	player.hand_facade = PlayerHandFacade.new(player, self)
+	# Back-ref so effects / relics can reach the handler via combatant.player_handler
+	# instead of a get_first_node_in_group lookup.
+	player.player_handler = self
 
 	_assign_hand_slot(character.hand_left, hand_left_weapon, hand_left_equipment)
 	_assign_hand_slot(character.hand_right, hand_right_weapon, hand_right_equipment)
@@ -259,7 +262,8 @@ func _on_card_discarded(card: Card) -> void:
 	character.discard.add_card(card)
 
 func _on_card_blocked(card: Card) -> void:
-	character.discard.add_card(card)
+	character.exhaust.add_card(card)
+	Events.card_exhausted.emit(card)
 
 func _on_card_pitched(card: Card) -> void:
 	if card.cost == 0:
