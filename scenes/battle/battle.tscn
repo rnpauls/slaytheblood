@@ -77,7 +77,7 @@ stats = ExtResource("4_psa3f")
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
 visible = false
 
-[node name="PlayerHandler" type="Node" parent="." unique_id=1870701093 node_paths=PackedStringArray("player", "hand") groups=["player_handler"]]
+[node name="PlayerHandler" type="Node" parent="." unique_id=1870701093 node_paths=PackedStringArray("player", "hand")]
 script = ExtResource("8_r04wr")
 player = NodePath("../Player")
 hand = NodePath("../BattleUI/Hand")
@@ -266,7 +266,7 @@ grow_vertical = 0
 theme = ExtResource("16_5moxy")
 text = "CONFIRM"
 
-[node name="Hand" type="Control" parent="BattleUI" unique_id=126863975 node_paths=PackedStringArray("player") groups=["player_hand"]]
+[node name="Hand" type="Control" parent="BattleUI" unique_id=126863975 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 7
