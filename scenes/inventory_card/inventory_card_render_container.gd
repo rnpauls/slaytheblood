@@ -3,6 +3,7 @@ extends MarginContainer
 
 const HOVER_SCALE := Vector2(1.08, 1.08)
 const HOVER_TWEEN_TIME := 0.1
+const CARD_ASPECT := 2.0 / 3.0
 
 signal equipment_pressed(equipment: Equipment)
 signal pressed(item: Resource)
@@ -30,12 +31,31 @@ func _ready() -> void:
 	button.mouse_entered.connect(_on_mouse_entered)
 	button.mouse_exited.connect(_on_mouse_exited)
 	stack.resized.connect(_update_pivot)
+	stack.resized.connect(_fit_glow_to_card)
 	_update_pivot()
+	_fit_glow_to_card()
 	_apply_clickable()
 
 
 func _update_pivot() -> void:
 	stack.pivot_offset = stack.size * 0.5
+
+
+# Mirror SubViewportViewer's STRETCH_KEEP_ASPECT_CENTERED so the glow halo
+# tracks the visible card edges instead of the full grid cell.
+func _fit_glow_to_card() -> void:
+	var s := stack.size
+	if s.x <= 0 or s.y <= 0:
+		return
+	var inset := Vector2.ZERO
+	if s.x / s.y > CARD_ASPECT:
+		inset.x = (s.x - s.y * CARD_ASPECT) * 0.5
+	else:
+		inset.y = (s.y - s.x / CARD_ASPECT) * 0.5
+	glow_panel.offset_left = inset.x
+	glow_panel.offset_right = -inset.x
+	glow_panel.offset_top = inset.y
+	glow_panel.offset_bottom = -inset.y
 
 
 func set_clickable(value: bool) -> void:

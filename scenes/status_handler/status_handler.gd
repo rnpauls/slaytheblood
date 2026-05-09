@@ -78,6 +78,12 @@ func add_status(status: Status) -> void:
 		return
 
 func _has_status(id: String) -> bool:
+	return has_status(id)
+
+
+## Public lookup for callers outside StatusHandler (weapons, relics, etc.).
+## Mirrors get_status_by_id's public/_private pairing.
+func has_status(id: String) -> bool:
 	for status_ui: StatusUI in get_children():
 		if status_ui.status.id == id:
 			return true

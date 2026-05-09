@@ -137,12 +137,19 @@ func untrack_card_ui(card: Card) -> void:
 
 ## Flip the discard pile onto the draw pile in original order — NOT shuffled.
 ## Mirrors PlayerHandler.reshuffle_deck_from_discard so HandFacade sees a
-## symmetric API on both sides. Resource-only — enemies have no visual pile.
+## symmetric API on both sides. Resource-only — enemies have no visual pile,
+## so the atomic swap is purely about avoiding N spurious draw_card debug
+## prints during the move.
 func reshuffle_discard() -> void:
 	if not _enemy.stats.draw_pile.empty():
 		return
-	while not _enemy.stats.discard.empty():
-		_enemy.stats.draw_pile.add_card(_enemy.stats.discard.draw_card())
+	if _enemy.stats.discard.empty():
+		return
+	var moving := _enemy.stats.discard.cards.duplicate()
+	_enemy.stats.discard.cards.clear()
+	_enemy.stats.draw_pile.cards = moving
+	_enemy.stats.discard.card_pile_size_changed.emit(0)
+	_enemy.stats.draw_pile.card_pile_size_changed.emit(_enemy.stats.draw_pile.cards.size())
 
 
 # ── Queries ───────────────────────────────────────────────────────────────────

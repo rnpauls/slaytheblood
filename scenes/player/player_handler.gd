@@ -195,22 +195,38 @@ func discard_cards() -> void:
 
 
 ## Flip the discard pile onto the draw pile in original order — NOT shuffled.
-## discard.draw_card() pops index 0 (oldest first) and draw_pile.add_card()
-## appends, so the resulting draw pile order is oldest-on-top (next to draw)
-## and newest-on-bottom (last to draw / "bottom of deck" per user spec).
+## Order: discard.cards[0] (oldest) becomes draw_pile.cards[0] (next to draw),
+## discard.cards[-1] (newest) becomes draw_pile.cards[-1] ("bottom of new
+## deck" per user spec).
+##
+## Implementation note: the resource swap is ATOMIC — we duplicate the array
+## once, clear discard, assign to draw, and emit size_changed exactly once on
+## each pile AFTER the visual handoff is done. The naive while-loop of
+## draw_card/add_card emits N intermediate size_changed events that each see a
+## mismatched visual-vs-resource count (because reshuffle_to has already moved
+## all visuals), and each one runs _sync_to_resource which spawns or frees
+## anonymous CardUIs to "fix" the diff. Those phantom CardUIs land in the
+## discard panel as the default-card placeholder and stick around after the
+## reshuffle completes.
 func reshuffle_deck_from_discard() -> void:
 	if not character.draw_pile.empty():
 		return
+	if character.discard.empty():
+		return
 
-	# Animate the visual handoff first so the size_changed handlers see matching
-	# counts and skip auto-spawn/free. The animation runs fire-and-forget; the
-	# resource swap below happens immediately so subsequent draws work.
+	# Animate the visual handoff first so the size_changed events emitted by
+	# the atomic swap below see matching visual/resource counts and skip
+	# auto-spawn/free.
 	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
 	if battle_ui and battle_ui.discard_pile and battle_ui.draw_pile:
 		battle_ui.discard_pile.reshuffle_to(battle_ui.draw_pile)
 
-	while not character.discard.empty():
-		character.draw_pile.add_card(character.discard.draw_card())
+	# Atomic resource swap (preserves order — no shuffle).
+	var moving := character.discard.cards.duplicate()
+	character.discard.cards.clear()
+	character.draw_pile.cards = moving
+	character.discard.card_pile_size_changed.emit(0)
+	character.draw_pile.card_pile_size_changed.emit(character.draw_pile.cards.size())
 
 func _on_card_play_started(_card: Card) -> void:
 	pass

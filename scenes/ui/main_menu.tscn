@@ -1,22 +1,38 @@
-[gd_scene format=3 uid="uid://6dbich680qne"]
+[gd_scene load_steps=14 format=3 uid="uid://6dbich680qne"]
 
 [ext_resource type="Script" uid="uid://cejvjis8534us" path="res://scenes/ui/main_menu.gd" id="1_lsjs7"]
 [ext_resource type="Resource" uid="uid://c6y7qo3oyjpal" path="res://scenes/run/run_startup.tres" id="2_8aaed"]
 [ext_resource type="Texture2D" uid="uid://dpfqok8tuy4r7" path="res://art/tile_0084.png" id="2_uyx6e"]
-[ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="3_q85j6"]
 [ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="3_rkg7c"]
 [ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="4_t0oo2"]
 [ext_resource type="Texture2D" uid="uid://cgopx2ponr1qi" path="res://art/tile_0121.png" id="5_vxe4u"]
 [ext_resource type="Texture2D" uid="uid://con6y7mc74c5a" path="res://art/tile_0120.png" id="6_b3udk"]
 [ext_resource type="Texture2D" uid="uid://ukld5o613i0a" path="res://art/tile_0122.png" id="7_yoaod"]
 [ext_resource type="AudioStream" uid="uid://bf6x110ucleeo" path="res://art/music/17406877-battle-of-the-dragons-8037.mp3" id="8_music"]
+[ext_resource type="Texture2D" uid="uid://7rrkay26jl73" path="res://art/backgrounds/medieval-dungeon-interior-with-stone-brick-walls-torches-empty-cellar-medieval-temple-palace-fort-tower-lit-by-night-modern-cartoon-illustration_76964-343786-915309253.jpg" id="9_dungeon"]
+[ext_resource type="FontFile" uid="uid://dohgfvvrbs3gn" path="res://art/themes/Abaddon_Fonts/Abaddon-Bold.ttf" id="10_titlefont"]
 
-[sub_resource type="Gradient" id="Gradient_xoidu"]
-colors = PackedColorArray(0.105882, 0, 0, 1, 0.460509, 0.308384, 0.229435, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("10_titlefont")
+font_size = 96
+font_color = Color(0.86, 0.18, 0.18, 1)
+outline_size = 14
+outline_color = Color(0.04, 0.02, 0.02, 1)
+shadow_size = 10
+shadow_color = Color(0.55, 0.12, 0.05, 0.55)
+shadow_offset = Vector2(0, 6)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bl4tu"]
-gradient = SubResource("Gradient_xoidu")
-width = 50
+[sub_resource type="Gradient" id="Gradient_vignette"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.04, 0.01, 0.01, 0.45, 0, 0, 0, 0.92)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vignette"]
+gradient = SubResource("Gradient_vignette")
+width = 256
+height = 144
+fill = 1
+fill_from = Vector2(0.5, 0.55)
+fill_to = Vector2(1, 1)
 
 [node name="MainMenu" type="Control" unique_id=2082163363]
 layout_mode = 3
@@ -36,7 +52,61 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture1D_bl4tu")
+mouse_filter = 2
+texture = ExtResource("9_dungeon")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Wizard" type="Sprite2D" parent="." unique_id=1465159025]
+self_modulate = Color(0.45, 0.4, 0.4, 1)
+position = Vector2(149.00002, 468)
+scale = Vector2(5.9375, 5.9375)
+texture = ExtResource("2_uyx6e")
+
+[node name="Assassin" type="Sprite2D" parent="." unique_id=1981531106]
+self_modulate = Color(0.45, 0.4, 0.4, 1)
+position = Vector2(269, 377)
+scale = Vector2(6.375, 6.375)
+texture = ExtResource("3_rkg7c")
+
+[node name="Warrior" type="Sprite2D" parent="." unique_id=604909533]
+self_modulate = Color(0.45, 0.4, 0.4, 1)
+position = Vector2(276, 521)
+scale = Vector2(8.375, 8.375)
+texture = ExtResource("4_t0oo2")
+
+[node name="Ghost" type="Sprite2D" parent="." unique_id=1813381935]
+self_modulate = Color(0.5, 0.42, 0.42, 1)
+position = Vector2(985, 419)
+scale = Vector2(8.375, 8.375)
+texture = ExtResource("5_vxe4u")
+flip_h = true
+
+[node name="Bat" type="Sprite2D" parent="." unique_id=193168803]
+self_modulate = Color(0.45, 0.38, 0.38, 1)
+position = Vector2(1051, 296)
+scale = Vector2(6.875, 6.875)
+texture = ExtResource("6_b3udk")
+flip_h = true
+
+[node name="Spider" type="Sprite2D" parent="." unique_id=1773466516]
+self_modulate = Color(0.45, 0.38, 0.38, 1)
+position = Vector2(1122, 539)
+scale = Vector2(9.8125, 9.8125)
+texture = ExtResource("7_yoaod")
+flip_h = true
+
+[node name="Vignette" type="TextureRect" parent="." unique_id=771342108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vignette")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Title" type="Label" parent="." unique_id=98041780]
 layout_mode = 1
@@ -45,14 +115,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -197.5
-offset_top = -164.0
-offset_right = 197.5
-offset_bottom = -120.0
+offset_left = -560.0
+offset_top = -310.0
+offset_right = 560.0
+offset_bottom = -190.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Slay The Blood"
-label_settings = ExtResource("3_q85j6")
+text = "Depths of the Dungeon"
+label_settings = SubResource("LabelSettings_title")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -89,39 +159,6 @@ custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 size_flags_vertical = 3
 text = "Exit"
-
-[node name="Wizard" type="Sprite2D" parent="." unique_id=1465159025]
-position = Vector2(149.00002, 468)
-scale = Vector2(5.9375, 5.9375)
-texture = ExtResource("2_uyx6e")
-
-[node name="Assassin" type="Sprite2D" parent="." unique_id=1981531106]
-position = Vector2(269, 377)
-scale = Vector2(6.375, 6.375)
-texture = ExtResource("3_rkg7c")
-
-[node name="Warrior" type="Sprite2D" parent="." unique_id=604909533]
-position = Vector2(276, 521)
-scale = Vector2(8.375, 8.375)
-texture = ExtResource("4_t0oo2")
-
-[node name="Ghost" type="Sprite2D" parent="." unique_id=1813381935]
-position = Vector2(985, 419)
-scale = Vector2(8.375, 8.375)
-texture = ExtResource("5_vxe4u")
-flip_h = true
-
-[node name="Bat" type="Sprite2D" parent="." unique_id=193168803]
-position = Vector2(1051, 296)
-scale = Vector2(6.875, 6.875)
-texture = ExtResource("6_b3udk")
-flip_h = true
-
-[node name="Spider" type="Sprite2D" parent="." unique_id=1773466516]
-position = Vector2(1122, 539)
-scale = Vector2(9.8125, 9.8125)
-texture = ExtResource("7_yoaod")
-flip_h = true
 
 [connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
