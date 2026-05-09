@@ -40,7 +40,10 @@ const RARITY_COLORS := {
 
 signal weapon_used_up
 
-var owner: Variant
+## Combatant currently wielding this weapon (always Player today, but typed
+## as Combatant for symmetry with Card and to leave room for enemy-wielded
+## weapons later). Null until WeaponHandler wires it up.
+var owner: Combatant
 var on_hits: Array[OnHit]
 
 func initialize_weapon(_owner: WeaponUI) -> void:

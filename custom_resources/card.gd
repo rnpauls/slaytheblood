@@ -55,7 +55,11 @@ const RARITY_COLORS := {
 @export var disable_pitch: bool = false
 #@export var disable_cost: bool = false
 
-var owner: Variant
+## The Combatant who currently owns this card (Player or Enemy). Set by the
+## handler that draws/adds the card; null while the card is in a draw pile or
+## reward stack. Effects, on-hits, and runechant triggers all guard against
+## null since a card can briefly outlive its owner during scene teardown.
+var owner: Combatant
 var on_hits: Array[OnHit]
 
 signal card_play_started(Card)
@@ -76,7 +80,9 @@ func is_single_targeted() -> bool:
 func _get_targets(_card_parent: Node) -> Array[Node]:
 	# Resolve via owner: the CardUI may have been detached by card_ui.play()
 	# before effects resolve, but owner (Player/Enemy) stays in the tree.
-	var tree = owner.get_tree()
+	if owner == null or not owner.is_inside_tree():
+		return []
+	var tree := owner.get_tree()
 
 	match target:
 		Target.SELF:

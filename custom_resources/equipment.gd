@@ -51,7 +51,9 @@ const RARITY_COLORS := {
 var current_block: int
 var used_this_attack: bool = false
 var ability_used_this_turn: bool = false
-var owner: Variant
+## Combatant who owns this equipment (always Player today). Null until
+## EquipmentHandler wires it up.
+var owner: Combatant
 
 
 func initialize_equipment(_owner) -> void:
