@@ -51,6 +51,9 @@ func start_battle(char_stats: CharacterStats) -> void:
 	# Back-ref so effects / relics can reach the handler via combatant.player_handler
 	# instead of a get_first_node_in_group lookup.
 	player.player_handler = self
+	# Tell RelicHandler who the relics belong to so add_relic can wire
+	# relic.owner without each relic doing its own lookup.
+	relics.relics_owner = player
 
 	_assign_hand_slot(character.hand_left, hand_left_weapon, hand_left_equipment)
 	_assign_hand_slot(character.hand_right, hand_right_weapon, hand_right_equipment)

@@ -12,18 +12,26 @@ enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
 @export var icon: Texture
 @export_multiline var tooltip: String
 
-func initialize_relic(_owner: RelicUI) -> void:
+## Combatant that holds this relic. Set by RelicHandler.add_relic. Lets relic
+## scripts read self.owner.stats / self.owner.status_handler /
+## self.owner.player_handler instead of looking up the player by group name.
+## Always Player today; typed Combatant for symmetry with Card / Weapon /
+## Equipment owners.
+var owner: Combatant
+
+
+func initialize_relic(_relic_ui: RelicUI) -> void:
 	pass
 
 
-func activate_relic(_owner: RelicUI) -> void:
+func activate_relic(_relic_ui: RelicUI) -> void:
 	pass
 
 
 # This method should be implemented by event-based relics
 # which connect to the EventBus to make sure that they are
 # disconnected when a relic gets removed.
-func deactivate_relic(_owner: RelicUI) -> void:
+func deactivate_relic(_relic_ui: RelicUI) -> void:
 	pass
 
 

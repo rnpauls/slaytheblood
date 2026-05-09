@@ -9,6 +9,11 @@ const RELIC_UI = preload("res://scenes/relic_handler/relic_ui.tscn")
 @onready var relics_control: RelicsControl = $RelicsControl
 @onready var relics: HBoxContainer = %Relics
 
+## Combatant that owns these relics (always Player today). Set by
+## PlayerHandler.start_battle so relic scripts can read relic.owner instead
+## of doing a get_first_node_in_group lookup at activation time.
+var relics_owner: Combatant
+
 func _ready() -> void:
 	relics.child_exiting_tree.connect(_on_relics_child_exiting_tree)
 	
@@ -48,6 +53,9 @@ func add_relic(relic: Relic) -> void:
 	var new_relic_ui := RELIC_UI.instantiate() as RelicUI
 	relics.add_child(new_relic_ui)
 	new_relic_ui.relic = relic
+	# Wire the back-ref BEFORE initialize_relic so subclasses can read
+	# self.owner from inside their own initialize/connect setup.
+	new_relic_ui.relic.owner = relics_owner
 	new_relic_ui.relic.initialize_relic(new_relic_ui)
 
 func has_relic(id: String) -> bool:

@@ -1,11 +1,12 @@
 extends Relic
 
 
-func activate_relic(owner: RelicUI) -> void:
-	Events.player_action_phase_started.connect(_add_mana.bind(owner), CONNECT_ONE_SHOT)
+func activate_relic(relic_ui: RelicUI) -> void:
+	Events.player_action_phase_started.connect(_add_mana.bind(relic_ui), CONNECT_ONE_SHOT)
 
-func _add_mana(owner: RelicUI) -> void:
-	owner.flash()
-	var player := owner.get_tree().get_first_node_in_group("player") as Player
+
+func _add_mana(relic_ui: RelicUI) -> void:
+	relic_ui.flash()
+	var player := self.owner as Player
 	if player:
 		player.stats.mana += 1
