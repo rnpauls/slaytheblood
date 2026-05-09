@@ -55,9 +55,9 @@ func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_at
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)
 	for target in targets:
 		target.stats.block = 0
-	var player = targets[0].get_tree().get_first_node_in_group("player") as Player
-	player.stats.mana -= cost
-	if not go_again: player.stats.action_points -= 1
+	if owner:
+		owner.stats.mana -= cost
+		if not go_again: owner.stats.action_points -= 1
 	attacks_this_turn += 1
 	if attacks_this_turn >= attacks_per_turn: weapon_used_up.emit()
 

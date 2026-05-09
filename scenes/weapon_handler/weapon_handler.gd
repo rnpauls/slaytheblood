@@ -53,13 +53,13 @@ func set_weapon(new_weapon: Weapon) -> void:
 		hide()
 
 
-# Connects to the player's stats_changed signal so the glow reflects mana / AP
-# in real time. Safe to call repeatedly — duplicate connections are skipped.
+# Connects to the wielder's stats_changed signal so the glow reflects mana /
+# AP in real time. Safe to call repeatedly — duplicate connections are skipped.
 func _connect_stats_for_glow() -> void:
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if player and player.stats:
-		if not player.stats.stats_changed.is_connected(_update_glow):
-			player.stats.stats_changed.connect(_update_glow)
+	var combatant := owner_of_weapon as Combatant
+	if combatant and combatant.stats:
+		if not combatant.stats.stats_changed.is_connected(_update_glow):
+			combatant.stats.stats_changed.connect(_update_glow)
 
 
 func _update_glow() -> void:
@@ -99,13 +99,12 @@ func reset() -> void:
 
 func can_activate_weapon() -> bool:
 	if not weapon: return false
-	var player: Player = get_tree().get_first_node_in_group("player")
-	var mana:= player.stats.mana
-	var ap := player.stats.action_points
-	if activable and (mana >= weapon.cost) and (ap > 0):
-		return true
-	else:
+	var combatant := owner_of_weapon as Combatant
+	if not combatant or not combatant.stats:
 		return false
+	var mana := combatant.stats.mana
+	var ap := combatant.stats.action_points
+	return activable and (mana >= weapon.cost) and (ap > 0)
 
 func begin_targeting() -> void:
 	targeting = true
