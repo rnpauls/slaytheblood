@@ -201,6 +201,75 @@ func accept_pitched_visual(card_ui: CardUI) -> void:
 	_update_counter()
 
 
+## Spawn a fresh CardUI at `source_global_pos` (face-up, full size) and tween
+## it into this pile after a brief readability hold. Used by CardAddEffect via
+## the BattleUI router to show "card X was added to your draw/discard pile".
+##
+## Caller must invoke this BEFORE mutating the resource pile (same handoff
+## invariant as accept_pitched_visual): the new CardUI is parented in
+## immediately, so when the resource size_changed handler runs it sees matching
+## visual/resource counts and skips its own auto-spawn.
+##
+## For face-down piles (draw pile), the card flips back-side at the end of the
+## flight so the player sees what was added during the flight, then it joins
+## the deck face-down.
+func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
+	var visual := CARD_UI_SCENE.instantiate() as CardUI
+	add_child(visual)
+	visual.card = card_resource
+	# add_to_back_of_deck=true (draw pile) puts the new card at the front
+	# (north / peeked) child slot; discard pile puts it at the back (visible top).
+	if add_to_back_of_deck:
+		move_child(visual, 0)
+	else:
+		move_child(visual, get_child_count() - 1)
+	visual.pivot_offset = CARD_PIVOT
+	visual.global_position = source_global_pos
+	visual.scale = Vector2.ONE
+	visual.rotation_degrees = 0.0
+	visual.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_set_descendants_mouse_filter(visual, Control.MOUSE_FILTER_IGNORE)
+	visual.z_index = 10
+	if visual.card_render:
+		visual.card_render.show_back = false
+		visual.card_render.set_glow(false)
+
+	_pitched_in_flight = visual
+
+	var target_index: int = 0 if add_to_back_of_deck else _visuals().size() - 1
+	var target_pos: Vector2 = _slot_position(target_index)
+	var hold_duration := 0.3
+	var fly_duration := 0.4
+
+	var t := visual.create_tween()
+	t.tween_interval(hold_duration)
+	t.tween_property(visual, "position", target_pos, fly_duration) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(visual, "rotation_degrees", 0.0, fly_duration) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(visual, "scale", Vector2(PILE_SCALE, PILE_SCALE), fly_duration) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	# Face-down piles: flip the card to its back as it lands so it joins the
+	# deck visually consistent with the rest of the stack.
+	if face_down:
+		t.tween_property(visual.card_render, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP_FAST)
+		t.tween_callback(func():
+			if is_instance_valid(visual) and visual.card_render:
+				visual.card_render.show_back = true)
+		t.tween_property(visual.card_render, "scale:x", 1.0, Constants.TWEEN_CARD_FLIP_FAST)
+
+	t.tween_callback(func():
+		if _pitched_in_flight == visual:
+			_pitched_in_flight = null
+		if is_instance_valid(visual):
+			visual.z_index = 0)
+	visual.tween = t
+
+	_arrange()
+	_update_counter()
+
+
 # ── Internal: spawn/free to match resource size ───────────────────────────────
 
 func _on_pile_size_changed(_new_size: int) -> void:

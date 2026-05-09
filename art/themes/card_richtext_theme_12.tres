@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c1a6to6bnimqu" path="res://art/themes/lt_cushion/LTCushion-VF.ttf" id="5_0flnu"]
 
 [resource]
-default_font_size = 10
+default_font_size = 12
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 3
 RichTextLabel/fonts/bold_font = ExtResource("1_eqsa6")

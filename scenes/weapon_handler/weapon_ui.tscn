@@ -6,6 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="5_gvkp5"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="6_abdjr"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weapon_glow"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(1, 0.95, 0.3, 0.8)
+shadow_size = 8
+
 [sub_resource type="Animation" id="Animation_eknsn"]
 length = 0.001
 tracks/0/type = "value"
@@ -68,15 +77,6 @@ _data = {
 &"flash": SubResource("Animation_dig6a")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weapon_glow"]
-bg_color = Color(0, 0, 0, 0)
-shadow_color = Color(1, 0.95, 0.3, 0.8)
-shadow_size = 8
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [node name="WeaponUI" type="Control" unique_id=1748562188]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
@@ -84,14 +84,14 @@ anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_uyydt")
 
-[node name="GlowPanel" type="Panel" parent="." unique_id=4000000002]
+[node name="GlowPanel" type="Panel" parent="." unique_id=-294967294]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 2
-visible = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_weapon_glow")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1641670766]
@@ -126,13 +126,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -22.0
-offset_right = 20.0
-offset_bottom = 22.0
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "4"
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -166,10 +166,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -22.0
-offset_right = 20.0
-offset_bottom = 22.0
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "3"

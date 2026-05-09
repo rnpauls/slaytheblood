@@ -9,7 +9,6 @@ func enter() ->void:
 	card_ui.is_hovered = false
 	card_ui.z_index = 0
 	card_ui.card_render.card_visuals.panel.set("theme_override_styles/panel", card_ui.BASE_STYLEBOX)
-	card_ui.card_render.modulate = Color.WHITE
 	card_ui.pivot_offset = card_ui.size/2
 
 	Events.tooltip_hide_requested.emit()
@@ -19,6 +18,9 @@ func on_gui_input(event: InputEvent) -> void:
 	var rmb := event.is_action_pressed("right_mouse")
 
 	if lmb and hand.is_selecting:
+		if hand.count_selected_cards() >= hand.selection_limit:
+			_log("BASE on_gui_input: LMB IGNORED (selection_limit=%d already reached)" % hand.selection_limit)
+			return
 		_log("BASE on_gui_input: LMB (is_selecting=true) → SELECTED")
 		transition_requested.emit(self, CardState.State.SELECTED)
 		return

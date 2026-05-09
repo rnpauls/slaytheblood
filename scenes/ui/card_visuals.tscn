@@ -2,17 +2,17 @@
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_0qctv"]
 [ext_resource type="Script" uid="uid://cjhf23ocvv0vi" path="res://scenes/ui/card_visuals.gd" id="2_4hbsy"]
-[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="3_10ksf"]
 [ext_resource type="Texture2D" uid="uid://c8avjgmutbvpw" path="res://art/custom_art/card_visuals/pitch_bar.png" id="4_k4udy"]
 [ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="4_m3e03"]
 [ext_resource type="Texture2D" uid="uid://diodbu8p6vfm6" path="res://art/custom_art/card_visuals/three_pip_4_pitch_bar.png" id="5_6o0a7"]
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="5_21bya"]
 [ext_resource type="Texture2D" uid="uid://h8lr3eetsht5" path="res://art/custom_art/card_visuals/card_border.png" id="6_6o0a7"]
 [ext_resource type="Texture2D" uid="uid://cy2hhpc4ntplw" path="res://art/custom_art/card_visuals/card_art_frame.png" id="6_8hscx"]
 [ext_resource type="Texture2D" uid="uid://b0cx7vg3324n2" path="res://art/item11.png" id="6_njcf5"]
 [ext_resource type="Texture2D" uid="uid://bxtbwy0s4bltj" path="res://art/custom_art/card_visuals/from_claude/filigree_corner.svg" id="7_21bya"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="7_b8ve4"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="8_bp74k"]
-[ext_resource type="Theme" uid="uid://cho0px4v2r182" path="res://art/themes/card_richtext_theme_10.tres" id="10_b8ve4"]
+[ext_resource type="Theme" uid="uid://cho0px4v2r182" path="res://art/themes/card_richtext_theme_12.tres" id="10_b8ve4"]
 [ext_resource type="Texture2D" uid="uid://8ehmmlk0r0mk" path="res://art/custom_art/card_visuals/from_claude/tier_red.png" id="11_3o6dk"]
 [ext_resource type="Texture2D" uid="uid://c2f6oqlq3fu1u" path="res://art/custom_art/card_visuals/bar_1_red.png" id="11_21bya"]
 [ext_resource type="Texture2D" uid="uid://buoc2foifon6a" path="res://art/custom_art/card_visuals/from_claude/cost_coin.png" id="12_0c3ob"]
@@ -42,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xe1ap")
 
 [node name="Panel" type="NinePatchRect" parent="." unique_id=271331774]
@@ -95,7 +96,7 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_10ksf")
+texture = ExtResource("5_21bya")
 expand_mode = 1
 stretch_mode = 5
 
@@ -162,6 +163,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
+mouse_filter = 1
 
 [node name="PitchStrip" type="CanvasModulate" parent="PitchStripPos" unique_id=868946663]
 unique_name_in_owner = true
@@ -328,9 +330,9 @@ vertical_alignment = 1
 [node name="Type" type="RichTextLabel" parent="." unique_id=1578929195]
 layout_mode = 0
 offset_left = 36.0
-offset_top = 260.0
+offset_top = 259.0
 offset_right = 164.0
-offset_bottom = 272.0
+offset_bottom = 271.0
 mouse_filter = 2
 theme = ExtResource("10_b8ve4")
 text = "Attack"

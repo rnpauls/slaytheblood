@@ -21,6 +21,7 @@ const CARD_UI_SCENE = preload("res://scenes/card_ui/player_card_ui.tscn")
 @export var char_stats: CharacterStats
 @export var is_blocking: bool = false
 @export var is_selecting: bool = false
+var selection_limit: int = 0
 
 var hovered_card: PlayerCardUI = null 
 
@@ -240,13 +241,22 @@ func _on_enemy_attack_declared() -> void:
 func _on_player_blocks_declared() -> void:
 	is_blocking = false
 
-func _on_selecting_cards_from_hand() -> void:
+func _on_selecting_cards_from_hand(limit: int) -> void:
 	is_selecting = true
+	selection_limit = limit
 
 func _on_finished_selecting_cards_from_hand(_cards: Array[PlayerCardUI]) -> void:
 	is_selecting = false
+	selection_limit = 0
 	for handcard in get_children() as Array[PlayerCardUI]:
 		handcard.card_state_machine.force_return_to_base_state()
+
+func count_selected_cards() -> int:
+	var count := 0
+	for handcard in get_children():
+		if handcard is PlayerCardUI and handcard.selected:
+			count += 1
+	return count
 
 func _on_lock_hand() -> void:
 	disable_hand()

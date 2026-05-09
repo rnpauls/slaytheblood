@@ -34,9 +34,9 @@ theme_override_styles/panel = ExtResource("3_invsb")
 [node name="WeaponUI" parent="." unique_id=261593189 instance=ExtResource("2_invwu")]
 layout_mode = 0
 offset_left = 69.0
-offset_top = 98.0
+offset_top = 90.0
 offset_right = 133.0
-offset_bottom = 162.0
+offset_bottom = 154.0
 
 [node name="EquipmentDisplay" type="Control" parent="." unique_id=1828750525]
 visible = false
@@ -85,8 +85,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="OneShotBadge" type="TextureRect" parent="EquipmentDisplay" unique_id=1611112222]
-texture_filter = 1
 visible = false
+texture_filter = 1
 layout_mode = 0
 offset_left = 56.0
 offset_top = -16.0
@@ -99,10 +99,10 @@ stretch_mode = 5
 [node name="Rarity" type="TextureRect" parent="." unique_id=1071544369]
 texture_filter = 1
 layout_mode = 0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 52.0
-offset_bottom = 52.0
+offset_left = -9.0
+offset_top = -7.0
+offset_right = 36.0
+offset_bottom = 38.0
 mouse_filter = 2
 texture = ExtResource("4_invrar")
 expand_mode = 1
@@ -111,36 +111,34 @@ stretch_mode = 5
 [node name="TextBox" type="RichTextLabel" parent="." unique_id=892735793]
 layout_mode = 0
 offset_left = 5.0
-offset_top = 195.0
+offset_top = 191.0
 offset_right = 195.0
-offset_bottom = 247.0
+offset_bottom = 243.0
 mouse_filter = 2
 theme = ExtResource("5_invth")
-theme_override_constants/line_separation = -10
 bbcode_enabled = true
 text = "On hit destroy arsenal"
 horizontal_alignment = 1
 
 [node name="NameLabel" type="RichTextLabel" parent="." unique_id=238359469]
 layout_mode = 0
-offset_left = 58.0
+offset_left = 39.0
 offset_top = 7.0
 offset_right = 194.0
 offset_bottom = 63.0
 mouse_filter = 2
 theme = ExtResource("5_invth")
-theme_override_constants/line_separation = -10
 bbcode_enabled = true
 text = "Sledge of Anvilheim"
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="TypeLabel" type="RichTextLabel" parent="." unique_id=155581673]
 layout_mode = 0
 offset_left = 4.0
-offset_top = 245.0
+offset_top = 257.0
 offset_right = 194.0
-offset_bottom = 297.0
+offset_bottom = 299.0
 mouse_filter = 2
 theme = ExtResource("5_invth")
 bbcode_enabled = true

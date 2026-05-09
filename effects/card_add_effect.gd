@@ -14,6 +14,11 @@ func execute(targets: Array[Node]) -> void:
 		if not target or not target.stats:
 			continue
 		var new_card := card_to_add.duplicate() as Card
+		# Emit BEFORE mutating the resource pile so the BattleUI listener can
+		# do the visual handoff (parent the flying CardUI into the target panel)
+		# ahead of the size_changed handler — otherwise we'd see a duplicate
+		# auto-spawned visual fly up from below the pile.
+		Events.card_add_animation_requested.emit(new_card, target, destination)
 		match destination:
 			Destination.DRAW_PILE_RANDOM:
 				_insert_random(target.stats.draw_pile, new_card)

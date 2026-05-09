@@ -37,7 +37,7 @@ signal tooltip_hide_requested
 ## Exactly one of `weapon` or `equipment` should be set; the other is null.
 signal inventory_preview_show_requested(weapon: Weapon, equipment: Equipment, anchor_rect: Rect2)
 signal inventory_preview_hide_requested
-signal selecting_cards_from_hand
+signal selecting_cards_from_hand(limit: int)
 signal finished_selecting_cards_from_hand(selected_cards: Array[CardUI])
 signal lock_hand()
 signal unlock_hand()
@@ -47,6 +47,12 @@ signal unlock_hand()
 ## to gate downstream effects (e.g. ravenous_rabble's pitch read).
 signal top_card_reveal_requested(card: Card, source_owner: Node)
 signal top_card_reveal_finished
+## Request a fly-in animation for a card being added to a target combatant's
+## pile. Listener (BattleUI) handles visuals; CardAddEffect emits this BEFORE
+## mutating the resource pile so the listener can do the visual handoff
+## (parent the CardUI into the target panel) ahead of the size_changed handler.
+## Fire-and-forget — no completion signal; the tween runs independently.
+signal card_add_animation_requested(card: Card, target: Node, destination: int)
 
 #Player-related events
 signal player_initial_hand_drawn
