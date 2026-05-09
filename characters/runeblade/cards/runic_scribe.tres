@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bcrnsc0001run"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://dicqumhwg56o0" path="res://art/magicbook/64x64/book_image_3.png" id="2_icon"]
+[ext_resource type="Script" path="res://generic_cards/draw_cards.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+draw_amount = 3
+id = "runic_scribe"
+type = 1
+cost = 1
+pitch = 3
+icon = ExtResource("2_icon")
+tooltip_text = "Draw 3 cards."
+sound = ExtResource("1_block")
+disable_attack = true
+disable_defense = true

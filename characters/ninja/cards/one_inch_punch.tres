@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_7mun4")
-id = "inch_punch"
+id = "one_inch_punch"
 target = 1
 pitch = 3
 attack = 3

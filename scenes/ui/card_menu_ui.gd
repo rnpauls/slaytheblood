@@ -7,9 +7,37 @@ const BASE_STYLEBOX := preload("res://scenes/card_ui/card_base_stylebox.tres")
 const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 
 @export var card: Card : set = set_card
+@export_range(0.1, 2.0, 0.05) var base_scale: float = 0.8 : set = set_base_scale
 @export var hover_scale := 1.1
 
 @onready var visuals: CardVisuals = $Visuals
+
+
+func _ready() -> void:
+	# CenterContainer.fit_child_in_rect resets visuals.scale to (1, 1) every
+	# sort, so re-apply on each sort to keep base_scale in effect.
+	sort_children.connect(_apply_base_scale)
+	_apply_base_scale()
+
+
+func set_base_scale(value: float) -> void:
+	base_scale = value
+	if is_node_ready():
+		_apply_base_scale()
+		update_minimum_size()
+
+
+func _apply_base_scale() -> void:
+	if visuals == null:
+		return
+	visuals.pivot_offset = visuals.custom_minimum_size / 2.0
+	visuals.scale = Vector2.ONE * base_scale
+
+
+func _get_minimum_size() -> Vector2:
+	if visuals == null:
+		return Vector2.ZERO
+	return visuals.custom_minimum_size * base_scale
 
 
 func _on_visuals_gui_input(event: InputEvent) -> void:
@@ -20,7 +48,7 @@ func _on_visuals_gui_input(event: InputEvent) -> void:
 func _on_visuals_mouse_entered() -> void:
 	visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 	visuals.pivot_offset = visuals.size / 2.0
-	visuals.scale = Vector2.ONE * hover_scale
+	visuals.scale = Vector2.ONE * base_scale * hover_scale
 	z_index = 20
 	if not card:
 		return
@@ -31,7 +59,7 @@ func _on_visuals_mouse_entered() -> void:
 
 func _on_visuals_mouse_exited() -> void:
 	visuals.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
-	visuals.scale = Vector2.ONE
+	visuals.scale = Vector2.ONE * base_scale
 	z_index = 0
 	Events.tooltip_hide_requested.emit()
 

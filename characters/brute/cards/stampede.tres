@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://bcstm0001bru"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://qpag2a664ffc" path="res://art/item56.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/brute/cards/stampede.gd" id="3_script"]
+[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
+
+[resource]
+script = ExtResource("3_script")
+id = "stampede"
+type = 0
+target = 1
+cost = 1
+pitch = 1
+attack = 5
+defense = 2
+icon = ExtResource("2_icon")
+tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: draw 2 more cards."
+sound = ExtResource("4_sound")

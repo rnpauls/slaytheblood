@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bcqrx0001nin"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://cli20nvbbuehk" path="res://art/item51.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/ninja/cards/quick_reflexes.gd" id="3_script"]
+[ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_sound"]
+
+[resource]
+script = ExtResource("3_script")
+id = "quick_reflexes"
+type = 0
+target = 1
+pitch = 1
+attack = 3
+defense = 2
+icon = ExtResource("2_icon")
+tooltip_text = "On hit: draw 1."
+sound = ExtResource("4_sound")

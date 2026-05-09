@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://b7archvst001"]
+
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_arch"]
+[ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="2_arch"]
+[ext_resource type="Resource" uid="uid://b7archdck002" path="res://enemies/archivist/archivist_starting_deck.tres" id="3_arch"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_arch"]
+[ext_resource type="Resource" uid="uid://b7catalg002" path="res://weapons/elite/catalog_tome.tres" id="5_arch"]
+
+[resource]
+script = ExtResource("1_arch")
+character_name = "The Archivist"
+art = ExtResource("2_arch")
+max_health = 60
+starting_deck = ExtResource("3_arch")
+starting_inventory = ExtResource("4_arch")
+cards_per_turn = 3
+hand_left = ExtResource("5_arch")
+metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

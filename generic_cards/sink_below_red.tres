@@ -8,7 +8,6 @@
 script = ExtResource("2_vu1fo")
 id = "sink_below"
 type = 2
-rarity = 2
 pitch = 1
 defense = 4
 icon = ExtResource("1_vu1fo")

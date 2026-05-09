@@ -6,7 +6,7 @@ const MUSCLE_STATUS = preload("res://statuses/muscle.tres")
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	if not owner:
 		return
-	var enemies :Array[Combatant] = owner.get_tree().get_nodes_in_group("enemies")
+	var enemies: Array[Node] = owner.get_tree().get_nodes_in_group("enemies")
 	for e in enemies:
 		if e == owner or not is_instance_valid(e):
 			continue

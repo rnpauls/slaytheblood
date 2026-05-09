@@ -30,7 +30,10 @@
 [ext_resource type="Resource" uid="uid://ddntfmnq37i48" path="res://characters/brute/cards/heavy_cleave.tres" id="27_hvclv"]
 [ext_resource type="Resource" uid="uid://ddntfmnq37i58" path="res://characters/brute/cards/whirlwind.tres" id="28_whirl"]
 [ext_resource type="Resource" uid="uid://ddntfmnq37i68" path="res://characters/brute/cards/adrenaline.tres" id="29_adrnl"]
+[ext_resource type="Resource" path="res://characters/brute/cards/war_drum.tres" id="30_wardr"]
+[ext_resource type="Resource" path="res://characters/brute/cards/stampede.tres" id="31_stamp"]
+[ext_resource type="Resource" path="res://characters/brute/cards/rage_cycle.tres" id="32_rgcyc"]
 
 [resource]
 script = ExtResource("2_tp1qw")
-cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("7_11m5d"), ExtResource("6_1qg6x"), ExtResource("5_1qht6"), ExtResource("9_2ypy4"), ExtResource("8_1xvak"), ExtResource("9_wlxe0"), ExtResource("10_brp3f"), ExtResource("11_q8gyr"), ExtResource("12_w0piq"), ExtResource("13_2eavu"), ExtResource("14_wmius"), ExtResource("15_fw1py"), ExtResource("16_e52y7"), ExtResource("17_afu21"), ExtResource("18_kcywi"), ExtResource("19_qwcd2"), ExtResource("20_ygm28"), ExtResource("21_ygm28"), ExtResource("22_eshak"), ExtResource("23_unyld"), ExtResource("24_btcry"), ExtResource("25_roar"), ExtResource("26_sndwd"), ExtResource("27_hvclv"), ExtResource("28_whirl"), ExtResource("29_adrnl")])
+cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("7_11m5d"), ExtResource("6_1qg6x"), ExtResource("5_1qht6"), ExtResource("9_2ypy4"), ExtResource("8_1xvak"), ExtResource("9_wlxe0"), ExtResource("10_brp3f"), ExtResource("11_q8gyr"), ExtResource("12_w0piq"), ExtResource("13_2eavu"), ExtResource("14_wmius"), ExtResource("15_fw1py"), ExtResource("16_e52y7"), ExtResource("17_afu21"), ExtResource("18_kcywi"), ExtResource("19_qwcd2"), ExtResource("20_ygm28"), ExtResource("21_ygm28"), ExtResource("22_eshak"), ExtResource("23_unyld"), ExtResource("24_btcry"), ExtResource("25_roar"), ExtResource("26_sndwd"), ExtResource("27_hvclv"), ExtResource("28_whirl"), ExtResource("29_adrnl"), ExtResource("30_wardr"), ExtResource("31_stamp"), ExtResource("32_rgcyc")])

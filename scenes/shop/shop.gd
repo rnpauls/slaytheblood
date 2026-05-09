@@ -23,6 +23,8 @@ const SHOP_EQUIPMENT = preload("res://scenes/shop/shop_equipment.tscn")
 @onready var blink_timer: Timer = %BlinkTimer
 @onready var card_tooltip_popup: CardTooltipPopup = %CardTooltipPopup
 @onready var modifier_handler: ModifierHandler = $ModifierHandler
+@onready var remove_card_button: Button = %RemoveCardButton
+@onready var remove_card_view: CardPileView = %RemoveCardView
 
 func _ready() -> void:
 	for shop_card: ShopCard in cards.get_children():
@@ -51,6 +53,11 @@ func populate_shop() -> void:
 	_generate_shop_relics()
 	_generate_shop_weapons()
 	_generate_shop_equipment()
+	remove_card_view.card_pile = char_stats.deck
+	run_stats.gold_changed.connect(_update_remove_card_button)
+	run_stats.card_removal_cost_changed.connect(_update_remove_card_button)
+	char_stats.deck.card_pile_size_changed.connect(_update_remove_card_button.unbind(1))
+	_update_remove_card_button()
 
 func _blink_timer_setup() -> void:
 	blink_timer.wait_time = randf_range(1.0, 5.0)
@@ -141,6 +148,24 @@ func _get_updated_shop_cost(original_cost: int) -> int:
 
 func _on_back_button_pressed() -> void:
 	Events.shop_exited.emit()
+
+
+func _update_remove_card_button() -> void:
+	var cost := _get_updated_shop_cost(run_stats.card_removal_cost)
+	remove_card_button.text = "Remove Card (%d)" % cost
+	remove_card_button.disabled = run_stats.gold < cost or char_stats.deck.cards.is_empty()
+
+
+func _on_remove_card_button_pressed() -> void:
+	remove_card_view.show_current_view("Choose a card to remove")
+
+
+func _on_remove_card_view_card_selected(card: Card) -> void:
+	var cost := _get_updated_shop_cost(run_stats.card_removal_cost)
+	run_stats.gold -= cost
+	char_stats.deck.cards.erase(card)
+	char_stats.deck.card_pile_size_changed.emit(char_stats.deck.cards.size())
+	run_stats.card_removal_cost += RunStats.CARD_REMOVAL_COST_INCREMENT
 
 
 func _on_shop_card_bought(card: Card, gold_cost: int) -> void:

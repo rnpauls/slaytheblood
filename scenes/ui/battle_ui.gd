@@ -91,10 +91,10 @@ func _on_player_action_phase_started() -> void:
 
 func _on_end_turn_button_pressed() -> void:
 	end_turn_button.disabled = true
-	if end_turn_button.text == "END":
+	if end_turn_button.text == "END TURN":
 		Events.player_end_phase_started.emit()
 	elif end_turn_button.text == "BLOCK":
-		end_turn_button.text = "END"
+		end_turn_button.text = "END TURN"
 		Events.player_blocks_declared.emit()
 
 func _on_enemy_attack_declared() -> void:
@@ -103,7 +103,7 @@ func _on_enemy_attack_declared() -> void:
 	end_turn_button.disabled = false
 
 func _on_enemy_phase_ended() -> void:
-	end_turn_button.text = "END"
+	end_turn_button.text = "END TURN"
 	end_turn_button.disabled = false
 
 

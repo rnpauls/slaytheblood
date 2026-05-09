@@ -30,6 +30,7 @@
 [ext_resource type="Resource" uid="uid://da8os8m7cgqqm" path="res://equipment/steel_plate.tres" id="15_ncc2j"]
 [ext_resource type="Resource" uid="uid://citg2gxgih72i" path="res://weapons/tiger_staff.tres" id="15_njv4s"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="15_tfdun"]
+[ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="16_remov"]
 
 [sub_resource type="Gradient" id="Gradient_p5i2f"]
 offsets = PackedFloat32Array(0.486364, 1)
@@ -227,6 +228,21 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Leave"
 
+[node name="RemoveCardButton" type="Button" parent="UILayer" unique_id=1069481479]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 264.0
+offset_top = 272.0
+offset_right = 417.0
+offset_bottom = 318.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Remove Card"
+
 [node name="CardTooltipPopup" parent="UILayer" unique_id=1502570526 instance=ExtResource("5_x4lmk")]
 unique_name_in_owner = true
 visible = false
@@ -236,4 +252,14 @@ visible = false
 [node name="ShopCostModifier" parent="ModifierHandler" unique_id=33117873 instance=ExtResource("15_tfdun")]
 type = 3
 
+[node name="RemoveCardLayer" type="CanvasLayer" parent="." unique_id=1502570527]
+layer = 3
+
+[node name="RemoveCardView" parent="RemoveCardLayer" unique_id=1502570528 instance=ExtResource("16_remov")]
+unique_name_in_owner = true
+visible = false
+selection_mode = true
+
 [connection signal="pressed" from="UILayer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="UILayer/RemoveCardButton" to="." method="_on_remove_card_button_pressed"]
+[connection signal="card_selected" from="RemoveCardLayer/RemoveCardView" to="." method="_on_remove_card_view_card_selected"]

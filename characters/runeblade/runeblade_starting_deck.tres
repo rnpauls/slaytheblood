@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://crbsd1runebd0"]
+[gd_resource type="Resource" script_class="CardPile" format=3]
 
-[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="1_pile0"]
-[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="2_card0"]
-[ext_resource type="Resource" uid="uid://crspktryrunb4" path="res://characters/runeblade/cards/runic_spike_yellow.tres" id="3_rsy00"]
-[ext_resource type="Resource" uid="uid://crrtrt1runebd" path="res://characters/runeblade/cards/read_the_runes_red.tres" id="4_nbhj2"]
-[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="5_haeij"]
-[ext_resource type="Resource" uid="uid://cou6k25k1xfh0" path="res://characters/runeblade/cards/aether_spindle_yellow.tres" id="6_asy00"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="1_pile0"]
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="2_card0"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/runic_spike_yellow.tres" id="3_rsy00"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/read_the_runes_red.tres" id="4_nbhj2"]
+[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="5_0q0s3"]
+[ext_resource type="Resource" path="res://generic_cards/head_jab_blue.tres" id="5_haeij"]
 
 [resource]
 script = ExtResource("1_pile0")
-cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("4_nbhj2"), ExtResource("4_nbhj2"), ExtResource("6_asy00"), ExtResource("6_asy00"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("3_rsy00")])
+cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("4_nbhj2"), ExtResource("4_nbhj2"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("3_rsy00"), ExtResource("5_0q0s3"), ExtResource("5_0q0s3")])

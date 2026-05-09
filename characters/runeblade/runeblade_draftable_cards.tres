@@ -11,7 +11,10 @@
 [ext_resource type="Resource" uid="uid://ba0gxskb7w1o6" path="res://characters/runeblade/cards/haunting_hymn_red.tres" id="8_m5f1k"]
 [ext_resource type="Resource" uid="uid://cqwhyuhkr4wgx" path="res://characters/runeblade/cards/immolate_red.tres" id="9_p33dt"]
 [ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="10_k5sm7"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/arcane_insight.tres" id="11_arcin"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/runic_scribe.tres" id="12_rnscr"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/aether_conduit.tres" id="13_aecdt"]
 
 [resource]
 script = ExtResource("1_pile0")
-cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rsb00"), ExtResource("5_y1vpg"), ExtResource("7_rrb00"), ExtResource("8_asy00"), ExtResource("8_m5f1k"), ExtResource("9_p33dt"), ExtResource("10_k5sm7")])
+cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rsb00"), ExtResource("5_y1vpg"), ExtResource("7_rrb00"), ExtResource("8_asy00"), ExtResource("8_m5f1k"), ExtResource("9_p33dt"), ExtResource("10_k5sm7"), ExtResource("11_arcin"), ExtResource("12_rnscr"), ExtResource("13_aecdt")])

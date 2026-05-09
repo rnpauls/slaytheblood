@@ -17,8 +17,7 @@
 
 [resource]
 script = ExtResource("3_134v8")
-description = "Sneaky little bastard.
-He will kill you"
+description = "Master of evasive attacks"
 portrait = ExtResource("1_7xeg5")
 draftable_cards = ExtResource("2_u8x1n")
 draftable_equipment = Array[ExtResource("3_7xeg5")]([ExtResource("8_smoke"), ExtResource("9_tabi"), ExtResource("10_band")])

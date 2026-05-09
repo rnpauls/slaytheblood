@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bcrcdt0001run"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" uid="uid://dekli02x6ge3r" path="res://art/magicbook/64x64/book_image_5.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://dg37ediyhsnnb" path="res://characters/runeblade/cards/aether_conduit.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "aether_conduit"
+target = 1
+pitch = 1
+attack = 2
+zap = 1
+defense = 2
+go_again = true
+icon = ExtResource("2_icon")
+tooltip_text = "[kw=zap:1]Zap 1[/kw]. On hit: draw 1."
+sound = ExtResource("1_block")

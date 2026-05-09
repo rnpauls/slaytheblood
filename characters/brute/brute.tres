@@ -17,8 +17,7 @@
 
 [resource]
 script = ExtResource("1_i5v26")
-description = "Likes to fuck shit up.
-Extra girthy."
+description = "No thinking. Only smash"
 portrait = ExtResource("1_pbyxb")
 draftable_cards = ExtResource("2_s65w1")
 draftable_equipment = Array[ExtResource("3_pbyxb")]([ExtResource("8_helm"), ExtResource("9_greav"), ExtResource("10_spik")])

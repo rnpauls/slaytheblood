@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b7t2archscn1"]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_arch1"]
+[ext_resource type="Resource" uid="uid://b7archvst001" path="res://enemies/archivist/archivist_enemy.tres" id="2_arch2"]
+
+[node name="Tier2Archivist" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_arch1")]
+position = Vector2(731, 220)
+stats = ExtResource("2_arch2")

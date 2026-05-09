@@ -1,8 +1,8 @@
 [gd_resource type="Resource" format=3 uid="uid://ddn55fnq37i28"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_icon"]
-[ext_resource type="Script" uid="uid://stbnincrd004a" path="res://characters/ninja/cards/twin_strike.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://sj50f6au036n" path="res://art/Icon28_24.png" id="2_qe7py"]
+[ext_resource type="Script" uid="uid://ddn55fnq37i27" path="res://characters/ninja/cards/twin_strike.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_sound"]
 
 [resource]
@@ -15,6 +15,6 @@ attack = 2
 defense = 2
 ai_value = 2
 ai_value_needs_attack = true
-icon = ExtResource("1_icon")
-tooltip_text = "Hits twice for 2. On-hits trigger per hit."
+icon = ExtResource("2_qe7py")
+tooltip_text = "Hits twice"
 sound = ExtResource("3_sound")

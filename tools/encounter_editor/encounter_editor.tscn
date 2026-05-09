@@ -1,0 +1,245 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7encedt0001"]
+
+[ext_resource type="Script" path="res://tools/encounter_editor/encounter_editor.gd" id="1_editor"]
+
+[node name="EncounterEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_editor")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.13, 0.16, 1)
+
+[node name="Canvas" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 1
+
+[node name="Hint" type="Label" parent="Canvas"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -16.0
+offset_right = 200.0
+offset_bottom = 16.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.65, 0.65, 0.7, 1)
+text = "1280 × 720 game canvas — drag enemies here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 220.0
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="LeftPanel"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="LeftPanel/VBox"]
+layout_mode = 2
+text = "Battles"
+horizontal_alignment = 1
+
+[node name="BattleList" type="ItemList" parent="LeftPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+auto_height = false
+
+[node name="NewBtn" type="Button" parent="LeftPanel/VBox"]
+layout_mode = 2
+text = "New"
+
+[node name="SaveBtn" type="Button" parent="LeftPanel/VBox"]
+layout_mode = 2
+text = "Save"
+
+[node name="SaveAsBtn" type="Button" parent="LeftPanel/VBox"]
+layout_mode = 2
+text = "Save As (filename)"
+
+[node name="RefreshBtn" type="Button" parent="LeftPanel/VBox"]
+layout_mode = 2
+text = "Refresh"
+
+[node name="RightPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="RightPanel"]
+layout_mode = 2
+
+[node name="HeaderLabel" type="Label" parent="RightPanel/VBox"]
+layout_mode = 2
+text = "Enemies"
+horizontal_alignment = 1
+
+[node name="Filter" type="LineEdit" parent="RightPanel/VBox"]
+layout_mode = 2
+placeholder_text = "Filter…"
+
+[node name="EnemyList" type="ItemList" parent="RightPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+auto_height = false
+icon_mode = 0
+fixed_icon_size = Vector2i(28, 28)
+
+[node name="AddBtn" type="Button" parent="RightPanel/VBox"]
+layout_mode = 2
+text = "+ Add Selected"
+
+[node name="SelectedLabel" type="Label" parent="RightPanel/VBox"]
+layout_mode = 2
+text = "Selected enemy position"
+horizontal_alignment = 1
+
+[node name="SelectedRow" type="HBoxContainer" parent="RightPanel/VBox"]
+layout_mode = 2
+
+[node name="LabelX" type="Label" parent="RightPanel/VBox/SelectedRow"]
+layout_mode = 2
+text = "X"
+
+[node name="PosX" type="SpinBox" parent="RightPanel/VBox/SelectedRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1280.0
+step = 1.0
+
+[node name="LabelY" type="Label" parent="RightPanel/VBox/SelectedRow"]
+layout_mode = 2
+text = "Y"
+
+[node name="PosY" type="SpinBox" parent="RightPanel/VBox/SelectedRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 720.0
+step = 1.0
+
+[node name="RemoveBtn" type="Button" parent="RightPanel/VBox"]
+layout_mode = 2
+disabled = true
+text = "Remove Selected"
+
+[node name="TopBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -460.0
+offset_top = 8.0
+offset_right = 460.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="HBox" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+
+[node name="NameLbl" type="Label" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Filename"
+
+[node name="NameEdit" type="LineEdit" parent="TopBar/HBox"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+placeholder_text = "tier_X_my_battle"
+
+[node name="TierLbl" type="Label" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Tier"
+
+[node name="TierSpin" type="SpinBox" parent="TopBar/HBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 2.0
+step = 1.0
+
+[node name="WeightLbl" type="Label" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Weight"
+
+[node name="WeightSpin" type="SpinBox" parent="TopBar/HBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 10.0
+step = 0.1
+value = 1.0
+
+[node name="GoldMinLbl" type="Label" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Gold min"
+
+[node name="GoldMinSpin" type="SpinBox" parent="TopBar/HBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 999.0
+step = 1.0
+value = 30.0
+
+[node name="GoldMaxLbl" type="Label" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Gold max"
+
+[node name="GoldMaxSpin" type="SpinBox" parent="TopBar/HBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 999.0
+step = 1.0
+value = 50.0
+
+[node name="PoolCheck" type="CheckBox" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Add to pool"
+
+[node name="EliteCheck" type="CheckBox" parent="TopBar/HBox"]
+layout_mode = 2
+text = "Elite"
+
+[node name="BottomBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 220.0
+offset_top = -32.0
+offset_right = -260.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StatusLabel" type="Label" parent="BottomBar"]
+layout_mode = 2
+text = "Ready."

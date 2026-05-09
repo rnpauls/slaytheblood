@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://b1ntebn42q2l5"]
+[gd_resource type="Resource" script_class="CardPile" format=3]
 
-[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_hvivs"]
-[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://generic_cards/head_jab_red.tres" id="2_kl23a"]
-[ext_resource type="Resource" uid="uid://dqxasrxlk6q38" path="res://generic_cards/ravenous_rabble_blue.tres" id="3_mkeyd"]
-[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="4_3vcd4"]
-[ext_resource type="Resource" uid="uid://s8o4e6v14nrd" path="res://generic_cards/critical_strike_red.tres" id="4_gkmoi"]
-[ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://generic_cards/wounding_blow_blue.tres" id="5_l214d"]
-[ext_resource type="Resource" uid="uid://bos4xvkdp51nx" path="res://characters/ninja/cards/throw_knives.tres" id="7_gkmoi"]
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_hvivs"]
+[ext_resource type="Resource" path="res://generic_cards/head_jab_red.tres" id="2_kl23a"]
+[ext_resource type="Resource" path="res://generic_cards/ravenous_rabble_blue.tres" id="3_mkeyd"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="4_3vcd4"]
+[ext_resource type="Resource" path="res://generic_cards/critical_strike_red.tres" id="4_gkmoi"]
+[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="5_l214d"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/throw_knives.tres" id="7_gkmoi"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/poison_the_blade.tres" id="7_mkeyd"]
 
 [resource]
 script = ExtResource("4_3vcd4")
-cards = Array[ExtResource("1_hvivs")]([ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("3_mkeyd"), ExtResource("3_mkeyd"), ExtResource("4_gkmoi"), ExtResource("4_gkmoi"), ExtResource("5_l214d"), ExtResource("5_l214d"), ExtResource("7_gkmoi")])
+cards = Array[ExtResource("1_hvivs")]([ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("3_mkeyd"), ExtResource("3_mkeyd"), ExtResource("4_gkmoi"), ExtResource("4_gkmoi"), ExtResource("5_l214d"), ExtResource("5_l214d"), ExtResource("7_gkmoi"), ExtResource("7_mkeyd"), ExtResource("7_mkeyd")])

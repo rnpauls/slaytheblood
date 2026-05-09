@@ -14,7 +14,7 @@
 
 [resource]
 script = ExtResource("2_chst0")
-description = "Channels arcane through steel. Build runechants, set the field humming, then deliver one untyped strike that bypasses everything."
+description = "Arcane warrior mixing steel and magicks"
 portrait = ExtResource("1_np4oh")
 draftable_cards = ExtResource("5_drft0")
 draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00")])

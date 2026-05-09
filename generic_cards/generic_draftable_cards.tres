@@ -8,12 +8,11 @@
 [ext_resource type="Resource" uid="uid://s8o4e6v14nrd" path="res://generic_cards/critical_strike_red.tres" id="5_heaj2"]
 [ext_resource type="Resource" uid="uid://de0t0sb7c3tao" path="res://generic_cards/critical_strike_blue.tres" id="6_nyblp"]
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://generic_cards/ravenous_rabble_red.tres" id="7_sa5j3"]
-[ext_resource type="Resource" uid="uid://dqxasrxlk6q38" path="res://generic_cards/ravenous_rabble_blue.tres" id="8_4icgd"]
 [ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://generic_cards/sink_below_red.tres" id="9_dwve2"]
 [ext_resource type="Resource" uid="uid://bg7p6qyn055g8" path="res://generic_cards/sink_below_blue.tres" id="10_772p6"]
-[ext_resource type="Resource" uid="uid://b8pjbbgq27nko" path="res://generic_cards/sink_below_yellow.tres" id="11_nbdw2"]
+[ext_resource type="Resource" uid="uid://bdxdpo8h67w3y" path="res://generic_cards/command_and_conquer.tres" id="11_5gyys"]
 [ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="12_bm1u0"]
 
 [resource]
 script = ExtResource("3_ar66p")
-cards = Array[ExtResource("1_5jay3")]([ExtResource("2_kb2gv"), ExtResource("3_5gyys"), ExtResource("4_bm1u0"), ExtResource("5_heaj2"), ExtResource("6_nyblp"), ExtResource("7_sa5j3"), ExtResource("8_4icgd"), ExtResource("9_dwve2"), ExtResource("10_772p6"), ExtResource("11_nbdw2"), ExtResource("12_bm1u0")])
+cards = Array[ExtResource("1_5jay3")]([ExtResource("2_kb2gv"), ExtResource("3_5gyys"), ExtResource("4_bm1u0"), ExtResource("5_heaj2"), ExtResource("6_nyblp"), ExtResource("7_sa5j3"), ExtResource("9_dwve2"), ExtResource("10_772p6"), ExtResource("12_bm1u0"), ExtResource("11_5gyys")])

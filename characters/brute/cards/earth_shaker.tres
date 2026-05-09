@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://ddntfmnq37iy8"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://ck1t4hdip6xrl" path="res://art/tile_0119.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://ban5orprbej52" path="res://art/Iicon_32_17.png" id="2_frcsi"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="3_sound"]
 
@@ -14,6 +14,6 @@ cost = 3
 pitch = 2
 attack = 7
 defense = 3
-icon = ExtResource("1_icon")
+icon = ExtResource("2_frcsi")
 tooltip_text = "Hits all enemies."
 sound = ExtResource("3_sound")

@@ -3,7 +3,10 @@ extends Control
 
 const CARD_MENU_UI_SCENE := preload("res://scenes/ui/card_menu_ui.tscn")
 
+signal card_selected(card: Card)
+
 @export var card_pile: CardPile
+@export var selection_mode: bool = false
 
 @onready var title: Label = %Title
 @onready var cards: GridContainer = %Cards
@@ -53,6 +56,14 @@ func _update_view(randomized: bool) ->void:
 		var new_card := CARD_MENU_UI_SCENE.instantiate() as CardMenuUI
 		cards.add_child(new_card)
 		new_card.card = card
-		new_card.tooltip_requested.connect(card_tooltip_popup.show_tooltip)
-	
+		if selection_mode:
+			new_card.tooltip_requested.connect(_on_card_selected)
+		else:
+			new_card.tooltip_requested.connect(card_tooltip_popup.show_tooltip)
+
 	show()
+
+
+func _on_card_selected(card: Card) -> void:
+	card_selected.emit(card)
+	hide()
