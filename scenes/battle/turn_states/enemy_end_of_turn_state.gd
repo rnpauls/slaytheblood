@@ -25,6 +25,9 @@ func enter() -> void:
 		return
 
 	_current_enemy.status_handler.statuses_applied.connect(_on_statuses_applied)
+	# Worst-case fallback: force PLAYER_SOT, conceding any remaining enemies'
+	# turns. Better than deadlocking on a missed statuses_applied signal.
+	_arm_watchdog(State.PLAYER_SOT)
 	_current_enemy.status_handler.apply_statuses_by_type(Status.Type.END_OF_TURN)
 
 
@@ -33,6 +36,7 @@ func exit() -> void:
 		var sh := _current_enemy.status_handler
 		if sh and sh.statuses_applied.is_connected(_on_statuses_applied):
 			sh.statuses_applied.disconnect(_on_statuses_applied)
+	_disarm_watchdog()
 
 
 func _on_statuses_applied(type: Status.Type) -> void:

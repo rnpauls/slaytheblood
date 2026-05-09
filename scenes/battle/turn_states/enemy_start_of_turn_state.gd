@@ -38,6 +38,7 @@ func enter() -> void:
 	Events.enemy_died.connect(_on_enemy_died)
 	_current_enemy.status_handler.statuses_applied.connect(_on_statuses_applied)
 	_current_enemy.enemy_ai.plan_created.connect(_on_plan_created)
+	_arm_watchdog(State.ENEMY_ACTING)
 
 	_current_enemy.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
@@ -52,6 +53,7 @@ func exit() -> void:
 		var ai := _current_enemy.enemy_ai
 		if ai and ai.plan_created.is_connected(_on_plan_created):
 			ai.plan_created.disconnect(_on_plan_created)
+	_disarm_watchdog()
 
 
 func _on_enemy_died(enemy: Enemy) -> void:

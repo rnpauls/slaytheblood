@@ -15,12 +15,14 @@ func enter() -> void:
 		_request(State.STALEMATE)
 		return
 	Events.player_action_phase_started.connect(_on_action_phase_started)
+	_arm_watchdog(State.PLAYER_ACTION)
 	player_handler.start_turn()
 
 
 func exit() -> void:
 	if Events.player_action_phase_started.is_connected(_on_action_phase_started):
 		Events.player_action_phase_started.disconnect(_on_action_phase_started)
+	_disarm_watchdog()
 
 
 func _on_action_phase_started() -> void:

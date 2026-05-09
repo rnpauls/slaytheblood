@@ -13,11 +13,13 @@ extends TurnState
 
 func enter() -> void:
 	Events.player_initial_hand_drawn.connect(_on_initial_hand_drawn)
+	_arm_watchdog(State.PLAYER_ACTION)
 
 
 func exit() -> void:
 	if Events.player_initial_hand_drawn.is_connected(_on_initial_hand_drawn):
 		Events.player_initial_hand_drawn.disconnect(_on_initial_hand_drawn)
+	_disarm_watchdog()
 
 
 func _on_initial_hand_drawn() -> void:

@@ -15,12 +15,14 @@ extends TurnState
 
 func enter() -> void:
 	Events.player_hand_drawn.connect(_on_hand_drawn)
+	_arm_watchdog(State.ENEMY_SOT)
 	player_handler.end_turn()
 
 
 func exit() -> void:
 	if Events.player_hand_drawn.is_connected(_on_hand_drawn):
 		Events.player_hand_drawn.disconnect(_on_hand_drawn)
+	_disarm_watchdog()
 
 
 func _on_hand_drawn() -> void:
