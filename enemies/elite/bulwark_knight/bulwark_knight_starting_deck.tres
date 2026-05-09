@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardPile" load_steps=7 format=3 uid="uid://b7eDblwdck013"]
+
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Resource" uid="uid://b7e1iron0001" path="res://enemies/elite/bulwark_knight/cards/iron_stance.tres" id="2_iron"]
+[ext_resource type="Resource" uid="uid://b7e2phlnx002" path="res://enemies/elite/bulwark_knight/cards/phalanx_strike.tres" id="3_phlx"]
+[ext_resource type="Resource" uid="uid://b7e3stwll003" path="res://enemies/elite/bulwark_knight/cards/stalwart_wall.tres" id="4_stwl"]
+[ext_resource type="Resource" uid="uid://b7e4cntsl004" path="res://enemies/elite/bulwark_knight/cards/counter_slam.tres" id="5_cnts"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="6_pile"]
+
+[resource]
+script = ExtResource("6_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("2_iron"), ExtResource("2_iron"), ExtResource("3_phlx"), ExtResource("3_phlx"), ExtResource("4_stwl"), ExtResource("5_cnts")])

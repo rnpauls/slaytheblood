@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b7eJblwsc019"]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_blwsc"]
+[ext_resource type="Resource" uid="uid://b7eGblwknt016" path="res://enemies/elite/bulwark_knight/bulwark_knight_enemy.tres" id="2_blwsc"]
+
+[node name="EliteBulwarkKnight" type="Node2D" unique_id=2871001001]
+
+[node name="Enemy" parent="." unique_id=2871001002 instance=ExtResource("1_blwsc")]
+position = Vector2(902, 320)
+stats = ExtResource("2_blwsc")

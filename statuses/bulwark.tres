@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BulwarkStatus" format=3 uid="uid://b1k2lmnopqrs7"]
+
+[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="1_blwk1"]
+[ext_resource type="Script" path="res://statuses/bulwark.gd" id="2_blwk2"]
+
+[resource]
+script = ExtResource("2_blwk2")
+id = "bulwark"
+type = 0
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 5
+icon = ExtResource("1_blwk1")
+tooltip = "Bulwark: gain %s block at the start of every turn."

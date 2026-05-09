@@ -41,6 +41,13 @@ func _input(event: InputEvent) -> void:
 func set_weapon(new_weapon: Weapon) -> void:
 	if not is_node_ready():
 		await ready
+	# Detach the previously-wielded weapon (if any) before swapping. Covers both
+	# unequip (new_weapon == null) and re-equip with a different weapon.
+	var previous := weapon
+	if previous and previous != new_weapon:
+		var prev_combatant := owner_of_weapon as Combatant
+		if prev_combatant:
+			previous.detach_from_combatant(prev_combatant)
 	if new_weapon:
 		weapon_ui.weapon = new_weapon
 		weapon = weapon_ui.weapon
@@ -49,7 +56,11 @@ func set_weapon(new_weapon: Weapon) -> void:
 			weapon.weapon_used_up.connect(_on_weapon_used_up)
 			_connect_stats_for_glow()
 			_update_glow()
+		var combatant := owner_of_weapon as Combatant
+		if combatant:
+			weapon.attach_to_combatant(combatant)
 	else:
+		weapon = null
 		hide()
 
 
@@ -74,9 +85,12 @@ func _on_weapon_used_up() -> void:
 	if weapon.is_single_use:
 		if owner_of_weapon is Player:
 			owner_of_weapon.stats.inventory.remove_equipment(weapon)
+		var combatant := owner_of_weapon as Combatant
+		if combatant:
+			weapon.detach_from_combatant(combatant)
 		weapon.queue_free()
 		hide()
-		
+
 	disable_weapon()
 
 func disable_weapon() -> void:

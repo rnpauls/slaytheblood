@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="1_6cvld"]
 [ext_resource type="Script" uid="uid://otg3prwumwa" path="res://scenes/ui/gold_ui.gd" id="1_k71xw"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_number.tres" id="2_typenum"]
 
 [node name="GoldUI" type="HBoxContainer" unique_id=402258775]
 offset_right = 32.0
@@ -21,4 +22,5 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 1
 text = "9999"
+label_settings = ExtResource("2_typenum")
 vertical_alignment = 1

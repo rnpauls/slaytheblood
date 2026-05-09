@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=6 format=3 uid="uid://b7eGblwknt016"]
+
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_blwk"]
+[ext_resource type="Texture2D" uid="uid://dc7crere7e7ow" path="res://art/tile_0099.png" id="2_blwk"]
+[ext_resource type="Resource" uid="uid://b7eDblwdck013" path="res://enemies/elite/bulwark_knight/bulwark_knight_starting_deck.tres" id="3_blwk"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_blwk"]
+[ext_resource type="Resource" uid="uid://b7twrshld001" path="res://weapons/elite/tower_shield.tres" id="5_blwk"]
+
+[resource]
+script = ExtResource("1_blwk")
+character_name = "Bulwark Knight"
+art = ExtResource("2_blwk")
+max_health = 35
+starting_deck = ExtResource("3_blwk")
+starting_inventory = ExtResource("4_blwk")
+cards_per_turn = 3
+hand_left = ExtResource("5_blwk")
+metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

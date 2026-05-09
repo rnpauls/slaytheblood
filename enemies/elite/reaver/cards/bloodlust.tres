@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://b7e5bldlst005"]
+
+[ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_bldl1"]
+[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_bldl2"]
+[ext_resource type="Script" path="res://enemies/elite/reaver/cards/bloodlust.gd" id="3_bldl3"]
+
+[resource]
+script = ExtResource("3_bldl3")
+id = "bloodlust"
+type = 0
+target = 1
+cost = 1
+pitch = 1
+attack = 6
+defense = 0
+ai_value = 6
+icon = ExtResource("2_bldl2")
+tooltip_text = "Bloodlust: 6 attack. Gain 1 Muscle."
+sound = ExtResource("1_bldl1")
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

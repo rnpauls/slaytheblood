@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b7eKreavsc020"]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_revsc"]
+[ext_resource type="Resource" uid="uid://b7eHreaver017" path="res://enemies/elite/reaver/reaver_enemy.tres" id="2_revsc"]
+
+[node name="EliteReaver" type="Node2D" unique_id=2871002001]
+
+[node name="Enemy" parent="." unique_id=2871002002 instance=ExtResource("1_revsc")]
+position = Vector2(902, 320)
+stats = ExtResource("2_revsc")

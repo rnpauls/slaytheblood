@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://6dbich680qne"]
+[gd_scene format=3 uid="uid://6dbich680qne"]
 
 [ext_resource type="Script" uid="uid://cejvjis8534us" path="res://scenes/ui/main_menu.gd" id="1_lsjs7"]
 [ext_resource type="Resource" uid="uid://c6y7qo3oyjpal" path="res://scenes/run/run_startup.tres" id="2_8aaed"]
@@ -12,16 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://7rrkay26jl73" path="res://art/backgrounds/medieval-dungeon-interior-with-stone-brick-walls-torches-empty-cellar-medieval-temple-palace-fort-tower-lit-by-night-modern-cartoon-illustration_76964-343786-915309253.jpg" id="9_dungeon"]
 [ext_resource type="FontFile" uid="uid://dohgfvvrbs3gn" path="res://art/themes/Abaddon_Fonts/Abaddon-Bold.ttf" id="10_titlefont"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font = ExtResource("10_titlefont")
-font_size = 96
-font_color = Color(0.86, 0.18, 0.18, 1)
-outline_size = 14
-outline_color = Color(0.04, 0.02, 0.02, 1)
-shadow_size = 10
-shadow_color = Color(0.55, 0.12, 0.05, 0.55)
-shadow_offset = Vector2(0, 6)
-
 [sub_resource type="Gradient" id="Gradient_vignette"]
 offsets = PackedFloat32Array(0, 0.55, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0.04, 0.01, 0.01, 0.45, 0, 0, 0, 0.92)
@@ -33,6 +23,16 @@ height = 144
 fill = 1
 fill_from = Vector2(0.5, 0.55)
 fill_to = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("10_titlefont")
+font_size = 96
+font_color = Color(0.86, 0.18, 0.18, 1)
+outline_size = 14
+outline_color = Color(0.04, 0.02, 0.02, 1)
+shadow_size = 10
+shadow_color = Color(0.55, 0.12, 0.05, 0.55)
+shadow_offset = Vector2(0, 6)
 
 [node name="MainMenu" type="Control" unique_id=2082163363]
 layout_mode = 3

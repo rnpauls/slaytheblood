@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bpq3l77qluekc" path="res://scenes/battle/battle.gd" id="1_0ser8"]
 [ext_resource type="Script" uid="uid://dn6sbbsk51rtt" path="res://scenes/ui/hand.gd" id="2_bgimw"]
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="2_spkj8"]
+[ext_resource type="AudioStream" uid="uid://cq65iewg2cx53" path="res://art/music/cyberwave-orchestra-dramatic-orchestral-combat-music-loop-382814.mp3" id="3_156m4"]
 [ext_resource type="PackedScene" uid="uid://behjfqeouf5ky" path="res://scenes/player/player.tscn" id="3_g13cx"]
 [ext_resource type="PackedScene" uid="uid://b7wddw3ex8aun" path="res://scenes/card_target_selector/card_target_selector.tscn" id="3_j5x61"]
-[ext_resource type="AudioStream" uid="uid://cccl81n14imbp" path="res://art/music/dummy_daniel-under-siege-490053.mp3" id="3_pyfix"]
 [ext_resource type="Script" uid="uid://8q3wa6hc2yss" path="res://scenes/enemy/enemy_handler.gd" id="4_2ufbh"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/brute/brute.tres" id="4_psa3f"]
 [ext_resource type="Texture2D" uid="uid://del2yqjjiqwse" path="res://art/backgrounds/de5fb9bc-cd93-40b6-9e0c-502e21629fe3.jpg" id="4_pyfix"]
@@ -38,7 +38,7 @@ point_count = 3
 [node name="Battle" type="Node2D" unique_id=2090464004]
 script = ExtResource("1_0ser8")
 char_stats = ExtResource("4_psa3f")
-music = ExtResource("3_pyfix")
+music = ExtResource("3_156m4")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1702230980]

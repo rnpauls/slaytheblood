@@ -8,15 +8,19 @@ const FLOORS := 15
 const MAP_WIDTH := 7
 const PATHS := 6
 const MONSTER_ROOM_WEIGHT := 12.0
+const ELITE_ROOM_WEIGHT := 3.0
 const EVENT_ROOM_WEIGHT := 5.0
 const SHOP_ROOM_WEIGHT := 2.5
 const CAMPFIRE_ROOM_WEIGHT := 4.0
+
+const ELITE_MIN_ROW := 4
 
 @export var battle_stats_pool: BattleStatsPool
 @export var event_room_pool: EventRoomPool
 
 var random_room_type_weights = {
 	Room.Type.MONSTER: 0.0,
+	Room.Type.ELITE_MONSTER: 0.0,
 	Room.Type.CAMPFIRE: 0.0,
 	Room.Type.SHOP: 0.0,
 	Room.Type.EVENT: 0.0
@@ -134,11 +138,15 @@ func _setup_boss_room() -> void:
 	boss_room.battle_stats = battle_stats_pool.get_random_battle_for_tier(2)
 			
 func _setup_random_room_weights()-> void:
+	# Cumulative thresholds for weighted random pick. Order: MONSTER, ELITE,
+	# CAMPFIRE, SHOP, EVENT. Each entry is the running sum so a single uniform
+	# roll in [0, total) selects via the first threshold it falls under.
 	random_room_type_weights[Room.Type.MONSTER] = MONSTER_ROOM_WEIGHT
-	random_room_type_weights[Room.Type.CAMPFIRE] = MONSTER_ROOM_WEIGHT + CAMPFIRE_ROOM_WEIGHT
-	random_room_type_weights[Room.Type.SHOP] = MONSTER_ROOM_WEIGHT+ CAMPFIRE_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
-	random_room_type_weights[Room.Type.EVENT] = MONSTER_ROOM_WEIGHT+ CAMPFIRE_ROOM_WEIGHT + SHOP_ROOM_WEIGHT + EVENT_ROOM_WEIGHT
-	
+	random_room_type_weights[Room.Type.ELITE_MONSTER] = MONSTER_ROOM_WEIGHT + ELITE_ROOM_WEIGHT
+	random_room_type_weights[Room.Type.CAMPFIRE] = MONSTER_ROOM_WEIGHT + ELITE_ROOM_WEIGHT + CAMPFIRE_ROOM_WEIGHT
+	random_room_type_weights[Room.Type.SHOP] = MONSTER_ROOM_WEIGHT + ELITE_ROOM_WEIGHT + CAMPFIRE_ROOM_WEIGHT + SHOP_ROOM_WEIGHT
+	random_room_type_weights[Room.Type.EVENT] = MONSTER_ROOM_WEIGHT + ELITE_ROOM_WEIGHT + CAMPFIRE_ROOM_WEIGHT + SHOP_ROOM_WEIGHT + EVENT_ROOM_WEIGHT
+
 	random_room_type_total_weight = random_room_type_weights[Room.Type.EVENT]
 
 func _setup_room_types() -> void:
@@ -168,32 +176,43 @@ func _set_room_randomly(room_to_set: Room) -> void:
 	var consecutive_campfire := true
 	var consecutive_shop := true
 	var campfire_on_13 := true
-	
+	var elite_too_early := true
+	var consecutive_elite := true
+
 	var type_candidate: Room.Type
-	
-	while campfire_below_4 or consecutive_campfire or consecutive_shop or campfire_on_13:
+
+	while campfire_below_4 or consecutive_campfire or consecutive_shop or campfire_on_13 or elite_too_early or consecutive_elite:
 		type_candidate = _get_random_room_type_by_weight()
-		
+
 		var is_campfire := type_candidate == Room.Type.CAMPFIRE
 		var has_campfire_parent := _room_has_parent_of_type(room_to_set, Room.Type.CAMPFIRE)
 		var is_shop := type_candidate == Room.Type.SHOP
 		var has_shop_parent := _room_has_parent_of_type(room_to_set, Room.Type.SHOP)
-		
+		var is_elite := type_candidate == Room.Type.ELITE_MONSTER
+		var has_elite_parent := _room_has_parent_of_type(room_to_set, Room.Type.ELITE_MONSTER)
+
 		campfire_below_4 = is_campfire and room_to_set.row < 3
 		consecutive_campfire = is_campfire and has_campfire_parent
 		consecutive_shop = is_shop and has_shop_parent
 		campfire_on_13 = is_campfire and room_to_set.row == FLOORS -3
-		
+		# Elites only mid-act: give the player time to build a deck, and don't
+		# crowd the campfire-on-13 prep floor.
+		elite_too_early = is_elite and room_to_set.row < ELITE_MIN_ROW
+		consecutive_elite = is_elite and has_elite_parent
+
 	room_to_set.type = type_candidate
 
 	if type_candidate == Room.Type.MONSTER:
 		var tier_for_monster_rooms := 0
-		
+
 		if room_to_set.row > 2:
 			tier_for_monster_rooms = 1
-			
+
 		room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(tier_for_monster_rooms)
-	#
+
+	if type_candidate == Room.Type.ELITE_MONSTER:
+		room_to_set.battle_stats = battle_stats_pool.get_random_elite_battle()
+
 	if type_candidate == Room.Type.EVENT:
 		room_to_set.event_scene = event_room_pool.get_random()
 

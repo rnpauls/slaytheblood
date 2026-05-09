@@ -50,6 +50,20 @@ func initialize_weapon(_owner: WeaponUI) -> void:
 	pass
 
 
+## Called when this weapon is equipped/wielded by a combatant. Override to
+## attach passive statuses or modifiers that should persist while wielded
+## (e.g. Tower Shield's start-of-turn block, Twin Axes' damage modifier).
+## Default no-op so existing weapons stay unchanged.
+func attach_to_combatant(_combatant: Combatant) -> void:
+	pass
+
+
+## Inverse of attach_to_combatant. Called when the weapon is unequipped or
+## its wielder dies. Override to remove anything attach added.
+func detach_from_combatant(_combatant: Combatant) -> void:
+	pass
+
+
 func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_attack:int = attack) -> void:
 	Events.player_attack_declared.emit()
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)

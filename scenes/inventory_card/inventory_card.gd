@@ -7,14 +7,14 @@ const HANDS_LABELS := {
 	Weapon.Hands.OFFHAND: "Off-Hand",
 }
 
-@onready var weapon_ui: WeaponUI = $WeaponUI
-@onready var equipment_display: Control = $EquipmentDisplay
-@onready var equip_icon: TextureRect = $EquipmentDisplay/EquipIcon
-@onready var block_label: Label = $EquipmentDisplay/BlockBadge/BlockLabel
-@onready var one_shot_badge: TextureRect = $EquipmentDisplay/OneShotBadge
+@onready var weapon_ui: WeaponUI = $ArtPanel/WeaponUI
+@onready var equipment_display: Control = $ArtPanel/EquipmentDisplay
+@onready var equip_icon: TextureRect = $ArtPanel/EquipmentDisplay/EquipIcon
+@onready var block_label: Label = $ArtPanel/EquipmentDisplay/BlockBadge/BlockLabel
+@onready var one_shot_badge: TextureRect = $ArtPanel/EquipmentDisplay/OneShotBadge
 @onready var rarity: TextureRect = $Rarity
 @onready var text_box: RichTextLabel = $TextBox
-@onready var name_label: RichTextLabel = $NameLabel
+@onready var name_label: RichTextLabel = $ArtPanel/NameLabel
 @onready var type_label: RichTextLabel = $TypeLabel
 
 @export var weapon: Weapon : set = set_weapon

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://b7eAmnadrn010"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_mndr1"]
+[ext_resource type="Texture2D" uid="uid://d2vujk8wvu6ia" path="res://art/tile_0123.png" id="2_mndr2"]
+[ext_resource type="Script" path="res://enemies/elite/hexweaver/cards/mana_drain.gd" id="3_mndr3"]
+
+[resource]
+script = ExtResource("3_mndr3")
+id = "mana_drain"
+type = 1
+target = 1
+cost = 0
+pitch = 1
+attack = 0
+defense = 0
+ai_value = 3
+icon = ExtResource("2_mndr2")
+tooltip_text = "Mana Drain: target's mana set to 0."
+sound = ExtResource("1_mndr1")
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

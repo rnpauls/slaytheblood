@@ -21,7 +21,7 @@ alignment = 1
 script = ExtResource("1_d8wvt")
 
 [node name="DeckIcon" type="TextureRect" parent="." unique_id=2099223660]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("2_levgj")
@@ -37,7 +37,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResourceIcon" type="TextureRect" parent="." unique_id=879142191]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("3_gold")
@@ -53,7 +53,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DiscardButton" type="TextureButton" parent="." unique_id=1708981913]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
 texture_normal = ExtResource("4_disc")

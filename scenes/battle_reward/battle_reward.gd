@@ -62,6 +62,23 @@ func add_equipment_reward(equipment: Equipment) -> void:
 	eq_reward.pressed.connect(_on_equipment_reward_taken.bind(equipment))
 	rewards.add_child.call_deferred(eq_reward)
 
+
+func add_weapon_reward(weapon: Weapon) -> void:
+	if not weapon:
+		return
+
+	var wp_reward := REWARD_BUTTON.instantiate() as RewardButton
+	wp_reward.reward_icon = weapon.icon
+	wp_reward.reward_text = weapon.weapon_name
+	wp_reward.pressed.connect(_on_weapon_reward_taken.bind(weapon))
+	rewards.add_child.call_deferred(wp_reward)
+
+
+## Public alias for the inventory roller — used by elite reward path which
+## guarantees a weapon-or-equipment drop alongside the standard cards/gold.
+func roll_inventory_item() -> Resource:
+	return _roll_inventory_item()
+
 func _show_draft_rewards() -> void:
 	if not run_stats or not character_stats:
 		return
@@ -191,6 +208,13 @@ func _on_equipment_reward_taken(equipment: Equipment) -> void:
 		return
 
 	character_stats.add_equipment(equipment)
+
+
+func _on_weapon_reward_taken(weapon: Weapon) -> void:
+	if not weapon or not character_stats:
+		return
+
+	character_stats.add_weapon(weapon)
 
 func _on_back_button_pressed() -> void:
 	Events.battle_reward_exited.emit()

@@ -4,9 +4,9 @@
 [ext_resource type="LabelSettings" path="res://art/themes/typography/type_number.tres" id="2_typenum"]
 
 [node name="HealthBar" type="ProgressBar" unique_id=252986333]
-custom_minimum_size = Vector2(140, 14)
+custom_minimum_size = Vector2(140, 18)
 offset_right = 140.0
-offset_bottom = 14.0
+offset_bottom = 18.0
 max_value = 10.0
 value = 10.0
 show_percentage = false

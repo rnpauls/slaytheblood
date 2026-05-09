@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CursedStaffWeapon" load_steps=4 format=3 uid="uid://b7crsdstf003"]
+
+[ext_resource type="Texture2D" uid="uid://buwbg83cftq01" path="res://art/Icon28_25.png" id="1_crst1"]
+[ext_resource type="Script" path="res://weapons/elite/cursed_staff.gd" id="2_crst2"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_crst3"]
+
+[resource]
+script = ExtResource("2_crst2")
+weapon_name = "Cursed Staff"
+id = "cursed_staff"
+type = 6
+rarity = 2
+character_type = 0
+hands = 1
+starter_weapon = false
+allow_duplicate_in_draft = false
+icon = ExtResource("1_crst1")
+sound = ExtResource("3_crst3")
+tooltip = "Cursed Staff: at the start of every turn, applies Exposed to every opponent. Swing for 2 attack + 4 arcane."
+attack = 2
+damage_kind = 1
+zap = 4
+cost = 1
+go_again = false
+is_single_use = false
+attacks_per_turn = 1
+attacks_this_turn = 0

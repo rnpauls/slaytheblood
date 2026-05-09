@@ -7,6 +7,7 @@ const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
 const LEGEND_ENTRIES := [
 	[Room.Type.MONSTER, "Monster"],
+	[Room.Type.ELITE_MONSTER, "Elite"],
 	[Room.Type.EVENT, "Event"],
 	[Room.Type.CAMPFIRE, "Campfire"],
 	[Room.Type.SHOP, "Shop"],

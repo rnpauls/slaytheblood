@@ -242,6 +242,27 @@ func _show_regular_battle_rewards() -> void:
 	reward_scene.add_card_reward()
 	reward_scene.add_card_reward()
 
+
+## Elite-clear rewards: standard gold + cards, plus a guaranteed weapon or
+## equipment drop. Battle gold is already higher on elite BattleStats so no
+## separate multiplier is applied here.
+func _show_elite_battle_rewards() -> void:
+	var reward_scene := _change_view(BATTLE_REWARD_SCENE) as BattleReward
+	reward_scene.run_stats = stats
+	reward_scene.character_stats = character
+	reward_scene.relic_handler = relic_handler
+	reward_scene.draftable_inventory = DRAFTABLE_INVENTORY
+
+	reward_scene.add_gold_reward(map.last_room.battle_stats.roll_gold_reward())
+	reward_scene.add_card_reward()
+	reward_scene.add_card_reward()
+
+	var bonus_item := reward_scene.roll_inventory_item()
+	if bonus_item is Weapon:
+		reward_scene.add_weapon_reward(bonus_item)
+	elif bonus_item is Equipment:
+		reward_scene.add_equipment_reward(bonus_item)
+
 func _on_battle_room_entered(room: Room) -> void:
 	var battle_scene: Battle = _change_view(BATTLE_SCENE) as Battle
 	battle_scene.char_stats = character
@@ -287,6 +308,8 @@ func _on_battle_won() -> void:
 		var win_screen := _change_view(WIN_SCREEN_SCENE) as WinScreen
 		win_screen.character = character
 		SaveGame.delete_data()
+	elif map.last_room and map.last_room.type == Room.Type.ELITE_MONSTER:
+		_show_elite_battle_rewards()
 	else:
 		_show_regular_battle_rewards()
 
@@ -295,6 +318,8 @@ func _on_map_exited(room: Room) -> void:
 	
 	match room.type:
 		Room.Type.MONSTER:
+			_on_battle_room_entered(room)
+		Room.Type.ELITE_MONSTER:
 			_on_battle_room_entered(room)
 		Room.Type.TREASURE:
 			_on_treasure_room_entered()

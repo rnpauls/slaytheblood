@@ -12,6 +12,9 @@ const ICONS := {
 	Room.Type.SHOP: [preload("res://art/gold.png"), Vector2.ONE*3],
 	Room.Type.BOSS: [preload("res://art/tile_0105.png"), Vector2.ONE*5],
 	Room.Type.EVENT: [preload("res://art/rarity.png"), Vector2.ONE*5],
+	# Reuse the boss sprite at a slightly smaller scale for elites — visually
+	# louder than a regular monster, distinct from the boss.
+	Room.Type.ELITE_MONSTER: [preload("res://art/tile_0105.png"), Vector2.ONE*4],
 }
 
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D

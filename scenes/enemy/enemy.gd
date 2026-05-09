@@ -21,6 +21,8 @@ extends Combatant
 
 const ARROW_OFFSET := 45
 const ENEMY_CARD_UI_SCENE := preload("res://scenes/card_ui/enemy_card_ui.tscn")
+const WEAPON_HANDLER_SCENE := preload("res://scenes/weapon_handler/weapon_handler.tscn")
+const WEAPON_BADGE_OFFSET := Vector2(80, -40)
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
@@ -47,6 +49,11 @@ var current_action: Card: set = set_current_action, get = _get_current_action
 
 ## EnemyCardUI displayed in the arsenal slot (or null when arsenal is empty).
 var _arsenal_card_ui: EnemyCardUI = null
+
+## Visual badge for an enemy-wielded weapon (only set if stats.hand_left is a
+## Weapon at battle setup). Reuses WeaponHandler with `interactive = false`
+## so we get the icon + tooltip plumbing without player-input handling.
+var _weapon_badge: WeaponHandler = null
 
 var hand_manager: EnemyHandManager
 var action_sequencer: EnemyActionSequencer
@@ -83,6 +90,8 @@ func _on_death() -> void:
 	# StatusHandler, IntentUI), so a tooltip shown for this enemy would
 	# otherwise stay on screen.
 	Events.tooltip_hide_requested.emit()
+	if stats and stats.hand_left is Weapon:
+		(stats.hand_left as Weapon).detach_from_combatant(self)
 	Events.enemy_died.emit(self)
 	queue_free()
 
@@ -176,6 +185,26 @@ func update_enemy() -> void:
 	arrow.position = Vector2.RIGHT * (sprite_2d.get_rect().size.x / 2 + ARROW_OFFSET)
 	name_label.text = stats.character_name
 	update_stats()
+	_setup_weapon_badge()
+
+
+## Mount the visual weapon badge. WeaponHandler.set_weapon takes care of
+## calling attach_to_combatant — no need to call it again here.
+## Idempotent — safe to call multiple times if update_enemy fires more
+## than once.
+func _setup_weapon_badge() -> void:
+	if not (stats.hand_left is Weapon):
+		return
+	if _weapon_badge != null and is_instance_valid(_weapon_badge):
+		return
+	var weapon := stats.hand_left as Weapon
+	var badge := WEAPON_HANDLER_SCENE.instantiate() as WeaponHandler
+	badge.interactive = false
+	badge.owner_of_weapon = self
+	add_child(badge)
+	badge.position = WEAPON_BADGE_OFFSET
+	badge.set_weapon(weapon)
+	_weapon_badge = badge
 
 
 ## Refresh the intent display, the resource UI, the arsenal card_ui, and the

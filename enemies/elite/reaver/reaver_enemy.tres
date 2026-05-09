@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=6 format=3 uid="uid://b7eHreaver017"]
+
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_reav"]
+[ext_resource type="Texture2D" uid="uid://bi6pfjs32f820" path="res://art/tile_0101.png" id="2_reav"]
+[ext_resource type="Resource" uid="uid://b7eEravdck014" path="res://enemies/elite/reaver/reaver_starting_deck.tres" id="3_reav"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_reav"]
+[ext_resource type="Resource" uid="uid://b7twnaxe002" path="res://weapons/elite/twin_axes.tres" id="5_reav"]
+
+[resource]
+script = ExtResource("1_reav")
+character_name = "The Reaver"
+art = ExtResource("2_reav")
+max_health = 26
+starting_deck = ExtResource("3_reav")
+starting_inventory = ExtResource("4_reav")
+cards_per_turn = 3
+hand_left = ExtResource("5_reav")
+metadata/_custom_type_script = "uid://ctmwu6sm10xgw"
