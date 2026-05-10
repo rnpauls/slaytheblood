@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://byn1k3uw2i2gk"
+path="res://.godot/imported/Heavy Armor Walk 1.mp3-510398a20d7e26e3ab5d0a4ba0f372ac.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Heavy Armor Walk 1.mp3"
+dest_files=["res://.godot/imported/Heavy Armor Walk 1.mp3-510398a20d7e26e3ab5d0a4ba0f372ac.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

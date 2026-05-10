@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bxjy2naa8qiad"
+path="res://.godot/imported/Weird Hit.mp3-075670f7b29444d55eae6e198e660ebf.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Weird Hit.mp3"
+dest_files=["res://.godot/imported/Weird Hit.mp3-075670f7b29444d55eae6e198e660ebf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

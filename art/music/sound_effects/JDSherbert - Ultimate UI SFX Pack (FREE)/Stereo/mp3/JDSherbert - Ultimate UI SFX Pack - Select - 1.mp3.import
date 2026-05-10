@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cbtf2cvqwlqhj"
+path="res://.godot/imported/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3-30c9a5a3ccf15c9421820d5fb36189f2.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/JDSherbert - Ultimate UI SFX Pack (FREE)/Stereo/mp3/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3"
+dest_files=["res://.godot/imported/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3-30c9a5a3ccf15c9421820d5fb36189f2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

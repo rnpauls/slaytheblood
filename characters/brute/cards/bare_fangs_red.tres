@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_6feat"]
 [ext_resource type="Texture2D" uid="uid://bd24nyu1ri2t" path="res://art/Iicon_32_11.png" id="2_ijsqh"]
 [ext_resource type="Script" uid="uid://b2hwcwautfx8p" path="res://characters/brute/cards/bare_fangs.gd" id="2_qoays"]
-[ext_resource type="AudioStream" uid="uid://cnup57sd22nks" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/crunch.wav" id="4_5ci4p"]
+[ext_resource type="AudioStream" uid="uid://da5ps6q7paxq" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/03_Claw_03.wav" id="4_ijsqh"]
 
 [resource]
 script = ExtResource("2_qoays")
@@ -14,5 +14,5 @@ pitch = 1
 attack = 6
 icon = ExtResource("2_ijsqh")
 tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: +2atk"
-sound = ExtResource("4_5ci4p")
+sound = ExtResource("4_ijsqh")
 disable_defense = true

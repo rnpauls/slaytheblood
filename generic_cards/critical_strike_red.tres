@@ -13,5 +13,6 @@ pitch = 1
 attack = 5
 defense = 3
 icon = ExtResource("1_1y116")
+sound = ExtResource("1_ypqsn")
 block_sound = ExtResource("1_ypqsn")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

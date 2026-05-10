@@ -3,6 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_wmy6e"]
 [ext_resource type="Texture2D" uid="uid://bl5e7ueslu6ap" path="res://art/item42.png" id="2_b1iqv"]
 [ext_resource type="Script" uid="uid://d2mhqqkkw7egc" path="res://generic_cards/block.gd" id="3_xgq3i"]
+[ext_resource type="AudioStream" uid="uid://cdcrekpo82nwa" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/39_Block_03.wav" id="4_hvnoj"]
 
 [resource]
 script = ExtResource("3_xgq3i")
@@ -12,5 +13,5 @@ rarity = 1
 pitch = 3
 defense = 4
 icon = ExtResource("2_b1iqv")
-sound = ExtResource("1_wmy6e")
+sound = ExtResource("4_hvnoj")
 disable_attack = true

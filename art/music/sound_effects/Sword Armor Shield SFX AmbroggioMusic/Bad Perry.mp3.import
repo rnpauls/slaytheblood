@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://0fosui1o5rk"
+path="res://.godot/imported/Bad Perry.mp3-dc8516b7b1e41972b2c32edcf1bf7984.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Bad Perry.mp3"
+dest_files=["res://.godot/imported/Bad Perry.mp3-dc8516b7b1e41972b2c32edcf1bf7984.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

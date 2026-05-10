@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_9.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/storm_of_runes.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "storm_of_runes"
+type = 1
+target = 2
+cost = 2
+pitch = 2
+rarity = 1
+icon = ExtResource("2_icon")
+tooltip_text = "Consume all your [kw=runechant]runechants[/kw]. Deal that much arcane to every enemy."
+sound = ExtResource("1_block")
+disable_attack = true
+disable_defense = true

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://i5hpae5jm87n" path="res://art/item31.png" id="1_3cbwq"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_khkg5"]
 [ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/brute/cards/wild_ride.gd" id="2_3cbwq"]
-[ext_resource type="AudioStream" uid="uid://fi38usv6fgm5" path="res://art/music/sound_effects/DSGN/FGHTImpt_HIT-Strong Smack_HY_PC-005.wav" id="4_c5ahh"]
+[ext_resource type="AudioStream" uid="uid://dyuqtroinksbp" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/08_Bite_04.wav" id="4_1c2qv"]
 
 [resource]
 script = ExtResource("2_3cbwq")
@@ -14,5 +14,5 @@ pitch = 1
 attack = 6
 icon = ExtResource("1_3cbwq")
 tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: Go again."
-sound = ExtResource("4_c5ahh")
+sound = ExtResource("4_1c2qv")
 disable_defense = true

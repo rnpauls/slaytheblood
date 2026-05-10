@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://uniq2ok1gf8y"
+path="res://.godot/imported/Heavy Weapon Unsheathe.mp3-c82e004d9a95c3bf4ec010a1f9e44e55.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Heavy Weapon Unsheathe.mp3"
+dest_files=["res://.godot/imported/Heavy Weapon Unsheathe.mp3-c82e004d9a95c3bf4ec010a1f9e44e55.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

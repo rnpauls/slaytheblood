@@ -11,10 +11,19 @@
 [ext_resource type="Resource" uid="uid://ba0gxskb7w1o6" path="res://characters/runeblade/cards/haunting_hymn_red.tres" id="8_m5f1k"]
 [ext_resource type="Resource" uid="uid://cqwhyuhkr4wgx" path="res://characters/runeblade/cards/immolate_red.tres" id="9_p33dt"]
 [ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="10_k5sm7"]
-[ext_resource type="Resource" path="res://characters/runeblade/cards/arcane_insight.tres" id="11_arcin"]
-[ext_resource type="Resource" path="res://characters/runeblade/cards/runic_scribe.tres" id="12_rnscr"]
-[ext_resource type="Resource" path="res://characters/runeblade/cards/aether_conduit.tres" id="13_aecdt"]
+[ext_resource type="Resource" uid="uid://bcrcin0001run" path="res://characters/runeblade/cards/arcane_insight.tres" id="11_arcin"]
+[ext_resource type="Resource" uid="uid://bcrnsc0001run" path="res://characters/runeblade/cards/runic_scribe.tres" id="12_rnscr"]
+[ext_resource type="Resource" uid="uid://bcrcdt0001run" path="res://characters/runeblade/cards/aether_conduit.tres" id="13_aecdt"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/darken_sky.tres" id="14_drksk"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/runic_burst.tres" id="15_rnbrs"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/storm_of_runes.tres" id="16_strrn"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/channel_aether.tres" id="17_chath"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/runesurge.tres" id="18_rnsrg"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/aether_bolt.tres" id="19_aebol"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/mana_burn.tres" id="20_mnbrn"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/disintegrate.tres" id="21_disnt"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/aether_surge.tres" id="22_aesrg"]
 
 [resource]
 script = ExtResource("1_pile0")
-cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rsb00"), ExtResource("5_y1vpg"), ExtResource("7_rrb00"), ExtResource("8_asy00"), ExtResource("8_m5f1k"), ExtResource("9_p33dt"), ExtResource("10_k5sm7"), ExtResource("11_arcin"), ExtResource("12_rnscr"), ExtResource("13_aecdt")])
+cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rsb00"), ExtResource("5_y1vpg"), ExtResource("7_rrb00"), ExtResource("8_asy00"), ExtResource("8_m5f1k"), ExtResource("9_p33dt"), ExtResource("10_k5sm7"), ExtResource("11_arcin"), ExtResource("12_rnscr"), ExtResource("13_aecdt"), ExtResource("14_drksk"), ExtResource("15_rnbrs"), ExtResource("16_strrn"), ExtResource("17_chath"), ExtResource("18_rnsrg"), ExtResource("19_aebol"), ExtResource("20_mnbrn"), ExtResource("21_disnt"), ExtResource("22_aesrg")])

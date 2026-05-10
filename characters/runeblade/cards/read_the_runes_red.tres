@@ -3,6 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_uy0cw"]
 [ext_resource type="Texture2D" uid="uid://byogcb4jkiu6i" path="res://art/magicbook/64x64/book_image_1.png" id="2_04qcp"]
 [ext_resource type="Script" uid="uid://bag72jm3xt4c6" path="res://characters/runeblade/cards/read_the_runes.gd" id="3_gus7u"]
+[ext_resource type="AudioStream" uid="uid://b2se4lels378n" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/51_Flee_02.wav" id="4_04qcp"]
 
 [resource]
 script = ExtResource("3_gus7u")
@@ -10,6 +11,8 @@ runechant_amount = 3
 id = "read_the_runes"
 type = 1
 pitch = 1
+defense = 2
 ai_value = 3
 icon = ExtResource("2_04qcp")
 tooltip_text = "Create three runechants"
+sound = ExtResource("4_04qcp")

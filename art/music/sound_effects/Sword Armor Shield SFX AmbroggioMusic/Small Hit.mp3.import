@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://byuyqw1y0nfgr"
+path="res://.godot/imported/Small Hit.mp3-ccbe5d0769a448e71ec02dc682e88f20.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Small Hit.mp3"
+dest_files=["res://.godot/imported/Small Hit.mp3-ccbe5d0769a448e71ec02dc682e88f20.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

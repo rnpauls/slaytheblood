@@ -2,7 +2,8 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
 [ext_resource type="Texture2D" uid="uid://ckgyit1x3wnbe" path="res://art/Iicon_32_35.png" id="1_icon"]
-[ext_resource type="Script" uid="uid://stbgencrd003a" path="res://generic_cards/reflect_stance.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://ddnx1fnq37i17" path="res://generic_cards/reflect_stance.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://blejb5rxc4n8o" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/weapon_drop.wav" id="4_ysj21"]
 
 [resource]
 script = ExtResource("2_script")
@@ -13,5 +14,6 @@ pitch = 1
 ai_value = 3
 icon = ExtResource("1_icon")
 tooltip_text = "Gain [kw=thorns:3]Thorns 3[/kw] this turn."
+sound = ExtResource("4_ysj21")
 disable_attack = true
 disable_defense = true

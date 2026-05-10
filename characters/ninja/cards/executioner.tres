@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/item62.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/ninja/cards/executioner.gd" id="3_script"]
+[ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_sound"]
+
+[resource]
+script = ExtResource("3_script")
+id = "executioner"
+type = 0
+target = 1
+cost = 2
+pitch = 1
+attack = 5
+defense = 2
+rarity = 2
+icon = ExtResource("2_icon")
+tooltip_text = "Deal damage equal to 5 + target's [kw=marked]Marked[/kw] stacks. Consumes Marked."
+sound = ExtResource("4_sound")

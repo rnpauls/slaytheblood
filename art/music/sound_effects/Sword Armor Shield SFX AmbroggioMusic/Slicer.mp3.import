@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfv0i6h34q0a1"
+path="res://.godot/imported/Slicer.mp3-10d94147bd20619bbd3b1c5aac2bdd00.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Slicer.mp3"
+dest_files=["res://.godot/imported/Slicer.mp3-10d94147bd20619bbd3b1c5aac2bdd00.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

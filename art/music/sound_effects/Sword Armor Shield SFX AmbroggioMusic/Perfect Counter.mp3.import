@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://k5lf1vm2g0bn"
+path="res://.godot/imported/Perfect Counter.mp3-dc950aa2a2bdb37e4d31c8693843bd11.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Perfect Counter.mp3"
+dest_files=["res://.godot/imported/Perfect Counter.mp3-dc950aa2a2bdb37e4d31c8693843bd11.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

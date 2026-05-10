@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("3_script")
 id = "aether_conduit"
+rarity = 2
 target = 1
 pitch = 1
 attack = 2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://4pea4p6jrk4g"
+path="res://.godot/imported/Drop Weapon.mp3-ebbfdbb19ec6a60cb50d5a16b28c335a.mp3str"
+
+[deps]
+
+source_file="res://art/music/sound_effects/Sword Armor Shield SFX AmbroggioMusic/Drop Weapon.mp3"
+dest_files=["res://.godot/imported/Drop Weapon.mp3-ebbfdbb19ec6a60cb50d5a16b28c335a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
