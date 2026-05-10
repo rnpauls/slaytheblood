@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bm0786xi0batq"]
 
-[ext_resource type="Texture2D" uid="uid://dh4x623krw7e5" path="res://art/samurai.png" id="1_7xeg5"]
-[ext_resource type="Resource" uid="uid://6i5wr118op2u" path="res://characters/ninja/ninja_draftable_cards.tres" id="2_u8x1n"]
+[ext_resource type="Texture2D" uid="uid://dh4x623krw7e5" path="res://art/sprites/samurai.png" id="1_7xeg5"]
+[ext_resource type="Resource" uid="uid://nx7abhele6lr" path="res://characters/ninja/ninja_draftable_cards.tres" id="2_u8x1n"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_7xeg5"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="3_134v8"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="4_tnwy8"]
-[ext_resource type="Resource" uid="uid://b1ntebn42q2l5" path="res://characters/ninja/ninja_starting_deck.tres" id="5_fhfql"]
+[ext_resource type="Resource" uid="uid://bp4f56pybjkb" path="res://characters/ninja/ninja_starting_deck.tres" id="5_fhfql"]
 [ext_resource type="Resource" uid="uid://di0lkhegtyanm" path="res://weapons/kodachi.tres" id="5_j05nd"]
 [ext_resource type="Resource" uid="uid://citg2gxgih72i" path="res://weapons/tiger_staff.tres" id="6_kjhjj"]
 [ext_resource type="Resource" uid="uid://buxa3aoc70x0u" path="res://characters/ninja/ninja_starting_inv.tres" id="6_wrrns"]
@@ -25,6 +25,7 @@ draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtRe
 starting_relic = ExtResource("7_fhfql")
 character_name = "Ninja"
 art = ExtResource("1_7xeg5")
+display_height = 150.0
 max_health = 25
 starting_deck = ExtResource("5_fhfql")
 starting_inventory = ExtResource("6_wrrns")

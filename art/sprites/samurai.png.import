@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvxyju4yxrnky"
-path="res://.godot/imported/slime_grok.png-835b6221dbd70474c24e1e300731692c.ctex"
+uid="uid://dh4x623krw7e5"
+path="res://.godot/imported/samurai.png-44096b81a0e0c83ba8e90f70cc300ac6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/custom_art/slime_grok.png"
-dest_files=["res://.godot/imported/slime_grok.png-835b6221dbd70474c24e1e300731692c.ctex"]
+source_file="res://art/sprites/samurai.png"
+dest_files=["res://.godot/imported/samurai.png-44096b81a0e0c83ba8e90f70cc300ac6.ctex"]
 
 [params]
 

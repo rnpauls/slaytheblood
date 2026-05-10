@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bsl1m00enmy00"]
 
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_stats"]
-[ext_resource type="Texture2D" uid="uid://cvxyju4yxrnky" path="res://art/custom_art/slime_grok.png" id="2_4u67c"]
+[ext_resource type="Texture2D" uid="uid://cvxyju4yxrnky" path="res://art/sprites/slime_grok.png" id="2_4u67c"]
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="2_ai"]
 [ext_resource type="Resource" uid="uid://bsl1m00deck00" path="res://enemies/slime/slime_enemy_starting_deck.tres" id="4_deck"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_inv"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_qbpot"]
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_vya8y"]
-[ext_resource type="Texture2D" uid="uid://b33ifssickigs" path="res://art/custom_art/bat_grok.png" id="2_snxww"]
+[ext_resource type="Texture2D" uid="uid://b33ifssickigs" path="res://art/sprites/bat_grok.png" id="2_snxww"]
 [ext_resource type="Resource" uid="uid://bu02uj2lp60de" path="res://enemies/bat/bat_enemy_starting_deck.tres" id="4_18cca"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_snxww"]
 

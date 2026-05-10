@@ -61,12 +61,14 @@ func start_battle() ->void:
 	# eventually fires at the end of the setup chain.
 	_setup_turn_state_machine()
 
+	# Initialize the player (equipment, deck, refs) BEFORE relics flash so
+	# equipment is visible during the SOC animation and draw_card doesn't
+	# race against the relic tween waiting on Events.player_set_up.
+	player_handler.start_battle(char_stats)
+	battle_ui.initialize_card_pile_ui()
+
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_type(Relic.Type.START_OF_COMBAT)
-	print_debug("TODO: Implement random start turn?")
-	if not player_handler.player:
-		await Events.player_set_up
-	player_handler.draw_cards(player.stats.cards_per_turn, 'init')
 
 # Builds the SM as a child node and registers all 9 phase states.
 # Done programmatically rather than in battle.tscn to keep the scene
@@ -113,7 +115,7 @@ func _on_player_died() -> void:
 func _on_relics_activated(type: Relic.Type) -> void:
 	match type:
 		Relic.Type.START_OF_COMBAT:
-			player_handler.start_battle(char_stats)
-			battle_ui.initialize_card_pile_ui()
+			player_handler.start_turn()
+			player_handler.draw_cards(player.stats.cards_per_turn, 'init')
 		Relic.Type.END_OF_COMBAT:
 			Events.battle_over_screen_requested.emit("Victorious!", BattleOverPanel.Type.WIN)

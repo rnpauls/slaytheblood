@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cp7xdwgtmam1n"]
 
 [ext_resource type="Script" uid="uid://lv62ht8mc8om" path="res://scenes/enemy/enemy.gd" id="1_dl80c"]
-[ext_resource type="Texture2D" uid="uid://bnmgk13poawy3" path="res://art/custom_art/crab_grok_150px.png" id="2_2f3il"]
+[ext_resource type="Texture2D" uid="uid://bnmgk13poawy3" path="res://art/sprites/crab_grok_150px.png" id="2_2f3il"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="2_ywvjq"]
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="3_p3m4l"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
@@ -14,6 +14,7 @@
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="11_name"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
+resource_local_to_scene = true
 size = Vector2(100, 100)
 
 [node name="Enemy" type="Node2D" unique_id=844617398 groups=["enemies"]]
@@ -37,32 +38,32 @@ shape = SubResource("RectangleShape2D_54tcg")
 
 [node name="StatsUI" parent="." unique_id=408535621 instance=ExtResource("3_p3m4l")]
 offset_left = -126.0
-offset_top = 42.0
+offset_top = 26.0
 offset_right = 126.0
-offset_bottom = 106.0
+offset_bottom = 90.0
 
 [node name="IntentUI" parent="." unique_id=257861735 instance=ExtResource("5_rbfua")]
-offset_left = -27.0
-offset_top = -96.0
-offset_right = 35.0
-offset_bottom = -59.0
+offset_left = -28.0
+offset_top = -65.0
+offset_right = 36.0
+offset_bottom = -17.0
 
 [node name="EnemyResourceUI" parent="." unique_id=1222570682 instance=ExtResource("6_4efjx")]
 anchors_preset = 8
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = 110.0
-offset_right = 79.0
-offset_bottom = 147.0
+offset_left = -75.0
+offset_top = 58.0
+offset_right = 83.0
+offset_bottom = 95.0
 grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="EnemyHand" parent="." unique_id=-1293967295 instance=ExtResource("9_ehand")]
-position = Vector2(0, 158)
+position = Vector2(0, 111)
 
 [node name="StagedDisplay" type="Node2D" parent="." unique_id=-1293967294]
-position = Vector2(0, -118)
+position = Vector2(-55, -39)
 script = ExtResource("10_staged")
 staged_scale = 0.15
 
@@ -86,9 +87,9 @@ vertical_alignment = 1
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -71.0
-offset_top = 75.0
+offset_top = 25.0
 offset_right = -71.0
-offset_bottom = 88.0
+offset_bottom = 38.0
 status_owner = NodePath("..")
 
 [node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]

@@ -23,6 +23,7 @@ const ARROW_OFFSET := 45
 const ENEMY_CARD_UI_SCENE := preload("res://scenes/card_ui/enemy_card_ui.tscn")
 const WEAPON_HANDLER_SCENE := preload("res://scenes/weapon_handler/weapon_handler.tscn")
 const WEAPON_BADGE_OFFSET := Vector2(80, -40)
+const LEGACY_SPRITE_HALF_EXTENT := 41.0
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
@@ -31,6 +32,16 @@ const WEAPON_BADGE_OFFSET := Vector2(80, -40)
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
 @onready var block_display: Node2D = $BlockDisplay
 @onready var name_label: Label = $NameLabel
+@onready var hover_collision: CollisionShape2D = $HoverArea/CollisionShape2D
+
+@onready var _intent_origin_y: float = intent_ui.position.y
+@onready var _staged_origin_y: float = staged_display.position.y
+@onready var _stats_origin_y: float = stats_ui.position.y
+@onready var _resource_origin_y: float = enemy_resource_ui.position.y
+@onready var _name_origin_y: float = name_label.position.y
+@onready var _status_origin_y: float = status_handler.position.y
+@onready var _hand_origin_y: float = enemy_hand.position.y
+@onready var _block_origin_x: float = block_display.position.x
 
 ## Position (relative to the Enemy node) where the arsenal card_ui sits.
 @export var arsenal_offset: Vector2 = Vector2(-90, 158)
@@ -182,7 +193,27 @@ func update_enemy() -> void:
 		await ready
 
 	sprite_2d.texture = stats.art
-	arrow.position = Vector2.RIGHT * (sprite_2d.get_rect().size.x / 2 + ARROW_OFFSET)
+	var s : float = stats.display_height / stats.art.get_height()
+	sprite_2d.scale = Vector2(s, s)
+
+	var half := sprite_2d.get_rect().size * sprite_2d.scale * 0.5
+	var dy := half.y - LEGACY_SPRITE_HALF_EXTENT
+	var dx := half.x - LEGACY_SPRITE_HALF_EXTENT
+
+	intent_ui.position.y = _intent_origin_y - dy
+	staged_display.position.y = _staged_origin_y - dy
+
+	stats_ui.position.y = _stats_origin_y + dy
+	enemy_resource_ui.position.y = _resource_origin_y + dy
+	name_label.position.y = _name_origin_y + dy
+	status_handler.position.y = _status_origin_y + dy
+	enemy_hand.position.y = _hand_origin_y + dy
+
+	block_display.position.x = _block_origin_x - dx
+	arrow.position = Vector2.RIGHT * (half.x + ARROW_OFFSET)
+
+	(hover_collision.shape as RectangleShape2D).size = half * 2.0
+
 	name_label.text = stats.character_name
 	update_stats()
 	_setup_weapon_badge()

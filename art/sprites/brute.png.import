@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b33ifssickigs"
-path="res://.godot/imported/bat_grok.png-cea701fdb66be22fe57042b08bbb81db.ctex"
+uid="uid://c3b3xjx3gtm1f"
+path="res://.godot/imported/brute.png-65b78e0b4676fccddedca8ccf3a680d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/custom_art/bat_grok.png"
-dest_files=["res://.godot/imported/bat_grok.png-cea701fdb66be22fe57042b08bbb81db.ctex"]
+source_file="res://art/sprites/brute.png"
+dest_files=["res://.godot/imported/brute.png-65b78e0b4676fccddedca8ccf3a680d8.ctex"]
 
 [params]
 

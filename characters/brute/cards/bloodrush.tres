@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_nkc57"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="1_qouyo"]
-[ext_resource type="Texture2D" uid="uid://c3b3xjx3gtm1f" path="res://art/brute.png" id="2_nkc57"]
+[ext_resource type="Texture2D" uid="uid://c3b3xjx3gtm1f" path="res://art/sprites/brute.png" id="2_nkc57"]
 
 [resource]
 script = ExtResource("1_qouyo")

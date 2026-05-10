@@ -1,6 +1,8 @@
 class_name Player
 extends Combatant
 
+const LEGACY_SPRITE_HALF_EXTENT := 60.0
+
 ## Cards that cannot be used to block this turn due to Intimidate. Set by IntimidatedStatus.
 var intimidated_cards: Array[Card] = []
 
@@ -8,6 +10,11 @@ var intimidated_cards: Array[Card] = []
 ## PlayerHandler.start_battle. Lets effects / relics that need the handler
 ## reach it via combatant.player_handler instead of a scene-tree group lookup.
 var player_handler: PlayerHandler
+
+@onready var mouse_hover_collision: CollisionShape2D = $MouseHoverArea/CollisionShape2D
+
+@onready var _stats_origin_y: float = stats_ui.position.y
+@onready var _status_origin_y: float = status_handler.position.y
 
 
 ## Mirror of Enemy.add_card_to_hand: add a Card to the player's hand,
@@ -22,6 +29,16 @@ func _on_stats_set() -> void:
 	if not is_inside_tree():
 		await ready
 	sprite_2d.texture = stats.art
+	var s : float = stats.display_height / stats.art.get_height()
+	sprite_2d.scale = Vector2(s, s)
+
+	var half := sprite_2d.get_rect().size * sprite_2d.scale * 0.5
+	var dy := half.y - LEGACY_SPRITE_HALF_EXTENT
+
+	stats_ui.position.y = _stats_origin_y + dy
+	status_handler.position.y = _status_origin_y + dy
+	(mouse_hover_collision.shape as RectangleShape2D).size = half * 2.0
+
 	update_stats()
 
 func _on_death() -> void:

@@ -66,7 +66,6 @@ func start_battle(char_stats: CharacterStats) -> void:
 	relics.relics_activated.connect(_on_relics_activated)
 	player.status_handler.statuses_applied.connect(_on_statuses_applied)
 	Events.player_set_up.emit()
-	start_turn()
 
 
 ## Decide whether the slot holds a Weapon or an offhand Equipment, and route accordingly.

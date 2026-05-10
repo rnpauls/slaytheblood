@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hi4ia628741e"
-path="res://.godot/imported/grok_kunoichi.png-4e264066988c979e50e7d2a1f946d227.ctex"
+uid="uid://b33ifssickigs"
+path="res://.godot/imported/bat_grok.png-86de3ea44fbee44f9efadee75e66fd8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/custom_art/grok_kunoichi.png"
-dest_files=["res://.godot/imported/grok_kunoichi.png-4e264066988c979e50e7d2a1f946d227.ctex"]
+source_file="res://art/sprites/bat_grok.png"
+dest_files=["res://.godot/imported/bat_grok.png-86de3ea44fbee44f9efadee75e66fd8d.ctex"]
 
 [params]
 

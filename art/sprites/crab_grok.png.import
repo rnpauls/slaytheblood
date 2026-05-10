@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbvhepsjtfeo"
-path="res://.godot/imported/nerd.png-31d159cd72cce7e222398368431d9250.ctex"
+uid="uid://cxvcb3wn33vq8"
+path="res://.godot/imported/crab_grok.png-ca59a35ebf556e119328a7397d558ec2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/nerd.png"
-dest_files=["res://.godot/imported/nerd.png-31d159cd72cce7e222398368431d9250.ctex"]
+source_file="res://art/sprites/crab_grok.png"
+dest_files=["res://.godot/imported/crab_grok.png-ca59a35ebf556e119328a7397d558ec2.ctex"]
 
 [params]
 

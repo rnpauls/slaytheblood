@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://behjfqeouf5ky"]
 
 [ext_resource type="Script" uid="uid://bljhj80f6512h" path="res://scenes/player/player.gd" id="1_g61l3"]
-[ext_resource type="Texture2D" uid="uid://dh4x623krw7e5" path="res://art/samurai.png" id="2_75vfm"]
+[ext_resource type="Texture2D" uid="uid://dh4x623krw7e5" path="res://art/sprites/samurai.png" id="2_75vfm"]
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="2_ukskc"]
 [ext_resource type="PackedScene" uid="uid://djfl6g8hr6qaa" path="res://scenes/status_handler/status_handler.tscn" id="4_yap0n"]
 [ext_resource type="PackedScene" uid="uid://bcy7llg0kv43x" path="res://scenes/modifier_handler/modifier_handler.tscn" id="5_7r1uk"]
 [ext_resource type="PackedScene" uid="uid://bcbqbnaq3ug5l" path="res://scenes/modifier_handler/modifier.tscn" id="6_x5300"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_player_hover"]
+resource_local_to_scene = true
 size = Vector2(120, 120)
 
 [node name="Player" type="Node2D" unique_id=1759816572 groups=["player"]]
 script = ExtResource("1_g61l3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=617256268]
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_75vfm")
 
 [node name="MouseHoverArea" type="Area2D" parent="." unique_id=100200300]

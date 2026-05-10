@@ -5,6 +5,7 @@ signal stats_changed
 
 @export var character_name: String
 @export var art: Texture
+@export var display_height: float = 150.0
 
 @export_group("Gameplay Data")
 @export var max_health := 1 : set = set_max_health
