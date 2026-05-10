@@ -34,6 +34,10 @@ func start_battle() ->void:
 
 	battle_ui.char_stats = char_stats
 	player.stats = char_stats
+	# Wire the BattleUI back-ref on the player so handler / card_ui code can
+	# reach pile UIs through combatant.battle_ui instead of a group lookup.
+	player.battle_ui = battle_ui
+	enemy_handler.battle_ui_ref = battle_ui
 	player_handler.relics = relics
 	player_handler.hand_left_weapon = hand_left_weapon
 	player_handler.hand_right_weapon = hand_right_weapon

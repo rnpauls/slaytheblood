@@ -128,7 +128,7 @@ func draw_card() -> void:
 		reshuffle_deck_from_discard()
 	# Release the top visual from the draw pile BEFORE popping the resource so
 	# the panel's size_changed handler sees matching counts and skips auto-removal.
-	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
+	var battle_ui := player.battle_ui
 	var source_visual: CardUI = null
 	if battle_ui and battle_ui.draw_pile:
 		source_visual = battle_ui.draw_pile.release_top_visual()
@@ -260,7 +260,7 @@ func reshuffle_deck_from_discard() -> void:
 	# Animate the visual handoff first so the size_changed events emitted by
 	# the atomic swap below see matching visual/resource counts and skip
 	# auto-spawn/free.
-	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
+	var battle_ui := player.battle_ui
 	if battle_ui and battle_ui.discard_pile and battle_ui.draw_pile:
 		battle_ui.discard_pile.reshuffle_to(battle_ui.draw_pile)
 

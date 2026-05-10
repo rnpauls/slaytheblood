@@ -12,6 +12,10 @@ var acting_enemies: Array[Enemy] = []
 ## injection instead of a get_first_node_in_group lookup at setup time.
 var player_target: Player
 
+## Set by Battle.start_battle so each enemy gets the BattleUI ref by
+## injection. Propagated to enemy.battle_ui in setup_enemies.
+var battle_ui_ref: BattleUI
+
 func _ready() -> void:
 	Events.enemy_died.connect(_on_enemy_died)
 	Events.player_action_phase_started.connect(_on_player_action_phase_started)
@@ -28,6 +32,7 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 	for new_enemy: Node2D in all_new_enemies.get_children():
 		var new_enemy_child := new_enemy.duplicate() as Enemy
 		add_child(new_enemy_child)
+		new_enemy_child.battle_ui = battle_ui_ref
 		new_enemy_child.stats.draw_pile = new_enemy_child.stats.starting_deck.custom_duplicate()
 		new_enemy_child.stats.draw_pile.shuffle()
 		new_enemy_child.stats.discard = CardPile.new()

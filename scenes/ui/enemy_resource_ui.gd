@@ -47,7 +47,7 @@ func _on_discard_size_changed(new_size: int) -> void:
 func _on_discard_pressed() -> void:
 	if not _ai or not _ai.enemy or not _ai.enemy.stats:
 		return
-	var battle_ui := get_tree().get_first_node_in_group("ui_layer") as BattleUI
+	var battle_ui := _ai.enemy.battle_ui
 	if not battle_ui:
 		return
 	var enemy_name: String = _ai.enemy.stats.character_name if _ai.enemy.stats.character_name else "Enemy"

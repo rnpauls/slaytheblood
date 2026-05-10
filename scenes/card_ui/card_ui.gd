@@ -154,7 +154,21 @@ func _on_gui_input(_event: InputEvent) -> void:
 
 
 func _get_battle_ui() -> BattleUI:
-	return get_tree().get_first_node_in_group("ui_layer") as BattleUI
+	# Primary path: every Combatant carries a battle_ui back-ref. Anonymous
+	# CardUIs in pile previews (CardStackPanel.reveal_top, etc.) may have
+	# card == null or card.owner == null — those callers tolerate a null
+	# return, so fall through silently in that case.
+	if card and card.owner and card.owner.battle_ui:
+		return card.owner.battle_ui
+	# Fallback: walk up our own parent chain looking for a BattleUI ancestor.
+	# Covers transient CardUIs that were never assigned an owner (e.g.
+	# face-down placeholders in pile panels).
+	var node: Node = get_parent()
+	while node:
+		if node is BattleUI:
+			return node
+		node = node.get_parent()
+	return null
 
 
 # Returns CardStackPanel; the type annotation is dropped to break the

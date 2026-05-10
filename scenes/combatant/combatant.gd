@@ -17,6 +17,13 @@ var active_on_hits: Array[OnHit]
 ## for the enemy). Effects call e.g. target.hand_facade.discard_random(2).
 var hand_facade: HandFacade
 
+## Back-ref to the BattleUI for the current battle. Set by Battle.start_battle
+## (player) / EnemyHandler.setup_enemies (each enemy) so call sites that need
+## BattleUI (card_ui pile handoff, enemy_resource_ui discard view,
+## player_handler reshuffle visual) can read combatant.battle_ui instead of
+## doing a get_first_node_in_group("ui_layer") lookup.
+var battle_ui: BattleUI
+
 signal attack_completed
 
 func set_stats(value: Stats) -> void:
