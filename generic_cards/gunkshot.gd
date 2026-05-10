@@ -9,8 +9,8 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	on_hits.append(on_hit)
 	do_stock_attack_damage_effect(targets, modifiers)
 
-func _on_hit_add_trash(target: Node, _args: Array) -> void:
+func _on_hit_add_trash(atk_target: Node, _args: Array) -> void:
 	var effect := CardAddEffect.new()
 	effect.card_to_add = TRASH_CARD
 	effect.destination = CardAddEffect.Destination.DRAW_PILE_RANDOM
-	effect.execute([target])
+	effect.execute([atk_target])

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="1_i5v26"]
 [ext_resource type="Texture2D" uid="uid://c3b3xjx3gtm1f" path="res://art/sprites/brute.png" id="1_pbyxb"]
-[ext_resource type="Resource" uid="uid://bg8v8osd0axpy" path="res://characters/brute/brute_draftable_cards.tres" id="2_s65w1"]
+[ext_resource type="Resource" uid="uid://ceo5ksfobyos2" path="res://characters/brute/brute_draftable_cards.tres" id="2_s65w1"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_pbyxb"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="4_3gwwx"]
-[ext_resource type="Resource" uid="uid://bv2s8lx0ivxs3" path="res://characters/brute/brute_starting_deck.tres" id="4_6x0nb"]
+[ext_resource type="Resource" uid="uid://cvgk76sl2bjsk" path="res://characters/brute/brute_starting_deck.tres" id="4_6x0nb"]
 [ext_resource type="Resource" uid="uid://vcqlfgcw8ri" path="res://weapons/ball_breaker.tres" id="5_aq6wg"]
 [ext_resource type="Resource" uid="uid://c4n5peso4ufb8" path="res://characters/brute/brute_starting_inv.tres" id="5_imjtc"]
 [ext_resource type="Resource" uid="uid://stbrelic001b" path="res://relics/bloodied_pelt.tres" id="5_md8iq"]

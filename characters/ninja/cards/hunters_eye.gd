@@ -8,10 +8,10 @@ const MARKED_STATUS = preload("res://statuses/marked.tres")
 
 
 func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
-	for target in targets:
-		if target == null or target.status_handler == null:
+	for atk_target in targets:
+		if atk_target == null or atk_target.status_handler == null:
 			continue
 		var marked := MARKED_STATUS.duplicate()
 		marked.stacks = stacks_amount
 		marked.duration = 1
-		target.status_handler.add_status(marked)
+		atk_target.status_handler.add_status(marked)
