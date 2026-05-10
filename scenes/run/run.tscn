@@ -78,7 +78,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.490196)
+color = Color(0.15294118, 0.14117648, 0.22745098, 1)
 
 [node name="BarItems" type="HBoxContainer" parent="TopBar" unique_id=1626484409]
 custom_minimum_size = Vector2(0, 18)
@@ -101,6 +101,7 @@ layout_mode = 2
 [node name="RelicHandlerContainer" type="CenterContainer" parent="TopBar/BarItems" unique_id=1619718458]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 
 [node name="RelicHandler" parent="TopBar/BarItems/RelicHandlerContainer" unique_id=2006051407 instance=ExtResource("6_a2nef")]
 unique_name_in_owner = true

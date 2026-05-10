@@ -39,27 +39,35 @@ offset_bottom = 80.0
 
 [node name="RelicUI" parent="RelicsControl/Relics" unique_id=515061143 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI2" parent="RelicsControl/Relics" unique_id=1205403893 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI3" parent="RelicsControl/Relics" unique_id=1077278846 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI4" parent="RelicsControl/Relics" unique_id=133350557 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI5" parent="RelicsControl/Relics" unique_id=1331262750 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI6" parent="RelicsControl/Relics" unique_id=1050719392 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI7" parent="RelicsControl/Relics" unique_id=1394417150 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RelicUI8" parent="RelicsControl/Relics" unique_id=1563389993 instance=ExtResource("4_qg6nw")]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="RightButton" type="TextureButton" parent="." unique_id=1218490046]
 unique_name_in_owner = true

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cp7xdwgtmam1n"]
 
 [ext_resource type="Script" uid="uid://lv62ht8mc8om" path="res://scenes/enemy/enemy.gd" id="1_dl80c"]
-[ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/tile_0110.png" id="1_srxb5"]
+[ext_resource type="Texture2D" uid="uid://bnmgk13poawy3" path="res://art/custom_art/crab_grok_150px.png" id="2_2f3il"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="2_ywvjq"]
 [ext_resource type="PackedScene" uid="uid://b32oqifk3s1e" path="res://scenes/ui/stats_ui.tscn" id="3_p3m4l"]
 [ext_resource type="PackedScene" uid="uid://i5gv2gp3nlho" path="res://scenes/ui/intent_ui.tscn" id="5_rbfua"]
@@ -14,14 +14,13 @@
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="11_name"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
-size = Vector2(82, 82)
+size = Vector2(100, 100)
 
 [node name="Enemy" type="Node2D" unique_id=844617398 groups=["enemies"]]
 script = ExtResource("1_dl80c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=919184121]
-scale = Vector2(5.125, 5.125)
-texture = ExtResource("1_srxb5")
+texture = ExtResource("2_2f3il")
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=2093290913]
 visible = false
@@ -80,10 +79,8 @@ offset_top = 110.0
 offset_right = 120.0
 offset_bottom = 138.0
 grow_horizontal = 2
-mouse_filter = 2
 theme = ExtResource("11_name")
 theme_override_font_sizes/font_size = 18
-text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 
