@@ -77,36 +77,33 @@ func _request(to: State) -> void:
 ## needs longer (e.g. boss-tier status pile-ons).
 const PHASE_GATE_TIMEOUT := 10.0
 
-var _watchdog_armed: bool = false
+# Generation counter — every arm or disarm increments it. Pending timers
+# capture their generation at arm time and bail on fire if it doesn't match.
+# This makes arm → disarm → re-arm safe within a single state instance:
+# the first arm's stale timer sees a different generation and bails instead
+# of triggering a false-positive fallback transition.
+var _watchdog_generation: int = 0
 
 
 ## Arm the watchdog with a fallback state. If `timeout` seconds pass before
-## _disarm_watchdog() is called, force a transition to `fallback` with a
-## warning. Multiple calls re-arm the timer (the previous timer's callback
-## will see _watchdog_armed=false-then-true and bail on the stale generation).
+## _disarm_watchdog() is called (or another arm replaces this one), force a
+## transition to `fallback` with a warning. Safe to call repeatedly within a
+## single state — each call invalidates any previously pending timer.
 func _arm_watchdog(fallback: State, timeout: float = PHASE_GATE_TIMEOUT) -> void:
-	_watchdog_armed = true
-	# Capture the current generation by snapshotting `state` at arm time —
-	# if exit() runs and a new state arms its own watchdog before our timer
-	# fires, the stale callback will see _watchdog_armed=true on the new
-	# state and could mis-fire. The bool flag alone is enough because exit()
-	# always calls _disarm_watchdog() (which sets the flag false), and the
-	# next state's _arm_watchdog re-sets it true on a fresh state instance.
-	# So a stale timer firing after exit will see false. The only risk is
-	# arm→arm on the same instance, which the early _watchdog_armed=true
-	# write below guarantees stays armed.
+	_watchdog_generation += 1
+	var generation := _watchdog_generation
 	var t := get_tree().create_timer(timeout, false)
-	t.timeout.connect(_on_watchdog_timeout.bind(fallback))
+	t.timeout.connect(_on_watchdog_timeout.bind(fallback, generation))
 
 
 func _disarm_watchdog() -> void:
-	_watchdog_armed = false
+	_watchdog_generation += 1
 
 
-func _on_watchdog_timeout(fallback: State) -> void:
-	if not _watchdog_armed:
-		return  # cleanly exited or re-armed by a later call
-	_watchdog_armed = false
+func _on_watchdog_timeout(fallback: State, generation: int) -> void:
+	if generation != _watchdog_generation:
+		return  # stale — armed timer was disarmed or replaced before we fired
+	_watchdog_generation += 1  # invalidate ourselves so we can't re-fire
 	push_warning("[TurnSM] phase-gate timeout in %s; forcing %s" % [
 		State.keys()[state], State.keys()[fallback]])
 	# Use the same transition_requested path as a normal success transition

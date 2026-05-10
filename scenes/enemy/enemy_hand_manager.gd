@@ -204,11 +204,19 @@ func get_or_create_card_ui(card: Card) -> EnemyCardUI:
 ## in lockstep with the per-card signals emitted by Card.play / block_card /
 ## pitch_card / sink_card. Enemy handlers stay silent on the global Events bus
 ## so player relics (resonance_ring, lucky_charm) only fire on player actions.
+##
+## Cards persist across draws (discard → reshuffle → draw again is the same
+## Card instance), so we guard each connect to avoid the Godot "already
+## connected" error when a card is re-drawn after being played and recycled.
 func _connect_lifecycle_signals(card: Card) -> void:
-	card.card_play_finished.connect(_on_card_play_finished)
-	card.blocked.connect(_on_card_blocked)
-	card.pitched.connect(_on_card_pitched)
-	card.sunk.connect(_on_card_sunk)
+	if not card.card_play_finished.is_connected(_on_card_play_finished):
+		card.card_play_finished.connect(_on_card_play_finished)
+	if not card.blocked.is_connected(_on_card_blocked):
+		card.blocked.connect(_on_card_blocked)
+	if not card.pitched.is_connected(_on_card_pitched):
+		card.pitched.connect(_on_card_pitched)
+	if not card.sunk.is_connected(_on_card_sunk):
+		card.sunk.connect(_on_card_sunk)
 
 
 func _on_card_play_finished(card: Card) -> void:

@@ -14,6 +14,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	var on_hit = OnHit.new()
 	on_hit.custom_func = _on_hit_buff_next_attack
 	on_hit.args = [modifiers] as Array[ModifierHandler]
+	on_hit.ai_value = 1
 	on_hits.append(on_hit)
 	
 	do_stock_attack_damage_effect(targets, modifiers)

@@ -137,11 +137,19 @@ func draw_card() -> void:
 		hand.add_card(card_drawn, source_visual)
 		SFXRegistry.play(&"DRAW_CARD")
 		Events.player_card_drawn.emit()
-		card_drawn.card_play_finished.connect(_on_card_play_finished)
-		card_drawn.card_play_started.connect(_on_card_play_started)
-		card_drawn.pitched.connect(_on_card_pitched)
-		card_drawn.sunk.connect(_on_card_sunk)
-		card_drawn.blocked.connect(_on_card_blocked)
+		# Cards persist across draws (discard → reshuffle → draw again is the same
+		# Card instance), so guard each connect to avoid Godot's "already
+		# connected" error when a card is re-drawn after being played and recycled.
+		if not card_drawn.card_play_finished.is_connected(_on_card_play_finished):
+			card_drawn.card_play_finished.connect(_on_card_play_finished)
+		if not card_drawn.card_play_started.is_connected(_on_card_play_started):
+			card_drawn.card_play_started.connect(_on_card_play_started)
+		if not card_drawn.pitched.is_connected(_on_card_pitched):
+			card_drawn.pitched.connect(_on_card_pitched)
+		if not card_drawn.sunk.is_connected(_on_card_sunk):
+			card_drawn.sunk.connect(_on_card_sunk)
+		if not card_drawn.blocked.is_connected(_on_card_blocked):
+			card_drawn.blocked.connect(_on_card_blocked)
 		card_drawn.owner = player
 	elif source_visual:
 		# Edge case: visual released but no card to draw (resource desync). Free it.
@@ -309,14 +317,16 @@ func _on_card_sunk(card: Card) -> void:
 func _on_statuses_applied(type: Status.Type) -> void:
 	match type:
 		Status.Type.START_OF_TURN:
-			#print("Need to implement drawing cards at end of turn instead of start. Currently card draw signal controls turn flow")
+			print_debug("[Cascade] _on_statuses_applied(START_OF_TURN) → action_phase_started + enable_hand")
 			Events.player_action_phase_started.emit()
 			hand.enable_hand()
 		Status.Type.END_OF_TURN:
+			print_debug("[Cascade] _on_statuses_applied(END_OF_TURN) → end_turn_cleanup")
 			end_turn_cleanup()
 
 
 func _on_relics_activated(type: Relic.Type) -> void:
+	print_debug("[Cascade] _on_relics_activated(%s)" % Relic.Type.keys()[type])
 	match type:
 		Relic.Type.START_OF_TURN:
 			player.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)

@@ -74,22 +74,30 @@ func _set_char_stats(value: CharacterStats) -> void:
 	action_points_ui.char_stats = char_stats
 	hand.char_stats = char_stats
 
+## EOT cleanup completed and the hand is back at full size. Disable the end
+## turn button — it stays disabled until the enemy declares an attack (flips
+## it to BLOCK) or the enemy phase ends (returns it to END TURN). Also emit
+## player_turn_ended for status effects (intimidated/poison_tip/empowered)
+## that hook into "the player's turn just ended".
 func _on_player_hand_drawn() -> void:
+	print_debug("[EndBtn] disable from _on_player_hand_drawn (post-EOT)")
 	end_turn_button.disabled = true
-	print_debug("End turn is emitted from battle_ui, but it does nothing here anymore")
 	Events.player_turn_ended.emit()
 
 func _on_player_initial_hand_drawn() -> void:
+	print_debug("[EndBtn] enable from _on_player_initial_hand_drawn")
 	waiting_for_battle_start = false
 	end_turn_button.disabled = false
 
 func _on_player_action_phase_started() -> void:
 	if waiting_for_battle_start:
-		pass
+		print_debug("[EndBtn] _on_player_action_phase_started skipped (waiting_for_battle_start)")
 	else:
+		print_debug("[EndBtn] enable from _on_player_action_phase_started")
 		end_turn_button.disabled = false
 
 func _on_end_turn_button_pressed() -> void:
+	print_debug("[EndBtn] disable from _on_end_turn_button_pressed (text=%s)" % end_turn_button.text)
 	end_turn_button.disabled = true
 	if end_turn_button.text == "END TURN":
 		Events.player_end_phase_started.emit()
@@ -99,10 +107,12 @@ func _on_end_turn_button_pressed() -> void:
 
 func _on_enemy_attack_declared() -> void:
 	#is_blocking = true
+	print_debug("[EndBtn] enable+BLOCK from _on_enemy_attack_declared")
 	end_turn_button.text = "BLOCK"
 	end_turn_button.disabled = false
 
 func _on_enemy_phase_ended() -> void:
+	print_debug("[EndBtn] enable+END TURN from _on_enemy_phase_ended")
 	end_turn_button.text = "END TURN"
 	end_turn_button.disabled = false
 

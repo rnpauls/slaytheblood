@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7encedt0001"]
+[gd_scene format=3 uid="uid://b7encedt0001"]
 
-[ext_resource type="Script" path="res://tools/encounter_editor/encounter_editor.gd" id="1_editor"]
+[ext_resource type="Script" uid="uid://bcrwtvojx0nyt" path="res://tools/encounter_editor/encounter_editor.gd" id="1_editor"]
 
-[node name="EncounterEditor" type="Control"]
+[node name="EncounterEditor" type="Control" unique_id=1227375903]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_editor")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1895129930]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12, 0.13, 0.16, 1)
 
-[node name="Canvas" type="Control" parent="."]
+[node name="Canvas" type="Control" parent="." unique_id=1992527836]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,9 +31,11 @@ offset_left = -640.0
 offset_top = -360.0
 offset_right = 640.0
 offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 
-[node name="Hint" type="Label" parent="Canvas"]
+[node name="Hint" type="Label" parent="Canvas" unique_id=1908364413]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,49 +46,49 @@ offset_left = -200.0
 offset_top = -16.0
 offset_right = 200.0
 offset_bottom = 16.0
-mouse_filter = 2
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.65, 0.65, 0.7, 1)
 text = "1280 × 720 game canvas — drag enemies here"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LeftPanel" type="PanelContainer" parent="."]
+[node name="LeftPanel" type="PanelContainer" parent="." unique_id=1750451267]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 220.0
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="LeftPanel"]
+[node name="VBox" type="VBoxContainer" parent="LeftPanel" unique_id=1340713114]
 layout_mode = 2
 
-[node name="HeaderLabel" type="Label" parent="LeftPanel/VBox"]
+[node name="HeaderLabel" type="Label" parent="LeftPanel/VBox" unique_id=364094957]
 layout_mode = 2
 text = "Battles"
 horizontal_alignment = 1
 
-[node name="BattleList" type="ItemList" parent="LeftPanel/VBox"]
+[node name="BattleList" type="ItemList" parent="LeftPanel/VBox" unique_id=1033358722]
 layout_mode = 2
 size_flags_vertical = 3
-auto_height = false
 
-[node name="NewBtn" type="Button" parent="LeftPanel/VBox"]
+[node name="NewBtn" type="Button" parent="LeftPanel/VBox" unique_id=1455732894]
 layout_mode = 2
 text = "New"
 
-[node name="SaveBtn" type="Button" parent="LeftPanel/VBox"]
+[node name="SaveBtn" type="Button" parent="LeftPanel/VBox" unique_id=532144514]
 layout_mode = 2
 text = "Save"
 
-[node name="SaveAsBtn" type="Button" parent="LeftPanel/VBox"]
+[node name="SaveAsBtn" type="Button" parent="LeftPanel/VBox" unique_id=1048108811]
 layout_mode = 2
 text = "Save As (filename)"
 
-[node name="RefreshBtn" type="Button" parent="LeftPanel/VBox"]
+[node name="RefreshBtn" type="Button" parent="LeftPanel/VBox" unique_id=1819989771]
 layout_mode = 2
 text = "Refresh"
 
-[node name="RightPanel" type="PanelContainer" parent="."]
+[node name="RightPanel" type="PanelContainer" parent="." unique_id=1608140310]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -96,65 +98,60 @@ offset_left = -260.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="RightPanel"]
+[node name="VBox" type="VBoxContainer" parent="RightPanel" unique_id=624555256]
 layout_mode = 2
 
-[node name="HeaderLabel" type="Label" parent="RightPanel/VBox"]
+[node name="HeaderLabel" type="Label" parent="RightPanel/VBox" unique_id=1630328323]
 layout_mode = 2
 text = "Enemies"
 horizontal_alignment = 1
 
-[node name="Filter" type="LineEdit" parent="RightPanel/VBox"]
+[node name="Filter" type="LineEdit" parent="RightPanel/VBox" unique_id=740641540]
 layout_mode = 2
 placeholder_text = "Filter…"
 
-[node name="EnemyList" type="ItemList" parent="RightPanel/VBox"]
+[node name="EnemyList" type="ItemList" parent="RightPanel/VBox" unique_id=286617662]
 layout_mode = 2
 size_flags_vertical = 3
-auto_height = false
 icon_mode = 0
 fixed_icon_size = Vector2i(28, 28)
 
-[node name="AddBtn" type="Button" parent="RightPanel/VBox"]
+[node name="AddBtn" type="Button" parent="RightPanel/VBox" unique_id=1882955973]
 layout_mode = 2
 text = "+ Add Selected"
 
-[node name="SelectedLabel" type="Label" parent="RightPanel/VBox"]
+[node name="SelectedLabel" type="Label" parent="RightPanel/VBox" unique_id=1055422690]
 layout_mode = 2
 text = "Selected enemy position"
 horizontal_alignment = 1
 
-[node name="SelectedRow" type="HBoxContainer" parent="RightPanel/VBox"]
+[node name="SelectedRow" type="HBoxContainer" parent="RightPanel/VBox" unique_id=835600784]
 layout_mode = 2
 
-[node name="LabelX" type="Label" parent="RightPanel/VBox/SelectedRow"]
+[node name="LabelX" type="Label" parent="RightPanel/VBox/SelectedRow" unique_id=598933345]
 layout_mode = 2
 text = "X"
 
-[node name="PosX" type="SpinBox" parent="RightPanel/VBox/SelectedRow"]
+[node name="PosX" type="SpinBox" parent="RightPanel/VBox/SelectedRow" unique_id=1146528784]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 0.0
 max_value = 1280.0
-step = 1.0
 
-[node name="LabelY" type="Label" parent="RightPanel/VBox/SelectedRow"]
+[node name="LabelY" type="Label" parent="RightPanel/VBox/SelectedRow" unique_id=288832631]
 layout_mode = 2
 text = "Y"
 
-[node name="PosY" type="SpinBox" parent="RightPanel/VBox/SelectedRow"]
+[node name="PosY" type="SpinBox" parent="RightPanel/VBox/SelectedRow" unique_id=310891496]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 0.0
 max_value = 720.0
-step = 1.0
 
-[node name="RemoveBtn" type="Button" parent="RightPanel/VBox"]
+[node name="RemoveBtn" type="Button" parent="RightPanel/VBox" unique_id=751217853]
 layout_mode = 2
 disabled = true
 text = "Remove Selected"
 
-[node name="TopBar" type="PanelContainer" parent="."]
+[node name="TopBar" type="PanelContainer" parent="." unique_id=1679066802]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -165,70 +162,63 @@ offset_right = 460.0
 offset_bottom = 56.0
 grow_horizontal = 2
 
-[node name="HBox" type="HBoxContainer" parent="TopBar"]
+[node name="HBox" type="HBoxContainer" parent="TopBar" unique_id=1335809101]
 layout_mode = 2
 
-[node name="NameLbl" type="Label" parent="TopBar/HBox"]
+[node name="NameLbl" type="Label" parent="TopBar/HBox" unique_id=483710293]
 layout_mode = 2
 text = "Filename"
 
-[node name="NameEdit" type="LineEdit" parent="TopBar/HBox"]
+[node name="NameEdit" type="LineEdit" parent="TopBar/HBox" unique_id=792340785]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 placeholder_text = "tier_X_my_battle"
 
-[node name="TierLbl" type="Label" parent="TopBar/HBox"]
+[node name="TierLbl" type="Label" parent="TopBar/HBox" unique_id=1644265943]
 layout_mode = 2
 text = "Tier"
 
-[node name="TierSpin" type="SpinBox" parent="TopBar/HBox"]
+[node name="TierSpin" type="SpinBox" parent="TopBar/HBox" unique_id=497210900]
 layout_mode = 2
-min_value = 0.0
 max_value = 2.0
-step = 1.0
 
-[node name="WeightLbl" type="Label" parent="TopBar/HBox"]
+[node name="WeightLbl" type="Label" parent="TopBar/HBox" unique_id=552860646]
 layout_mode = 2
 text = "Weight"
 
-[node name="WeightSpin" type="SpinBox" parent="TopBar/HBox"]
+[node name="WeightSpin" type="SpinBox" parent="TopBar/HBox" unique_id=720568265]
 layout_mode = 2
-min_value = 0.0
 max_value = 10.0
 step = 0.1
 value = 1.0
 
-[node name="GoldMinLbl" type="Label" parent="TopBar/HBox"]
+[node name="GoldMinLbl" type="Label" parent="TopBar/HBox" unique_id=1118596257]
 layout_mode = 2
 text = "Gold min"
 
-[node name="GoldMinSpin" type="SpinBox" parent="TopBar/HBox"]
+[node name="GoldMinSpin" type="SpinBox" parent="TopBar/HBox" unique_id=1606511090]
 layout_mode = 2
-min_value = 0.0
 max_value = 999.0
-step = 1.0
 value = 30.0
 
-[node name="GoldMaxLbl" type="Label" parent="TopBar/HBox"]
+[node name="GoldMaxLbl" type="Label" parent="TopBar/HBox" unique_id=1137600806]
 layout_mode = 2
 text = "Gold max"
 
-[node name="GoldMaxSpin" type="SpinBox" parent="TopBar/HBox"]
+[node name="GoldMaxSpin" type="SpinBox" parent="TopBar/HBox" unique_id=582403677]
 layout_mode = 2
-min_value = 0.0
 max_value = 999.0
-step = 1.0
 value = 50.0
 
-[node name="PoolCheck" type="CheckBox" parent="TopBar/HBox"]
+[node name="PoolCheck" type="CheckBox" parent="TopBar/HBox" unique_id=379583979]
 layout_mode = 2
 text = "Add to pool"
 
-[node name="EliteCheck" type="CheckBox" parent="TopBar/HBox"]
+[node name="EliteCheck" type="CheckBox" parent="TopBar/HBox" unique_id=769045065]
 layout_mode = 2
 text = "Elite"
 
-[node name="BottomBar" type="PanelContainer" parent="."]
+[node name="BottomBar" type="PanelContainer" parent="." unique_id=173602022]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -240,6 +230,6 @@ offset_right = -260.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="StatusLabel" type="Label" parent="BottomBar"]
+[node name="StatusLabel" type="Label" parent="BottomBar" unique_id=1993651014]
 layout_mode = 2
 text = "Ready."

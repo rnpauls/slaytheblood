@@ -23,6 +23,10 @@ extends TurnState
 ## for the player to read the card; short enough that NAA-heavy turns don't drag.
 const NAA_HOLD_DURATION := 0.6
 
+## Per-segment watchdog timeout for automated (non-player-input) awaits. Generous
+## enough to cover slow reveal animations + chained do_action effects.
+const SEGMENT_WATCHDOG_TIMEOUT := 30.0
+
 var _current_enemy: Enemy
 var _cancelled := false  # exit() called externally — bail without requesting
 var _current_enemy_died := false  # current enemy died mid-loop — go to next ENEMY_SOT
@@ -50,6 +54,7 @@ func exit() -> void:
 	_cancelled = true
 	if Events.enemy_died.is_connected(_on_enemy_died):
 		Events.enemy_died.disconnect(_on_enemy_died)
+	_disarm_watchdog()
 
 
 func _on_enemy_died(enemy: Enemy) -> void:
@@ -59,6 +64,13 @@ func _on_enemy_died(enemy: Enemy) -> void:
 
 func _run_action_loop() -> void:
 	while true:
+		# Arm the watchdog around each per-action automated segment. We
+		# disarm it across `await Events.player_blocks_declared` below so an
+		# AFK player thinking through their block isn't punished. Fallback
+		# is ENEMY_EOT — concedes any remaining actions for this enemy and
+		# moves on rather than soft-locking the turn loop.
+		_arm_watchdog(State.ENEMY_EOT, SEGMENT_WATCHDOG_TIMEOUT)
+
 		# declare_next_attack is synchronous: it sets current_action and
 		# stages the card UI. enemy_attack_declared (which flips the END
 		# button to BLOCK in BattleUI) is emitted later in
@@ -88,7 +100,10 @@ func _run_action_loop() -> void:
 		# instead of prompting — Enemy.declare_next_attack skips the
 		# enemy_attack_declared emit for NAAs so the END button never flips.
 		if _current_enemy.current_action.type == Card.Type.ATTACK:
+			# Player input — disarm the watchdog so AFK doesn't trigger fallback.
+			_disarm_watchdog()
 			await Events.player_blocks_declared
+			_arm_watchdog(State.ENEMY_EOT, SEGMENT_WATCHDOG_TIMEOUT)
 		else:
 			await get_tree().create_timer(NAA_HOLD_DURATION).timeout
 		if _cancelled:
@@ -104,6 +119,11 @@ func _run_action_loop() -> void:
 		if _current_enemy_died:
 			break
 
+		# Disarm at the bottom of each loop iteration so the next iteration's
+		# top re-arm starts a fresh per-segment timer.
+		_disarm_watchdog()
+
+	_disarm_watchdog()
 	if _cancelled:
 		return
 	if _current_enemy_died:

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_xgq3i")
-id = "stanuch_defense"
+id = "staunch_defense"
 type = 2
 rarity = 1
 pitch = 3

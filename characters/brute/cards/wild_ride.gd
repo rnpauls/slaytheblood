@@ -1,13 +1,11 @@
 extends Card
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
-	if owner is Player:
+	var is_player_owned := owner is Player
+	if is_player_owned:
 		Events.lock_hand.emit()
 	Events.card_discarded.connect(_on_card_discarded)
-	if await sixloot(owner, 1):
-		go_again = true
-	else:
-		go_again = false
+	go_again = await sixloot(owner, 1)
 	do_stock_attack_damage_effect(targets, modifiers)
-	if owner is Player:
+	if is_player_owned:
 		Events.unlock_hand.emit()

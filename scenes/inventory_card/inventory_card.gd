@@ -51,7 +51,9 @@ func set_equipment(new_equipment: Equipment) -> void:
 	weapon_ui.hide()
 	equipment_display.show()
 	equip_icon.texture = equipment.icon
-	block_label.text = "%d/%d" % [equipment.current_block, equipment.max_block]
+	# Normalize the -1 sentinel for display (pre-clone .tres in reward screen).
+	var display_block: int = equipment.current_block if equipment.current_block >= 0 else equipment.max_block
+	block_label.text = "%d/%d" % [display_block, equipment.max_block]
 	_update_status_badge()
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(equipment.get_tooltip()))
 	name_label.text = equipment.equipment_name

@@ -90,6 +90,7 @@ func add_card(card: Card, source_visual: CardUI = null) -> void:
 
 
 func enable_hand() -> void:
+	print_debug("[Hand] enable_hand (cards=%d)" % get_child_count())
 	for card: PlayerCardUI in get_children():
 		card.disabled = false
 		if card.mouse_is_over():
@@ -97,6 +98,7 @@ func enable_hand() -> void:
 
 
 func disable_hand() -> void:
+	print_debug("[Hand] disable_hand (cards=%d)" % get_child_count())
 	for card: PlayerCardUI in get_children():
 		card.disabled = true
 

@@ -7,7 +7,6 @@
 script = ExtResource("2_script")
 equipment_name = "Berserker Helm"
 id = "berserker_helm"
-slot = 0
 rarity = 1
 character_type = 2
 icon = ExtResource("1_icon")

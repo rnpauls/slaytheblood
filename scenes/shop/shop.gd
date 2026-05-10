@@ -166,6 +166,7 @@ func _on_remove_card_view_card_selected(card: Card) -> void:
 	char_stats.deck.cards.erase(card)
 	char_stats.deck.card_pile_size_changed.emit(char_stats.deck.cards.size())
 	run_stats.card_removal_cost += RunStats.CARD_REMOVAL_COST_INCREMENT
+	_update_items()
 
 
 func _on_shop_card_bought(card: Card, gold_cost: int) -> void:

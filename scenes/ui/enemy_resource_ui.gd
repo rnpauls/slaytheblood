@@ -17,10 +17,31 @@ func _ready() -> void:
 
 
 func update_display(ai: EnemyAI) -> void:
+	if _ai and _ai != ai:
+		var prev_draw := _ai.enemy.stats.draw_pile
+		var prev_discard := _ai.enemy.stats.discard
+		if prev_draw.card_pile_size_changed.is_connected(_on_draw_pile_size_changed):
+			prev_draw.card_pile_size_changed.disconnect(_on_draw_pile_size_changed)
+		if prev_discard.card_pile_size_changed.is_connected(_on_discard_size_changed):
+			prev_discard.card_pile_size_changed.disconnect(_on_discard_size_changed)
 	_ai = ai
-	deck_count.text = "%s" % ai.enemy.stats.draw_pile.cards.size()
+	var draw_pile := ai.enemy.stats.draw_pile
+	var discard := ai.enemy.stats.discard
+	if not draw_pile.card_pile_size_changed.is_connected(_on_draw_pile_size_changed):
+		draw_pile.card_pile_size_changed.connect(_on_draw_pile_size_changed)
+	if not discard.card_pile_size_changed.is_connected(_on_discard_size_changed):
+		discard.card_pile_size_changed.connect(_on_discard_size_changed)
+	deck_count.text = "%s" % draw_pile.cards.size()
 	resource_count.text = "%s" % ai.resources
-	discard_count.text = "%s" % ai.enemy.stats.discard.cards.size()
+	discard_count.text = "%s" % discard.cards.size()
+
+
+func _on_draw_pile_size_changed(new_size: int) -> void:
+	deck_count.text = "%s" % new_size
+
+
+func _on_discard_size_changed(new_size: int) -> void:
+	discard_count.text = "%s" % new_size
 
 
 func _on_discard_pressed() -> void:
