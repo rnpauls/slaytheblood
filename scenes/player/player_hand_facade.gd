@@ -90,9 +90,65 @@ func reshuffle_discard() -> void:
 	_player_handler.reshuffle_deck_from_discard()
 
 
+# ── Interactive prompt ───────────────────────────────────────────────────────
+
+## Show the choose-cards-in-hand UI and await the player's selection.
+## Returns the chosen Cards (data, not visuals). Returns [] if BattleUI
+## isn't reachable (defensive — shouldn't happen mid-battle).
+func prompt_choose_cards(count: int, prompt_text: String = "") -> Array[Card]:
+	if _player.battle_ui == null:
+		push_warning("PlayerHandFacade.prompt_choose_cards: player.battle_ui is null")
+		return []
+	var chosen_uis: Array[CardUI] = await _player.battle_ui.choose_cards_in_hand(count, prompt_text)
+	var cards: Array[Card] = []
+	for ui in chosen_uis:
+		if ui is PlayerCardUI:
+			cards.append((ui as PlayerCardUI).card)
+	return cards
+
+
+# ── Per-card operations ──────────────────────────────────────────────────────
+
+## Sink the given card from hand (back to draw pile). Routes through
+## PlayerCardUI.sink() so the visual fly-to-pile + card.sink_card emit chain
+## fires unchanged.
+func sink_card(card: Card) -> void:
+	var card_ui := _find_card_ui(card)
+	if card_ui:
+		card_ui.sink()
+
+
+## Discard the given card. Routes through PlayerCardUI.discard() so the
+## visual handoff and Events.card_discarded side effects (Enraged etc.)
+## fire unchanged.
+func discard_card(card: Card) -> void:
+	var card_ui := _find_card_ui(card)
+	if card_ui:
+		card_ui.discard()
+
+
+## Exhaust the given card — remove visual without going to discard. Mirrors
+## ExhaustRandomEffect semantics: visual disappears, resource lands in
+## character.exhaust pile so Resonance Ring / similar still see it.
+func exhaust_card(card: Card) -> void:
+	var card_ui := _find_card_ui(card)
+	if card_ui:
+		_player_handler.character.exhaust.add_card(card)
+		card_ui.queue_free()
+
+
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 func _shuffled_card_uis() -> Array:
 	var card_uis := _player_handler.hand.get_children().duplicate()
 	RNG.array_shuffle(card_uis)
 	return card_uis
+
+
+## Locate the matching PlayerCardUI for a given Card resource currently in
+## hand. Used by the per-card operations above to apply UI-side effects.
+func _find_card_ui(card: Card) -> PlayerCardUI:
+	for child in _player_handler.hand.get_children():
+		if child is PlayerCardUI and (child as PlayerCardUI).card == card:
+			return child as PlayerCardUI
+	return null

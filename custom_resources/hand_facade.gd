@@ -69,3 +69,40 @@ func reshuffle_discard() -> void:
 ## Destroy the arsenal slot card. Returns true if there was one to destroy.
 func destroy_arsenal() -> bool:
 	return false
+
+
+# ── Interactive prompts ──────────────────────────────────────────────────────
+
+## Ask the owning combatant to pick `count` cards from its hand. Awaitable.
+## For Player: shows the choose-cards UI and waits for the click. For Enemy:
+## random pick (no UI). Optional prompt_text customizes the label shown to
+## the player ("Sink a card", "Exhaust a card", etc.); ignored on enemy side.
+##
+## Returns the actually chosen cards (may be fewer than `count` if hand size
+## is smaller, or empty if the prompt is cancelled).
+func prompt_choose_cards(_count: int, _prompt_text: String = "") -> Array[Card]:
+	push_warning("HandFacade.prompt_choose_cards called on base class")
+	return []
+
+
+# ── Per-card operations (operate on a specific Card already in hand) ─────────
+
+## Sink the given card from hand back into the draw pile. Player side flies
+## the visual to the draw pile and routes through card.sink_card; enemy side
+## adds the card to enemy stats.draw_pile and removes from hand.
+func sink_card(_card: Card) -> void:
+	push_warning("HandFacade.sink_card called on base class")
+
+## Discard the given card. Player side flies the visual through CardUI.discard
+## (which fires Events.card_discarded → side effects like Enraged). Enemy
+## side calls card.discard_card (puts it in enemy stats.discard) + removes
+## from hand.
+func discard_card(_card: Card) -> void:
+	push_warning("HandFacade.discard_card called on base class")
+
+## Exhaust the given card — remove from hand without going to discard. Player
+## side queue_frees the visual; enemy side just removes from hand. (Neither
+## side adds to a permanent exhaust pile in this method — match existing
+## ExhaustRandomEffect semantics.)
+func exhaust_card(_card: Card) -> void:
+	push_warning("HandFacade.exhaust_card called on base class")

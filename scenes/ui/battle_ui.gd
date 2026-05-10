@@ -60,9 +60,14 @@ func show_card_pile(pile: CardPile, title: String) -> void:
 	discard_pile_view.card_pile = pile
 	discard_pile_view.show_current_view(title)
 
-func choose_cards_in_hand(num_cards: int) -> Array[CardUI]:
+## Prompt the player to pick `num_cards` from their hand. Awaits user input
+## and returns the chosen CardUIs. Optional prompt_text overrides the default
+## "Choose N cards" label so card scripts can show a verb-specific prompt
+## (e.g. "Sink a card", "Exhaust a card"). Most callers should go through
+## PlayerHandFacade.prompt_choose_cards rather than calling this directly.
+func choose_cards_in_hand(num_cards: int, prompt_text: String = "") -> Array[CardUI]:
 	num_cards_to_choose = num_cards
-	choice_screen_label.text = "Choose %s cards" % num_cards_to_choose
+	choice_screen_label.text = prompt_text if not prompt_text.is_empty() else "Choose %s cards" % num_cards_to_choose
 	choice_screen.show()
 	Events.selecting_cards_from_hand.emit(num_cards_to_choose)
 	var selected_cards: Array[CardUI] = await Events.finished_selecting_cards_from_hand

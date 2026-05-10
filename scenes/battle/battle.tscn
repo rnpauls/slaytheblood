@@ -80,7 +80,7 @@ script = ExtResource("8_r04wr")
 player = NodePath("../Player")
 hand = NodePath("../BattleUI/Hand")
 
-[node name="BattleUI" type="CanvasLayer" parent="." unique_id=2022019696 groups=["ui_layer"]]
+[node name="BattleUI" type="CanvasLayer" parent="." unique_id=2022019696]
 script = ExtResource("7_8utji")
 
 [node name="ManaUI" parent="BattleUI" unique_id=356935032 instance=ExtResource("11_8aauo")]

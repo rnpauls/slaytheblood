@@ -80,6 +80,48 @@ func destroy_arsenal() -> bool:
 	return _enemy.destroy_arsenal()
 
 
+# ── Interactive prompt ───────────────────────────────────────────────────────
+
+## No UI to prompt the enemy with, so default to a random pick. Today the
+## design choice is "no enemy gets a choose-from-hand card" — this default is
+## a sensible fallback if one accidentally fires for an enemy.
+func prompt_choose_cards(count: int, _prompt_text: String = "") -> Array[Card]:
+	var pool := _shuffled_hand()
+	var chosen: Array[Card] = []
+	for c in pool.slice(0, count):
+		chosen.append(c)
+	return chosen
+
+
+# ── Per-card operations ──────────────────────────────────────────────────────
+
+## Sink the given card from hand back to the enemy's draw pile (top), then
+## remove it from hand. No "sink to top" semantics on enemy side prior to
+## this — using add_card for now; if enemy cards ever need true top-of-deck
+## semantics, add a CardPile.add_card_to_top method.
+func sink_card(card: Card) -> void:
+	if not _hand_manager.hand.has(card):
+		return
+	_enemy.stats.draw_pile.add_card(card)
+	_hand_manager.remove_card(card)
+
+
+## Discard the given card to the enemy's discard pile.
+func discard_card(card: Card) -> void:
+	if not _hand_manager.hand.has(card):
+		return
+	card.discard_card()
+	_hand_manager.remove_card(card)
+
+
+## Exhaust the given card — remove from hand, push to exhaust pile.
+func exhaust_card(card: Card) -> void:
+	if not _hand_manager.hand.has(card):
+		return
+	_enemy.stats.exhaust.add_card(card)
+	_hand_manager.remove_card(card)
+
+
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 func _shuffled_hand() -> Array[Card]:
