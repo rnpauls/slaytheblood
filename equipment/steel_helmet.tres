@@ -8,7 +8,6 @@ script = ExtResource("2_5pgmu")
 equipment_name = "Steel Helmet"
 id = "steel_helmet"
 rarity = 1
-persistence = 1
 icon = ExtResource("1_t0h8p")
 max_block = 2
 metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

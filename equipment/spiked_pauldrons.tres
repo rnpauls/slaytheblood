@@ -10,8 +10,6 @@ id = "spiked_pauldrons"
 slot = 1
 rarity = 1
 character_type = 2
-persistence = 1
-break_on_use = false
 icon = ExtResource("1_icon")
 tooltip = "Spiked Pauldrons: when used to block, gain [kw=thorns:2]Thorns 2[/kw] this turn."
 max_block = 3

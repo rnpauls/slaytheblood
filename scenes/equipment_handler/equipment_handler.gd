@@ -97,7 +97,7 @@ func _on_player_end_phase_started() -> void:
 	_refresh_button_state()
 
 
-## End-of-battle restore for REUSABLE equipment.
+## End-of-battle restore (only items with regenerates_each_battle do anything here).
 func restore_for_battle() -> void:
 	if not equipment:
 		return
@@ -191,19 +191,15 @@ func _destroy_equipment() -> void:
 	# Disconnect any global-signal hooks the equipment registered.
 	destroyed.deactivate_equipment(owner_of_equipment)
 	equipment_destroyed.emit(destroyed)
-	# ONE_SHOT: remove from inventory entirely so it's gone after battle.
-	# REUSABLE: keep in inventory; restore_for_battle will refresh it.
-	if destroyed.persistence == Equipment.Persistence.ONE_SHOT:
-		var player := owner_of_equipment as Player
-		if player and player.stats and player.stats.inventory:
-			player.stats.inventory.remove_equipment(destroyed)
-		# Also clear the equipped slot reference on the character.
-		_clear_equipped_slot_on_character(destroyed)
-		set_equipment(null)
-	else:
-		# REUSABLE but currently broken — keep it in the slot, just disabled.
-		# It'll restore at end of battle.
+	# Unbreakable: keep in slot, just disabled until regenerated.
+	if destroyed.unbreakable:
 		_refresh_button_state()
+		return
+	var player := owner_of_equipment as Player
+	if player and player.stats and player.stats.inventory:
+		player.stats.inventory.remove_equipment(destroyed)
+	_clear_equipped_slot_on_character(destroyed)
+	set_equipment(null)
 
 
 func _clear_equipped_slot_on_character(eq: Equipment) -> void:

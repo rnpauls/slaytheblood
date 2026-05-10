@@ -9,7 +9,6 @@ equipment_name = "Steel Boots"
 id = "steel_boots"
 slot = 3
 rarity = 1
-persistence = 1
 icon = ExtResource("1_827l6")
 max_block = 2
 metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

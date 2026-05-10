@@ -10,8 +10,6 @@ id = "scabskin_leathers"
 slot = 3
 rarity = 0
 character_type = 2
-persistence = 1
-break_on_use = false
 icon = ExtResource("2_skln")
 tooltip = "[color=\"ffdf00\"]Scabskin Leathers[/color]
 Defense 2.

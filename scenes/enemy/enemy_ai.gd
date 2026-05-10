@@ -62,15 +62,13 @@ func play_next_action() -> Card:
 	while resources < next_action.cost and turn_plan.pitched.size() > 0:
 		var pitch = turn_plan.pitched[0]
 		resources += pitch.pitch
-		# Mirror the increment into stats.mana so that Card.play (which
-		# decrements char_stats.mana -= cost for any player) leaves stats.mana
-		# at a non-negative value. Without this mirror, every enemy action that
-		# costs > 0 drives stats.mana negative, corrupting arcane prevention
-		# (defend_packet reads stats.mana, and Stats.take_damage's clampi math
-		# misbehaves on negative mana). cleanup_phase resets stats.mana at end
-		# of enemy phase so leftover mana doesn't accumulate across turns.
-		enemy.stats.mana += pitch.pitch
-		enemy.stats.draw_pile.add_card(pitch)
+		# pitch_card increments stats.mana AND emits `pitched`, which
+		# EnemyHandManager._on_card_pitched routes to the discard pile. The
+		# stats.mana mirror keeps the running tally non-negative so subsequent
+		# Card.play calls (which decrement stats.mana -= cost) don't corrupt
+		# arcane prevention math in defend_packet. cleanup_phase resets
+		# stats.mana at end of enemy phase.
+		pitch.pitch_card(enemy.stats)
 		hand.erase(pitch)
 		card_removed_from_hand.emit(pitch)
 		turn_plan.pitched.erase(pitch)
@@ -264,6 +262,12 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 	for c: Card in blocked_out:
 		var block_amount: int = modifier_handler.get_modified_value(c.defense, Modifier.Type.BLOCK_GAINED)
 		enemy.stats.block += block_amount
+		# Emit `blocked` directly (rather than calling card.block_card) so we
+		# don't double-fire BlockEffect — the defense sequencer plays the block
+		# SFX at badge-pop, staggered per card; routing through block_card here
+		# would fire all SFX at once before the animations begin. The signal
+		# emit still drives EnemyHandManager._on_card_blocked → exhaust pile.
+		c.blocked.emit(c)
 		if c == arsenal:
 			arsenal = null
 			print_enemy_ai("blocked arsenal %s for %d" % [c.id, block_amount])
@@ -273,9 +277,10 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 			print_enemy_ai("blocked %s for %d" % [c.id, block_amount])
 	for c: Card in pitched_out:
 		var pre_mana: int = enemy.stats.mana
-		enemy.stats.mana += c.pitch
+		# pitch_card increments stats.mana AND emits `pitched`, which
+		# EnemyHandManager._on_card_pitched routes to the discard pile.
+		c.pitch_card(enemy.stats)
 		var post_add_mana: int = enemy.stats.mana
-		enemy.stats.draw_pile.add_card(c)
 		hand.erase(c)
 		card_removed_from_hand.emit(c)
 		print_enemy_ai("pitched %s defensively pre=%d +%d post_add=%d final=%d" % [c.id, pre_mana, c.pitch, post_add_mana, enemy.stats.mana])

@@ -13,7 +13,10 @@
 ## Block stats (stats.block) and pitched mana (stats.mana) are already in
 ## place by the time this is called — defend_packet committed them up
 ## front so AttackDamageEffect / ZapEffect see the right values when they
-## run immediately after. The animation is a fire-and-forget coroutine.
+## run immediately after. Pile disposition (exhaust for blocks, discard for
+## pitches) also already happened via the card lifecycle signals emitted by
+## defend_packet (EnemyHandManager handlers route to the right pile). The
+## animation is a fire-and-forget coroutine.
 class_name EnemyDefenseSequencer
 extends Node
 
@@ -114,10 +117,9 @@ func _animate_defense_card(card: Card, amount: int, kind: String) -> void:
 	if not is_instance_valid(card_ui):
 		return
 
-	# For blocks, send the card to the discard pile (data side); pitched
-	# cards already went to draw_pile in defend_packet.
-	if kind == "block":
-		_enemy.stats.discard.add_card(card)
+	# Pile disposition is signal-driven now: defend_packet emits `blocked` /
+	# calls pitch_card before this animation runs, and EnemyHandManager's
+	# handlers route to exhaust / discard respectively. Nothing to do here.
 	var t := card_ui.create_tween()
 	t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
 	t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)

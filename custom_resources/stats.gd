@@ -155,6 +155,9 @@ func add_weapon(new_weapon: Weapon) -> void:
 ## (offhand equipment goes into hand_left/hand_right just like an offhand weapon).
 func add_equipment(new_equipment: Equipment) -> void:
 	var cloned: Equipment = new_equipment.duplicate()
+	# Resolve the -1 sentinel immediately so inventory views show "max/max", not "-1/max".
+	if cloned.current_block < 0:
+		cloned.current_block = cloned.max_block
 	inventory.add_equipment(cloned)
 	_auto_equip(cloned)
 

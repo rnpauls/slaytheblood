@@ -4,9 +4,6 @@ extends Resource
 enum Slot {HEAD, CHEST, ARMS, LEGS, OFFHAND}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
-## ONE_SHOT: equipment is permanently removed from the inventory if destroyed mid-battle.
-## REUSABLE: equipment restores to max_block at end of battle (current_block reset).
-enum Persistence {ONE_SHOT, REUSABLE}
 
 const RARITY_COLORS := {
 	Card.Rarity.COMMON: Color.GRAY,
@@ -20,10 +17,9 @@ const RARITY_COLORS := {
 @export var slot: Slot
 @export var rarity: Rarity
 @export var character_type: CharacterType
-@export var persistence: Persistence
-## If true: equipment is destroyed when used to block (regardless of remaining block).
-## If false: current_block decrements by 1 per use; equipment is destroyed when current_block reaches 0.
-@export var break_on_use: bool = false
+## If true: equipment dumps its full current_block in one defend and breaks.
+## If false: defends for current_block worth of damage, then decrements by 1; breaks at 0.
+@export var single_use: bool = false
 @export var starter_equipment: bool = false
 ## If false, this item is filtered out of post-battle drafts when already owned.
 @export var allow_duplicate_in_draft: bool = false
@@ -35,6 +31,14 @@ const RARITY_COLORS := {
 
 @export_group("Block")
 @export var max_block: int = 1
+## Persistent across battles and saves. -1 means "uninitialized" — set to max_block on first equip.
+@export var current_block: int = -1
+
+@export_group("Persistence Exceptions")
+## When true: current_block resets to max_block at end of battle. Granted by special items / events.
+@export var regenerates_each_battle: bool = false
+## When true: equipment is not destroyed at 0; remains in slot but unusable until regenerated.
+@export var unbreakable: bool = false
 
 @export_group("Triggered Ability")
 ## Optional: a Relic resource activated when this equipment is used to block.
@@ -48,7 +52,6 @@ const RARITY_COLORS := {
 @export var has_active_ability: bool = false
 
 # Runtime state — not exported.
-var current_block: int
 var used_this_attack: bool = false
 var ability_used_this_turn: bool = false
 ## Combatant who owns this equipment (always Player today). Null until
@@ -57,21 +60,19 @@ var owner: Combatant
 
 
 func initialize_equipment(_owner) -> void:
-	current_block = max_block
+	if current_block < 0:
+		current_block = max_block
 	used_this_attack = false
-	# Reset here so the flag never leaks across battles via the saved Resource
-	# (Godot serializes script `var`s, not just `@export`s).
 	ability_used_this_turn = false
 
 
 ## Called when an equipment is used to defend against an incoming attack.
-## Returns true if the equipment was destroyed by this use.
-## The caller is responsible for adding the returned block value to player.stats.block
-## (kept as a separate step so the EquipmentHandler can route through BlockEffect for sound/UI).
+## Returns the block amount applied. After the call, equipment may be destroyed
+## (caller should check is_destroyed()).
 func consume_block_for_attack() -> int:
 	var amount := current_block
 	used_this_attack = true
-	if break_on_use:
+	if single_use:
 		current_block = 0
 	else:
 		current_block = max(0, current_block - 1)
@@ -79,11 +80,11 @@ func consume_block_for_attack() -> int:
 
 
 func is_destroyed() -> bool:
-	return current_block <= 0
+	return current_block <= 0 and not unbreakable
 
 
 ## Reset for a new incoming attack: re-enable click but do NOT restore block value.
-## Block restoration happens at end-of-battle (only for REUSABLE).
+## Block restoration happens at end-of-battle (only when regenerates_each_battle).
 func reset_for_attack() -> void:
 	used_this_attack = false
 
@@ -110,9 +111,9 @@ func deactivate_equipment(_owner_node: Node) -> void:
 	pass
 
 
-## Restore equipment to full at end of battle (REUSABLE only).
+## Restore equipment to full at end of battle (only items with regenerates_each_battle).
 func restore_for_battle() -> void:
-	if persistence == Persistence.REUSABLE:
+	if regenerates_each_battle:
 		current_block = max_block
 		used_this_attack = false
 		ability_used_this_turn = false

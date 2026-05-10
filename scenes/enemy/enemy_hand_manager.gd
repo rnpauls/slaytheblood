@@ -70,6 +70,7 @@ func draw_card() -> void:
 	hand.append(card_drawn)
 	Events.enemy_card_drawn.emit(_enemy)
 	card_drawn.owner = _enemy
+	_connect_lifecycle_signals(card_drawn)
 	var card_ui := _enemy_hand.add_card(card_drawn, _enemy.stats, _enemy.modifier_handler)
 	card_ui_map[card_drawn] = card_ui
 	_log("drew %s  (hand %d, ui_map %d)" % [card_drawn.id, hand.size(), card_ui_map.size()])
@@ -92,6 +93,7 @@ func add_card_to_hand(card: Card) -> void:
 	hand.append(card)
 	Events.enemy_card_drawn.emit(_enemy)
 	card.owner = _enemy
+	_connect_lifecycle_signals(card)
 	var card_ui := _enemy_hand.add_card(card, _enemy.stats, _enemy.modifier_handler)
 	card_ui_map[card] = card_ui
 	_log("added to hand %s  (hand %d, ui_map %d)" % [card.id, hand.size(), card_ui_map.size()])
@@ -170,6 +172,38 @@ func get_or_create_card_ui(card: Card) -> EnemyCardUI:
 	card_ui.setup(card, _enemy.stats, _enemy.modifier_handler)
 	card_ui.show_back = false
 	return card_ui
+
+
+# ── Card lifecycle handlers ───────────────────────────────────────────────────
+
+## Mirror of player_handler's connect-on-draw pattern. Keeps enemy disposition
+## in lockstep with the per-card signals emitted by Card.play / block_card /
+## pitch_card / sink_card. Enemy handlers stay silent on the global Events bus
+## so player relics (resonance_ring, lucky_charm) only fire on player actions.
+func _connect_lifecycle_signals(card: Card) -> void:
+	card.card_play_finished.connect(_on_card_play_finished)
+	card.blocked.connect(_on_card_blocked)
+	card.pitched.connect(_on_card_pitched)
+	card.sunk.connect(_on_card_sunk)
+
+
+func _on_card_play_finished(card: Card) -> void:
+	if card.exhausts:
+		_enemy.stats.exhaust.add_card(card)
+		return
+	_enemy.stats.discard.add_card(card)
+
+
+func _on_card_blocked(card: Card) -> void:
+	_enemy.stats.exhaust.add_card(card)
+
+
+func _on_card_pitched(card: Card) -> void:
+	_enemy.stats.discard.add_card(card)
+
+
+func _on_card_sunk(card: Card) -> void:
+	_enemy.stats.draw_pile.add_card(card)
 
 
 # ── AI signal handler ─────────────────────────────────────────────────────────

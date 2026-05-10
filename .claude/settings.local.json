@@ -44,7 +44,10 @@
       "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit-after 60)",
       "Bash(/Applications/Godot.app/Contents/MacOS/Godot --editor --headless --path /Users/rich/Desktop/Godot/Godot/slaytheblood --quit-after 80)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(grep -nA 5 \"func draw_cards\" /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/player/player_hand_facade.gd)",
+      "Bash(grep -E \"\\\\.\\(gd|tres\\)$\")",
+      "Bash(grep -E \"\\\\.\\(gd\\)$\")"
     ]
   }
 }

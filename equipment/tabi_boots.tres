@@ -10,8 +10,6 @@ id = "tabi_boots"
 slot = 3
 rarity = 1
 character_type = 1
-persistence = 1
-break_on_use = false
 icon = ExtResource("1_icon")
 tooltip = "Tabi Boots: the first card you play each turn refunds 1 [kw=action_point]Action Point[/kw]."
 max_block = 2

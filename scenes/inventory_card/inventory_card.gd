@@ -7,6 +7,9 @@ const HANDS_LABELS := {
 	Weapon.Hands.OFFHAND: "Off-Hand",
 }
 
+const WARNING_BADGE_PATH := "res://art/equipment_badges/warning.png"
+const INFINITY_BADGE_PATH := "res://art/equipment_badges/infinity.png"
+
 @onready var weapon_ui: WeaponUI = $ArtPanel/WeaponUI
 @onready var equipment_display: Control = $ArtPanel/EquipmentDisplay
 @onready var equip_icon: TextureRect = $ArtPanel/EquipmentDisplay/EquipIcon
@@ -48,9 +51,26 @@ func set_equipment(new_equipment: Equipment) -> void:
 	weapon_ui.hide()
 	equipment_display.show()
 	equip_icon.texture = equipment.icon
-	block_label.text = str(equipment.max_block)
-	one_shot_badge.visible = equipment.persistence == Equipment.Persistence.ONE_SHOT
+	block_label.text = "%d/%d" % [equipment.current_block, equipment.max_block]
+	_update_status_badge()
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(equipment.get_tooltip()))
 	name_label.text = equipment.equipment_name
 	rarity.modulate = Equipment.RARITY_COLORS[equipment.rarity]
 	type_label.text = Equipment.Slot.keys()[equipment.slot]
+
+
+func _update_status_badge() -> void:
+	if equipment.regenerates_each_battle and equipment.unbreakable:
+		one_shot_badge.texture = _load_badge(INFINITY_BADGE_PATH)
+		one_shot_badge.visible = one_shot_badge.texture != null
+	elif equipment.single_use or equipment.current_block == 1:
+		one_shot_badge.texture = _load_badge(WARNING_BADGE_PATH)
+		one_shot_badge.visible = one_shot_badge.texture != null
+	else:
+		one_shot_badge.visible = false
+
+
+func _load_badge(path: String) -> Texture2D:
+	if ResourceLoader.exists(path):
+		return load(path)
+	return null
