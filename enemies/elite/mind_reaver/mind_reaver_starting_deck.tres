@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" path="res://generic_cards/sear_memory.tres" id="3_sm"]
+[ext_resource type="Resource" path="res://generic_cards/hexed_lash.tres" id="4_hl"]
+[ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="5_bb"]
+[ext_resource type="Resource" path="res://generic_cards/mind_wipe.tres" id="6_mw"]
+[ext_resource type="Resource" path="res://generic_cards/sundering_blow.tres" id="7_sb"]
+[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="8_blk"]
+[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="9_wb"]
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("3_sm"), ExtResource("3_sm"), ExtResource("4_hl"), ExtResource("4_hl"), ExtResource("5_bb"), ExtResource("5_bb"), ExtResource("6_mw"), ExtResource("7_sb"), ExtResource("7_sb"), ExtResource("8_blk"), ExtResource("8_blk"), ExtResource("8_blk"), ExtResource("8_blk"), ExtResource("9_wb"), ExtResource("9_wb")])

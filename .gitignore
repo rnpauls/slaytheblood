@@ -20,3 +20,7 @@ build/
 
 # OS
 Thumbs.db
+
+# Claude Code (contains API tokens)
+.mcp.json
+.claude/settings.local.json

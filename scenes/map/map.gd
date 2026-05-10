@@ -27,6 +27,7 @@ const LEGEND_ICON_SIZE := Vector2(28, 28)
 
 var map_data: Array[Array]
 var floors_climbed: int
+var act: int = 1
 var last_room: Room
 var camera_edge_y: float
 var scroll_locked := false
@@ -81,19 +82,32 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func generate_new_map() -> void:
 	floors_climbed = 0
+	last_room = null
+	map_generator.act = act
+	_clear_map_visuals()
 	map_data = map_generator.generate_map()
 	create_map()
+	camera_2d.position.y = 0
 
-func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room) -> void:
+func load_map(map: Array[Array], floors_completed: int, last_room_climbed: Room, current_act: int = 1) -> void:
+	act = current_act
 	floors_climbed = floors_completed
 	map_data = map
 	last_room = last_room_climbed
+	_clear_map_visuals()
 	create_map()
 
 	if floors_climbed > 0:
 		camera_2d.position.y = clampf(-floors_climbed * MapGenerator.Y_DIST, -camera_edge_y, 0)
 	else:
 		unlock_floor()
+
+
+func _clear_map_visuals() -> void:
+	for child in rooms.get_children():
+		child.queue_free()
+	for child in lines.get_children():
+		child.queue_free()
 
 func create_map() -> void:
 	for current_floor: Array in map_data:

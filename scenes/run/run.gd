@@ -12,6 +12,10 @@ const MAIN_MENU_PATH = "res://scenes/ui/main_menu.tscn"
 const NON_COMBAT_MUSIC := preload("res://art/music/deuslower-medieval-ambient-236809.mp3")
 const EVENT_ROOM_POOL := preload("res://scenes/event_rooms/event_room_pool.tres")
 
+# Highest act in the game. Defeating the boss of this act ends the run; bosses
+# of earlier acts trigger an act transition instead.
+const FINAL_ACT := 2
+
 @export var run_startup: RunStartup
 
 @onready var map: Map = $Map
@@ -37,6 +41,9 @@ var stats: RunStats
 var character: CharacterStats
 var save_data: SaveGame
 var peeked_view: Node = null
+# Set true after a non-final boss is defeated. The next battle_reward_exited
+# triggers an act transition instead of returning to the same map.
+var _pending_act_advance := false
 
 func _ready() -> void:
 	if not run_startup:
@@ -81,6 +88,7 @@ func _save_run(was_on_map: bool) -> void:
 	save_data.last_room = map.last_room
 	save_data.map_data = map.map_data.duplicate()
 	save_data.floors_climbed = map.floors_climbed
+	save_data.act = map.act
 	save_data.was_on_map = was_on_map
 	save_data.current_inventory = character.inventory
 	save_data.current_hand_left = character.hand_left
@@ -111,7 +119,7 @@ func _load_run() -> void:
 	_setup_top_bar()
 	_setup_event_connections()
 	
-	map.load_map(save_data.map_data, save_data.floors_climbed, save_data.last_room)
+	map.load_map(save_data.map_data, save_data.floors_climbed, save_data.last_room, save_data.act)
 	if save_data.last_room and not save_data.was_on_map:
 		_on_map_exited(save_data.last_room)
 	elif save_data.last_room:
@@ -135,6 +143,13 @@ func _change_view(scene: PackedScene) -> Node:
 	return new_view
 
 func _show_map() -> void:
+	# After a non-final boss, the rewards screen exit advances the act instead
+	# of returning to the (just-cleared) map.
+	if _pending_act_advance:
+		_pending_act_advance = false
+		_advance_to_next_act()
+		return
+
 	Events.tooltip_hide_requested.emit()
 	if current_view.get_child_count() > 0:
 		current_view.get_child(0).queue_free()
@@ -142,6 +157,21 @@ func _show_map() -> void:
 	map.show_map()
 	map.hide_current_marker()
 	map.unlock_next_rooms()
+	inventory_view.combat_locked = false
+
+	_save_run(true)
+
+
+func _advance_to_next_act() -> void:
+	Events.tooltip_hide_requested.emit()
+	if current_view.get_child_count() > 0:
+		current_view.get_child(0).queue_free()
+
+	map.act += 1
+	map.generate_new_map()
+	map.show_map()
+	map.hide_current_marker()
+	map.unlock_floor(0)
 	inventory_view.combat_locked = false
 
 	_save_run(true)
@@ -229,6 +259,10 @@ func _setup_top_bar() -> void:
 	inventory_view.visibility_changed.connect(_update_map_scroll_lock)
 	deck_view.visibility_changed.connect(_update_map_scroll_lock)
 
+	TooltipHelper.attach(map_button, "Map", "View the run map. Choose your next room.")
+	TooltipHelper.attach(inventory_button, "Inventory", "View and re-equip your weapons, armor, and relics.")
+	TooltipHelper.attach(deck_button, "Deck", "View every card you currently own.")
+
 func _update_map_scroll_lock() -> void:
 	map.scroll_locked = inventory_view.visible or deck_view.visible
 
@@ -304,13 +338,18 @@ func _on_event_room_entered(room: Room) -> void:
 
 func _on_battle_won() -> void:
 	MusicPlayer.play(NON_COMBAT_MUSIC, true)
-	if map.floors_climbed == MapGenerator.FLOORS:
+	var is_boss := map.last_room and map.last_room.type == Room.Type.BOSS
+	if is_boss and map.act >= FINAL_ACT:
 		var win_screen := _change_view(WIN_SCREEN_SCENE) as WinScreen
 		win_screen.character = character
 		SaveGame.delete_data()
 	elif map.last_room and map.last_room.type == Room.Type.ELITE_MONSTER:
 		_show_elite_battle_rewards()
 	else:
+		# Non-final boss: same rewards as a regular fight, then on rewards
+		# exit we advance the act (see _show_map).
+		if is_boss:
+			_pending_act_advance = true
 		_show_regular_battle_rewards()
 
 func _on_map_exited(room: Room) -> void:

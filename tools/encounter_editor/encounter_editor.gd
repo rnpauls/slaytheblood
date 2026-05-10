@@ -18,6 +18,11 @@ const ENEMY_SCENE_PATH := "res://scenes/enemy/enemy.tscn"
 const TOKEN_SIZE := Vector2(96, 96)
 const CANVAS_W := 1280
 const CANVAS_H := 720
+## The canvas displays the 1280×720 game viewport scaled to fit between the
+## side panels. Token center coords stay in game-space; only the Control's
+## visual size and position get scaled.
+const DISPLAY_SCALE := 0.6
+const TOKEN_DISPLAY_SIZE := TOKEN_SIZE * DISPLAY_SCALE
 const SELECTED_BORDER := Color(1, 0.85, 0.2, 1)
 
 @onready var battle_list: ItemList = $LeftPanel/VBox/BattleList
@@ -222,9 +227,9 @@ func _add_token(stats_path: String, pos: Vector2) -> Control:
 		_enemy_stats_cache[stats_path] = stats
 
 	var token := PanelContainer.new()
-	token.custom_minimum_size = TOKEN_SIZE
-	token.size = TOKEN_SIZE
-	token.position = pos - TOKEN_SIZE * 0.5
+	token.custom_minimum_size = TOKEN_DISPLAY_SIZE
+	token.size = TOKEN_DISPLAY_SIZE
+	token.position = pos * DISPLAY_SCALE - TOKEN_DISPLAY_SIZE * 0.5
 	token.set_meta("stats_path", stats_path)
 	token.set_meta("center", pos)
 	token.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -247,7 +252,7 @@ func _add_token(stats_path: String, pos: Vector2) -> Control:
 		tex.texture = stats.art
 		tex.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex.custom_minimum_size = Vector2(64, 64)
+		tex.custom_minimum_size = Vector2(36, 36)
 		tex.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		vbox.add_child(tex)
 
@@ -256,7 +261,7 @@ func _add_token(stats_path: String, pos: Vector2) -> Control:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	label.add_theme_font_size_override("font_size", 10)
+	label.add_theme_font_size_override("font_size", 8)
 	vbox.add_child(label)
 
 	token.gui_input.connect(_on_token_gui_input.bind(token))
@@ -302,11 +307,13 @@ func _clear_tokens() -> void:
 	canvas_hint.visible = true
 
 
+## `center` is in game-space (0..1280, 0..720). The Control's display position
+## is the scaled-down version; the meta + spinboxes stay in game-space.
 func _move_token(token: Control, center: Vector2) -> void:
 	center.x = clampf(center.x, 0, CANVAS_W)
 	center.y = clampf(center.y, 0, CANVAS_H)
 	token.set_meta("center", center)
-	token.position = center - TOKEN_SIZE * 0.5
+	token.position = center * DISPLAY_SCALE - TOKEN_DISPLAY_SIZE * 0.5
 	if token == _selected_token:
 		pos_x_spin.set_value_no_signal(center.x)
 		pos_y_spin.set_value_no_signal(center.y)
@@ -320,7 +327,9 @@ func _on_token_gui_input(event: InputEvent, token: Control) -> void:
 		if mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed:
 			_select_token(token)
 			_drag_token = token
-			_drag_offset = mb.position - TOKEN_SIZE * 0.5
+			# _drag_offset is in display pixels (mb.position is local to the
+			# scaled-down token). Converted to game-space in _input.
+			_drag_offset = mb.position - TOKEN_DISPLAY_SIZE * 0.5
 			accept_event()
 
 
@@ -338,7 +347,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion:
 		var canvas_pos := canvas.get_local_mouse_position()
-		_move_token(_drag_token, canvas_pos - _drag_offset)
+		var display_center := canvas_pos - _drag_offset
+		_move_token(_drag_token, display_center / DISPLAY_SCALE)
 	elif event is InputEventMouseButton:
 		var mb: InputEventMouseButton = event
 		if mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:

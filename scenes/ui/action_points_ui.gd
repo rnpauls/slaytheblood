@@ -6,6 +6,10 @@ extends Panel
 @onready var action_points_label: Label = $ActionPointsLabel
 
 
+func _ready() -> void:
+	TooltipHelper.attach(self, "Action Points", "Spent to use weapons and equipment. Refills at the start of each turn.")
+
+
 #func _ready() -> void:
 	#await get_tree().create_timer(1).timeout
 	#char_stats.mana = 0

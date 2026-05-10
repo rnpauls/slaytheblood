@@ -18,6 +18,10 @@ const ELITE_MIN_ROW := 4
 @export var battle_stats_pool: BattleStatsPool
 @export var event_room_pool: EventRoomPool
 
+# Set by Map.generate_new_map() before generate_map() is called. Drives which
+# tier of BattleStats the map pulls from (see _tier_for).
+var act: int = 1
+
 var random_room_type_weights = {
 	Room.Type.MONSTER: 0.0,
 	Room.Type.ELITE_MONSTER: 0.0,
@@ -135,7 +139,7 @@ func _setup_boss_room() -> void:
 			current_room.next_rooms.append(boss_room)
 	
 	boss_room.type = Room.Type.BOSS
-	boss_room.battle_stats = battle_stats_pool.get_random_battle_for_tier(2)
+	boss_room.battle_stats = battle_stats_pool.get_random_battle_for_tier(_tier_for("boss"))
 			
 func _setup_random_room_weights()-> void:
 	# Cumulative thresholds for weighted random pick. Order: MONSTER, ELITE,
@@ -153,7 +157,7 @@ func _setup_room_types() -> void:
 	for room: Room in map_data[0]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.MONSTER
-			room.battle_stats = battle_stats_pool.get_random_battle_for_tier(0)
+			room.battle_stats = battle_stats_pool.get_random_battle_for_tier(_tier_for("early"))
 	
 	#9th floor is always treasure
 	for room: Room in map_data[FLOORS/2]:
@@ -203,12 +207,8 @@ func _set_room_randomly(room_to_set: Room) -> void:
 	room_to_set.type = type_candidate
 
 	if type_candidate == Room.Type.MONSTER:
-		var tier_for_monster_rooms := 0
-
-		if room_to_set.row > 2:
-			tier_for_monster_rooms = 1
-
-		room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(tier_for_monster_rooms)
+		var role := "early" if room_to_set.row <= 2 else "late"
+		room_to_set.battle_stats = battle_stats_pool.get_random_battle_for_tier(_tier_for(role))
 
 	if type_candidate == Room.Type.ELITE_MONSTER:
 		room_to_set.battle_stats = battle_stats_pool.get_random_elite_battle()
@@ -239,6 +239,20 @@ func _room_has_parent_of_type(room: Room, type: Room.Type) -> bool:
 			return true
 	
 	return false
+
+
+# Tier number for the given role at the current act.
+# Act 1 keeps the original two-tier ramp for regular monsters (0 then 1).
+# Acts 2+ use one regular tier per act (placeholder until more content lands)
+# and skip a tier between regulars and boss to leave room for "late"-only
+# content authored later.
+func _tier_for(role: String) -> int:
+	var base := (act - 1) * 3
+	match role:
+		"early": return base
+		"late":  return base + (1 if act == 1 else 0)
+		"boss":  return base + 2
+	return 0
 
 
 func _get_random_room_type_by_weight() -> Room.Type:

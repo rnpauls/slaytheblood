@@ -8,8 +8,7 @@
 [ext_resource type="StyleBox" path="res://art/themes/styleboxes/blood_progress_fill.tres" id="6_pb_f"]
 [ext_resource type="StyleBox" path="res://art/themes/styleboxes/blood_progress_bg.tres" id="7_pb_b"]
 [ext_resource type="FontFile" uid="uid://c1a6to6bnimqu" path="res://art/themes/lt_cushion/LTCushion-VF.ttf" id="8_font"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_focus"]
+[ext_resource type="StyleBox" path="res://art/themes/styleboxes/banner_button_focus.tres" id="9_btn_f"]
 
 [resource]
 default_font = ExtResource("8_font")
@@ -20,7 +19,7 @@ Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 3
 Button/font_sizes/font_size = 28
 Button/styles/disabled = ExtResource("5_btn_d")
-Button/styles/focus = SubResource("StyleBoxEmpty_focus")
+Button/styles/focus = ExtResource("9_btn_f")
 Button/styles/hover = ExtResource("3_btn_h")
 Button/styles/normal = ExtResource("2_btn_n")
 Button/styles/pressed = ExtResource("4_btn_p")

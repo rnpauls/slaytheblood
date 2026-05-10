@@ -77,10 +77,7 @@ func _on_death() -> void:
 
 
 func _on_mouse_hover_entered() -> void:
-	var sh := get_node_or_null("StatusHandler") as StatusHandler
-	if sh == null:
-		return
-	var entries := sh.get_tooltip_entries()
+	var entries := get_hover_tooltip_entries()
 	if entries.is_empty():
 		return
 	# Anchor to the sprite's canvas-space rect so the tooltip sits beside the

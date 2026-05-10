@@ -388,10 +388,7 @@ func _on_area_exited(_area):
 
 func _on_hover_area_mouse_entered() -> void:
 	name_label.show()
-	var sh := get_node_or_null("StatusHandler") as StatusHandler
-	if sh == null:
-		return
-	var entries := sh.get_tooltip_entries()
+	var entries := get_hover_tooltip_entries()
 	if entries.is_empty():
 		return
 	# Anchor to the sprite's canvas-space rect so the tooltip sits beside the

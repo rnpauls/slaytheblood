@@ -47,7 +47,15 @@
       "Bash(git commit -m ' *)",
       "Bash(grep -nA 5 \"func draw_cards\" /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/player/player_hand_facade.gd)",
       "Bash(grep -E \"\\\\.\\(gd|tres\\)$\")",
-      "Bash(grep -E \"\\\\.\\(gd\\)$\")"
+      "Bash(grep -E \"\\\\.\\(gd\\)$\")",
+      "Bash(file art/sprites/*.png)",
+      "mcp__d4be54cc-0a52-4f7f-a106-f30bcd0c9622__create_object",
+      "mcp__d4be54cc-0a52-4f7f-a106-f30bcd0c9622__list_characters",
+      "Bash(claude mcp *)",
+      "Read(//Users/rich/.claude/**)",
+      "Read(//Users/rich/**)",
+      "mcp__pixellab__create_object",
+      "mcp__pixellab__get_object"
     ]
   }
 }

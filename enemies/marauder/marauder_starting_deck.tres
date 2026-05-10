@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" path="res://generic_cards/lacerate.tres" id="3_lac"]
+[ext_resource type="Resource" path="res://generic_cards/crushing_strike.tres" id="4_crush"]
+[ext_resource type="Resource" path="res://generic_cards/flexing_pummel.tres" id="5_flex"]
+[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="6_blk"]
+[ext_resource type="Resource" path="res://generic_cards/raging_onslaught_red.tres" id="7_rage"]
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("3_lac"), ExtResource("3_lac"), ExtResource("4_crush"), ExtResource("4_crush"), ExtResource("5_flex"), ExtResource("6_blk"), ExtResource("6_blk"), ExtResource("7_rage"), ExtResource("7_rage")])

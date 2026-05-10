@@ -36,6 +36,9 @@ func _ready() -> void:
 	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
 	Events.top_card_reveal_requested.connect(_on_top_card_reveal_requested)
 	Events.card_add_animation_requested.connect(_on_card_add_animation_requested)
+	TooltipHelper.attach(draw_pile, "Draw Pile", "Cards left to draw this combat. Click to view. Reshuffled from your discard when empty.")
+	TooltipHelper.attach(discard_pile, "Discard Pile", "Cards you've used this combat. Click to view. Returns to your draw pile when it empties.")
+	TooltipHelper.attach(exhaust_button, "Exhaust Pile", "Cards removed for the rest of this combat. Click to view.")
 
 func initialize_card_pile_ui() ->void:
 	draw_pile.card_pile = char_stats.draw_pile

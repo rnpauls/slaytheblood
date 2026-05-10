@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bt1g356h2qppc"]
 
 [ext_resource type="Script" uid="uid://2k7m42jipsq4" path="res://scenes/ui/enemy_resource_ui.gd" id="1_d8wvt"]
-[ext_resource type="Texture2D" uid="uid://c50m0leqqs44k" path="res://art/draw.png" id="2_levgj"]
-[ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="3_gold"]
-[ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="4_disc"]
+[ext_resource type="Texture2D" uid="uid://djr17nrac3pcu" path="res://art/icons8-deck-64.png" id="2_te5m0"]
+[ext_resource type="Texture2D" uid="uid://c2xhttrclo1r7" path="res://art/tile_0116.png" id="4_swq1q"]
+[ext_resource type="Texture2D" uid="uid://pvpjrn1flbv2" path="res://art/icons8-recycle-bin-96.png" id="5_l85vu"]
 [ext_resource type="LabelSettings" path="res://art/themes/typography/type_small.tres" id="5_typesml"]
 
 [node name="EnemyResourceUI" type="HBoxContainer" unique_id=1222570682]
@@ -24,7 +24,7 @@ script = ExtResource("1_d8wvt")
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("2_levgj")
+texture = ExtResource("2_te5m0")
 expand_mode = 1
 stretch_mode = 5
 
@@ -40,7 +40,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
-texture = ExtResource("3_gold")
+texture = ExtResource("4_swq1q")
 expand_mode = 1
 stretch_mode = 5
 
@@ -56,7 +56,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 4
-texture_normal = ExtResource("4_disc")
+texture_normal = ExtResource("5_l85vu")
 ignore_texture_size = true
 stretch_mode = 5
 

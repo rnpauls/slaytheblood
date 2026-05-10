@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://generic_cards/vampiric_bite.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/Icon28_33.png" id="2_icon"]
+[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("1_script")
+id = "vampiric_bite"
+type = 0
+rarity = 1
+target = 1
+cost = 2
+pitch = 1
+attack = 5
+defense = 3
+ai_value = 4
+icon = ExtResource("2_icon")
+tooltip_text = "[center]On hit: Heal user for 3.[/center]"
+sound = ExtResource("3_sound")

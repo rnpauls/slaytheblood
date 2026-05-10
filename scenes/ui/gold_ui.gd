@@ -7,6 +7,7 @@ extends HBoxContainer
 
 func _ready() -> void:
 	label.text = "0"
+	TooltipHelper.attach(self, "Gold", "Currency. Spend at shops and events.")
 
 func set_run_stats(new_value: RunStats) -> void:
 	run_stats = new_value

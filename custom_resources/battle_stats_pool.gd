@@ -6,7 +6,9 @@ extends Resource
 ## (Room.Type.ELITE_MONSTER) draw from this list uniformly.
 @export var elite_pool: Array[BattleStats]
 
-var total_weights_by_tier := [0.0, 0.0, 0.0]
+# Tier int -> total accumulated weight. Sized dynamically from `pool` in
+# setup() so any tier values present in the pool are usable.
+var total_weights_by_tier: Dictionary = {}
 
 
 func _get_all_battles_for_tier(tier: int) -> Array[BattleStats]:
@@ -18,14 +20,18 @@ func _get_all_battles_for_tier(tier: int) -> Array[BattleStats]:
 
 func _setup_weight_for_tier(tier: int) -> void:
 	var battles := _get_all_battles_for_tier(tier)
-	total_weights_by_tier[tier] = 0.0
+	var total := 0.0
 
 	for battle: BattleStats in battles:
-		total_weights_by_tier[tier] += battle.weight
-		battle.accumulated_weight = total_weights_by_tier[tier]
+		total += battle.weight
+		battle.accumulated_weight = total
+
+	total_weights_by_tier[tier] = total
 
 
 func get_random_battle_for_tier(tier: int) -> BattleStats:
+	if not total_weights_by_tier.has(tier):
+		return null
 	var roll := randf_range(0.0, total_weights_by_tier[tier])
 	var battles := _get_all_battles_for_tier(tier)
 
@@ -44,5 +50,9 @@ func get_random_elite_battle() -> BattleStats:
 
 
 func setup() -> void:
-	for i in 3:
-		_setup_weight_for_tier(i)
+	total_weights_by_tier.clear()
+	var tiers := {}
+	for battle: BattleStats in pool:
+		tiers[battle.battle_tier] = true
+	for tier: int in tiers:
+		_setup_weight_for_tier(tier)

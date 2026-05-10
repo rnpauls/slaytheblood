@@ -76,12 +76,13 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -120.0
-offset_top = 110.0
+offset_top = 7.0
 offset_right = 120.0
-offset_bottom = 138.0
+offset_bottom = 35.0
 grow_horizontal = 2
 theme = ExtResource("11_name")
 theme_override_font_sizes/font_size = 18
+text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
 

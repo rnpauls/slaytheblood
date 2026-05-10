@@ -5,6 +5,11 @@ extends Panel
 
 @onready var mana_label: Label = $ManaLabel
 
+
+func _ready() -> void:
+	TooltipHelper.attach(self, "Mana", "Spent to play cards. Refills at the start of each turn.")
+
+
 #func _ready() -> void:
 	#await get_tree().create_timer(1).timeout
 	#char_stats.mana = 0

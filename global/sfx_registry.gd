@@ -30,6 +30,14 @@ func play(sfx_name: StringName, pitch: float = 1.0) -> void:
 # to opt out — useful for gameplay-context buttons like card click areas.
 func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
+	# The main scene's nodes are already in the tree by the time this autoload's
+	# _ready runs, so node_added never fires for them. Sweep once to catch them.
+	_wire_subtree(get_tree().root)
+
+func _wire_subtree(node: Node) -> void:
+	_on_node_added(node)
+	for child in node.get_children():
+		_wire_subtree(child)
 
 func _on_node_added(node: Node) -> void:
 	if node is Button and not node.is_in_group(&"no_sfx"):

@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://buoc2foifon6a" path="res://art/custom_art/card_visuals/from_claude/cost_coin.png" id="12_0c3ob"]
 [ext_resource type="Texture2D" uid="uid://c2axityhh8m5i" path="res://art/custom_art/card_visuals/from_claude/replay_badge.png" id="16_jxqcx"]
 [ext_resource type="Texture2D" uid="uid://cc656n5hck2mb" path="res://art/custom_art/card_visuals/from_claude/icon_replay.svg" id="17_ee1gm"]
+[ext_resource type="Theme" uid="uid://bepkl6nnrfx4u" path="res://art/themes/card_richtext_theme_16.tres" id="18_87ky4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe1ap"]
 bg_color = Color(0.23810464, 0.23816228, 0.30056205, 1)
@@ -321,7 +322,7 @@ offset_top = 181.0
 offset_right = 189.0
 offset_bottom = 257.0
 mouse_filter = 2
-theme = ExtResource("8_bp74k")
+theme = ExtResource("18_87ky4")
 bbcode_enabled = true
 text = "If you can read this there is a bug."
 horizontal_alignment = 1

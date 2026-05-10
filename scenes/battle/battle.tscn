@@ -69,7 +69,7 @@ position = Vector2(669, 271)
 stats = ExtResource("8_u75mi")
 
 [node name="Player" parent="." unique_id=1140780656 instance=ExtResource("3_g13cx")]
-position = Vector2(208, 357)
+position = Vector2(312, 357)
 stats = ExtResource("4_psa3f")
 
 [node name="CardTargetSelector" parent="." unique_id=1483368759 instance=ExtResource("3_j5x61")]
@@ -166,59 +166,59 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LeftWeaponHandler" parent="BattleUI" unique_id=679500354 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 56.0
+offset_left = 160.0
 offset_top = 315.0
-offset_right = 120.0
+offset_right = 224.0
 offset_bottom = 379.0
 
 [node name="RightWeaponHandler" parent="BattleUI" unique_id=210931309 instance=ExtResource("19_156m4")]
 unique_name_in_owner = true
-offset_left = 295.0
+offset_left = 399.0
 offset_top = 314.0
-offset_right = 359.0
+offset_right = 463.0
 offset_bottom = 378.0
 
 [node name="LeftOffhandEquipmentHandler" parent="BattleUI" unique_id=746134647 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-offset_left = 56.0
+offset_left = 160.0
 offset_top = 315.0
-offset_right = 120.0
+offset_right = 224.0
 offset_bottom = 379.0
 
 [node name="RightOffhandEquipmentHandler" parent="BattleUI" unique_id=1685207277 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-offset_left = 295.0
+offset_left = 399.0
 offset_top = 314.0
-offset_right = 359.0
+offset_right = 463.0
 offset_bottom = 378.0
 
 [node name="HeadEquipmentHandler" parent="BattleUI" unique_id=958391557 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
 z_index = 1
-offset_left = 174.0
+offset_left = 278.0
 offset_top = 107.0
-offset_right = 238.0
+offset_right = 342.0
 offset_bottom = 171.0
 
 [node name="ChestEquipmentHandler" parent="BattleUI" unique_id=491197610 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-offset_left = 174.0
+offset_left = 278.0
 offset_top = 177.0
-offset_right = 238.0
+offset_right = 342.0
 offset_bottom = 241.0
 
 [node name="ArmsEquipmentHandler" parent="BattleUI" unique_id=815727987 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-offset_left = 104.0
+offset_left = 208.0
 offset_top = 177.0
-offset_right = 168.0
+offset_right = 272.0
 offset_bottom = 241.0
 
 [node name="LegsEquipmentHandler" parent="BattleUI" unique_id=132559581 instance=ExtResource("20_eqphd")]
 unique_name_in_owner = true
-offset_left = 244.0
+offset_left = 348.0
 offset_top = 177.0
-offset_right = 308.0
+offset_right = 412.0
 offset_bottom = 241.0
 
 [node name="ChoiceScreen" type="ColorRect" parent="BattleUI" unique_id=293939386]

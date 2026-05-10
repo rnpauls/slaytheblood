@@ -1,0 +1,13 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://b6dllxybarou"]
+
+[ext_resource type="FontFile" uid="uid://dohgfvvrbs3gn" path="res://art/themes/Abaddon_Fonts/Abaddon-Bold.ttf" id="1_ndr68"]
+
+[resource]
+font = ExtResource("1_ndr68")
+font_size = 96
+font_color = Color(0.86, 0.18, 0.18, 1)
+outline_size = 14
+outline_color = Color(0.04, 0.02, 0.02, 1)
+shadow_size = 10
+shadow_color = Color(0.55, 0.12, 0.05, 0.55)
+shadow_offset = Vector2(0, 6)

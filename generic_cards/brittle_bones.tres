@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://generic_cards/brittle_bones.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/Icon28_20.png" id="2_icon"]
+[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("1_script")
+id = "brittle_bones"
+type = 0
+rarity = 1
+target = 1
+cost = 2
+pitch = 1
+attack = 3
+defense = 4
+ai_value = 5
+icon = ExtResource("2_icon")
+tooltip_text = "[center]On hit: Apply [kw=frail]Frail[/kw] (2 turns).[/center]"
+sound = ExtResource("3_sound")

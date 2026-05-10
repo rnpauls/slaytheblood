@@ -8,12 +8,17 @@ extends HBoxContainer
 @onready var resource_count: Label = $ResourceCount
 @onready var discard_button: TextureButton = $DiscardButton
 @onready var discard_count: Label = $DiscardCount
+@onready var deck_icon: TextureRect = $DeckIcon
+@onready var resource_icon: TextureRect = $ResourceIcon
 
 var _ai: EnemyAI
 
 
 func _ready() -> void:
 	discard_button.pressed.connect(_on_discard_pressed)
+	TooltipHelper.attach(deck_icon, "Enemy Draw Pile", "Cards left in the enemy's draw pile.")
+	TooltipHelper.attach(resource_icon, "Enemy Resource", "The enemy's current resource pool.")
+	TooltipHelper.attach(discard_button, "Enemy Discard Pile", "Cards the enemy has used this combat. Click to view.")
 
 
 func update_display(ai: EnemyAI) -> void:

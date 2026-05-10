@@ -65,3 +65,19 @@ func take_damage(damage: int, which_modifier: Modifier.Type, damage_kind: Card.D
 ## Override in subclasses to handle death (emit event, queue_free, etc.)
 func _on_death() -> void:
 	pass
+
+## Tooltip stack shown when hovering this combatant's sprite. Combines the
+## status grid's entries with a summary card listing active on-hits.
+func get_hover_tooltip_entries() -> Array[TooltipData]:
+	var entries: Array[TooltipData] = []
+	if status_handler:
+		entries.append_array(status_handler.get_tooltip_entries())
+
+	var on_hit_lines: Array[String] = []
+	for oh: OnHit in active_on_hits:
+		if oh != null and oh.id != "":
+			on_hit_lines.append("  • %s" % oh.id.capitalize().replace("_", " "))
+	if not on_hit_lines.is_empty():
+		entries.append(TooltipData.make(null, "On hit", "\n".join(on_hit_lines)))
+
+	return entries
