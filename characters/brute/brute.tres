@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://dxkms3e6ja0wr"]
 
+[ext_resource type="Texture2D" uid="uid://cx87eu7tnl0my" path="res://art/sprites/pixellab/brute-0001.png" id="1_hmg1o"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="1_i5v26"]
-[ext_resource type="Texture2D" uid="uid://c3b3xjx3gtm1f" path="res://art/sprites/brute.png" id="1_pbyxb"]
 [ext_resource type="Resource" uid="uid://ceo5ksfobyos2" path="res://characters/brute/brute_draftable_cards.tres" id="2_s65w1"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_pbyxb"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="4_3gwwx"]
@@ -18,13 +18,13 @@
 [resource]
 script = ExtResource("1_i5v26")
 description = "No thinking. Only smash"
-portrait = ExtResource("1_pbyxb")
+portrait = ExtResource("1_hmg1o")
 draftable_cards = ExtResource("2_s65w1")
 draftable_equipment = Array[ExtResource("3_pbyxb")]([ExtResource("8_helm"), ExtResource("9_greav"), ExtResource("10_spik")])
 draftable_weapons = Array[ExtResource("4_3gwwx")]([ExtResource("5_aq6wg"), ExtResource("6_hmg1o"), ExtResource("7_pb6lu")])
 starting_relic = ExtResource("5_md8iq")
 character_name = "Brute"
-art = ExtResource("1_pbyxb")
+art = ExtResource("1_hmg1o")
 display_height = 200.0
 max_health = 50
 starting_deck = ExtResource("4_6x0nb")

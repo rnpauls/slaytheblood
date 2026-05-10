@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="EnemyStats" format=3]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bol0asooai0ap"]
 
-[ext_resource type="Script" path="res://custom_resources/enemy_stats.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/sprites/nerd.png" id="2_art"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_it2sc"]
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dtsfint1urekk" path="res://art/sprites/pixellab/mind_reaver.png" id="2_art"]
 [ext_resource type="Resource" path="res://enemies/elite/mind_reaver/mind_reaver_starting_deck.tres" id="3_deck"]
-[ext_resource type="Resource" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
 
 [resource]
 script = ExtResource("1_script")

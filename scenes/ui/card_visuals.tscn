@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c8avjgmutbvpw" path="res://art/custom_art/card_visuals/pitch_bar.png" id="4_k4udy"]
 [ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="4_m3e03"]
 [ext_resource type="Texture2D" uid="uid://diodbu8p6vfm6" path="res://art/custom_art/card_visuals/three_pip_4_pitch_bar.png" id="5_6o0a7"]
-[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="5_21bya"]
+[ext_resource type="Texture2D" uid="uid://bcwu3liuhginf" path="res://art/card_art/pixellab/bare_fangs.png" id="5_87ky4"]
 [ext_resource type="Texture2D" uid="uid://h8lr3eetsht5" path="res://art/custom_art/card_visuals/card_border.png" id="6_6o0a7"]
 [ext_resource type="Texture2D" uid="uid://cy2hhpc4ntplw" path="res://art/custom_art/card_visuals/card_art_frame.png" id="6_8hscx"]
 [ext_resource type="Texture2D" uid="uid://b0cx7vg3324n2" path="res://art/item11.png" id="6_njcf5"]
@@ -90,14 +90,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -43.0
+offset_left = -60.0
+offset_top = -41.0
 offset_right = 60.0
-offset_bottom = 81.0
+offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_21bya")
+texture = ExtResource("5_87ky4")
 expand_mode = 1
 stretch_mode = 5
 

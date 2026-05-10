@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://b7archvst001"]
 
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_arch"]
-[ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="2_arch"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_h2840"]
+[ext_resource type="Texture2D" uid="uid://d1e1xrwss7adl" path="res://art/sprites/pixellab/archivist.png" id="2_arch"]
 [ext_resource type="Resource" uid="uid://b7archdck002" path="res://enemies/archivist/archivist_starting_deck.tres" id="3_arch"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_arch"]
 [ext_resource type="Resource" uid="uid://b7catalg002" path="res://weapons/elite/catalog_tome.tres" id="5_arch"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_acw5l"]
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_t3btv"]
-[ext_resource type="Texture2D" uid="uid://bue8imscpldys" path="res://art/tile_0097.png" id="2_17j56"]
+[ext_resource type="Texture2D" uid="uid://b4sc3cygh4qhm" path="res://art/sprites/pixellab/karnus.png" id="2_17j56"]
 [ext_resource type="Resource" uid="uid://d1n4q76pajrtp" path="res://enemies/karnus/karnus_enemy_starting_deck.tres" id="4_17j56"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_8vbrw"]
 

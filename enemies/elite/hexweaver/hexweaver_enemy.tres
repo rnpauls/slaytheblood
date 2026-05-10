@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyStats" load_steps=6 format=3 uid="uid://b7eIhexwvr018"]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://dag0f14g84kc2"]
 
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_hexw"]
-[ext_resource type="Texture2D" uid="uid://dojlh80rte165" path="res://art/tile_0107.png" id="2_hexw"]
-[ext_resource type="Resource" uid="uid://b7eFhexdck015" path="res://enemies/elite/hexweaver/hexweaver_starting_deck.tres" id="3_hexw"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_rd1ic"]
+[ext_resource type="Texture2D" uid="uid://quxipllb7g8p" path="res://art/sprites/pixellab/hexweaver.png" id="2_hexw"]
+[ext_resource type="Resource" path="res://enemies/elite/hexweaver/hexweaver_starting_deck.tres" id="3_hexw"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_hexw"]
 [ext_resource type="Resource" uid="uid://b7crsdstf003" path="res://weapons/elite/cursed_staff.tres" id="5_hexw"]
 

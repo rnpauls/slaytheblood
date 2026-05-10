@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bbegfx4ducysc"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_2kg07"]
-[ext_resource type="Texture2D" uid="uid://bd24nyu1ri2t" path="res://art/Iicon_32_11.png" id="2_dlnh4"]
+[ext_resource type="Texture2D" uid="uid://bcwu3liuhginf" path="res://art/card_art/pixellab/bare_fangs.png" id="2_dlnh4"]
 [ext_resource type="Script" uid="uid://b2hwcwautfx8p" path="res://characters/brute/cards/bare_fangs.gd" id="2_mynfl"]
 [ext_resource type="AudioStream" uid="uid://da5ps6q7paxq" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/03_Claw_03.wav" id="4_dlnh4"]
 

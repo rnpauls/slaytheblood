@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bhual6q3jy6t4"]
 
-[ext_resource type="Texture2D" uid="uid://cbvhepsjtfeo" path="res://art/sprites/nerd.png" id="1_np4oh"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="2_chst0"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_np4oh"]
 [ext_resource type="Resource" uid="uid://by78q8te8tqex" path="res://characters/runeblade/runeblade_starting_deck.tres" id="3_sdck0"]
@@ -9,19 +8,20 @@
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="6_wpn00"]
 [ext_resource type="Resource" uid="uid://covn825k1xfh0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
 [ext_resource type="Resource" uid="uid://bg118yb2wjnyh" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]
+[ext_resource type="Texture2D" uid="uid://5y8s48ojety4" path="res://art/sprites/pixellab/runeblade_001.png" id="8_mmgth"]
 [ext_resource type="Resource" uid="uid://dmwlkidfeph" path="res://weapons/runeblood_carver.tres" id="9_rbc00"]
 [ext_resource type="Resource" uid="uid://stbrelic004b" path="res://relics/spell_binder.tres" id="10_rlc0"]
 
 [resource]
 script = ExtResource("2_chst0")
 description = "Arcane warrior mixing steel and magicks"
-portrait = ExtResource("1_np4oh")
+portrait = ExtResource("8_mmgth")
 draftable_cards = ExtResource("5_drft0")
 draftable_equipment = Array[ExtResource("3_np4oh")]([null, null, null, null])
 draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00")])
 starting_relic = ExtResource("10_rlc0")
 character_name = "Runeblade"
-art = ExtResource("1_np4oh")
+art = ExtResource("8_mmgth")
 max_health = 40
 starting_deck = ExtResource("3_sdck0")
 starting_inventory = ExtResource("4_sinv0")

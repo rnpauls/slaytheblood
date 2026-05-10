@@ -55,7 +55,15 @@
       "Read(//Users/rich/.claude/**)",
       "Read(//Users/rich/**)",
       "mcp__pixellab__create_object",
-      "mcp__pixellab__get_object"
+      "mcp__pixellab__get_object",
+      "Bash(curl -sS -o /Users/rich/Desktop/Godot/Godot/slaytheblood/art/sprites/pixellab/karnus.png \"https://backblaze.pixellab.ai/file/pixellab-characters/objects/be579bde-364d-4d27-81d0-4b62d97e6d65/bbe9d490-6495-4a74-bba6-cbae6bed5db0/rotations/frame_0.png\")",
+      "mcp__pixellab__select_object_frames",
+      "mcp__pixellab__dismiss_review",
+      "Bash(curl -sLo archivist.png \"https://api.pixellab.ai/mcp/objects/2eac9f51-c0aa-4e42-bad4-23cb052c2121/download\")",
+      "Bash(sips -f horizontal archivist.png --out archivist.png)",
+      "Bash(curl -sSL -o /Users/rich/Desktop/Godot/Godot/slaytheblood/art/card_art/pixellab/beat_chest.png \"https://backblaze.pixellab.ai/file/pixellab-characters/objects/be579bde-364d-4d27-81d0-4b62d97e6d65/ce827cda-b106-48da-872f-3222bed0c39a/rotations/unknown.png\")",
+      "Bash(python3 -c ' *)",
+      "WebFetch(domain:api.pixellab.ai)"
     ]
   }
 }

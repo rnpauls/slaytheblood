@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bm0786xi0batq"]
 
-[ext_resource type="Texture2D" uid="uid://dh4x623krw7e5" path="res://art/sprites/samurai.png" id="1_7xeg5"]
+[ext_resource type="Texture2D" uid="uid://bvbmygr3u8upo" path="res://art/sprites/pixellab/ninja_0001.png" id="1_kjhjj"]
 [ext_resource type="Resource" uid="uid://nx7abhele6lr" path="res://characters/ninja/ninja_draftable_cards.tres" id="2_u8x1n"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_7xeg5"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="3_134v8"]
@@ -18,13 +18,13 @@
 [resource]
 script = ExtResource("3_134v8")
 description = "Master of evasive attacks"
-portrait = ExtResource("1_7xeg5")
+portrait = ExtResource("1_kjhjj")
 draftable_cards = ExtResource("2_u8x1n")
 draftable_equipment = Array[ExtResource("3_7xeg5")]([ExtResource("8_smoke"), ExtResource("9_tabi"), ExtResource("10_band")])
 draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtResource("6_kjhjj"), ExtResource("7_5pfox")])
 starting_relic = ExtResource("7_fhfql")
 character_name = "Ninja"
-art = ExtResource("1_7xeg5")
+art = ExtResource("1_kjhjj")
 max_health = 40
 starting_deck = ExtResource("5_fhfql")
 starting_inventory = ExtResource("6_wrrns")
