@@ -1,6 +1,6 @@
-## Cantrip attack with a small arcane bonus — physical hit triggers the on-hit
-## draw, zap rides along as bonus arcane folded into the same DamagePacket.
-## (Pure arcane wouldn't work: ZapEffect bypasses on-hits by design.)
+## Cantrip attack — both the physical hit and the zap can independently fire
+## the on-hit draw, so a clean play against an unprepared target draws 2 cards
+## (one per landing component).
 extends Card
 
 
@@ -9,6 +9,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	on_hit.id = "aether_conduit_draw"
 	on_hit.custom_func = _on_hit_draw_card
 	on_hit.args = [modifiers] as Array[ModifierHandler]
+	on_hit.ai_value = 2
 	on_hits.append(on_hit)
 	do_stock_attack_damage_effect(targets, modifiers)
 

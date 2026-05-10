@@ -32,6 +32,7 @@ const KEYWORDS: Dictionary = {
 	&"rampage" : preload("uid://gfx457xrk4at"),
 	&"trash" : preload("uid://btrshkw9xm1c2"),
 	&"zap" : preload("uid://czapkw1runeb4"),
+	&"runechant" : preload("res://keywords/runechant_kw.tres"),
 	&"fleeting" : preload("res://keywords/fleeting_kw.tres"),
 	&"inert" : preload("res://keywords/inert_kw.tres"),
 }

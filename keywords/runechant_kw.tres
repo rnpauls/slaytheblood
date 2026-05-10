@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://crchntkw1ru4r"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_rch01"]
+[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_rchic"]
+
+[resource]
+script = ExtResource("1_rch01")
+id = &"runechant"
+display_name = "Runechant"
+icon = ExtResource("2_rchic")
+description = "Your next attack deals +1 arcane damage per runechant."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

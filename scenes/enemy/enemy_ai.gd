@@ -208,7 +208,19 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 			{"cards": keep_cards, "resources": 0, "arsenal": keep_arsenal}, 1, enemy.stats.health
 		)["damage"]
 		var offense_lost: int = max_offense_baseline - offense_after
-		var score: float = float(damage_taken) + float(offense_lost)
+		# On-hit cost: each landing damage component independently fires every
+		# on-hit in the packet. Score is "cost to defender" (lower = better),
+		# so add OnHit.ai_value once per landing component — incentivizing the
+		# AI to fully shut down a component when on-hits are valuable.
+		var phys_lands: bool = max(0, physical - block_total) > 0
+		var arc_lands: bool = max(0, arcane - prevention) > 0
+		var on_hit_cost: int = 0
+		for oh: OnHit in packet.on_hit_effects:
+			if phys_lands:
+				on_hit_cost += oh.ai_value
+			if arc_lands:
+				on_hit_cost += oh.ai_value
+		var score: float = float(damage_taken) + float(offense_lost) + float(on_hit_cost)
 
 		var cards_used: int = blocked_cards.size() + pitched_cards.size()
 		var should_replace := false
@@ -363,10 +375,22 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 				new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0) + action.action_points_granted
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
-			var current_action_damage_modified = modifier_handler.get_modified_value(action.attack, Modifier.Type.DMG_DEALT)
+			# Total damage is attack + zap regardless of damage_kind: PHYSICAL kind
+			# routes attack to physical and zap to arcane; ARCANE kind merges both
+			# into arcane. Either way the AI weighs the same total.
+			var raw_damage: int = action.attack + action.zap
+			var current_action_damage_modified = modifier_handler.get_modified_value(raw_damage, Modifier.Type.DMG_DEALT)
 			var bonus = action.ai_value
 			if action.ai_value_needs_attack and not sub_result.actions.any(func(c): return c.type == Card.Type.ATTACK):
 				bonus = 0
+			# Split-damage cards (phys + zap) can fire their on-hit twice — once
+			# per landing component. card.on_hits is empty until apply_effects
+			# runs, so we can't sum OnHit.ai_value here; mirror it by doubling
+			# the card-level ai_value when both damage components exist.
+			var has_phys: bool = (action.damage_kind == Card.DamageKind.PHYSICAL and action.attack > 0)
+			var has_arc: bool = action.zap > 0 or (action.damage_kind == Card.DamageKind.ARCANE and action.attack > 0)
+			if has_phys and has_arc:
+				bonus *= 2
 			current_action_damage_modified += bonus
 			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
 			

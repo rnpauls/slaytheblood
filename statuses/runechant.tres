@@ -9,4 +9,4 @@ id = "runechant"
 type = 2
 stack_type = 1
 icon = ExtResource("2_rchic")
-tooltip = "Runechant: pops on your next attack to deal 1 arcane damage to the target. Bypasses block."
+tooltip = "Your next attack deals +1 arcane damage per runechant."

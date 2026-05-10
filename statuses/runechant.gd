@@ -1,6 +1,10 @@
 ## Runechants are stored arcane charge on a combatant. Visually they appear as
-## small sprites floating above the owner; mechanically they auto-trigger on
-## the owner's next attack (handled in Card.do_runechant_trigger).
+## small sprites floating above the owner; mechanically they consume on the
+## owner's next attack and add +1 arcane damage per stack to that attack's
+## DamagePacket. The rider arcane lands as part of the same packet, so it
+## also triggers any on-hit effects on the attacking card (e.g. concuss with
+## runechants discards twice — once from the physical hit, once from the
+## arcane rider).
 ##
 ## INTENSITY-stacked: each "stack" is one runechant. When stacks reach 0 the
 ## StatusUI auto-removes itself (see status_ui.gd:37) and our _exit_tree

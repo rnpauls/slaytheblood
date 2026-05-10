@@ -7,9 +7,12 @@
 ## execute() resolves defense once via EnemyAI.defend_packet (which picks the
 ## best block/pitch allocation across the hand, considering both portions of
 ## the hit together), then routes physical through AttackDamageEffect and
-## arcane through ZapEffect with the chosen prevention amount. Splitting the
-## decision per damage type was the old shape — it caused the enemy to die
-## to {phys + arc} totals when neither portion was lethal alone.
+## arcane through ZapEffect with the chosen prevention amount. Both effects
+## carry the same on_hit_effects, so a split-damage card like aether_conduit
+## can trigger its on-hit independently for the physical land and the arcane
+## land (drawing up to two cards). Splitting the decision per damage type was
+## the old shape — it caused the enemy to die to {phys + arc} totals when
+## neither portion was lethal alone.
 class_name DamagePacket
 extends RefCounted
 
@@ -51,4 +54,6 @@ func execute_single_target(target: Node) -> void:
 		zap.amount = arcane
 		zap.sound = sound
 		zap.prevention = prevention
+		zap.on_hit_effects = on_hit_effects
+		zap.source_owner = source_owner
 		zap.execute([target])
