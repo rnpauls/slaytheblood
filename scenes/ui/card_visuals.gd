@@ -31,7 +31,7 @@ func set_card(value: Card) -> void:
 		await ready
 
 	card = value
-	cost.text = str(card.cost)
+	cost.text = str(card.get_play_cost())
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(card.get_default_tooltip()))
 	type_label.text = str(card.TypeString.keys()[card.type])
 	card_name.text = card.id.capitalize()
@@ -65,6 +65,13 @@ func set_card(value: Card) -> void:
 			#pitch_pips.texture = FOUR_PIP_4_PITCH_BAR
 		#5:
 			#pitch_pips.texture = FIVE_PIP_4_PITCH_BAR
+
+## Recompute the cost label from the current state. Cards with overridden
+## get_play_cost() change their displayed cost as runechants / attacks_this_turn
+## / discards_this_combat update — PlayerCardUI calls this on stats_changed.
+func refresh_cost() -> void:
+	if card:
+		cost.text = str(card.get_play_cost())
 
 func hide_attack() ->void:
 	attack.hide()

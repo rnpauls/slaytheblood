@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ChannelAegisStatus" format=3]
+
+[ext_resource type="Script" path="res://statuses/channel_aegis.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_18.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+block_amount = 15
+id = "channel_aegis"
+type = 0
+stack_type = 0
+can_expire = true
+duration = 1
+icon = ExtResource("2_icon")
+tooltip = "Channel Aegis: at the start of your next turn, gain %s block."

@@ -47,6 +47,11 @@ func _set_char_stats(value: Stats) -> void:
 func _on_char_stats_changed() -> void:
 	if card:
 		playable = char_stats.can_play_card(card)
+		# Refresh dynamic-cost cards (Rune Bolt, Cascade Strike, Final Salvo)
+		# whenever stats tick — runechants/attacks_this_turn/discards_this_combat
+		# all flow through stats_changed.
+		if card_render and card_render.card_visuals:
+			card_render.card_visuals.refresh_cost()
 
 func _set_playable(value: bool) -> void:
 	playable = value

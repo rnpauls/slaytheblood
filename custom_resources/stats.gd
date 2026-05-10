@@ -35,6 +35,13 @@ var exhaust: CardPile
 var health: int : set = set_health
 var block: int : set = set_block
 
+## Dynamic-cost counters. Wired by Player listeners (player.gd) so cards
+## with overridden get_play_cost() can read the live state (e.g. Cascade
+## Strike's cost drops by attacks already declared this turn). Setters
+## emit stats_changed so CardVisuals.refresh_cost() picks up the change.
+var attacks_this_turn: int = 0 : set = set_attacks_this_turn
+var discards_this_combat: int = 0 : set = set_discards_this_combat
+
 func set_health(value : int) -> void:
 	health = clampi(value, 0, max_health)
 	stats_changed.emit()
@@ -68,10 +75,18 @@ func reset_mana() -> void:
 func reset_action_points() -> void:
 	action_points = 1
 
+func set_attacks_this_turn(value: int) -> void:
+	attacks_this_turn = value
+	stats_changed.emit()
+
+func set_discards_this_combat(value: int) -> void:
+	discards_this_combat = value
+	stats_changed.emit()
+
 func can_play_card(card:Card) -> bool:
 	if card.type == Card.Type.BLOCK:
 		return false
-	return mana >= card.cost and action_points >= 1 and not card.unplayable
+	return mana >= card.get_play_cost() and action_points >= 1 and not card.unplayable
 
 func create_instance() -> Resource:
 	var instance: Stats = self.duplicate()
@@ -84,6 +99,9 @@ func create_instance() -> Resource:
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
 	instance.exhaust = CardPile.new()
+	# Fresh combat: reset the dynamic-cost counters so they start from 0.
+	instance.attacks_this_turn = 0
+	instance.discards_this_combat = 0
 	return instance
 
 ## prevention: how much arcane to mana-spend on. -1 = auto-spend everything

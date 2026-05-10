@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_20.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/cursed_inscription.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+trash_per_hit = 2
+id = "cursed_inscription"
+type = 0
+target = 1
+cost = 1
+pitch = 2
+attack = 2
+zap = 2
+defense = 2
+icon = ExtResource("2_icon")
+tooltip_text = "Deal 2 damage + 2 [kw=zap]arcane[/kw]. On hit: add 2 [kw=trash]Trash[/kw] to target's draw pile."
+sound = ExtResource("1_block")

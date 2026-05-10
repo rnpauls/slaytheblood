@@ -26,7 +26,18 @@
 [ext_resource type="Resource" uid="uid://bcwdr0001bru" path="res://characters/brute/cards/war_drum.tres" id="30_wardr"]
 [ext_resource type="Resource" uid="uid://bcstm0001bru" path="res://characters/brute/cards/stampede.tres" id="31_stamp"]
 [ext_resource type="Resource" uid="uid://bcrgc0001bru" path="res://characters/brute/cards/rage_cycle.tres" id="32_rgcyc"]
+[ext_resource type="Resource" path="res://characters/brute/cards/iron_hide.tres" id="33_irhd"]
+[ext_resource type="Resource" path="res://characters/brute/cards/counterattack.tres" id="34_ctak"]
+[ext_resource type="Resource" path="res://characters/brute/cards/bulwark.tres" id="35_blwk"]
+[ext_resource type="Resource" path="res://characters/brute/cards/retribution.tres" id="36_rtrb"]
+[ext_resource type="Resource" path="res://characters/brute/cards/bloodletting_cleave.tres" id="37_bldcv"]
+[ext_resource type="Resource" path="res://characters/brute/cards/pain_drinker.tres" id="38_pndrk"]
+[ext_resource type="Resource" path="res://characters/brute/cards/deaths_door.tres" id="39_dthdr"]
+[ext_resource type="Resource" path="res://characters/brute/cards/berserker_rage.tres" id="40_bsrkr"]
+[ext_resource type="Resource" path="res://characters/brute/cards/final_salvo.tres" id="41_fnslv"]
+[ext_resource type="Resource" path="res://characters/brute/cards/war_trophy.tres" id="42_wrtrp"]
+[ext_resource type="Resource" path="res://characters/brute/cards/bone_talisman.tres" id="43_bntls"]
 
 [resource]
 script = ExtResource("2_tp1qw")
-cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("8_1xvak"), ExtResource("10_brp3f"), ExtResource("11_q8gyr"), ExtResource("12_w0piq"), ExtResource("13_2eavu"), ExtResource("14_wmius"), ExtResource("18_kcywi"), ExtResource("19_qwcd2"), ExtResource("20_ygm28"), ExtResource("21_ygm28"), ExtResource("22_eshak"), ExtResource("23_unyld"), ExtResource("24_btcry"), ExtResource("25_roar"), ExtResource("26_sndwd"), ExtResource("27_hvclv"), ExtResource("28_whirl"), ExtResource("29_adrnl"), ExtResource("30_wardr"), ExtResource("31_stamp"), ExtResource("32_rgcyc")])
+cards = Array[ExtResource("1_6rakt")]([ExtResource("3_kdxy2"), ExtResource("4_lcvrb"), ExtResource("5_1qht6"), ExtResource("8_1xvak"), ExtResource("10_brp3f"), ExtResource("11_q8gyr"), ExtResource("12_w0piq"), ExtResource("13_2eavu"), ExtResource("14_wmius"), ExtResource("18_kcywi"), ExtResource("19_qwcd2"), ExtResource("20_ygm28"), ExtResource("21_ygm28"), ExtResource("22_eshak"), ExtResource("23_unyld"), ExtResource("24_btcry"), ExtResource("25_roar"), ExtResource("26_sndwd"), ExtResource("27_hvclv"), ExtResource("28_whirl"), ExtResource("29_adrnl"), ExtResource("30_wardr"), ExtResource("31_stamp"), ExtResource("32_rgcyc"), ExtResource("33_irhd"), ExtResource("34_ctak"), ExtResource("35_blwk"), ExtResource("36_rtrb"), ExtResource("37_bldcv"), ExtResource("38_pndrk"), ExtResource("39_dthdr"), ExtResource("40_bsrkr"), ExtResource("41_fnslv"), ExtResource("42_wrtrp"), ExtResource("43_bntls")])

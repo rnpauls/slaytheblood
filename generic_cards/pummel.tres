@@ -1,6 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://dbl6dq40jsh32"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_0felm"]
+[ext_resource type="Texture2D" uid="uid://bjjlvy8lklqj4" path="res://art/item43.png" id="2_hofcq"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="2_uayyh"]
 [ext_resource type="AudioStream" uid="uid://bcbdx1co02roj" path="res://art/music/sound_effects/JDSherbert - Ultimate UI SFX Pack (FREE)/Stereo/wav (HD)/JDSherbert - Ultimate UI SFX Pack - Swipe - 1.wav" id="3_hofcq"]
 
@@ -12,5 +13,6 @@ cost = 2
 pitch = 1
 attack = 6
 defense = 2
+icon = ExtResource("2_hofcq")
 sound = ExtResource("3_hofcq")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

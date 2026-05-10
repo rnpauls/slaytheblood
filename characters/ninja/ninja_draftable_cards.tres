@@ -17,8 +17,12 @@
 [ext_resource type="Resource" path="res://characters/ninja/cards/hunters_eye.tres" id="24_huney"]
 [ext_resource type="Resource" path="res://characters/ninja/cards/death_mark.tres" id="25_dthmk"]
 [ext_resource type="Resource" path="res://characters/ninja/cards/executioner.tres" id="26_exctr"]
-[ext_resource type="Resource" path="res://characters/ninja/cards/bullseye.tres" id="27_bllsy"]
+[ext_resource type="Resource" uid="uid://btlx2vitldhsy" path="res://characters/ninja/cards/bullseye.tres" id="27_bllsy"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/cascade_strike.tres" id="28_csstk"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/slashing_cut.tres" id="29_slcut"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/hemorrhage.tres" id="30_hmrhg"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/razor_edge.tres" id="31_rzedg"]
 
 [resource]
 script = ExtResource("18_k7xau")
-cards = Array[ExtResource("1_1n65v")]([ExtResource("12_6xfej"), ExtResource("17_flick"), ExtResource("9_m8dfe"), ExtResource("19_mfd"), ExtResource("8_mcc34"), ExtResource("22_qrflx"), ExtResource("23_shurst"), ExtResource("7_17ur2"), ExtResource("10_17ur2"), ExtResource("20_twin"), ExtResource("21_vnstp"), ExtResource("16_whisp"), ExtResource("24_huney"), ExtResource("25_dthmk"), ExtResource("26_exctr"), ExtResource("27_bllsy")])
+cards = Array[ExtResource("1_1n65v")]([ExtResource("12_6xfej"), ExtResource("17_flick"), ExtResource("9_m8dfe"), ExtResource("19_mfd"), ExtResource("8_mcc34"), ExtResource("22_qrflx"), ExtResource("23_shurst"), ExtResource("7_17ur2"), ExtResource("10_17ur2"), ExtResource("20_twin"), ExtResource("21_vnstp"), ExtResource("16_whisp"), ExtResource("24_huney"), ExtResource("25_dthmk"), ExtResource("26_exctr"), ExtResource("27_bllsy"), ExtResource("28_csstk"), ExtResource("29_slcut"), ExtResource("30_hmrhg"), ExtResource("31_rzedg")])

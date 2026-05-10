@@ -35,6 +35,8 @@ const KEYWORDS: Dictionary = {
 	&"runechant" : preload("res://keywords/runechant_kw.tres"),
 	&"fleeting" : preload("res://keywords/fleeting_kw.tres"),
 	&"inert" : preload("res://keywords/inert_kw.tres"),
+	&"bleed" : preload("res://keywords/bleed_kw.tres"),
+	&"channel" : preload("res://keywords/channel_kw.tres"),
 }
 
 const _KW_TAG_REGEX := r"\[kw=([\w-]+)(?::([^\]]+))?\](.*?)\[/kw\]"

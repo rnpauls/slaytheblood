@@ -79,6 +79,14 @@ var discarded_card: Card = null
 func is_single_targeted() -> bool:
 	return target == Target.SINGLE_ENEMY
 
+## Hook for dynamic mana cost. Default returns the static `cost` field.
+## Override in subclasses to reduce cost based on live owner state — e.g.
+## runechant pile size, attacks_this_turn, discards_this_combat. Both
+## play() and Stats.can_play_card route through this so the playability
+## check and the actual mana spend stay in sync.
+func get_play_cost() -> int:
+	return cost
+
 func _get_targets(_card_parent: Node) -> Array[Node]:
 	# Resolve via owner: the CardUI may have been detached by card_ui.play()
 	# before effects resolve, but owner (Player/Enemy) stays in the tree.
@@ -102,12 +110,17 @@ func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers:
 
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)
+
+	# Pay mana before player_attack_declared fires so dynamic-cost cards
+	# (Cascade Strike) read the prior attack count, not their own. Otherwise
+	# the card's own attack would self-discount and the UI cost would
+	# disagree with the actual mana spend.
+	char_stats.mana -= get_play_cost()
+	char_stats.action_points -= 1
+
 	if type == Type.ATTACK:
 		if targets[0] is Enemy:
 			Events.player_attack_declared.emit()
-
-	char_stats.mana -= cost
-	char_stats.action_points -= 1
 	await apply_effects(targets, modifiers)
 
 	for targetx in targets:

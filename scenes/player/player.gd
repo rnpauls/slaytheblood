@@ -17,6 +17,33 @@ var player_handler: PlayerHandler
 @onready var _status_origin_y: float = status_handler.position.y
 
 
+func _ready() -> void:
+	# Wire dynamic-cost counters. attacks_this_turn drives Cascade Strike's
+	# discount (resets each turn); discards_this_combat drives Final Salvo
+	# (resets per combat via stats.create_instance).
+	Events.player_attack_declared.connect(_on_attack_declared)
+	Events.card_discarded.connect(_on_card_discarded)
+	Events.player_action_phase_started.connect(_on_action_phase_started)
+
+
+func _on_attack_declared() -> void:
+	if stats:
+		stats.attacks_this_turn += 1
+
+
+func _on_card_discarded(card: Card) -> void:
+	# Only count discards from cards the player owned. card.owner is null for
+	# cards in piles/rewards, but discard always flows from the player's hand
+	# where owner is set, so the guard mostly filters out enemy discards.
+	if stats and card and card.owner == self:
+		stats.discards_this_combat += 1
+
+
+func _on_action_phase_started() -> void:
+	if stats:
+		stats.attacks_this_turn = 0
+
+
 ## Mirror of Enemy.add_card_to_hand: add a Card to the player's hand,
 ## skipping the draw pile. Used by CardAddEffect when destination is HAND so
 ## effects don't have to branch on `target is Player` vs `target is Enemy`.

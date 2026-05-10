@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/keyword_entry.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"channel"
+display_name = "Channel"
+description = "Apply now; effect resolves at the start of your next turn. Quickened Cast can fire active Channels immediately."

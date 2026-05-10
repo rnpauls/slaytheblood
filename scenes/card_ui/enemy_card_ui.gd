@@ -16,12 +16,25 @@ func _ready() -> void:
 	# Apply initial back state once the render node exists
 	_apply_show_back()
 
+## Visual tint applied to enemy cards whose underlying Card.unplayable is
+## true (Trash, etc.). Greying the whole CardUI signals "this slot is dead
+## weight in the enemy's hand" without exposing the card's identity.
+const UNPLAYABLE_TINT := Color(0.55, 0.55, 0.55, 1.0)
+
 ## Convenience helper: set stats, modifiers, and card at once.
 func setup(p_card: Card, p_stats: EnemyStats, p_modifiers: ModifierHandler) -> void:
 	char_stats = p_stats
 	modifier_handler = p_modifiers
 	card = p_card
 	_apply_show_back()
+	_apply_unplayable_tint()
+
+
+func _apply_unplayable_tint() -> void:
+	if card and card.unplayable:
+		modulate = UNPLAYABLE_TINT
+	else:
+		modulate = Color.WHITE
 
 ## Tint the card-back to reflect the AI plan and toggle the on-hit "!" overlay.
 func set_plan_color(color: Color, show_exclamation: bool) -> void:
