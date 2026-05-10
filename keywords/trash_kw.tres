@@ -6,5 +6,5 @@
 script = ExtResource("1_trshkw")
 id = &"trash"
 display_name = "Trash"
-description = "Cannot be played, pitched, or used to block. Exhausts at end of turn."
+description = "[kw=inert]Inert[/kw]. [kw=fleeting]Fleeting[/kw]."
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

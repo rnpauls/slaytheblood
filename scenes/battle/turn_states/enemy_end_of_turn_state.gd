@@ -43,7 +43,7 @@ func _on_statuses_applied(type: Status.Type) -> void:
 	if type != Status.Type.END_OF_TURN:
 		return
 	if _current_enemy and is_instance_valid(_current_enemy):
-		_current_enemy.exhaust_eot_cards_in_hand()
+		await _current_enemy.exhaust_fleeting_in_hand()
 	enemy_handler.acting_enemies.erase(_current_enemy)
 	_advance()
 

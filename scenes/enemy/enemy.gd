@@ -145,8 +145,8 @@ func draw_cards(amount: int) -> Tween:
 func add_card_to_hand(card: Card) -> void:
 	hand_manager.add_card_to_hand(card)
 
-func exhaust_eot_cards_in_hand() -> void:
-	hand_manager.exhaust_eot_cards_in_hand()
+func exhaust_fleeting_in_hand() -> void:
+	await hand_manager.exhaust_fleeting_in_hand()
 
 
 # ── Action delegation ─────────────────────────────────────────────────────────

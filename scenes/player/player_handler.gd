@@ -175,9 +175,39 @@ func draw_cards(amount: int, hand_type = null) -> Tween:
 	return tween
 
 func end_turn_cleanup() -> void:
+	await exhaust_fleeting_in_hand()
 	character.reset_mana()
 	character.action_points = 0
 	draw_cards(character.cards_per_turn - hand.get_child_count(), 'end')
+
+
+## Exhaust cards with `fleeting: true` from the player's hand at end of turn.
+## Mirrors EnemyHandManager.exhaust_fleeting_in_hand: each fleeting card runs
+## CardUI._burn_up() (the same shader-driven dissolve used when an exhausting
+## card is played), then the resource lands in the exhaust pile.
+func exhaust_fleeting_in_hand() -> void:
+	var to_burn: Array[CardUI] = []
+	for child in hand.get_children():
+		var card_ui := child as CardUI
+		if card_ui and card_ui.card and card_ui.card.fleeting:
+			to_burn.append(card_ui)
+	if to_burn.is_empty():
+		return
+
+	for card_ui in to_burn:
+		# Reparent to the BattleUI overlay so the hand re-arranges its remaining
+		# cards immediately while this one burns above it.
+		card_ui._reparent_to_play_overlay()
+		character.exhaust.add_card(card_ui.card)
+		Events.card_exhausted.emit(card_ui.card)
+
+	for card_ui in to_burn:
+		card_ui._burn_up()
+	await get_tree().create_timer(CardUI.BURN_DURATION + 0.05).timeout
+
+	for card_ui in to_burn:
+		if is_instance_valid(card_ui):
+			card_ui.queue_free()
 
 
 func discard_cards() -> void:

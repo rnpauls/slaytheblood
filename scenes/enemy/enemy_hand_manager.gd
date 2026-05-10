@@ -6,7 +6,7 @@
 ##   draw_card()
 ##   draw_cards(amount) -> Tween
 ##   add_card_to_hand(card)
-##   exhaust_eot_cards_in_hand()
+##   exhaust_fleeting_in_hand()     — burn fleeting cards at EOT
 ##   remove_card(card)              — manual removal (e.g. defense path)
 ##   get_card_ui(card) -> EnemyCardUI
 ##   set_pending_stage(card)        — flag the next card to be staged so the
@@ -100,23 +100,47 @@ func add_card_to_hand(card: Card) -> void:
 	hand_changed.emit()
 
 
-## Remove cards with `unplayable: true` at end of turn. Enemy hands persist
-## across turns (no auto-discard), so this hook prevents clutter from cards
-## added by player effects (e.g. Trash from Gunkshot). With the post-refactor
-## default of exhausts=true on every card, gating EOT cleanup on unplayable
-## (instead of exhausts) keeps normal enemy cards in hand across turns and
-## still cleans up curses/trash that the player has injected.
-func exhaust_eot_cards_in_hand() -> void:
+## Exhaust cards with `fleeting: true` from the hand at end of turn. Enemy hands
+## persist across turns (no auto-discard), so this hook prevents clutter from
+## fleeting cards (curses/trash injected by player effects, e.g. Gunkshot).
+##
+## Visual: each fleeting card runs CardUI._burn_up() (the same shader-driven
+## dissolve player cards use when exhausted on play), instead of the plain
+## fade-out used for normal mid-turn removal.
+func exhaust_fleeting_in_hand() -> void:
 	var to_exhaust: Array[Card] = []
 	for card in hand:
-		if card.unplayable:
+		if card.fleeting:
 			to_exhaust.append(card)
+	if to_exhaust.is_empty():
+		return
+
+	# Capture each card_ui BEFORE the AI signal handler clears card_ui_map, and
+	# reparent to the BattleUI overlay so _on_ai_card_removed_from_hand skips
+	# its fade-out (it only fades cards still parented to _enemy_hand).
+	var card_uis_to_burn: Array[EnemyCardUI] = []
+	for card in to_exhaust:
+		var card_ui: EnemyCardUI = card_ui_map.get(card, null)
+		if is_instance_valid(card_ui):
+			card_uis_to_burn.append(card_ui)
+			card_ui._reparent_to_play_overlay()
+
 	for card in to_exhaust:
 		hand.erase(card)
 		_enemy.stats.exhaust.add_card(card)
 		if _enemy.enemy_ai:
 			# AI removes from its own hand and re-plans via the signal handler below.
 			_enemy.enemy_ai.card_removed_from_hand.emit(card)
+
+	# Kick off all burn animations in parallel; wait for them to finish before
+	# advancing the EOT phase.
+	for card_ui in card_uis_to_burn:
+		card_ui._burn_up()
+	await _enemy.get_tree().create_timer(CardUI.BURN_DURATION + 0.05).timeout
+
+	for card_ui in card_uis_to_burn:
+		if is_instance_valid(card_ui):
+			card_ui.queue_free()
 
 
 ## Remove a card from the data hand, the card_ui_map, and the EnemyHand display.

@@ -40,6 +40,8 @@ const RARITY_COLORS := {
 @export var go_again: bool = false : get = get_go_again
 @export var action_points_granted: int = 0
 @export var unplayable: bool = false
+## Fleeting: if in hand at end of turn, the card is exhausted.
+@export var fleeting: bool = false
 @export var ai_value: int
 @export var ai_value_needs_attack: bool = false
 

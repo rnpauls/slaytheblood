@@ -10,8 +10,9 @@ id = "trash"
 type = 1
 exhausts = true
 unplayable = true
+fleeting = true
 icon = ExtResource("2_trash")
-tooltip_text = "Cannot be played, pitched, or used to block. Exhausts at end of turn if in hand"
+tooltip_text = "[kw=inert]Inert[/kw]. [kw=fleeting]Fleeting[/kw]."
 disable_attack = true
 disable_defense = true
 disable_pitch = true

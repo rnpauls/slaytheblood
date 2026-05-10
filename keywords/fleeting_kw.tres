@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://bflt8kw1xm0a1"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_fltkw"]
+
+[resource]
+script = ExtResource("1_fltkw")
+id = &"fleeting"
+display_name = "Fleeting"
+description = "If in hand at end of turn, this card is exhausted."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

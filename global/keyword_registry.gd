@@ -32,6 +32,8 @@ const KEYWORDS: Dictionary = {
 	&"rampage" : preload("uid://gfx457xrk4at"),
 	&"trash" : preload("uid://btrshkw9xm1c2"),
 	&"zap" : preload("uid://czapkw1runeb4"),
+	&"fleeting" : preload("res://keywords/fleeting_kw.tres"),
+	&"inert" : preload("res://keywords/inert_kw.tres"),
 }
 
 const _KW_TAG_REGEX := r"\[kw=([\w-]+)(?::([^\]]+))?\](.*?)\[/kw\]"
