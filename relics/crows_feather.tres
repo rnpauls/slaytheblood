@@ -1,14 +1,13 @@
 [gd_resource type="Resource" format=3 uid="uid://stbrelic01ab"]
 
-[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="1_icon"]
-[ext_resource type="Script" uid="uid://stbrelic009a" path="res://relics/crows_feather.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://bfxdyp1ggg2sv" path="res://art/Icon28_30.png" id="1_dy8sa"]
+[ext_resource type="Script" uid="uid://stbrelic01aa" path="res://relics/crows_feather.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")
 relic_name = "Crow's Feather"
 id = "crows_feather"
 type = 4
-character_type = 0
-icon = ExtResource("1_icon")
+icon = ExtResource("1_dy8sa")
 tooltip = "[color=\"ffdf00\"]Crow's Feather[/color]
 The first attack you play each turn refunds 1 [kw=action_point]Action Point[/kw]."

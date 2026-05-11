@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://stbrelic001b"]
 
-[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="1_icon"]
-[ext_resource type="Script" path="res://relics/bloodied_pelt.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://ck00youabr5hn" path="res://art/item85.png" id="1_4dtfs"]
+[ext_resource type="Script" uid="uid://stbrelic001a" path="res://relics/bloodied_pelt.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")
@@ -10,6 +10,6 @@ id = "bloodied_pelt"
 type = 4
 character_type = 2
 starter_relic = true
-icon = ExtResource("1_icon")
+icon = ExtResource("1_4dtfs")
 tooltip = "[color=\"ffdf00\"]Bloodied Pelt[/color]
 The first time you take damage each combat, gain [kw=empower:4]Empower 4[/kw]."

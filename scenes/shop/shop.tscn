@@ -10,9 +10,11 @@
 [ext_resource type="Resource" uid="uid://c0sroqlgs48fe" path="res://relics/mana_potion.tres" id="5_b714b"]
 [ext_resource type="PackedScene" uid="uid://dsiqp6n72kl03" path="res://scenes/shop/shop_relic.tscn" id="5_iqig7"]
 [ext_resource type="PackedScene" uid="uid://da4qwswwfbl28" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_x4lmk"]
-[ext_resource type="Resource" uid="uid://bpyxehcf5kwl" path="res://relics/reinforced_armor.tres" id="6_ksdlm"]
+[ext_resource type="Resource" uid="uid://stbrelic01ab" path="res://relics/crows_feather.tres" id="6_c5xje"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="7_5y7fm"]
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/brute/brute.tres" id="7_hjjob"]
+[ext_resource type="Resource" uid="uid://stbrelic010b" path="res://relics/caffeine_tab.tres" id="7_qu1ni"]
+[ext_resource type="Resource" uid="uid://stbrelic007b" path="res://relics/lucky_charm.tres" id="8_0272k"]
 [ext_resource type="Resource" uid="uid://rbm1nv0nx2nj" path="res://test_data/test_run_stats.tres" id="8_ropyq"]
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="8_toxgp"]
 [ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="9_u2jek"]
@@ -98,9 +100,6 @@ _data = {
 &"RESET": SubResource("Animation_aaacn")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_irnh7"]
-font_size = 12
-
 [node name="Shop" type="Control" unique_id=1304603380]
 layout_mode = 3
 anchors_preset = 15
@@ -110,7 +109,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1ldyg")
-shop_relics = Array[ExtResource("2_m2rrw")]([ExtResource("3_rno6l"), ExtResource("4_ntyfo"), ExtResource("5_b714b"), ExtResource("6_ksdlm")])
+shop_relics = Array[ExtResource("2_m2rrw")]([ExtResource("3_rno6l"), ExtResource("4_ntyfo"), ExtResource("5_b714b"), ExtResource("6_c5xje"), ExtResource("7_qu1ni"), ExtResource("8_0272k")])
 shop_weapons = Array[ExtResource("7_5y7fm")]([ExtResource("8_toxgp"), ExtResource("9_u2jek"), ExtResource("10_bnu54"), ExtResource("11_cxrsv"), ExtResource("12_8jxaa"), ExtResource("13_a1v00"), ExtResource("14_4yy74"), ExtResource("15_njv4s"), ExtResource("W_galvanic"), ExtResource("W_runeblood"), ExtResource("W_aether")])
 shop_equipment = Array[ExtResource("11_f8gqx")]([ExtResource("12_wjgtv"), ExtResource("13_cxrsv"), ExtResource("14_8jxaa"), ExtResource("15_ncc2j"), ExtResource("EQ_bandolier"), ExtResource("EQ_berserker"), ExtResource("EQ_heavy_greaves"), ExtResource("EQ_hexsigil"), ExtResource("EQ_manathreaded"), ExtResource("EQ_runeweaver"), ExtResource("EQ_scabskin"), ExtResource("EQ_smoke"), ExtResource("EQ_spellbinders"), ExtResource("EQ_spiked"), ExtResource("EQ_tabi")])
 char_stats = ExtResource("7_hjjob")
@@ -160,14 +159,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 28.0
-offset_top = -51.0
-offset_right = 68.0
-offset_bottom = -39.0
+offset_left = -637.0
+offset_top = 301.0
+offset_right = -465.0
+offset_bottom = 321.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Shop"
-label_settings = SubResource("LabelSettings_irnh7")
+text = "Buy somethin', will ya"
 horizontal_alignment = 1
 vertical_alignment = 1
 

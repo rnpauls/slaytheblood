@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://stbrelic006b"]
 
-[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://2igrvjj56niq" path="res://art/magicbook/64x64/book_image_17.png" id="1_pvxm1"]
 [ext_resource type="Script" uid="uid://stbrelic006a" path="res://relics/tome_of_wards.gd" id="2_script"]
 
 [resource]
@@ -9,6 +9,6 @@ relic_name = "Tome of Wards"
 id = "tome_of_wards"
 type = 2
 character_type = 3
-icon = ExtResource("1_icon")
+icon = ExtResource("1_pvxm1")
 tooltip = "[color=\"ffdf00\"]Tome of Wards[/color]
 At the end of each turn, if you took no damage this turn, create a [kw=runechant]runechant[/kw]."

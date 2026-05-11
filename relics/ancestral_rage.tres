@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://stbrelic002b"]
 
-[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://4wkwbhjb0yp5" path="res://art/bone3.png" id="1_s3scs"]
 [ext_resource type="Script" uid="uid://stbrelic002a" path="res://relics/ancestral_rage.gd" id="2_script"]
 
 [resource]
@@ -9,6 +9,6 @@ relic_name = "Ancestral Rage"
 id = "ancestral_rage"
 type = 1
 character_type = 2
-icon = ExtResource("1_icon")
+icon = ExtResource("1_s3scs")
 tooltip = "[color=\"ffdf00\"]Ancestral Rage[/color]
 At the start of combat, gain [kw=muscle:1]Muscle 1[/kw]."

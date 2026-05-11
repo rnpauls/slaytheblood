@@ -48,6 +48,7 @@ theme_override_constants/margin_bottom = 11
 
 [node name="CardBackPanel" type="Panel" parent="MarginContainer" unique_id=1542496556]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_d3nd8")

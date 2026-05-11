@@ -1,6 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://stbrelic007b"]
 
-[ext_resource type="Texture2D" uid="uid://cbteg6lcx42sy" path="res://art/item82.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://dffcahrwgrcqe" path="res://art/item60.png" id="1_svtse"]
 [ext_resource type="Script" uid="uid://stbrelic007a" path="res://relics/lucky_charm.gd" id="2_script"]
 
 [resource]
@@ -8,7 +8,6 @@ script = ExtResource("2_script")
 relic_name = "Lucky Charm"
 id = "lucky_charm"
 type = 4
-character_type = 0
-icon = ExtResource("1_icon")
+icon = ExtResource("1_svtse")
 tooltip = "[color=\"ffdf00\"]Lucky Charm[/color]
 Once per combat, when you pitch a card, draw a card."
