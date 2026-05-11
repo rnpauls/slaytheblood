@@ -130,13 +130,14 @@ texture = SubResource("GradientTexture2D_pa13r")
 [node name="DecorationLayer" type="CanvasLayer" parent="." unique_id=241961719]
 
 [node name="Shopkeeper" type="TextureRect" parent="DecorationLayer" unique_id=315744981]
+texture_filter = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 66.0
-offset_top = -220.0
-offset_right = 205.0
-offset_bottom = -80.0
+offset_left = 3.0
+offset_top = -217.0
+offset_right = 142.0
+offset_bottom = -77.0
 grow_vertical = 0
 texture = ExtResource("2_00e6t")
 expand_mode = 1
@@ -172,10 +173,10 @@ vertical_alignment = 1
 
 [node name="Weapons" type="HBoxContainer" parent="UILayer" unique_id=500071596]
 unique_name_in_owner = true
-offset_left = 67.0
-offset_top = 110.0
-offset_right = 517.0
-offset_bottom = 346.0
+offset_left = 98.0
+offset_top = 133.0
+offset_right = 548.0
+offset_bottom = 369.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
@@ -195,10 +196,10 @@ weapon = ExtResource("W_aether")
 
 [node name="Equipment" type="HBoxContainer" parent="UILayer" unique_id=30414963]
 unique_name_in_owner = true
-offset_left = 68.0
-offset_top = 383.0
-offset_right = 518.0
-offset_bottom = 623.0
+offset_left = 98.0
+offset_top = 401.0
+offset_right = 548.0
+offset_bottom = 641.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
@@ -222,35 +223,47 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 54.0
-offset_top = -291.0
-offset_right = 504.0
-offset_bottom = 237.0
+offset_left = -64.0
+offset_top = -226.0
+offset_right = 596.0
+offset_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 theme_override_constants/separation = 15
 
 [node name="Cards" type="HBoxContainer" parent="UILayer/ShopContent" unique_id=1726449760]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 theme_override_constants/separation = 15
 
 [node name="ShopCard" parent="UILayer/ShopContent/Cards" unique_id=34719287 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
 layout_mode = 2
 
 [node name="ShopCard2" parent="UILayer/ShopContent/Cards" unique_id=1270184286 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
 layout_mode = 2
 
 [node name="ShopCard3" parent="UILayer/ShopContent/Cards" unique_id=1866610996 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard4" parent="UILayer/ShopContent/Cards" unique_id=315799312 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard5" parent="UILayer/ShopContent/Cards" unique_id=1068467191 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
 layout_mode = 2
 
 [node name="Relics" type="HBoxContainer" parent="UILayer/ShopContent" unique_id=973321356]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 10
 theme_override_constants/separation = 15
 
 [node name="ShopRelic" parent="UILayer/ShopContent/Relics" unique_id=503453516 instance=ExtResource("5_iqig7")]

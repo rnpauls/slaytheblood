@@ -14,16 +14,23 @@ theme_override_constants/separation = 15
 script = ExtResource("1_gu12k")
 card = ExtResource("2_qhqmp")
 
-[node name="CardContainer" type="CenterContainer" parent="." unique_id=1977906023]
+[node name="CardContainer" type="Control" parent="." unique_id=1977906023]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 196)
+custom_minimum_size = Vector2(120, 160)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="CardMenuUI" parent="CardContainer" unique_id=1177282318 instance=ExtResource("1_jui1i")]
-layout_mode = 2
-base_scale = 0.7
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+base_scale = 0.6
 hover_scale = 1.4286
 
 [node name="Price" type="HBoxContainer" parent="." unique_id=1101452153]
