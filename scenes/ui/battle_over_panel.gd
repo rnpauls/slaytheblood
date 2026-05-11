@@ -32,6 +32,7 @@ func show_screen(text: String, type: Type) -> void:
 
 
 func _on_continue_pressed() -> void:
+	get_tree().paused = false
 	if _current_type == Type.STALEMATE:
 		Events.battle_stalemated.emit()
 	else:

@@ -3,7 +3,7 @@ extends VBoxContainer
 
 @export var card: Card : set = set_card
 
-@onready var card_container: CenterContainer = %CardContainer
+@onready var card_container: Control = %CardContainer
 @onready var price: HBoxContainer = %Price
 @onready var price_label: Label = %PriceLabel
 @onready var buy_button: Button = %BuyButton

@@ -42,6 +42,8 @@ func _is_stalemate() -> bool:
 		return false
 	if not player_handler.character.discard.empty():
 		return false
+	if _player_has_zero_cost_weapon():
+		return false
 
 	for enemy in enemy_handler.get_children():
 		if not is_instance_valid(enemy):
@@ -62,3 +64,10 @@ func _has_playable_arsenal(enemy: Enemy) -> bool:
 		return false
 	var arsenal: Card = enemy.enemy_ai.arsenal
 	return arsenal.type == Card.Type.ATTACK and arsenal.cost <= enemy.stats.mana
+
+
+func _player_has_zero_cost_weapon() -> bool:
+	for wep in [player_handler.hand_left_weapon, player_handler.hand_right_weapon] as Array[WeaponHandler]:
+		if wep and wep.weapon and wep.weapon.cost == 0:
+			return true
+	return false
