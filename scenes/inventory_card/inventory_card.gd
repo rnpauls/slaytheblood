@@ -36,7 +36,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(weapon.get_tooltip()))
 	name_label.text = weapon.weapon_name
 	rarity.modulate = Weapon.RARITY_COLORS[weapon.rarity]
-	type_label.text = "%s\n[font_size=20]%s[/font_size]" % [
+	type_label.text = "%s - %s" % [
 		Weapon.Type.keys()[weapon.type],
 		HANDS_LABELS[weapon.hands],
 	]

@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/brute/cards/warrior_true_strength.tres" id="2_qhqmp"]
 
 [node name="ShopCard" type="VBoxContainer" unique_id=315799312]
-custom_minimum_size = Vector2(40, 56)
 offset_right = 200.0
 offset_bottom = 365.0
 size_flags_horizontal = 4
@@ -17,6 +16,7 @@ card = ExtResource("2_qhqmp")
 
 [node name="CardContainer" type="CenterContainer" parent="." unique_id=1977906023]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 196)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

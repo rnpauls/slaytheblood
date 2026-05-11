@@ -294,7 +294,7 @@ func _update_hand_plan_colors() -> void:
 				show_exclamation = card.type == Card.Type.ATTACK \
 					and (card.on_hits.size() > 0 or active_on_hits.size() > 0)
 			elif card in plan.pitched:
-				color = Color.BLUE
+				color = Color.DEEP_SKY_BLUE
 		card_ui.set_plan_color(color, show_exclamation)
 
 	# Arsenal card_ui follows the same rules (it can't be pitched, so no blue).
@@ -317,7 +317,7 @@ func _action_plan_color(card: Card) -> Color:
 		Card.Type.ATTACK:
 			return Color.RED
 		Card.Type.NAA:
-			return Color.GREEN
+			return Color.CHARTREUSE
 		_:
 			return Color.BLACK
 

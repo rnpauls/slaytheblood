@@ -1,31 +1,23 @@
 [gd_scene format=3 uid="uid://dv8833ny3ov2e"]
 
 [ext_resource type="Script" uid="uid://04oscjhi8h6c" path="res://scenes/card_ui/card_render_container.gd" id="1_d3nd8"]
+[ext_resource type="Texture2D" uid="uid://2k4qx77sgsyn" path="res://art/custom_art/card_visuals/card_back_hatch_pattern.png" id="3_1vw4x"]
 [ext_resource type="PackedScene" uid="uid://s4mgc84jep8h" path="res://scenes/ui/card_visuals.tscn" id="3_d3nd8"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_14lqk"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back"]
-bg_color = Color(0.1, 0.12, 0.22, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.25, 0.35, 0.6, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glow"]
 bg_color = Color(0, 0, 0, 0)
-shadow_color = Color(1, 0.95, 0.3, 0.8)
-shadow_size = 16
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color(1, 0.95, 0.3, 0.8)
+shadow_size = 16
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_14lqk"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3nd8"]
+bg_color = Color(0.23137255, 0.14509805, 0.23921569, 1)
 
 [node name="CardRenderContainer" type="MarginContainer" unique_id=1508382840]
 custom_minimum_size = Vector2(40, 60)
@@ -35,17 +27,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_d3nd8")
 
-[node name="GlowPanel" type="Panel" parent="." unique_id=4000000001]
+[node name="GlowPanel" type="Panel" parent="." unique_id=-294967295]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 mouse_filter = 2
-visible = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_glow")
 
 [node name="ViewportTexture" type="TextureRect" parent="." unique_id=1215619486]
 texture_filter = 4
 layout_mode = 2
 texture = SubResource("ViewportTexture_14lqk")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=823658456]
 layout_mode = 2
@@ -53,12 +46,18 @@ theme_override_constants/margin_left = 7
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 11
 
-[node name="CardBackPanel" type="Panel" parent="MarginContainer" unique_id=2001000001]
+[node name="CardBackPanel" type="Panel" parent="MarginContainer" unique_id=1542496556]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_back")
+theme_override_styles/panel = SubResource("StyleBoxFlat_d3nd8")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CardBackPanel" unique_id=1913184883]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 280.0
+texture = ExtResource("3_1vw4x")
+expand_mode = 1
 
 [node name="PlanExclamation" type="Label" parent="MarginContainer/CardBackPanel" unique_id=2001000002]
 unique_name_in_owner = true
@@ -69,7 +68,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 160
 text = "!"
@@ -88,7 +86,6 @@ offset_top = 4.0
 offset_right = -10.0
 offset_bottom = 84.0
 grow_horizontal = 0
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -102,7 +99,9 @@ disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 2
-size = Vector2i(226, 291)
+size = Vector2i(678, 873)
+size_2d_override = Vector2i(226, 291)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="CardVisuals" parent="SubViewport" unique_id=101409697 instance=ExtResource("3_d3nd8")]

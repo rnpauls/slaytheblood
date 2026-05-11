@@ -34,6 +34,7 @@ func _apply_base_scale() -> void:
 		return
 	visuals.pivot_offset = visuals.custom_minimum_size / 2.0
 	visuals.scale = Vector2.ONE * base_scale
+	update_minimum_size()
 
 
 func _get_minimum_size() -> Vector2:

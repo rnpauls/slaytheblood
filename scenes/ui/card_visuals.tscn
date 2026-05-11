@@ -315,7 +315,6 @@ texture = ExtResource("17_ee1gm")
 stretch_mode = 5
 
 [node name="TextBox" type="RichTextLabel" parent="." unique_id=1259037404]
-texture_filter = 1
 layout_mode = 0
 offset_left = 11.0
 offset_top = 181.0
