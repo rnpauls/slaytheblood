@@ -74,6 +74,15 @@ signal player_first_card_played(card: Card)
 ## Fires the first time an attack card is played in a given player turn.
 ## Used by Crow's Feather.
 signal player_first_attack_played(card: Card)
+## Fires after EVERY player card resolves (post-effects). Used by reactive
+## "next non-attack" buffs (e.g. Mana-Threaded Greaves) that need to inspect
+## the played card's type.
+signal player_card_played(card: Card)
+## Request that a specific Equipment instance destroy itself this frame. The
+## EquipmentHandler that owns the instance handles teardown (on_destroyed
+## hook, removal from inventory, etc.) via _destroy_equipment. Used by
+## active-ability equipment that consumes itself (Spellbinder's Robe).
+signal equipment_self_destruct_requested(equipment: Equipment)
 
 #Enemy-related events
 signal enemy_phase_ended #Called when all enemies are done, move to player turn

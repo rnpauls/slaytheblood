@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://btlx2vitldhsy"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://c6walq52ych7k" path="res://art/item64.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://b8bytmercc6kn" path="res://art/card_art/pixellab/bullseye.png" id="2_icon"]
 [ext_resource type="Script" uid="uid://d2r1424cq2ou5" path="res://characters/ninja/cards/bullseye.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_sound"]
 
@@ -11,7 +11,7 @@ id = "bullseye"
 target = 1
 pitch = 2
 attack = 4
-defense = 2
+defense = 3
 icon = ExtResource("2_icon")
 tooltip_text = "Deal 4 damage. Double damage vs [kw=marked]Marked[/kw] targets."
 sound = ExtResource("4_sound")

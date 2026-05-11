@@ -1,20 +1,19 @@
 [gd_resource type="Resource" format=3 uid="uid://b7e7rcklch007"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_bv4mp"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_rckl1"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_rckl2"]
-[ext_resource type="Script" path="res://enemies/elite/reaver/cards/reckless_charge.gd" id="3_rckl3"]
+[ext_resource type="Script" uid="uid://bf36ysdt4toh3" path="res://enemies/elite/reaver/cards/reckless_charge.gd" id="3_rckl3"]
 
 [resource]
 script = ExtResource("3_rckl3")
 id = "reckless_charge"
-type = 0
 target = 1
 cost = 1
 pitch = 2
 attack = 10
-defense = 0
 ai_value = 10
 icon = ExtResource("2_rckl2")
-tooltip_text = "Reckless Charge: 10 attack. Take 3 self damage."
+tooltip_text = "Lose 3 HP"
 sound = ExtResource("1_rckl1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

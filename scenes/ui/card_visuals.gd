@@ -22,6 +22,7 @@ extends Control
 
 #const FIVE_PIP_4_PITCH_BAR = preload("uid://b7aopbfcwmbtv")
 #const FOUR_PIP_4_PITCH_BAR = preload("uid://dnwth2rfebm4q")
+const ZERO_PIP_4_PITCH_BAR = preload("uid://biukqdfmbjun2")
 const ONE_PIP_4_PITCH_BAR = preload("uid://c2f6oqlq3fu1u")#preload("uid://b7u7lguwohkop")
 const THREE_PIP_4_PITCH_BAR = preload("uid://dy7gr74myjkmd")#preload("uid://diodbu8p6vfm6")
 const TWO_PIP_4_PITCH_BAR = preload("uid://d0llkkmor2k0u")#preload("uid://7g08eoj27y8j")
@@ -52,6 +53,9 @@ func set_card(value: Card) -> void:
 	art_panel.add_theme_stylebox_override("panel", StyleBoxCache.get_rarity_border(art_panel, card.rarity))
 	#pitch_strip.modulate = Card.PITCH_COLORS[card.pitch]
 	match card.pitch:
+		0:
+			mana_bar.texture = ZERO_PIP_4_PITCH_BAR
+			manabar_underline.modulate = Color.GAINSBORO
 		1:
 			mana_bar.texture = ONE_PIP_4_PITCH_BAR
 			manabar_underline.modulate = Color.hex(Constants.RED_PITCH)

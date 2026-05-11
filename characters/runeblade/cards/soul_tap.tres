@@ -1,20 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://cjunn7hr0dq7"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_23.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/soul_tap.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://ba4pq7edhcg35" path="res://art/card_art/pixellab/soul_tap.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://tdyebvmlnbld" path="res://characters/runeblade/cards/soul_tap.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
-damage_per_trash = 2
 id = "soul_tap"
 type = 1
+rarity = 2
 target = 1
 cost = 1
 pitch = 1
-rarity = 2
+defense = 4
 icon = ExtResource("2_icon")
 tooltip_text = "Deal 2 [kw=zap]arcane[/kw] for each [kw=trash]Trash[/kw] card across enemy draw piles and discards."
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

@@ -1,18 +1,15 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" script_class="ScabskinLeathersEquipment" format=3 uid="uid://bkv4elr4iwvhu"]
 
-[ext_resource type="Script" path="res://equipment/scabskin_leathers.gd" id="1_skln"]
-[ext_resource type="Texture2D" uid="uid://c6rme2o6dyaoj" path="res://art/tile_0104.png" id="2_skln"]
+[ext_resource type="Script" uid="uid://ce6xgi04sxdn0" path="res://equipment/scabskin_leathers.gd" id="1_skln"]
+[ext_resource type="Texture2D" path="res://art/sprites/pixellab/scabskin_leathers.png" id="2_skln"]
 
 [resource]
 script = ExtResource("1_skln")
 equipment_name = "Scabskin Leathers"
 id = "scabskin_leathers"
 slot = 3
-rarity = 0
 character_type = 2
 icon = ExtResource("2_skln")
-tooltip = "[color=\"ffdf00\"]Scabskin Leathers[/color]
-Defense 2.
-Active (once per turn): Spend 1 AP, roll a d6 and gain floor(d6/2) action points back."
+tooltip = "Action (once per turn): Roll a d6 and gain half that many AP (rounded down)"
 max_block = 2
 has_active_ability = true

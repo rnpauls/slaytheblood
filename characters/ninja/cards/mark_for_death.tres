@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
 [ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="1_icon"]
-[ext_resource type="Script" uid="uid://stbnincrd003a" path="res://characters/ninja/cards/mark_for_death.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://ddn55fnq37i17" path="res://characters/ninja/cards/mark_for_death.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="3_sound"]
 
 [resource]
@@ -12,6 +12,7 @@ type = 1
 target = 1
 cost = 1
 pitch = 2
+defense = 3
 go_again = true
 ai_value = 4
 ai_value_needs_attack = true
@@ -19,4 +20,3 @@ icon = ExtResource("1_icon")
 tooltip_text = "Apply [kw=marked:4]Marked 4[/kw] to target."
 sound = ExtResource("3_sound")
 disable_attack = true
-disable_defense = true

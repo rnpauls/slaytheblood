@@ -8,7 +8,7 @@
 custom_minimum_size = Vector2(100, 100)
 offset_right = 107.0
 offset_bottom = 220.0
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 script = ExtResource("1_eqshop")
@@ -21,21 +21,24 @@ size_flags_vertical = 3
 [node name="InventoryCardRenderContainer" parent="EquipmentContainer" instance=ExtResource("2_eqshop")]
 layout_mode = 2
 size_flags_vertical = 1
+hover_scale = Vector2(1.4286, 1.4286)
+rest_scale = Vector2(0.7, 0.7)
 
 [node name="Price" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 2
 alignment = 1
 
 [node name="PriceLabel" type="Label" parent="Price"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 21
 text = "999"
 
 [node name="GoldIcon" type="TextureRect" parent="Price"]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(21, 21)
 layout_mode = 2
 texture = ExtResource("3_eqshop")
 expand_mode = 4
@@ -45,7 +48,8 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 21
 text = "Buy"
 
 [connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

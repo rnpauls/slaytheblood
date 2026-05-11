@@ -1,21 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://bkxqkjjuplox7"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_21.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/hex.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://d1o2mhaipe2ly" path="res://art/magicbook/64x64/book_image_21.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://2h6h3or416y3" path="res://characters/runeblade/cards/hex.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
-trash_count = 3
-brittle_duration = 2
 id = "hex"
 type = 1
 target = 1
 cost = 1
 pitch = 1
+defense = 3
 go_again = true
 icon = ExtResource("2_icon")
-tooltip_text = "Add 3 [kw=trash]Trash[/kw] cards to target's draw pile. Apply [kw=brittle]Brittle[/kw] for 2 turns."
+tooltip_text = "Add 3 [kw=trash]Trash[/kw] cards to target's draw pile. Apply [kw=exposed:2]Exposed 2[/kw]."
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

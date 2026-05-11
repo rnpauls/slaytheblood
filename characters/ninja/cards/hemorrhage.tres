@@ -1,20 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://ck1gdwp7a6s1k"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item59.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/ninja/cards/hemorrhage.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://qpag2a664ffc" path="res://art/item59.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bgj6qyyiuv51f" path="res://characters/ninja/cards/hemorrhage.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
 id = "hemorrhage"
-type = 0
+rarity = 1
 target = 1
 cost = 2
 pitch = 1
 attack = 4
-defense = 2
-rarity = 1
+defense = 3
 icon = ExtResource("2_icon")
 tooltip_text = "Deal 4 + target's [kw=bleed]Bleed[/kw] stacks damage. (Does not consume Bleed.)"
 sound = ExtResource("4_sound")

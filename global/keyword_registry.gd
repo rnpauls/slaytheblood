@@ -24,7 +24,7 @@ const KEYWORDS: Dictionary = {
 	&"muscle": preload("uid://dwwwgbh3j5nri"),
 	&"empower" : preload("uid://d11r1vtrliyc3"),
 	&"intim" : preload("uid://c2nsq18tn8muy"),
-	&"vulnerable": preload("uid://7gk67jrtikrd"),
+	&"exposed": preload("uid://7gk67jrtikrd"),
 	&"brittle" : preload("uid://cfqb7i380owtc"),
 	&"enraged" : preload("uid://qe37tcwulr8q"),
 	&"flow" : preload("uid://woqcqv0i0feo"),

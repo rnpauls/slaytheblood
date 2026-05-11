@@ -1,20 +1,18 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://cngmewy6pkui3"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item72.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/retribution.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://cb02oo4u8qgqt" path="res://art/item72.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://c8l65ejfwwm0e" path="res://characters/brute/cards/retribution.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-thorns_stacks = 3
 id = "retribution"
-type = 0
 target = 1
 cost = 1
 pitch = 2
 attack = 4
-defense = 2
+defense = 4
 icon = ExtResource("2_icon")
-tooltip_text = "Deal 4 damage. Gain [kw=thorns:3]Thorns 3[/kw]."
+tooltip_text = "Gain [kw=thorns:3]Thorns 3[/kw]."
 sound = ExtResource("4_sound")

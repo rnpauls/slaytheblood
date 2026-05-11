@@ -1,8 +1,8 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://n1b0pnxrlxv"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_7.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/runic_burst.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://cve8gxyk28p8x" path="res://art/magicbook/64x64/book_image_7.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://8rk1kpqq0ywv" path="res://characters/runeblade/cards/runic_burst.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
@@ -11,8 +11,8 @@ type = 1
 target = 1
 cost = 1
 pitch = 1
+defense = 4
 icon = ExtResource("2_icon")
 tooltip_text = "Consume all your [kw=runechant]runechants[/kw]. Deal arcane damage equal to 2× the amount consumed."
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

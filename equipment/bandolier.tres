@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BandolierEquipment" format=3 uid="uid://stbequip006b"]
 
-[ext_resource type="Texture2D" uid="uid://b23uexaietdbt" path="res://art/item36.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://dgqa31wdnu1d8" path="res://art/sprites/pixellab/bandolier.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://stbequip006a" path="res://equipment/bandolier.gd" id="2_script"]
 
 [resource]

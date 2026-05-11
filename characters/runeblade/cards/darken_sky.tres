@@ -1,20 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://btso4x6ukg3q7"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://dcy32eq7h52tv" path="res://art/magicbook/64x64/book_image_6.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/darken_sky.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://dn0dunw3iav0q" path="res://art/card_art/pixellab/darken_sky.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://c5l2o8sxkf37w" path="res://characters/runeblade/cards/darken_sky.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
-charge_stacks = 3
 id = "darken_sky"
 type = 1
 cost = 1
 pitch = 2
+defense = 3
 go_again = true
 action_points_granted = 1
 icon = ExtResource("2_icon")
 tooltip_text = "Gain 1 [kw=action_point]Action Point[/kw]. Your next attack this turn: on hit, create 3 [kw=runechant]runechants[/kw]."
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

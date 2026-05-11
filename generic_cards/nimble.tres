@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://bn1mb1ec4rdxa"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_wwalm"]
-[ext_resource type="Texture2D" uid="uid://b23uexaietdbt" path="res://art/item36.png" id="2_x1hd6"]
+[ext_resource type="Texture2D" uid="uid://c50ir7go6a460" path="res://art/card_art/pixellab/nimble.png" id="2_x1hd6"]
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="3_wsmxw"]
 [ext_resource type="AudioStream" uid="uid://umv88dkphod" path="res://art/music/sound_effects/JDSherbert - Ultimate UI SFX Pack (FREE)/Stereo/wav (HD)/JDSherbert - Ultimate UI SFX Pack - Popup Open - 1.wav" id="4_wwalm"]
 

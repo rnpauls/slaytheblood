@@ -1,21 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://dg0a3vqrrn0b0"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item78.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/final_salvo.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://oqin3stbitln" path="res://art/card_art/pixellab/final_salvo.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://b2dn534oi4fkp" path="res://characters/brute/cards/final_salvo.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-discards_per_discount = 2
 id = "final_salvo"
-type = 0
+rarity = 2
 target = 2
 cost = 3
 pitch = 1
 attack = 8
-defense = 1
-rarity = 2
 icon = ExtResource("2_icon")
 tooltip_text = "Deal 8 damage to all enemies. Cost reduced by 1 per 2 cards discarded this combat."
 sound = ExtResource("4_sound")
+disable_defense = true

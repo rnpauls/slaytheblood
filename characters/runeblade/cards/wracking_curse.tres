@@ -1,22 +1,20 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://y5bk4vtobqy7"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_22.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/wracking_curse.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://ccpkiqf63iq2o" path="res://art/magicbook/64x64/book_image_22.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://d0c44j5bl4y04" path="res://characters/runeblade/cards/wracking_curse.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
-marked_stacks = 3
-brittle_duration = 2
 id = "wracking_curse"
 type = 1
+rarity = 1
 target = 1
 cost = 1
 pitch = 2
+defense = 3
 go_again = true
-rarity = 1
 icon = ExtResource("2_icon")
-tooltip_text = "Apply [kw=marked:3]Marked 3[/kw] and [kw=brittle]Brittle[/kw] (2 turns) to target."
+tooltip_text = "Apply [kw=marked:3]Marked 3[/kw] and [kw=exposed:2]Exposed 2[/kw] to target."
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

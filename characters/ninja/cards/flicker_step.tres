@@ -1,8 +1,8 @@
 [gd_resource type="Resource" format=3 uid="uid://ddn55fnq37i08"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="1_icon"]
-[ext_resource type="Script" path="res://characters/ninja/cards/flicker_step.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://b40tuinjbxt0r" path="res://art/card_art/pixellab/flicker_step.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://ddn55fnq37i07" path="res://characters/ninja/cards/flicker_step.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="3_sound"]
 
 [resource]

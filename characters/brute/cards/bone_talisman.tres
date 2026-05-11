@@ -1,20 +1,18 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://bgwbodepp7d3q"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item65.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/bone_talisman.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://cs2gy4iva28bn" path="res://art/card_art/pixellab/bone_talisman.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://c50osbefnuco" path="res://characters/brute/cards/bone_talisman.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-cards_on_discard = 1
 id = "bone_talisman"
-type = 0
 target = 1
 cost = 1
 pitch = 1
 attack = 6
-defense = 2
+defense = 4
 icon = ExtResource("2_icon")
 tooltip_text = "Deal 6 damage. When discarded, draw 1 card."
 sound = ExtResource("4_sound")

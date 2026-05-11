@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ManathreadedGreavesEquipment" format=3 uid="uid://nlkimdmeaoa"]
+
+[ext_resource type="Script" uid="uid://07w3hf8dw4d8" path="res://equipment/manathreaded_greaves.gd" id="1_mtgrv"]
+[ext_resource type="Texture2D" path="res://art/sprites/pixellab/manathreaded_greaves.png" id="2_mtgrv"]
+
+[resource]
+script = ExtResource("1_mtgrv")
+equipment_name = "Mana-Threaded Greaves"
+id = "manathreaded_greaves"
+slot = 3
+rarity = 1
+character_type = 3
+icon = ExtResource("2_mtgrv")
+tooltip = "[color=\"ffdf00\"]Mana-Threaded Greaves[/color]
+Defense 3.
+After blocking with these, the next non-attack action you play grants +1 action point."
+max_block = 3

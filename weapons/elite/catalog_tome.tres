@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CatalogTomeWeapon" format=3 uid="uid://b7catalg002"]
 
 [ext_resource type="Texture2D" uid="uid://byogcb4jkiu6i" path="res://art/magicbook/64x64/book_image_1.png" id="1_ctlg1"]
-[ext_resource type="Script" path="res://weapons/elite/catalog_tome.gd" id="2_ctlg2"]
+[ext_resource type="Script" uid="uid://cp7wdkkqkni5e" path="res://weapons/elite/catalog_tome.gd" id="2_ctlg2"]
 [ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_ctlg3"]
 
 [resource]
@@ -13,6 +13,6 @@ rarity = 2
 hands = 1
 icon = ExtResource("1_ctlg1")
 sound = ExtResource("3_ctlg3")
-tooltip = "Catalog Tome: at the start of every turn, gain block equal to your opponent's deck size, and bonus damage equal to one third of it. Swing for 4 attack."
+tooltip = "Catalog Tome: at the start of every turn, gain block equal to your opponent's deck size, and bonus damage equal to one third of it"
 attack = 4
 cost = 1

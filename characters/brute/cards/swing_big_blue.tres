@@ -8,7 +8,6 @@
 [resource]
 script = ExtResource("3_at5qr")
 id = "swing_big"
-rarity = 2
 target = 1
 cost = 2
 pitch = 3

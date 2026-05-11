@@ -2,14 +2,15 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
 [ext_resource type="Texture2D" uid="uid://oe7v35ii8vrs" path="res://art/tile_0102.png" id="1_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/unyielding.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://ddntfmnq37i07" path="res://characters/brute/cards/unyielding.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")
 id = "unyielding"
 type = 1
-pitch = 1
-defense = 8
+rarity = 2
+pitch = 3
+defense = 9
 ai_value = 1
 icon = ExtResource("1_icon")
 tooltip_text = "Gain 8 [kw=block]block[/kw]."

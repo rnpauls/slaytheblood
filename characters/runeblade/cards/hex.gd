@@ -1,13 +1,13 @@
-## Hex: dump 3 Trash into the target's draw pile and apply Brittle (=Exposed,
-## takes 50% more damage for N turns). The Trash sits in their deck as
-## unplayable filler, the Brittle amplifies whatever lands in the meantime.
+## Hex: dump 3 Trash into the target's draw pile and apply Exposed (target takes
+## 50% more damage for N turns). The Trash sits in their deck as unplayable
+## filler, the Exposed amplifies whatever lands in the meantime.
 extends Card
 
 const TRASH_CARD := preload("res://generic_cards/trash.tres")
 const EXPOSED_STATUS := preload("res://statuses/exposed.tres")
 
 @export var trash_count: int = 3
-@export var brittle_duration: int = 2
+@export var exposed_duration: int = 2
 
 
 func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
@@ -20,6 +20,6 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
 		effect.destination = CardAddEffect.Destination.DRAW_PILE_RANDOM
 		effect.execute([target_node])
 	if target_node.status_handler:
-		var brittle := EXPOSED_STATUS.duplicate()
-		brittle.duration = brittle_duration
-		target_node.status_handler.add_status(brittle)
+		var exposed := EXPOSED_STATUS.duplicate()
+		exposed.duration = exposed_duration
+		target_node.status_handler.add_status(exposed)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NextActionApBuffStatus" format=3]
+
+[ext_resource type="Script" path="res://statuses/next_action_ap_buff.gd" id="1_nxtap"]
+[ext_resource type="Texture2D" uid="uid://df5xn3ukn0gor" path="res://art/magicbook/64x64/book_image_2.png" id="2_nxtap"]
+
+[resource]
+script = ExtResource("1_nxtap")
+id = "next_action_ap_buff"
+type = 2
+stack_type = 1
+can_expire = false
+stacks = 1
+icon = ExtResource("2_nxtap")
+tooltip = "Next non-attack action you play grants +1 action point."

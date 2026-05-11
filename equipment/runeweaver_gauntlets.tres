@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RuneweaverGauntletsEquipment" format=3 uid="uid://cyi5ptq61dosr"]
+
+[ext_resource type="Script" uid="uid://brwefgxpuk80o" path="res://equipment/runeweaver_gauntlets.gd" id="1_rwgnt"]
+[ext_resource type="Texture2D" uid="uid://0eqyy5cuel6l" path="res://art/sprites/pixellab/runeweaver_gauntlets.png" id="2_rwgnt"]
+
+[resource]
+script = ExtResource("1_rwgnt")
+equipment_name = "Runeweaver's Gauntlets"
+id = "runeweaver_gauntlets"
+slot = 2
+rarity = 1
+character_type = 3
+icon = ExtResource("2_rwgnt")
+tooltip = "[color=\"ffdf00\"]Runeweaver's Gauntlets[/color]
+Defense 2.
+Active (once per turn): Spend 2 mana and create 1 [kw=runechant]runechant[/kw]. Go again."
+max_block = 2
+has_active_ability = true

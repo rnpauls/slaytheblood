@@ -1,6 +1,6 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" script_class="DarkenSkyChargeStatus" format=3 uid="uid://dnm4ek4586em0"]
 
-[ext_resource type="Script" path="res://statuses/darken_sky_charge.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://b6p485hdtmuc5" path="res://statuses/darken_sky_charge.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_icon"]
 
 [resource]

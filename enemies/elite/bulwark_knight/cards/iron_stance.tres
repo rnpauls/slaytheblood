@@ -2,19 +2,15 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_iron1"]
 [ext_resource type="Texture2D" uid="uid://d2vujk8wvu6ia" path="res://art/tile_0123.png" id="2_iron2"]
-[ext_resource type="Script" path="res://enemies/elite/bulwark_knight/cards/iron_stance.gd" id="3_iron3"]
+[ext_resource type="Script" uid="uid://d0eb4twobiwca" path="res://enemies/elite/bulwark_knight/cards/iron_stance.gd" id="3_iron3"]
 
 [resource]
 script = ExtResource("3_iron3")
 id = "iron_stance"
 type = 1
-target = 0
-cost = 0
 pitch = 1
-attack = 0
 defense = 8
-ai_value = 0
+go_again = true
 icon = ExtResource("2_iron2")
-tooltip_text = "Iron Stance: 8 defense."
 sound = ExtResource("1_iron1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

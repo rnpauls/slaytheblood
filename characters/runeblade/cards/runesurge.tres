@@ -1,8 +1,8 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://5e017dcx1jtf"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_13.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/runesurge.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://6bds65lxdcoc" path="res://art/magicbook/64x64/book_image_13.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://cm8q7rmdm5us7" path="res://characters/runeblade/cards/runesurge.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
@@ -10,9 +10,9 @@ id = "runesurge"
 type = 1
 cost = 2
 pitch = 1
-rarity = 1
+defense = 3
+go_again = true
 icon = ExtResource("2_icon")
 tooltip_text = "Gain [kw=empower]Empower[/kw] equal to your [kw=runechant]runechants[/kw]. (Does not consume them.)"
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

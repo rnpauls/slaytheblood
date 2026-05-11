@@ -2,19 +2,14 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_stwl1"]
 [ext_resource type="Texture2D" uid="uid://d2vujk8wvu6ia" path="res://art/tile_0123.png" id="2_stwl2"]
-[ext_resource type="Script" path="res://enemies/elite/bulwark_knight/cards/stalwart_wall.gd" id="3_stwl3"]
+[ext_resource type="Script" uid="uid://baoikbehgx122" path="res://enemies/elite/bulwark_knight/cards/stalwart_wall.gd" id="3_stwl3"]
 
 [resource]
 script = ExtResource("3_stwl3")
 id = "stalwart_wall"
 type = 1
-target = 0
-cost = 0
-pitch = 0
-attack = 0
 defense = 12
-ai_value = 0
+go_again = true
 icon = ExtResource("2_stwl2")
-tooltip_text = "Stalwart Wall: 12 defense."
 sound = ExtResource("1_stwl1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

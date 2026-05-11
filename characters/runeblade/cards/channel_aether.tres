@@ -1,20 +1,17 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://cp5nstopv4lrd"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_11.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/channel_aether.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://bd2yp5wxjyqiu" path="res://art/magicbook/64x64/book_image_11.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://oprisoepuhcs" path="res://characters/runeblade/cards/channel_aether.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
-base_amount = 2
-bonus_amount = 4
-mana_threshold = 3
 id = "channel_aether"
 type = 1
 pitch = 3
+defense = 3
 go_again = true
 icon = ExtResource("2_icon")
 tooltip_text = "Create 2 [kw=runechant]runechants[/kw]. If you have 3+ mana, create 4 instead."
 sound = ExtResource("1_block")
 disable_attack = true
-disable_defense = true

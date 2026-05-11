@@ -43,7 +43,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_invbg")
 
-[node name="Border" type="NinePatchRect" parent="."]
+[node name="Border" type="NinePatchRect" parent="." unique_id=670607216]
 self_modulate = Color(0.78, 0.62, 0.28, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -51,7 +51,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 texture = ExtResource("4_invborder")
 draw_center = false
 region_rect = Rect2(0, 0, 60, 60)
@@ -60,7 +59,7 @@ patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 15
 
-[node name="ArtPanel" type="TextureRect" parent="."]
+[node name="ArtPanel" type="TextureRect" parent="." unique_id=1567001900]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -78,7 +77,7 @@ mouse_filter = 2
 texture = ExtResource("5_invartfr")
 stretch_mode = 5
 
-[node name="Filigree1" type="TextureRect" parent="ArtPanel"]
+[node name="Filigree1" type="TextureRect" parent="ArtPanel" unique_id=1674630906]
 layout_mode = 0
 offset_left = -27.5
 offset_top = 40.0
@@ -88,7 +87,7 @@ mouse_filter = 2
 texture = ExtResource("6_invfilig")
 stretch_mode = 5
 
-[node name="Filigree2" type="TextureRect" parent="ArtPanel"]
+[node name="Filigree2" type="TextureRect" parent="ArtPanel" unique_id=511403326]
 layout_mode = 0
 offset_left = 96.5
 offset_top = 40.0
@@ -99,7 +98,7 @@ texture = ExtResource("6_invfilig")
 stretch_mode = 5
 flip_h = true
 
-[node name="Filigree3" type="TextureRect" parent="ArtPanel"]
+[node name="Filigree3" type="TextureRect" parent="ArtPanel" unique_id=1916138841]
 layout_mode = 0
 offset_left = -27.5
 offset_top = 124.0
@@ -110,7 +109,7 @@ texture = ExtResource("6_invfilig")
 stretch_mode = 5
 flip_v = true
 
-[node name="Filigree4" type="TextureRect" parent="ArtPanel"]
+[node name="Filigree4" type="TextureRect" parent="ArtPanel" unique_id=1829597042]
 layout_mode = 0
 offset_left = 96.5
 offset_top = 124.0
@@ -204,9 +203,9 @@ stretch_mode = 5
 [node name="NameLabel" type="RichTextLabel" parent="ArtPanel" unique_id=238359469]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 11.0
+offset_top = 2.5
 offset_right = 156.0
-offset_bottom = 47.0
+offset_bottom = 43.0
 mouse_filter = 2
 theme = ExtResource("8_invth20")
 bbcode_enabled = true

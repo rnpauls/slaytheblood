@@ -1,13 +1,13 @@
 [gd_resource type="Resource" format=3 uid="uid://b7e2phlnx002"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_nir81"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_phlx1"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_phlx2"]
-[ext_resource type="Script" path="res://enemies/elite/bulwark_knight/cards/phalanx_strike.gd" id="3_phlx3"]
+[ext_resource type="Script" uid="uid://dfj7lkisfrs5k" path="res://enemies/elite/bulwark_knight/cards/phalanx_strike.gd" id="3_phlx3"]
 
 [resource]
 script = ExtResource("3_phlx3")
 id = "phalanx_strike"
-type = 0
 target = 1
 cost = 1
 pitch = 1
@@ -15,6 +15,6 @@ attack = 4
 defense = 6
 ai_value = 4
 icon = ExtResource("2_phlx2")
-tooltip_text = "Phalanx Strike: 4 attack + current block. 6 defense."
+tooltip_text = "Gain attack equal to current block"
 sound = ExtResource("1_phlx1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://ddntfmnq37i18"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://dmstf3o5o06n6" path="res://art/item94.png" id="2_hp51x"]
+[ext_resource type="Texture2D" uid="uid://ddhh0e88halex" path="res://art/card_art/pixellab/battle_cry.png" id="2_hp51x"]
 [ext_resource type="Script" uid="uid://ddntfmnq37i17" path="res://characters/brute/cards/battle_cry.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://bwqypbxyj2f11" path="res://art/music/sound_effects/400 Sounds Pack/Human/cough_double.wav" id="3_sound"]
 

@@ -1,9 +1,10 @@
+@tool
 class_name InventoryCardRenderContainer
 extends MarginContainer
 
-const HOVER_SCALE := Vector2(1.08, 1.08)
 const HOVER_TWEEN_TIME := 0.1
 const CARD_ASPECT := 2.0 / 3.0
+const NATURAL_MIN_SIZE := Vector2(200, 300)
 
 signal equipment_pressed(equipment: Equipment)
 signal pressed(item: Resource)
@@ -11,6 +12,8 @@ signal pressed(item: Resource)
 @export var weapon: Weapon : set = set_weapon
 @export var equipment: Equipment : set = set_equipment
 @export var clickable: bool = false : set = set_clickable
+@export var hover_scale: Vector2 = Vector2(1.08, 1.08)
+@export var rest_scale: Vector2 = Vector2.ONE : set = set_rest_scale
 
 @onready var sub_viewport_viewer: TextureRect = %SubViewportViewer
 @onready var inventory_card: InventoryCard = $SubViewport/InventoryCard
@@ -87,6 +90,8 @@ func set_equipment(new_equipment: Equipment) -> void:
 
 
 func _on_pressed() -> void:
+	if Engine.is_editor_hint():
+		return
 	if equipment:
 		equipment_pressed.emit(equipment)
 		pressed.emit(equipment)
@@ -95,6 +100,8 @@ func _on_pressed() -> void:
 
 
 func _on_mouse_entered() -> void:
+	if Engine.is_editor_hint():
+		return
 	_set_hovered(true)
 	var tooltip_text := ""
 	if weapon:
@@ -110,6 +117,8 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	if Engine.is_editor_hint():
+		return
 	_set_hovered(false)
 	Events.tooltip_hide_requested.emit()
 
@@ -121,4 +130,22 @@ func _set_hovered(value: bool) -> void:
 	if _hover_tween and _hover_tween.is_running():
 		_hover_tween.kill()
 	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	_hover_tween.tween_property(stack, "scale", HOVER_SCALE if value else Vector2.ONE, HOVER_TWEEN_TIME)
+	_hover_tween.tween_property(stack, "scale", hover_scale if value else Vector2.ONE, HOVER_TWEEN_TIME)
+
+
+func set_rest_scale(value: Vector2) -> void:
+	rest_scale = value
+	if not is_node_ready():
+		return
+	update_minimum_size()
+
+
+# Mirror CardMenuUI's layout-aware minimum: report the visual minimum at
+# rest_scale so the parent container (e.g. HBoxContainer) actually packs
+# scaled items tighter rather than just shrinking them within unscaled cells.
+# Returns ZERO at the default rest_scale to preserve the old min behavior
+# (custom_minimum_size = 40x60 from the .tscn) for non-shop usages.
+func _get_minimum_size() -> Vector2:
+	if rest_scale == Vector2.ONE:
+		return Vector2.ZERO
+	return NATURAL_MIN_SIZE * rest_scale

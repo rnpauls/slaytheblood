@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://4t0h3cimqt3o"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_in7bp"]
-[ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_sd0hr"]
+[ext_resource type="Texture2D" uid="uid://c5l8hgu4rv5hl" path="res://art/card_art/pixellab/poisoned_tip.png" id="1_sd0hr"]
 [ext_resource type="Script" uid="uid://bik2r6llb7hq" path="res://characters/ninja/cards/poison_the_blade.gd" id="2_sd0hr"]
 [ext_resource type="AudioStream" uid="uid://5lcvnbnunaib" path="res://art/music/sound_effects/400 Sounds Pack/Environment/water_splashing.wav" id="4_g23bi"]
 

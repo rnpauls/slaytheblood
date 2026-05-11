@@ -1,13 +1,13 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://conkkrmqjv2jt"]
 
-[ext_resource type="Script" path="res://generic_cards/vampiric_bite.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/Icon28_33.png" id="2_icon"]
-[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_e50sf"]
+[ext_resource type="Script" uid="uid://c0slv7quhsk14" path="res://generic_cards/vampiric_bite.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://j4kweg14joe8" path="res://art/card_art/pixellab/vampiric_bite.png" id="2_icon"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
 
 [resource]
 script = ExtResource("1_script")
 id = "vampiric_bite"
-type = 0
 rarity = 1
 target = 1
 cost = 2

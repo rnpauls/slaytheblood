@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BrittleStatus" format=3]
+
+[ext_resource type="Script" path="res://statuses/brittle.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/expose.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = "brittle"
+type = 1
+stack_type = 1
+can_expire = true
+duration = 1
+stacks = 1
+icon = ExtResource("2_icon")
+tooltip = "Brittle: gains %s less block when blocking until end of turn."

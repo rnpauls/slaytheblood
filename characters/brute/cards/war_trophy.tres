@@ -1,15 +1,13 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://b7pvswkikb3ve"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item66.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/war_trophy.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://baany2nyo34c5" path="res://art/card_art/pixellab/war_trophy.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://bq270a73mnaup" path="res://characters/brute/cards/war_trophy.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-mana_on_discard = 1
 id = "war_trophy"
-type = 0
 target = 1
 cost = 1
 pitch = 1

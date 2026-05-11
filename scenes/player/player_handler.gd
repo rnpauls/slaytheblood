@@ -284,6 +284,7 @@ func _on_card_play_finished(card: Card) -> void:
 	if not _first_card_played_this_turn:
 		_first_card_played_this_turn = true
 		Events.player_first_card_played.emit(card)
+	Events.player_card_played.emit(card)
 	if card.exhausts:# or card.type == Card.Type.POWER:
 		character.exhaust.add_card(card)
 		Events.card_exhausted.emit(card)
@@ -294,11 +295,8 @@ func _on_card_discarded(card: Card) -> void:
 	if card.attack >= 6:
 		var enr_status  := preload("res://statuses/enraged.tres").duplicate()
 		player.status_handler.add_status(enr_status)
-
-	if card.exhausts:# or card.type == Card.Type.POWER:
-		character.exhaust.add_card(card)
-		Events.card_exhausted.emit(card)
-		return
+	# Forced discards always go to the discard pile. `exhausts` only applies
+	# when the card is PLAYED (routed by _on_card_play_finished).
 	character.discard.add_card(card)
 
 func _on_card_blocked(card: Card) -> void:

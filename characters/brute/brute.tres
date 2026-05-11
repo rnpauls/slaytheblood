@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cx87eu7tnl0my" path="res://art/sprites/pixellab/brute-0001.png" id="1_hmg1o"]
 [ext_resource type="Script" uid="uid://b70h3fay80sot" path="res://custom_resources/character_stats.gd" id="1_i5v26"]
-[ext_resource type="Resource" uid="uid://ceo5ksfobyos2" path="res://characters/brute/brute_draftable_cards.tres" id="2_s65w1"]
+[ext_resource type="Resource" uid="uid://cgjfn2fdxycqy" path="res://characters/brute/brute_draftable_cards.tres" id="2_s65w1"]
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_pbyxb"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="4_3gwwx"]
 [ext_resource type="Resource" uid="uid://cvgk76sl2bjsk" path="res://characters/brute/brute_starting_deck.tres" id="4_6x0nb"]
@@ -14,14 +14,16 @@
 [ext_resource type="Resource" uid="uid://stbequip002b" path="res://equipment/berserker_helm.tres" id="8_helm"]
 [ext_resource type="Resource" uid="uid://stbequip003b" path="res://equipment/heavy_greaves.tres" id="9_greav"]
 [ext_resource type="Resource" uid="uid://stbequip004b" path="res://equipment/spiked_pauldrons.tres" id="10_spik"]
+[ext_resource type="Resource" path="res://equipment/scabskin_leathers.tres" id="11_scab"]
+[ext_resource type="Resource" uid="uid://baygstotj2pli" path="res://weapons/decimator.tres" id="12_decim"]
 
 [resource]
 script = ExtResource("1_i5v26")
 description = "No thinking. Only smash"
 portrait = ExtResource("1_hmg1o")
 draftable_cards = ExtResource("2_s65w1")
-draftable_equipment = Array[ExtResource("3_pbyxb")]([ExtResource("8_helm"), ExtResource("9_greav"), ExtResource("10_spik")])
-draftable_weapons = Array[ExtResource("4_3gwwx")]([ExtResource("5_aq6wg"), ExtResource("6_hmg1o"), ExtResource("7_pb6lu")])
+draftable_equipment = Array[ExtResource("3_pbyxb")]([ExtResource("8_helm"), ExtResource("9_greav"), ExtResource("10_spik"), ExtResource("11_scab")])
+draftable_weapons = Array[ExtResource("4_3gwwx")]([ExtResource("5_aq6wg"), ExtResource("6_hmg1o"), ExtResource("7_pb6lu"), ExtResource("12_decim")])
 starting_relic = ExtResource("5_md8iq")
 character_name = "Brute"
 art = ExtResource("1_hmg1o")

@@ -1,20 +1,19 @@
 [gd_resource type="Resource" format=3 uid="uid://b7e6whrlnd006"]
 
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_01d1w"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_whrl1"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_whrl2"]
-[ext_resource type="Script" path="res://enemies/elite/reaver/cards/whirlwind.gd" id="3_whrl3"]
+[ext_resource type="Script" uid="uid://c8xb3uviko0mq" path="res://enemies/elite/reaver/cards/whirlwind.gd" id="3_whrl3"]
 
 [resource]
 script = ExtResource("3_whrl3")
 id = "whirlwind"
-type = 0
 target = 1
 cost = 1
 pitch = 1
 attack = 5
-defense = 0
 ai_value = 5
 icon = ExtResource("2_whrl2")
-tooltip_text = "Whirlwind: 5 attack."
+tooltip_text = "Hits all enemies"
 sound = ExtResource("1_whrl1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

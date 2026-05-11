@@ -7,8 +7,10 @@
 
 [node name="ShopCard" type="VBoxContainer" unique_id=315799312]
 custom_minimum_size = Vector2(40, 56)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 200.0
+offset_bottom = 365.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 15
 script = ExtResource("1_gu12k")
 card = ExtResource("2_qhqmp")
@@ -16,24 +18,34 @@ card = ExtResource("2_qhqmp")
 [node name="CardContainer" type="CenterContainer" parent="." unique_id=1977906023]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="CardMenuUI" parent="CardContainer" unique_id=1177282318 instance=ExtResource("1_jui1i")]
 layout_mode = 2
+base_scale = 0.7
+hover_scale = 1.4286
 
 [node name="Price" type="HBoxContainer" parent="." unique_id=1101452153]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 2
 alignment = 1
 
 [node name="PriceLabel" type="Label" parent="Price" unique_id=822697421]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
 text = "999"
 
 [node name="GoldIcon" type="TextureRect" parent="Price" unique_id=662625622]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 texture = ExtResource("2_amrd3")
 expand_mode = 1
 stretch_mode = 5
@@ -42,6 +54,8 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
 text = "Buy"
 
 [connection signal="pressed" from="BuyButton" to="." method="_on_buy_button_pressed"]

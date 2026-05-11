@@ -32,6 +32,12 @@ func _ready() -> void:
 	Events.player_blocks_declared.connect(_on_player_blocks_declared)
 	Events.player_action_phase_started.connect(_on_player_action_phase_started)
 	Events.player_end_phase_started.connect(_on_player_end_phase_started)
+	Events.equipment_self_destruct_requested.connect(_on_self_destruct_requested)
+
+
+func _on_self_destruct_requested(eq: Equipment) -> void:
+	if equipment == eq:
+		_destroy_equipment()
 
 
 func set_equipment(new_equipment: Equipment) -> void:

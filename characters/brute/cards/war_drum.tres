@@ -1,14 +1,12 @@
 [gd_resource type="Resource" format=3 uid="uid://bcwdr0001bru"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://6wq18c8obbc6" path="res://art/item55.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/war_drum.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://uvwg2xqbq3jt" path="res://art/card_art/pixellab/war_drum.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://dvqpc405eeswn" path="res://characters/brute/cards/war_drum.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-draw_amount = 3
-empower_amount = 2
 id = "war_drum"
 type = 1
 cost = 2

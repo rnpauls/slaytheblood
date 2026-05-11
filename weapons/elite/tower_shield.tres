@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="TowerShieldWeapon" load_steps=4 format=3 uid="uid://b7twrshld001"]
+[gd_resource type="Resource" script_class="TowerShieldWeapon" format=3 uid="uid://b7twrshld001"]
 
 [ext_resource type="Texture2D" uid="uid://c4db7ggurfpek" path="res://art/Icon28_05.png" id="1_twrs1"]
-[ext_resource type="Script" path="res://weapons/elite/tower_shield.gd" id="2_twrs2"]
+[ext_resource type="Script" uid="uid://jom8ab81liax" path="res://weapons/elite/tower_shield.gd" id="2_twrs2"]
 [ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_twrs3"]
 
 [resource]
@@ -10,18 +10,9 @@ weapon_name = "Tower Shield"
 id = "tower_shield"
 type = 3
 rarity = 2
-character_type = 0
 hands = 1
-starter_weapon = false
-allow_duplicate_in_draft = false
 icon = ExtResource("1_twrs1")
 sound = ExtResource("3_twrs3")
-tooltip = "Tower Shield: gain 5 block at the start of every turn. Swing for 4 attack and gain 8 block."
+tooltip = "Tower Shield: gain 5 block at the start of every turn. On attack: gain 8 block"
 attack = 4
-damage_kind = 0
-zap = 0
 cost = 1
-go_again = false
-is_single_use = false
-attacks_per_turn = 1
-attacks_this_turn = 0

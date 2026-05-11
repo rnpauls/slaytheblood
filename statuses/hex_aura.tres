@@ -1,15 +1,12 @@
 [gd_resource type="Resource" script_class="HexAuraStatus" format=3 uid="uid://b2k3lmnopqrs8"]
 
 [ext_resource type="Texture2D" uid="uid://cw6byp2lelct" path="res://art/expose.png" id="1_hxar1"]
-[ext_resource type="Script" path="res://statuses/hex_aura.gd" id="2_hxar2"]
+[ext_resource type="Script" uid="uid://qexywh6awutj" path="res://statuses/hex_aura.gd" id="2_hxar2"]
 
 [resource]
 script = ExtResource("2_hxar2")
 id = "hex_aura"
-type = 0
 stack_type = 1
-can_expire = false
-duration = 0
 stacks = 1
 icon = ExtResource("1_hxar1")
 tooltip = "Hex Aura: at the start of every turn, applies Exposed to every opponent."

@@ -6,5 +6,5 @@
 script = ExtResource("1_ndgym")
 id = &"brittle"
 display_name = "Brittle"
-description = "Target takes 50% more damage for a few turns"
+description = "Gains {x} less block when blocking until end of turn"
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

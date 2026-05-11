@@ -1,17 +1,16 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://xxanemc6025u"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_16.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/runeblade/cards/channel_meteor.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://p18hql00cpmh" path="res://art/magicbook/64x64/book_image_16.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://dpx86k6sbshdo" path="res://characters/runeblade/cards/channel_meteor.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")
 id = "channel_meteor"
 type = 1
-cost = 1
+rarity = 2
+cost = 2
 pitch = 1
-go_again = true
-rarity = 1
 icon = ExtResource("2_icon")
 tooltip_text = "[kw=channel]Channel[/kw]: at the start of your next turn, deal 12 arcane to every enemy."
 sound = ExtResource("1_block")

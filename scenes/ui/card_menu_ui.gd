@@ -1,3 +1,4 @@
+@tool
 class_name CardMenuUI
 extends CenterContainer
 
@@ -11,6 +12,7 @@ const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
 @export var hover_scale := 1.1
 
 @onready var visuals: CardVisuals = $Visuals
+@onready var glow_panel: Panel = $Visuals/GlowPanel
 
 
 func _ready() -> void:
@@ -41,15 +43,20 @@ func _get_minimum_size() -> Vector2:
 
 
 func _on_visuals_gui_input(event: InputEvent) -> void:
+	if Engine.is_editor_hint():
+		return
 	if event.is_action_pressed("left_mouse"):
 		tooltip_requested.emit(card)
 
 
 func _on_visuals_mouse_entered() -> void:
+	if Engine.is_editor_hint():
+		return
 	visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 	visuals.pivot_offset = visuals.size / 2.0
 	visuals.scale = Vector2.ONE * base_scale * hover_scale
 	z_index = 20
+	glow_panel.visible = true
 	if not card:
 		return
 	var entries: Array[TooltipData] = KeywordRegistry.build_tooltip_chain(card.get_default_tooltip())
@@ -58,9 +65,12 @@ func _on_visuals_mouse_entered() -> void:
 
 
 func _on_visuals_mouse_exited() -> void:
+	if Engine.is_editor_hint():
+		return
 	visuals.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
 	visuals.scale = Vector2.ONE * base_scale
 	z_index = 0
+	glow_panel.visible = false
 	Events.tooltip_hide_requested.emit()
 
 

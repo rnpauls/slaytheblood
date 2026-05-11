@@ -11,10 +11,9 @@
 [ext_resource type="Resource" uid="uid://ben0yhw3hsk4y" path="res://equipment/steel_helmet.tres" id="8_4shbp"]
 [ext_resource type="Resource" uid="uid://da8os8m7cgqqm" path="res://equipment/steel_plate.tres" id="9_f1yx2"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="11_epmps"]
-[ext_resource type="Resource" uid="uid://baygstotj2pli" path="res://weapons/decimator.tres" id="12_lwfwv"]
 [ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="13_63081"]
 
 [resource]
 script = ExtResource("1_dinv")
 equipment = Array[ExtResource("1_0y41r")]([ExtResource("2_5qabd"), ExtResource("3_tgnch"), ExtResource("4_0eshf"), ExtResource("5_yo3ue"), ExtResource("6_ws0ku"), ExtResource("7_xifx7"), ExtResource("8_4shbp"), ExtResource("9_f1yx2")])
-weapons = Array[ExtResource("11_epmps")]([ExtResource("12_lwfwv"), ExtResource("13_63081")])
+weapons = Array[ExtResource("11_epmps")]([ExtResource("13_63081")])

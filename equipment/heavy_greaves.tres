@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HeavyGreavesEquipment" format=3 uid="uid://stbequip003b"]
 
-[ext_resource type="Texture2D" uid="uid://ck1t4hdip6xrl" path="res://art/tile_0119.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://dkbkiwt3univm" path="res://art/sprites/pixellab/heavy_greaves.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://stbequip003a" path="res://equipment/heavy_greaves.gd" id="2_script"]
 
 [resource]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HexsigilCrownEquipment" format=3 uid="uid://bt7mnj2pvkn61"]
+
+[ext_resource type="Script" uid="uid://28864qaq3hv2" path="res://equipment/hexsigil_crown.gd" id="1_hxcrn"]
+[ext_resource type="Texture2D" uid="uid://bh35nmjxio7yq" path="res://art/sprites/pixellab/hexsigil_crown.png" id="2_hxcrn"]
+
+[resource]
+script = ExtResource("1_hxcrn")
+equipment_name = "Hex-Sigil Crown"
+id = "hexsigil_crown"
+rarity = 1
+character_type = 3
+icon = ExtResource("2_hxcrn")
+tooltip = "[color=\"ffdf00\"]Hex-Sigil Crown[/color]
+Defense 2.
+When used to block, the attacking enemy discards a random card."
+max_block = 2

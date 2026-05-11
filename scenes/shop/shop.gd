@@ -18,7 +18,7 @@ const SHOP_EQUIPMENT = preload("res://scenes/shop/shop_equipment.tscn")
 @onready var relics: HBoxContainer = %Relics
 @onready var weapons: HBoxContainer = %Weapons
 ## Optional: only present once the shop scene has an %Equipment HBoxContainer.
-@onready var equipment_container: HBoxContainer = get_node_or_null("%Equipment")
+@onready var equipment_container: HBoxContainer = %Equipment
 @onready var shopkeeper_animation: AnimationPlayer = %ShopkeeperAnimation
 @onready var blink_timer: Timer = %BlinkTimer
 @onready var card_tooltip_popup: CardTooltipPopup = %CardTooltipPopup
