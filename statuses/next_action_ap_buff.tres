@@ -1,14 +1,13 @@
-[gd_resource type="Resource" script_class="NextActionApBuffStatus" format=3]
+[gd_resource type="Resource" script_class="NextActionApBuffStatus" format=3 uid="uid://cm8hpylfmi5i1"]
 
-[ext_resource type="Script" path="res://statuses/next_action_ap_buff.gd" id="1_nxtap"]
-[ext_resource type="Texture2D" uid="uid://df5xn3ukn0gor" path="res://art/magicbook/64x64/book_image_2.png" id="2_nxtap"]
+[ext_resource type="Texture2D" uid="uid://bfxdyp1ggg2sv" path="res://art/Icon28_30.png" id="1_k1o55"]
+[ext_resource type="Script" uid="uid://dhsdkjmebq63j" path="res://statuses/next_action_ap_buff.gd" id="1_nxtap"]
 
 [resource]
 script = ExtResource("1_nxtap")
 id = "next_action_ap_buff"
 type = 2
 stack_type = 1
-can_expire = false
 stacks = 1
-icon = ExtResource("2_nxtap")
+icon = ExtResource("1_k1o55")
 tooltip = "Next non-attack action you play grants +1 action point."

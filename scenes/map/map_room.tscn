@@ -100,6 +100,7 @@ width = 2.0
 default_color = Color(0.466181, 0.466181, 0.466181, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=1307325523]
+texture_filter = 1
 scale = Vector2(5, 5)
 texture = ExtResource("1_0sdrv")
 

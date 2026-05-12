@@ -9,19 +9,23 @@
 [ext_resource type="Texture2D" uid="uid://h8lr3eetsht5" path="res://art/custom_art/card_visuals/card_border.png" id="6_6o0a7"]
 [ext_resource type="Texture2D" uid="uid://cy2hhpc4ntplw" path="res://art/custom_art/card_visuals/card_art_frame.png" id="6_8hscx"]
 [ext_resource type="Texture2D" uid="uid://b0cx7vg3324n2" path="res://art/item11.png" id="6_njcf5"]
-[ext_resource type="Texture2D" uid="uid://bxtbwy0s4bltj" path="res://art/custom_art/card_visuals/from_claude/filigree_corner.svg" id="7_21bya"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="7_b8ve4"]
+[ext_resource type="Texture2D" uid="uid://c74wi36yydqu0" path="res://art/custom_art/card_visuals/filigree_corner.png" id="8_3o6dk"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="8_bp74k"]
 [ext_resource type="Theme" uid="uid://cho0px4v2r182" path="res://art/themes/card_richtext_theme_12.tres" id="10_b8ve4"]
 [ext_resource type="Texture2D" uid="uid://8ehmmlk0r0mk" path="res://art/custom_art/card_visuals/from_claude/tier_red.png" id="11_3o6dk"]
 [ext_resource type="Texture2D" uid="uid://c2f6oqlq3fu1u" path="res://art/custom_art/card_visuals/bar_1_red.png" id="11_21bya"]
 [ext_resource type="Texture2D" uid="uid://buoc2foifon6a" path="res://art/custom_art/card_visuals/from_claude/cost_coin.png" id="12_0c3ob"]
 [ext_resource type="Texture2D" uid="uid://c2axityhh8m5i" path="res://art/custom_art/card_visuals/from_claude/replay_badge.png" id="16_jxqcx"]
-[ext_resource type="Texture2D" uid="uid://cc656n5hck2mb" path="res://art/custom_art/card_visuals/from_claude/icon_replay.svg" id="17_ee1gm"]
+[ext_resource type="Texture2D" uid="uid://27vqim86aibk" path="res://art/custom_art/card_visuals/go_again.png" id="17_87ky4"]
 [ext_resource type="Theme" uid="uid://bepkl6nnrfx4u" path="res://art/themes/card_richtext_theme_16.tres" id="18_87ky4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe1ap"]
 bg_color = Color(0.23810464, 0.23816228, 0.30056205, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="CardVisuals" type="Control" unique_id=101409697 node_paths=PackedStringArray("attack", "defense", "go_again_icon")]
 custom_minimum_size = Vector2(200, 280)
@@ -116,41 +120,45 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Filigree" type="TextureRect" parent="ArtPanel" unique_id=704307563]
+texture_filter = 1
 layout_mode = 0
-offset_left = -27.5
+offset_left = 2.0
 offset_top = 40.0
-offset_right = 72.5
-offset_bottom = 80.0
-texture = ExtResource("7_21bya")
+offset_right = 24.0
+offset_bottom = 62.0
+texture = ExtResource("8_3o6dk")
 stretch_mode = 5
 
 [node name="Filigree2" type="TextureRect" parent="ArtPanel" unique_id=566899464]
+texture_filter = 1
 layout_mode = 0
-offset_left = 96.5
+offset_left = 146.0
 offset_top = 40.0
-offset_right = 196.5
-offset_bottom = 80.0
-texture = ExtResource("7_21bya")
+offset_right = 168.0
+offset_bottom = 62.0
+texture = ExtResource("8_3o6dk")
 stretch_mode = 5
 flip_h = true
 
 [node name="Filigree3" type="TextureRect" parent="ArtPanel" unique_id=1332990558]
+texture_filter = 1
 layout_mode = 0
-offset_left = -27.5
-offset_top = 134.0
-offset_right = 72.5
+offset_left = 2.0
+offset_top = 152.0
+offset_right = 24.0
 offset_bottom = 174.0
-texture = ExtResource("7_21bya")
+texture = ExtResource("8_3o6dk")
 stretch_mode = 5
 flip_v = true
 
 [node name="Filigree4" type="TextureRect" parent="ArtPanel" unique_id=1637551952]
+texture_filter = 1
 layout_mode = 0
-offset_left = 96.5
-offset_top = 134.0
-offset_right = 196.5
+offset_left = 146.0
+offset_top = 152.0
+offset_right = 168.0
 offset_bottom = 174.0
-texture = ExtResource("7_21bya")
+texture = ExtResource("8_3o6dk")
 stretch_mode = 5
 flip_h = true
 flip_v = true
@@ -227,29 +235,31 @@ stretch_mode = 5
 
 [node name="CostCorner" type="TextureRect" parent="." unique_id=766890482]
 layout_mode = 0
-offset_left = 165.0
-offset_top = -8.0
-offset_right = 210.0
-offset_bottom = 37.0
+offset_left = 168.0
+offset_right = 213.0
+offset_bottom = 45.0
+scale = Vector2(0.88, 0.88)
 texture = ExtResource("12_0c3ob")
+expand_mode = 1
 stretch_mode = 5
 
 [node name="Cost" type="Label" parent="." unique_id=564548442]
 layout_mode = 1
-offset_left = 108.0
-offset_top = -10.0
-offset_right = 201.0
-offset_bottom = 48.0
+offset_left = 142.0
+offset_top = -5.0
+offset_right = 235.0
+offset_bottom = 53.0
 text = "3"
 label_settings = ExtResource("4_m3e03")
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AttackIcon" type="TextureRect" parent="." unique_id=407441525]
+texture_filter = 1
 layout_mode = 1
-offset_left = -24.0
-offset_top = 228.00002
-offset_right = 40.0
+offset_left = -20.999992
+offset_top = 227.99998
+offset_right = 43.000008
 offset_bottom = 292.0
 rotation = -0.58294
 pivot_offset = Vector2(32, 32)
@@ -261,22 +271,23 @@ stretch_mode = 5
 [node name="Attack" type="Label" parent="AttackIcon" unique_id=1820418952]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 36.560448
-offset_top = 1.467999
-offset_right = 105.94489
-offset_bottom = 70.85243
+offset_left = 17.64331
+offset_top = -9.807733
+offset_right = 87.027756
+offset_bottom = 59.5767
 rotation = 0.58294
 theme_override_font_sizes/font_size = 43
 text = "4"
 label_settings = ExtResource("4_m3e03")
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DefenseIcon" type="TextureRect" parent="." unique_id=1309720383]
 layout_mode = 1
-offset_left = 163.0
-offset_top = 233.0
-offset_right = 227.0
-offset_bottom = 297.0
+offset_left = 161.0
+offset_top = 227.0
+offset_right = 225.0
+offset_bottom = 291.0
 mouse_filter = 2
 texture = ExtResource("7_b8ve4")
 expand_mode = 1
@@ -285,33 +296,35 @@ stretch_mode = 5
 [node name="Defense" type="Label" parent="DefenseIcon" unique_id=681672455]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = -43.0
-offset_top = 12.0
-offset_right = 44.0
-offset_bottom = 61.0
+offset_left = -12.0
+offset_top = 11.0
+offset_right = 75.0
+offset_bottom = 60.0
 text = "8"
 label_settings = ExtResource("4_m3e03")
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GoAgainIcon" type="TextureRect" parent="." unique_id=1750346003]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 0
-offset_left = -10.0
-offset_top = -8.0
-offset_right = 35.0
-offset_bottom = 37.0
+offset_left = -7.0
+offset_right = 38.0
+offset_bottom = 45.0
+scale = Vector2(0.76, 0.76)
 texture = ExtResource("16_jxqcx")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="GoAgainIcon" unique_id=696522157]
+texture_filter = 1
 layout_mode = 0
-offset_left = 9.0
-offset_top = 9.0
-offset_right = 36.0
-offset_bottom = 36.0
-texture = ExtResource("17_ee1gm")
+offset_left = 10.526316
+offset_top = 9.210526
+offset_right = 37.526314
+offset_bottom = 36.210526
+texture = ExtResource("17_87ky4")
 stretch_mode = 5
 
 [node name="TextBox" type="RichTextLabel" parent="." unique_id=1259037404]

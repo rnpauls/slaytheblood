@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scrim"]
 bg_color = Color(0.04, 0.04, 0.06, 0.92)
 
-[node name="BattleOverPanel" type="Panel"]
+[node name="BattleOverPanel" type="Panel" unique_id=1527343473]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_scrim")
 script = ExtResource("1_74pv3")
 
-[node name="Proclamation" type="PanelContainer" parent="."]
+[node name="Proclamation" type="PanelContainer" parent="." unique_id=2131701540]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -30,11 +30,18 @@ offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Proclamation"]
+[node name="MarginContainer" type="MarginContainer" parent="Proclamation" unique_id=884911703]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Proclamation/MarginContainer" unique_id=1622877062]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="Proclamation/VBoxContainer"]
+[node name="Label" type="Label" parent="Proclamation/MarginContainer/VBoxContainer" unique_id=304594235]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Victorious!"
@@ -42,16 +49,28 @@ label_settings = ExtResource("2_typedsp")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="Proclamation/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 16)
+[node name="HSeparator" type="HSeparator" parent="Proclamation/MarginContainer/VBoxContainer" unique_id=1144448770]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Awesome!"
+theme_override_constants/separation = 60
 
-[node name="MainMenuButton" type="Button" parent="Proclamation/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Proclamation/MarginContainer/VBoxContainer" unique_id=1715861207]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Restart"
+
+[node name="ContinueButton" type="Button" parent="Proclamation/MarginContainer/VBoxContainer/MainMenuButton" unique_id=1874235791]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 16)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -101.5
+offset_right = 101.5
+offset_bottom = 48.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "Claim Rewards"

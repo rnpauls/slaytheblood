@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://b8stk2cstkp01"]
 
-[ext_resource type="Script" path="res://scenes/ui/card_stack_panel.gd" id="1_stk_panel"]
+[ext_resource type="Script" uid="uid://c0bsus0jtaknc" path="res://scenes/ui/card_stack_panel.gd" id="1_stk_panel"]
 [ext_resource type="LabelSettings" path="res://art/themes/typography/type_heading.tres" id="2_typehd"]
 
-[node name="CardStackPanel" type="Control"]
+[node name="CardStackPanel" type="Control" unique_id=1809644052]
 custom_minimum_size = Vector2(120, 120)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 120.0
 offset_bottom = 120.0
 mouse_filter = 2
 script = ExtResource("1_stk_panel")
 
-[node name="ClickArea" type="Button" parent="."]
+[node name="ClickArea" type="Button" parent="." unique_id=1634800431]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -22,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 0
 flat = true
 
-[node name="Counter" type="Label" parent="."]
+[node name="Counter" type="Label" parent="." unique_id=1932733831]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -30,10 +32,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -28.0
+offset_left = 41.0
 offset_top = -36.0
-offset_right = 28.0
-offset_bottom = 0.0
+offset_right = 97.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "0"

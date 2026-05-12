@@ -6,5 +6,5 @@
 script = ExtResource("1_7aq11")
 id = &"rampage"
 display_name = "Rampage"
-description = "Draw {x} card(s), then discard 1 random card. Discards a 6+atk if possible. Triggers if a 6+atk is discarded"
+description = "Draw {x} card(s), then discard 1 random card with 6 or more atk. Triggers if successful. If no 6+ atk cards, discards a random card"
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

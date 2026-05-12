@@ -16,6 +16,6 @@ defense = 2
 go_again = true
 ai_value = -1
 icon = ExtResource("1_6v8r4")
-tooltip_text = "Reveal the top card of owner's deck. Subtract the pitch value from this card's atk"
+tooltip_text = "Reveal the top card of owner's deck. Subtract the pitch value from this card's [kw=atk]"
 sound = ExtResource("4_re7em")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

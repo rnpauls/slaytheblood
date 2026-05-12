@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b4eqshopeq"]
 
-[ext_resource type="Script" path="res://scenes/shop/shop_equipment.gd" id="1_eqshop"]
+[ext_resource type="Script" uid="uid://gxfxca3we6v0" path="res://scenes/shop/shop_equipment.gd" id="1_eqshop"]
 [ext_resource type="PackedScene" uid="uid://binvcardrcrcn" path="res://scenes/inventory_card/inventory_card_render_container.tscn" id="2_eqshop"]
 [ext_resource type="Texture2D" uid="uid://c8xbao0quvvux" path="res://art/gold.png" id="3_eqshop"]
 
-[node name="ShopEquipment" type="VBoxContainer"]
+[node name="ShopEquipment" type="VBoxContainer" unique_id=1466796083]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 107.0
 offset_bottom = 220.0
@@ -13,38 +13,42 @@ size_flags_vertical = 3
 theme_override_constants/separation = 10
 script = ExtResource("1_eqshop")
 
-[node name="EquipmentContainer" type="MarginContainer" parent="."]
+[node name="EquipmentContainer" type="MarginContainer" parent="." unique_id=121009567]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InventoryCardRenderContainer" parent="EquipmentContainer" instance=ExtResource("2_eqshop")]
+[node name="InventoryCardRenderContainer" parent="EquipmentContainer" unique_id=1214608304 instance=ExtResource("2_eqshop")]
 layout_mode = 2
 size_flags_vertical = 1
 hover_scale = Vector2(1.4286, 1.4286)
 rest_scale = Vector2(0.7, 0.7)
 
-[node name="Price" type="HBoxContainer" parent="."]
+[node name="Price" type="HBoxContainer" parent="." unique_id=1228089212]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="PriceLabel" type="Label" parent="Price"]
+[node name="PriceLabel" type="Label" parent="Price" unique_id=1737764458]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 21
+size_flags_horizontal = 4
 text = "999"
+vertical_alignment = 2
 
-[node name="GoldIcon" type="TextureRect" parent="Price"]
-custom_minimum_size = Vector2(21, 21)
+[node name="GoldIcon" type="TextureRect" parent="Price" unique_id=452186352]
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("3_eqshop")
-expand_mode = 4
+expand_mode = 1
 stretch_mode = 5
 
-[node name="BuyButton" type="Button" parent="."]
+[node name="BuyButton" type="Button" parent="." unique_id=1184210926]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2

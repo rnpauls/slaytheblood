@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmpoweredStatus" format=3 uid="uid://dyqrfs5qoybfo"]
+[gd_resource type="Resource" script_class="PoisonTipStatus" format=3 uid="uid://dyqrfs5qoybfo"]
 
 [ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_fna18"]
 [ext_resource type="Script" uid="uid://y2g67x6nnf1g" path="res://statuses/poison_tip.gd" id="2_hjrsj"]

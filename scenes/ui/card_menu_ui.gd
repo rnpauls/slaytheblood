@@ -53,6 +53,7 @@ func _on_visuals_gui_input(event: InputEvent) -> void:
 func _on_visuals_mouse_entered() -> void:
 	if Engine.is_editor_hint():
 		return
+	SFXRegistry.play(&"HOVER_UI")
 	visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 	visuals.pivot_offset = visuals.size / 2.0
 	visuals.scale = Vector2.ONE * base_scale * hover_scale

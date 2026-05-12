@@ -10,7 +10,7 @@ extends Node
 
 ## id (StringName) -> resource path (String). Paths must be valid res:// URIs.
 const ICONS: Dictionary = {
-	# &"atk": "res://art/sword_icon.png",
+	 &"atk": "res://art/atk_icon.png",
 	# &"def": "res://art/shield_icon.png",
 	# &"mana": "res://art/mana_icon.png",
 }

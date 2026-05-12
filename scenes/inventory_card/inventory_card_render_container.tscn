@@ -24,7 +24,7 @@ offset_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_invccc")
-hover_scale = Vector2(1.6, 1.6)
+hover_scale = Vector2(1.3, 1.3)
 
 [node name="Stack" type="Control" parent="." unique_id=237239472]
 unique_name_in_owner = true

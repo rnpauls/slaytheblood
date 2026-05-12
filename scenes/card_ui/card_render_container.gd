@@ -8,6 +8,7 @@ extends MarginContainer
 @onready var card_visuals: CardVisuals = %CardVisuals
 @onready var viewport_texture: TextureRect = $ViewportTexture
 @onready var card_back_panel: Panel = %CardBackPanel
+@onready var card_back_margin_container: MarginContainer = %CardBackMarginContainer
 @onready var plan_exclamation: Label = %PlanExclamation
 @onready var arsenal_label: Label = %ArsenalLabel
 @onready var sub_viewport: SubViewport = $SubViewport
@@ -27,7 +28,7 @@ func set_show_back(value: bool) -> void:
 	if not is_node_ready():
 		await ready
 	viewport_texture.visible = not show_back
-	card_back_panel.visible = show_back
+	card_back_margin_container.visible = show_back
 	# Skip rendering the face into the SubViewport while the back is shown.
 	sub_viewport.render_target_update_mode = (
 		SubViewport.UPDATE_DISABLED if show_back else SubViewport.UPDATE_ALWAYS

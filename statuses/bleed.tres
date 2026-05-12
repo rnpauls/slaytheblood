@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="BleedStatus" format=3]
+[gd_resource type="Resource" script_class="BleedStatus" format=3 uid="uid://b0v8yt7bm4ip6"]
 
-[ext_resource type="Script" path="res://statuses/bleed.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/Iicon_32_13.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://bj73oqujng3n2" path="res://art/Icon28_09.png" id="1_2hokm"]
+[ext_resource type="Script" uid="uid://dvkcvitbjj8gi" path="res://statuses/bleed.gd" id="1_script"]
 
 [resource]
 script = ExtResource("1_script")
@@ -11,5 +11,5 @@ stack_type = 1
 can_expire = true
 duration = 2
 stacks = 1
-icon = ExtResource("2_icon")
+icon = ExtResource("1_2hokm")
 tooltip = "Bleed: at end of turn, take %s damage."

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DarkenSkyChargeStatus" format=3 uid="uid://dnm4ek4586em0"]
 
 [ext_resource type="Script" uid="uid://b6p485hdtmuc5" path="res://statuses/darken_sky_charge.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://byogcb4jkiu6i" path="res://art/magicbook/64x64/book_image_1.png" id="1_v5fxa"]
 
 [resource]
 script = ExtResource("1_script")
@@ -11,5 +11,5 @@ stack_type = 1
 can_expire = true
 duration = 1
 stacks = 3
-icon = ExtResource("2_icon")
+icon = ExtResource("1_v5fxa")
 tooltip = "Darken Sky: your next attack creates %s [kw=runechant]runechants[/kw] on hit."

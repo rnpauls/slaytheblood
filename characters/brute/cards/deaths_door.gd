@@ -8,7 +8,7 @@ extends Card
 
 
 func get_default_tooltip() -> String:
-	return tooltip_text % [attack, per_threshold]
+	return tooltip_text % [per_threshold]
 
 
 func get_updated_tooltip(player_modifiers: ModifierHandler, _enemy_modifiers: ModifierHandler) -> String:

@@ -110,6 +110,7 @@ layout_mode = 2
 
 [node name="MapButton" type="TextureButton" parent="TopBar/BarItems" unique_id=1500000042]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("8_l6p45")
@@ -118,6 +119,7 @@ stretch_mode = 5
 
 [node name="InventoryButton" type="TextureButton" parent="TopBar/BarItems" unique_id=1829506682]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("8_7yo0l")
@@ -131,6 +133,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_fo0ly")
 
 [node name="DeckButton" parent="TopBar/BarItems" unique_id=336927411 node_paths=PackedStringArray("counter") instance=ExtResource("4_i2rp4")]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("5_048qf")

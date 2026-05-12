@@ -12,7 +12,7 @@ type = 1
 pitch = 2
 go_again = true
 icon = ExtResource("2_icon")
-tooltip_text = "Discard 1 random 6atk card: draw 2"
+tooltip_text = "Discard 1 random card with 6+[kw=atk] or more: draw 2"
 sound = ExtResource("4_sound")
 disable_attack = true
 disable_defense = true

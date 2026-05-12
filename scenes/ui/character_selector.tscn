@@ -133,6 +133,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_ucmb5")
 
 [node name="Icon" type="TextureRect" parent="CharacterButtons/BruteButton" unique_id=1482183687]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -157,6 +158,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_ucmb5")
 
 [node name="Icon" type="TextureRect" parent="CharacterButtons/RunebladeButton" unique_id=1531259455]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -181,6 +183,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_ucmb5")
 
 [node name="Icon" type="TextureRect" parent="CharacterButtons/NinjaButton" unique_id=97791022]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

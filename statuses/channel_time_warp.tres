@@ -1,14 +1,11 @@
-[gd_resource type="Resource" script_class="ChannelTimeWarpStatus" format=3]
+[gd_resource type="Resource" script_class="ChannelTimeWarpStatus" format=3 uid="uid://c8o77768o08uj"]
 
-[ext_resource type="Script" path="res://statuses/channel_time_warp.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_17.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://du4cpe24t5rcj" path="res://statuses/channel_time_warp.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://2igrvjj56niq" path="res://art/magicbook/64x64/book_image_17.png" id="2_icon"]
 
 [resource]
 script = ExtResource("1_script")
-cards_to_draw = 3
 id = "channel_time_warp"
-type = 0
-stack_type = 0
 can_expire = true
 duration = 1
 icon = ExtResource("2_icon")

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EmpoweredStatus" format=3 uid="uid://c1ipkh0jjmd8m"]
 
-[ext_resource type="Texture2D" uid="uid://dmstf3o5o06n6" path="res://art/item94.png" id="1_bp4s2"]
+[ext_resource type="Texture2D" uid="uid://bd24nyu1ri2t" path="res://art/Iicon_32_11.png" id="1_bp4s2"]
 [ext_resource type="Script" uid="uid://bx2men7u2b6no" path="res://statuses/empowered.gd" id="2_ies5f"]
 
 [resource]

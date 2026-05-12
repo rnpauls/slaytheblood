@@ -19,11 +19,13 @@ offset_bottom = 30.0
 size_flags_horizontal = 3
 script = ExtResource("1_6bsit")
 card = ExtResource("2_56wht")
+hover_scale = 1.3
 
 [node name="Visuals" parent="." unique_id=945611760 instance=ExtResource("3_2y3x4")]
 layout_mode = 2
+card = ExtResource("2_56wht")
 
-[node name="GlowPanel" type="Panel" parent="Visuals"]
+[node name="GlowPanel" type="Panel" parent="Visuals" unique_id=1808425739]
 visible = false
 z_index = -1
 layout_mode = 1

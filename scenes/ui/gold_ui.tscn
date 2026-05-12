@@ -12,6 +12,7 @@ theme_override_constants/separation = 2
 script = ExtResource("1_k71xw")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=670384151]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("1_6cvld")

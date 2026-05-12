@@ -17,6 +17,7 @@ alignment = 1
 script = ExtResource("1_7kcvo")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=2064034557]
+texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = ExtResource("1_xj6py")

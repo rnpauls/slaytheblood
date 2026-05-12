@@ -1,14 +1,11 @@
-[gd_resource type="Resource" script_class="ChannelMeteorStatus" format=3]
+[gd_resource type="Resource" script_class="ChannelMeteorStatus" format=3 uid="uid://ca4uywe0b5s1v"]
 
-[ext_resource type="Script" path="res://statuses/channel_meteor.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/magicbook/64x64/book_image_16.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://dw57f5hc2vwog" path="res://statuses/channel_meteor.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://p18hql00cpmh" path="res://art/magicbook/64x64/book_image_16.png" id="2_icon"]
 
 [resource]
 script = ExtResource("1_script")
-damage = 12
 id = "channel_meteor"
-type = 0
-stack_type = 0
 can_expire = true
 duration = 1
 icon = ExtResource("2_icon")

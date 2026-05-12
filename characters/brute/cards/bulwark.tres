@@ -1,19 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://b2oc8wtxrtvy"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item71.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/unyielding.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://dhorrpi2qd3rv" path="res://art/item71.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://ddntfmnq37i07" path="res://characters/brute/cards/unyielding.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
 id = "bulwark"
 type = 1
+rarity = 1
 cost = 2
 pitch = 3
-defense = 12
+defense = 5
 ai_value = 1
-rarity = 1
 icon = ExtResource("2_icon")
 tooltip_text = "Gain 12 [kw=block]block[/kw]."
 sound = ExtResource("4_sound")
