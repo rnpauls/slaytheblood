@@ -2,10 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="1_0y41r"]
 [ext_resource type="Script" uid="uid://ca31qrfmxu26w" path="res://custom_resources/draftable_inventory.gd" id="1_dinv"]
-[ext_resource type="Resource" uid="uid://bvboibfq7ytq2" path="res://equipment/iron_rot_boots.tres" id="2_5qabd"]
-[ext_resource type="Resource" uid="uid://cny6qsqey3des" path="res://equipment/iron_rot_gauntlets.tres" id="3_tgnch"]
-[ext_resource type="Resource" uid="uid://cai7nshfgnmct" path="res://equipment/iron_rot_helmet.tres" id="4_0eshf"]
-[ext_resource type="Resource" uid="uid://b0wcw2dy8qh8e" path="res://equipment/iron_rot_plate.tres" id="5_yo3ue"]
 [ext_resource type="Resource" uid="uid://clfqia836mtu6" path="res://equipment/steel_boots.tres" id="6_ws0ku"]
 [ext_resource type="Resource" uid="uid://dg6bklewy1u3g" path="res://equipment/steel_gauntlets.tres" id="7_xifx7"]
 [ext_resource type="Resource" uid="uid://ben0yhw3hsk4y" path="res://equipment/steel_helmet.tres" id="8_4shbp"]
@@ -15,5 +11,5 @@
 
 [resource]
 script = ExtResource("1_dinv")
-equipment = Array[ExtResource("1_0y41r")]([ExtResource("2_5qabd"), ExtResource("3_tgnch"), ExtResource("4_0eshf"), ExtResource("5_yo3ue"), ExtResource("6_ws0ku"), ExtResource("7_xifx7"), ExtResource("8_4shbp"), ExtResource("9_f1yx2")])
+equipment = Array[ExtResource("1_0y41r")]([ExtResource("6_ws0ku"), ExtResource("7_xifx7"), ExtResource("8_4shbp"), ExtResource("9_f1yx2")])
 weapons = Array[ExtResource("11_epmps")]([ExtResource("13_63081")])

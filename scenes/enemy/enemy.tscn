@@ -60,7 +60,7 @@ grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="EnemyHand" parent="." unique_id=-1293967295 instance=ExtResource("9_ehand")]
-position = Vector2(0, 111)
+position = Vector2(0, 171)
 
 [node name="StagedDisplay" type="Node2D" parent="." unique_id=-1293967294]
 position = Vector2(-55, -39)
@@ -88,9 +88,9 @@ vertical_alignment = 1
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -71.0
-offset_top = 25.0
+offset_top = 134.0
 offset_right = -71.0
-offset_bottom = 38.0
+offset_bottom = 147.0
 status_owner = NodePath("..")
 
 [node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]

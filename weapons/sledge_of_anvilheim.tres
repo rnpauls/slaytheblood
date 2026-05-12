@@ -9,6 +9,7 @@ script = ExtResource("2_e5ena")
 weapon_name = "Sledge of Anvilheim"
 id = "sledge_of_anvilheim"
 type = 3
+character_type = 2
 hands = 1
 icon = ExtResource("1_e5ena")
 sound = ExtResource("3_n852i")

@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://c4brrbokqt532" path="res://scenes/ui/inventory_view.tscn" id="13_fo0ly"]
 [ext_resource type="PackedScene" uid="uid://b8tlay001a26v" path="res://scenes/ui/tooltip_layer.tscn" id="14_ttip"]
 [ext_resource type="PackedScene" uid="uid://cjjtuwl338t1b" path="res://scenes/ui/inventory_preview_layer.tscn" id="15_invpl"]
+[ext_resource type="StyleBox" path="res://art/themes/styleboxes/topbar_panel.tres" id="16_topbar"]
+[ext_resource type="StyleBox" uid="uid://d1ee6p51c2g2s" path="res://art/themes/styleboxes/topbar_inner_contour.tres" id="17_contur"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fo0ly"]
 
@@ -72,18 +74,33 @@ text = "campfire"
 [node name="TopBar" type="CanvasLayer" parent="." unique_id=1876607555]
 layer = 3
 
-[node name="Background" type="ColorRect" parent="TopBar" unique_id=1159474024]
+[node name="Background" type="Panel" parent="TopBar" unique_id=1159474024]
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 mouse_filter = 2
-color = Color(0.15294118, 0.14117648, 0.22745098, 1)
+theme_override_styles/panel = ExtResource("16_topbar")
+
+[node name="InnerContour" type="Panel" parent="TopBar/Background" unique_id=1198861848]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = -5.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("17_contur")
 
 [node name="BarItems" type="HBoxContainer" parent="TopBar" unique_id=1626484409]
 custom_minimum_size = Vector2(0, 18)
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 15.0
 offset_bottom = 80.0
 grow_horizontal = 2
 

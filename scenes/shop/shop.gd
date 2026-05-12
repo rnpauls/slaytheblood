@@ -106,6 +106,8 @@ func _generate_shop_weapons() -> void:
 		func(weapon: Weapon):
 			var can_appear := weapon.can_appear_as_reward(char_stats)
 			var already_had_it := char_stats.inventory.has_weapon(weapon.id)
+			if weapon.allow_duplicate_in_draft:
+				already_had_it = false
 			return can_appear and not already_had_it
 	)
 	
@@ -118,6 +120,7 @@ func _generate_shop_weapons() -> void:
 		weapons.add_child(new_shop_weapon)
 		new_shop_weapon.weapon = weapon
 		new_shop_weapon.gold_cost = _get_updated_shop_cost(new_shop_weapon.gold_cost)
+		
 		new_shop_weapon.update(run_stats)
 
 func _update_items() -> void:
@@ -126,9 +129,13 @@ func _update_items() -> void:
 
 	for shop_relic: ShopRelic in relics.get_children():
 		shop_relic.update(run_stats)
-	
+
 	for shop_weapon: ShopWeapon in weapons.get_children():
 		shop_weapon.update(run_stats)
+
+	if equipment_container:
+		for shop_equipment_entry: ShopEquipment in equipment_container.get_children():
+			shop_equipment_entry.update(run_stats)
 
 func _update_item_costs() -> void:
 	for shop_card: ShopCard in cards.get_children():
@@ -138,10 +145,15 @@ func _update_item_costs() -> void:
 	for shop_relic: ShopRelic in relics.get_children():
 		shop_relic.gold_cost = _get_updated_shop_cost(shop_relic.gold_cost)
 		shop_relic.update(run_stats)
-	
+
 	for shop_weapon: ShopWeapon in weapons.get_children():
 		shop_weapon.gold_cost = _get_updated_shop_cost(shop_weapon.gold_cost)
 		shop_weapon.update(run_stats)
+
+	if equipment_container:
+		for shop_equipment_entry: ShopEquipment in equipment_container.get_children():
+			shop_equipment_entry.gold_cost = _get_updated_shop_cost(shop_equipment_entry.gold_cost)
+			shop_equipment_entry.update(run_stats)
 
 func _get_updated_shop_cost(original_cost: int) -> int:
 	return modifier_handler.get_modified_value(original_cost, Modifier.Type.SHOP_COST)

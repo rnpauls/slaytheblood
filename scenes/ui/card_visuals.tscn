@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="7_b8ve4"]
 [ext_resource type="Texture2D" uid="uid://c74wi36yydqu0" path="res://art/custom_art/card_visuals/filigree_corner.png" id="8_3o6dk"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="8_bp74k"]
-[ext_resource type="Theme" uid="uid://cho0px4v2r182" path="res://art/themes/card_richtext_theme_12.tres" id="10_b8ve4"]
 [ext_resource type="Texture2D" uid="uid://8ehmmlk0r0mk" path="res://art/custom_art/card_visuals/from_claude/tier_red.png" id="11_3o6dk"]
 [ext_resource type="Texture2D" uid="uid://c2f6oqlq3fu1u" path="res://art/custom_art/card_visuals/bar_1_red.png" id="11_21bya"]
 [ext_resource type="Texture2D" uid="uid://buoc2foifon6a" path="res://art/custom_art/card_visuals/from_claude/cost_coin.png" id="12_0c3ob"]
@@ -343,10 +342,10 @@ vertical_alignment = 1
 [node name="Type" type="RichTextLabel" parent="." unique_id=1578929195]
 layout_mode = 0
 offset_left = 36.0
-offset_top = 259.0
+offset_top = 252.0
 offset_right = 164.0
-offset_bottom = 271.0
+offset_bottom = 268.0
 mouse_filter = 2
-theme = ExtResource("10_b8ve4")
+theme = ExtResource("18_87ky4")
 text = "Attack"
 horizontal_alignment = 1

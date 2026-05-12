@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TabiBootsEquipment" format=3 uid="uid://stbequip005b"]
 
-[ext_resource type="Texture2D" path="res://art/sprites/pixellab/tabi_boots.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://da1oh7oybsum4" path="res://art/sprites/pixellab/tabi_boots.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://stbequip005a" path="res://equipment/tabi_boots.gd" id="2_script"]
 
 [resource]

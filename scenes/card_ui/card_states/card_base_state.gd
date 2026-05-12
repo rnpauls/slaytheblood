@@ -29,6 +29,9 @@ func on_gui_input(event: InputEvent) -> void:
 		if card_ui.card.disable_pitch:
 			_log("BASE on_gui_input: RMB IGNORED (disable_pitch=true)")
 			return
+		if card_ui.disabled or hand.is_selecting or hand.is_blocking:
+			_log("BASE on_gui_input: RMB IGNORED (disabled=%s, is_selecting=%s, is_blocking=%s)" % [card_ui.disabled, hand.is_selecting, hand.is_blocking])
+			return
 		_log("BASE on_gui_input: RMB → PITCHED")
 		transition_requested.emit(self, CardState.State.PITCHED)
 		return

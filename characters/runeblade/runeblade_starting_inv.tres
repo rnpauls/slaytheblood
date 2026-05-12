@@ -4,13 +4,8 @@
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_eqp00"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="3_wpn00"]
 [ext_resource type="Resource" uid="uid://dmwlkidfeph" path="res://weapons/runeblood_carver.tres" id="4_rbc00"]
-[ext_resource type="Resource" uid="uid://bvboibfq7ytq2" path="res://equipment/iron_rot_boots.tres" id="5_irb00"]
-[ext_resource type="Resource" uid="uid://b0wcw2dy8qh8e" path="res://equipment/iron_rot_plate.tres" id="6_irp00"]
-[ext_resource type="Resource" uid="uid://cny6qsqey3des" path="res://equipment/iron_rot_gauntlets.tres" id="7_irg00"]
-[ext_resource type="Resource" uid="uid://cai7nshfgnmct" path="res://equipment/iron_rot_helmet.tres" id="8_irh00"]
 
 [resource]
 script = ExtResource("1_inv00")
 weapons = Array[ExtResource("3_wpn00")]([ExtResource("4_rbc00")])
-equips = Array[ExtResource("2_eqp00")]([ExtResource("5_irb00"), ExtResource("6_irp00"), ExtResource("7_irg00"), ExtResource("8_irh00")])
 metadata/_custom_type_script = "uid://s62w0o001fci"

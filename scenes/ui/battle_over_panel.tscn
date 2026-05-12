@@ -54,23 +54,16 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 60
 
+[node name="ContinueButton" type="Button" parent="Proclamation/MarginContainer/VBoxContainer" unique_id=1874235791]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Claim Rewards"
+
 [node name="MainMenuButton" type="Button" parent="Proclamation/MarginContainer/VBoxContainer" unique_id=1715861207]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 16)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Restart"
-
-[node name="ContinueButton" type="Button" parent="Proclamation/MarginContainer/VBoxContainer/MainMenuButton" unique_id=1874235791]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 16)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -101.5
-offset_right = 101.5
-offset_bottom = 48.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-text = "Claim Rewards"

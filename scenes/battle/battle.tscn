@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://c7640ve4l6kcn" path="res://scenes/ui/status_view.tscn" id="21_hb0k1"]
 [ext_resource type="PackedScene" uid="uid://xl552ip4wa50" path="res://scenes/ui/card_pile_view.tscn" id="21_wry5f"]
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="22_xhst1"]
+[ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="23_endtt"]
+[ext_resource type="StyleBox" path="res://art/themes/styleboxes/end_turn_inner_contour.tres" id="24_endct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywq45"]
 size = Vector2(1262, 209)
@@ -111,9 +113,23 @@ offset_right = -20.0
 offset_bottom = -125.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("23_endtt")
 disabled = true
 text = "END TURN"
 metadata/_edit_use_anchors_ = true
+
+[node name="InnerContour" type="Panel" parent="BattleUI/EndTurnButton"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("24_endct")
 
 [node name="DrawPile" parent="BattleUI" unique_id=1843257857 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
