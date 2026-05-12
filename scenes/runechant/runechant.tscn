@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://crchscn1ru4xy"]
+[gd_scene format=3 uid="uid://crchscn1ru4xy"]
 
 [ext_resource type="Script" uid="uid://crchsce1ru4ge" path="res://scenes/runechant/runechant.gd" id="1_rsc01"]
-[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="2_rscic"]
+[ext_resource type="Texture2D" uid="uid://ccpkiqf63iq2o" path="res://art/magicbook/64x64/book_image_22.png" id="2_apdpj"]
 
-[node name="Runechant" type="Node2D"]
+[node name="Runechant" type="Node2D" unique_id=1679708960]
 script = ExtResource("1_rsc01")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1862552961]
 modulate = Color(0.55, 0.4, 1, 1)
 scale = Vector2(0.45, 0.45)
-texture = ExtResource("2_rscic")
+texture = ExtResource("2_apdpj")

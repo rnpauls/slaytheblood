@@ -27,6 +27,7 @@ const RARITY_COLORS := {
 @export_group("Visuals")
 @export var icon: Texture
 @export var sound: AudioStream
+@export var break_sound: AudioStream
 @export_multiline var tooltip: String
 
 @export_group("Block")

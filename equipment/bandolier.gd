@@ -9,12 +9,13 @@ extends Equipment
 
 func consume_block_for_attack() -> int:
 	used_this_attack = true
+	var base_block := current_block
 	current_block = 0
 	if not owner or not (owner is Player):
-		return 0
+		return base_block
 	var hand_facade: HandFacade = owner.hand_facade
 	if not hand_facade:
-		return 0
+		return base_block
 	var hand_arr := hand_facade.get_hand()
 	var target_card: Card = null
 	var highest_atk: int = 0
@@ -23,6 +24,6 @@ func consume_block_for_attack() -> int:
 			highest_atk = c.attack
 			target_card = c
 	if target_card == null:
-		return 0
+		return base_block
 	hand_facade.discard_random_filtered(func(c: Card) -> bool: return c == target_card, 1)
-	return highest_atk
+	return base_block + highest_atk

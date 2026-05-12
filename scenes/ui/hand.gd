@@ -22,8 +22,9 @@ const CARD_UI_SCENE = preload("res://scenes/card_ui/player_card_ui.tscn")
 @export var is_blocking: bool = false
 @export var is_selecting: bool = false
 var selection_limit: int = 0
+var is_enabled: bool = false
 
-var hovered_card: PlayerCardUI = null 
+var hovered_card: PlayerCardUI = null
 
 func _ready() -> void:
 	Events.enemy_attack_declared.connect(_on_enemy_attack_declared)
@@ -68,6 +69,8 @@ func add_card(card: Card, source_visual: CardUI = null) -> void:
 		new_card_ui.modulate = Color(1, 1, 1, 0)
 		add_child(new_card_ui)
 
+	new_card_ui.disabled = not is_enabled
+
 	_arrange_cards()
 
 	if source_visual:
@@ -90,6 +93,7 @@ func add_card(card: Card, source_visual: CardUI = null) -> void:
 
 
 func enable_hand() -> void:
+	is_enabled = true
 	print_debug("[Hand] enable_hand (cards=%d)" % get_child_count())
 	for card: PlayerCardUI in get_children():
 		card.disabled = false
@@ -98,6 +102,7 @@ func enable_hand() -> void:
 
 
 func disable_hand() -> void:
+	is_enabled = false
 	print_debug("[Hand] disable_hand (cards=%d)" % get_child_count())
 	for card: PlayerCardUI in get_children():
 		card.disabled = true

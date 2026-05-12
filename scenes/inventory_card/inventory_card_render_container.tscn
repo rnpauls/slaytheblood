@@ -14,9 +14,6 @@ corner_radius_bottom_left = 8
 shadow_color = Color(1, 1, 1, 0.65)
 shadow_size = 12
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_aw4x6"]
-viewport_path = NodePath("SubViewport")
-
 [node name="InventoryCardRenderContainer" type="MarginContainer" unique_id=2054887772]
 custom_minimum_size = Vector2(40, 60)
 offset_right = 40.0
@@ -52,7 +49,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_aw4x6")
 
 [node name="Button" type="Button" parent="Stack" unique_id=946935939]
 unique_name_in_owner = true

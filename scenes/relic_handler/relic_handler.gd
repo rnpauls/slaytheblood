@@ -12,10 +12,21 @@ const RELIC_UI = preload("res://scenes/relic_handler/relic_ui.tscn")
 ## Combatant that owns these relics (always Player today). Set by
 ## PlayerHandler.start_battle so relic scripts can read relic.owner instead
 ## of doing a get_first_node_in_group lookup at activation time.
-var relics_owner: Combatant
+## Starter relics are added in run.gd before any battle, so their owner is
+## null at add_relic time; the setter back-fills owner on already-added
+## relics so spell_binder & friends resolve self.owner correctly at SOC.
+var relics_owner: Combatant : set = _set_relics_owner
 
 func _ready() -> void:
 	relics.child_exiting_tree.connect(_on_relics_child_exiting_tree)
+
+func _set_relics_owner(new_owner: Combatant) -> void:
+	relics_owner = new_owner
+	if not relics:
+		return
+	for relic_ui in relics.get_children():
+		if relic_ui is RelicUI and relic_ui.relic:
+			relic_ui.relic.owner = new_owner
 	
 	
 	#add_relic(preload("res://relics/explosive_barrel.tres"))

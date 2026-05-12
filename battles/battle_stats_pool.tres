@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BattleStatsPool" format=3 uid="uid://ctdap71r4m525"]
+[gd_resource type="Resource" script_class="BattleStatsPool" format=3 uid="uid://bii8xblben6dc"]
 
 [ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="1_p6jnf"]
 [ext_resource type="Resource" uid="uid://st77tqqf1bs1" path="res://battles/tier_0_bats2.tres" id="2_kip4e"]
@@ -14,14 +14,15 @@
 [ext_resource type="Resource" path="res://battles/elite/elite_reaver.tres" id="12_erav"]
 [ext_resource type="Resource" path="res://battles/elite/elite_hexweaver.tres" id="13_ehex"]
 [ext_resource type="Resource" uid="uid://b7t2arch001" path="res://battles/tier_2_archivist.tres" id="14_arch"]
-[ext_resource type="Resource" path="res://battles/tier_0_slimes.tres" id="15_6x4eu"]
-[ext_resource type="Resource" uid="uid://t3kunoichirestr" path="res://battles/tier_3_kunoichi.tres" id="16_t3kun"]
+[ext_resource type="Resource" uid="uid://bhroqnrg4tnib" path="res://battles/tier_0_slimes.tres" id="15_6x4eu"]
+[ext_resource type="Resource" uid="uid://dv3ytjug32tfb" path="res://battles/tier_3_kunoichi.tres" id="16_t3kun"]
 [ext_resource type="Resource" uid="uid://hatd0ybmm241" path="res://battles/tier_5_toxic_ghost.tres" id="17_t5tox"]
 [ext_resource type="Resource" path="res://battles/tier_2_marauder.tres" id="18_t2mar"]
 [ext_resource type="Resource" path="res://battles/tier_3_stalker.tres" id="19_t3stk"]
 [ext_resource type="Resource" path="res://battles/elite/elite_mind_reaver.tres" id="20_emr"]
+[ext_resource type="Resource" path="res://battles/tier_1_kuno_comm.tres" id="20_iajyq"]
 
 [resource]
 script = ExtResource("6_cquyn")
-pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("10_t1sli"), ExtResource("14_arch"), ExtResource("15_6x4eu"), ExtResource("16_t3kun"), ExtResource("17_t5tox"), ExtResource("18_t2mar"), ExtResource("19_t3stk")])
+pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("10_t1sli"), ExtResource("14_arch"), ExtResource("15_6x4eu"), ExtResource("16_t3kun"), ExtResource("17_t5tox"), ExtResource("18_t2mar"), ExtResource("19_t3stk"), ExtResource("20_iajyq")])
 elite_pool = Array[ExtResource("1_p6jnf")]([ExtResource("11_eblw"), ExtResource("12_erav"), ExtResource("13_ehex"), ExtResource("20_emr")])

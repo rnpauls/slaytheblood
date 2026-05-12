@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://du3u0apwwyk5d"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ive1s"]
+[ext_resource type="Texture2D" uid="uid://b8xlqs8awkpte" path="res://art/card_art/pixellab/called_shot.png" id="2_ochvi"]
+[ext_resource type="Script" uid="uid://dtudl7747thxx" path="res://generic_cards/ravenous_rabble.gd" id="3_bf3rt"]
+[ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="4_rwjd8"]
+
+[resource]
+script = ExtResource("3_bf3rt")
+id = "called_shot"
+rarity = 1
+target = 1
+pitch = 2
+attack = 4
+defense = 2
+go_again = true
+ai_value = -1
+icon = ExtResource("2_ochvi")
+tooltip_text = "Reveal the top card of owner's deck. Subtract the pitch value from this card's [kw=atk]"
+sound = ExtResource("4_rwjd8")
+metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

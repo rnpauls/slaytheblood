@@ -191,6 +191,7 @@ func attempt_to_block() -> void:
 
 func _destroy_equipment() -> void:
 	var destroyed := equipment
+	SFXPlayer.play(destroyed.break_sound)
 	# Fire the on-destroyed hook before we tear it down so Heavy Greaves etc.
 	# can grant their last-rites effect.
 	destroyed.on_destroyed(owner_of_equipment)
