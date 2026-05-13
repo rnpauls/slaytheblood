@@ -10,7 +10,5 @@ id = "hexsigil_crown"
 rarity = 1
 character_type = 3
 icon = ExtResource("2_hxcrn")
-tooltip = "[color=\"ffdf00\"]Hex-Sigil Crown[/color]
-Defense 2.
-When used to block, the attacking enemy discards a random card."
+tooltip = "On block:, the attacking enemy discards a random card."
 max_block = 2

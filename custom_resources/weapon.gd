@@ -6,13 +6,6 @@ enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
 enum Hands {ONEHAND, TWOHAND, OFFHAND}
 enum Rarity {COMMON, UNCOMMON, RARE}
 
-const RARITY_COLORS := {
-	Card.Rarity.COMMON: Color.GRAY,
-	Card.Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,
-	Card.Rarity.RARE: Color.GOLD,
-	
-}
-
 @export var weapon_name: String
 @export var id: String
 @export var type: Type

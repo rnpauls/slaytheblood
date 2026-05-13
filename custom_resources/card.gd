@@ -8,19 +8,6 @@ enum Rarity {COMMON, UNCOMMON, RARE}
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 enum DamageKind {PHYSICAL, ARCANE}
 
-const RARITY_COLORS := {
-	Card.Rarity.COMMON: Color.GRAY,
-	Card.Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,
-	Card.Rarity.RARE: Color.GOLD,
-	
-}
-
-#const PITCH_COLORS := {
-	#0: Color.GRAY,
-	#1: Color.RED,
-	#2: Color.YELLOW,
-	#3: Color.BLUE
-#}
 
 @export_group("Card Attributes")
 @export var id: String

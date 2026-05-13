@@ -15,6 +15,7 @@ var tint_cost: bool = true
 @onready var art_panel: TextureRect = %ArtPanel
 @onready var cost: Label = $Cost
 @onready var icon: TextureRect = %Icon
+@onready var filigree: TextureRect = %Filigree
 @export var attack: Label
 @export var defense: Label
 @export var go_again_icon: TextureRect
@@ -62,21 +63,22 @@ func set_card(value: Card) -> void:
 		go_again_icon.hide()
 	icon.texture = card.icon
 	# StyleBoxCache returns one shared StyleBoxFlat per rarity (cached on first use).
-	art_panel.add_theme_stylebox_override("panel", StyleBoxCache.get_rarity_border(art_panel, card.rarity))
+	#art_panel.add_theme_stylebox_override("panel", StyleBoxCache.get_rarity_border(art_panel, card.rarity))
 	#pitch_strip.modulate = Card.PITCH_COLORS[card.pitch]
+	filigree.modulate = Constants.RARITY_COLORS[card.rarity]
 	match card.pitch:
 		0:
 			mana_bar.texture = ZERO_PIP_4_PITCH_BAR
 			manabar_underline.modulate = Color.GAINSBORO
 		1:
 			mana_bar.texture = ONE_PIP_4_PITCH_BAR
-			manabar_underline.modulate = Color.hex(Constants.RED_PITCH)
+			manabar_underline.modulate = Constants.RED_PITCH
 		2:
 			mana_bar.texture = TWO_PIP_4_PITCH_BAR
-			manabar_underline.modulate = Color.hex(Constants.YELLOW_PITCH)
+			manabar_underline.modulate = Constants.YELLOW_PITCH
 		3:
 			mana_bar.texture = THREE_PIP_4_PITCH_BAR
-			manabar_underline.modulate = Color.hex(Constants.BLUE_PITCH)
+			manabar_underline.modulate = Constants.BLUE_PITCH
 		#4:
 			#pitch_pips.texture = FOUR_PIP_4_PITCH_BAR
 		#5:

@@ -2,15 +2,13 @@
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_0qctv"]
 [ext_resource type="Script" uid="uid://cjhf23ocvv0vi" path="res://scenes/ui/card_visuals.gd" id="2_4hbsy"]
-[ext_resource type="Texture2D" uid="uid://c8avjgmutbvpw" path="res://art/custom_art/card_visuals/pitch_bar.png" id="4_k4udy"]
 [ext_resource type="LabelSettings" uid="uid://ducyspuxn8wap" path="res://art/themes/label_card_stats.tres" id="4_m3e03"]
-[ext_resource type="Texture2D" uid="uid://diodbu8p6vfm6" path="res://art/custom_art/card_visuals/three_pip_4_pitch_bar.png" id="5_6o0a7"]
 [ext_resource type="Texture2D" uid="uid://bcwu3liuhginf" path="res://art/card_art/pixellab/bare_fangs.png" id="5_87ky4"]
 [ext_resource type="Texture2D" uid="uid://h8lr3eetsht5" path="res://art/custom_art/card_visuals/card_border.png" id="6_6o0a7"]
 [ext_resource type="Texture2D" uid="uid://cy2hhpc4ntplw" path="res://art/custom_art/card_visuals/card_art_frame.png" id="6_8hscx"]
 [ext_resource type="Texture2D" uid="uid://b0cx7vg3324n2" path="res://art/item11.png" id="6_njcf5"]
 [ext_resource type="Texture2D" uid="uid://b8cpfgtokx1es" path="res://art/item52.png" id="7_b8ve4"]
-[ext_resource type="Texture2D" uid="uid://c74wi36yydqu0" path="res://art/custom_art/card_visuals/filigree_corner.png" id="8_3o6dk"]
+[ext_resource type="Texture2D" uid="uid://cc7wsirrbyunu" path="res://art/custom_art/card_visuals/filigree_corner_white.png" id="7_sujnu"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="8_bp74k"]
 [ext_resource type="Texture2D" uid="uid://8ehmmlk0r0mk" path="res://art/custom_art/card_visuals/from_claude/tier_red.png" id="11_3o6dk"]
 [ext_resource type="Texture2D" uid="uid://c2f6oqlq3fu1u" path="res://art/custom_art/card_visuals/bar_1_red.png" id="11_21bya"]
@@ -119,45 +117,44 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Filigree" type="TextureRect" parent="ArtPanel" unique_id=704307563]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 0
 offset_left = 2.0
 offset_top = 40.0
 offset_right = 24.0
 offset_bottom = 62.0
-texture = ExtResource("8_3o6dk")
+texture = ExtResource("7_sujnu")
 stretch_mode = 5
 
-[node name="Filigree2" type="TextureRect" parent="ArtPanel" unique_id=566899464]
+[node name="Filigree2" type="TextureRect" parent="ArtPanel/Filigree" unique_id=566899464]
 texture_filter = 1
 layout_mode = 0
-offset_left = 146.0
-offset_top = 40.0
-offset_right = 168.0
-offset_bottom = 62.0
-texture = ExtResource("8_3o6dk")
+offset_left = 144.0
+offset_right = 166.0
+offset_bottom = 22.0
+texture = ExtResource("7_sujnu")
 stretch_mode = 5
 flip_h = true
 
-[node name="Filigree3" type="TextureRect" parent="ArtPanel" unique_id=1332990558]
+[node name="Filigree3" type="TextureRect" parent="ArtPanel/Filigree" unique_id=1332990558]
 texture_filter = 1
 layout_mode = 0
-offset_left = 2.0
-offset_top = 152.0
-offset_right = 24.0
-offset_bottom = 174.0
-texture = ExtResource("8_3o6dk")
+offset_top = 112.0
+offset_right = 22.0
+offset_bottom = 134.0
+texture = ExtResource("7_sujnu")
 stretch_mode = 5
 flip_v = true
 
-[node name="Filigree4" type="TextureRect" parent="ArtPanel" unique_id=1637551952]
+[node name="Filigree4" type="TextureRect" parent="ArtPanel/Filigree" unique_id=1637551952]
 texture_filter = 1
 layout_mode = 0
-offset_left = 146.0
-offset_top = 152.0
-offset_right = 168.0
-offset_bottom = 174.0
-texture = ExtResource("8_3o6dk")
+offset_left = 144.0
+offset_top = 112.0
+offset_right = 166.0
+offset_bottom = 134.0
+texture = ExtResource("7_sujnu")
 stretch_mode = 5
 flip_h = true
 flip_v = true
@@ -173,39 +170,9 @@ offset_bottom = 40.0
 grow_horizontal = 2
 mouse_filter = 1
 
-[node name="PitchStrip" type="CanvasModulate" parent="PitchStripPos" unique_id=868946663]
-unique_name_in_owner = true
-visible = false
-
-[node name="TextureRect" type="TextureRect" parent="PitchStripPos/PitchStrip" unique_id=1916488488]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -91.0
-offset_right = 91.0
-offset_bottom = 40.0
-grow_horizontal = 2
-texture = ExtResource("4_k4udy")
-stretch_mode = 5
-
-[node name="PitchPips" type="TextureRect" parent="PitchStripPos" unique_id=861927136]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -111.0
-offset_top = -8.0
-offset_right = 71.0
-offset_bottom = 32.0
-grow_horizontal = 2
-texture = ExtResource("5_6o0a7")
-stretch_mode = 5
-
 [node name="ManabarUnderline" type="TextureRect" parent="PitchStripPos" unique_id=1956983208]
 unique_name_in_owner = true
-modulate = Color(0.72156864, 0.23529412, 0.23529412, 1)
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -220,6 +187,7 @@ stretch_mode = 5
 
 [node name="ManaBar" type="TextureRect" parent="PitchStripPos" unique_id=1125470081]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

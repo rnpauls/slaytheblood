@@ -10,7 +10,7 @@ offset_right = 200.0
 offset_bottom = 365.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 script = ExtResource("1_gu12k")
 card = ExtResource("2_qhqmp")
 
@@ -31,7 +31,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 base_scale = 0.6
-hover_scale = 1.0
+hover_scale = 1.1
 
 [node name="Price" type="HBoxContainer" parent="." unique_id=1101452153]
 unique_name_in_owner = true
@@ -58,7 +58,7 @@ stretch_mode = 5
 
 [node name="BuyButton" type="Button" parent="." unique_id=190036115]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 12)
+custom_minimum_size = Vector2(70, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20

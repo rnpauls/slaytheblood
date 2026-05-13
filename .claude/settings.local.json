@@ -63,7 +63,25 @@
       "Bash(sips -f horizontal archivist.png --out archivist.png)",
       "Bash(curl -sSL -o /Users/rich/Desktop/Godot/Godot/slaytheblood/art/card_art/pixellab/beat_chest.png \"https://backblaze.pixellab.ai/file/pixellab-characters/objects/be579bde-364d-4d27-81d0-4b62d97e6d65/ce827cda-b106-48da-872f-3222bed0c39a/rotations/unknown.png\")",
       "Bash(python3 -c ' *)",
-      "WebFetch(domain:api.pixellab.ai)"
+      "WebFetch(domain:api.pixellab.ai)",
+      "Bash(godot --version)",
+      "Bash(mdfind -name \"Godot.app\")",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --version)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit --path .)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit --path . --check-only --script /dev/stdin)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --path /Users/rich/Desktop/Godot/Godot/slaytheblood --script /tmp/test_load.gd)",
+      "WebFetch(domain:docs.godotengine.org)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit --path /Users/rich/Desktop/Godot/Godot/slaytheblood --verbose)",
+      "Read(//tmp/**)",
+      "Bash(grep -B 2 -A 2 \"card_ui.tscn\\\\|card_ui.gd\\\\|enemy_card_ui\" /tmp/godot_verbose.log | head -80)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --path /Users/rich/Desktop/Godot/Godot/slaytheblood --script /tmp/test_load_enemy.gd)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --import --path /Users/rich/Desktop/Godot/Godot/slaytheblood)",
+      "Bash(xxd /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/enemy_card_ui.tscn)",
+      "Bash(xxd)",
+      "Bash(sed -n '6p' /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/enemy_card_ui.tscn)",
+      "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/enemy_card_ui.tscn)",
+      "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/player_card_ui.tscn)",
+      "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/card_ui.tscn)"
     ]
   }
 }

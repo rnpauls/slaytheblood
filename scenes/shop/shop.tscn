@@ -171,10 +171,10 @@ vertical_alignment = 1
 
 [node name="Weapons" type="HBoxContainer" parent="UILayer" unique_id=500071596]
 unique_name_in_owner = true
-offset_left = 98.0
-offset_top = 115.0
-offset_right = 548.0
-offset_bottom = 351.0
+offset_left = 1.0
+offset_top = 133.0
+offset_right = 451.0
+offset_bottom = 400.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
@@ -194,10 +194,10 @@ weapon = ExtResource("W_aether")
 
 [node name="Equipment" type="HBoxContainer" parent="UILayer" unique_id=30414963]
 unique_name_in_owner = true
-offset_left = 98.0
-offset_top = 420.0
-offset_right = 548.0
-offset_bottom = 660.0
+offset_left = 201.0
+offset_top = 431.0
+offset_right = 651.0
+offset_bottom = 700.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 15
@@ -215,62 +215,56 @@ equipment = ExtResource("15_ncc2j")
 layout_mode = 2
 equipment = ExtResource("EQ_manathreaded")
 
-[node name="ShopContent" type="VBoxContainer" parent="UILayer" unique_id=1988987100]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -206.0
-offset_right = 596.0
-offset_bottom = 288.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Cards" type="HBoxContainer" parent="UILayer" unique_id=1726449760]
+unique_name_in_owner = true
+offset_left = 454.0
+offset_top = 150.0
+offset_right = 1249.0
+offset_bottom = 395.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/separation = 15
 
-[node name="Cards" type="HBoxContainer" parent="UILayer/ShopContent" unique_id=1726449760]
+[node name="ShopCard" parent="UILayer/Cards" unique_id=34719287 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard2" parent="UILayer/Cards" unique_id=1270184286 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard3" parent="UILayer/Cards" unique_id=1866610996 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard4" parent="UILayer/Cards" unique_id=315799312 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard5" parent="UILayer/Cards" unique_id=1068467191 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="ShopCard6" parent="UILayer/Cards" unique_id=51357709 instance=ExtResource("4_61gdv")]
+custom_minimum_size = Vector2(40, 56)
+layout_mode = 2
+
+[node name="Relics" type="HBoxContainer" parent="UILayer" unique_id=973321356]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_constants/separation = 15
-
-[node name="ShopCard" parent="UILayer/ShopContent/Cards" unique_id=34719287 instance=ExtResource("4_61gdv")]
-custom_minimum_size = Vector2(40, 56)
-layout_mode = 2
-
-[node name="ShopCard2" parent="UILayer/ShopContent/Cards" unique_id=1270184286 instance=ExtResource("4_61gdv")]
-custom_minimum_size = Vector2(40, 56)
-layout_mode = 2
-
-[node name="ShopCard3" parent="UILayer/ShopContent/Cards" unique_id=1866610996 instance=ExtResource("4_61gdv")]
-custom_minimum_size = Vector2(40, 56)
-layout_mode = 2
-
-[node name="ShopCard4" parent="UILayer/ShopContent/Cards" unique_id=315799312 instance=ExtResource("4_61gdv")]
-custom_minimum_size = Vector2(40, 56)
-layout_mode = 2
-
-[node name="ShopCard5" parent="UILayer/ShopContent/Cards" unique_id=1068467191 instance=ExtResource("4_61gdv")]
-custom_minimum_size = Vector2(40, 56)
-layout_mode = 2
-
-[node name="Relics" type="HBoxContainer" parent="UILayer/ShopContent" unique_id=973321356]
-unique_name_in_owner = true
-layout_mode = 2
+offset_left = 675.0
+offset_top = 495.0
+offset_right = 915.0
+offset_bottom = 638.0
 size_flags_vertical = 10
 theme_override_constants/separation = 15
 
-[node name="ShopRelic" parent="UILayer/ShopContent/Relics" unique_id=503453516 instance=ExtResource("5_iqig7")]
+[node name="ShopRelic" parent="UILayer/Relics" unique_id=503453516 instance=ExtResource("5_iqig7")]
 layout_mode = 2
 
-[node name="ShopRelic2" parent="UILayer/ShopContent/Relics" unique_id=719714276 instance=ExtResource("5_iqig7")]
+[node name="ShopRelic2" parent="UILayer/Relics" unique_id=719714276 instance=ExtResource("5_iqig7")]
 layout_mode = 2
 
-[node name="ShopRelic3" parent="UILayer/ShopContent/Relics" unique_id=2041741568 instance=ExtResource("5_iqig7")]
+[node name="ShopRelic3" parent="UILayer/Relics" unique_id=2041741568 instance=ExtResource("5_iqig7")]
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="UILayer" unique_id=1069481478]

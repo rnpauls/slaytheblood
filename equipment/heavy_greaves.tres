@@ -12,5 +12,5 @@ rarity = 1
 character_type = 2
 single_use = true
 icon = ExtResource("1_icon")
-tooltip = "Heavy Greaves: 6 block. When destroyed, gain [kw=empower:2]Empower 2[/kw]."
+tooltip = "When destroyed, gain [kw=empower:2]Empower 2[/kw]."
 max_block = 6

@@ -5,12 +5,6 @@ enum Slot {HEAD, CHEST, ARMS, LEGS, OFFHAND}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
 
-const RARITY_COLORS := {
-	Card.Rarity.COMMON: Color.GRAY,
-	Card.Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,
-	Card.Rarity.RARE: Color.GOLD,
-}
-
 @export_group("Equipment Attributes")
 @export var equipment_name: String
 @export var id: String

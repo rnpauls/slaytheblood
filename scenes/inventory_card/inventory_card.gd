@@ -15,7 +15,7 @@ const INFINITY_BADGE_PATH := "res://art/equipment_badges/infinity.png"
 @onready var equip_icon: TextureRect = $ArtPanel/EquipmentDisplay/EquipIcon
 @onready var block_label: Label = $ArtPanel/EquipmentDisplay/BlockBadge/BlockLabel
 @onready var one_shot_badge: TextureRect = $ArtPanel/EquipmentDisplay/OneShotBadge
-@onready var rarity: TextureRect = $Rarity
+@onready var filigree: TextureRect = %Filigree
 @onready var text_box: RichTextLabel = $TextBox
 @onready var name_label: RichTextLabel = $ArtPanel/NameLabel
 @onready var type_label: RichTextLabel = $TypeLabel
@@ -35,7 +35,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 	weapon_ui.set_weapon(weapon)
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(weapon.get_tooltip()))
 	name_label.text = weapon.weapon_name
-	rarity.modulate = Weapon.RARITY_COLORS[weapon.rarity]
+	filigree.modulate = Constants.RARITY_COLORS[weapon.rarity]
 	type_label.text = "%s - %s" % [
 		Weapon.Type.keys()[weapon.type],
 		HANDS_LABELS[weapon.hands],
@@ -57,7 +57,7 @@ func set_equipment(new_equipment: Equipment) -> void:
 	_update_status_badge()
 	text_box.text = IconRegistry.expand_icons(KeywordRegistry.format_keywords(equipment.get_tooltip()))
 	name_label.text = equipment.equipment_name
-	rarity.modulate = Equipment.RARITY_COLORS[equipment.rarity]
+	filigree.modulate = Constants.RARITY_COLORS[equipment.rarity]
 	type_label.text = Equipment.Slot.keys()[equipment.slot]
 
 

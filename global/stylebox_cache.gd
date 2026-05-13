@@ -17,6 +17,6 @@ func get_rarity_border(source_panel: Control, rarity: int) -> StyleBoxFlat:
 	if not _rarity_cache.has(rarity):
 		var base_sb := source_panel.get_theme_stylebox("panel") as StyleBoxFlat
 		var sb := base_sb.duplicate() as StyleBoxFlat
-		sb.border_color = Card.RARITY_COLORS[rarity]
+		sb.border_color = Constants.RARITY_COLORS[rarity]
 		_rarity_cache[rarity] = sb
 	return _rarity_cache[rarity]
