@@ -31,7 +31,7 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 base_scale = 0.6
-hover_scale = 1.55
+hover_scale = 1.0
 
 [node name="Price" type="HBoxContainer" parent="." unique_id=1101452153]
 unique_name_in_owner = true

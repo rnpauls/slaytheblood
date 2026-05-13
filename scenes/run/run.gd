@@ -28,6 +28,7 @@ const FINAL_ACT := 2
 @onready var deck_button: CardPileOpener = %DeckButton
 @onready var deck_view: CardPileView = %DeckView
 @onready var pause_menu: PauseMenu = $PauseMenu
+@onready var debug_buttons: VBoxContainer = $DebugButtons
 
 @onready var battle_button: Button = %BattleButton
 @onready var map_button: TextureButton = %MapButton
@@ -53,6 +54,7 @@ func _ready() -> void:
 		func():
 			get_tree().change_scene_to_file(MAIN_MENU_PATH)
 	)
+	_setup_debug_layer()
 	MusicPlayer.play(NON_COMBAT_MUSIC, true)
 	match run_startup.type:
 		RunStartup.Type.NEW_RUN:
@@ -61,9 +63,16 @@ func _ready() -> void:
 		RunStartup.Type.CONTINUED_RUN:
 			_load_run()
 
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed("cheat"):
-		#get_tree().call_group("enemies", "queue_free")
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug_menu"):
+		debug_buttons.visible = not debug_buttons.visible
+		get_viewport().set_input_as_handled()
+
+func _setup_debug_layer() -> void:
+	var debug_layer := CanvasLayer.new()
+	debug_layer.layer = 10
+	add_child(debug_layer)
+	debug_buttons.reparent(debug_layer)
 
 func _start_run() -> void:
 	stats = RunStats.new()
@@ -228,9 +237,6 @@ func _setup_event_connections() -> void:
 
 
 func _setup_debug_event_buttons() -> void:
-	var debug_buttons := $DebugButtons as VBoxContainer
-	if not debug_buttons:
-		return
 	for scene: PackedScene in EVENT_ROOM_POOL.event_rooms:
 		var btn := Button.new()
 		btn.text = "event: " + scene.resource_path.get_file().get_basename()

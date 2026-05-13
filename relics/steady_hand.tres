@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://stbrelic011b"]
+
+[ext_resource type="Texture2D" path="res://art/relics/pixellab/steady_hand.png" id="1_sthnd"]
+[ext_resource type="Script" uid="uid://stbrelic011a" path="res://relics/steady_hand.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Steady Hand"
+id = "steady_hand"
+type = 4
+icon = ExtResource("1_sthnd")
+tooltip = "[color=\"ffdf00\"]Steady Hand[/color]
+Draw 1 additional card at end of turn."

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/enemy_stats.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/sprites/pixellab/ghoul.png" id="2_art"]
+[ext_resource type="Resource" path="res://enemies/ghoul/ghoul_starting_deck.tres" id="3_deck"]
+[ext_resource type="Resource" path="res://enemies/empty_inventory.tres" id="4_inv"]
+
+[resource]
+script = ExtResource("1_script")
+character_name = "Ghoul"
+art = ExtResource("2_art")
+max_health = 24
+starting_deck = ExtResource("3_deck")
+starting_inventory = ExtResource("4_inv")
+cards_per_turn = 3

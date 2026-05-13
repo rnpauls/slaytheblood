@@ -13,6 +13,13 @@ func enter() ->void:
 
 	Events.tooltip_hide_requested.emit()
 
+	# If the mouse is still over the card (e.g. just deselected by clicking
+	# during a "choose a card" prompt), re-apply hover visuals so the card
+	# snaps back to hover position instead of being stuck at the previous
+	# elevated Y with scale 0.7 from _return_to_original_parent.
+	if card_ui.mouse_is_over():
+		on_mouse_entered()
+
 func on_gui_input(event: InputEvent) -> void:
 	var lmb := event.is_action_pressed("left_mouse")
 	var rmb := event.is_action_pressed("right_mouse")

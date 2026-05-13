@@ -7,8 +7,8 @@ const EXPOSED_STATUS := preload("res://statuses/exposed.tres")
 
 
 func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
-	for target in targets:
-		var sh :StatusHandler= target.get("status_handler")
+	for tgt in targets:
+		var sh :StatusHandler= tgt.get("status_handler")
 		if sh is StatusHandler:
 			var dup: ExposedStatus = EXPOSED_STATUS.duplicate()
 			dup.duration = 2

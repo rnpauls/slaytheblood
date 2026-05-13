@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CrimsonCenserWeapon" format=3 uid="uid://dk2dshgbrgsg4"]
+
+[ext_resource type="Texture2D" uid="uid://ddn8hrnwrafx3" path="res://art/sprites/pixellab/crimson_censer.png" id="1_cens1"]
+[ext_resource type="Script" uid="uid://cen07ohr755nj" path="res://weapons/elite/crimson_censer.gd" id="2_cens2"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_cens3"]
+
+[resource]
+script = ExtResource("2_cens2")
+weapon_name = "Crimson Censer"
+id = "crimson_censer"
+type = 4
+rarity = 2
+hands = 1
+icon = ExtResource("1_cens1")
+sound = ExtResource("3_cens3")
+tooltip = "A brass censer dripping blood. Strikes leave wounds that won't close."
+attack = 3
+cost = 1

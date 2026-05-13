@@ -10,7 +10,6 @@ extends MarginContainer
 @onready var card_back_panel: Panel = %CardBackPanel
 @onready var card_back_margin_container: MarginContainer = %CardBackMarginContainer
 @onready var plan_exclamation: Label = %PlanExclamation
-@onready var arsenal_label: Label = %ArsenalLabel
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var glow_panel: Panel = %GlowPanel
 
@@ -60,9 +59,3 @@ func set_plan_color(color: Color, show_exclamation: bool) -> void:
 		card_back_panel.add_theme_stylebox_override("panel", _plan_stylebox)
 	_plan_stylebox.bg_color = color
 	plan_exclamation.visible = show_exclamation
-
-## Toggle the "A" overlay marking this card as the enemy's arsenal.
-func set_arsenal_marker(value: bool) -> void:
-	if not is_node_ready():
-		await ready
-	arsenal_label.visible = value

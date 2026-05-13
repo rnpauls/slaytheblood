@@ -59,7 +59,8 @@ func _update_view(randomized: bool) ->void:
 		if selection_mode:
 			new_card.tooltip_requested.connect(_on_card_selected)
 		else:
-			new_card.tooltip_requested.connect(card_tooltip_popup.show_tooltip)
+			#new_card.tooltip_requested.connect(card_tooltip_popup.show_tooltip)
+			pass
 
 	show()
 

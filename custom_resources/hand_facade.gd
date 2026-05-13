@@ -7,7 +7,6 @@
 ## Effects targeting a Combatant call:
 ##   target.hand_facade.discard_random(n)
 ##   target.hand_facade.exhaust_random(n)
-##   target.hand_facade.destroy_arsenal()
 ##   target.hand_facade.draw_cards(n)
 ## …without branching on `target is Player` vs `target is Enemy`.
 ##
@@ -30,9 +29,6 @@ func size() -> int:
 	return 0
 
 func is_intimidated(_card: Card) -> bool:
-	return false
-
-func has_arsenal() -> bool:
 	return false
 
 
@@ -65,10 +61,6 @@ func draw_cards(_n: int) -> Tween:
 ## Move every card in the discard pile back to the draw pile and shuffle.
 func reshuffle_discard() -> void:
 	push_warning("HandFacade.reshuffle_discard called on base class")
-
-## Destroy the arsenal slot card. Returns true if there was one to destroy.
-func destroy_arsenal() -> bool:
-	return false
 
 
 # ── Interactive prompts ──────────────────────────────────────────────────────

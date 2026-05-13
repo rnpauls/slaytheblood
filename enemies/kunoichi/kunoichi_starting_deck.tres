@@ -7,8 +7,9 @@
 [ext_resource type="Resource" uid="uid://biyyop47rwhph" path="res://characters/ninja/cards/bittering_thorns_red.tres" id="4_jnjdq"]
 [ext_resource type="Resource" uid="uid://4t0h3cimqt3o" path="res://characters/ninja/cards/poison_the_blade.tres" id="5_uyr5x"]
 [ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="6_jsou6"]
+[ext_resource type="Resource" path="res://generic_cards/lacerate.tres" id="7_40tkk"]
 
 [resource]
 script = ExtResource("2_f38eu")
-cards = Array[ExtResource("1_ixber")]([ExtResource("2_2gbi0"), ExtResource("2_2gbi0"), ExtResource("2_2gbi0"), ExtResource("3_40tkk"), ExtResource("3_40tkk"), ExtResource("4_jnjdq"), ExtResource("4_jnjdq"), ExtResource("5_uyr5x"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6")])
+cards = Array[ExtResource("1_ixber")]([ExtResource("2_2gbi0"), ExtResource("2_2gbi0"), ExtResource("2_2gbi0"), ExtResource("3_40tkk"), ExtResource("3_40tkk"), ExtResource("4_jnjdq"), ExtResource("4_jnjdq"), ExtResource("5_uyr5x"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("6_jsou6"), ExtResource("7_40tkk"), ExtResource("7_40tkk"), ExtResource("7_40tkk")])
 metadata/_custom_type_script = "uid://dejd2uv2w4475"

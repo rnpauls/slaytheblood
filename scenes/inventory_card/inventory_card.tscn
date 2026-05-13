@@ -238,7 +238,7 @@ offset_bottom = 269.0
 mouse_filter = 2
 theme = ExtResource("9_36qo6")
 bbcode_enabled = true
-text = "On hit destroy arsenal"
+text = "Tooltip text"
 horizontal_alignment = 1
 
 [node name="TypeLabel" type="RichTextLabel" parent="." unique_id=155581673]

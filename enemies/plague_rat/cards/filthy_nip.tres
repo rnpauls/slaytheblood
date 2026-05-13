@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://enemies/plague_rat/cards/filthy_nip.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/card_art/pixellab/filthy_nip.png" id="2_icon"]
+[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("1_script")
+id = "filthy_nip"
+type = 0
+rarity = 0
+target = 1
+cost = 0
+pitch = 1
+attack = 2
+defense = 2
+ai_value = 3
+icon = ExtResource("2_icon")
+tooltip_text = "[center]On hit: Apply 3 [kw=poison_tip]Poison Tip[/kw].[/center]"
+sound = ExtResource("3_sound")

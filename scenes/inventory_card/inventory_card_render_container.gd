@@ -1,10 +1,10 @@
 @tool
 class_name InventoryCardRenderContainer
-extends MarginContainer
+extends CenterContainer
 
 const HOVER_TWEEN_TIME := 0.1
 const CARD_ASPECT := 2.0 / 3.0
-const NATURAL_MIN_SIZE := Vector2(200, 300)
+const NATURAL_SIZE := Vector2(200, 300)
 
 signal equipment_pressed(equipment: Equipment)
 signal pressed(item: Resource)
@@ -12,8 +12,12 @@ signal pressed(item: Resource)
 @export var weapon: Weapon : set = set_weapon
 @export var equipment: Equipment : set = set_equipment
 @export var clickable: bool = false : set = set_clickable
-@export var hover_scale: Vector2 = Vector2(1.08, 1.08)
-@export var rest_scale: Vector2 = Vector2.ONE : set = set_rest_scale
+
+# base_scale and hover_scale are absolute fractions of NATURAL_SIZE — the
+# hovered size is NOT a multiplier on top of base_scale.
+@export_group("Scaling")
+@export var base_scale: float = 1.0 : set = set_base_scale
+@export var hover_scale: float = 1.1
 
 @onready var sub_viewport_viewer: TextureRect = %SubViewportViewer
 @onready var inventory_card: InventoryCard = $SubViewport/InventoryCard
@@ -35,7 +39,10 @@ func _ready() -> void:
 	button.mouse_exited.connect(_on_mouse_exited)
 	stack.resized.connect(_update_pivot)
 	stack.resized.connect(_fit_glow_to_card)
-	_update_pivot()
+	# CenterContainer.fit_child_in_rect resets stack.scale to (1, 1) every sort,
+	# so re-apply on each sort to keep base_scale in effect (mirrors CardMenuUI).
+	sort_children.connect(_apply_base_scale)
+	_apply_base_scale()
 	_fit_glow_to_card()
 	_apply_clickable()
 
@@ -129,23 +136,39 @@ func _set_hovered(value: bool) -> void:
 	z_index = 10 if value else 0
 	if _hover_tween and _hover_tween.is_running():
 		_hover_tween.kill()
-	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	_hover_tween.tween_property(stack, "scale", hover_scale if value else Vector2.ONE, HOVER_TWEEN_TIME)
+	# Stack's size is NATURAL * base_scale (driven by custom_minimum_size below),
+	# so stack.scale here is a multiplier on top of that resting size. Resolve
+	# the absolute hover/base targets back into a stack.scale ratio.
+	if value:
+		# Instant zoom in to hover_scale * NATURAL.
+		stack.scale = Vector2.ONE * (hover_scale / base_scale)
+	else:
+		# Tween back to rest (stack.scale = ONE -> visual = NATURAL * base_scale).
+		_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		_hover_tween.tween_property(stack, "scale", Vector2.ONE, HOVER_TWEEN_TIME)
 
 
-func set_rest_scale(value: Vector2) -> void:
-	rest_scale = value
+func set_base_scale(value: float) -> void:
+	base_scale = value
 	if not is_node_ready():
 		return
+	_apply_base_scale()
+
+
+# CenterContainer's C++ get_minimum_size() returns the max of children's
+# combined minimum sizes (bypassing our GDScript _get_minimum_size override),
+# so we drive the container's reported size via Stack.custom_minimum_size.
+# Stack.size then equals NATURAL_SIZE * base_scale, and stack.scale stays at
+# ONE at rest -- the visual size IS the stack size.
+func _apply_base_scale() -> void:
+	var rest_size := NATURAL_SIZE * base_scale
+	stack.custom_minimum_size = rest_size
+	stack.pivot_offset = rest_size / 2.0
+	stack.scale = Vector2.ONE
 	update_minimum_size()
 
 
-# Mirror CardMenuUI's layout-aware minimum: report the visual minimum at
-# rest_scale so the parent container (e.g. HBoxContainer) actually packs
-# scaled items tighter rather than just shrinking them within unscaled cells.
-# Returns ZERO at the default rest_scale to preserve the old min behavior
-# (custom_minimum_size = 40x60 from the .tscn) for non-shop usages.
+# Kept as a defensive fallback; in practice CenterContainer's C++
+# get_minimum_size overrides this, so the real driver is Stack.custom_minimum_size.
 func _get_minimum_size() -> Vector2:
-	if rest_scale == Vector2.ONE:
-		return Vector2.ZERO
-	return NATURAL_MIN_SIZE * rest_scale
+	return NATURAL_SIZE * base_scale

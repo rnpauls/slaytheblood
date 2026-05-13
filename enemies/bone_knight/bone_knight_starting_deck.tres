@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="3_bb"]
+[ext_resource type="Resource" path="res://enemies/elite/bulwark_knight/cards/iron_stance.tres" id="4_is"]
+[ext_resource type="Resource" path="res://characters/brute/cards/heavy_cleave.tres" id="5_hc"]
+[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
+[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="7_blk"]
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("3_bb"), ExtResource("3_bb"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("5_hc"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_blk")])

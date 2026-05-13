@@ -1,11 +1,10 @@
 class_name ShopWeapon
 extends VBoxContainer
 
-const INVENTORY_CARD_RENDER_CONTAINER = preload("res://scenes/inventory_card/inventory_card_render_container.tscn")
-
 @export var weapon: Weapon : set = set_weapon
 
 @onready var weapon_container: MarginContainer = %WeaponContainer
+@onready var current_inventory_card: InventoryCardRenderContainer = %InventoryCardRenderContainer
 @onready var price: HBoxContainer = %Price
 @onready var price_label: Label = %PriceLabel
 @onready var buy_button: Button = %BuyButton
@@ -32,13 +31,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 		await ready
 
 	weapon = new_weapon
-	
-	for child in weapon_container.get_children():
-		child.queue_free()
-
-	var new_weapon_card := INVENTORY_CARD_RENDER_CONTAINER.instantiate() as InventoryCardRenderContainer
-	weapon_container.add_child(new_weapon_card)
-	new_weapon_card.weapon = weapon
+	current_inventory_card.weapon = weapon
 
 func _on_buy_button_pressed() -> void:
 	Events.shop_weapon_bought.emit(weapon, gold_cost)

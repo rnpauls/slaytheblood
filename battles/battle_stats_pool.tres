@@ -14,15 +14,25 @@
 [ext_resource type="Resource" path="res://battles/elite/elite_reaver.tres" id="12_erav"]
 [ext_resource type="Resource" path="res://battles/elite/elite_hexweaver.tres" id="13_ehex"]
 [ext_resource type="Resource" uid="uid://b7t2arch001" path="res://battles/tier_2_archivist.tres" id="14_arch"]
-[ext_resource type="Resource" uid="uid://bhroqnrg4tnib" path="res://battles/tier_0_slimes.tres" id="15_6x4eu"]
+[ext_resource type="Resource" uid="uid://b03gvt7tny22y" path="res://battles/tier_0_slimes.tres" id="15_6x4eu"]
 [ext_resource type="Resource" uid="uid://dv3ytjug32tfb" path="res://battles/tier_3_kunoichi.tres" id="16_t3kun"]
 [ext_resource type="Resource" uid="uid://hatd0ybmm241" path="res://battles/tier_5_toxic_ghost.tres" id="17_t5tox"]
 [ext_resource type="Resource" path="res://battles/tier_2_marauder.tres" id="18_t2mar"]
 [ext_resource type="Resource" path="res://battles/tier_3_stalker.tres" id="19_t3stk"]
 [ext_resource type="Resource" path="res://battles/elite/elite_mind_reaver.tres" id="20_emr"]
 [ext_resource type="Resource" path="res://battles/tier_1_kuno_comm.tres" id="20_iajyq"]
+[ext_resource type="Resource" path="res://battles/tier_3_ghoul.tres" id="21_t3gh"]
+[ext_resource type="Resource" path="res://battles/tier_3_plague_rats.tres" id="22_t3pr"]
+[ext_resource type="Resource" path="res://battles/tier_3_cultist_ghoul.tres" id="23_t3cg"]
+[ext_resource type="Resource" path="res://battles/tier_3_bone_knight.tres" id="24_t3bk"]
+[ext_resource type="Resource" path="res://battles/tier_3_wraith_pair.tres" id="25_t3wp"]
+[ext_resource type="Resource" path="res://battles/tier_3_bone_wraith.tres" id="26_t3bw"]
+[ext_resource type="Resource" path="res://battles/tier_3_cultist_rats.tres" id="27_t3cr"]
+[ext_resource type="Resource" path="res://battles/tier_3_plague_doctor.tres" id="28_t3pd"]
+[ext_resource type="Resource" path="res://battles/tier_3_treant.tres" id="29_t3tr"]
+[ext_resource type="Resource" path="res://battles/elite/elite_bloodbound_acolyte.tres" id="30_eba"]
 
 [resource]
 script = ExtResource("6_cquyn")
-pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("10_t1sli"), ExtResource("14_arch"), ExtResource("15_6x4eu"), ExtResource("16_t3kun"), ExtResource("17_t5tox"), ExtResource("18_t2mar"), ExtResource("19_t3stk"), ExtResource("20_iajyq")])
-elite_pool = Array[ExtResource("1_p6jnf")]([ExtResource("11_eblw"), ExtResource("12_erav"), ExtResource("13_ehex"), ExtResource("20_emr")])
+pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("10_t1sli"), ExtResource("14_arch"), ExtResource("15_6x4eu"), ExtResource("16_t3kun"), ExtResource("17_t5tox"), ExtResource("18_t2mar"), ExtResource("19_t3stk"), ExtResource("20_iajyq"), ExtResource("21_t3gh"), ExtResource("22_t3pr"), ExtResource("23_t3cg"), ExtResource("24_t3bk"), ExtResource("25_t3wp"), ExtResource("26_t3bw"), ExtResource("27_t3cr"), ExtResource("28_t3pd"), ExtResource("29_t3tr")])
+elite_pool = Array[ExtResource("1_p6jnf")]([ExtResource("11_eblw"), ExtResource("12_erav"), ExtResource("13_ehex"), ExtResource("20_emr"), ExtResource("30_eba")])

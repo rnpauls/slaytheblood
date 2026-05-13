@@ -5,7 +5,6 @@ var enemy: Enemy # Reference to enemy object (with life, intellect)
 #var deck: CardPile # Array of card objects (Card class)
 var hand: Array # Current hand
 #var life: int
-var arsenal: Card = null # Single Card or null
 var turn_plan = null # Stores the planned turn {damage, pitched, actions, remaining}
 var resources := 0 # Tracks resources available this turn
 ## Cards that cannot be used to block or pitch this turn due to Intimidate.
@@ -16,7 +15,7 @@ var modifier_handler: ModifierHandler
 @export var target: Node2D#: set = _set_target
 
 signal plan_created(enemy: Enemy)
-## Emitted whenever the AI removes a card from its hand (pitch, play, block, arsenal).
+## Emitted whenever the AI removes a card from its hand (pitch, play, block).
 ## Enemy.gd connects to this to keep the visual hand in sync.
 signal card_removed_from_hand(card: Card)
 
@@ -38,27 +37,13 @@ func recalculate_plan(player_life: int) -> void:
 
 ## Play the next action in turn_plan, returns card to the enemy node
 ## Pitches cards as needed
-## Arsenals if out of actions
 func play_next_action() -> Card:
 	if not turn_plan or turn_plan.actions.size() == 0:
-		if turn_plan and turn_plan.remaining.size() > 0 and not arsenal:
-			# Don't arsenal the lone remaining card if it's costly — arsenal can't
-			# be pitched, so it'd be stranded if next turn's draws don't bring
-			# enough resources to play it. Keeping it in hand at least preserves
-			# its pitch utility.
-			var only_costly: bool = turn_plan.remaining.size() == 1 and turn_plan.remaining[0].cost > 0
-			if not only_costly:
-				arsenal = pick_best_arsenal(turn_plan.remaining)
-				hand.erase(arsenal)
-				card_removed_from_hand.emit(arsenal)
-				print_enemy_ai("arsenaled %s" % arsenal.id)
-			else:
-				print_enemy_ai("kept %s in hand (lone costly card)" % turn_plan.remaining[0].id)
 		turn_plan = null
 		return null
-	
+
 	var next_action = turn_plan.actions[0]
-	
+
 	while resources < next_action.cost and turn_plan.pitched.size() > 0:
 		var pitch = turn_plan.pitched[0]
 		resources += pitch.pitch
@@ -73,20 +58,16 @@ func play_next_action() -> Card:
 		card_removed_from_hand.emit(pitch)
 		turn_plan.pitched.erase(pitch)
 		print_enemy_ai("pitched %s for %d" % [pitch.id, pitch.pitch])
-	
+
 	if resources < next_action.cost:
 		turn_plan.actions.erase(next_action)
 		print_enemy_ai("ran out of resources for %s" % next_action.id)
 		return null
-	
+
 	resources -= next_action.cost
-	if next_action == arsenal:
-		arsenal = null
-		print_enemy_ai("played arsenal %s" % [next_action.id])
-	else:
-		hand.erase(next_action)
-		card_removed_from_hand.emit(next_action)
-		print_enemy_ai("played %s" % [next_action.id])
+	hand.erase(next_action)
+	card_removed_from_hand.emit(next_action)
+	print_enemy_ai("played %s" % [next_action.id])
 	turn_plan.actions.erase(next_action)
 	return next_action
 
@@ -135,22 +116,15 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 	var current_hp: int = enemy.stats.health
 
 	# Build candidate list. Hand cards may take any role subject to flags.
-	# Arsenal can BLOCK only if it's a Type.BLOCK card (F&B rule); never PITCH.
 	var candidates: Array = []
 	for c: Card in hand:
 		var can_block_c: bool = (not c.disable_defense) and (not (c in intimidated_cards))
 		var can_pitch_c: bool = (not c.disable_pitch) and (not (c in intimidated_cards))
-		candidates.append({"card": c, "is_arsenal": false, "can_block": can_block_c, "can_pitch": can_pitch_c})
-	var arsenal_in_candidates := false
-	if arsenal and arsenal.type == Card.Type.BLOCK:
-		var can_block_arsenal: bool = (not arsenal.disable_defense) and (not (arsenal in intimidated_cards))
-		if can_block_arsenal:
-			candidates.append({"card": arsenal, "is_arsenal": true, "can_block": true, "can_pitch": false})
-			arsenal_in_candidates = true
+		candidates.append({"card": c, "can_block": can_block_c, "can_pitch": can_pitch_c})
 
 	# Baseline offense if we keep everything (no defense). Used for offense_lost.
 	var max_offense_baseline: int = calculate_max_offense(
-		{"cards": hand.duplicate(), "resources": 0, "arsenal": arsenal}, 1, enemy.stats.health
+		{"cards": hand.duplicate(), "resources": 0}, 1, enemy.stats.health
 	)["damage"]
 
 	var n: int = candidates.size()
@@ -168,7 +142,6 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 		var blocked_cards: Array[Card] = []
 		var pitched_cards: Array[Card] = []
 		var keep_cards: Array[Card] = []
-		var keep_arsenal: Card = arsenal if not arsenal_in_candidates else null
 		var valid := true
 		var rem := mask
 		for i in n:
@@ -177,10 +150,7 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 			var ent: Dictionary = candidates[i]
 			match role:
 				0:
-					if ent.is_arsenal:
-						keep_arsenal = ent.card
-					else:
-						keep_cards.append(ent.card)
+					keep_cards.append(ent.card)
 				1:
 					if not ent.can_block:
 						valid = false
@@ -205,7 +175,7 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 		var survives: bool = damage_taken < current_hp
 
 		var offense_after: int = calculate_max_offense(
-			{"cards": keep_cards, "resources": 0, "arsenal": keep_arsenal}, 1, enemy.stats.health
+			{"cards": keep_cards, "resources": 0}, 1, enemy.stats.health
 		)["damage"]
 		var offense_lost: int = max_offense_baseline - offense_after
 		# On-hit cost: each landing damage component independently fires every
@@ -259,12 +229,11 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 			best_offense_after = offense_after
 			best_cards_used = cards_used
 
-	# Commit the chosen allocation. Block-card removal mirrors the old
-	# defend() flow: arsenal is cleared by direct assignment; hand cards
-	# emit card_removed_from_hand (drives _on_hand_changed -> recalc plan).
-	# stats.block / stats.mana are applied here so that the AttackDamageEffect
-	# / ZapEffect that fire immediately after defend_packet returns see the
-	# right values when they call take_damage.
+	# Commit the chosen allocation. Hand cards emit card_removed_from_hand
+	# (drives _on_hand_changed -> recalc plan). stats.block / stats.mana are
+	# applied here so that the AttackDamageEffect / ZapEffect that fire
+	# immediately after defend_packet returns see the right values when they
+	# call take_damage.
 	var blocked_out: Array[Card] = best.get("blocked", [] as Array[Card])
 	var pitched_out: Array[Card] = best.get("pitched", [] as Array[Card])
 	print_enemy_ai("defend_packet pkt=(p:%d a:%d) hp=%d mana=%d picked mask=%s blocked=%d pitched=%d prevention=%d damage=%s survives=%s" % [
@@ -280,13 +249,9 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 		# would fire all SFX at once before the animations begin. The signal
 		# emit still drives EnemyHandManager._on_card_blocked → exhaust pile.
 		c.blocked.emit(c)
-		if c == arsenal:
-			arsenal = null
-			print_enemy_ai("blocked arsenal %s for %d" % [c.id, block_amount])
-		else:
-			hand.erase(c)
-			card_removed_from_hand.emit(c)
-			print_enemy_ai("blocked %s for %d" % [c.id, block_amount])
+		hand.erase(c)
+		card_removed_from_hand.emit(c)
+		print_enemy_ai("blocked %s for %d" % [c.id, block_amount])
 	for c: Card in pitched_out:
 		var pre_mana: int = enemy.stats.mana
 		# pitch_card increments stats.mana AND emits `pitched`, which
@@ -306,8 +271,7 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 ## Recursively calculate maximum offense potential
 ##TODO: include damage modifiers
 func calculate_max_offense(state: Dictionary, action_points: int, player_life: int) -> Dictionary:
-	var arsenal_card = state.get("arsenal")
-	if action_points <= 0 or (state.cards.size() == 0 and not arsenal_card):
+	if action_points <= 0 or state.cards.size() == 0:
 		return {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards}
 
 	var best_result = {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards.duplicate()}
@@ -318,11 +282,10 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	#Tie-break on equal damage by preferring fewer pitches — play_next_action
 	#only pitches as needed at runtime, so over-pitching in the plan would
 	#cause the displayed pitch list to disagree with what actually happens.
-	#Note: arsenal cannot be pitched (F&B rule) — only carried through state.
 	for pitch in state.cards:
 		if pitch.disable_pitch:
 			continue
-		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch, "arsenal": arsenal_card}
+		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch}
 		new_state.cards.erase(pitch)
 		var pitch_result = calculate_max_offense(new_state, action_points, player_life)
 		var total_damage = pitch_result.damage * lethal_factor
@@ -348,7 +311,7 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 ##Calls with current hand, zero resources, and one action point
 ##Used at start of turn
 func calculate_max_offense_now(player_life: int) -> Dictionary:
-	var hand_state = {"cards": hand.duplicate(), "resources": 0, "arsenal": arsenal}
+	var hand_state = {"cards": hand.duplicate(), "resources": 0}
 	return calculate_max_offense(hand_state, 1, player_life)
 	
 ## Try playing actions with hand and resources defined in state
@@ -358,21 +321,12 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	var best_actions = []
 	var best_remaining = state.cards.duplicate()
 
-	var arsenal_card = state.get("arsenal")
-	var candidates = state.cards.duplicate()
-	if arsenal_card:
-		candidates.append(arsenal_card)
-
-	for action in candidates as Array[Card]:
+	for action in state.cards as Array[Card]:
 		if action.unplayable:
 			continue
 		if action.cost <= state.resources and (action.type == Card.Type.ATTACK or action.type == Card.Type.NAA):
-			var new_state: Dictionary
-			if action == arsenal_card:
-				new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost, "arsenal": null}
-			else:
-				new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost, "arsenal": arsenal_card}
-				new_state.cards.erase(action)
+			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost}
+			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0) + action.action_points_granted
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
 			# Total damage is attack + zap regardless of damage_kind: PHYSICAL kind
@@ -403,32 +357,6 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	
 	return {"damage": best_damage, "pitched": best_pitched, "actions": best_actions, "remaining": best_remaining}
 
-## Pick the best card to arsenal
-func pick_best_arsenal(cards: Array) -> Card:
-	var eligible: Array = cards.filter(func(c): return not c.unplayable)
-	if eligible.size() == 0:
-		return null
-	var best_card = eligible[0]
-	for card in eligible:
-		if card.type == Card.Type.BLOCK:
-			if best_card.type != Card.Type.BLOCK:
-				best_card = card
-			elif card.defense > best_card.defense:
-				best_card = card
-		elif card.pitch < best_card.pitch:
-			best_card = card
-		elif card.pitch == best_card.pitch:
-			if (card.attack + card.ai_value) > (best_card.attack + best_card.ai_value):
-				best_card = card
-	return best_card
-
-##Draw back up to full
-#func end_turn() -> void:
-	#Should recycle pitch here instead of instantly sending it to the bottom
-	#for i in enemy.stats.cards_per_turn - hand.size():
-		#var temp_card: Card = enemy.stats.draw_pile.draw_card()
-		#if temp_card:
-			#hand.append(temp_card)
 
 func print_enemy_ai(debug_str: String) -> void:
 				print("%s %s: %s" % [enemy.stats.character_name, enemy.name, debug_str])

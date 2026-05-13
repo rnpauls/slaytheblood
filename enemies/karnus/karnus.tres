@@ -10,7 +10,7 @@
 script = ExtResource("1_t3btv")
 character_name = "Karnus, the Obstinate"
 art = ExtResource("2_17j56")
-max_health = 30
+max_health = 35
 starting_deck = ExtResource("4_17j56")
 starting_inventory = ExtResource("5_8vbrw")
 cards_per_turn = 4

@@ -1,12 +1,9 @@
-## Burn HP for a fat Empower load. Empower's duration=1 means the buff
-## expires at turn end (or after one attack) — so this is a setup for an
-## immediate big swing, not a long-term engine.
+## Burn HP for permanent +Strength (Muscle) this battle. No duration set
+## means the stacks stick around for the rest of the fight.
 extends Card
 
-const EMPOWER_STATUS = preload("res://statuses/empowered.tres")
-
 @export var hp_cost: int = 4
-@export var empower_stacks: int = 4
+@export var muscle_stacks: int = 2
 
 
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
@@ -14,7 +11,6 @@ func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 		return
 	owner.stats.health -= hp_cost
 	if owner.status_handler:
-		var empower := EMPOWER_STATUS.duplicate()
-		empower.stacks = empower_stacks
-		empower.duration = 1
-		owner.status_handler.add_status(empower)
+		var muscle: MuscleStatus = preload("res://statuses/muscle.tres").duplicate()
+		muscle.stacks = muscle_stacks
+		owner.status_handler.add_status(muscle)

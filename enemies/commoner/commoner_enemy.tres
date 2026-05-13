@@ -10,7 +10,7 @@
 script = ExtResource("2_bso4h")
 character_name = "Commoner"
 art = ExtResource("1_mtmb2")
-max_health = 10
+max_health = 12
 starting_deck = ExtResource("4_ywb1e")
 starting_inventory = ExtResource("4_nuuag")
 cards_per_turn = 4

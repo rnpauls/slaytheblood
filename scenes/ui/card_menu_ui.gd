@@ -6,13 +6,20 @@ signal tooltip_requested(card: Card)
 
 const BASE_STYLEBOX := preload("res://scenes/card_ui/card_base_stylebox.tres")
 const HOVER_STYLEBOX := preload("res://scenes/card_ui/card_hover_stylebox.tres")
+const HOVER_TWEEN_TIME := 0.1
 
 @export var card: Card : set = set_card
+
+# base_scale and hover_scale are absolute fractions of the card's natural
+# size — the hovered size is NOT a multiplier on top of base_scale.
+@export_group("Scaling")
 @export_range(0.1, 2.0, 0.05) var base_scale: float = 0.8 : set = set_base_scale
-@export var hover_scale := 1.1
+@export_range(0.1, 2.0, 0.05) var hover_scale: float = 1.1
 
 @onready var visuals: CardVisuals = $Visuals
 @onready var glow_panel: Panel = $Visuals/GlowPanel
+
+var _hover_tween: Tween
 
 
 func _ready() -> void:
@@ -56,7 +63,10 @@ func _on_visuals_mouse_entered() -> void:
 	SFXRegistry.play(&"HOVER_UI")
 	visuals.panel.set("theme_override_styles/panel", HOVER_STYLEBOX)
 	visuals.pivot_offset = visuals.size / 2.0
-	visuals.scale = Vector2.ONE * base_scale * hover_scale
+	# Instant zoom in.
+	if _hover_tween and _hover_tween.is_running():
+		_hover_tween.kill()
+	visuals.scale = Vector2.ONE * hover_scale
 	z_index = 20
 	glow_panel.visible = true
 	if not card:
@@ -70,7 +80,11 @@ func _on_visuals_mouse_exited() -> void:
 	if Engine.is_editor_hint():
 		return
 	visuals.panel.set("theme_override_styles/panel", BASE_STYLEBOX)
-	visuals.scale = Vector2.ONE * base_scale
+	# Tween back to rest.
+	if _hover_tween and _hover_tween.is_running():
+		_hover_tween.kill()
+	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	_hover_tween.tween_property(visuals, "scale", Vector2.ONE * base_scale, HOVER_TWEEN_TIME)
 	z_index = 0
 	glow_panel.visible = false
 	Events.tooltip_hide_requested.emit()

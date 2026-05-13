@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://bhroqnrg4tnib"]
+[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://b03gvt7tny22y"]
 
-[ext_resource type="PackedScene" uid="uid://c30l8huh4guit" path="res://battles/tier_0_slimes.tscn" id="1_bpn20"]
+[ext_resource type="PackedScene" uid="uid://cmpvyxjcbinsh" path="res://battles/tier_0_slimes.tscn" id="1_bpn20"]
 [ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="2_lblfe"]
 
 [resource]

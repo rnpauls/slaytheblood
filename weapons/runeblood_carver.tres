@@ -15,5 +15,4 @@ icon = ExtResource("1_rcicn")
 sound = ExtResource("3_rcsnd")
 tooltip = "On hit: create 1 runechant"
 attack = 1
-go_again = true
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

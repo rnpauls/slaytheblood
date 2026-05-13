@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://stbrelic008b" path="res://relics/resonance_ring.tres" id="16_reso"]
 [ext_resource type="Resource" uid="uid://stbrelic009b" path="res://relics/crows_feather.tres" id="17_crow"]
 [ext_resource type="Resource" uid="uid://stbrelic010b" path="res://relics/caffeine_tab.tres" id="18_caff"]
+[ext_resource type="Resource" uid="uid://stbrelic011b" path="res://relics/steady_hand.tres" id="19_stdh"]
 [ext_resource type="Texture2D" uid="uid://dcri7r5nvl48m" path="res://art/backgrounds/empty_treasure_room.jpeg" id="6_8auyv"]
 [ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="7_bbvtr"]
 
@@ -161,7 +162,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_ahqvo")
-treasure_relic_pool = Array[ExtResource("2_6uobi")]([ExtResource("3_8an4p"), ExtResource("4_0ulcj"), ExtResource("5_tmyoj"), ExtResource("11_anc"), ExtResource("12_iron"), ExtResource("13_aeth"), ExtResource("14_tome"), ExtResource("15_lucky"), ExtResource("16_reso"), ExtResource("17_crow"), ExtResource("18_caff")])
+treasure_relic_pool = Array[ExtResource("2_6uobi")]([ExtResource("3_8an4p"), ExtResource("4_0ulcj"), ExtResource("5_tmyoj"), ExtResource("11_anc"), ExtResource("12_iron"), ExtResource("13_aeth"), ExtResource("14_tome"), ExtResource("15_lucky"), ExtResource("16_reso"), ExtResource("17_crow"), ExtResource("18_caff"), ExtResource("19_stdh")])
 
 [node name="Background" type="TextureRect" parent="." unique_id=756734931]
 layout_mode = 1

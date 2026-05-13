@@ -34,6 +34,7 @@ const KEYWORDS: Dictionary = {
 	&"zap" : preload("uid://czapkw1runeb4"),
 	&"runechant" : preload("res://keywords/runechant_kw.tres"),
 	&"fleeting" : preload("res://keywords/fleeting_kw.tres"),
+	&"reserve" : preload("res://keywords/reserve_kw.tres"),
 	&"inert" : preload("res://keywords/inert_kw.tres"),
 	&"bleed" : preload("res://keywords/bleed_kw.tres"),
 	&"channel" : preload("res://keywords/channel_kw.tres"),

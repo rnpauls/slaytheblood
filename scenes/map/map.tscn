@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://k82yiqxg3pj1" path="res://scenes/map/map.gd" id="1_yuly5"]
 [ext_resource type="Script" uid="uid://dpol4nlmb6yic" path="res://scenes/map/map_generator.gd" id="2_blka6"]
-[ext_resource type="Resource" uid="uid://b03opgk5gd1bn" path="res://battles/battle_stats_pool.tres" id="3_l33wd"]
+[ext_resource type="Resource" uid="uid://bii8xblben6dc" path="res://battles/battle_stats_pool.tres" id="3_l33wd"]
 [ext_resource type="Resource" uid="uid://demadyqgdrutk" path="res://scenes/event_rooms/event_room_pool.tres" id="4_h8dso"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="5_legend"]
 [ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/arrow.png" id="6_marker"]

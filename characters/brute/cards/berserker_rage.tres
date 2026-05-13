@@ -1,14 +1,12 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://dk744ttqhphvw"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item76.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/berserker_rage.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://ko3yv0iaeyx4" path="res://art/item76.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://be0p0v8iifevg" path="res://characters/brute/cards/berserker_rage.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-hp_cost = 4
-empower_stacks = 4
 id = "berserker_rage"
 type = 1
 cost = 1

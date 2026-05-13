@@ -28,9 +28,6 @@ func size() -> int:
 func is_intimidated(card: Card) -> bool:
 	return _enemy.enemy_ai != null and _enemy.enemy_ai.intimidated_cards.has(card)
 
-func has_arsenal() -> bool:
-	return _enemy.enemy_ai != null and _enemy.enemy_ai.arsenal != null
-
 
 # ── Mutations ────────────────────────────────────────────────────────────────
 
@@ -74,10 +71,6 @@ func draw_cards(n: int) -> Tween:
 
 func reshuffle_discard() -> void:
 	_hand_manager.reshuffle_discard()
-
-
-func destroy_arsenal() -> bool:
-	return _enemy.destroy_arsenal()
 
 
 # ── Interactive prompt ───────────────────────────────────────────────────────

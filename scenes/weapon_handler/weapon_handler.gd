@@ -56,6 +56,9 @@ func set_weapon(new_weapon: Weapon) -> void:
 			weapon.weapon_used_up.connect(_on_weapon_used_up)
 			_connect_stats_for_glow()
 			_update_glow()
+			# Owner was just assigned, so dynamic weapons can now read live
+			# status. Re-evaluate the go_again badge.
+			weapon_ui.refresh_go_again()
 		var combatant := owner_of_weapon as Combatant
 		if combatant:
 			weapon.attach_to_combatant(combatant)
@@ -65,17 +68,27 @@ func set_weapon(new_weapon: Weapon) -> void:
 
 
 # Connects to the wielder's stats_changed signal so the glow reflects mana /
-# AP in real time. Safe to call repeatedly — duplicate connections are skipped.
+# AP in real time, and to statuses_changed so the go-again badge re-evaluates
+# whenever the wielder gains or loses a status (e.g. enraged / flow).
+# Safe to call repeatedly — duplicate connections are skipped.
 func _connect_stats_for_glow() -> void:
 	var combatant := owner_of_weapon as Combatant
 	if combatant and combatant.stats:
 		if not combatant.stats.stats_changed.is_connected(_update_glow):
 			combatant.stats.stats_changed.connect(_update_glow)
+	if combatant and combatant.status_handler:
+		if not combatant.status_handler.statuses_changed.is_connected(_on_statuses_changed):
+			combatant.status_handler.statuses_changed.connect(_on_statuses_changed)
 
 
 func _update_glow() -> void:
 	if weapon_ui:
 		weapon_ui.set_glow(can_activate_weapon())
+
+
+func _on_statuses_changed() -> void:
+	if weapon_ui:
+		weapon_ui.refresh_go_again()
 
 
 func flash() -> void:

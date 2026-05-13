@@ -33,8 +33,7 @@ func _on_action_phase_started() -> void:
 # is "stuck" only when hand AND draw pile AND discard pile are all empty —
 # discard is part of the check because an empty draw pile auto-recycles from
 # the discard (no shuffle) on the next draw. Exhaust pile is NOT part of the
-# check: exhausted cards never come back. An enemy with a playable arsenal
-# (an attack it can afford) is also not stuck.
+# check: exhausted cards never come back.
 func _is_stalemate() -> bool:
 	if player_handler.hand.get_child_count() > 0:
 		return false
@@ -54,16 +53,7 @@ func _is_stalemate() -> bool:
 			return false
 		if not enemy.stats.discard.empty():
 			return false
-		if _has_playable_arsenal(enemy):
-			return false
 	return true
-
-
-func _has_playable_arsenal(enemy: Enemy) -> bool:
-	if enemy.enemy_ai == null or enemy.enemy_ai.arsenal == null:
-		return false
-	var arsenal: Card = enemy.enemy_ai.arsenal
-	return arsenal.type == Card.Type.ATTACK and arsenal.cost <= enemy.stats.mana
 
 
 func _player_has_zero_cost_weapon() -> bool:

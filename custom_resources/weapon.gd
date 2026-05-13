@@ -64,6 +64,13 @@ func detach_from_combatant(_combatant: Combatant) -> void:
 	pass
 
 
+## Returns true if this weapon would refund an action point if swung *now*.
+## Default returns the static flag; dynamic weapons override to check live
+## status / state on `owner`. Used by WeaponUI to show the go-again badge.
+func would_go_again() -> bool:
+	return go_again
+
+
 func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_attack:int = attack) -> void:
 	Events.player_attack_declared.emit()
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)

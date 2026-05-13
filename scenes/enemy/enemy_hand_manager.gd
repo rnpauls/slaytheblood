@@ -185,7 +185,7 @@ func get_card_ui(card: Card) -> EnemyCardUI:
 
 
 ## Return the EnemyCardUI for card if it's tracked, otherwise create a transient
-## one (for arsenal cards, etc., that aren't currently in the hand display).
+## one (for cards that aren't currently in the hand display).
 func get_or_create_card_ui(card: Card) -> EnemyCardUI:
 	var existing: EnemyCardUI = card_ui_map.get(card, null)
 	if is_instance_valid(existing):
@@ -240,8 +240,8 @@ func _on_card_sunk(card: Card) -> void:
 
 # ── AI signal handler ─────────────────────────────────────────────────────────
 
-## Called when EnemyAI removes a card from its internal hand (pitch, arsenal,
-## play, block). Keeps the EnemyHand visual in sync without duplicating logic.
+## Called when EnemyAI removes a card from its internal hand (pitch, play,
+## block). Keeps the EnemyHand visual in sync without duplicating logic.
 ## NOTE: we do NOT erase from `hand` here — EnemyAI already did that.
 func _on_ai_card_removed_from_hand(card: Card) -> void:
 	_log("AI removed '%s'  ai_hand=%d  enemy_hand=%d  ui_map=%d" % [

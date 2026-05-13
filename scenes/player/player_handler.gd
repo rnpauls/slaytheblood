@@ -12,6 +12,13 @@ extends Node
 const HAND_DRAW_INTERVAL := 0.25
 const HAND_DISCARD_INTERVAL := 0.25
 
+# Situational statuses are only applied if the loadout (weapons + deck) contains
+# at least one item that actually consumes them. Status id -> list of card/weapon ids.
+const STATUS_LOADOUT_REQUIREMENTS := {
+	"flow": ["harmonized_kodachi"],
+	"enraged": ["mandible_claw", "ball_breaker", "romping_club"],
+}
+
 @export var relics: RelicHandler
 @export var hand_left_weapon: WeaponHandler
 @export var hand_right_weapon: WeaponHandler
@@ -186,7 +193,16 @@ func end_turn_cleanup() -> void:
 	await exhaust_fleeting_in_hand()
 	character.reset_mana()
 	character.action_points = 0
-	draw_cards(character.cards_per_turn - hand.get_child_count(), 'end')
+	# Reserve cards don't count toward cards_per_turn. Draw back up to
+	# cards_per_turn + 1 effective hand size, capped at cards_per_turn draws.
+	var reserve_count := 0
+	for child in hand.get_children():
+		var card_ui := child as CardUI
+		if card_ui and card_ui.card and card_ui.card.reserve:
+			reserve_count += 1
+	var effective_hand := hand.get_child_count() - reserve_count
+	var to_draw := clampi(character.cards_per_turn + 1 - effective_hand, 0, character.cards_per_turn)
+	draw_cards(to_draw, 'end')
 
 
 ## Exhaust cards with `fleeting: true` from the player's hand at end of turn.
@@ -292,7 +308,7 @@ func _on_card_play_finished(card: Card) -> void:
 	character.discard.add_card(card) #This used to happen at the start of card.play()
 
 func _on_card_discarded(card: Card) -> void:
-	if card.attack >= 6:
+	if card.attack >= 6 and _loadout_cares_about("enraged"):
 		var enr_status  := preload("res://statuses/enraged.tres").duplicate()
 		player.status_handler.add_status(enr_status)
 	# Forced discards always go to the discard pile. `exhausts` only applies
@@ -304,13 +320,26 @@ func _on_card_blocked(card: Card) -> void:
 	Events.card_exhausted.emit(card)
 
 func _on_card_pitched(card: Card) -> void:
-	if card.cost == 0:
+	if card.cost == 0 and _loadout_cares_about("flow"):
 		var flow_status  := preload("res://statuses/flow.tres").duplicate()
 		player.status_handler.add_status(flow_status)
 	character.discard.add_card(card)
 
 func _on_card_sunk(card: Card) -> void:
 	character.draw_pile.add_card(card)
+
+func _loadout_cares_about(status_id: String) -> bool:
+	var caring_ids: Array = STATUS_LOADOUT_REQUIREMENTS.get(status_id, [])
+	if caring_ids.is_empty():
+		return true
+	for slot in [hand_left_weapon, hand_right_weapon]:
+		if slot and slot.weapon and slot.weapon.id in caring_ids:
+			return true
+	if character and character.deck:
+		for c in character.deck.cards:
+			if c.id in caring_ids:
+				return true
+	return false
 
 func _on_statuses_applied(type: Status.Type) -> void:
 	match type:

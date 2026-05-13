@@ -46,8 +46,8 @@ func _build_content(payload: Variant) -> void:
 	elif equipment:
 		card.equipment = equipment
 
-	var tooltip_text := weapon.get_tooltip() if weapon else equipment.get_tooltip()
-	for entry: TooltipData in KeywordRegistry.build_tooltip_chain(tooltip_text):
+	var tooltip_txt := weapon.get_tooltip() if weapon else equipment.get_tooltip()
+	for entry: TooltipData in KeywordRegistry.build_tooltip_chain(tooltip_txt):
 		var box := TOOLTIP_BOX.instantiate() as TooltipBox
 		add_child(box)
 		box.set_data(entry)

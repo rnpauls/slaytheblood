@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://biyyop47rwhph"]
 
-[ext_resource type="Texture2D" uid="uid://ckgyit1x3wnbe" path="res://art/Iicon_32_35.png" id="1_3r622"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ihowx"]
+[ext_resource type="Texture2D" uid="uid://d0dvthv0ao2nw" path="res://art/Iicon_32_14.png" id="2_0xt31"]
 [ext_resource type="Script" uid="uid://cxxmi8mh70rmu" path="res://characters/ninja/cards/bittering_thorns.gd" id="2_ihowx"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="4_0xt31"]
 
@@ -17,7 +17,7 @@ defense = 3
 go_again = true
 ai_value = 1
 ai_value_needs_attack = true
-icon = ExtResource("1_3r622")
+icon = ExtResource("2_0xt31")
 tooltip_text = "On hit: Next attack
 gets +1[icon=atk]"
 sound = ExtResource("4_0xt31")

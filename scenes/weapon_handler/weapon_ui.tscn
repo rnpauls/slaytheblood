@@ -5,6 +5,8 @@
 [ext_resource type="Material" uid="uid://d30aqi80c1nrc" path="res://art/themes/white_sprite_material.tres" id="4_m2n2c"]
 [ext_resource type="Texture2D" uid="uid://b7x0a8gdp02ng" path="res://art/rarity.png" id="5_gvkp5"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="6_abdjr"]
+[ext_resource type="Texture2D" uid="uid://c2axityhh8m5i" path="res://art/custom_art/card_visuals/from_claude/replay_badge.png" id="7_goag1"]
+[ext_resource type="Texture2D" uid="uid://27vqim86aibk" path="res://art/custom_art/card_visuals/go_again.png" id="8_goag2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weapon_glow"]
 bg_color = Color(0, 0, 0, 0)
@@ -177,3 +179,34 @@ grow_vertical = 2
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GoAgainIcon" type="TextureRect" parent="." unique_id=1750346004]
+texture_filter = 1
+layout_mode = 0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource("7_goag1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="GoAgainIcon" unique_id=696522158]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 14.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_goag2")
+expand_mode = 1
+stretch_mode = 5

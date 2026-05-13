@@ -11,8 +11,6 @@ slot = 2
 rarity = 1
 character_type = 3
 icon = ExtResource("2_rwgnt")
-tooltip = "[color=\"ffdf00\"]Runeweaver's Gauntlets[/color]
-Defense 2.
-Active (once per turn): Spend 2 mana and create 1 [kw=runechant]runechant[/kw]. Go again."
+tooltip = "Action (once per turn): Spend 2 mana and create 1 [kw=runechant]runechant[/kw]. Go again."
 max_block = 2
 has_active_ability = true

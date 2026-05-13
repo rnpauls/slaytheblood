@@ -52,7 +52,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=2076825111]
-clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 3
@@ -63,8 +62,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 6
 
 [node name="CardMenuUI" parent="MarginContainer/VBoxContainer/ScrollContainer/Cards" unique_id=1113692148 instance=ExtResource("1_08fuf")]

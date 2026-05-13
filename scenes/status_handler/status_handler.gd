@@ -2,6 +2,10 @@ class_name StatusHandler
 extends GridContainer
 
 signal statuses_applied(type: Status.Type)
+## Fires when a status is added or about to be removed. Listeners that depend
+## on `has_status(...)` should reconnect/refresh on this signal. The remove
+## case is deferred so listeners see the updated child list.
+signal statuses_changed
 
 const STATUS_APPLY_INTERVAL := 0.25
 const STATUS_UI = preload("res://scenes/status_handler/status_ui.tscn")
@@ -62,6 +66,8 @@ func add_status(status: Status) -> void:
 		new_status_ui.set_status(status)
 		new_status_ui.status.status_applied.connect(_on_status_applied)
 		new_status_ui.status.initialize_status(status_owner)
+		new_status_ui.tree_exiting.connect(_on_status_ui_tree_exiting)
+		statuses_changed.emit()
 		return
 	
 	if not status.can_expire and not stackable:
@@ -112,6 +118,11 @@ func _get_all_statuses() -> Array[Status]:
 func _on_status_applied(status: Status) -> void:
 	if status.can_expire:
 		status.duration -= 1
+
+## Deferred so listeners see the status_ui already removed from the tree
+## before they re-query `has_status`.
+func _on_status_ui_tree_exiting() -> void:
+	statuses_changed.emit.call_deferred()
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_mouse"):

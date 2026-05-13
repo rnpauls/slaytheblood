@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="CardPile" load_steps=7 format=3 uid="uid://b7eFhexdck015"]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://b70vbws22283g"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Resource" uid="uid://b7e9hxbolt009" path="res://enemies/elite/hexweaver/cards/hex_bolt.tres" id="2_hxbo"]
-[ext_resource type="Resource" uid="uid://b7eAmnadrn010" path="res://enemies/elite/hexweaver/cards/mana_drain.tres" id="3_mndr"]
-[ext_resource type="Resource" uid="uid://b7eBdrntch011" path="res://enemies/elite/hexweaver/cards/drain_touch.tres" id="4_drnt"]
-[ext_resource type="Resource" uid="uid://b7eCcrswkn012" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="5_crsw"]
+[ext_resource type="Resource" uid="uid://b7fahxbolt01a" path="res://enemies/elite/hexweaver/cards/hex_bolt.tres" id="2_hxbo"]
+[ext_resource type="Resource" uid="uid://cavqdwvisvawa" path="res://enemies/elite/hexweaver/cards/mana_drain.tres" id="3_mndr"]
+[ext_resource type="Resource" uid="uid://c314ogdp6v0i6" path="res://enemies/elite/hexweaver/cards/drain_touch.tres" id="4_drnt"]
+[ext_resource type="Resource" uid="uid://drb1153iurkcm" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="5_crsw"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="6_pile"]
 
 [resource]

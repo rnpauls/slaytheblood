@@ -10,9 +10,9 @@
 [ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://generic_cards/ravenous_rabble_red.tres" id="7_sa5j3"]
 [ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://generic_cards/sink_below_red.tres" id="9_dwve2"]
 [ext_resource type="Resource" uid="uid://bg7p6qyn055g8" path="res://generic_cards/sink_below_blue.tres" id="10_772p6"]
-[ext_resource type="Resource" uid="uid://bdxdpo8h67w3y" path="res://generic_cards/command_and_conquer.tres" id="11_5gyys"]
 [ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="12_bm1u0"]
+[ext_resource type="Resource" path="res://generic_cards/snatch.tres" id="13_snatch"]
 
 [resource]
 script = ExtResource("3_ar66p")
-cards = Array[ExtResource("1_5jay3")]([ExtResource("2_kb2gv"), ExtResource("3_5gyys"), ExtResource("4_bm1u0"), ExtResource("5_heaj2"), ExtResource("6_nyblp"), ExtResource("7_sa5j3"), ExtResource("9_dwve2"), ExtResource("10_772p6"), ExtResource("12_bm1u0"), ExtResource("11_5gyys")])
+cards = Array[ExtResource("1_5jay3")]([ExtResource("2_kb2gv"), ExtResource("3_5gyys"), ExtResource("4_bm1u0"), ExtResource("5_heaj2"), ExtResource("6_nyblp"), ExtResource("7_sa5j3"), ExtResource("9_dwve2"), ExtResource("10_772p6"), ExtResource("12_bm1u0"), ExtResource("13_snatch")])

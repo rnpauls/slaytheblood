@@ -162,7 +162,6 @@ func _equipped_items() -> Array:
 
 func _make_pool_card(item: Resource) -> InventoryCardRenderContainer:
 	var c := INVENTORY_CARD_RENDER_CONTAINER_SCENE.instantiate() as InventoryCardRenderContainer
-	c.custom_minimum_size = Vector2(200, 300)
 	c.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	c.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	if item is Weapon:

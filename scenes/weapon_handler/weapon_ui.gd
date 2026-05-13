@@ -8,6 +8,7 @@ extends Control
 @onready var atk_label: Label = %AtkLabel
 @onready var cost_label: Label = %CostLabel
 @onready var glow_panel: Panel = %GlowPanel
+@onready var go_again_icon: TextureRect = $GoAgainIcon
 
 func _ready() -> void:
 	shader_material = ShaderMaterial.new()
@@ -22,6 +23,7 @@ func set_weapon(new_weapon: Weapon) -> void:
 		await ready
 	if not new_weapon:
 		icon.texture = null
+		go_again_icon.hide()
 		return
 	#print("setting up weapon %s" % new_weapon.id)
 	icon.texture = new_weapon.icon
@@ -47,6 +49,15 @@ func set_glow(enabled: bool) -> void:
 func update_labels() -> void:
 	atk_label.text = str(weapon.attack)
 	cost_label.text = str(weapon.cost)
+	refresh_go_again()
+
+func refresh_go_again() -> void:
+	if not is_node_ready():
+		await ready
+	if not weapon:
+		go_again_icon.hide()
+		return
+	go_again_icon.visible = weapon.would_go_again()
 
 #func request_tooltip() -> void:
 	#var tt_text: = weapon.get_tooltip()

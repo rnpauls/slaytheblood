@@ -1,12 +1,11 @@
 ## Enemy facade — Combatant subclass that coordinates the three extracted
 ## components (HandManager, ActionSequencer, DefenseSequencer) and owns the
-## intent / arsenal / hover UI that ties them together.
+## intent / hover UI that ties them together.
 ##
 ## Responsibilities that LIVE here:
 ##   * Combatant lifecycle (_init_stats, _on_stats_set, update_enemy, _on_death)
 ##   * Intent display + plan-color visualization (update_intent,
-##     _update_hand_plan_colors, _action_plan_color, _refresh_arsenal_card_ui)
-##   * Arsenal slot management (destroy_arsenal, _arsenal_card_ui)
+##     _update_hand_plan_colors, _action_plan_color)
 ##   * Hover area / arrow / name label / tooltip routing
 ##   * setup_ai (orchestrates: AI instance + wiring all components)
 ##   * cleanup_phase (end-of-enemy-phase reset + redraw)
@@ -20,7 +19,6 @@ class_name Enemy
 extends Combatant
 
 const ARROW_OFFSET := 45
-const ENEMY_CARD_UI_SCENE := preload("res://scenes/card_ui/enemy_card_ui.tscn")
 const WEAPON_HANDLER_SCENE := preload("res://scenes/weapon_handler/weapon_handler.tscn")
 const WEAPON_BADGE_OFFSET := Vector2(80, -40)
 const LEGACY_SPRITE_HALF_EXTENT := 41.0
@@ -36,15 +34,6 @@ const LEGACY_SPRITE_HALF_EXTENT := 41.0
 
 @onready var _intent_origin_y: float = intent_ui.position.y
 @onready var _staged_origin_y: float = staged_display.position.y
-@onready var _stats_origin_y: float = stats_ui.position.y
-@onready var _resource_origin_y: float = enemy_resource_ui.position.y
-@onready var _name_origin_y: float = name_label.position.y
-@onready var _status_origin_y: float = status_handler.position.y
-@onready var _hand_origin_y: float = enemy_hand.position.y
-@onready var _block_origin_x: float = block_display.position.x
-
-## Position (relative to the Enemy node) where the arsenal card_ui sits.
-@export var arsenal_offset: Vector2 = Vector2(-90, 158)
 
 signal enemy_action_completed
 
@@ -57,9 +46,6 @@ var card_ui_map: Dictionary: get = _get_card_ui_map
 
 ## current_action delegates to action_sequencer; setter triggers intent refresh.
 var current_action: Card: set = set_current_action, get = _get_current_action
-
-## EnemyCardUI displayed in the arsenal slot (or null when arsenal is empty).
-var _arsenal_card_ui: EnemyCardUI = null
 
 ## Visual badge for an enemy-wielded weapon (only set if stats.hand_left is a
 ## Weapon at battle setup). Reuses WeaponHandler with `interactive = false`
@@ -90,8 +76,13 @@ func _ready() -> void:
 
 # ── Combatant overrides ───────────────────────────────────────────────────────
 
+const HEALTH_VARIATION := 0.05
+
 func _init_stats(value: Stats) -> Stats:
-	return value.create_instance()
+	var instance: Stats = value.create_instance()
+	var factor := RNG.instance.randf_range(1.0 - HEALTH_VARIATION, 1.0 + HEALTH_VARIATION)
+	instance.max_health = maxi(1, roundi(instance.max_health * factor))
+	return instance
 
 func _on_stats_set() -> void:
 	update_enemy()
@@ -122,7 +113,7 @@ func setup_ai(player_target: Player = null) -> void:
 	enemy_ai.hand = hand_manager.hand
 
 	# Keep EnemyHand display in sync whenever EnemyAI removes a card internally
-	# (pitch, arsenal pickup, play, block) so the visual hand never drifts.
+	# (pitch, play, block) so the visual hand never drifts.
 	hand_manager.connect_to_ai(enemy_ai)
 
 	# Wire IntentUI so hover events carry this enemy reference (for tooltip).
@@ -164,24 +155,20 @@ func do_action() -> void:
 # ── Phase / lifecycle ─────────────────────────────────────────────────────────
 
 func cleanup_phase() -> void:
-	# Draw back up to cards_per_turn, staggered.
-	var to_draw := stats.cards_per_turn - hand_manager.hand.size()
+	# Reserve cards don't count toward cards_per_turn. Draw back up to
+	# cards_per_turn + 1 effective hand size, capped at cards_per_turn draws.
+	var reserve_count := 0
+	for card in hand_manager.hand:
+		if card and card.reserve:
+			reserve_count += 1
+	var effective_hand := hand_manager.hand.size() - reserve_count
+	var to_draw := clampi(stats.cards_per_turn + 1 - effective_hand, 0, stats.cards_per_turn)
 	if to_draw > 0:
 		hand_manager.draw_cards(to_draw)
 	stats.block = 0
 	stats.mana = 0
 	stats.action_points = 1
 	enemy_resource_ui.update_display(enemy_ai)
-
-
-func destroy_arsenal() -> bool:
-	if enemy_ai.arsenal == null:
-		return false
-	var arsenal_card: Card = enemy_ai.arsenal
-	enemy_ai.arsenal = null
-	arsenal_card.queue_free()
-	_refresh_arsenal_card_ui()
-	return true
 
 
 # ── Visual / intent refresh ───────────────────────────────────────────────────
@@ -196,23 +183,23 @@ func update_enemy() -> void:
 	var s : float = stats.display_height / stats.art.get_height()
 	sprite_2d.scale = Vector2(s, s)
 
+	# Bottom-anchor: draw the texture entirely above sprite_2d.position, and
+	# park that position at the floor so every enemy's feet land on the same line.
+	sprite_2d.offset = Vector2(0, -stats.art.get_height() / 2.0)
+	sprite_2d.position = Vector2(0, LEGACY_SPRITE_HALF_EXTENT)
+
 	var half := sprite_2d.get_rect().size * sprite_2d.scale * 0.5
 	var dy := half.y - LEGACY_SPRITE_HALF_EXTENT
-	var dx := half.x - LEGACY_SPRITE_HALF_EXTENT
 
-	intent_ui.position.y = _intent_origin_y - dy
-	staged_display.position.y = _staged_origin_y - dy
+	# Bottom-anchored sprite grows entirely upward, so the top moves by 2 * dy.
+	intent_ui.position.y = _intent_origin_y - 2.0 * dy
+	staged_display.position.y = _staged_origin_y - 2.0 * dy
 
-	stats_ui.position.y = _stats_origin_y + dy
-	enemy_resource_ui.position.y = _resource_origin_y + dy
-	name_label.position.y = _name_origin_y + dy
-	status_handler.position.y = _status_origin_y + dy
-	enemy_hand.position.y = _hand_origin_y + dy
-
-	block_display.position.x = _block_origin_x - dx
-	arrow.position = Vector2.RIGHT * (half.x + ARROW_OFFSET)
+	var sprite_center_y := LEGACY_SPRITE_HALF_EXTENT - half.y
+	arrow.position = Vector2(half.x + ARROW_OFFSET, sprite_center_y)
 
 	(hover_collision.shape as RectangleShape2D).size = half * 2.0
+	hover_collision.position.y = sprite_center_y
 
 	name_label.text = stats.character_name
 	update_stats()
@@ -238,9 +225,9 @@ func _setup_weapon_badge() -> void:
 	_weapon_badge = badge
 
 
-## Refresh the intent display, the resource UI, the arsenal card_ui, and the
-## per-card plan colors. Called any time the AI plan or the hand might have
-## changed (hand mutations, action declared/played, defense applied).
+## Refresh the intent display, the resource UI, and the per-card plan colors.
+## Called any time the AI plan or the hand might have changed (hand mutations,
+## action declared/played, defense applied).
 func update_intent() -> void:
 	# Build a preview plan when one isn't active (between or before enemy
 	# turns) so the intent text and hand colors share a single source of truth.
@@ -271,7 +258,6 @@ func update_intent() -> void:
 			new_intent.current_text = "EMPTY"
 			new_intent.icon = null
 	intent_ui.update_intent(new_intent)
-	_refresh_arsenal_card_ui()
 	_update_hand_plan_colors()
 
 
@@ -297,17 +283,6 @@ func _update_hand_plan_colors() -> void:
 				color = Color.DEEP_SKY_BLUE
 		card_ui.set_plan_color(color, show_exclamation)
 
-	# Arsenal card_ui follows the same rules (it can't be pitched, so no blue).
-	if is_instance_valid(_arsenal_card_ui) and enemy_ai.arsenal != null:
-		var ars: Card = enemy_ai.arsenal
-		var ars_color: Color = Color.BLACK
-		var ars_excl: bool = false
-		if plan != null and ars in plan.actions:
-			ars_color = _action_plan_color(ars)
-			ars_excl = ars.type == Card.Type.ATTACK \
-				and (ars.on_hits.size() > 0 or active_on_hits.size() > 0)
-		_arsenal_card_ui.set_plan_color(ars_color, ars_excl)
-
 
 ## Plan color for a card the AI intends to play this turn. Explicit per-type
 ## branch (rather than "ATTACK or default") so a stray BLOCK in plan.actions
@@ -320,27 +295,6 @@ func _action_plan_color(card: Card) -> Color:
 			return Color.CHARTREUSE
 		_:
 			return Color.BLACK
-
-
-## Create, update, or destroy the arsenal slot card_ui to mirror enemy_ai.arsenal.
-func _refresh_arsenal_card_ui() -> void:
-	if not enemy_ai:
-		return
-	var current_arsenal: Card = enemy_ai.arsenal
-	if current_arsenal == null:
-		if is_instance_valid(_arsenal_card_ui):
-			_arsenal_card_ui.queue_free()
-		_arsenal_card_ui = null
-		return
-	if not is_instance_valid(_arsenal_card_ui):
-		_arsenal_card_ui = ENEMY_CARD_UI_SCENE.instantiate() as EnemyCardUI
-		add_child(_arsenal_card_ui)
-		_arsenal_card_ui.scale = Vector2.ONE * enemy_hand.card_scale
-		_arsenal_card_ui.position = arsenal_offset
-	if _arsenal_card_ui.card != current_arsenal:
-		_arsenal_card_ui.setup(current_arsenal, stats, modifier_handler)
-		_arsenal_card_ui.show_back = true
-		_arsenal_card_ui.set_arsenal_marker(true)
 
 
 # ── Hand-changed reaction ────────────────────────────────────────────────────

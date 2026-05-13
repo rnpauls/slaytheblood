@@ -19,10 +19,11 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="InventoryCardRenderContainer" parent="EquipmentContainer" unique_id=1214608304 instance=ExtResource("2_eqshop")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
-hover_scale = Vector2(1.4286, 1.4286)
-rest_scale = Vector2(0.7, 0.7)
+base_scale = 0.7
+hover_scale = 1.0
 
 [node name="Price" type="HBoxContainer" parent="." unique_id=1228089212]
 unique_name_in_owner = true

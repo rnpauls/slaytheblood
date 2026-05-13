@@ -95,17 +95,20 @@ func add_card(card: Card, source_visual: CardUI = null) -> void:
 func enable_hand() -> void:
 	is_enabled = true
 	print_debug("[Hand] enable_hand (cards=%d)" % get_child_count())
-	for card: PlayerCardUI in get_children():
-		card.disabled = false
-		if card.mouse_is_over():
-			card.card_state_machine.on_mouse_entered()
+	for child in get_children():
+		if child is PlayerCardUI:
+			var card := child as PlayerCardUI
+			card.disabled = false
+			if card.mouse_is_over():
+				card.card_state_machine.on_mouse_entered()
 
 
 func disable_hand() -> void:
 	is_enabled = false
 	print_debug("[Hand] disable_hand (cards=%d)" % get_child_count())
-	for card: PlayerCardUI in get_children():
-		card.disabled = true
+	for child in get_children():
+		if child is PlayerCardUI:
+			(child as PlayerCardUI).disabled = true
 
 func _arrange_cards() -> void:
 	var cards: Array[PlayerCardUI] = []
@@ -252,11 +255,12 @@ func _on_selecting_cards_from_hand(limit: int) -> void:
 	is_selecting = true
 	selection_limit = limit
 
-func _on_finished_selecting_cards_from_hand(_cards: Array[PlayerCardUI]) -> void:
+func _on_finished_selecting_cards_from_hand(_cards: Array[CardUI]) -> void:
 	is_selecting = false
 	selection_limit = 0
-	for handcard in get_children() as Array[PlayerCardUI]:
-		handcard.card_state_machine.force_return_to_base_state()
+	for child in get_children():
+		if child is PlayerCardUI:
+			(child as PlayerCardUI).card_state_machine.force_return_to_base_state()
 
 func count_selected_cards() -> int:
 	var count := 0

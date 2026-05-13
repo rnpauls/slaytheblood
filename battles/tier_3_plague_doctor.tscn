@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
+[ext_resource type="Resource" path="res://enemies/plague_doctor/plague_doctor_enemy.tres" id="2_stats"]
+
+[node name="Tier3PlagueDoctor" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(929, 302)
+stats = ExtResource("2_stats")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://bres8kw1rsrv1"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_rsrve"]
+
+[resource]
+script = ExtResource("1_rsrve")
+id = &"reserve"
+display_name = "Reserve"
+description = "Doesn't count toward your hand size at end of turn."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

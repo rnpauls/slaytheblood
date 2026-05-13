@@ -19,7 +19,7 @@ offset_bottom = 30.0
 size_flags_horizontal = 3
 script = ExtResource("1_6bsit")
 card = ExtResource("2_56wht")
-hover_scale = 1.3
+hover_scale = 1.0
 
 [node name="Visuals" parent="." unique_id=945611760 instance=ExtResource("3_2y3x4")]
 layout_mode = 2

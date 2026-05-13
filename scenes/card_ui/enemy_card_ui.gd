@@ -41,11 +41,6 @@ func set_plan_color(color: Color, show_exclamation: bool) -> void:
 	if card_render:
 		card_render.set_plan_color(color, show_exclamation)
 
-## Toggle the "A" overlay marking this card as the enemy's arsenal.
-func set_arsenal_marker(value: bool) -> void:
-	if card_render:
-		card_render.set_arsenal_marker(value)
-
 ## Flip from card-back to card-face with a brief horizontal squish tween.
 ## Targets card_render.scale:x (an inner Control) instead of self.scale so this
 ## tween can run in parallel with an outer position/scale tween on the CardUI

@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://stbequip002b" path="res://equipment/berserker_helm.tres" id="8_helm"]
 [ext_resource type="Resource" uid="uid://stbequip003b" path="res://equipment/heavy_greaves.tres" id="9_greav"]
 [ext_resource type="Resource" uid="uid://stbequip004b" path="res://equipment/spiked_pauldrons.tres" id="10_spik"]
-[ext_resource type="Resource" path="res://equipment/scabskin_leathers.tres" id="11_scab"]
+[ext_resource type="Resource" uid="uid://bkv4elr4iwvhu" path="res://equipment/scabskin_leathers.tres" id="11_scab"]
 [ext_resource type="Resource" uid="uid://baygstotj2pli" path="res://weapons/decimator.tres" id="12_decim"]
 
 [resource]

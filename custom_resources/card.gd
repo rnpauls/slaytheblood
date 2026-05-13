@@ -42,6 +42,8 @@ const RARITY_COLORS := {
 @export var unplayable: bool = false
 ## Fleeting: if in hand at end of turn, the card is exhausted.
 @export var fleeting: bool = false
+## Reserve: does not count toward cards_per_turn when drawing at end of turn.
+@export var reserve: bool = false
 @export var ai_value: int
 @export var ai_value_needs_attack: bool = false
 

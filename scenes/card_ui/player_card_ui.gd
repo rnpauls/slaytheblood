@@ -20,6 +20,7 @@ func _ready() -> void:
 	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
 	Events.card_aim_ended.connect(_on_card_drag_or_aim_ended)
 	Events.card_drag_ended.connect(_on_card_drag_or_aim_ended)
+	Events.player_action_phase_started.connect(_on_player_action_phase_started)
 	card_state_machine.init(self)
 
 func _input(event: InputEvent) -> void:
@@ -96,3 +97,6 @@ func _on_card_drag_or_aim_ended(_card: Node) -> void:
 func _on_card_drawn() -> void:
 	if char_stats and card:
 		playable = char_stats.can_play_card(card)
+
+func _on_player_action_phase_started() -> void:
+	disabled = false

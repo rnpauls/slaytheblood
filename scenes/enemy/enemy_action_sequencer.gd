@@ -161,7 +161,7 @@ func _stage_attack_card_ui(card: Card, card_ui: EnemyCardUI) -> void:
 	if not is_instance_valid(card_ui):
 		card_ui = _hand_manager.get_card_ui(card)
 	if not is_instance_valid(card_ui):
-		# Card isn't in the hand display (e.g. arsenal) — create a transient ui.
+		# Card isn't in the hand display — create a transient ui.
 		card_ui = _hand_manager.get_or_create_card_ui(card)
 
 	_staged_card_ui = card_ui

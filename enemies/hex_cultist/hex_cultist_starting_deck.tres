@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" path="res://generic_cards/hexed_lash.tres" id="3_hl"]
+[ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="4_bb"]
+[ext_resource type="Resource" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="5_cw"]
+[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("3_hl"), ExtResource("3_hl"), ExtResource("4_bb"), ExtResource("4_bb"), ExtResource("5_cw"), ExtResource("6_wb"), ExtResource("6_wb")])

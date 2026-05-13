@@ -14,5 +14,5 @@ pitch = 1
 attack = 6
 defense = 4
 icon = ExtResource("2_icon")
-tooltip_text = "+1[kw=atk] per %s HP missing."
+tooltip_text = "+1[icon=atk] per %s HP missing."
 sound = ExtResource("4_sound")

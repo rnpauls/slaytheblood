@@ -14,14 +14,12 @@ corner_radius_bottom_left = 8
 shadow_color = Color(1, 1, 1, 0.65)
 shadow_size = 12
 
-[node name="InventoryCardRenderContainer" type="MarginContainer" unique_id=2054887772]
-custom_minimum_size = Vector2(40, 60)
-offset_right = 40.0
-offset_bottom = 60.0
+[node name="InventoryCardRenderContainer" type="CenterContainer" unique_id=2054887772]
+offset_right = 200.0
+offset_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_invccc")
-hover_scale = Vector2(1.6, 1.6)
 
 [node name="Stack" type="Control" parent="." unique_id=237239472]
 unique_name_in_owner = true
