@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeartbloodMaulWeapon" format=3 uid="uid://d0ysidmrl0vvu"]
+
+[ext_resource type="Texture2D" uid="uid://co01hwpgrg757" path="res://art/weapons/pixellab/heartblood_maul.png" id="1_hmaul_icon"]
+[ext_resource type="Script" path="res://weapons/heartblood_maul.gd" id="2_hmaul_script"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_hmaul_sound"]
+
+[resource]
+script = ExtResource("2_hmaul_script")
+weapon_name = "Heartblood Maul"
+id = "heartblood_maul"
+type = 3
+rarity = 2
+character_type = 2
+hands = 1
+icon = ExtResource("1_hmaul_icon")
+sound = ExtResource("3_hmaul_sound")
+tooltip = "Go Again. Lose 4 HP per swing."
+attack = 6
+go_again = true

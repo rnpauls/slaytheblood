@@ -70,11 +70,17 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ### Pixellab enemy sprites
 - Pixellab API reference: https://api.pixellab.ai/mcp/docs — fetch before non-trivial operations (animations, tilesets, multi-direction characters).
-- Save generated PNGs to `art/sprites/pixellab/`.
+- Save to `art/sprites/pixellab/`.
 - Default size 152×152 Use 256×256 only for big bosses.
 - Include "facing left" in the prompt
 
 ### Pixellab card art
-- Save generated PNGs to `art/card_art/pixellab/`
+- Save to `art/card_art/pixellab/`
 - Default size 120×120 pixels
 - Specify that background should not be empty
+
+### Pixellab equipment and weapons
+- Save to 'art/weapons/pixellab/' or 'art/equipment/pixellab/'
+- 64x64 pixels
+- Transparent background
+- n_frame = 1

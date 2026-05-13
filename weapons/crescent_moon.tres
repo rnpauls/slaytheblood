@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CrescentMoonWeapon" format=3 uid="uid://du4wf3ytdu6my"]
+
+[ext_resource type="Texture2D" uid="uid://xilo2h7blttm" path="res://art/weapons/pixellab/crescent_moon.png" id="1_cm_icon"]
+[ext_resource type="Script" path="res://weapons/crescent_moon.gd" id="2_cm_script"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_cm_sound"]
+
+[resource]
+script = ExtResource("2_cm_script")
+weapon_name = "Crescent Moon"
+id = "crescent_moon"
+rarity = 1
+character_type = 1
+hands = 1
+icon = ExtResource("1_cm_icon")
+sound = ExtResource("3_cm_sound")
+tooltip = "Hits all enemies and applies [kw=marked:2]Marked 2[/kw]."
+attack = 3
+cost = 1

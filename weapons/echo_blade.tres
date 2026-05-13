@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EchoBladeWeapon" format=3 uid="uid://dwo0b2v83k5iy"]
+
+[ext_resource type="Texture2D" uid="uid://csbpqdrfuc633" path="res://art/weapons/pixellab/echo_blade.png" id="1_eb_icon"]
+[ext_resource type="Script" path="res://weapons/echo_blade.gd" id="2_eb_script"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_eb_sound"]
+
+[resource]
+script = ExtResource("2_eb_script")
+weapon_name = "Echo Blade"
+id = "echo_blade"
+rarity = 1
+character_type = 1
+icon = ExtResource("1_eb_icon")
+sound = ExtResource("3_eb_sound")
+tooltip = "If you've played an Attack this turn, this swing hits twice."
+attack = 2
+cost = 1

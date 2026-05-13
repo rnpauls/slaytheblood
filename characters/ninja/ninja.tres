@@ -10,7 +10,12 @@
 [ext_resource type="Resource" uid="uid://citg2gxgih72i" path="res://weapons/tiger_staff.tres" id="6_kjhjj"]
 [ext_resource type="Resource" uid="uid://buxa3aoc70x0u" path="res://characters/ninja/ninja_starting_inv.tres" id="6_wrrns"]
 [ext_resource type="Resource" uid="uid://b4y4lw03v8och" path="res://weapons/ninja_star.tres" id="7_5pfox"]
+[ext_resource type="Resource" uid="uid://du4wf3ytdu6my" path="res://weapons/crescent_moon.tres" id="7_cresc"]
+[ext_resource type="Resource" uid="uid://dwo0b2v83k5iy" path="res://weapons/echo_blade.tres" id="7_echob"]
 [ext_resource type="Resource" uid="uid://cpq6w8ligmkxn" path="res://relics/ira_pendant.tres" id="7_fhfql"]
+[ext_resource type="Resource" path="res://weapons/rose_whip.tres" id="7_rwhip"]
+[ext_resource type="Resource" uid="uid://stbsoul0001" path="res://weapons/soul_dagger.tres" id="7_sdagger"]
+[ext_resource type="Resource" uid="uid://lggrhtemm5h7" path="res://weapons/whisperfang.tres" id="7_wfang"]
 [ext_resource type="Resource" uid="uid://stbequip001b" path="res://equipment/smoke_capsule.tres" id="8_smoke"]
 [ext_resource type="Resource" uid="uid://stbequip005b" path="res://equipment/tabi_boots.tres" id="9_tabi"]
 [ext_resource type="Resource" uid="uid://stbequip006b" path="res://equipment/bandolier.tres" id="10_band"]
@@ -21,7 +26,7 @@ description = "Master of evasive attacks"
 portrait = ExtResource("1_kjhjj")
 draftable_cards = ExtResource("2_u8x1n")
 draftable_equipment = Array[ExtResource("3_7xeg5")]([ExtResource("8_smoke"), ExtResource("9_tabi"), ExtResource("10_band")])
-draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtResource("6_kjhjj"), ExtResource("7_5pfox")])
+draftable_weapons = Array[ExtResource("4_tnwy8")]([ExtResource("5_j05nd"), ExtResource("6_kjhjj"), ExtResource("7_5pfox"), ExtResource("7_wfang"), ExtResource("7_cresc"), ExtResource("7_echob"), ExtResource("7_sdagger"), ExtResource("7_rwhip")])
 starting_relic = ExtResource("7_fhfql")
 character_name = "Ninja"
 art = ExtResource("1_kjhjj")

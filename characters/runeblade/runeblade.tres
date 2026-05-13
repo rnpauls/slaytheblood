@@ -9,12 +9,15 @@
 [ext_resource type="Resource" uid="uid://covn825k1xfh0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
 [ext_resource type="Resource" uid="uid://bg118yb2wjnyh" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]
 [ext_resource type="Texture2D" uid="uid://5y8s48ojety4" path="res://art/sprites/pixellab/runeblade_001.png" id="8_mmgth"]
+[ext_resource type="Resource" uid="uid://b4720cxixqpt8" path="res://weapons/bloodfire_glaive.tres" id="9_bfglv"]
 [ext_resource type="Resource" uid="uid://dmwlkidfeph" path="res://weapons/runeblood_carver.tres" id="9_rbc00"]
+[ext_resource type="Resource" uid="uid://if1ee131cgy7" path="res://weapons/the_conductor.tres" id="9_tcond"]
+[ext_resource type="Resource" uid="uid://k8bfi30xkf77" path="res://weapons/wand_of_endless_sparks.tres" id="9_wnspk"]
 [ext_resource type="Resource" uid="uid://stbrelic004b" path="res://relics/spell_binder.tres" id="10_rlc0"]
-[ext_resource type="Resource" path="res://equipment/hexsigil_crown.tres" id="11_hxcrn"]
-[ext_resource type="Resource" path="res://equipment/spellbinders_robe.tres" id="12_sbrbe"]
-[ext_resource type="Resource" path="res://equipment/runeweaver_gauntlets.tres" id="13_rwgnt"]
-[ext_resource type="Resource" path="res://equipment/manathreaded_greaves.tres" id="14_mtgrv"]
+[ext_resource type="Resource" uid="uid://bt7mnj2pvkn61" path="res://equipment/hexsigil_crown.tres" id="11_hxcrn"]
+[ext_resource type="Resource" uid="uid://fw27yjhyjbfn" path="res://equipment/spellbinders_robe.tres" id="12_sbrbe"]
+[ext_resource type="Resource" uid="uid://cyi5ptq61dosr" path="res://equipment/runeweaver_gauntlets.tres" id="13_rwgnt"]
+[ext_resource type="Resource" uid="uid://nlkimdmeaoa" path="res://equipment/manathreaded_greaves.tres" id="14_mtgrv"]
 
 [resource]
 script = ExtResource("2_chst0")
@@ -22,7 +25,7 @@ description = "Arcane warrior mixing steel and magicks"
 portrait = ExtResource("8_mmgth")
 draftable_cards = ExtResource("5_drft0")
 draftable_equipment = Array[ExtResource("3_np4oh")]([ExtResource("11_hxcrn"), ExtResource("12_sbrbe"), ExtResource("13_rwgnt"), ExtResource("14_mtgrv")])
-draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00")])
+draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00"), ExtResource("9_wnspk"), ExtResource("9_tcond"), ExtResource("9_bfglv")])
 starting_relic = ExtResource("10_rlc0")
 character_name = "Runeblade"
 art = ExtResource("8_mmgth")

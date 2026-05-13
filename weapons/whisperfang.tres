@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WhisperfangWeapon" format=3 uid="uid://lggrhtemm5h7"]
+
+[ext_resource type="Texture2D" uid="uid://c3b6oj2kr8tat" path="res://art/weapons/pixellab/whisperfang.png" id="1_wf_icon"]
+[ext_resource type="Script" uid="uid://cwhsprfngnja1" path="res://weapons/whisperfang.gd" id="2_wf_script"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_wf_sound"]
+
+[resource]
+script = ExtResource("2_wf_script")
+weapon_name = "Whisperfang"
+id = "whisperfang"
+type = 1
+rarity = 2
+character_type = 1
+icon = ExtResource("1_wf_icon")
+sound = ExtResource("3_wf_sound")
+tooltip = "On attack: if you've attacked 3 or more times this turn, draw a card."
+attack = 1

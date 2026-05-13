@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BloodfireGlaiveWeapon" format=3 uid="uid://b4720cxixqpt8"]
+
+[ext_resource type="Texture2D" uid="uid://dastijay6di4x" path="res://art/weapons/pixellab/bloodfire_glaive.png" id="1_bfg_icon"]
+[ext_resource type="Script" path="res://weapons/bloodfire_glaive.gd" id="2_bfg_script"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_bfg_sound"]
+
+[resource]
+script = ExtResource("2_bfg_script")
+weapon_name = "Bloodfire Glaive"
+id = "bloodfire_glaive"
+type = 6
+rarity = 1
+character_type = 3
+hands = 1
+icon = ExtResource("1_bfg_icon")
+sound = ExtResource("3_bfg_sound")
+tooltip = "Pure arcane. Lose 3 HP per swing."
+attack = 3
+damage_kind = 1
+zap = 3
+cost = 1

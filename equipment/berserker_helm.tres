@@ -10,5 +10,5 @@ id = "berserker_helm"
 rarity = 1
 character_type = 2
 icon = ExtResource("1_icon")
-tooltip = "On block:, gain [kw=muscle:1]Muscle 1[/kw] this turn."
+tooltip = "On block:, gain [kw=muscle:1]Muscle 1[/kw] until the end of your next turn."
 max_block = 2

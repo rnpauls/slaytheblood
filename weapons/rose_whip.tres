@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RoseWhipWeapon" format=3 uid="uid://stbweap_rosewhip"]
+
+[ext_resource type="Texture2D" path="res://art/weapons/pixellab/rose_whip.png" id="1_rw_icon"]
+[ext_resource type="Script" path="res://weapons/rose_whip.gd" id="2_rw_script"]
+[ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_rw_sound"]
+
+[resource]
+script = ExtResource("2_rw_script")
+weapon_name = "Rose Whip"
+id = "rose_whip"
+type = 1
+rarity = 2
+character_type = 1
+hands = 1
+icon = ExtResource("1_rw_icon")
+sound = ExtResource("3_rw_sound")
+tooltip = "On hit: inflict 1 [kw=bleed]bleed[/kw]. Then double the target's bleed (even on miss)."
+attack = 4
+cost = 2

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TheConductorWeapon" format=3 uid="uid://if1ee131cgy7"]
+
+[ext_resource type="Texture2D" uid="uid://cot1huvwxgpte" path="res://art/weapons/pixellab/the_conductor.png" id="1_tc_icon"]
+[ext_resource type="Script" path="res://weapons/the_conductor.gd" id="2_tc_script"]
+[ext_resource type="AudioStream" uid="uid://ccsyihfmo03i3" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_2.wav" id="3_tc_sound"]
+
+[resource]
+script = ExtResource("2_tc_script")
+weapon_name = "The Conductor"
+id = "the_conductor"
+type = 6
+rarity = 2
+character_type = 3
+icon = ExtResource("1_tc_icon")
+sound = ExtResource("3_tc_sound")
+tooltip = "[kw=zap:2]Zap 2[/kw]. On hit: double your [kw=runechant]runechant[/kw] stacks."
+zap = 2
+cost = 1

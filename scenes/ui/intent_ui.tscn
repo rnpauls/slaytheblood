@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://dbkwigrt5g7y3" path="res://scenes/ui/intent_ui.gd" id="1_7kcvo"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="1_xj6py"]
 [ext_resource type="LabelSettings" path="res://art/themes/typography/type_number.tres" id="2_typenum"]
-[ext_resource type="Texture2D" path="res://art/sprites/pixellab/exclamation.png" id="3_excl"]
+[ext_resource type="Texture2D" uid="uid://dorw2cbquoax1" path="res://art/sprites/pixellab/exclamation.png" id="3_excl"]
 
-[node name="IntentUI" type="HBoxContainer" unique_id=935402215]
+[node name="IntentUI" type="Control" unique_id=858503199]
+layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -13,20 +14,49 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 48.0
 grow_horizontal = 2
-theme_override_constants/separation = 4
-alignment = 1
 script = ExtResource("1_7kcvo")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=2064034557]
+unique_name_in_owner = true
+visible = false
 texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
+layout_mode = 0
+offset_left = 9.0
+offset_right = 57.0
+offset_bottom = 48.0
 texture = ExtResource("1_xj6py")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="." unique_id=1346307527]
-layout_mode = 2
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.5
+offset_right = 18.5
+offset_bottom = 48.0
+grow_horizontal = 2
+size_flags_vertical = 1
+text = "3x?"
+label_settings = ExtResource("2_typenum")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AtkLabel" type="Label" parent="." unique_id=1218618507]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_top = -30.0
+offset_right = 7.0
+offset_bottom = 18.0
+grow_horizontal = 2
 size_flags_vertical = 1
 text = "7"
 label_settings = ExtResource("2_typenum")
@@ -34,10 +64,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Exclamation" type="TextureRect" parent="." unique_id=2001000010]
+unique_name_in_owner = true
+visible = false
 texture_filter = 1
 custom_minimum_size = Vector2(32, 32)
-visible = false
-layout_mode = 2
+layout_mode = 0
+offset_left = 39.0
+offset_top = 3.0
+offset_right = 71.0
+offset_bottom = 48.0
 texture = ExtResource("3_excl")
 expand_mode = 1
 stretch_mode = 5

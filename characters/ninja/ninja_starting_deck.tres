@@ -8,7 +8,8 @@
 [ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://generic_cards/wounding_blow_blue.tres" id="5_l214d"]
 [ext_resource type="Resource" uid="uid://bos4xvkdp51nx" path="res://characters/ninja/cards/throw_knives.tres" id="7_gkmoi"]
 [ext_resource type="Resource" uid="uid://4t0h3cimqt3o" path="res://characters/ninja/cards/poison_the_blade.tres" id="7_mkeyd"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="8_gkmoi"]
 
 [resource]
 script = ExtResource("4_3vcd4")
-cards = Array[ExtResource("1_hvivs")]([ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("3_mkeyd"), ExtResource("3_mkeyd"), ExtResource("4_gkmoi"), ExtResource("4_gkmoi"), ExtResource("5_l214d"), ExtResource("5_l214d"), ExtResource("7_gkmoi"), ExtResource("7_mkeyd"), ExtResource("7_mkeyd"), ExtResource("3_mkeyd")])
+cards = Array[ExtResource("1_hvivs")]([ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("2_kl23a"), ExtResource("3_mkeyd"), ExtResource("3_mkeyd"), ExtResource("4_gkmoi"), ExtResource("4_gkmoi"), ExtResource("5_l214d"), ExtResource("5_l214d"), ExtResource("7_gkmoi"), ExtResource("7_mkeyd"), ExtResource("7_mkeyd"), ExtResource("3_mkeyd"), ExtResource("8_gkmoi"), ExtResource("8_gkmoi"), ExtResource("3_mkeyd")])

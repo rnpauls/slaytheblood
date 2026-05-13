@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WandOfEndlessSparksWeapon" format=3 uid="uid://k8bfi30xkf77"]
+
+[ext_resource type="Texture2D" uid="uid://75l4ttn3dp3s" path="res://art/weapons/pixellab/wand_of_endless_sparks.png" id="1_woes_icon"]
+[ext_resource type="Script" path="res://weapons/wand_of_endless_sparks.gd" id="2_woes_script"]
+[ext_resource type="AudioStream" uid="uid://ccsyihfmo03i3" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_2.wav" id="3_woes_sound"]
+
+[resource]
+script = ExtResource("2_woes_script")
+weapon_name = "Wand of Endless Sparks"
+id = "wand_of_endless_sparks"
+type = 6
+rarity = 2
+character_type = 3
+hands = 1
+icon = ExtResource("1_woes_icon")
+sound = ExtResource("3_woes_sound")
+tooltip = "[kw=zap:4]Zap 4[/kw]. Go Again. On hit: create 2 [kw=runechant]runechant[/kw]."
+zap = 4
+cost = 2
+go_again = true

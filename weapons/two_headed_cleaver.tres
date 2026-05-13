@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TwoHeadedCleaverWeapon" format=3 uid="uid://iu4e10mx0wy1"]
+
+[ext_resource type="Texture2D" uid="uid://dqwm2meiv4grd" path="res://art/weapons/pixellab/two_headed_cleaver.png" id="1_thc_icon"]
+[ext_resource type="Script" path="res://weapons/two_headed_cleaver.gd" id="2_thc_script"]
+[ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="3_thc_sound"]
+
+[resource]
+script = ExtResource("2_thc_script")
+weapon_name = "Two-Headed Cleaver"
+id = "two_headed_cleaver"
+type = 2
+rarity = 1
+character_type = 2
+hands = 1
+icon = ExtResource("1_thc_icon")
+sound = ExtResource("3_thc_sound")
+tooltip = "Hits all enemies. [kw=enraged]Enraged[/kw]: +2 atk"
+attack = 3
+cost = 2

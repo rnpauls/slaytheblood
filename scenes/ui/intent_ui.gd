@@ -1,12 +1,13 @@
 class_name IntentUI
-extends HBoxContainer
+extends Control
 
 ## Set by Enemy after instantiation so hover can read its on-hits and action.
 var enemy: Enemy = null
 
-@onready var icon: TextureRect = $Icon
-@onready var label: Label = $Label
-@onready var exclamation: TextureRect = $Exclamation
+@onready var icon: TextureRect = %Icon
+@onready var label: Label = %Label
+@onready var atk_label: Label = %AtkLabel
+@onready var exclamation: TextureRect = %Exclamation
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -20,8 +21,17 @@ func update_intent(intent: Intent) -> void:
 
 	icon.texture = intent.icon
 	icon.visible = icon.texture != null
-	label.text = intent.current_text
-	label.visible = intent.current_text.length() > 0
+	if not intent.current_text.is_empty() and intent.current_text[0].is_valid_int():
+		atk_label.text = intent.current_text
+		atk_label.show()
+		label.hide()
+	elif intent.current_text.length() > 0:
+		label.text = intent.current_text
+		label.show()
+		atk_label.hide()
+	else:
+		label.hide()
+		atk_label.hide()
 
 	var has_on_hit := false
 	if enemy and enemy.current_action and enemy.current_action.type == Card.Type.ATTACK:

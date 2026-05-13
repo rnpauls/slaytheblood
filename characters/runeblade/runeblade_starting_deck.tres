@@ -7,7 +7,9 @@
 [ext_resource type="Resource" uid="uid://crrtrt1runebd" path="res://characters/runeblade/cards/read_the_runes_red.tres" id="4_nbhj2"]
 [ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="5_haeij"]
 [ext_resource type="Resource" uid="uid://cqwhyuhkr4wgx" path="res://characters/runeblade/cards/immolate_red.tres" id="6_nbhj2"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="7_j08qt"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="8_afyta"]
 
 [resource]
 script = ExtResource("1_pile0")
-cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("4_nbhj2"), ExtResource("4_nbhj2"), ExtResource("4_0q0s3"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("6_nbhj2")])
+cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("3_rsy00"), ExtResource("4_nbhj2"), ExtResource("4_nbhj2"), ExtResource("4_0q0s3"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("5_haeij"), ExtResource("6_nbhj2"), ExtResource("7_j08qt"), ExtResource("7_j08qt"), ExtResource("8_afyta"), ExtResource("8_afyta"), ExtResource("3_rsy00"), ExtResource("4_nbhj2")])

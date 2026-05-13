@@ -16,6 +16,9 @@
 [ext_resource type="Resource" uid="uid://stbequip004b" path="res://equipment/spiked_pauldrons.tres" id="10_spik"]
 [ext_resource type="Resource" uid="uid://bkv4elr4iwvhu" path="res://equipment/scabskin_leathers.tres" id="11_scab"]
 [ext_resource type="Resource" uid="uid://baygstotj2pli" path="res://weapons/decimator.tres" id="12_decim"]
+[ext_resource type="Resource" uid="uid://d0ysidmrl0vvu" path="res://weapons/heartblood_maul.tres" id="13_hmaul"]
+[ext_resource type="Resource" uid="uid://iu4e10mx0wy1" path="res://weapons/two_headed_cleaver.tres" id="14_thclv"]
+[ext_resource type="Resource" uid="uid://dt42xa5cchfwy" path="res://weapons/berserkers_bite.tres" id="15_bbite"]
 
 [resource]
 script = ExtResource("1_i5v26")
@@ -23,7 +26,7 @@ description = "No thinking. Only smash"
 portrait = ExtResource("1_hmg1o")
 draftable_cards = ExtResource("2_s65w1")
 draftable_equipment = Array[ExtResource("3_pbyxb")]([ExtResource("8_helm"), ExtResource("9_greav"), ExtResource("10_spik"), ExtResource("11_scab")])
-draftable_weapons = Array[ExtResource("4_3gwwx")]([ExtResource("5_aq6wg"), ExtResource("6_hmg1o"), ExtResource("7_pb6lu"), ExtResource("12_decim")])
+draftable_weapons = Array[ExtResource("4_3gwwx")]([ExtResource("5_aq6wg"), ExtResource("6_hmg1o"), ExtResource("7_pb6lu"), ExtResource("12_decim"), ExtResource("13_hmaul"), ExtResource("14_thclv"), ExtResource("15_bbite")])
 starting_relic = ExtResource("5_md8iq")
 character_name = "Brute"
 art = ExtResource("1_hmg1o")

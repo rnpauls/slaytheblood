@@ -1,14 +1,13 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://bnpxl3v8ym45w"]
 
-[ext_resource type="Script" path="res://generic_cards/crushing_strike.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/Icon28_25.png" id="2_icon"]
-[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_m4fx6"]
+[ext_resource type="Script" uid="uid://v8af72kwdgw7" path="res://generic_cards/crushing_strike.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://buwbg83cftq01" path="res://art/Icon28_25.png" id="2_icon"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
 
 [resource]
 script = ExtResource("1_script")
 id = "crushing_strike"
-type = 0
-rarity = 0
 target = 1
 cost = 1
 pitch = 1

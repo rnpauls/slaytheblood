@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float strength : hint_range(0.0, 1.0) = 1.0;  // 0 = original, 1 = fully grey
+uniform float strength : hint_range(0.0, 1.0) = 0.0;  // 0 = original, 1 = fully grey
 
 void fragment() {
     vec4 color = texture(TEXTURE, UV);

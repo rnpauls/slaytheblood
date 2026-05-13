@@ -71,6 +71,7 @@ staged_scale = 0.15
 position = Vector2(-105, -7)
 
 [node name="NameLabel" type="Label" parent="." unique_id=-1293967293]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
