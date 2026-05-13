@@ -45,6 +45,29 @@ func deselect() -> void:
 func _set_char_stats(value: Stats) -> void:
 	super._set_char_stats(value)
 
+func _set_modifier_handler(value: ModifierHandler) -> void:
+	if modifier_handler == value:
+		return
+	if modifier_handler and modifier_handler.modifiers_changed.is_connected(_on_modifiers_changed):
+		modifier_handler.modifiers_changed.disconnect(_on_modifiers_changed)
+	super._set_modifier_handler(value)
+	if modifier_handler and not modifier_handler.modifiers_changed.is_connected(_on_modifiers_changed):
+		modifier_handler.modifiers_changed.connect(_on_modifiers_changed)
+	_propagate_modifier_handler()
+
+func _propagate_modifier_handler() -> void:
+	# Hand.gd assigns modifier_handler before add_child, so @onready vars aren't
+	# initialized yet — wait for _ready before touching card_render.
+	if not is_node_ready():
+		await ready
+	if card_render and card_render.card_visuals:
+		card_render.card_visuals.modifier_handler = modifier_handler
+		card_render.card_visuals.refresh_modified_values()
+
+func _on_modifiers_changed() -> void:
+	if card_render and card_render.card_visuals:
+		card_render.card_visuals.refresh_modified_values()
+
 func _on_char_stats_changed() -> void:
 	if card:
 		playable = char_stats.can_play_card(card)
@@ -64,10 +87,16 @@ func _set_playable(value: bool) -> void:
 		card_render.set_glow(false)
 		return
 	card_render.set_glow(playable)
-	if not playable:
-		card_render.card_visuals.cost.add_theme_color_override("font_color", Color.RED)
-	else:
-		card_render.card_visuals.cost.remove_theme_color_override("font_color")
+	if card_render.card_visuals:
+		# tint_cost gates whether refresh_modified_values touches the cost
+		# label's font_color — keeps our unplayable-red override below winning.
+		card_render.card_visuals.tint_cost = playable
+		if not playable:
+			card_render.card_visuals.cost.add_theme_color_override("font_color", Color.RED)
+		else:
+			card_render.card_visuals.cost.remove_theme_color_override("font_color")
+			# Reapply modifier tint to cost (and refresh attack/defense — cheap).
+			card_render.card_visuals.refresh_modified_values()
 
 func _on_gui_input(event: InputEvent) -> void:
 	if _in_pile():

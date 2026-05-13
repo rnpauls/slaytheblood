@@ -8,7 +8,7 @@ extends Card
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	if not owner or not owner.hand_facade:
 		return
-	var chosen: Array[Card] = await owner.hand_facade.prompt_choose_cards(2, "Sink 2 cards")
+	var chosen: Array[Card] = await owner.hand_facade.prompt_choose_cards(2, "Sink up to 2 cards", 0)
 	for card in chosen:
 		owner.hand_facade.sink_card(card)
 		owner.hand_facade.draw_cards(1)

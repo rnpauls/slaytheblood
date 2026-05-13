@@ -94,12 +94,14 @@ func reshuffle_discard() -> void:
 
 ## Show the choose-cards-in-hand UI and await the player's selection.
 ## Returns the chosen Cards (data, not visuals). Returns [] if BattleUI
-## isn't reachable (defensive — shouldn't happen mid-battle).
-func prompt_choose_cards(count: int, prompt_text: String = "") -> Array[Card]:
+## isn't reachable (defensive — shouldn't happen mid-battle). Pass
+## `min_count = 0` to make selection optional (player may confirm with
+## zero); -1 keeps strict equality with `count`.
+func prompt_choose_cards(count: int, prompt_text: String = "", min_count: int = -1) -> Array[Card]:
 	if _player.battle_ui == null:
 		push_warning("PlayerHandFacade.prompt_choose_cards: player.battle_ui is null")
 		return []
-	var chosen_uis: Array[CardUI] = await _player.battle_ui.choose_cards_in_hand(count, prompt_text)
+	var chosen_uis: Array[CardUI] = await _player.battle_ui.choose_cards_in_hand(count, prompt_text, min_count)
 	var cards: Array[Card] = []
 	for ui in chosen_uis:
 		if ui is PlayerCardUI:

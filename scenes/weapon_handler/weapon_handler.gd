@@ -49,12 +49,20 @@ func set_weapon(new_weapon: Weapon) -> void:
 		if prev_combatant:
 			previous.detach_from_combatant(prev_combatant)
 	if new_weapon:
+		# Wire the wielder's modifier_handler BEFORE assigning the weapon, so
+		# WeaponUI.set_weapon's initial update_labels() picks up modifier tints
+		# instead of writing raw stats and waiting for the next refresh.
+		var pre_handler: ModifierHandler = null
+		if owner_of_weapon and owner_of_weapon.get("modifier_handler"):
+			pre_handler = owner_of_weapon.modifier_handler
+		weapon_ui.modifier_handler = pre_handler
 		weapon_ui.weapon = new_weapon
 		weapon = weapon_ui.weapon
 		if interactive:
 			weapon.owner = owner_of_weapon
 			weapon.weapon_used_up.connect(_on_weapon_used_up)
 			_connect_stats_for_glow()
+			_connect_modifiers_for_labels()
 			_update_glow()
 			# Owner was just assigned, so dynamic weapons can now read live
 			# status. Re-evaluate the go_again badge.
@@ -81,6 +89,21 @@ func _connect_stats_for_glow() -> void:
 			combatant.status_handler.statuses_changed.connect(_on_statuses_changed)
 
 
+# Connects to the wielder's ModifierHandler so the weapon's atk/cost labels
+# re-tint when buffs/debuffs come, go, or change stack counts mid-combat.
+# Safe to call repeatedly — duplicate connections are skipped.
+func _connect_modifiers_for_labels() -> void:
+	if owner_of_weapon and owner_of_weapon.get("modifier_handler"):
+		var mh: ModifierHandler = owner_of_weapon.modifier_handler
+		if mh and not mh.modifiers_changed.is_connected(_on_modifiers_changed):
+			mh.modifiers_changed.connect(_on_modifiers_changed)
+
+
+func _on_modifiers_changed() -> void:
+	if weapon_ui and weapon:
+		weapon_ui.update_labels()
+
+
 func _update_glow() -> void:
 	if weapon_ui:
 		weapon_ui.set_glow(can_activate_weapon())
@@ -96,15 +119,22 @@ func flash() -> void:
 	
 func _on_weapon_used_up() -> void:
 	if weapon.is_single_use:
-		if owner_of_weapon is Player:
-			owner_of_weapon.stats.inventory.remove_equipment(weapon)
-		var combatant := owner_of_weapon as Combatant
-		if combatant:
-			weapon.detach_from_combatant(combatant)
-		weapon.queue_free()
-		hide()
-
+		_destroy_weapon()
 	disable_weapon()
+
+
+func _destroy_weapon() -> void:
+	var destroyed := weapon
+	if owner_of_weapon is Player:
+		var stats := (owner_of_weapon as Player).stats
+		if stats:
+			if stats.inventory:
+				stats.inventory.remove_weapon(destroyed)
+			if stats.hand_left == destroyed:
+				stats.hand_left = null
+			elif stats.hand_right == destroyed:
+				stats.hand_right = null
+	set_weapon(null)
 
 func disable_weapon() -> void:
 	if not weapon: return

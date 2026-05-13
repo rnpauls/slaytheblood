@@ -44,6 +44,8 @@ func _is_stalemate() -> bool:
 	if _player_has_zero_cost_weapon():
 		return false
 
+	var enemy_count := 0
+	var all_enemies_bleeding := true
 	for enemy in enemy_handler.get_children():
 		if not is_instance_valid(enemy):
 			continue
@@ -53,6 +55,15 @@ func _is_stalemate() -> bool:
 			return false
 		if not enemy.stats.discard.empty():
 			return false
+		enemy_count += 1
+		if not enemy.status_handler.has_status("bleed"):
+			all_enemies_bleeding = false
+
+	# Bleed will tick down every enemy at end-of-turn until VICTORY fires —
+	# only skip the stalemate when the player isn't also bleeding out.
+	if enemy_count > 0 and all_enemies_bleeding \
+			and not player_handler.character.status_handler.has_status("bleed"):
+		return false
 	return true
 
 

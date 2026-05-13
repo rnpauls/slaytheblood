@@ -329,11 +329,14 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0) + action.action_points_granted
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
-			# Total damage is attack + zap regardless of damage_kind: PHYSICAL kind
-			# routes attack to physical and zap to arcane; ARCANE kind merges both
-			# into arcane. Either way the AI weighs the same total.
-			var raw_damage: int = action.attack + action.zap
-			var current_action_damage_modified = modifier_handler.get_modified_value(raw_damage, Modifier.Type.DMG_DEALT)
+			# DMG_DEALT (Muscle, Empowered, etc.) only buffs physical damage.
+			# Split the action into a physical portion (attack when damage_kind
+			# is PHYSICAL) and an arcane portion (zap, plus attack when
+			# damage_kind is ARCANE) so the AI's score matches what
+			# build_attack_packet will actually deliver.
+			var phys_part: int = action.attack if action.damage_kind == Card.DamageKind.PHYSICAL else 0
+			var arc_part: int = action.zap + (action.attack if action.damage_kind == Card.DamageKind.ARCANE else 0)
+			var current_action_damage_modified = modifier_handler.get_modified_value(phys_part, Modifier.Type.DMG_DEALT) + arc_part
 			var bonus = action.ai_value
 			if action.ai_value_needs_attack and not sub_result.actions.any(func(c): return c.type == Card.Type.ATTACK):
 				bonus = 0

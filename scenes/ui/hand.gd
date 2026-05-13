@@ -172,6 +172,19 @@ func _sample_rotation_curve(t: float) -> float:
 		return rotation_curve.sample(t)
 	return t  # linear fallback works fine
 
+## Resting local-x for a card at the given child index in the hovered (wider)
+## fan. The hover state snaps x to this so a newly-hovered card doesn't stay at
+## the pushed-aside x it had as a neighbor of the previously-hovered card.
+func get_natural_hovered_x_for_index(index: int, card_size_x: float) -> float:
+	var count := 0
+	for child in get_children():
+		if child is PlayerCardUI:
+			count += 1
+	var base_width := float(count) * width_per_card * width_mult_hovered
+	base_width = min(base_width, max_width)
+	var t: float = 0.5 if count <= 1 else float(index) / max(1, count - 1)
+	return lerp(-base_width / 2, base_width / 2, t) + size.x / 2 - card_size_x / 2
+
 #Set card's original positions for use when returning to hand
 func _on_child_order_changed() -> void:
 	if not is_node_ready():

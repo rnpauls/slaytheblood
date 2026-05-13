@@ -124,16 +124,16 @@ func build_attack_packet(modifiers: ModifierHandler, custom_attack: int = attack
 	if owner:
 		packet.on_hit_effects.append_array(owner.active_on_hits)
 
-	var modified_main := modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
 	if damage_kind == Card.DamageKind.PHYSICAL:
-		packet.physical = modified_main
+		packet.physical = modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
 	else:
-		packet.arcane = modified_main
+		packet.arcane = custom_attack
 
 	if zap > 0:
-		packet.arcane += modifiers.get_modified_value(zap, Modifier.Type.DMG_DEALT)
+		packet.arcane += zap
 
-	if owner and owner.status_handler:
+	# Pure-zap weapons (physical == 0) aren't the rune-imbued swing runechants represent.
+	if packet.physical > 0 and owner and owner.status_handler:
 		var rune: Status = owner.status_handler.get_status_by_id("runechant")
 		if rune is RunechantStatus:
 			packet.arcane += (rune as RunechantStatus).consume()

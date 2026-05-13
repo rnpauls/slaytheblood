@@ -1,7 +1,9 @@
 ## Thorns: when the bearer is physically attacked, deal `stacks` damage back
 ## to the attacker — even if the attack was fully blocked. INTENSITY-stacked,
-## decays at end of bearer's turn. Used by Reflect Stance (enemy NAA) and
-## Spiked Pauldrons (player equipment).
+## decays at end of the opposite side's turn (player thorns ticks on
+## `enemy_phase_ended`; enemy thorns ticks on `player_turn_ended`), so it
+## persists through the phase in which retaliation can actually occur. Used by
+## Reflect Stance (enemy NAA) and Spiked Pauldrons (player equipment).
 ##
 ## Listens to combatant_attacked (fires unconditionally per attack) rather than
 ## combatant_damaged (gated on residual damage) so a fully-blocked Spiked
@@ -23,9 +25,9 @@ func initialize_status(target: Node) -> void:
 	_target = target
 	Events.combatant_attacked.connect(_on_combatant_attacked)
 	if target is Player:
-		Events.player_turn_ended.connect(apply_status.bind(target))
-	else:
 		Events.enemy_phase_ended.connect(apply_status.bind(target))
+	else:
+		Events.player_turn_ended.connect(apply_status.bind(target))
 
 
 func _on_combatant_attacked(victim: Node, attacker: Node, attempted: int, _damage_dealt: int) -> void:

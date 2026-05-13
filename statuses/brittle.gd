@@ -24,6 +24,11 @@ func initialize_status(target: Node) -> void:
 	if not status_changed.is_connected(_on_status_changed):
 		status_changed.connect(_on_status_changed)
 
+	if target is Player:
+		Events.enemy_phase_ended.connect(apply_status.bind(target))
+	else:
+		Events.player_turn_ended.connect(apply_status.bind(target))
+
 
 func update() -> void:
 	if _block_modifier == null:

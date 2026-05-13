@@ -5,6 +5,10 @@ extends CardState
 func enter() ->void:
 	if not card_ui.is_node_ready():
 		await card_ui.ready
+
+	var sm := get_parent() as CardStateMachine
+	var came_from_dragging := sm and sm.current_state and sm.current_state.state == CardState.State.DRAGGING
+
 	card_ui.return_to_hand()
 	card_ui.is_hovered = false
 	card_ui.z_index = 0
@@ -13,11 +17,17 @@ func enter() ->void:
 
 	Events.tooltip_hide_requested.emit()
 
-	# If the mouse is still over the card (e.g. just deselected by clicking
-	# during a "choose a card" prompt), re-apply hover visuals so the card
-	# snaps back to hover position instead of being stuck at the previous
-	# elevated Y with scale 0.7 from _return_to_original_parent.
-	if card_ui.mouse_is_over():
+	if came_from_dragging:
+		# Drag cancel: clear Hand.hovered_card so _arrange_cards animates this
+		# card back to its slot. Without this, the auto-hover branch below would
+		# re-mark it as hovered and _arrange_cards would skip it, leaving the
+		# card stuck under the cursor until the next mouse_exited.
+		card_ui.card_unhovered.emit(card_ui)
+	elif card_ui.mouse_is_over():
+		# If the mouse is still over the card (e.g. just deselected by clicking
+		# during a "choose a card" prompt), re-apply hover visuals so the card
+		# snaps back to hover position instead of being stuck at the previous
+		# elevated Y with scale 0.7 from _return_to_original_parent.
 		on_mouse_entered()
 
 func on_gui_input(event: InputEvent) -> void:
@@ -80,6 +90,9 @@ func on_mouse_entered() -> void:
 	var screen_bottom:= card_ui.get_viewport_rect().size.y - card_ui.size.y
 	var new_y = clampf(card_ui.global_position.y, 0, screen_bottom)
 	card_ui.global_position.y = new_y
+	# Snap x to the card's natural slot in the hovered fan so it doesn't stay
+	# at the pushed-aside x it had as a neighbor of the previously-hovered card.
+	card_ui.position.x = hand.get_natural_hovered_x_for_index(card_ui.original_index, card_ui.size.x)
 	card_ui.z_index = 20   # Bring way to front
 	#card_ui.tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	#card_ui.tween.tween_property(card_ui, "scale", Vector2(card_ui.hover_scale, card_ui.hover_scale), card_ui.tween_duration)

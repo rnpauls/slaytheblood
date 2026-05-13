@@ -89,6 +89,26 @@ func is_single_targeted() -> bool:
 func get_play_cost() -> int:
 	return cost
 
+## Modifier-aware display helpers used by the hand UI so cards in hand show
+## the value the player will actually deal/spend/block. Pass null for a raw
+## read (e.g. inventory/deck-view screens that have no live modifiers).
+func get_modified_attack(handler: ModifierHandler) -> int:
+	var base := get_attack_value()
+	if handler == null:
+		return base
+	return handler.get_modified_value(base, Modifier.Type.DMG_DEALT)
+
+func get_modified_defense(handler: ModifierHandler) -> int:
+	if handler == null:
+		return defense
+	return handler.get_modified_value(defense, Modifier.Type.BLOCK_GAINED)
+
+func get_modified_cost(handler: ModifierHandler) -> int:
+	var base := get_play_cost()
+	if handler == null:
+		return base
+	return handler.get_modified_value(base, Modifier.Type.CARD_COST)
+
 func _get_targets(_card_parent: Node) -> Array[Node]:
 	# Resolve via owner: the CardUI may have been detached by card_ui.play()
 	# before effects resolve, but owner (Player/Enemy) stays in the tree.
@@ -201,18 +221,18 @@ func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack
 	if owner:
 		packet.on_hit_effects.append_array(owner.active_on_hits)
 
-	var modified_main := modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
 	if damage_kind == DamageKind.PHYSICAL:
-		packet.physical = modified_main
+		packet.physical = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
 	else:
-		packet.arcane = modified_main
+		packet.arcane = custom_damage
 
 	if zap > 0:
-		packet.arcane += modifiers.get_modified_value(zap, Modifier.Type.DMG_DEALT)
+		packet.arcane += zap
 
 	# Runechants on the attacker pop into the same packet — single decision
 	# point for the defender instead of a sequence of small arcane events.
-	if owner and owner.status_handler:
+	# Pure-zap attacks (physical == 0) aren't the rune-imbued swing runechants represent.
+	if packet.physical > 0 and owner and owner.status_handler:
 		var rune: Status = owner.status_handler.get_status_by_id("runechant")
 		if rune is RunechantStatus:
 			packet.arcane += (rune as RunechantStatus).consume()
@@ -226,7 +246,7 @@ func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap:
 	if custom_zap <= 0:
 		return
 	var zap_effect := ZapEffect.new()
-	zap_effect.amount = modifiers.get_modified_value(custom_zap, Modifier.Type.DMG_DEALT)
+	zap_effect.amount = custom_zap
 	zap_effect.sound = sound
 	zap_effect.execute(targets)
 

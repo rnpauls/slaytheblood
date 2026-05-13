@@ -22,6 +22,8 @@ const ARROW_OFFSET := 45
 const WEAPON_HANDLER_SCENE := preload("res://scenes/weapon_handler/weapon_handler.tscn")
 const WEAPON_BADGE_OFFSET := Vector2(80, -40)
 const LEGACY_SPRITE_HALF_EXTENT := 41.0
+const DEATH_FADE_DURATION := 0.5
+const DEATH_SINK_DISTANCE := 12.0
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
@@ -94,7 +96,15 @@ func _on_death() -> void:
 	Events.tooltip_hide_requested.emit()
 	if stats and stats.hand_left is Weapon:
 		(stats.hand_left as Weapon).detach_from_combatant(self)
+	# Emit synchronously (EnemyHandler needs it now); defer only queue_free.
 	Events.enemy_died.emit(self)
+
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(sprite_2d, "modulate:a", 0.0, DEATH_FADE_DURATION)
+	tween.tween_property(sprite_2d, "position:y", sprite_2d.position.y + DEATH_SINK_DISTANCE, DEATH_FADE_DURATION) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await tween.finished
+
 	queue_free()
 
 
@@ -238,7 +248,11 @@ func update_intent() -> void:
 	var new_intent = Intent.new()
 	if current_action and current_action.type == Card.Type.ATTACK:
 		var og_atk = current_action.get_attack_value()
-		var modified_damage := modifier_handler.get_modified_value(og_atk, Modifier.Type.DMG_DEALT)
+		var modified_damage: int
+		if current_action.damage_kind == Card.DamageKind.PHYSICAL:
+			modified_damage = modifier_handler.get_modified_value(og_atk, Modifier.Type.DMG_DEALT)
+		else:
+			modified_damage = og_atk
 		modified_damage = enemy_ai.target.modifier_handler.get_modified_value(modified_damage, Modifier.Type.DMG_TAKEN)
 
 		if current_action.go_again:

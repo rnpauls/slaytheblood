@@ -75,6 +75,15 @@ func start_battle(char_stats: CharacterStats) -> void:
 	Events.player_set_up.emit()
 
 
+func _exit_tree() -> void:
+	# PlayerHandler dies with the Battle scene; the `player` Node we handed to
+	# RelicHandler dies with it. Null out relics_owner so non-battle scenes
+	# (shop/treasure/reward) don't try to assign a freed ref to relic.owner in
+	# add_relic. The next start_battle() repopulates owner via the setter.
+	if relics:
+		relics.relics_owner = null
+
+
 ## Decide whether the slot holds a Weapon or an offhand Equipment, and route accordingly.
 ## The unused handler is hidden so only one is visible per side.
 func _assign_hand_slot(slot_value: Resource, weapon_handler: WeaponHandler, equip_handler: EquipmentHandler) -> void:

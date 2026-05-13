@@ -18,6 +18,7 @@ extends CanvasLayer
 
 var waiting_for_battle_start:= true
 var num_cards_to_choose: int = 0
+var min_cards_to_choose: int = 0
 #var is_blocking:= false
 var _exhaust_button_tween: Tween
 
@@ -66,10 +67,14 @@ func show_card_pile(pile: CardPile, title: String) -> void:
 ## Prompt the player to pick `num_cards` from their hand. Awaits user input
 ## and returns the chosen CardUIs. Optional prompt_text overrides the default
 ## "Choose N cards" label so card scripts can show a verb-specific prompt
-## (e.g. "Sink a card", "Exhaust a card"). Most callers should go through
-## PlayerHandFacade.prompt_choose_cards rather than calling this directly.
-func choose_cards_in_hand(num_cards: int, prompt_text: String = "") -> Array[CardUI]:
+## (e.g. "Sink a card", "Exhaust a card"). Optional min_cards lowers the
+## confirm-gate floor (defaults to num_cards = strict equality); pass 0 to
+## let the player confirm with nothing selected. Most callers should go
+## through PlayerHandFacade.prompt_choose_cards rather than calling this
+## directly.
+func choose_cards_in_hand(num_cards: int, prompt_text: String = "", min_cards: int = -1) -> Array[CardUI]:
 	num_cards_to_choose = num_cards
+	min_cards_to_choose = clampi(min_cards if min_cards >= 0 else num_cards, 0, num_cards)
 	choice_screen_label.text = prompt_text if not prompt_text.is_empty() else "Choose %s cards" % num_cards_to_choose
 	choice_screen.show()
 	Events.selecting_cards_from_hand.emit(num_cards_to_choose)
@@ -144,7 +149,7 @@ func _on_confirm_button_pressed() -> void:
 	for tempcard in hand.get_children():
 		if tempcard.selected:
 			chosen_cards.append(tempcard)
-	if chosen_cards.size() == num_cards_to_choose:
+	if chosen_cards.size() >= min_cards_to_choose and chosen_cards.size() <= num_cards_to_choose:
 		Events.finished_selecting_cards_from_hand.emit(chosen_cards)
 		choice_screen.hide()
 

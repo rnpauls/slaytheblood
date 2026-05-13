@@ -16,7 +16,7 @@ const PLAY_EMPHASIS_DURATION := 0.18
 const PLAY_EMPHASIS_SCALE_MULT := 1.18
 const BURN_DURATION := 0.55
 
-@export var modifier_handler: ModifierHandler
+@export var modifier_handler: ModifierHandler : set = _set_modifier_handler
 @export var card: Card : set = _set_card
 ## Accepts both CharacterStats and EnemyStats since both extend Stats.
 @export var char_stats: Stats : set = _set_char_stats
@@ -231,6 +231,11 @@ func _set_char_stats(value: Stats) -> void:
 	char_stats = value
 	if char_stats and not char_stats.stats_changed.is_connected(_on_char_stats_changed):
 		char_stats.stats_changed.connect(_on_char_stats_changed)
+
+## Base no-op setter — subclasses (PlayerCardUI) override to also connect the
+## modifier_handler's modifiers_changed signal and propagate to card_visuals.
+func _set_modifier_handler(value: ModifierHandler) -> void:
+	modifier_handler = value
 
 func _on_char_stats_changed() -> void:
 	pass

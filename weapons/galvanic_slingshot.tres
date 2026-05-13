@@ -10,7 +10,7 @@ weapon_name = "Galvanic Slingshot"
 id = "galvanic_slingshot"
 type = 6
 character_type = 3
-hands = 2
+hands = 0
 icon = ExtResource("1_85g7i")
 sound = ExtResource("3_gssnd")
 tooltip = "[kw=zap:2]Zap 2[/kw]"

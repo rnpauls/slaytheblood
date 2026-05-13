@@ -78,7 +78,7 @@ func reshuffle_discard() -> void:
 ## No UI to prompt the enemy with, so default to a random pick. Today the
 ## design choice is "no enemy gets a choose-from-hand card" — this default is
 ## a sensible fallback if one accidentally fires for an enemy.
-func prompt_choose_cards(count: int, _prompt_text: String = "") -> Array[Card]:
+func prompt_choose_cards(count: int, _prompt_text: String = "", _min_count: int = -1) -> Array[Card]:
 	var pool := _shuffled_hand()
 	var chosen: Array[Card] = []
 	for c in pool.slice(0, count):

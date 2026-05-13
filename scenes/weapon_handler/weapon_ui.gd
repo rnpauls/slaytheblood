@@ -3,6 +3,9 @@ extends Control
 
 @export var weapon: Weapon : set = set_weapon
 @export var shader_material: ShaderMaterial
+## Wired by WeaponHandler from owner_of_weapon.modifier_handler. When null
+## (inventory screen, etc.) update_labels renders raw weapon stats.
+var modifier_handler: ModifierHandler = null
 @onready var icon: TextureRect = $Icon
 #@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var atk_label: Label = %AtkLabel
@@ -47,9 +50,29 @@ func set_glow(enabled: bool) -> void:
 	glow_panel.visible = enabled and weapon != null
 
 func update_labels() -> void:
-	atk_label.text = str(weapon.attack)
-	cost_label.text = str(weapon.cost)
+	var base_atk := weapon.attack
+	var mod_atk := base_atk
+	if modifier_handler:
+		mod_atk = modifier_handler.get_modified_value(base_atk, Modifier.Type.DMG_DEALT)
+	_apply_value_tint(atk_label, base_atk, mod_atk)
+
+	var base_cost := weapon.cost
+	var mod_cost := base_cost
+	if modifier_handler:
+		mod_cost = modifier_handler.get_modified_value(base_cost, Modifier.Type.CARD_COST)
+	_apply_value_tint(cost_label, base_cost, mod_cost)
+
 	refresh_go_again()
+
+
+func _apply_value_tint(label: Label, base: int, modified: int) -> void:
+	label.text = str(modified)
+	if modified > base:
+		label.add_theme_color_override("font_color", Palette.GOLD_HIGHLIGHT)
+	elif modified < base:
+		label.add_theme_color_override("font_color", Palette.BLOOD_CRIMSON)
+	else:
+		label.remove_theme_color_override("font_color")
 
 func refresh_go_again() -> void:
 	if not is_node_ready():

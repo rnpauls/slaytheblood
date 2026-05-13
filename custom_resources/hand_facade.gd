@@ -69,10 +69,13 @@ func reshuffle_discard() -> void:
 ## For Player: shows the choose-cards UI and waits for the click. For Enemy:
 ## random pick (no UI). Optional prompt_text customizes the label shown to
 ## the player ("Sink a card", "Exhaust a card", etc.); ignored on enemy side.
+## Optional min_count lets the player confirm with as few as `min_count`
+## cards selected (0 = fully optional). Defaults to `count` (strict equality
+## — preserves the original behavior). Ignored on enemy side.
 ##
 ## Returns the actually chosen cards (may be fewer than `count` if hand size
 ## is smaller, or empty if the prompt is cancelled).
-func prompt_choose_cards(_count: int, _prompt_text: String = "") -> Array[Card]:
+func prompt_choose_cards(_count: int, _prompt_text: String = "", _min_count: int = -1) -> Array[Card]:
 	push_warning("HandFacade.prompt_choose_cards called on base class")
 	return []
 

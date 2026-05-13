@@ -2,6 +2,14 @@ class_name CardVisuals
 extends Control
 
 @export var card: Card : set = set_card
+## Set by PlayerCardUI from the player's modifier_handler. When null (deck
+## view, inventory previews, etc.) refresh_modified_values is a no-op-ish
+## passthrough and renders raw card values.
+var modifier_handler: ModifierHandler = null
+## PlayerCardUI flips this off while the card is "unplayable" so its existing
+## red cost-override at player_card_ui._set_playable wins over our modifier
+## tint. Default true so non-PlayerCardUI consumers still get cost tinting.
+var tint_cost: bool = true
 
 @onready var panel: NinePatchRect = $Panel
 @onready var art_panel: TextureRect = %ArtPanel
@@ -44,6 +52,10 @@ func set_card(value: Card) -> void:
 		hide_defense()
 	else:
 		defense.text = str(card.defense)
+	# Apply modifier-aware tint on top of the raw values just written, if a
+	# handler was assigned before set_card ran. PlayerCardUI also calls this
+	# again after assigning modifier_handler post-set_card.
+	refresh_modified_values()
 	if card.go_again:
 		go_again_icon.show()
 	else:
@@ -73,9 +85,46 @@ func set_card(value: Card) -> void:
 ## Recompute the cost label from the current state. Cards with overridden
 ## get_play_cost() change their displayed cost as runechants / attacks_this_turn
 ## / discards_this_combat update — PlayerCardUI calls this on stats_changed.
+## Routes through refresh_modified_values so the cost tint stays in sync when
+## a CARD_COST modifier is active.
 func refresh_cost() -> void:
 	if card:
-		cost.text = str(card.get_play_cost())
+		refresh_modified_values()
+
+
+## Recompute attack / defense / cost labels using the current modifier_handler
+## and re-tint each label gold (buff) or crimson (debuff) when the displayed
+## value differs from the card's base. Also re-runs the description through
+## the modifier-aware keyword formatter so the zap value picks up a color span.
+func refresh_modified_values() -> void:
+	if not card or not is_node_ready():
+		return
+
+	if not (card.disable_attack or card.type == Card.Type.BLOCK or card.type == Card.Type.NAA):
+		_apply_value_tint(attack, card.get_attack_value(), card.get_modified_attack(modifier_handler))
+
+	if not card.disable_defense:
+		_apply_value_tint(defense, card.defense, card.get_modified_defense(modifier_handler))
+
+	if tint_cost:
+		_apply_value_tint(cost, card.get_play_cost(), card.get_modified_cost(modifier_handler))
+	else:
+		# Cost is being driven by PlayerCardUI's unplayable-red override; just
+		# refresh the number without touching font_color.
+		cost.text = str(card.get_modified_cost(modifier_handler))
+
+	text_box.text = IconRegistry.expand_icons(
+		KeywordRegistry.format_keywords_with_modifiers(card.get_default_tooltip(), modifier_handler))
+
+
+func _apply_value_tint(label: Label, base: int, modified: int) -> void:
+	label.text = str(modified)
+	if modified > base:
+		label.add_theme_color_override("font_color", Palette.GOLD_HIGHLIGHT)
+	elif modified < base:
+		label.add_theme_color_override("font_color", Palette.BLOOD_CRIMSON)
+	else:
+		label.remove_theme_color_override("font_color")
 
 func hide_attack() ->void:
 	attack.hide()

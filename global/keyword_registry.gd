@@ -105,6 +105,38 @@ func format_keywords(text: String) -> String:
 	return _kw_tag.sub(text, "[b]$3[/b]", true)
 
 
+## Modifier-aware variant of format_keywords: for keywords whose magnitude
+## represents a value the player actually deals (currently just `zap`, which
+## is folded into the attack damage packet via DMG_DEALT), wrap the rendered
+## display in a gold/red color span when the player's modifiers would shift it.
+## Falls back to format_keywords when no handler is supplied.
+func format_keywords_with_modifiers(text: String, handler: ModifierHandler) -> String:
+	if text.is_empty() or _kw_tag == null:
+		return text
+	if handler == null:
+		return format_keywords(text)
+
+	var result := ""
+	var cursor := 0
+	for m in _kw_tag.search_all(text):
+		result += text.substr(cursor, m.get_start() - cursor)
+		var id := StringName(m.get_string(1))
+		var value_str := m.get_string(2)
+		var display := m.get_string(3)
+		var replacement := "[b]%s[/b]" % display
+		if id == &"zap" and value_str != "":
+			var base := value_str.to_int()
+			var modified := handler.get_modified_value(base, Modifier.Type.DMG_DEALT)
+			if modified > base:
+				replacement = "[b][color=#%s]%s[/color][/b]" % [Palette.GOLD_HIGHLIGHT.to_html(false), display]
+			elif modified < base:
+				replacement = "[b][color=#%s]%s[/color][/b]" % [Palette.BLOOD_CRIMSON.to_html(false), display]
+		result += replacement
+		cursor = m.get_end()
+	result += text.substr(cursor)
+	return result
+
+
 ## Walk the keyword graph starting from `text`, returning one TooltipData per
 ## unique keyword reachable transitively (e.g. card mentions Strong, Strong's
 ## description mentions Strength → both boxes appear). BFS so closer references

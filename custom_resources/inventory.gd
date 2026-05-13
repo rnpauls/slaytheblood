@@ -13,6 +13,10 @@ func add_weapon(weapon: Weapon) -> void:
 	weapons.append(weapon)
 	#inventory_changed.emit()
 
+func remove_weapon(weapon: Weapon) -> void:
+	weapons.erase(weapon)
+	#inventory_changed.emit()
+
 func add_equipment(equipment: Equipment) -> void:
 	equips.append(equipment)
 	#inventory_changed.emit()

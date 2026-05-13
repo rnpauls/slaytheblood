@@ -6,6 +6,7 @@ var enemy: Enemy = null
 
 @onready var icon: TextureRect = $Icon
 @onready var label: Label = $Label
+@onready var exclamation: TextureRect = $Exclamation
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -21,6 +22,13 @@ func update_intent(intent: Intent) -> void:
 	icon.visible = icon.texture != null
 	label.text = intent.current_text
 	label.visible = intent.current_text.length() > 0
+
+	var has_on_hit := false
+	if enemy and enemy.current_action and enemy.current_action.type == Card.Type.ATTACK:
+		has_on_hit = enemy.current_action.on_hits.size() > 0 \
+			or enemy.active_on_hits.size() > 0
+	exclamation.visible = has_on_hit
+
 	show()
 
 func _on_mouse_entered() -> void:
@@ -50,7 +58,7 @@ func _build_tooltip_text() -> String:
 	# Damage line (only for attacks)
 	if action.type == Card.Type.ATTACK:
 		var dmg: int = action.get_attack_value()
-		if enemy.modifier_handler:
+		if enemy.modifier_handler and action.damage_kind == Card.DamageKind.PHYSICAL:
 			dmg = enemy.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_DEALT)
 		if enemy.enemy_ai and enemy.enemy_ai.target and enemy.enemy_ai.target.modifier_handler:
 			dmg = enemy.enemy_ai.target.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_TAKEN)
@@ -58,7 +66,12 @@ func _build_tooltip_text() -> String:
 		if action.go_again:
 			lines.append("Go Again")
 
-	# On-hit effects
+	# Card's own description (covers per-card on-hits like Lacerate's Bleed).
+	if action.tooltip_text != "":
+		lines.append("")
+		lines.append(action.tooltip_text)
+
+	# Status-applied on-hits (Poison Tip, etc.) carried by the combatant.
 	if enemy.active_on_hits.size() > 0:
 		lines.append("")
 		lines.append("[b]On hit:[/b]")
