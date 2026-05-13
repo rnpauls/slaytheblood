@@ -69,7 +69,7 @@ func _generate_shop_cards() -> void:
 	var available_cards:= char_stats.draftable_cards.duplicate_cards()
 	RNG.array_shuffle(available_cards)
 	#available_cards.shuffle()
-	shop_card_array = available_cards.slice(0, 5)
+	shop_card_array = available_cards.slice(0, 6)
 	
 	for card: Card in shop_card_array:
 		var new_shop_card := SHOP_CARD.instantiate() as ShopCard

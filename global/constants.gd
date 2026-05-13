@@ -44,8 +44,8 @@ const RED_PITCH = Color(0xb83c3cFF)
 const YELLOW_PITCH = Color(0xd8ae3bFF)
 const BLUE_PITCH = Color(0x4988beFF)
 const RARITY_COLORS := {
-	Card.Rarity.COMMON: Color.GRAY,
-	Card.Rarity.UNCOMMON: Color.CORNFLOWER_BLUE,
-	Card.Rarity.RARE: Color.GOLD,
+	0: Color.GRAY,
+	1: Color.CORNFLOWER_BLUE,
+	2: Color.GOLD,
 	
 }

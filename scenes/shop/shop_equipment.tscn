@@ -23,6 +23,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 base_scale = 0.6
+hover_scale = 1.0
 
 [node name="Price" type="HBoxContainer" parent="." unique_id=1228089212]
 unique_name_in_owner = true

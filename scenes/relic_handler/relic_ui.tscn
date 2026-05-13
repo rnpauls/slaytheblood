@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://big0rbu80crno"]
 
 [ext_resource type="Script" uid="uid://co5cqlajlf2fp" path="res://scenes/relic_handler/relic_ui.gd" id="1_jnrvr"]
-[ext_resource type="Texture2D" uid="uid://dytq0eumwvky6" path="res://art/tile_0074.png" id="1_tqrdb"]
 [ext_resource type="Material" uid="uid://d30aqi80c1nrc" path="res://art/themes/white_sprite_material.tres" id="2_mfpcx"]
 [ext_resource type="Resource" uid="uid://dhg8g1wnj0oft" path="res://relics/healing_potion.tres" id="2_sir3c"]
+[ext_resource type="Texture2D" uid="uid://boklhiqs1414d" path="res://art/tile_0115.png" id="3_v7f4x"]
 
 [sub_resource type="Animation" id="Animation_eknsn"]
 length = 0.001
@@ -81,17 +81,19 @@ offset_right = -592.0
 offset_bottom = -312.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(24, 24)
 size_flags_vertical = 4
 script = ExtResource("1_jnrvr")
 relic = ExtResource("2_sir3c")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=2080651039]
+texture_filter = 1
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 1
 offset_right = 48.0
 offset_bottom = 48.0
 pivot_offset = Vector2(8, 8)
-texture = ExtResource("1_tqrdb")
+texture = ExtResource("3_v7f4x")
 expand_mode = 1
 stretch_mode = 5
 
