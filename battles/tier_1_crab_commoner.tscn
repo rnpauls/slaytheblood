@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://dt0udcpihe8ve"]
+[gd_scene format=3 uid="uid://oxkvu7p64yuy"]
 
-[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_qedx2"]
-[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_tp4gr"]
-[ext_resource type="Resource" uid="uid://b7kxqdggip08o" path="res://enemies/crab/crab_enemy.tres" id="3_xr6i6"]
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
+[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_es"]
+[ext_resource type="Resource" uid="uid://b7kxqdggip08o" path="res://enemies/crab/crab_enemy.tres" id="3_es"]
 
-[node name="Tier2CrabCommoner" type="Node2D" unique_id=215508035]
+[node name="Tier1CrabCommoner" type="Node2D"]
 
-[node name="Enemy" parent="." unique_id=171155132 instance=ExtResource("1_qedx2")]
-position = Vector2(747, 264)
-stats = ExtResource("2_tp4gr")
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(787.43017578125, 331.957000732422)
+stats = ExtResource("2_es")
 
-[node name="Enemy2" parent="." unique_id=830231401 instance=ExtResource("1_qedx2")]
-position = Vector2(1051, 258)
-stats = ExtResource("3_xr6i6")
+[node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1014.87097167969, 281.225860595703)
+stats = ExtResource("3_es")

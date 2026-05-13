@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://dyfqyi1jph77q"]
+[gd_scene format=3 uid="uid://dygdervsem3q7"]
 
-[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_uhbxr"]
-[ext_resource type="Resource" uid="uid://dninwixr8caa7" path="res://enemies/karnus/karnus.tres" id="2_k4myk"]
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
+[ext_resource type="Resource" uid="uid://dninwixr8caa7" path="res://enemies/karnus/karnus.tres" id="2_es"]
 
-[node name="Tier0Bats2" type="Node2D" unique_id=1860910465]
+[node name="Tier2Karnus" type="Node2D"]
 
-[node name="Enemy" parent="." unique_id=28283840 instance=ExtResource("1_uhbxr")]
-position = Vector2(731, 220)
-stats = ExtResource("2_k4myk")
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(842.827941894531, 306.881683349609)
+stats = ExtResource("2_es")

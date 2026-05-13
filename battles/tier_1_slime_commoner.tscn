@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://bsl1m0t1scn00"]
+[gd_scene format=3 uid="uid://cflhfovgcmcqb"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
-[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_commn"]
-[ext_resource type="Resource" uid="uid://bsl1m00enmy00" path="res://enemies/slime/slime_enemy.tres" id="3_slime"]
+[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_es"]
+[ext_resource type="Resource" uid="uid://bsl1m00enmy00" path="res://enemies/slime/slime_enemy.tres" id="3_es"]
 
-[node name="Tier1SlimeCommoner" type="Node2D" unique_id=1685917986]
+[node name="Tier1SlimeCommoner" type="Node2D"]
 
-[node name="Enemy" parent="." unique_id=2004645267 instance=ExtResource("1_enemy")]
-position = Vector2(747, 264)
-stats = ExtResource("2_commn")
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(813.236572265625, 339.698944091797)
+stats = ExtResource("2_es")
 
-[node name="Enemy2" parent="." unique_id=2004645268 instance=ExtResource("1_enemy")]
-position = Vector2(1051, 258)
-stats = ExtResource("3_slime")
+[node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1033.79565429688, 289.827941894531)
+stats = ExtResource("3_es")

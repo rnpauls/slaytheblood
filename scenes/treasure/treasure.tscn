@@ -9,17 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://d007n5sscvumv" path="res://art/tile_0090.png" id="4_k7lbv"]
 [ext_resource type="Texture2D" uid="uid://isan6btj7dwy" path="res://art/tile_0091.png" id="5_opp3a"]
 [ext_resource type="Resource" uid="uid://bpyxehcf5kwl" path="res://relics/reinforced_armor.tres" id="5_tmyoj"]
+[ext_resource type="Texture2D" uid="uid://dcri7r5nvl48m" path="res://art/backgrounds/empty_treasure_room.jpeg" id="6_8auyv"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="7_bbvtr"]
 [ext_resource type="Resource" uid="uid://stbrelic002b" path="res://relics/ancestral_rage.tres" id="11_anc"]
 [ext_resource type="Resource" uid="uid://stbrelic003b" path="res://relics/iron_stomach.tres" id="12_iron"]
 [ext_resource type="Resource" uid="uid://stbrelic005b" path="res://relics/aether_veil.tres" id="13_aeth"]
 [ext_resource type="Resource" uid="uid://stbrelic006b" path="res://relics/tome_of_wards.tres" id="14_tome"]
 [ext_resource type="Resource" uid="uid://stbrelic007b" path="res://relics/lucky_charm.tres" id="15_lucky"]
 [ext_resource type="Resource" uid="uid://stbrelic008b" path="res://relics/resonance_ring.tres" id="16_reso"]
-[ext_resource type="Resource" uid="uid://stbrelic009b" path="res://relics/crows_feather.tres" id="17_crow"]
+[ext_resource type="Resource" uid="uid://stbrelic01ab" path="res://relics/crows_feather.tres" id="17_crow"]
 [ext_resource type="Resource" uid="uid://stbrelic010b" path="res://relics/caffeine_tab.tres" id="18_caff"]
-[ext_resource type="Resource" uid="uid://stbrelic011b" path="res://relics/steady_hand.tres" id="19_stdh"]
-[ext_resource type="Texture2D" uid="uid://dcri7r5nvl48m" path="res://art/backgrounds/empty_treasure_room.jpeg" id="6_8auyv"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="7_bbvtr"]
+[ext_resource type="Resource" path="res://relics/steady_hand.tres" id="19_stdh"]
 
 [sub_resource type="Animation" id="Animation_31ci2"]
 length = 0.001
@@ -204,6 +204,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TreasureChest" type="TextureRect" parent="." unique_id=1214863501]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -226,6 +227,7 @@ libraries/ = SubResource("AnimationLibrary_intt6")
 autoplay = &"highlight"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="TreasureChest" unique_id=1992705335]
+texture_filter = 1
 position = Vector2(20, 30)
 emitting = false
 amount = 25

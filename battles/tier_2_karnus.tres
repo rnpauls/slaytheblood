@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://c0phbx8gtujhs"]
+[gd_resource type="Resource" script_class="BattleStats" format=3]
 
-[ext_resource type="PackedScene" uid="uid://dyfqyi1jph77q" path="res://battles/tier_2_karnus.tscn" id="1_637td"]
-[ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="2_mxy4s"]
+[ext_resource type="PackedScene" path="res://battles/tier_2_karnus.tscn" id="1_637td"]
+[ext_resource type="Script" path="res://custom_resources/battle_stats.gd" id="2_mxy4s"]
 
 [resource]
 script = ExtResource("2_mxy4s")

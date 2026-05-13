@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cmpvyxjcbinsh"]
+[gd_scene format=3 uid="uid://ohhthsqjo0qo"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://bsl1m00enmy00" path="res://enemies/slime/slime_enemy.tres" id="2_es"]
@@ -6,9 +6,9 @@
 [node name="Tier0Slimes" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1140.58801269531, 283.252838134766)
+position = Vector2(1081.23303222656, 290.134552001953)
 stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(896.382019042969, 295.346130371094)
+position = Vector2(831.865783691406, 328.034362792969)
 stats = ExtResource("2_es")

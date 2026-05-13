@@ -12,4 +12,4 @@ rarity = 1
 character_type = 1
 single_use = true
 icon = ExtResource("1_icon")
-tooltip = "On block: gain 1 block, then discard your highest-attack card and gain additional block equal to its attack"
+tooltip = "On block: Gain 1 block, then discard your highest [icon=atk] card & gain block equal to its attack"

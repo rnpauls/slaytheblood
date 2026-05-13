@@ -9,4 +9,5 @@ func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	var chosen: Array[Card] = await owner.hand_facade.prompt_choose_cards(1, "Sink a card")
 	for card in chosen:
 		owner.hand_facade.sink_card(card)
+		owner.hand_facade.draw_cards(1)
 	owner.hand_facade.draw_cards(2)

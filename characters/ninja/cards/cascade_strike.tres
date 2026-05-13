@@ -15,5 +15,5 @@ pitch = 1
 attack = 8
 defense = 3
 icon = ExtResource("2_icon")
-tooltip_text = "Deal 6 damage. Cost reduced by 1 per attack you've already played this turn."
+tooltip_text = "Cost reduced by 1 per attack you've already played this turn."
 sound = ExtResource("4_sound")
