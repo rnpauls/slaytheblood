@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SoulDaggerWeapon" format=3 uid="uid://stbsoul0001"]
 
-[ext_resource type="Texture2D" uid="uid://c0vbf1dt8shoi" path="res://art/weapons/pixellab/rose_whip.png" id="1_dgtgu"]
+[ext_resource type="Texture2D" uid="uid://dxqic42e8e1lp" path="res://art/weapons/pixellab/soul_dagger.png" id="1_dgtgu"]
 [ext_resource type="Script" uid="uid://b0bxw2opu5nwc" path="res://weapons/soul_dagger.gd" id="2_sd_script"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_sd_sound"]
 
@@ -13,7 +13,7 @@ rarity = 1
 character_type = 1
 icon = ExtResource("1_dgtgu")
 sound = ExtResource("3_sd_sound")
-tooltip = "Go Again. +1 damage for each card you have sunk this turn."
+tooltip = "Go Again. +1 damage for each card you have sunk this combat."
 attack = 1
 cost = 1
 go_again = true

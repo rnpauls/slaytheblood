@@ -47,6 +47,10 @@ window/size/window_width_override=2480
 window/size/window_height_override=1440
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/icon_thumbnail/plugin.cfg")
+
 [file_customization]
 
 folder_colors={

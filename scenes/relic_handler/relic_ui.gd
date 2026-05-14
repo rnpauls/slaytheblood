@@ -7,6 +7,7 @@ extends Control
 
 @onready var icon: TextureRect = $Icon
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var counter_label: Label = $Counter
 
 
 func _ready() -> void:
@@ -42,6 +43,15 @@ func flash() -> void:
 	if Engine.is_editor_hint():
 		return
 	animation_player.play("flash")
+
+
+func set_counter(value: int) -> void:
+	if Engine.is_editor_hint():
+		return
+	if not is_node_ready():
+		await ready
+	counter_label.text = str(value)
+	counter_label.visible = true
 
 func _on_mouse_entered() -> void:
 	if Engine.is_editor_hint():

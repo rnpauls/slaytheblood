@@ -172,6 +172,7 @@ func _show_map() -> void:
 
 
 func _advance_to_next_act() -> void:
+	character.health = character.max_health
 	Events.tooltip_hide_requested.emit()
 	if current_view.get_child_count() > 0:
 		current_view.get_child(0).queue_free()

@@ -41,7 +41,7 @@ var block: int : set = set_block
 ## emit stats_changed so CardVisuals.refresh_cost() picks up the change.
 var attacks_this_turn: int = 0 : set = set_attacks_this_turn
 var discards_this_combat: int = 0 : set = set_discards_this_combat
-var sinks_this_turn: int = 0 : set = set_sinks_this_turn
+var sinks_this_combat: int = 0 : set = set_sinks_this_combat
 
 func set_health(value : int) -> void:
 	health = clampi(value, 0, max_health)
@@ -84,8 +84,8 @@ func set_discards_this_combat(value: int) -> void:
 	discards_this_combat = value
 	stats_changed.emit()
 
-func set_sinks_this_turn(value: int) -> void:
-	sinks_this_turn = value
+func set_sinks_this_combat(value: int) -> void:
+	sinks_this_combat = value
 	stats_changed.emit()
 
 func can_play_card(card:Card) -> bool:
@@ -107,7 +107,7 @@ func create_instance() -> Resource:
 	# Fresh combat: reset the dynamic-cost counters so they start from 0.
 	instance.attacks_this_turn = 0
 	instance.discards_this_combat = 0
-	instance.sinks_this_turn = 0
+	instance.sinks_this_combat = 0
 	return instance
 
 ## prevention: how much arcane to mana-spend on. -1 = auto-spend everything

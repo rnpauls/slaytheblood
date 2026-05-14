@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_qbpot"]
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_vya8y"]
-[ext_resource type="Texture2D" uid="uid://b33ifssickigs" path="res://art/sprites/bat_grok.png" id="2_snxww"]
+[ext_resource type="Texture2D" uid="uid://blmneustxl62b" path="res://art/sprites/pixellab/bat.png" id="2_t6bmg"]
+[ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_gd852"]
 [ext_resource type="Resource" uid="uid://bu02uj2lp60de" path="res://enemies/bat/bat_enemy_starting_deck.tres" id="4_18cca"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_snxww"]
 
 [resource]
 script = ExtResource("1_qbpot")
 character_name = "Bat"
-art = ExtResource("2_snxww")
+art = ExtResource("2_t6bmg")
 max_health = 7
 starting_deck = ExtResource("4_18cca")
 starting_inventory = ExtResource("5_snxww")

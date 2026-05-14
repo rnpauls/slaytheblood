@@ -47,5 +47,8 @@ type = 1
 [node name="CardCostModifier" parent="ModifierHandler" unique_id=1882914202 instance=ExtResource("6_x5300")]
 type = 2
 
+[node name="BlockGainedModifier" parent="ModifierHandler" unique_id=1647823901 instance=ExtResource("6_x5300")]
+type = 5
+
 [connection signal="mouse_entered" from="MouseHoverArea" to="." method="_on_mouse_hover_entered"]
 [connection signal="mouse_exited" from="MouseHoverArea" to="." method="_on_mouse_hover_exited"]

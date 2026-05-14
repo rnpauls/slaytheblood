@@ -89,6 +89,7 @@ func _on_stats_set() -> void:
 	update_enemy()
 
 func _on_death() -> void:
+	SFXPlayer.play(stats.death_sound)
 	# queue_free skips mouse_exited on our hover sources (HoverArea,
 	# StatusHandler, IntentUI), so a tooltip shown for this enemy would
 	# otherwise stay on screen.

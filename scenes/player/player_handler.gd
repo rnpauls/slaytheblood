@@ -124,7 +124,6 @@ func start_turn() -> void:
 	character.block = 0
 	character.reset_mana()
 	character.reset_action_points()
-	character.sinks_this_turn = 0
 	_first_card_played_this_turn = false
 	_first_attack_played_this_turn = false
 	relics.activate_relics_by_type(Relic.Type.START_OF_TURN)
@@ -336,7 +335,7 @@ func _on_card_pitched(card: Card) -> void:
 	character.discard.add_card(card)
 
 func _on_card_sunk(card: Card) -> void:
-	character.sinks_this_turn += 1
+	character.sinks_this_combat += 1
 	character.draw_pile.add_card(card)
 
 func _loadout_cares_about(status_id: String) -> bool:
