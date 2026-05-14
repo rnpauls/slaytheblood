@@ -28,6 +28,7 @@ alignment = 1
 
 [node name="CustomIcon" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1757749818]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 texture = ExtResource("1_0hgxs")

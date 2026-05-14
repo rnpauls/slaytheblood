@@ -10,4 +10,4 @@ type = 1
 can_expire = true
 duration = 1
 icon = ExtResource("1_wdi67")
-tooltip = "Enraged: Has discarded a 6+atk this turn"
+tooltip = "Has discarded a 6+atk this turn"

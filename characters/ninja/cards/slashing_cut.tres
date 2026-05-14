@@ -14,5 +14,5 @@ pitch = 1
 attack = 3
 defense = 3
 icon = ExtResource("2_icon")
-tooltip_text = "Deal 3 damage. On hit: apply [kw=bleed:3]Bleed 3[/kw]."
+tooltip_text = "Deal 3 damage. [kw=onhit]On hit[/kw]: apply [kw=bleed:3]Bleed 3[/kw]."
 sound = ExtResource("4_sound")

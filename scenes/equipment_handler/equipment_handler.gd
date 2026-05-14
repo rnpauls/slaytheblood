@@ -243,6 +243,9 @@ func _on_mouse_entered() -> void:
 		return
 	_set_hovered(true)
 	var anchor_rect := Rect2(global_position, size)
+	# Underlying Area2D mouse_exited doesn't fire when this Button captures the
+	# mouse, so clear any stale tooltip explicitly.
+	Events.tooltip_hide_requested.emit()
 	Events.inventory_preview_show_requested.emit(null, equipment, anchor_rect)
 
 

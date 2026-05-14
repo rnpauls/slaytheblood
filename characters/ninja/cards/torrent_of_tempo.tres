@@ -17,6 +17,6 @@ defense = 3
 ai_value = 2
 ai_value_needs_attack = true
 icon = ExtResource("1_nuuo2")
-tooltip_text = "On hit: Go Again"
+tooltip_text = "[kw=onhit]On hit[/kw]: Go Again"
 sound = ExtResource("4_iob1m")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

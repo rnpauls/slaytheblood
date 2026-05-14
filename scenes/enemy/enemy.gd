@@ -20,8 +20,12 @@ extends Combatant
 
 const ARROW_OFFSET := 45
 const WEAPON_HANDLER_SCENE := preload("res://scenes/weapon_handler/weapon_handler.tscn")
-const WEAPON_BADGE_OFFSET := Vector2(80, -40)
-const LEGACY_SPRITE_HALF_EXTENT := 41.0
+const WEAPON_BADGE_OFFSET := Vector2(100, -40)
+## Half of the default `display_height` (152, see custom_resources/stats.gd).
+## Scene-default positions of intent/staged are calibrated for this baseline:
+## a sprite of this height needs no per-enemy adjustment. Larger or smaller
+## enemies shift `intent_ui` / `staged_display` up or down to track the head.
+const SPRITE_BASELINE_HALF := 76.0
 const DEATH_FADE_DURATION := 0.5
 const DEATH_SINK_DISTANCE := 12.0
 
@@ -78,13 +82,8 @@ func _ready() -> void:
 
 # ── Combatant overrides ───────────────────────────────────────────────────────
 
-const HEALTH_VARIATION := 0.05
-
 func _init_stats(value: Stats) -> Stats:
-	var instance: Stats = value.create_instance()
-	var factor := RNG.instance.randf_range(1.0 - HEALTH_VARIATION, 1.0 + HEALTH_VARIATION)
-	instance.max_health = maxi(1, roundi(instance.max_health * factor))
-	return instance
+	return value.create_instance()
 
 func _on_stats_set() -> void:
 	update_enemy()
@@ -193,19 +192,21 @@ func update_enemy() -> void:
 	var s : float = stats.display_height / stats.art.get_height()
 	sprite_2d.scale = Vector2(s, s)
 
-	# Bottom-anchor: draw the texture entirely above sprite_2d.position, and
-	# park that position at the floor so every enemy's feet land on the same line.
+	# Bottom-anchor at the Enemy's origin: the texture draws entirely above
+	# sprite_2d.position, so the feet always sit at local (0, 0).
 	sprite_2d.offset = Vector2(0, -stats.art.get_height() / 2.0)
-	sprite_2d.position = Vector2(0, LEGACY_SPRITE_HALF_EXTENT)
+	sprite_2d.position = Vector2.ZERO
 
 	var half := sprite_2d.get_rect().size * sprite_2d.scale * 0.5
-	var dy := half.y - LEGACY_SPRITE_HALF_EXTENT
+	var dy := half.y - SPRITE_BASELINE_HALF
 
-	# Bottom-anchored sprite grows entirely upward, so the top moves by 2 * dy.
+	# Track the head relative to the baseline sprite. The whole growth happens
+	# upward (bottom is fixed), so the top moves by 2 * dy.
 	intent_ui.position.y = _intent_origin_y - 2.0 * dy
 	staged_display.position.y = _staged_origin_y - 2.0 * dy
 
-	var sprite_center_y := LEGACY_SPRITE_HALF_EXTENT - half.y
+	# Vertical middle of the actual sprite — feet at 0, top at -2 * half.y.
+	var sprite_center_y := -half.y
 	arrow.position = Vector2(half.x + ARROW_OFFSET, sprite_center_y)
 
 	(hover_collision.shape as RectangleShape2D).size = half * 2.0

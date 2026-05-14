@@ -116,6 +116,10 @@ func _get_targets(_card_parent: Node) -> Array[Node]:
 #Currently does not accept non-attack actions targetting enemies
 func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers: ModifierHandler) -> void:
 	card_play_started.emit(self)
+	# Per-play scratch: apply_effects in on-hit cards rebuilds this; build_attack_packet
+	# consumes it. Without the clear, replays of the same card across a battle keep
+	# appending, so a card like Quick Reflexes draws N cards on its Nth play.
+	on_hits.clear()
 
 	if not is_single_targeted():
 		targets = _get_targets(card_parent)

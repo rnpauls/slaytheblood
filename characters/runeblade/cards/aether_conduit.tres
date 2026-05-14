@@ -16,5 +16,5 @@ defense = 2
 go_again = true
 ai_value = 2
 icon = ExtResource("2_icon")
-tooltip_text = "[kw=zap:1]Zap 1[/kw]. On hit: draw 1."
+tooltip_text = "[kw=zap:1]Zap 1[/kw]. [kw=onhit]On hit[/kw]: draw 1."
 sound = ExtResource("1_block")

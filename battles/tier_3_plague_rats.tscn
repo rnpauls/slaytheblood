@@ -1,18 +1,18 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://0jsfywsk3cnc"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
-[ext_resource type="Resource" path="res://enemies/plague_rat/plague_rat_enemy.tres" id="2_stats"]
+[ext_resource type="Resource" uid="uid://b3sgw1llaberg" path="res://enemies/plague_rat/plague_rat_enemy.tres" id="2_es"]
 
 [node name="Tier3PlagueRats" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(711, 354)
-stats = ExtResource("2_stats")
+position = Vector2(711, 395)
+stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(915, 225)
-stats = ExtResource("2_stats")
+position = Vector2(911.559020996094, 324.49462890625)
+stats = ExtResource("2_es")
 
 [node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1122, 288)
-stats = ExtResource("2_stats")
+position = Vector2(1121.13977050781, 354.806427001953)
+stats = ExtResource("2_es")

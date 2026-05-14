@@ -16,5 +16,5 @@ attack = 7
 defense = 3
 ai_value = 7
 icon = ExtResource("2_icon")
-tooltip_text = "[center]On hit: Steal a random card from the target's hand.[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Steal a random card from the target's hand.[/center]"
 sound = ExtResource("3_sound")

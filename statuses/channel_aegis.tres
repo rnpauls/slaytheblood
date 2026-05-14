@@ -9,4 +9,4 @@ id = "channel_aegis"
 can_expire = true
 duration = 1
 icon = ExtResource("2_icon")
-tooltip = "Channel Aegis: at the start of your next turn, gain %s block."
+tooltip = "At the start of your next turn, gain %s block."

@@ -16,5 +16,5 @@ attack = 3
 defense = 3
 ai_value = 3
 icon = ExtResource("2_icon")
-tooltip_text = "[center]On hit: Draw a card.[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Draw a card.[/center]"
 sound = ExtResource("3_sound")

@@ -10,4 +10,4 @@ type = 2
 stack_type = 1
 stacks = 2
 icon = ExtResource("1_r7u63")
-tooltip = "Muscle: attacks deal %s more damage."
+tooltip = "Attacks deal %s more damage."

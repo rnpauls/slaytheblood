@@ -16,5 +16,5 @@ defense = 3
 ai_value = 1
 ai_value_needs_attack = true
 icon = ExtResource("2_4dnnl")
-tooltip_text = "On hit: gain 1 [kw=action_point]Action Point[/kw]."
+tooltip_text = "[kw=onhit]On hit[/kw]: gain 1 [kw=action_point]Action Point[/kw]."
 sound = ExtResource("3_sound")

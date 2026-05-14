@@ -13,8 +13,9 @@ cost = 1
 pitch = 1
 attack = 3
 defense = 3
+go_again = true
 ai_value = 1
 ai_value_needs_attack = true
 icon = ExtResource("2_dyct6")
-tooltip_text = "On hit: next attack gets \"On hit: deal 2 damage.\""
+tooltip_text = "[kw=onhit]On hit[/kw]: next attack gets \"On hit: deal 2 damage.\""
 sound = ExtResource("3_sound")

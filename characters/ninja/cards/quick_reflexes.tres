@@ -13,5 +13,5 @@ pitch = 1
 attack = 3
 defense = 2
 icon = ExtResource("2_icon")
-tooltip_text = "On hit: draw 1."
+tooltip_text = "[kw=onhit]On hit[/kw]: draw 1."
 sound = ExtResource("4_sound")

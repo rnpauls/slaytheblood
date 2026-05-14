@@ -9,4 +9,4 @@ id = "channel_time_warp"
 can_expire = true
 duration = 1
 icon = ExtResource("2_icon")
-tooltip = "Channel Time Warp: at the start of your next turn, draw %s extra cards."
+tooltip = "At the start of your next turn, draw %s extra cards."

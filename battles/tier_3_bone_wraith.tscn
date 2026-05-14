@@ -7,9 +7,9 @@
 [node name="Tier3BoneWraith" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(820, 302)
+position = Vector2(820, 343.0)
 stats = ExtResource("2_bone")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1080, 302)
+position = Vector2(1080, 343.0)
 stats = ExtResource("3_wraith")

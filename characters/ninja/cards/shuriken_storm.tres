@@ -17,5 +17,5 @@ defense = 3
 go_again = true
 ai_value = 3
 icon = ExtResource("2_kw1wo")
-tooltip_text = "Hit all enemies. On hit: draw 1."
+tooltip_text = "Hit all enemies. [kw=onhit]On hit[/kw]: draw 1."
 sound = ExtResource("4_sound")

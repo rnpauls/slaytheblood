@@ -7,9 +7,9 @@
 [node name="Tier1SlimeCommoner" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(813.236572265625, 339.698944091797)
+position = Vector2(813.236572265625, 380.698944091797)
 stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1033.79565429688, 289.827941894531)
+position = Vector2(1033.79565429688, 330.827941894531)
 stats = ExtResource("3_es")

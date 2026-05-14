@@ -9,4 +9,4 @@ id = "channel_meteor"
 can_expire = true
 duration = 1
 icon = ExtResource("2_icon")
-tooltip = "Channel Meteor: at the start of your next turn, deal %s arcane to every enemy."
+tooltip = "At the start of your next turn, deal %s arcane to every enemy."

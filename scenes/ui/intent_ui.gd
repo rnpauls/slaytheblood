@@ -35,8 +35,13 @@ func update_intent(intent: Intent) -> void:
 
 	var has_on_hit := false
 	if enemy and enemy.current_action and enemy.current_action.type == Card.Type.ATTACK:
+		# [kw=onhit] in tooltip_text catches cards that lazily append OnHits
+		# inside apply_effects (Lacerate, Brittle Bones, etc.) and so have an
+		# empty on_hits array pre-first-play. parse_keywords reads the same
+		# structured markup the tooltip chain already consumes.
 		has_on_hit = enemy.current_action.on_hits.size() > 0 \
-			or enemy.active_on_hits.size() > 0
+			or enemy.active_on_hits.size() > 0 \
+			or KeywordRegistry.parse_keywords(enemy.current_action.tooltip_text).has(&"onhit")
 	exclamation.visible = has_on_hit
 
 	show()

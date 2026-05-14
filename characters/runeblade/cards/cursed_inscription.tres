@@ -15,5 +15,5 @@ attack = 2
 zap = 2
 defense = 3
 icon = ExtResource("2_icon")
-tooltip_text = "[kw=zap:2]Zap 2[/kw]. On hit: add 2 [kw=trash]Trash[/kw] to target's draw pile."
+tooltip_text = "[kw=zap:2]Zap 2[/kw]. [kw=onhit]On hit[/kw]: add 2 [kw=trash]Trash[/kw] to target's draw pile."
 sound = ExtResource("1_block")

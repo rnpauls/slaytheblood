@@ -6,6 +6,8 @@
 class_name EnemyHandler
 extends Node2D
 
+const HEALTH_VARIATION := 2
+
 var acting_enemies: Array[Enemy] = []
 
 ## Set by Battle.start_battle so each enemy's AI gets the player ref by
@@ -33,6 +35,13 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		var new_enemy_child := new_enemy.duplicate() as Enemy
 		add_child(new_enemy_child)
 		new_enemy_child.battle_ui = battle_ui_ref
+
+		# One-shot spawn HP jitter. Lives here (not in Enemy._init_stats) because
+		# the stats setter fires on both .instantiate() and .duplicate(), which
+		# would compound the roll. This loop runs exactly once per enemy.
+		var hp_delta := RNG.instance.randi_range(-HEALTH_VARIATION, HEALTH_VARIATION)
+		new_enemy_child.stats.max_health = maxi(1, new_enemy_child.stats.max_health + hp_delta)
+
 		new_enemy_child.stats.draw_pile = new_enemy_child.stats.starting_deck.custom_duplicate()
 		new_enemy_child.stats.draw_pile.shuffle()
 		new_enemy_child.stats.discard = CardPile.new()

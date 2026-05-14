@@ -12,4 +12,4 @@ can_expire = true
 duration = 1
 stacks = 3
 icon = ExtResource("1_v5fxa")
-tooltip = "Darken Sky: your next attack creates %s [kw=runechant]runechants[/kw] on hit."
+tooltip = "Your next attack creates %s [kw=runechant]runechants[/kw] on hit."

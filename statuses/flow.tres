@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("2_6dot0")
-id = "flow"
+id = "flow_state"
 type = 1
 can_expire = true
 duration = 1
 icon = ExtResource("1_3b1r0")
-tooltip = "Flow state: Has pitched a 0-cost this turn"
+tooltip = "Has pitched a 0-cost this turn"

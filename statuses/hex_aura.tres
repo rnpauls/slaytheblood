@@ -9,4 +9,4 @@ id = "hex_aura"
 stack_type = 1
 stacks = 1
 icon = ExtResource("1_37k4r")
-tooltip = "Hex Aura: at the start of every turn, applies Exposed to every opponent."
+tooltip = "At the start of every turn, applies Exposed to every opponent."

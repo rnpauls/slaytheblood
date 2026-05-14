@@ -12,4 +12,4 @@ can_expire = true
 duration = 1
 stacks = 2
 icon = ExtResource("1_1flo3")
-tooltip = "Bloodrush: Attacks get +2 this turn"
+tooltip = "Attacks get +2 this turn"

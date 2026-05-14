@@ -6,5 +6,5 @@
 [node name="Tier3BoneKnight" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(929, 302)
+position = Vector2(929, 343.0)
 stats = ExtResource("2_stats")

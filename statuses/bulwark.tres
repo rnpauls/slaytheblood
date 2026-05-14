@@ -9,4 +9,4 @@ id = "bulwark"
 stack_type = 1
 stacks = 5
 icon = ExtResource("1_187hj")
-tooltip = "Bulwark: gain %s block at the start of every turn."
+tooltip = "Gain %s block at the start of every turn."

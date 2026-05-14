@@ -22,6 +22,7 @@ script = ExtResource("1_dl80c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=919184121]
 texture = ExtResource("2_2f3il")
+offset = Vector2(0, -75)
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=2093290913]
 visible = false
@@ -38,37 +39,37 @@ shape = SubResource("RectangleShape2D_54tcg")
 
 [node name="StatsUI" parent="." unique_id=408535621 instance=ExtResource("3_p3m4l")]
 offset_left = -126.0
-offset_top = 53.0
+offset_top = 12.0
 offset_right = 126.0
-offset_bottom = 117.0
+offset_bottom = 76.0
 
 [node name="IntentUI" parent="." unique_id=257861735 instance=ExtResource("5_rbfua")]
 offset_left = -28.0
-offset_top = -69.0
+offset_top = -180.0
 offset_right = 36.0
-offset_bottom = -21.0
+offset_bottom = -132.0
 
 [node name="EnemyResourceUI" parent="." unique_id=1222570682 instance=ExtResource("6_4efjx")]
 anchors_preset = 8
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = 74.0
+offset_top = 33.0
 offset_right = 78.0
-offset_bottom = 111.0
+offset_bottom = 70.0
 grow_vertical = 2
 size_flags_vertical = 4
 
 [node name="EnemyHand" parent="." unique_id=-1293967295 instance=ExtResource("9_ehand")]
-position = Vector2(0, 135)
+position = Vector2(0, 94)
 
 [node name="StagedDisplay" type="Node2D" parent="." unique_id=-1293967294]
-position = Vector2(-55, -39)
+position = Vector2(-55, -150)
 script = ExtResource("10_staged")
 staged_scale = 0.15
 
 [node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
-position = Vector2(-105, -7)
+position = Vector2(-105, -48)
 
 [node name="NameLabel" type="Label" parent="." unique_id=-1293967293]
 visible = false
@@ -76,9 +77,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -120.0
-offset_top = 34.0
+offset_top = -7.0
 offset_right = 120.0
-offset_bottom = 62.0
+offset_bottom = 21.0
 grow_horizontal = 2
 theme = ExtResource("11_name")
 theme_override_font_sizes/font_size = 18
@@ -88,9 +89,9 @@ vertical_alignment = 1
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -71.0
-offset_top = 109.0
+offset_top = 68.0
 offset_right = -71.0
-offset_bottom = 122.0
+offset_bottom = 81.0
 status_owner = NodePath("..")
 
 [node name="ModifierHandler" parent="." unique_id=439907616 instance=ExtResource("7_ipda1")]

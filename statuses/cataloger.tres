@@ -9,4 +9,4 @@ id = "cataloger"
 stack_type = 1
 stacks = 1
 icon = ExtResource("1_sjymd")
-tooltip = "Cataloger: at the start of each turn, gain block equal to the opponent's deck size, and bonus damage equal to one third of their deck size."
+tooltip = "At the start of turn, gain block equal to the opponent's deck size, and bonus damage equal to one third of their deck size."

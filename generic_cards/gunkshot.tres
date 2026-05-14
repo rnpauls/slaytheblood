@@ -15,5 +15,5 @@ attack = 4
 defense = 3
 ai_value = 2
 icon = ExtResource("2_c6sqa")
-tooltip_text = "[center]On hit: add a [kw=trash]Trash[/kw] card to the target's draw pile.[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: add a [kw=trash]Trash[/kw] card to the target's draw pile.[/center]"
 sound = ExtResource("4_c6sqa")

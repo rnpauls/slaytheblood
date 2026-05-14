@@ -8,4 +8,4 @@ script = ExtResource("2_rkro7")
 stack_type = 2
 can_expire = true
 icon = ExtResource("1_sx2hh")
-tooltip = "Exposed: takes 50%% more damage for %s turns."
+tooltip = "Takes 50%% more damage for %s turns."

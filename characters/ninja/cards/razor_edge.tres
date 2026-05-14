@@ -14,5 +14,5 @@ pitch = 1
 attack = 2
 defense = 2
 icon = ExtResource("2_icon")
-tooltip_text = "Hit twice for 2. On each hit: apply [kw=bleed:1]Bleed 1[/kw]."
+tooltip_text = "Hit twice for 2. [kw=onhit]On each hit[/kw]: apply [kw=bleed:1]Bleed 1[/kw]."
 sound = ExtResource("4_sound")

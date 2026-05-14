@@ -12,4 +12,4 @@ can_expire = true
 duration = 1
 stacks = 4
 icon = ExtResource("1_icon")
-tooltip = "Marked: attacks against this target deal +%s damage this turn."
+tooltip = "Attacks against this target deal +%s damage this turn."

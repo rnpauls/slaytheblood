@@ -6,5 +6,5 @@
 [node name="Tier0Slime" type="Node2D" unique_id=1685917985]
 
 [node name="Enemy" parent="." unique_id=2004645266 instance=ExtResource("1_enemy")]
-position = Vector2(902, 320)
+position = Vector2(902, 361.0)
 stats = ExtResource("2_slime")

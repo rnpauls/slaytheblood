@@ -16,5 +16,5 @@ attack = 3
 defense = 3
 ai_value = 6
 icon = ExtResource("2_icon")
-tooltip_text = "[center]On hit: Target discards their hand, then draws that many cards minus one.[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Target discards their hand, then draws that many cards minus one.[/center]"
 sound = ExtResource("3_sound")

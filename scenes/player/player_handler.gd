@@ -15,7 +15,7 @@ const HAND_DISCARD_INTERVAL := 0.25
 # Situational statuses are only applied if the loadout (weapons + deck) contains
 # at least one item that actually consumes them. Status id -> list of card/weapon ids.
 const STATUS_LOADOUT_REQUIREMENTS := {
-	"flow": ["harmonized_kodachi"],
+	"flow_state": ["harmonized_kodachi"],
 	"enraged": ["mandible_claw", "ball_breaker", "romping_club", "two_headed_cleaver", "berserkers_bite"],
 }
 
@@ -330,7 +330,7 @@ func _on_card_blocked(card: Card) -> void:
 	Events.card_exhausted.emit(card)
 
 func _on_card_pitched(card: Card) -> void:
-	if card.cost == 0 and _loadout_cares_about("flow"):
+	if card.cost == 0 and _loadout_cares_about("flow_state"):
 		var flow_status  := preload("res://statuses/flow.tres").duplicate()
 		player.status_handler.add_status(flow_status)
 	character.discard.add_card(card)

@@ -12,4 +12,4 @@ can_expire = true
 duration = 1
 stacks = 1
 icon = ExtResource("1_ui33y")
-tooltip = "Thorns: when hit, deal %s damage back to the attacker."
+tooltip = "When hit, deal %s damage back to the attacker. Expires at end of enemy phase"

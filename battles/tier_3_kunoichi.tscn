@@ -6,5 +6,5 @@
 [node name="Tier3Kunoichi" type="Node2D" unique_id=215508035]
 
 [node name="Enemy" parent="." unique_id=171155132 instance=ExtResource("1_nf7sc")]
-position = Vector2(929, 302)
+position = Vector2(929, 343.0)
 stats = ExtResource("2_cnpyu")

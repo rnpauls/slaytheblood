@@ -16,5 +16,5 @@ attack = 4
 defense = 3
 ai_value = 6
 icon = ExtResource("2_icon")
-tooltip_text = "[center]On hit: Destroy a random piece of target's equipment.[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Destroy a random piece of target's equipment.[/center]"
 sound = ExtResource("3_sound")
