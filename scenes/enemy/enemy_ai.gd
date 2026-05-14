@@ -311,7 +311,7 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 ##Calls with current hand, zero resources, and one action point
 ##Used at start of turn
 func calculate_max_offense_now(player_life: int) -> Dictionary:
-	var hand_state = {"cards": hand.duplicate(), "resources": 0}
+	var hand_state = {"cards": hand.duplicate(), "resources": enemy.stats.mana}
 	return calculate_max_offense(hand_state, 1, player_life)
 	
 ## Try playing actions with hand and resources defined in state
