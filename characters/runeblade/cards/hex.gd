@@ -18,6 +18,8 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
 		var effect := CardAddEffect.new()
 		effect.card_to_add = TRASH_CARD
 		effect.destination = CardAddEffect.Destination.DRAW_PILE_RANDOM
+		if i == 0:
+			effect.sound = sound
 		effect.execute([target_node])
 	if target_node.status_handler:
 		var exposed := EXPOSED_STATUS.duplicate()

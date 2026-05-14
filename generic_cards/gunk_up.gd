@@ -8,4 +8,5 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	var effect := CardAddEffect.new()
 	effect.card_to_add = TRASH_CARD
 	effect.destination = CardAddEffect.Destination.DRAW_PILE_RANDOM
+	effect.sound = sound
 	effect.execute([targets[0]])
