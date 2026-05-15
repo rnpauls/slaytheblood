@@ -2,20 +2,19 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
 [ext_resource type="Texture2D" uid="uid://mjw60ynjivyd" path="res://art/card_art/pixellab/aether_spindle.png" id="2_2m8pt"]
-[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="3_vatk0"]
+[ext_resource type="Script" uid="uid://b2aqyhhhqt14v" path="res://generic_cards/vanilla_zap.gd" id="3_vzap0"]
 [ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="4_sndsl"]
 
 [resource]
-script = ExtResource("3_vatk0")
+script = ExtResource("3_vzap0")
 id = "aether_spindle"
+type = 1
 target = 1
 cost = 2
 pitch = 2
-attack = 4
-damage_kind = 1
-zap = 3
+zap = 7
 defense = 2
 go_again = true
 icon = ExtResource("2_2m8pt")
-tooltip_text = "[kw=zap:3]Zap 3[/kw]"
+tooltip_text = "[kw=zap:7]Zap 7[/kw]"
 sound = ExtResource("4_sndsl")

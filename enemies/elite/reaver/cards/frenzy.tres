@@ -13,6 +13,6 @@ pitch = 1
 attack = 3
 ai_value = 3
 icon = ExtResource("2_fren2")
-tooltip_text = "+3atk per [kw=muscle]Muscle[/kw] stack."
+tooltip_text = "+3[icon=atk] per [kw=muscle]Muscle[/kw] stack."
 sound = ExtResource("1_fren1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

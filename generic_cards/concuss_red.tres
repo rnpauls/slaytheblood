@@ -16,6 +16,6 @@ attack = 6
 defense = 3
 ai_value = 3
 icon = ExtResource("1_ejsuh")
-tooltip_text = "On hit: Discard random card"
+tooltip_text = "[kw=onhit]On hit[/kw]: Discard random card"
 sound = ExtResource("4_gyxjt")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

@@ -13,8 +13,6 @@ rarity = 2
 hands = 1
 icon = ExtResource("1_crst1")
 sound = ExtResource("3_crst3")
-tooltip = "The owner gets Hex Aura, which applies [kw=exposed:1]Exposed 1[/kw] to every opponent at the start of the turn"
-attack = 2
-damage_kind = 1
-zap = 4
+tooltip = "The owner gets Hex Aura, which applies [kw=exposed:1]Exposed 1[/kw] to every opponent at the start of owner's turn"
+zap = 6
 cost = 1

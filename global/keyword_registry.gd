@@ -39,6 +39,11 @@ const KEYWORDS: Dictionary = {
 	&"bleed" : preload("res://keywords/bleed_kw.tres"),
 	&"channel" : preload("res://keywords/channel_kw.tres"),
 	&"onhit" : preload("res://keywords/onhit_kw.tres"),
+	&"poison_tip" : preload("uid://dgkvv0r17bhsv"),
+	&"marked" : preload("uid://bxomn825uv5pg"),
+	&"ap" : preload("uid://mtgwledarle4"),
+	&"ga" : preload("uid://cowouit654fn3"),
+	&"exhaust" : preload("uid://g7x2hp5n1m73"),
 }
 
 const _KW_TAG_REGEX := r"\[kw=([\w-]+)(?::([^\]]+))?\](.*?)\[/kw\]"

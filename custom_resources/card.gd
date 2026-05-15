@@ -17,7 +17,6 @@ enum DamageKind {PHYSICAL, ARCANE}
 @export var cost: int
 @export var pitch: int
 @export var attack: int
-@export var damage_kind: DamageKind = DamageKind.PHYSICAL
 ## Arcane damage applied alongside the main attack (for split-damage cards).
 ## Resolves as a separate ZapEffect after the physical hit. Skills/NAAs can also
 ## set this to deal arcane without an attack component.
@@ -197,11 +196,11 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 	var packet := build_attack_packet(modifiers, custom_damage)
 	packet.execute(targets)
 
-## Build a DamagePacket for this card's attack. Folds in the main hit (routed
-## by damage_kind), the card's `zap` value, and any runechants on the owner
-## (consumed here). Used by do_stock_attack_damage_effect and exposed so the
-## enemy intent system / damage previews can inspect a card's full hit profile
-## without firing it.
+## Build a DamagePacket for this card's attack. Folds in the physical hit, the
+## card's `zap` value (scaled by ARCANE_DEALT), and any runechants on the owner
+## (consumed here, added raw). Used by do_stock_attack_damage_effect and exposed
+## so the enemy intent system / damage previews can inspect a card's full hit
+## profile without firing it.
 func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack) -> DamagePacket:
 	var packet := DamagePacket.new()
 	packet.source_card = self
@@ -212,13 +211,11 @@ func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack
 	if owner:
 		packet.on_hit_effects.append_array(owner.active_on_hits)
 
-	if damage_kind == DamageKind.PHYSICAL:
+	if custom_damage > 0:
 		packet.physical = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
-	else:
-		packet.arcane = custom_damage
 
 	if zap > 0:
-		packet.arcane += zap
+		packet.arcane = modifiers.get_modified_value(zap, Modifier.Type.ARCANE_DEALT)
 
 	# Runechants on the attacker pop into the same packet — single decision
 	# point for the defender instead of a sequence of small arcane events.
@@ -237,7 +234,7 @@ func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap:
 	if custom_zap <= 0:
 		return
 	var zap_effect := ZapEffect.new()
-	zap_effect.amount = custom_zap
+	zap_effect.amount = modifiers.get_modified_value(custom_zap, Modifier.Type.ARCANE_DEALT)
 	zap_effect.sound = sound
 	zap_effect.execute(targets)
 

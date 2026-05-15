@@ -13,6 +13,6 @@ rarity = 2
 hands = 1
 icon = ExtResource("1_cens1")
 sound = ExtResource("3_cens3")
-tooltip = "A brass censer dripping blood. Strikes leave wounds that won't close."
+tooltip = "A brass censer dripping blood"
 attack = 3
 cost = 1

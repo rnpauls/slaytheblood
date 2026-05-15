@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="EnemyStats" format=3]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://b0yheg4cig3qw"]
 
-[ext_resource type="Script" path="res://custom_resources/enemy_stats.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/sprites/brute.png" id="2_art"]
-[ext_resource type="Resource" path="res://enemies/marauder/marauder_starting_deck.tres" id="3_deck"]
-[ext_resource type="Resource" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_a6d8e"]
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c3b3xjx3gtm1f" path="res://art/sprites/brute.png" id="2_art"]
+[ext_resource type="Resource" uid="uid://c3k08kf6vb2d" path="res://enemies/marauder/marauder_starting_deck.tres" id="3_deck"]
+[ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_hcjr1"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
 
 [resource]
 script = ExtResource("1_script")

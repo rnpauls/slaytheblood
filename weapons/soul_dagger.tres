@@ -13,7 +13,7 @@ rarity = 1
 character_type = 1
 icon = ExtResource("1_dgtgu")
 sound = ExtResource("3_sd_sound")
-tooltip = "Go Again. +1 damage for each card you have sunk this combat."
+tooltip = "Go Again. +1[icon=atk] for each card you have sunk this combat."
 attack = 1
 cost = 1
 go_again = true

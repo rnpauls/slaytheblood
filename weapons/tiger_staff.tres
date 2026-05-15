@@ -13,7 +13,7 @@ character_type = 1
 hands = 1
 icon = ExtResource("1_yt0rb")
 sound = ExtResource("3_tx41t")
-tooltip = "Empower 1"
+tooltip = "[kw=empower:1]Empower 1[/kw]"
 attack = 1
 cost = 2
 go_again = true

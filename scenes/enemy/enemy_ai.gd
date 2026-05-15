@@ -329,14 +329,12 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0) + action.action_points_granted
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
-			# DMG_DEALT (Muscle, Empowered, etc.) only buffs physical damage.
-			# Split the action into a physical portion (attack when damage_kind
-			# is PHYSICAL) and an arcane portion (zap, plus attack when
-			# damage_kind is ARCANE) so the AI's score matches what
-			# build_attack_packet will actually deliver.
-			var phys_part: int = action.attack if action.damage_kind == Card.DamageKind.PHYSICAL else 0
-			var arc_part: int = action.zap + (action.attack if action.damage_kind == Card.DamageKind.ARCANE else 0)
-			var current_action_damage_modified = modifier_handler.get_modified_value(phys_part, Modifier.Type.DMG_DEALT) + arc_part
+			# DMG_DEALT (Muscle, Empowered, etc.) buffs physical damage; ARCANE_DEALT
+			# (Floodgate) buffs arcane. attack is always physical, zap always arcane,
+			# so the AI's score matches what build_attack_packet will deliver.
+			var phys_part: int = action.attack
+			var arc_part: int = action.zap
+			var current_action_damage_modified = modifier_handler.get_modified_value(phys_part, Modifier.Type.DMG_DEALT) + modifier_handler.get_modified_value(arc_part, Modifier.Type.ARCANE_DEALT)
 			var bonus = action.ai_value
 			if action.ai_value_needs_attack and not sub_result.actions.any(func(c): return c.type == Card.Type.ATTACK):
 				bonus = 0
@@ -344,8 +342,8 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			# per landing component. card.on_hits is empty until apply_effects
 			# runs, so we can't sum OnHit.ai_value here; mirror it by doubling
 			# the card-level ai_value when both damage components exist.
-			var has_phys: bool = (action.damage_kind == Card.DamageKind.PHYSICAL and action.attack > 0)
-			var has_arc: bool = action.zap > 0 or (action.damage_kind == Card.DamageKind.ARCANE and action.attack > 0)
+			var has_phys: bool = action.attack > 0
+			var has_arc: bool = action.zap > 0
 			if has_phys and has_arc:
 				bonus *= 2
 			current_action_damage_modified += bonus

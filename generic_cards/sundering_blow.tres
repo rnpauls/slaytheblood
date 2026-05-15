@@ -1,18 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://ct4l144q66ga7"]
 
-[ext_resource type="Script" path="res://generic_cards/sundering_blow.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/Icon28_32.png" id="2_icon"]
-[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+[ext_resource type="Script" uid="uid://ckicng2dv75hu" path="res://generic_cards/sundering_blow.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_wtujs"]
+[ext_resource type="Texture2D" uid="uid://bho8qwwwetjtl" path="res://art/Icon28_32.png" id="2_icon"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
 
 [resource]
 script = ExtResource("1_script")
 id = "sundering_blow"
-type = 0
 rarity = 2
 target = 1
 cost = 2
 pitch = 1
 attack = 4
+damage_kind = null
 defense = 3
 ai_value = 6
 icon = ExtResource("2_icon")

@@ -12,6 +12,6 @@ rarity = 1
 character_type = 1
 icon = ExtResource("1_eb_icon")
 sound = ExtResource("3_eb_sound")
-tooltip = "If you've played an Attack this turn, this swing hits twice."
+tooltip = "If you've played an Attack this turn, this attack hits twice."
 attack = 2
 cost = 1

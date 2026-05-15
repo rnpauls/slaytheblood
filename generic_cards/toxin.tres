@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_23s4o"]
 [ext_resource type="Texture2D" uid="uid://psr6xk3k26oh" path="res://art/tile_0114.png" id="1_jtqkr"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_uac2k"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="3_jtu7j"]
 
 [resource]
@@ -11,7 +12,6 @@ type = 1
 cost = 1
 pitch = 1
 defense = -1
-exhausts = true
 go_again = true
 icon = ExtResource("1_jtqkr")
 tooltip_text = "[center]Takes up space[/center]"

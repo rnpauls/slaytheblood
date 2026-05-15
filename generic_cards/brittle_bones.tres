@@ -16,5 +16,5 @@ attack = 3
 defense = 4
 ai_value = 5
 icon = ExtResource("2_icon")
-tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply [kw=brittle:2]Brittle 2[/kw].[/center]"
+tooltip_text = "[kw=onhit]On hit[/kw]: Apply [kw=brittle:2]Brittle 2[/kw]."
 sound = ExtResource("3_sound")

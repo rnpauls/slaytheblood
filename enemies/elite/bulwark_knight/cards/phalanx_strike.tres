@@ -15,6 +15,6 @@ attack = 4
 defense = 6
 ai_value = 4
 icon = ExtResource("2_phlx2")
-tooltip_text = "Gain attack equal to current block"
+tooltip_text = "Gain [icon=atk] equal to current block"
 sound = ExtResource("1_phlx1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

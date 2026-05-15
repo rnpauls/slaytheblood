@@ -104,6 +104,9 @@ type = 1
 [node name="BlockGainedModifier" parent="ModifierHandler" unique_id=1389451672 instance=ExtResource("8_3uufv")]
 type = 5
 
+[node name="ArcaneDealtModifier" parent="ModifierHandler" unique_id=1389451673 instance=ExtResource("8_3uufv")]
+type = 6
+
 [connection signal="area_entered" from="HoverArea" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="HoverArea" to="." method="_on_area_exited"]
 [connection signal="mouse_entered" from="HoverArea" to="." method="_on_hover_area_mouse_entered"]

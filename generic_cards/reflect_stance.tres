@@ -13,7 +13,7 @@ target = 1
 pitch = 1
 ai_value = 3
 icon = ExtResource("1_icon")
-tooltip_text = "Gain [kw=thorns:3]Thorns 3[/kw] this turn."
+tooltip_text = "Gain [kw=thorns:3]Thorns 3[/kw]."
 sound = ExtResource("4_ysj21")
 disable_attack = true
 disable_defense = true

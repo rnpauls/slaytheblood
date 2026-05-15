@@ -20,7 +20,6 @@ enum Rarity {COMMON, UNCOMMON, RARE}
 @export_multiline var tooltip: String
 
 @export var attack: int
-@export var damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL
 ## Arcane damage applied alongside the main weapon hit (split-damage weapons).
 ## Resolves through the same DamagePacket as `attack`, so runechants and the
 ## defender's mana spend see one bundled hit, not two events.
@@ -117,13 +116,11 @@ func build_attack_packet(modifiers: ModifierHandler, custom_attack: int = attack
 	if owner:
 		packet.on_hit_effects.append_array(owner.active_on_hits)
 
-	if damage_kind == Card.DamageKind.PHYSICAL:
+	if custom_attack > 0:
 		packet.physical = modifiers.get_modified_value(custom_attack, Modifier.Type.DMG_DEALT)
-	else:
-		packet.arcane = custom_attack
 
 	if zap > 0:
-		packet.arcane += zap
+		packet.arcane = modifiers.get_modified_value(zap, Modifier.Type.ARCANE_DEALT)
 
 	# Pure-zap weapons (physical == 0) aren't the rune-imbued swing runechants represent.
 	if packet.physical > 0 and owner and owner.status_handler:

@@ -2,19 +2,19 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
 [ext_resource type="Texture2D" uid="uid://f7tgpjiguspe" path="res://art/tile_0129.png" id="2_lpfvh"]
-[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="3_vatk0"]
+[ext_resource type="Script" uid="uid://b2aqyhhhqt14v" path="res://generic_cards/vanilla_zap.gd" id="3_vzap0"]
 [ext_resource type="AudioStream" uid="uid://dodx2r5nsudm" path="res://art/music/sound_effects/RPG_Essentials_Free/8_Atk_Magic_SFX/25_Wind_01.wav" id="4_p1sam"]
 
 [resource]
-script = ExtResource("3_vatk0")
+script = ExtResource("3_vzap0")
 id = "immolate"
+type = 1
 rarity = 1
 target = 1
 cost = 3
 pitch = 1
-attack = 6
-damage_kind = 1
+zap = 6
 defense = 3
 icon = ExtResource("2_lpfvh")
-tooltip_text = "Arcane damage"
+tooltip_text = "[kw=zap:6]Zap 6[/kw]."
 sound = ExtResource("4_p1sam")

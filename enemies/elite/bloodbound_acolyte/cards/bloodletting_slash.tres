@@ -16,5 +16,5 @@ attack = 6
 defense = 4
 ai_value = 7
 icon = ExtResource("2_icon")
-tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=bleed]Bleed[/kw]. Heal user for 2.[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=bleed:2]Bleed[/kw]. Heal user for 2.[/center]"
 sound = ExtResource("3_sound")

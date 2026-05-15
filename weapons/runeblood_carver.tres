@@ -13,6 +13,6 @@ starter_weapon = true
 allow_duplicate_in_draft = true
 icon = ExtResource("1_rcicn")
 sound = ExtResource("3_rcsnd")
-tooltip = "On hit: create 1 runechant"
+tooltip = "On hit: create 1 [kw=runechant]runechant[/kw]"
 attack = 1
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

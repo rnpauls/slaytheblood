@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="RoseWhipWeapon" format=3 uid="uid://stbweap_rosewhip"]
+[gd_resource type="Resource" script_class="RoseWhipWeapon" format=3 uid="uid://bhwhy1actvtlc"]
 
-[ext_resource type="Texture2D" path="res://art/weapons/pixellab/rose_whip.png" id="1_rw_icon"]
-[ext_resource type="Script" path="res://weapons/rose_whip.gd" id="2_rw_script"]
+[ext_resource type="Texture2D" uid="uid://c0vbf1dt8shoi" path="res://art/weapons/pixellab/rose_whip.png" id="1_rw_icon"]
+[ext_resource type="Script" uid="uid://c5q8ki10hga4r" path="res://weapons/rose_whip.gd" id="2_rw_script"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_rw_sound"]
 
 [resource]
@@ -14,6 +14,6 @@ character_type = 1
 hands = 1
 icon = ExtResource("1_rw_icon")
 sound = ExtResource("3_rw_sound")
-tooltip = "On hit: inflict 1 [kw=bleed]bleed[/kw]. Then double the target's bleed (even on miss)."
+tooltip = "On hit: inflict 1 [kw=bleed]bleed[/kw]. Then double the target's [b]bleed[/b] (even on miss)."
 attack = 4
 cost = 2

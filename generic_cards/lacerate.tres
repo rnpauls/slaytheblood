@@ -1,14 +1,13 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://kunu3i818qer"]
 
-[ext_resource type="Script" path="res://generic_cards/lacerate.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/Icon28_05.png" id="2_icon"]
-[ext_resource type="AudioStream" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_4vkrl"]
+[ext_resource type="Script" uid="uid://j7bbonikhm1e" path="res://generic_cards/lacerate.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c4db7ggurfpek" path="res://art/Icon28_05.png" id="2_icon"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
 
 [resource]
 script = ExtResource("1_script")
 id = "lacerate"
-type = 0
-rarity = 0
 target = 1
 cost = 1
 pitch = 1
@@ -16,5 +15,5 @@ attack = 5
 defense = 2
 ai_value = 4
 icon = ExtResource("2_icon")
-tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=bleed]Bleed[/kw].[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=bleed:2]Bleed[/kw].[/center]"
 sound = ExtResource("3_sound")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://bxomn825uv5pg"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_r0pwa"]
+
+[resource]
+script = ExtResource("1_r0pwa")
+id = &"poison_tip"
+display_name = "Poison Tip"
+description = "Until end of turn, unit takes {x} more damage from attacks."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

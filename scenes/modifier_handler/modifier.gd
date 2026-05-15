@@ -1,7 +1,7 @@
 class_name Modifier
 extends Node
 
-enum Type {DMG_DEALT, DMG_TAKEN, CARD_COST, SHOP_COST, NO_MODIFIER, BLOCK_GAINED}
+enum Type {DMG_DEALT, DMG_TAKEN, CARD_COST, SHOP_COST, NO_MODIFIER, BLOCK_GAINED, ARCANE_DEALT}
 
 ## Fires whenever a ModifierValue is added, removed, or mutated. Used by
 ## ModifierHandler.modifiers_changed to drive hand/weapon UI refreshes so the

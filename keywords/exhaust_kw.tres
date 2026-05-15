@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://g7x2hp5n1m73"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_qdxsa"]
+
+[resource]
+script = ExtResource("1_qdxsa")
+id = &"exhaust"
+display_name = "Exhaust"
+description = "Exhausted cards are removed from the game until the end of the battle."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

@@ -70,11 +70,16 @@ func _build_tooltip_text() -> String:
 	var action := enemy.current_action
 	var lines: Array[String] = []
 
-	# Damage line (only for attacks)
-	if action.type == Card.Type.ATTACK:
-		var dmg: int = action.get_attack_value()
-		if enemy.modifier_handler and action.damage_kind == Card.DamageKind.PHYSICAL:
-			dmg = enemy.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_DEALT)
+	# Damage line (attacks, and any action carrying zap)
+	if action.type == Card.Type.ATTACK or action.zap > 0:
+		var phys := action.get_attack_value()
+		var arc := action.zap
+		if enemy.modifier_handler:
+			if phys > 0:
+				phys = enemy.modifier_handler.get_modified_value(phys, Modifier.Type.DMG_DEALT)
+			if arc > 0:
+				arc = enemy.modifier_handler.get_modified_value(arc, Modifier.Type.ARCANE_DEALT)
+		var dmg := phys + arc
 		if enemy.enemy_ai and enemy.enemy_ai.target and enemy.enemy_ai.target.modifier_handler:
 			dmg = enemy.enemy_ai.target.modifier_handler.get_modified_value(dmg, Modifier.Type.DMG_TAKEN)
 		lines.append("[b]Deals %d damage[/b]" % dmg)

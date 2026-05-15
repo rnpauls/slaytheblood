@@ -8,8 +8,8 @@
 script = ExtResource("2_script")
 id = "stone_skin"
 type = 1
-pitch = 1
-defense = 6
+pitch = 2
+defense = 3
 ai_value = 3
 icon = ExtResource("1_icon")
 tooltip_text = "Gain 6 [kw=block]block[/kw]."

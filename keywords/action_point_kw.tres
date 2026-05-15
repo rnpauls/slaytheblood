@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://mtgwledarle4"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_vgsmp"]
+
+[resource]
+script = ExtResource("1_vgsmp")
+id = &"ap"
+display_name = "Action Point"
+description = "Every action uses one Action Point (AP) unless it has \"Go Again\" (symbolized by a circular arrow in the top left of cards and weapons)"
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

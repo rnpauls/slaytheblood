@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://hmm8s11sxqck" path="res://art/weapons/pixellab/berserkers_bite.png" id="1_bb_icon"]
 [ext_resource type="Script" path="res://weapons/berserkers_bite.gd" id="2_bb_script"]
-[ext_resource type="AudioStream" uid="uid://ulsyac81tfln" path="res://art/music/sound_effects/DSGN/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav" id="3_bb_sound"]
+[ext_resource type="AudioStream" uid="uid://d2qbx3up4dkkf" path="res://art/music/sound_effects/DSGN/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav" id="3_bb_sound"]
 
 [resource]
 script = ExtResource("2_bb_script")
@@ -13,5 +13,6 @@ rarity = 1
 character_type = 2
 icon = ExtResource("1_bb_icon")
 sound = ExtResource("3_bb_sound")
-tooltip = "Deal damage equal to missing HP / 4. Draw 1, discard 1 (preferring 6+ atk)."
+tooltip = "Deal damage equal to missing HP / 4. 
+[kw=rampage:1]Rampage 1[/kw]"
 cost = 1

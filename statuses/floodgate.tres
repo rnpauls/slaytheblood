@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FloodgateStatus" format=3]
+
+[ext_resource type="Texture2D" uid="uid://kawnrtoo8qc3" path="res://art/magicbook/64x64/book_image_8.png" id="1_icon"]
+[ext_resource type="Script" path="res://statuses/floodgate.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "floodgate"
+type = 2
+stack_type = 1
+can_expire = true
+duration = 1
+stacks = 1
+icon = ExtResource("1_icon")
+tooltip = "Floodgate: your next arcane card deals +%s zap on every hit."

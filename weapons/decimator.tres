@@ -15,7 +15,7 @@ hands = 1
 starter_weapon = null
 icon = ExtResource("1_8wuip")
 sound = ExtResource("3_q4g6v")
-tooltip = "Intimidate"
+tooltip = "[kw=intimidate:1]Intimidate 1[/kw]"
 attack = 4
 cost = 2
 go_again = null

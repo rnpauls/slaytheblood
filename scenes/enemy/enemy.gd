@@ -249,13 +249,13 @@ func update_intent() -> void:
 
 	var new_intent = Intent.new()
 	if current_action and current_action.type == Card.Type.ATTACK:
-		var og_atk = current_action.get_attack_value()
-		var modified_damage: int
-		if current_action.damage_kind == Card.DamageKind.PHYSICAL:
-			modified_damage = modifier_handler.get_modified_value(og_atk, Modifier.Type.DMG_DEALT)
-		else:
-			modified_damage = og_atk
-		modified_damage = enemy_ai.target.modifier_handler.get_modified_value(modified_damage, Modifier.Type.DMG_TAKEN)
+		var phys := current_action.get_attack_value()
+		var arc := current_action.zap
+		if phys > 0:
+			phys = modifier_handler.get_modified_value(phys, Modifier.Type.DMG_DEALT)
+		if arc > 0:
+			arc = modifier_handler.get_modified_value(arc, Modifier.Type.ARCANE_DEALT)
+		var modified_damage: int = enemy_ai.target.modifier_handler.get_modified_value(phys + arc, Modifier.Type.DMG_TAKEN)
 
 		if current_action.go_again:
 			new_intent.base_text = "%s GA"

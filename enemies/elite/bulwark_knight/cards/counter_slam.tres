@@ -15,6 +15,6 @@ attack = 6
 defense = 5
 ai_value = 6
 icon = ExtResource("2_cnts2")
-tooltip_text = "+6 atk if wielder has any block"
+tooltip_text = "+6[icon=atk] if owner has any block"
 sound = ExtResource("1_cnts1")
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"
