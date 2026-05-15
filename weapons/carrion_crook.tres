@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CarrionCrookWeapon" format=3]
+
+[ext_resource type="Texture2D" uid="uid://cvgyr0gjsb6yi" path="res://art/Icon28_40.png" id="1_icon"]
+[ext_resource type="Script" path="res://weapons/carrion_crook.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+weapon_name = "Carrion Crook"
+id = "carrion_crook"
+type = 6
+rarity = 2
+hands = 1
+icon = ExtResource("1_icon")
+sound = ExtResource("3_sound")
+tooltip = "When the wielder dies, every surviving ally gains 3 [kw=muscle:3]Muscle[/kw]."
+attack = 4
+cost = 2

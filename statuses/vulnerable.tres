@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="VulnerableStatus" format=3]
+
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="1_icon"]
+[ext_resource type="Script" path="res://statuses/vulnerable.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "vulnerable"
+type = 2
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_icon")
+tooltip = "Takes 50% more damage from all sources. Permanent."

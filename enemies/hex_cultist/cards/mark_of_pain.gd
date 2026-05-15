@@ -1,10 +1,11 @@
-## Mark of Pain: Hex Cultist NAA. Hexes the player so attacks against them
-## land harder this turn (Marked 2). The cultist itself isn't a heavy hitter
-## — Mark of Pain is the setup card for the rest of the encounter (other
-## cultists / hexweavers / rats follow up).
+## Mark of Pain: Hex Cultist NAA. Hexes the player with Marked 2 (this turn,
+## +2 dmg from any hit) AND Vulnerable 1 (permanent, +50% damage taken). The
+## Marked dies at end of turn, but the Vulnerable sticks — the player carries
+## the cultist's hex for the rest of the fight.
 extends Card
 
 const MARKED_STATUS := preload("res://statuses/marked.tres")
+const VULNERABLE_STATUS := preload("res://statuses/vulnerable.tres")
 
 
 func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
@@ -12,7 +13,9 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
 		var sh: StatusHandler = t.get("status_handler") if t else null
 		if sh == null:
 			continue
-		var dup: MarkedStatus = MARKED_STATUS.duplicate()
-		dup.stacks = 2
-		dup.duration = 1
-		sh.add_status(dup)
+		var marked: MarkedStatus = MARKED_STATUS.duplicate()
+		marked.stacks = 2
+		marked.duration = 1
+		sh.add_status(marked)
+		var vuln: VulnerableStatus = VULNERABLE_STATUS.duplicate()
+		sh.add_status(vuln)

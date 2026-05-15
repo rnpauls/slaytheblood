@@ -13,8 +13,8 @@ target = 1
 cost = 1
 pitch = 1
 defense = 1
-ai_value = 4
+ai_value = 6
 icon = ExtResource("3_icon")
-tooltip_text = "Apply [kw=marked:2]Marked 2[/kw] to the target."
+tooltip_text = "Apply [kw=marked:2]Marked 2[/kw] and [kw=vulnerable:1]Vulnerable[/kw] to the target."
 sound = ExtResource("4_sound")
 disable_attack = true
