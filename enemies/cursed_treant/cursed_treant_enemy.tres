@@ -11,6 +11,7 @@
 
 [resource]
 script = ExtResource("1_script")
+passives = Array[Resource]([ExtResource("5_sap")])
 character_name = "Cursed Treant"
 art = ExtResource("2_art")
 max_health = 45
@@ -18,4 +19,3 @@ starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 2
 hand_left = ExtResource("6_maul")
-passives = Array[Resource]([ExtResource("5_sap")])

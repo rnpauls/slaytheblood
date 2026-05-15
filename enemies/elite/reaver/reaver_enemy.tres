@@ -11,6 +11,7 @@
 
 [resource]
 script = ExtResource("1_reav")
+passives = Array[Resource]([ExtResource("6_bthirst")])
 character_name = "The Reaver"
 art = ExtResource("2_reav")
 max_health = 60
@@ -18,5 +19,4 @@ starting_deck = ExtResource("3_reav")
 starting_inventory = ExtResource("4_reav")
 cards_per_turn = 3
 hand_left = ExtResource("5_reav")
-passives = Array[Resource]([ExtResource("6_bthirst")])
 metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

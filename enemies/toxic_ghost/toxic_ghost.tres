@@ -10,10 +10,10 @@
 
 [resource]
 script = ExtResource("1_45i07")
+passives = Array[Resource]([ExtResource("6_decay")])
 character_name = "Toxic Ghost"
 art = ExtResource("1_vo8nc")
 max_health = 100
 starting_deck = ExtResource("5_dmd16")
 starting_inventory = ExtResource("4_18ue8")
 cards_per_turn = 5
-passives = Array[Resource]([ExtResource("6_decay")])

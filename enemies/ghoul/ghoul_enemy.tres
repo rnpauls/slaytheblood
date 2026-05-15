@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_qobcp"]
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bu60h8fsktdvj" path="res://art/sprites/pixellab/ghoul.png" id="2_art"]
-[ext_resource type="Resource" path="res://enemies/ghoul/ghoul_starting_deck.tres" id="3_deck"]
+[ext_resource type="Resource" uid="uid://bkq0e6gntjbiy" path="res://enemies/ghoul/ghoul_starting_deck.tres" id="3_deck"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_dqd5h"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="5_weapon"]
@@ -11,6 +11,7 @@
 
 [resource]
 script = ExtResource("1_script")
+passives = Array[Resource]([ExtResource("6_bloodied")])
 character_name = "Ghoul"
 art = ExtResource("2_art")
 max_health = 45
@@ -18,4 +19,3 @@ starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 4
 hand_left = ExtResource("5_weapon")
-passives = Array[Resource]([ExtResource("6_bloodied")])
