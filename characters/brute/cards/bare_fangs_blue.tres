@@ -12,7 +12,7 @@ target = 1
 cost = 2
 pitch = 3
 attack = 4
+defense = 2
 icon = ExtResource("2_4x0nj")
 tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: +2[icon=atk]"
 sound = ExtResource("4_4x0nj")
-disable_defense = true

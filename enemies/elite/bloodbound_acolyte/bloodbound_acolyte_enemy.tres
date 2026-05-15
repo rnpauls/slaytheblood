@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="EnemyStats" format=3]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://5cq408rdmoxf"]
 
-[ext_resource type="Script" path="res://custom_resources/enemy_stats.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/sprites/pixellab/bloodbound_acolyte.png" id="2_art"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_0qjhb"]
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://geqpxal634c5" path="res://art/sprites/pixellab/bloodbound_acolyte.png" id="2_art"]
 [ext_resource type="Resource" path="res://enemies/elite/bloodbound_acolyte/bloodbound_acolyte_starting_deck.tres" id="3_deck"]
-[ext_resource type="Resource" path="res://enemies/empty_inventory.tres" id="4_inv"]
-[ext_resource type="Resource" path="res://weapons/elite/crimson_censer.tres" id="5_weap"]
+[ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_nsroh"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="Resource" uid="uid://dk2dshgbrgsg4" path="res://weapons/elite/crimson_censer.tres" id="5_weap"]
 
 [resource]
 script = ExtResource("1_script")

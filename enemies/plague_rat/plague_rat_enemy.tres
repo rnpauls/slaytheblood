@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="EnemyStats" format=3]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bn11y0ih322i1"]
 
-[ext_resource type="Script" path="res://custom_resources/enemy_stats.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://art/sprites/pixellab/plague_rat.png" id="2_art"]
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_u6ska"]
+[ext_resource type="Texture2D" uid="uid://ci6egvmyebmk3" path="res://art/sprites/pixellab/plague_rat.png" id="2_art"]
 [ext_resource type="Resource" path="res://enemies/plague_rat/plague_rat_starting_deck.tres" id="3_deck"]
-[ext_resource type="Resource" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_iadty"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
 
 [resource]
 script = ExtResource("1_script")
 character_name = "Plague Rat"
 art = ExtResource("2_art")
-max_health = 10
+max_health = 21
 starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
-cards_per_turn = 2
+cards_per_turn = 3

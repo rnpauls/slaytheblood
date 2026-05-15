@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="CardPile" format=3]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bkq0e6gntjbiy"]
 
-[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" path="res://generic_cards/lacerate.tres" id="3_lac"]
-[ext_resource type="Resource" path="res://generic_cards/vampiric_bite.tres" id="4_vb"]
-[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="5_wb"]
-[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="6_blk"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" uid="uid://kunu3i818qer" path="res://generic_cards/lacerate.tres" id="3_lac"]
+[ext_resource type="Resource" uid="uid://conkkrmqjv2jt" path="res://generic_cards/vampiric_bite.tres" id="4_vb"]
+[ext_resource type="Resource" uid="uid://65vpdfe0j24m" path="res://generic_cards/sink_below_red.tres" id="5_8ddla"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="6_blk"]
+[ext_resource type="Resource" uid="uid://b7e7rcklch007" path="res://enemies/elite/reaver/cards/reckless_charge.tres" id="6_rw6ou"]
+[ext_resource type="Resource" uid="uid://bpkhgvswhpo2y" path="res://generic_cards/flexing_pummel.tres" id="7_p4573"]
+[ext_resource type="Resource" uid="uid://du3u0apwwyk5d" path="res://generic_cards/ravenous_rabble_yellow.tres" id="8_ve2t6"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_lac"), ExtResource("3_lac"), ExtResource("4_vb"), ExtResource("4_vb"), ExtResource("5_wb"), ExtResource("5_wb"), ExtResource("6_blk"), ExtResource("6_blk")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_lac"), ExtResource("3_lac"), ExtResource("4_vb"), ExtResource("4_vb"), ExtResource("6_blk"), ExtResource("6_blk"), ExtResource("5_8ddla"), ExtResource("5_8ddla"), ExtResource("4_vb"), ExtResource("6_rw6ou"), ExtResource("6_rw6ou"), ExtResource("6_rw6ou"), ExtResource("6_rw6ou"), ExtResource("7_p4573"), ExtResource("7_p4573"), ExtResource("7_p4573"), ExtResource("8_ve2t6"), ExtResource("8_ve2t6"), ExtResource("8_ve2t6"), ExtResource("8_ve2t6"), ExtResource("8_ve2t6")])

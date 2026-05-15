@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://1je41pftut7u"]
+[gd_scene format=3 uid="uid://dbef7op2g0u8a"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://cvixtqsyntvmf" path="res://enemies/kunoichi/kunoichi.tres" id="2_es"]
-[ext_resource type="Resource" uid="uid://ccqivpjiixffo" path="res://enemies/hex_cultist/hex_cultist_enemy.tres" id="3_es"]
+[ext_resource type="Resource" uid="uid://bsl1m00enmy00" path="res://enemies/slime/slime_enemy.tres" id="3_es"]
 
-[node name="Tier3Kunoichi" type="Node2D"]
+[node name="Tier1KunoSlimes" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(776.741821289062, 337.838714599609)
+position = Vector2(755.161315917969, 347.634429931641)
 stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(970.9677734375, 337.311859130859)
-stats = ExtResource("2_es")
+position = Vector2(960.645202636719, 347.634399414062)
+stats = ExtResource("3_es")
 
 [node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1148.92456054688, 341.612915039062)
+position = Vector2(1148.06433105469, 320.107696533203)
 stats = ExtResource("3_es")

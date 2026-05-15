@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://btifwopcim7ka"]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://b8x0s6s6n36c2"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" path="res://generic_cards/mark_quarry.tres" id="3_mq"]
-[ext_resource type="Resource" path="res://generic_cards/insightful_strike.tres" id="4_is"]
+[ext_resource type="Resource" uid="uid://edwx6q45sfqw" path="res://generic_cards/insightful_strike.tres" id="4_is"]
+[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="4_o3gq7"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="5_ujifr"]
 [ext_resource type="Resource" uid="uid://conkkrmqjv2jt" path="res://generic_cards/vampiric_bite.tres" id="5_vb"]
+[ext_resource type="Resource" uid="uid://bn1mb1ec4rdxa" path="res://generic_cards/nimble.tres" id="6_og7to"]
 [ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://generic_cards/wounding_blow_red.tres" id="6_wb"]
-[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="7_blk"]
+[ext_resource type="Resource" uid="uid://bnpxl3v8ym45w" path="res://generic_cards/crushing_strike.tres" id="8_fabjv"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_mq"), ExtResource("3_mq"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("5_vb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_blk"), ExtResource("7_blk")])
+cards = Array[ExtResource("1_card")]([ExtResource("5_vb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("5_vb"), ExtResource("5_vb"), ExtResource("5_vb"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("6_og7to"), ExtResource("6_og7to"), ExtResource("6_og7to"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("8_fabjv"), ExtResource("8_fabjv")])

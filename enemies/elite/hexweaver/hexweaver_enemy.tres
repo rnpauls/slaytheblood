@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_rd1ic"]
 [ext_resource type="Texture2D" uid="uid://quxipllb7g8p" path="res://art/sprites/pixellab/hexweaver.png" id="2_hexw"]
 [ext_resource type="Resource" path="res://enemies/elite/hexweaver/hexweaver_starting_deck.tres" id="3_hexw"]
+[ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_v1j1c"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_hexw"]
 [ext_resource type="Resource" uid="uid://b7crsdstf003" path="res://weapons/elite/cursed_staff.tres" id="5_hexw"]
 
@@ -11,7 +12,7 @@
 script = ExtResource("1_hexw")
 character_name = "Hexweaver"
 art = ExtResource("2_hexw")
-max_health = 22
+max_health = 55
 starting_deck = ExtResource("3_hexw")
 starting_inventory = ExtResource("4_hexw")
 cards_per_turn = 3

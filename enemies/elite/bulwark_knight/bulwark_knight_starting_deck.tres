@@ -1,12 +1,18 @@
-[gd_resource type="Resource" script_class="CardPile" load_steps=7 format=3 uid="uid://b7eDblwdck013"]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://b7j7tah782qkx"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
 [ext_resource type="Resource" uid="uid://b7e1iron0001" path="res://enemies/elite/bulwark_knight/cards/iron_stance.tres" id="2_iron"]
 [ext_resource type="Resource" uid="uid://b7e2phlnx002" path="res://enemies/elite/bulwark_knight/cards/phalanx_strike.tres" id="3_phlx"]
 [ext_resource type="Resource" uid="uid://b7e3stwll003" path="res://enemies/elite/bulwark_knight/cards/stalwart_wall.tres" id="4_stwl"]
 [ext_resource type="Resource" uid="uid://b7e4cntsl004" path="res://enemies/elite/bulwark_knight/cards/counter_slam.tres" id="5_cnts"]
+[ext_resource type="Resource" uid="uid://drb1153iurkcm" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="6_a8a0x"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="6_pile"]
+[ext_resource type="Resource" uid="uid://bn1mb1ec4rdxa" path="res://generic_cards/nimble.tres" id="7_d3yq7"]
+[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="8_7j6ax"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="9_empux"]
+[ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/brute/cards/warrior_big_slam.tres" id="10_hoj38"]
+[ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="11_ykcm5"]
 
 [resource]
 script = ExtResource("6_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("2_iron"), ExtResource("2_iron"), ExtResource("3_phlx"), ExtResource("3_phlx"), ExtResource("4_stwl"), ExtResource("5_cnts")])
+cards = Array[ExtResource("1_card")]([ExtResource("2_iron"), ExtResource("2_iron"), ExtResource("3_phlx"), ExtResource("3_phlx"), ExtResource("4_stwl"), ExtResource("5_cnts"), ExtResource("6_a8a0x"), ExtResource("6_a8a0x"), ExtResource("7_d3yq7"), ExtResource("7_d3yq7"), ExtResource("8_7j6ax"), ExtResource("8_7j6ax"), ExtResource("8_7j6ax"), ExtResource("9_empux"), ExtResource("9_empux"), ExtResource("9_empux"), ExtResource("10_hoj38"), ExtResource("10_hoj38"), ExtResource("10_hoj38"), ExtResource("11_ykcm5"), ExtResource("11_ykcm5"), ExtResource("11_ykcm5"), ExtResource("5_cnts"), ExtResource("5_cnts"), ExtResource("5_cnts")])

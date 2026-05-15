@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="CardPile" format=3]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://c736vy3gagbu6"]
 
-[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" path="res://enemies/elite/bloodbound_acolyte/cards/bloodletting_slash.tres" id="3_bs"]
-[ext_resource type="Resource" path="res://generic_cards/mark_quarry.tres" id="4_mq"]
-[ext_resource type="Resource" path="res://generic_cards/crushing_strike.tres" id="5_yy8bt"]
-[ext_resource type="Resource" path="res://characters/ninja/cards/mark_for_death.tres" id="6_gyjnt"]
-[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
-[ext_resource type="Resource" path="res://characters/ninja/cards/one_inch_punch.tres" id="7_57adx"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" uid="uid://d3wxj4nylfkaf" path="res://enemies/elite/bloodbound_acolyte/cards/bloodletting_slash.tres" id="3_bs"]
+[ext_resource type="Resource" uid="uid://b2ilndh1xh0qf" path="res://generic_cards/mark_quarry.tres" id="4_mq"]
+[ext_resource type="Resource" uid="uid://bnpxl3v8ym45w" path="res://generic_cards/crushing_strike.tres" id="5_yy8bt"]
+[ext_resource type="Resource" uid="uid://ddn55fnq37i18" path="res://characters/ninja/cards/mark_for_death.tres" id="6_gyjnt"]
+[ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
+[ext_resource type="Resource" uid="uid://dda70b1ss7fu1" path="res://characters/ninja/cards/one_inch_punch.tres" id="7_57adx"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="8_4fh23"]
+[ext_resource type="Resource" uid="uid://dqxasrxlk6q38" path="res://generic_cards/ravenous_rabble_blue.tres" id="9_wnsro"]
+[ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://generic_cards/ravenous_rabble_red.tres" id="10_u6huw"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_bs"), ExtResource("3_bs"), ExtResource("4_mq"), ExtResource("4_mq"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("3_bs"), ExtResource("5_yy8bt"), ExtResource("5_yy8bt"), ExtResource("5_yy8bt"), ExtResource("5_yy8bt"), ExtResource("6_gyjnt"), ExtResource("6_gyjnt"), ExtResource("6_gyjnt"), ExtResource("7_57adx"), ExtResource("7_57adx"), ExtResource("7_57adx")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_bs"), ExtResource("3_bs"), ExtResource("4_mq"), ExtResource("4_mq"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("3_bs"), ExtResource("5_yy8bt"), ExtResource("5_yy8bt"), ExtResource("5_yy8bt"), ExtResource("5_yy8bt"), ExtResource("6_gyjnt"), ExtResource("6_gyjnt"), ExtResource("6_gyjnt"), ExtResource("7_57adx"), ExtResource("7_57adx"), ExtResource("7_57adx"), ExtResource("8_4fh23"), ExtResource("8_4fh23"), ExtResource("8_4fh23"), ExtResource("9_wnsro"), ExtResource("9_wnsro"), ExtResource("9_wnsro"), ExtResource("3_bs"), ExtResource("10_u6huw"), ExtResource("10_u6huw")])

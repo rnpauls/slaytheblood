@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="CardPile" load_steps=7 format=3 uid="uid://b7eEravdck014"]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://boams8v5fe67u"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
 [ext_resource type="Resource" uid="uid://b7e5bldlst005" path="res://enemies/elite/reaver/cards/bloodlust.tres" id="2_bldl"]
-[ext_resource type="Resource" uid="uid://b7e6whrlnd006" path="res://enemies/elite/reaver/cards/whirlwind.tres" id="3_whrl"]
 [ext_resource type="Resource" uid="uid://b7e7rcklch007" path="res://enemies/elite/reaver/cards/reckless_charge.tres" id="4_rckl"]
-[ext_resource type="Resource" uid="uid://b7e8frenzy008" path="res://enemies/elite/reaver/cards/frenzy.tres" id="5_fren"]
+[ext_resource type="Resource" uid="uid://b7e8fren0y008" path="res://enemies/elite/reaver/cards/frenzy.tres" id="5_fren"]
+[ext_resource type="Resource" uid="uid://bn1mb1ec4rdxa" path="res://generic_cards/nimble.tres" id="5_jcdn0"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="6_dtd2f"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="6_pile"]
+[ext_resource type="Resource" uid="uid://jf61dkwx4vu2" path="res://generic_cards/brittle_bones.tres" id="7_8cxh3"]
+[ext_resource type="Resource" uid="uid://conkkrmqjv2jt" path="res://generic_cards/vampiric_bite.tres" id="8_4srsp"]
 
 [resource]
 script = ExtResource("6_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("2_bldl"), ExtResource("2_bldl"), ExtResource("3_whrl"), ExtResource("3_whrl"), ExtResource("4_rckl"), ExtResource("5_fren")])
+cards = Array[ExtResource("1_card")]([ExtResource("2_bldl"), ExtResource("2_bldl"), ExtResource("4_rckl"), ExtResource("5_fren"), ExtResource("5_jcdn0"), ExtResource("5_jcdn0"), ExtResource("5_jcdn0"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("6_dtd2f"), ExtResource("2_bldl"), ExtResource("2_bldl"), ExtResource("7_8cxh3"), ExtResource("7_8cxh3"), ExtResource("5_fren"), ExtResource("5_fren"), ExtResource("5_fren"), ExtResource("5_fren"), ExtResource("8_4srsp"), ExtResource("8_4srsp")])

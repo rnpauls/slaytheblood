@@ -5,11 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://dx5o03ja5cg7j" path="res://art/sprites/pixellab/toxic_ghost.png" id="1_vo8nc"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_b1b5i"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_18ue8"]
+[ext_resource type="Resource" path="res://enemies/toxic_ghost/toxic_ghost_starting_deck.tres" id="5_dmd16"]
 
 [resource]
 script = ExtResource("1_45i07")
 character_name = "Toxic Ghost"
 art = ExtResource("1_vo8nc")
-max_health = 70
+max_health = 100
+starting_deck = ExtResource("5_dmd16")
 starting_inventory = ExtResource("4_18ue8")
-cards_per_turn = 4
+cards_per_turn = 5
