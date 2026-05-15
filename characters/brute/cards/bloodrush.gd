@@ -2,6 +2,7 @@ extends Card
 
 
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
+	print("bloodrush")
 	if await sixloot(owner, 1):
 		go_again = true
 		owner.hand_facade.draw_cards(2)

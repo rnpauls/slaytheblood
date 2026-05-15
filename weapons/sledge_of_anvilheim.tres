@@ -13,7 +13,7 @@ character_type = 2
 hands = 1
 icon = ExtResource("1_e5ena")
 sound = ExtResource("3_n852i")
-tooltip = "[kw=enraged]Enraged[/kw]: Go Again"
+tooltip = "[kw=enraged]Enraged[/kw]: This gets [kw=ga]Go Again[/kw]"
 attack = 6
 cost = 4
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

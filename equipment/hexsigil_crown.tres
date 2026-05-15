@@ -10,5 +10,5 @@ id = "hexsigil_crown"
 rarity = 1
 character_type = 3
 icon = ExtResource("2_hxcrn")
-tooltip = "On block:, the attacking enemy discards a random card."
+tooltip = "When this blocks:, the attacking enemy discards a random card."
 max_block = 2

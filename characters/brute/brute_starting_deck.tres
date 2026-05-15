@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="1_vrruq"]
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_wm70o"]
+[ext_resource type="Resource" uid="uid://bg6kgdp5pefr7" path="res://characters/brute/cards/bloodrush.tres" id="3_7qy26"]
 [ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/brute/cards/warrior_big_slam.tres" id="3_m7ai2"]
 [ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="4_g8cso"]
 [ext_resource type="Resource" uid="uid://bllgno480j4cf" path="res://characters/brute/cards/wild_ride_red.tres" id="5_706r4"]
@@ -11,4 +12,4 @@
 
 [resource]
 script = ExtResource("1_vrruq")
-cards = Array[ExtResource("1_wm70o")]([ExtResource("3_m7ai2"), ExtResource("3_m7ai2"), ExtResource("3_m7ai2"), ExtResource("4_g8cso"), ExtResource("4_g8cso"), ExtResource("4_g8cso"), ExtResource("4_g8cso"), ExtResource("5_706r4"), ExtResource("6_vi5uh"), ExtResource("6_706r4"), ExtResource("6_706r4"), ExtResource("6_706r4"), ExtResource("6_vi5uh"), ExtResource("7_vi5uh"), ExtResource("7_vi5uh")])
+cards = Array[ExtResource("1_wm70o")]([ExtResource("3_m7ai2"), ExtResource("3_m7ai2"), ExtResource("3_m7ai2"), ExtResource("3_7qy26"), ExtResource("3_7qy26"), ExtResource("4_g8cso"), ExtResource("4_g8cso"), ExtResource("5_706r4"), ExtResource("6_vi5uh"), ExtResource("6_706r4"), ExtResource("6_706r4"), ExtResource("6_706r4"), ExtResource("6_vi5uh"), ExtResource("7_vi5uh"), ExtResource("7_vi5uh")])

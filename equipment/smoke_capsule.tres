@@ -12,5 +12,5 @@ rarity = 1
 character_type = 1
 single_use = true
 icon = ExtResource("1_icon")
-tooltip = "On block: draw 1 card"
+tooltip = "When this blocks: draw 1 card"
 max_block = 2

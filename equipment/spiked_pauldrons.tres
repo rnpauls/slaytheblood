@@ -11,5 +11,5 @@ slot = 1
 rarity = 1
 character_type = 2
 icon = ExtResource("1_icon")
-tooltip = "On block: gain [kw=thorns:2]Thorns 2[/kw] this turn."
+tooltip = "When this blocks: gain [kw=thorns:2]Thorns 2[/kw] this turn."
 max_block = 3

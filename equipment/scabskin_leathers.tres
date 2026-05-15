@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ScabskinLeathersEquipment" format=3 uid="uid://bkv4elr4iwvhu"]
 
 [ext_resource type="Script" uid="uid://ce6xgi04sxdn0" path="res://equipment/scabskin_leathers.gd" id="1_skln"]
-[ext_resource type="Texture2D" path="res://art/sprites/pixellab/scabskin_leathers.png" id="2_skln"]
+[ext_resource type="Texture2D" uid="uid://cu1kyw6q4qumn" path="res://art/sprites/pixellab/scabskin_leathers.png" id="2_skln"]
 
 [resource]
 script = ExtResource("1_skln")
@@ -10,6 +10,6 @@ id = "scabskin_leathers"
 slot = 3
 character_type = 2
 icon = ExtResource("2_skln")
-tooltip = "Action (once per turn): Roll a d6 and gain half that many AP (rounded down)"
+tooltip = "Action (once per turn): Roll a d6 and gain half that many [kw=ap]AP[/kw] (rounded down)"
 max_block = 2
 has_active_ability = true

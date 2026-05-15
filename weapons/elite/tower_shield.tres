@@ -13,6 +13,6 @@ rarity = 2
 hands = 1
 icon = ExtResource("1_twrs1")
 sound = ExtResource("3_twrs3")
-tooltip = "Gain 5 block at the start of every turn. On attack: gain 8 block"
+tooltip = "Gain 5 [kw=block]block[/kw] at the start of every turn. When this attacks: gain 8 [b]block[/b]."
 attack = 4
 cost = 1

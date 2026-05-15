@@ -13,6 +13,6 @@ rarity = 2
 character_type = 3
 icon = ExtResource("1_tc_icon")
 sound = ExtResource("3_tc_sound")
-tooltip = "[kw=zap:2]Zap 2[/kw]. On hit: double your [kw=runechant]runechant[/kw] stacks."
+tooltip = "[kw=zap:2]Zap 2[/kw]. [kw=onhit]On hit:[/kw] double your [kw=runechant]runechant[/kw] stacks."
 zap = 2
 cost = 1

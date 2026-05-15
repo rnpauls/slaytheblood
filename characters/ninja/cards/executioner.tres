@@ -15,5 +15,6 @@ pitch = 1
 attack = 5
 defense = 4
 icon = ExtResource("2_icon")
-tooltip_text = "Deal damage equal to 5 + target's [kw=marked]Marked[/kw] stacks. Consumes Marked."
+tooltip_text = "Gains [icon=atk] equal to target's [kw=marked]Marked[/kw] stacks.
+Consumes [b]Marked[/b]"
 sound = ExtResource("4_sound")

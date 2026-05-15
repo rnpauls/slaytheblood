@@ -14,6 +14,6 @@ character_type = 2
 hands = 1
 icon = ExtResource("1_hmaul_icon")
 sound = ExtResource("3_hmaul_sound")
-tooltip = "Lose 4 HP per swing."
+tooltip = "When this attacks: Lose 4 HP."
 attack = 6
 go_again = true

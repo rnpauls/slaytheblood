@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://ba0gxskb7w1o6"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_gegix"]
-[ext_resource type="Texture2D" uid="uid://kvbunc0kemcj" path="res://art/magicbook/64x64/book_image_23.png" id="2_gegix"]
+[ext_resource type="Texture2D" uid="uid://codi4cur402rf" path="res://art/magicbook/64x64/book_image_9.png" id="2_gegix"]
 [ext_resource type="Script" uid="uid://qumve6idfurk" path="res://characters/runeblade/cards/haunting_hymn.gd" id="3_46c45"]
 
 [resource]
@@ -14,4 +14,4 @@ pitch = 1
 defense = 3
 go_again = true
 icon = ExtResource("2_gegix")
-tooltip_text = "Draw 1. Create 2 runechants"
+tooltip_text = "Draw 1. Create 2 [kw=runechant]runechants[/kw]"

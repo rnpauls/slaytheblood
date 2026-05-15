@@ -2,8 +2,8 @@ class_name Card
 extends Resource
 
 #enum Type {ATTACK, SKILL, POWER}
-enum Type {ATTACK, NAA, BLOCK}
-enum TypeString {Attack, Action, Block}
+enum Type {ATTACK, NAA, BLOCK, TRASH}
+enum TypeString {Attack, Action, Block, Trash}
 enum Rarity {COMMON, UNCOMMON, RARE}
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 enum DamageKind {PHYSICAL, ARCANE}

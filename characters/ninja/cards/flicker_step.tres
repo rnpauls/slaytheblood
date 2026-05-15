@@ -12,7 +12,8 @@ type = 1
 pitch = 3
 go_again = true
 icon = ExtResource("1_icon")
-tooltip_text = "[kw=sink:2]Sink 2[/kw], draw 1."
+tooltip_text = "[kw=sink:2]Sink 2[/kw].
+Draw 1."
 sound = ExtResource("3_sound")
 disable_attack = true
 disable_defense = true

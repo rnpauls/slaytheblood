@@ -297,6 +297,8 @@ func _update_hand_plan_colors() -> void:
 					and (card.on_hits.size() > 0 or active_on_hits.size() > 0)
 			elif card in plan.pitched:
 				color = Color.DEEP_SKY_BLUE
+			elif card.type == Card.Type.TRASH:
+				color = Color.SADDLE_BROWN
 		card_ui.set_plan_color(color, show_exclamation)
 
 

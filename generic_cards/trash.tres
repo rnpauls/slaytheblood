@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_trash")
 id = "trash"
-type = 1
+type = 3
 unplayable = true
 fleeting = true
 icon = ExtResource("2_trash")

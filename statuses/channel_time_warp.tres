@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ChannelTimeWarpStatus" format=3 uid="uid://c8o77768o08uj"]
 
+[ext_resource type="Texture2D" uid="uid://ca5xwxypuu16i" path="res://art/magicbook/64x64/book_image_18.png" id="1_piwwx"]
 [ext_resource type="Script" uid="uid://du4cpe24t5rcj" path="res://statuses/channel_time_warp.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://2igrvjj56niq" path="res://art/magicbook/64x64/book_image_17.png" id="2_icon"]
 
 [resource]
 script = ExtResource("1_script")
 id = "channel_time_warp"
 can_expire = true
 duration = 1
-icon = ExtResource("2_icon")
+icon = ExtResource("1_piwwx")
 tooltip = "At the start of your next turn, draw %s extra cards."

@@ -12,7 +12,7 @@ type = 4
 character_type = 2
 icon = ExtResource("1_r4erp")
 sound = ExtResource("3_a32tg")
-tooltip = "[kw=enraged]Enraged[/kw]: +1atk"
+tooltip = "[kw=enraged]Enraged[/kw]: This gets +1[icon=atk]"
 attack = 3
 cost = 2
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

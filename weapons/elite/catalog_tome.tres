@@ -13,6 +13,6 @@ rarity = 2
 hands = 1
 icon = ExtResource("1_ctlg1")
 sound = ExtResource("3_ctlg3")
-tooltip = "At the start of owner's turn, gain block equal to opponent's deck size, and bonus damage equal to 1/3 of it"
+tooltip = "At the start of owner's turn, gain [kw=block]block[/kw] equal to opponent's deck size, and bonus [icon=atk] equal to 1/3 of it"
 attack = 4
 cost = 1

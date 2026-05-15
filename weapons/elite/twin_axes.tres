@@ -13,7 +13,8 @@ rarity = 2
 hands = 1
 icon = ExtResource("1_twax1")
 sound = ExtResource("3_twax3")
-tooltip = "All attacks deal +3 damage. Can attack twice per turn."
+tooltip = "Owner's attacks get +3[icon=atk]. 
+This can attack twice per turn."
 attack = 4
 cost = 1
 go_again = true

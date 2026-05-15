@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://kwu27jfkmyeo"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://ca5xwxypuu16i" path="res://art/magicbook/64x64/book_image_18.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://cfp40yg66kmm7" path="res://art/magicbook/64x64/book_image_19.png" id="2_8kw72"]
 [ext_resource type="Script" uid="uid://d24d06u3j5pck" path="res://characters/runeblade/cards/channel_aegis.gd" id="3_script"]
 
 [resource]
@@ -11,7 +11,7 @@ type = 1
 cost = 1
 pitch = 2
 go_again = true
-icon = ExtResource("2_icon")
+icon = ExtResource("2_8kw72")
 tooltip_text = "[kw=channel]Channel[/kw]: at the start of your next turn, gain 15 block."
 sound = ExtResource("1_block")
 disable_attack = true

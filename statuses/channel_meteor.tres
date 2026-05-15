@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ChannelMeteorStatus" format=3 uid="uid://ca4uywe0b5s1v"]
 
 [ext_resource type="Script" uid="uid://dw57f5hc2vwog" path="res://statuses/channel_meteor.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://p18hql00cpmh" path="res://art/magicbook/64x64/book_image_16.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://7o3vh11qjfnd" path="res://art/magicbook/64x64/book_image_20.png" id="1_uo1tv"]
 
 [resource]
 script = ExtResource("1_script")
 id = "channel_meteor"
 can_expire = true
 duration = 1
-icon = ExtResource("2_icon")
+icon = ExtResource("1_uo1tv")
 tooltip = "At the start of your next turn, deal %s arcane to every enemy."

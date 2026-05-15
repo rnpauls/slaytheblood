@@ -14,6 +14,6 @@ defense = 2
 go_again = true
 action_points_granted = 1
 icon = ExtResource("2_x1hd6")
-tooltip_text = "Gain 1 [kw=ap]Action Point[/kw"
+tooltip_text = "Gain 1 [kw=ap]Action Point[/kw]"
 sound = ExtResource("4_wwalm")
 disable_attack = true

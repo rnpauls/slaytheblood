@@ -13,7 +13,7 @@ character_type = 1
 allow_duplicate_in_draft = true
 icon = ExtResource("1_g6x73")
 sound = ExtResource("3_fe7qa")
-tooltip = "[kw=flow]Flow state[/kw]: Go Again"
+tooltip = "[kw=flow]Flow state[/kw]: This gets [kw=ga]Go Again[/kw]."
 attack = 1
 cost = 1
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

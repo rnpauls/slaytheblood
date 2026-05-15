@@ -13,7 +13,8 @@ pitch = 3
 go_again = true
 action_points_granted = 1
 icon = ExtResource("1_icon")
-tooltip_text = "Gain 1 [kw=action_point]Action Point[/kw]. Lose 2 HP."
+tooltip_text = "Gain 1 [kw=action_point]Action Point[/kw].
+Lose 2 HP."
 sound = ExtResource("3_sound")
 disable_attack = true
 disable_defense = true

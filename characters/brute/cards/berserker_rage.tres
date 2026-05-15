@@ -13,7 +13,8 @@ cost = 1
 pitch = 2
 go_again = true
 icon = ExtResource("2_icon")
-tooltip_text = "Lose 4 HP. Gain [kw=muscle:2]Muscle 2[/kw]."
+tooltip_text = "Lose 4 HP.
+Gain [kw=muscle:2]Muscle 2[/kw]."
 sound = ExtResource("4_sound")
 disable_attack = true
 disable_defense = true

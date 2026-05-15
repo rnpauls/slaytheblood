@@ -13,5 +13,5 @@ rarity = 2
 character_type = 1
 icon = ExtResource("1_wf_icon")
 sound = ExtResource("3_wf_sound")
-tooltip = "On attack: if you've attacked 3 or more times this turn, draw a card."
+tooltip = "When this attacks: If you've attacked 3 or more times this turn, draw a card."
 attack = 1

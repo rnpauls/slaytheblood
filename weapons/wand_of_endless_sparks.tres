@@ -14,7 +14,7 @@ character_type = 3
 hands = 1
 icon = ExtResource("1_woes_icon")
 sound = ExtResource("3_woes_sound")
-tooltip = "[kw=zap:4]Zap 4[/kw]. Go Again. On hit: create 2 [kw=runechant]runechants[/kw]."
+tooltip = "[kw=zap:4]Zap 4[/kw]. [kw=ga]Go Again.[/kw] [kw=onhit]On hit:[/kw] create 2 [kw=runechant]runechants[/kw]."
 zap = 4
 cost = 2
 go_again = true

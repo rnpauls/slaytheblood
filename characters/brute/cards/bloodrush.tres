@@ -1,11 +1,11 @@
 [gd_resource type="Resource" format=3 uid="uid://bg6kgdp5pefr7"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_nkc57"]
-[ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="1_qouyo"]
 [ext_resource type="Texture2D" uid="uid://7p0ynhv84ukg" path="res://art/card_art/pixellab/bloodrush.png" id="2_nkc57"]
+[ext_resource type="Script" uid="uid://bay146r16bi7v" path="res://characters/brute/cards/bloodrush.gd" id="3_nkc57"]
 
 [resource]
-script = ExtResource("1_qouyo")
+script = ExtResource("3_nkc57")
 id = "bloodrush"
 type = 1
 rarity = 2
@@ -13,6 +13,6 @@ cost = 1
 pitch = 2
 defense = 3
 icon = ExtResource("2_nkc57")
-tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: Draw two cards, gain 1AP, +2 strength this turn"
+tooltip_text = "[kw=rampage:1]Rampage 1[/kw]: Draw two cards, gain 1[kw=ap]AP[/kw], +2 [kw=muscle]muscle[/kw] this turn"
 disable_attack = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"

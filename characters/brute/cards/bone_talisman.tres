@@ -14,5 +14,5 @@ pitch = 1
 attack = 6
 defense = 4
 icon = ExtResource("2_icon")
-tooltip_text = "Deal 6 damage. When discarded, draw 1 card."
+tooltip_text = "When discarded, draw 1 card."
 sound = ExtResource("4_sound")

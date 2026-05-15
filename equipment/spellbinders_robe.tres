@@ -11,6 +11,7 @@ slot = 1
 rarity = 1
 character_type = 3
 icon = ExtResource("2_sbrbe")
-tooltip = "Action: Destroy this. Gain mana equal to your [kw=runechant]runechants[/kw] (does not consume them). Go again."
+tooltip = "Action: Destroy this. Gain mana equal to your [kw=runechant]runechants[/kw].
+[kw=ga]Go again[/kw]."
 max_block = 3
 has_active_ability = true

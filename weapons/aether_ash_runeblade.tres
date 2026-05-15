@@ -13,7 +13,7 @@ character_type = 3
 hands = 1
 icon = ExtResource("1_aaicn")
 sound = ExtResource("3_aasnd")
-tooltip = "Arcane damage"
+tooltip = "[kw=zap:6]Zap 4[/kw]."
 zap = 4
 cost = 2
 metadata/_custom_type_script = "uid://dm186c77vbsjn"

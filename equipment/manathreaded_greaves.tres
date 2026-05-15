@@ -11,5 +11,5 @@ slot = 3
 rarity = 1
 character_type = 3
 icon = ExtResource("2_mtgrv")
-tooltip = "On block:, the next non-attack action you play grants +1 action point."
+tooltip = "When this blocks: the next non-attack action you play grants +1 [kw=ap]AP[/kw]."
 max_block = 3
