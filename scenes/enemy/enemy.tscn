@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://be755sb3hx1sv" path="res://scenes/enemy/enemy_hand.tscn" id="9_ehand"]
 [ext_resource type="Script" uid="uid://bi3sysr02rwq3" path="res://scenes/enemy/enemy_staged_display.gd" id="10_staged"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="11_name"]
+[ext_resource type="Script" path="res://scenes/enemy/enemy_played_cards_display.gd" id="12_played"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 resource_local_to_scene = true
@@ -67,6 +68,10 @@ position = Vector2(0, 94)
 position = Vector2(-55, -150)
 script = ExtResource("10_staged")
 staged_scale = 0.15
+
+[node name="PlayedCardsDisplay" type="Node2D" parent="." unique_id=-1293967292]
+position = Vector2(140, -50)
+script = ExtResource("12_played")
 
 [node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
 position = Vector2(-105, -48)

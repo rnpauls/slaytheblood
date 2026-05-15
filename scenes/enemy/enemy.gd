@@ -34,12 +34,14 @@ const DEATH_SINK_DISTANCE := 12.0
 @onready var enemy_resource_ui: EnemyResourceUI = $EnemyResourceUI
 @onready var enemy_hand: EnemyHand = $EnemyHand
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
+@onready var played_cards_display: EnemyPlayedCardsDisplay = $PlayedCardsDisplay
 @onready var block_display: Node2D = $BlockDisplay
 @onready var name_label: Label = $NameLabel
 @onready var hover_collision: CollisionShape2D = $HoverArea/CollisionShape2D
 
 @onready var _intent_origin_y: float = intent_ui.position.y
 @onready var _staged_origin_y: float = staged_display.position.y
+@onready var _played_origin_y: float = played_cards_display.position.y
 
 signal enemy_action_completed
 
@@ -77,7 +79,7 @@ func _ready() -> void:
 	defense_sequencer.setup(self, hand_manager, enemy_hand, block_display)
 
 	action_sequencer = EnemyActionSequencer.new()
-	action_sequencer.setup(self, hand_manager, staged_display, enemy_resource_ui)
+	action_sequencer.setup(self, hand_manager, staged_display, played_cards_display, enemy_resource_ui)
 
 
 # ── Combatant overrides ───────────────────────────────────────────────────────
@@ -149,6 +151,9 @@ func add_card_to_hand(card: Card) -> void:
 func exhaust_fleeting_in_hand() -> void:
 	await hand_manager.exhaust_fleeting_in_hand()
 
+func burn_played_cards() -> void:
+	await played_cards_display.burn_all()
+
 
 # ── Action delegation ─────────────────────────────────────────────────────────
 
@@ -204,6 +209,7 @@ func update_enemy() -> void:
 	# upward (bottom is fixed), so the top moves by 2 * dy.
 	intent_ui.position.y = _intent_origin_y - 2.0 * dy
 	staged_display.position.y = _staged_origin_y - 2.0 * dy
+	played_cards_display.position.y = _played_origin_y - 2.0 * dy
 
 	# Vertical middle of the actual sprite — feet at 0, top at -2 * half.y.
 	var sprite_center_y := -half.y
@@ -242,7 +248,10 @@ func _setup_weapon_badge() -> void:
 func update_intent() -> void:
 	# Build a preview plan when one isn't active (between or before enemy
 	# turns) so the intent text and hand colors share a single source of truth.
-	if enemy_ai and enemy_ai.turn_plan == null and enemy_ai.hand.size() > 0:
+	# The _is_playing_action guard mirrors _on_hand_changed — during execution
+	# turn_plan is non-null so this branch normally skips, but guard anyway so
+	# the invariant is enforced at every recompute site.
+	if enemy_ai and enemy_ai.turn_plan == null and enemy_ai.hand.size() > 0 and not enemy_ai._is_playing_action:
 		var player_life: int = enemy_ai.target.stats.health
 		enemy_ai.turn_plan = enemy_ai.calculate_max_offense_now(player_life)
 
@@ -283,6 +292,16 @@ func _update_hand_plan_colors() -> void:
 	if not enemy_ai:
 		return
 	var plan = enemy_ai.turn_plan
+	# Sanity: every card the plan still references should also be in
+	# card_ui_map. If not, the plan is pointing at a stale card and the
+	# user's seeing miscolored hand state — surface it for debugging.
+	if plan != null:
+		for c: Card in plan.actions:
+			if not hand_manager.card_ui_map.has(c):
+				push_warning("[Enemy:%s] plan.actions has '%s' not in card_ui_map" % [stats.character_name, c.id])
+		for c: Card in plan.pitched:
+			if not hand_manager.card_ui_map.has(c):
+				push_warning("[Enemy:%s] plan.pitched has '%s' not in card_ui_map" % [stats.character_name, c.id])
 	for card in hand_manager.card_ui_map:
 		var card_ui: EnemyCardUI = hand_manager.card_ui_map[card]
 		if not is_instance_valid(card_ui):
@@ -323,7 +342,11 @@ func _action_plan_color(card: Card) -> Color:
 func _on_hand_changed() -> void:
 	if not enemy_ai:
 		return
-	if enemy_ai.turn_plan != null:
+	# Skip recalc while play_next_action is consuming the plan. Each pitch /
+	# play inside that loop emits card_removed_from_hand, and a cascading
+	# rebuild here would replace turn_plan mid-execution — causing the
+	# displayed plan to drift from what gets pitched/played.
+	if enemy_ai.turn_plan != null and not enemy_ai._is_playing_action:
 		var player_life: int = enemy_ai.target.stats.health
 		enemy_ai.recalculate_plan(player_life)
 	update_intent()

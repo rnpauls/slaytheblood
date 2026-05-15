@@ -12,6 +12,11 @@ var resources := 0 # Tracks resources available this turn
 var intimidated_cards: Array[Card] = []
 var modifier_handler: ModifierHandler
 
+## True while play_next_action is mid-execution. _on_hand_changed checks this
+## to avoid replacing turn_plan while the AI is consuming it — which would
+## desync the displayed plan from what gets pitched/played.
+var _is_playing_action: bool = false
+
 @export var target: Node2D#: set = _set_target
 
 signal plan_created(enemy: Enemy)
@@ -27,7 +32,10 @@ func setup(player_target: Player = null) -> void:
 ## Start the AI's turn by planning actions
 func start_turn(player_life: int) -> void:
 	turn_plan = calculate_max_offense_now(player_life)
-	resources = 0
+	# Carry leftover mana from defensive pitches into execution — the planner
+	# already counts it (calculate_max_offense_now reads stats.mana), so
+	# resources must start in sync or play_next_action falsely under-budgets.
+	resources = enemy.stats.mana
 	plan_created.emit(enemy)
 
 ## Recalculate turn_plan mid-turn (e.g. after drawing or discarding a card).
@@ -36,12 +44,16 @@ func recalculate_plan(player_life: int) -> void:
 	turn_plan = calculate_max_offense_now(player_life)
 
 ## Play the next action in turn_plan, returns card to the enemy node
-## Pitches cards as needed
+## Pitches cards as needed. _is_playing_action is held true across the body
+## (including the pitch-animation await) so _on_hand_changed won't rebuild
+## turn_plan from under us — the plan computed at start_turn is authoritative
+## for this turn.
 func play_next_action() -> Card:
-	if not turn_plan or turn_plan.actions.size() == 0:
+	if not turn_plan or turn_plan.actions.size() == 0 or enemy.stats.action_points <= 0:
 		turn_plan = null
 		return null
 
+	_is_playing_action = true
 	var next_action = turn_plan.actions[0]
 
 	while resources < next_action.cost and turn_plan.pitched.size() > 0:
@@ -64,13 +76,22 @@ func play_next_action() -> Card:
 	if resources < next_action.cost:
 		turn_plan.actions.erase(next_action)
 		print_enemy_ai("ran out of resources for %s" % next_action.id)
+		_is_playing_action = false
 		return null
 
 	resources -= next_action.cost
+	# Mirror try_actions' AP math (action_points - 1 + go_again + granted) so
+	# execution agrees with the planner about when the turn is exhausted.
+	enemy.stats.action_points -= 1
+	if next_action.go_again:
+		enemy.stats.action_points += 1
+	enemy.stats.action_points += next_action.action_points_granted
+
 	hand.erase(next_action)
 	card_removed_from_hand.emit(next_action)
 	print_enemy_ai("played %s" % [next_action.id])
 	turn_plan.actions.erase(next_action)
+	_is_playing_action = false
 	return next_action
 
 ## Defending phase: Player sends a DamagePacket (physical + arcane combined).
@@ -310,11 +331,11 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	return best_result
 
 ##Helper for calculate_max_offense
-##Calls with current hand, zero resources, and one action point
-##Used at start of turn
+##Calls with current hand, current mana, and the AP budget actually left.
+##Used at start of turn and on every mid-turn recalc.
 func calculate_max_offense_now(player_life: int) -> Dictionary:
 	var hand_state = {"cards": hand.duplicate(), "resources": enemy.stats.mana}
-	return calculate_max_offense(hand_state, 1, player_life)
+	return calculate_max_offense(hand_state, enemy.stats.action_points, player_life)
 	
 ## Try playing actions with hand and resources defined in state
 func try_actions(state: Dictionary, action_points: int, player_life: int, lethal_factor: float) -> Dictionary:

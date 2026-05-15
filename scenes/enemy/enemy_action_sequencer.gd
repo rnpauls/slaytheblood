@@ -18,15 +18,19 @@ var current_action: Card
 var _enemy: Enemy
 var _hand_manager: EnemyHandManager
 var _staged_display: EnemyStagedDisplay
+var _played_display: EnemyPlayedCardsDisplay
 var _enemy_resource_ui: EnemyResourceUI
 var _staged_card_ui: EnemyCardUI = null
 
 
 func setup(enemy: Enemy, hand_manager: EnemyHandManager,
-		staged_display: EnemyStagedDisplay, enemy_resource_ui: EnemyResourceUI) -> void:
+		staged_display: EnemyStagedDisplay,
+		played_display: EnemyPlayedCardsDisplay,
+		enemy_resource_ui: EnemyResourceUI) -> void:
 	_enemy = enemy
 	_hand_manager = hand_manager
 	_staged_display = staged_display
+	_played_display = played_display
 	_enemy_resource_ui = enemy_resource_ui
 
 
@@ -101,26 +105,43 @@ func do_action() -> void:
 	_enemy_resource_ui.update_display(_enemy.enemy_ai)
 
 
-## Attack path: release the staged card and let card_ui.play() run its full
-## attack/hit animation pipeline. card_ui detaches itself and queue_frees.
+## Attack path: detach the staged card, run the play-overlay emphasis + effects
+## pipeline inline (skipping the burn that CardUI.play() would do), then hand
+## the card off to the played-cards display where it remains until EOT.
 ## Disposition (exhaust vs discard) is driven by card.card_play_finished →
 ## EnemyHandManager._on_card_play_finished, which honors card.exhausts.
 func _do_attack_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
-		card_ui = _staged_display.release()
+		# clear_staged() detaches without reparenting (release() would send the
+		# card back to the hand first, only for _reparent_to_play_overlay to
+		# move it again).
+		card_ui = _staged_display.clear_staged()
 		_staged_card_ui = null
 	else:
 		card_ui = _hand_manager.get_or_create_card_ui(current_action)
 		_hand_manager.remove_card(current_action)
 
+	if not is_instance_valid(card_ui):
+		return
+
 	card_ui.targets = [_enemy.enemy_ai.target]
-	await card_ui.play()
+	var played_card := current_action
+
+	# Mirror the enemy branch of CardUI.play() minus the trailing _burn_up +
+	# queue_free; we hand the card off to the played display instead.
+	card_ui._reparent_to_play_overlay()
+	await card_ui._play_emphasis()
+	await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
+	if not is_instance_valid(card_ui):
+		return
+
+	_played_display.add_card(card_ui)
 
 
-## NAA path: apply effects in-place at the staged position, then burn the card
-## up. We bypass card_ui.play() so the visual stays at center during effects
-## (no flash back to hand). Disposition is signal-driven via card_play_finished.
+## NAA path: apply effects in-place at the staged position, then hand the card
+## off to the played-cards display. We bypass card_ui.play() so the visual
+## stays at center during effects (no flash back to hand).
 func _do_naa_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
@@ -145,10 +166,7 @@ func _do_naa_action() -> void:
 	if not is_instance_valid(card_ui):
 		return
 
-	await card_ui._burn_up()
-
-	if is_instance_valid(card_ui):
-		card_ui.queue_free()
+	_played_display.add_card(card_ui)
 
 
 # ── Staging ───────────────────────────────────────────────────────────────────
