@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://cpbjmfy26c7ev"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/card_art/pixellab/open_the_floodgate.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/open_the_floodgate.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "open_the_floodgate"
+type = 1
+target = 1
+cost = 1
+pitch = 1
+zap = 5
+defense = 3
+go_again = true
+icon = ExtResource("2_icon")
+tooltip_text = "[kw=zap:5]Zap 5[/kw]. Gain 3 [kw=floodgate]Floodgate[/kw]."
+sound = ExtResource("1_block")
+disable_attack = true

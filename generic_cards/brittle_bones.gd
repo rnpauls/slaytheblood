@@ -13,5 +13,5 @@ func _on_hit_apply_brittle(atk_target: Node, _args: Array) -> void:
 	var sh: StatusHandler = atk_target.get("status_handler")
 	if sh:
 		var dup: BrittleStatus = BRITTLE_STATUS.duplicate()
-		dup.stacks = 2
+		dup.duration = 2
 		sh.add_status(dup)

@@ -15,5 +15,5 @@ pitch = 1
 attack = 4
 defense = 3
 icon = ExtResource("2_icon")
-tooltip_text = "Deal 4 + target's [kw=bleed]Bleed[/kw] stacks damage. (Does not consume Bleed.)"
+tooltip_text = "Deal 4 + target's [kw=bleed]Bleed[/kw] damage. (Does not consume Bleed.)"
 sound = ExtResource("4_sound")

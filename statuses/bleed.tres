@@ -7,9 +7,9 @@
 script = ExtResource("1_script")
 id = "bleed"
 type = 1
-stack_type = 1
+stack_type = 2
 can_expire = true
-duration = 2
+duration = 1
 stacks = 1
 icon = ExtResource("1_2hokm")
-tooltip = "At end of turn, take %s damage."
+tooltip = "At end of turn, take %s damage, then reduce Bleed by 1."

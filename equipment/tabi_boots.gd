@@ -11,6 +11,8 @@ func initialize_equipment(owner_node) -> void:
 func _on_first_card_played(_card: Card) -> void:
 	if owner is Player and owner.stats:
 		owner.stats.action_points += 1
+		if handler:
+			handler.flash()
 
 
 func deactivate_equipment(_owner_node: Node) -> void:

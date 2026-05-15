@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BerserkersBiteWeapon" format=3 uid="uid://dt42xa5cchfwy"]
 
 [ext_resource type="Texture2D" uid="uid://hmm8s11sxqck" path="res://art/weapons/pixellab/berserkers_bite.png" id="1_bb_icon"]
-[ext_resource type="Script" path="res://weapons/berserkers_bite.gd" id="2_bb_script"]
+[ext_resource type="Script" uid="uid://cbrkbitclawx1" path="res://weapons/berserkers_bite.gd" id="2_bb_script"]
 [ext_resource type="AudioStream" uid="uid://d2qbx3up4dkkf" path="res://art/music/sound_effects/DSGN/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav" id="3_bb_sound"]
 
 [resource]
@@ -13,6 +13,6 @@ rarity = 1
 character_type = 2
 icon = ExtResource("1_bb_icon")
 sound = ExtResource("3_bb_sound")
-tooltip = "Deal damage equal to one-fourth of owner's missing HP. 
+tooltip = "Gain 1[icon=atk] for every four HP missing from owner's max HP. 
 [kw=rampage:1]Rampage 1[/kw]"
 cost = 1

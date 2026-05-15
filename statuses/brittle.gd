@@ -5,7 +5,7 @@ var _block_modifier: Modifier
 
 
 func get_tooltip() -> String:
-	return tooltip % stacks
+	return tooltip % duration
 
 
 func initialize_status(target: Node) -> void:
@@ -18,7 +18,7 @@ func initialize_status(target: Node) -> void:
 
 	if not brittle_modifier_value:
 		brittle_modifier_value = ModifierValue.create_new_modifier("brittle", ModifierValue.Type.FLAT)
-		brittle_modifier_value.flat_value = -stacks
+		brittle_modifier_value.flat_value = -1
 		_block_modifier.add_new_value(brittle_modifier_value)
 
 	if not status_changed.is_connected(_on_status_changed):
@@ -28,14 +28,6 @@ func initialize_status(target: Node) -> void:
 		Events.enemy_phase_ended.connect(apply_status.bind(target))
 	else:
 		Events.player_turn_ended.connect(apply_status.bind(target))
-
-
-func update() -> void:
-	if _block_modifier == null:
-		return
-	var brittle_modifier_value := _block_modifier.get_value("brittle")
-	if brittle_modifier_value:
-		brittle_modifier_value.flat_value = -stacks
 
 
 func _on_status_changed() -> void:

@@ -6,5 +6,5 @@
 script = ExtResource("1_ndgym")
 id = &"brittle"
 display_name = "Brittle"
-description = "Gains {x} less block when blocking until end of turn"
+description = "Gains 1 less block when blocking for {x} turns"
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

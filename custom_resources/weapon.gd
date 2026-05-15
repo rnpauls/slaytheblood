@@ -63,6 +63,13 @@ func would_go_again() -> bool:
 	return go_again
 
 
+## Returns the attack value to show on WeaponUI. Default returns the static
+## `attack`; dynamic weapons (e.g. Berserker's Bite) override to compute from
+## live owner state so the badge tracks the actual swing damage.
+func get_display_attack() -> int:
+	return attack
+
+
 func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, custom_attack:int = attack) -> void:
 	Events.player_attack_declared.emit()
 	do_stock_attack_damage_effect(targets, modifiers, custom_attack)

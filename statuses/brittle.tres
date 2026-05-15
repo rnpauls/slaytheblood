@@ -7,9 +7,9 @@
 script = ExtResource("1_script")
 id = "brittle"
 type = 2
-stack_type = 1
+stack_type = 2
 can_expire = true
 duration = 1
 stacks = 1
 icon = ExtResource("1_baqf0")
-tooltip = "Gains %s less block when blocking until end of turn."
+tooltip = "Gains 1 less block when blocking for %s turns."

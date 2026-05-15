@@ -18,13 +18,15 @@
 [ext_resource type="Resource" uid="uid://fw27yjhyjbfn" path="res://equipment/spellbinders_robe.tres" id="12_sbrbe"]
 [ext_resource type="Resource" uid="uid://cyi5ptq61dosr" path="res://equipment/runeweaver_gauntlets.tres" id="13_rwgnt"]
 [ext_resource type="Resource" uid="uid://nlkimdmeaoa" path="res://equipment/manathreaded_greaves.tres" id="14_mtgrv"]
+[ext_resource type="Resource" uid="uid://stbequip100b" path="res://equipment/floodgate_sigil.tres" id="15_flsgl"]
+[ext_resource type="Resource" uid="uid://stbequip101b" path="res://equipment/managlass_vambraces.tres" id="16_mgvmb"]
 
 [resource]
 script = ExtResource("2_chst0")
 description = "Arcane warrior mixing steel and magicks"
 portrait = ExtResource("8_mmgth")
 draftable_cards = ExtResource("5_drft0")
-draftable_equipment = Array[ExtResource("3_np4oh")]([ExtResource("11_hxcrn"), ExtResource("12_sbrbe"), ExtResource("13_rwgnt"), ExtResource("14_mtgrv")])
+draftable_equipment = Array[ExtResource("3_np4oh")]([ExtResource("11_hxcrn"), ExtResource("12_sbrbe"), ExtResource("13_rwgnt"), ExtResource("14_mtgrv"), ExtResource("15_flsgl"), ExtResource("16_mgvmb")])
 draftable_weapons = Array[ExtResource("6_wpn00")]([ExtResource("7_aash0"), ExtResource("8_gsls0"), ExtResource("9_rbc00"), ExtResource("9_wnspk"), ExtResource("9_tcond"), ExtResource("9_bfglv")])
 starting_relic = ExtResource("10_rlc0")
 character_name = "Runeblade"

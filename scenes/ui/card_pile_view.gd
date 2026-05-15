@@ -36,21 +36,21 @@ func _input(event:InputEvent) ->void:
 		else:
 			hide()
 
-func show_current_view(new_title: String, randomized: bool = false) ->void:
+func show_current_view(new_title: String, sorted: bool = false) ->void:
 	for card: Node in cards.get_children():
 		card.queue_free()
-	
+
 	card_tooltip_popup.hide_tooltip()
 	title.text = new_title
-	_update_view.call_deferred(randomized)
+	_update_view.call_deferred(sorted)
 
-func _update_view(randomized: bool) ->void:
+func _update_view(sorted: bool) ->void:
 	if not card_pile:
 		return
-	
+
 	var all_cards := card_pile.cards.duplicate()
-	if randomized:
-		RNG.array_shuffle(all_cards)
+	if sorted:
+		all_cards.sort_custom(_compare_by_color_then_name)
 	
 	for card: Card in all_cards:
 		var new_card := CARD_MENU_UI_SCENE.instantiate() as CardMenuUI
@@ -68,3 +68,12 @@ func _update_view(randomized: bool) ->void:
 func _on_card_selected(card: Card) -> void:
 	card_selected.emit(card)
 	hide()
+
+
+static func _compare_by_color_then_name(a: Card, b: Card) -> bool:
+	# pitch 0 = no color; push it to the end of the list, after blue (pitch 3).
+	var a_key: int = a.pitch if a.pitch > 0 else 99
+	var b_key: int = b.pitch if b.pitch > 0 else 99
+	if a_key != b_key:
+		return a_key < b_key
+	return a.id < b.id

@@ -51,9 +51,10 @@ func set_glow(enabled: bool) -> void:
 
 func update_labels() -> void:
 	var base_atk := weapon.attack
-	var mod_atk := base_atk
+	var display_atk := weapon.get_display_attack()
+	var mod_atk := display_atk
 	if modifier_handler:
-		mod_atk = modifier_handler.get_modified_value(base_atk, Modifier.Type.DMG_DEALT)
+		mod_atk = modifier_handler.get_modified_value(display_atk, Modifier.Type.DMG_DEALT)
 	_apply_value_tint(atk_label, base_atk, mod_atk)
 
 	var base_cost := weapon.cost

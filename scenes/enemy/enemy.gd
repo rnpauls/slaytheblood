@@ -175,7 +175,6 @@ func cleanup_phase() -> void:
 	var to_draw := clampi(stats.cards_per_turn + 1 - effective_hand, 0, stats.cards_per_turn)
 	if to_draw > 0:
 		hand_manager.draw_cards(to_draw)
-	stats.block = 0
 	stats.mana = 0
 	stats.action_points = 1
 	enemy_resource_ui.update_display(enemy_ai)

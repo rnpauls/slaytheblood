@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
 [ext_resource type="Texture2D" uid="uid://cr2i403j0yro2" path="res://art/card_art/pixellab/aether_bolt.png" id="2_icon"]
-[ext_resource type="Script" uid="uid://pmhnybfrxp2d" path="res://characters/runeblade/cards/aether_bolt.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://b2aqyhhhqt14v" path="res://generic_cards/vanilla_zap.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")

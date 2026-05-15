@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://d6m8bo3q0leb"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/card_art/pixellab/mana_surge.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/mana_surge.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "mana_surge"
+type = 1
+target = 1
+cost = 1
+pitch = 1
+zap = 4
+defense = 3
+icon = ExtResource("2_icon")
+tooltip_text = "[kw=zap:4]Zap 4[/kw]. Gain 1 [kw=floodgate]Floodgate[/kw]."
+sound = ExtResource("1_block")
+disable_attack = true

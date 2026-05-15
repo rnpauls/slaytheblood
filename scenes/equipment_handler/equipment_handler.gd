@@ -53,6 +53,7 @@ func set_equipment(new_equipment: Equipment) -> void:
 		equipment = equipment_ui.equipment
 		if interactive:
 			equipment.owner = owner_of_equipment
+			equipment.handler = self
 			equipment.initialize_equipment(owner_of_equipment)
 			_connect_stats_for_glow()
 		show()

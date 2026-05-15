@@ -6,4 +6,4 @@
 script = ExtResource("1_script")
 id = &"bleed"
 display_name = "Bleed"
-description = "At end of turn, take {x} damage. Wears off after a couple of ticks."
+description = "At end of turn, take {x} damage, then reduce Bleed by 1."

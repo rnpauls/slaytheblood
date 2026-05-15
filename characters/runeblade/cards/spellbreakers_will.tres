@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://b5vlr8rt6spmj"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/card_art/pixellab/spellbreakers_will.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/spellbreakers_will.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "spellbreakers_will"
+type = 1
+rarity = 2
+target = 1
+cost = 2
+pitch = 1
+zap = 8
+defense = 3
+icon = ExtResource("2_icon")
+tooltip_text = "[kw=zap:8]Zap 8[/kw]. Apply 2 [kw=exposed]Exposed[/kw]."
+sound = ExtResource("1_block")
+disable_attack = true

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="FloodgateSigilEquipment" format=3 uid="uid://stbequip100b"]
+
+[ext_resource type="Texture2D" path="res://art/equipment/pixellab/floodgate_sigil.png" id="1_icon"]
+[ext_resource type="Script" path="res://equipment/floodgate_sigil.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Floodgate Sigil"
+id = "floodgate_sigil"
+slot = 4
+rarity = 1
+character_type = 3
+regenerates_each_battle = true
+icon = ExtResource("1_icon")
+tooltip = "On block: gain 1 [kw=floodgate]Floodgate[/kw]."
+max_block = 2

@@ -1,19 +1,18 @@
-## Bleed applier. On hit: stack Bleed on target. The Bleed ticks at the
-## target's end-of-turn for `bleed_stacks` damage per stack. Stack
-## intensity merges across multiple Slashing Cuts.
+## Bleed applier. On hit: apply Bleed of duration `bleed_duration` to target.
+## DURATION-stacked: extends the bleed timer on top of any existing Bleed.
 extends Card
 
 const BLEED_STATUS = preload("res://statuses/bleed.tres")
 
-@export var bleed_stacks: int = 3
+@export var bleed_duration: int = 3
 
 
 func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	var on_hit := OnHit.new()
-	on_hit.id = "slashing_cut_bleed"
+	on_hit.id = "deep_gash_bleed"
 	on_hit.custom_func = _on_hit_apply_bleed
-	on_hit.args = [bleed_stacks]
-	on_hit.ai_value = bleed_stacks
+	on_hit.args = [bleed_duration]
+	on_hit.ai_value = bleed_duration
 	on_hits.append(on_hit)
 	do_stock_attack_damage_effect(targets, modifiers)
 
@@ -22,6 +21,5 @@ func _on_hit_apply_bleed(atk_target: Node, args: Array) -> void:
 	if atk_target == null or atk_target.status_handler == null:
 		return
 	var bleed := BLEED_STATUS.duplicate()
-	bleed.stacks = args[0]
-	bleed.duration = 2
+	bleed.duration = args[0]
 	atk_target.status_handler.add_status(bleed)

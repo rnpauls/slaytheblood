@@ -258,7 +258,7 @@ func _setup_top_bar() -> void:
 	relic_handler.add_relic(character.starting_relic)
 	deck_button.card_pile = character.deck
 	deck_view.card_pile = character.deck
-	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck"))
+	deck_button.pressed.connect(deck_view.show_current_view.bind("Deck", true))
 	inventory_button.pressed.connect(_on_inventory_pressed)
 	inventory_view.inventory = character.inventory
 	inventory_view.character = character

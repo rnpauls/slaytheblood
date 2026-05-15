@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://da8wevkgwfoep"]
+
+[ext_resource type="Texture2D" path="res://art/relics/pixellab/manaflow_pendant.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/manaflow_pendant.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Manaflow Pendant"
+id = "manaflow_pendant"
+type = 4
+character_type = 3
+starter_relic = false
+icon = ExtResource("1_icon")
+tooltip = "[color=\"ffdf00\"]Manaflow Pendant[/color]
+After your first attack each turn, gain 1 [kw=floodgate]Floodgate[/kw]."

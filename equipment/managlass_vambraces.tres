@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ManaglassVambracesEquipment" format=3 uid="uid://stbequip101b"]
+
+[ext_resource type="Texture2D" path="res://art/equipment/pixellab/managlass_vambraces.png" id="1_icon"]
+[ext_resource type="Script" path="res://equipment/managlass_vambraces.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "Managlass Vambraces"
+id = "managlass_vambraces"
+slot = 2
+rarity = 2
+character_type = 3
+single_use = true
+regenerates_each_battle = true
+icon = ExtResource("1_icon")
+tooltip = "When destroyed, gain 4 [kw=floodgate]Floodgate[/kw]."
+max_block = 1

@@ -169,7 +169,7 @@ func _update_remove_card_button() -> void:
 
 
 func _on_remove_card_button_pressed() -> void:
-	remove_card_view.show_current_view("Choose a card to remove")
+	remove_card_view.show_current_view("Choose a card to remove", true)
 
 
 func _on_remove_card_view_card_selected(card: Card) -> void:

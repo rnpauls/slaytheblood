@@ -20,3 +20,5 @@ func _on_combatant_attacked(victim: Node, attacker: Node, _attempted: int, _dama
 		return
 	if attacker is Combatant and attacker.hand_facade:
 		attacker.hand_facade.discard_random(1)
+		if handler:
+			handler.flash()

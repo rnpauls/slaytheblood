@@ -121,7 +121,6 @@ func _assign_body_equipment_slot(eq: Equipment, handler: EquipmentHandler) -> vo
 
 
 func start_turn() -> void:
-	character.block = 0
 	character.reset_mana()
 	character.reset_action_points()
 	_first_card_played_this_turn = false

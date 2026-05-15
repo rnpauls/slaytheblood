@@ -31,7 +31,12 @@
 [ext_resource type="Resource" uid="uid://bkxqkjjuplox7" path="res://characters/runeblade/cards/hex.tres" id="29_hex"]
 [ext_resource type="Resource" uid="uid://y5bk4vtobqy7" path="res://characters/runeblade/cards/wracking_curse.tres" id="30_wrcrs"]
 [ext_resource type="Resource" uid="uid://cjunn7hr0dq7" path="res://characters/runeblade/cards/soul_tap.tres" id="31_sltap"]
+[ext_resource type="Resource" uid="uid://cpbjmfy26c7ev" path="res://characters/runeblade/cards/open_the_floodgate.tres" id="32_oflod"]
+[ext_resource type="Resource" uid="uid://d6m8bo3q0leb" path="res://characters/runeblade/cards/mana_surge.tres" id="33_mnsur"]
+[ext_resource type="Resource" uid="uid://c7blr8rt6spmj" path="res://characters/runeblade/cards/tide_caller.tres" id="34_tcllr"]
+[ext_resource type="Resource" uid="uid://dxc5ijd30s3fd" path="res://characters/runeblade/cards/arc_cascade.tres" id="35_arccc"]
+[ext_resource type="Resource" uid="uid://b5vlr8rt6spmj" path="res://characters/runeblade/cards/spellbreakers_will.tres" id="36_spwil"]
 
 [resource]
 script = ExtResource("1_pile0")
-cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rsb00"), ExtResource("5_y1vpg"), ExtResource("7_rrb00"), ExtResource("8_asy00"), ExtResource("8_m5f1k"), ExtResource("9_p33dt"), ExtResource("10_k5sm7"), ExtResource("11_arcin"), ExtResource("12_rnscr"), ExtResource("13_aecdt"), ExtResource("14_drksk"), ExtResource("15_rnbrs"), ExtResource("16_strrn"), ExtResource("17_chath"), ExtResource("18_rnsrg"), ExtResource("19_aebol"), ExtResource("20_mnbrn"), ExtResource("21_disnt"), ExtResource("22_aesrg"), ExtResource("23_rnblt"), ExtResource("24_chmtr"), ExtResource("25_chtwp"), ExtResource("26_chaeg"), ExtResource("28_crsin"), ExtResource("29_hex"), ExtResource("30_wrcrs"), ExtResource("31_sltap")])
+cards = Array[ExtResource("2_card0")]([ExtResource("3_rsy00"), ExtResource("4_rsr00"), ExtResource("5_rsb00"), ExtResource("5_y1vpg"), ExtResource("7_rrb00"), ExtResource("8_asy00"), ExtResource("8_m5f1k"), ExtResource("9_p33dt"), ExtResource("10_k5sm7"), ExtResource("11_arcin"), ExtResource("12_rnscr"), ExtResource("13_aecdt"), ExtResource("14_drksk"), ExtResource("15_rnbrs"), ExtResource("16_strrn"), ExtResource("17_chath"), ExtResource("18_rnsrg"), ExtResource("19_aebol"), ExtResource("20_mnbrn"), ExtResource("21_disnt"), ExtResource("22_aesrg"), ExtResource("23_rnblt"), ExtResource("24_chmtr"), ExtResource("25_chtwp"), ExtResource("26_chaeg"), ExtResource("28_crsin"), ExtResource("29_hex"), ExtResource("30_wrcrs"), ExtResource("31_sltap"), ExtResource("32_oflod"), ExtResource("33_mnsur"), ExtResource("34_tcllr"), ExtResource("35_arccc"), ExtResource("36_spwil")])

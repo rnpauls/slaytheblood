@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://c7blr8rt6spmj"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/card_art/pixellab/tide_caller.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/tide_caller.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "tide_caller"
+type = 1
+rarity = 1
+cost = 0
+pitch = 2
+defense = 3
+icon = ExtResource("2_icon")
+tooltip_text = "Gain [kw=floodgate]Floodgate[/kw] equal to your [kw=runechant]runechants[/kw]. Do not consume them."
+sound = ExtResource("1_block")
+disable_attack = true

@@ -52,6 +52,7 @@ var ability_used_this_turn: bool = false
 ## Combatant who owns this equipment (always Player today). Null until
 ## EquipmentHandler wires it up.
 var owner: Combatant
+var handler: EquipmentHandler
 
 
 func initialize_equipment(_owner) -> void:

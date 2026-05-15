@@ -13,8 +13,7 @@ func _on_hit_bleed_and_heal(atk_target: Node, _args: Array) -> void:
 	var sh: StatusHandler = atk_target.get("status_handler")
 	if sh:
 		var dup: BleedStatus = BLEED_STATUS.duplicate()
-		dup.stacks = 2
-		dup.duration = 3
+		dup.duration = 2
 		sh.add_status(dup)
 	if owner:
 		owner.stats.heal(2)

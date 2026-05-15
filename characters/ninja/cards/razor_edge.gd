@@ -1,7 +1,7 @@
 ## Multi-hit Bleed re-applier. Hits twice; the on-hit fires once per landed
-## hit (per attack_damage_effect.gd's per-target loop), so a clean play
-## stacks 2 Bleed on the target. Cheap way to maintain a Bleed pile while
-## still putting damage on the board.
+## hit, so a clean play adds `bleed_per_hit` duration twice. DURATION-stacked
+## → 2 on a clean cast. Cheap way to extend a Bleed timer while still putting
+## damage on the board.
 extends Card
 
 const BLEED_STATUS = preload("res://statuses/bleed.tres")
@@ -24,6 +24,5 @@ func _on_hit_apply_bleed(atk_target: Node, args: Array) -> void:
 	if atk_target == null or atk_target.status_handler == null:
 		return
 	var bleed := BLEED_STATUS.duplicate()
-	bleed.stacks = args[0]
-	bleed.duration = 2
+	bleed.duration = args[0]
 	atk_target.status_handler.add_status(bleed)

@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
 [ext_resource type="Texture2D" uid="uid://m6w2ap555kk7" path="res://art/magicbook/64x64/book_image_14.png" id="2_icon"]
-[ext_resource type="Script" uid="uid://ckj7arg8aginh" path="res://characters/runeblade/cards/aether_surge.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://b2aqyhhhqt14v" path="res://generic_cards/vanilla_zap.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")

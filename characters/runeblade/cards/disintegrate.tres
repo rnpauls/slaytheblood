@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
 [ext_resource type="Texture2D" uid="uid://dixw0v2xup6mm" path="res://art/magicbook/64x64/book_image_12.png" id="2_icon"]
-[ext_resource type="Script" uid="uid://ctyx82a0igd3l" path="res://characters/runeblade/cards/disintegrate.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://b2aqyhhhqt14v" path="res://generic_cards/vanilla_zap.gd" id="3_script"]
 
 [resource]
 script = ExtResource("3_script")

@@ -13,3 +13,10 @@ func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, _custom_a
 	# Sixloot 1 — discard a random card, preferring 6+ atk. Result ignored:
 	# Berserker's Bite churns the hand whether or not the discard was a six.
 	sixloot(owner, 1)
+
+
+func get_display_attack() -> int:
+	if owner == null or owner.stats == null:
+		return 0
+	var missing: int = maxi(0, owner.stats.max_health - owner.stats.health)
+	return missing / 4

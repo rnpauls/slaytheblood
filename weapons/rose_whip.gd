@@ -1,7 +1,7 @@
-## Rose Whip — Ninja bleed amplifier. On hit inflicts 1 bleed; after the
-## swing (even on a fully-blocked miss) doubles the target's current bleed.
-## Because on_hit fires inside super.activate_weapon, a clean hit on a
-## zero-bleed target ends at 2 bleed: the fresh 1 gets included in the double.
+## Rose Whip — Ninja bleed amplifier. On hit inflicts Bleed 1; after the
+## swing (even on a fully-blocked miss) doubles the target's current Bleed
+## duration. Because on_hit fires inside super.activate_weapon, a clean hit
+## on a zero-bleed target ends at Bleed 2: the fresh 1 is included in the double.
 class_name RoseWhipWeapon
 extends Weapon
 
@@ -32,7 +32,7 @@ func _on_hit_inflict_bleed(target: Node, _args: Array) -> void:
 	if target == null or not is_instance_valid(target) or target.status_handler == null:
 		return
 	var bleed := BLEED_STATUS.duplicate() as BleedStatus
-	bleed.stacks = 1
+	bleed.duration = 1
 	target.status_handler.add_status(bleed)
 
 
@@ -40,10 +40,10 @@ func _double_bleed(target: Node) -> void:
 	if target == null or not is_instance_valid(target) or target.status_handler == null:
 		return
 	var existing := target.status_handler.get_status_by_id("bleed") as BleedStatus
-	if existing == null or existing.stacks <= 0:
+	if existing == null or existing.duration <= 0:
 		return
-	# BleedStatus uses StackType.INTENSITY → add_status sums stacks. Adding
-	# `existing.stacks` doubles the pile.
+	# BleedStatus uses StackType.DURATION → add_status sums durations. Adding
+	# `existing.duration` doubles the bleed timer.
 	var add := BLEED_STATUS.duplicate() as BleedStatus
-	add.stacks = existing.stacks
+	add.duration = existing.duration
 	target.status_handler.add_status(add)

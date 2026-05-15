@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://1dvnbqnt8hd0"]
+
+[ext_resource type="Texture2D" path="res://art/relics/pixellab/arcane_catalyst.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/arcane_catalyst.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Arcane Catalyst"
+id = "arcane_catalyst"
+type = 0
+character_type = 3
+starter_relic = false
+icon = ExtResource("1_icon")
+tooltip = "[color=\"ffdf00\"]Arcane Catalyst[/color]
+At the start of each turn, gain 1 [kw=floodgate]Floodgate[/kw]."

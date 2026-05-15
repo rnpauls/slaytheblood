@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://dxc5ijd30s3fd"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
+[ext_resource type="Texture2D" path="res://art/card_art/pixellab/arc_cascade.png" id="2_icon"]
+[ext_resource type="Script" path="res://characters/runeblade/cards/arc_cascade.gd" id="3_script"]
+
+[resource]
+script = ExtResource("3_script")
+id = "arc_cascade"
+type = 1
+rarity = 1
+target = 1
+cost = 1
+pitch = 1
+zap = 4
+defense = 3
+icon = ExtResource("2_icon")
+tooltip_text = "[kw=zap:4]Zap 4[/kw] twice."
+sound = ExtResource("1_block")
+disable_attack = true
