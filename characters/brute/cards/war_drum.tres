@@ -7,12 +7,17 @@
 
 [resource]
 script = ExtResource("3_script")
+draw_amount = 2
+empower_amount = 4
 id = "war_drum"
 type = 1
 cost = 2
 pitch = 3
+defense = 3
+go_again = true
+ai_value = 3
 icon = ExtResource("2_icon")
-tooltip_text = "Draw 3 cards. Gain [kw=empower:2]Empower 2[/kw]."
+tooltip_text = "Draw 2 cards. Gain [kw=empower:2]Empower 4[/kw]."
 sound = ExtResource("4_sound")
 disable_attack = true
 disable_defense = true

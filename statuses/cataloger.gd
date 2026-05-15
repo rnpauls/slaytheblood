@@ -2,10 +2,8 @@ class_name CatalogerStatus
 extends Status
 
 # Granted by Catalog Tome. Each START_OF_TURN, the wielder reads the opposing
-# player's master-deck size and (a) gains block equal to that size, (b) takes
-# a flat DMG_DEALT modifier equal to floor(size / DAMAGE_DIVISOR), refreshed
-# each turn so it always reflects the current deck (cards added or removed
-# mid-run still affect the next turn's swing).
+# player's draw pile size and (a) gains block equal to that size, (b) takes
+# a flat DMG_DEALT modifier equal to floor(size / DAMAGE_DIVISOR)
 
 const DAMAGE_DIVISOR := 3
 const SOURCE_ID := "cataloger"
@@ -46,5 +44,5 @@ func _opponent_deck_size(target: Node) -> int:
 	for opp in opponents:
 		var stats = opp.get("stats")
 		if stats and stats.get("deck"):
-			return stats.deck.cards.size()
+			return stats.draw_pile.cards.size()
 	return 0

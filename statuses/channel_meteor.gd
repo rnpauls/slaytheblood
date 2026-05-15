@@ -5,7 +5,7 @@
 class_name ChannelMeteorStatus
 extends Status
 
-@export var damage: int = 12
+@export var damage: int = 8
 
 
 func get_tooltip() -> String:

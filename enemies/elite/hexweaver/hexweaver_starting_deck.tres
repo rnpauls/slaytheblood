@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://b70vbws22283g"]
+[gd_resource type="Resource" script_class="CardPile" format=3]
 
-[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Resource" uid="uid://b7fahxbolt01a" path="res://enemies/elite/hexweaver/cards/hex_bolt.tres" id="2_hxbo"]
-[ext_resource type="Resource" uid="uid://cavqdwvisvawa" path="res://enemies/elite/hexweaver/cards/mana_drain.tres" id="3_mndr"]
-[ext_resource type="Resource" uid="uid://c314ogdp6v0i6" path="res://enemies/elite/hexweaver/cards/drain_touch.tres" id="4_drnt"]
-[ext_resource type="Resource" uid="uid://drb1153iurkcm" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="5_crsw"]
-[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="6_pile"]
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Resource" path="res://generic_cards/mind_wipe.tres" id="4_2hmth"]
+[ext_resource type="Resource" path="res://enemies/elite/hexweaver/cards/drain_touch.tres" id="4_drnt"]
+[ext_resource type="Resource" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="5_crsw"]
+[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="5_sd3yr"]
+[ext_resource type="Resource" path="res://generic_cards/critical_strike_blue.tres" id="6_a2te7"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="6_pile"]
+[ext_resource type="Resource" path="res://generic_cards/hexed_lash.tres" id="7_5lcum"]
+[ext_resource type="Resource" path="res://generic_cards/concuss_red.tres" id="8_id363"]
 
 [resource]
 script = ExtResource("6_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("2_hxbo"), ExtResource("2_hxbo"), ExtResource("3_mndr"), ExtResource("4_drnt"), ExtResource("4_drnt"), ExtResource("5_crsw")])
+cards = Array[ExtResource("1_card")]([ExtResource("4_drnt"), ExtResource("4_drnt"), ExtResource("5_crsw"), ExtResource("4_2hmth"), ExtResource("4_2hmth"), ExtResource("4_2hmth"), ExtResource("5_sd3yr"), ExtResource("5_sd3yr"), ExtResource("5_sd3yr"), ExtResource("6_a2te7"), ExtResource("6_a2te7"), ExtResource("6_a2te7"), ExtResource("7_5lcum"), ExtResource("7_5lcum"), ExtResource("7_5lcum"), ExtResource("8_id363"), ExtResource("8_id363"), ExtResource("8_id363")])

@@ -7,6 +7,7 @@ const SCAN_ROOTS := [
 	"res://characters/ninja",
 	"res://characters/runeblade",
 	"res://generic_cards",
+	"res://enemies"
 ]
 
 const CHARACTER_KEYS: Array[String] = ["ALL", "BRUTE", "NINJA", "RUNEBLADE", "GENERIC"]

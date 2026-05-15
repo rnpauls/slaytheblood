@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_eofgd")
-id = "warrior_slash"
+id = "slash"
 target = 2
 cost = 1
 pitch = 1

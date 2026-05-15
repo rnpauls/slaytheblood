@@ -118,8 +118,8 @@ disabled = true
 text = "END TURN"
 metadata/_edit_use_anchors_ = true
 
-[node name="InnerContour" type="Panel" parent="BattleUI/EndTurnButton"]
-anchors_preset = 15
+[node name="InnerContour" type="Panel" parent="BattleUI/EndTurnButton" unique_id=1236392506]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -133,7 +133,6 @@ theme_override_styles/panel = ExtResource("24_endct")
 
 [node name="DrawPile" parent="BattleUI" unique_id=1843257857 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
-layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -147,7 +146,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DiscardPile" parent="BattleUI" unique_id=1643009583 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true
-layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

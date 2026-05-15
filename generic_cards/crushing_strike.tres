@@ -13,6 +13,7 @@ cost = 1
 pitch = 1
 attack = 4
 defense = 2
+go_again = true
 ai_value = 4
 icon = ExtResource("2_icon")
 tooltip_text = "[kw=onhit]On hit[/kw]: Deal 3 additional damage."

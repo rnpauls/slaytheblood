@@ -1,22 +1,24 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://bk60e7yqlfecb"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item60.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/ninja/cards/death_mark.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://dffcahrwgrcqe" path="res://art/item60.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://gh1o8kpt0yle" path="res://characters/ninja/cards/death_mark.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-stacks_amount = 6
+stacks_amount = 3
 id = "death_mark"
 type = 1
+rarity = 1
 target = 1
 cost = 1
 pitch = 2
 go_again = true
-rarity = 1
+ai_value = 5
+ai_value_needs_attack = true
 icon = ExtResource("2_icon")
-tooltip_text = "Apply [kw=marked:6]Marked 6[/kw] to target."
+tooltip_text = "Apply [kw=marked:3]Marked 3[/kw] to target."
 sound = ExtResource("4_sound")
 disable_attack = true
 disable_defense = true

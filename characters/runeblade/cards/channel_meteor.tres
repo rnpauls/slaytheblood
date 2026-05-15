@@ -12,7 +12,7 @@ rarity = 2
 cost = 2
 pitch = 1
 icon = ExtResource("2_kiqvr")
-tooltip_text = "[kw=channel]Channel[/kw]: at the start of your next turn, deal 12 arcane to every enemy."
+tooltip_text = "[kw=channel]Channel[/kw]: at the start of your next turn, deal 8 arcane to every enemy."
 sound = ExtResource("1_block")
 disable_attack = true
 disable_defense = true

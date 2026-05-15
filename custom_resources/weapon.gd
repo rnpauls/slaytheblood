@@ -129,3 +129,21 @@ func build_attack_packet(modifiers: ModifierHandler, custom_attack: int = attack
 			packet.arcane += (rune as RunechantStatus).consume()
 
 	return packet
+
+## Rampage helper: draw `qty` extra cards into the source's hand, then randomly
+## discard one card from that hand, preferring an attack ≥ 6 (the "six" filter).
+## Returns true iff the discarded card actually was a 6+ atk — callers gate
+## bonus effects on this. Symmetric across player and enemy: takes any
+## Combatant and routes through its HandFacade so card scripts don't need to
+## branch on `owner is Player`.
+func sixloot(source: Node, qty: int) -> bool:
+	var combatant := source as Combatant
+	if combatant == null or combatant.hand_facade == null:
+		return false
+	if qty > 0:
+		var tween := combatant.hand_facade.draw_cards(qty)
+		if tween:
+			await tween.finished
+	var discard_effect := DiscardRandomSixEffect.new()
+	discard_effect.amount = 1
+	return discard_effect.execute([combatant])

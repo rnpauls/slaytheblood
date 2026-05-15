@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="CardPile" format=3]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://bjom6gwagmm4g"]
 
-[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="3_bb"]
-[ext_resource type="Resource" path="res://enemies/elite/bulwark_knight/cards/iron_stance.tres" id="4_is"]
-[ext_resource type="Resource" path="res://characters/brute/cards/heavy_cleave.tres" id="5_hc"]
-[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
-[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="7_blk"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" uid="uid://jf61dkwx4vu2" path="res://generic_cards/brittle_bones.tres" id="3_bb"]
+[ext_resource type="Resource" uid="uid://b7e1iron0001" path="res://enemies/elite/bulwark_knight/cards/iron_stance.tres" id="4_is"]
+[ext_resource type="Resource" uid="uid://ddntfmnq37i48" path="res://characters/brute/cards/heavy_cleave.tres" id="5_hc"]
+[ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
+[ext_resource type="Resource" uid="uid://bnpxl3v8ym45w" path="res://generic_cards/crushing_strike.tres" id="7_8iugc"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="7_blk"]
+[ext_resource type="Resource" uid="uid://c314ogdp6v0i6" path="res://enemies/elite/hexweaver/cards/drain_touch.tres" id="8_4o5dp"]
+[ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="9_61r7o"]
+[ext_resource type="Resource" uid="uid://dqxasrxlk6q38" path="res://generic_cards/ravenous_rabble_blue.tres" id="10_7lim0"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_bb"), ExtResource("3_bb"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("5_hc"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_blk")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_bb"), ExtResource("3_bb"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("5_hc"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_blk"), ExtResource("7_8iugc"), ExtResource("7_8iugc"), ExtResource("7_8iugc"), ExtResource("8_4o5dp"), ExtResource("8_4o5dp"), ExtResource("8_4o5dp"), ExtResource("9_61r7o"), ExtResource("6_wb"), ExtResource("10_7lim0"), ExtResource("10_7lim0"), ExtResource("5_hc"), ExtResource("5_hc")])

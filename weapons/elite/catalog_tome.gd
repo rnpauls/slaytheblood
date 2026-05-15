@@ -5,7 +5,7 @@ const CATALOGER_STATUS := preload("res://statuses/cataloger.tres")
 const CATALOGER_SOURCE_ID := "cataloger"
 
 # Wielder gains Cataloger: each START_OF_TURN, block and DMG_DEALT scale with
-# the opponent's master-deck size. The Archivist's signature; if the player
+# the opponent's draw pile size. The Archivist's signature; if the player
 # captures it, the same passive turns *enemy* deck sizes against them.
 
 

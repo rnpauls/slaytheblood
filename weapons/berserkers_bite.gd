@@ -12,8 +12,4 @@ func activate_weapon(targets: Array[Node], modifiers: ModifierHandler, _custom_a
 	super.activate_weapon(targets, modifiers, temp_attack)
 	# Sixloot 1 — discard a random card, preferring 6+ atk. Result ignored:
 	# Berserker's Bite churns the hand whether or not the discard was a six.
-	if owner is Combatant and owner.hand_facade:
-		owner.hand_facade.draw_cards(1)
-		var discard := DiscardRandomSixEffect.new()
-		discard.amount = 1
-		discard.execute([owner])
+	sixloot(owner, 1)

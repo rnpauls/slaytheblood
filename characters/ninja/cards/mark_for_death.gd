@@ -7,6 +7,6 @@ func apply_effects(targets: Array[Node], _modifiers: ModifierHandler) -> void:
 	if targets.is_empty() or targets[0] == null:
 		return
 	var marked := MARKED_STATUS.duplicate()
-	marked.stacks = 4
+	marked.stacks = 2
 	marked.duration = 1
 	targets[0].status_handler.add_status(marked)

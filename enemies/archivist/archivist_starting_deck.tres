@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://b7archdck002"]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://cp7nvutbe1n5i"]
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_arch1"]
-[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="2_arch1"]
+[ext_resource type="Resource" uid="uid://cirunqrru7hfi" path="res://generic_cards/mind_wipe.tres" id="2_18wsv"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_arch2"]
-[ext_resource type="Resource" uid="uid://dl0joso87gfpm" path="res://generic_cards/concuss_red.tres" id="3_arch3"]
-[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="4_arch4"]
-[ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://generic_cards/wounding_blow_red.tres" id="5_arch5"]
-[ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://generic_cards/wounding_blow_blue.tres" id="6_arch6"]
+[ext_resource type="Resource" uid="uid://b7e2phlnx002" path="res://enemies/elite/bulwark_knight/cards/phalanx_strike.tres" id="3_b6w4b"]
+[ext_resource type="Resource" uid="uid://cjlflt3j1chsa" path="res://generic_cards/sear_memory.tres" id="4_nel4v"]
+[ext_resource type="Resource" uid="uid://dqxasrxlk6q38" path="res://generic_cards/ravenous_rabble_blue.tres" id="8_qadb2"]
+[ext_resource type="Resource" uid="uid://edwx6q45sfqw" path="res://generic_cards/insightful_strike.tres" id="9_18wsv"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="9_lso6a"]
+[ext_resource type="Resource" uid="uid://bgnkshtcrd21a" path="res://generic_cards/gunkshot.tres" id="10_18wsv"]
+[ext_resource type="Resource" uid="uid://bgnkupncrd5x4" path="res://generic_cards/gunk_up.tres" id="10_b6w4b"]
+[ext_resource type="Resource" uid="uid://cgqchuhkr4wgx" path="res://generic_cards/staunch_defense.tres" id="10_q5ynr"]
 
 [resource]
 script = ExtResource("2_arch2")
-cards = Array[ExtResource("1_arch1")]([ExtResource("2_arch1"), ExtResource("2_arch1"), ExtResource("2_arch1"), ExtResource("2_arch1"), ExtResource("3_arch3"), ExtResource("3_arch3"), ExtResource("4_arch4"), ExtResource("4_arch4"), ExtResource("5_arch5"), ExtResource("5_arch5"), ExtResource("6_arch6"), ExtResource("6_arch6"), ExtResource("6_arch6"), ExtResource("6_arch6")])
+cards = Array[ExtResource("1_arch1")]([ExtResource("2_18wsv"), ExtResource("2_18wsv"), ExtResource("2_18wsv"), ExtResource("3_b6w4b"), ExtResource("3_b6w4b"), ExtResource("3_b6w4b"), ExtResource("4_nel4v"), ExtResource("4_nel4v"), ExtResource("4_nel4v"), ExtResource("4_nel4v"), ExtResource("8_qadb2"), ExtResource("8_qadb2"), ExtResource("8_qadb2"), ExtResource("8_qadb2"), ExtResource("9_lso6a"), ExtResource("9_lso6a"), ExtResource("9_lso6a"), ExtResource("9_lso6a"), ExtResource("10_q5ynr"), ExtResource("10_q5ynr"), ExtResource("10_q5ynr"), ExtResource("10_q5ynr"), ExtResource("10_18wsv"), ExtResource("10_18wsv"), ExtResource("10_18wsv"), ExtResource("10_18wsv"), ExtResource("9_18wsv"), ExtResource("9_18wsv"), ExtResource("9_18wsv"), ExtResource("10_b6w4b"), ExtResource("10_b6w4b"), ExtResource("10_b6w4b")])
 metadata/_custom_type_script = "uid://dejd2uv2w4475"

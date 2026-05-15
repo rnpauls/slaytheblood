@@ -10,9 +10,9 @@ weapon_name = "Catalog Tome"
 id = "catalog_tome"
 type = 6
 rarity = 2
-hands = 1
+hands = 2
 icon = ExtResource("1_ctlg1")
 sound = ExtResource("3_ctlg3")
-tooltip = "At the start of owner's turn, gain [kw=block]block[/kw] equal to opponent's deck size, and bonus [icon=atk] equal to 1/3 of it"
+tooltip = "Every turn, gain [kw=block]block[/kw] equal to opponent's draw pile size, and every other turn bonus [icon=atk] equal to 1/3 of it"
 attack = 4
 cost = 1

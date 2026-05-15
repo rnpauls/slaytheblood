@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_sxnko"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_844ut"]
+[ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="2_l5p37"]
+[ext_resource type="Resource" path="res://enemies/plague_doctor/cards/lance_boil.tres" id="3_lrbb5"]
+[ext_resource type="Resource" path="res://generic_cards/lacerate.tres" id="4_thgoe"]
+[ext_resource type="Resource" path="res://enemies/elite/reaver/cards/bloodlust.tres" id="5_2w7om"]
+[ext_resource type="Resource" path="res://generic_cards/ravenous_rabble_blue.tres" id="6_u1mio"]
+[ext_resource type="Resource" path="res://generic_cards/crushing_strike.tres" id="7_yhxj8"]
+[ext_resource type="Resource" path="res://generic_cards/flexing_pummel.tres" id="8_7ka4p"]
+[ext_resource type="Resource" path="res://generic_cards/nimble.tres" id="9_2eqiw"]
+[ext_resource type="Resource" path="res://characters/brute/cards/warrior_true_strength.tres" id="10_hucdb"]
+[ext_resource type="Resource" path="res://generic_cards/raging_onslaught_blue.tres" id="11_ru3nj"]
+[ext_resource type="Resource" path="res://enemies/elite/reaver/cards/reckless_charge.tres" id="12_x77sw"]
+
+[resource]
+script = ExtResource("2_844ut")
+cards = Array[ExtResource("1_sxnko")]([ExtResource("2_l5p37"), ExtResource("2_l5p37"), ExtResource("2_l5p37"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("4_thgoe"), ExtResource("4_thgoe"), ExtResource("4_thgoe"), ExtResource("5_2w7om"), ExtResource("5_2w7om"), ExtResource("5_2w7om"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("7_yhxj8"), ExtResource("7_yhxj8"), ExtResource("7_yhxj8"), ExtResource("8_7ka4p"), ExtResource("8_7ka4p"), ExtResource("8_7ka4p"), ExtResource("9_2eqiw"), ExtResource("9_2eqiw"), ExtResource("9_2eqiw"), ExtResource("10_hucdb"), ExtResource("10_hucdb"), ExtResource("11_ru3nj"), ExtResource("11_ru3nj"), ExtResource("12_x77sw"), ExtResource("12_x77sw"), ExtResource("12_x77sw")])
+metadata/_custom_type_script = "uid://dejd2uv2w4475"

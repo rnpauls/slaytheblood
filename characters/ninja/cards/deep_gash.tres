@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bxtg2nt2ljspc"]
+
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_d43t4"]
+[ext_resource type="Texture2D" uid="uid://dbu3ioyuhnqj3" path="res://art/item50.png" id="2_y8vdj"]
+[ext_resource type="Script" uid="uid://chj4f2gq6bmky" path="res://characters/ninja/cards/deep_gash.gd" id="3_j5kxa"]
+[ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_p3ps0"]
+
+[resource]
+script = ExtResource("3_j5kxa")
+id = "deep_gash"
+target = 1
+cost = 1
+pitch = 1
+attack = 3
+defense = 3
+icon = ExtResource("2_y8vdj")
+tooltip_text = "Deal 3 damage. [kw=onhit]On hit[/kw]: apply [kw=bleed:3]Bleed 3[/kw]."
+sound = ExtResource("4_p3ps0")

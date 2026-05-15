@@ -6,7 +6,9 @@
 [ext_resource type="Resource" path="res://characters/brute/cards/warrior_big_slam.tres" id="4_wbs"]
 [ext_resource type="Resource" path="res://characters/brute/cards/heavy_cleave.tres" id="5_hc"]
 [ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
+[ext_resource type="Resource" path="res://generic_cards/ravenous_rabble_red.tres" id="6_yc8gs"]
+[ext_resource type="Resource" path="res://generic_cards/raging_onslaught_blue.tres" id="7_86upx"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_ih"), ExtResource("3_ih"), ExtResource("4_wbs"), ExtResource("4_wbs"), ExtResource("5_hc"), ExtResource("6_wb"), ExtResource("6_wb")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_ih"), ExtResource("3_ih"), ExtResource("4_wbs"), ExtResource("4_wbs"), ExtResource("5_hc"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("3_ih"), ExtResource("3_ih"), ExtResource("4_wbs"), ExtResource("4_wbs"), ExtResource("6_yc8gs"), ExtResource("6_yc8gs"), ExtResource("6_yc8gs"), ExtResource("6_yc8gs"), ExtResource("6_yc8gs"), ExtResource("7_86upx"), ExtResource("7_86upx"), ExtResource("7_86upx"), ExtResource("7_86upx")])

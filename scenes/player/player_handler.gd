@@ -333,6 +333,7 @@ func _on_card_pitched(card: Card) -> void:
 		var flow_status  := preload("res://statuses/flow.tres").duplicate()
 		player.status_handler.add_status(flow_status)
 	character.discard.add_card(card)
+	Events.card_pitched.emit(card)
 
 func _on_card_sunk(card: Card) -> void:
 	character.sinks_this_combat += 1

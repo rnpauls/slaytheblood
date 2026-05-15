@@ -6,10 +6,9 @@
 
 [resource]
 script = ExtResource("3_script")
-id = "channel_time_warp"
+id = "channel_time"
 type = 1
 pitch = 3
-go_again = true
 icon = ExtResource("2_1p30c")
 tooltip_text = "[kw=channel]Channel[/kw]: at the start of your next turn, draw 3 extra cards."
 sound = ExtResource("1_block")
