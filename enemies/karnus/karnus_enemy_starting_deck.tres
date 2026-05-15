@@ -11,8 +11,9 @@
 [ext_resource type="Resource" path="res://generic_cards/nimble.tres" id="8_wl2j5"]
 [ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="9_wl2j5"]
 [ext_resource type="Resource" path="res://generic_cards/raging_onslaught_blue.tres" id="10_1vy2i"]
+[ext_resource type="Resource" path="res://enemies/karnus/cards/crippling_smash.tres" id="11_csmash"]
 
 [resource]
 script = ExtResource("2_bwqdf")
-cards = Array[ExtResource("1_2mpbg")]([ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("3_dyl2j"), ExtResource("3_dyl2j"), ExtResource("4_3w8mo"), ExtResource("4_3w8mo"), ExtResource("5_38mf7"), ExtResource("5_38mf7"), ExtResource("6_3w8mo"), ExtResource("6_3w8mo"), ExtResource("6_3w8mo"), ExtResource("6_3w8mo"), ExtResource("7_38mf7"), ExtResource("7_38mf7"), ExtResource("7_38mf7"), ExtResource("8_wl2j5"), ExtResource("8_wl2j5"), ExtResource("8_wl2j5"), ExtResource("3_dyl2j"), ExtResource("3_dyl2j"), ExtResource("9_wl2j5"), ExtResource("9_wl2j5"), ExtResource("9_wl2j5"), ExtResource("9_wl2j5"), ExtResource("10_1vy2i"), ExtResource("10_1vy2i"), ExtResource("10_1vy2i"), ExtResource("10_1vy2i")])
+cards = Array[ExtResource("1_2mpbg")]([ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("2_1pu37"), ExtResource("3_dyl2j"), ExtResource("3_dyl2j"), ExtResource("4_3w8mo"), ExtResource("4_3w8mo"), ExtResource("5_38mf7"), ExtResource("5_38mf7"), ExtResource("6_3w8mo"), ExtResource("6_3w8mo"), ExtResource("6_3w8mo"), ExtResource("6_3w8mo"), ExtResource("7_38mf7"), ExtResource("7_38mf7"), ExtResource("7_38mf7"), ExtResource("8_wl2j5"), ExtResource("8_wl2j5"), ExtResource("8_wl2j5"), ExtResource("3_dyl2j"), ExtResource("3_dyl2j"), ExtResource("9_wl2j5"), ExtResource("9_wl2j5"), ExtResource("9_wl2j5"), ExtResource("9_wl2j5"), ExtResource("10_1vy2i"), ExtResource("10_1vy2i"), ExtResource("10_1vy2i"), ExtResource("10_1vy2i"), ExtResource("11_csmash"), ExtResource("11_csmash")])
 metadata/_custom_type_script = "uid://dejd2uv2w4475"

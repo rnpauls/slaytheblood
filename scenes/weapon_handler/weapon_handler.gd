@@ -73,6 +73,17 @@ func set_weapon(new_weapon: Weapon) -> void:
 		var combatant := owner_of_weapon as Combatant
 		if combatant:
 			weapon.attach_to_combatant(combatant)
+			# Non-interactive wielders (enemies — the visual badge spawns
+			# WeaponHandler with interactive=false) never call activate_weapon,
+			# so the weapon's on_hits would be inert. Mirror them onto
+			# combatant.active_on_hits so every card the wielder plays carries
+			# the weapon's on-hit. Player wielders skip this branch — they get
+			# weapon on-hits via the weapon's own swing path, and including
+			# them here would double-apply.
+			if not interactive:
+				for h in weapon.on_hits:
+					if not h in combatant.active_on_hits:
+						combatant.active_on_hits.append(h)
 	else:
 		weapon = null
 		hide()

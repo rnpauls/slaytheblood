@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DiseaseCarrierStatus" format=3]
+
+[ext_resource type="Texture2D" uid="uid://bj73oqujng3n2" path="res://art/Icon28_09.png" id="1_icon"]
+[ext_resource type="Script" path="res://statuses/disease_carrier.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "disease_carrier"
+type = 2
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+icon = ExtResource("1_icon")
+tooltip = "On death, apply 3 Bleed to the player."

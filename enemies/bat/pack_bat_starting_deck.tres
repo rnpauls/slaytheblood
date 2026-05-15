@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" uid="uid://cw14a8p7hxfqe" path="res://generic_cards/head_jab_red.tres" id="3_head"]
+[ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://generic_cards/wounding_blow_red.tres" id="4_wound"]
+[ext_resource type="Resource" uid="uid://bbjmrnssffhvv" path="res://generic_cards/struggle.tres" id="5_strug"]
+[ext_resource type="Resource" uid="uid://s8o4e6v14nrd" path="res://generic_cards/critical_strike_red.tres" id="6_crit"]
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("3_head"), ExtResource("3_head"), ExtResource("4_wound"), ExtResource("5_strug"), ExtResource("6_crit")])

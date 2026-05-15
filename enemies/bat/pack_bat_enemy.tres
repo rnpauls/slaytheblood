@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3]
+
+[ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_stats"]
+[ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="2_ai"]
+[ext_resource type="Texture2D" uid="uid://blmneustxl62b" path="res://art/sprites/pixellab/bat.png" id="3_art"]
+[ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="4_death"]
+[ext_resource type="Resource" path="res://enemies/bat/pack_bat_starting_deck.tres" id="5_deck"]
+[ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="6_inv"]
+[ext_resource type="Resource" path="res://statuses/flock.tres" id="7_flock"]
+[ext_resource type="Resource" path="res://statuses/bat_bite.tres" id="8_batbite"]
+
+[resource]
+script = ExtResource("1_stats")
+character_name = "Pack Bat"
+art = ExtResource("3_art")
+max_health = 10
+starting_deck = ExtResource("5_deck")
+starting_inventory = ExtResource("6_inv")
+cards_per_turn = 2
+ai = ExtResource("2_ai")
+death_sound = ExtResource("4_death")
+passives = Array[Resource]([ExtResource("7_flock"), ExtResource("8_batbite")])

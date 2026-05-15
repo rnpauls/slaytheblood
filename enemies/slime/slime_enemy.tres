@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_qblg1"]
 [ext_resource type="Resource" uid="uid://bsl1m00deck00" path="res://enemies/slime/slime_enemy_starting_deck.tres" id="4_deck"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="5_inv"]
+[ext_resource type="Resource" path="res://statuses/splitter.tres" id="6_splitter"]
 
 [resource]
 script = ExtResource("1_stats")
@@ -15,4 +16,5 @@ max_health = 12
 starting_deck = ExtResource("4_deck")
 starting_inventory = ExtResource("5_inv")
 cards_per_turn = 2
+passives = Array[Resource]([ExtResource("6_splitter")])
 metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

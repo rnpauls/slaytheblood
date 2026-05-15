@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CrippledStatus" format=3]
+
+[ext_resource type="Texture2D" uid="uid://ck00youabr5hn" path="res://art/item85.png" id="1_icon"]
+[ext_resource type="Script" path="res://statuses/crippled.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "crippled"
+type = 1
+stack_type = 2
+can_expire = true
+duration = 1
+stacks = 1
+icon = ExtResource("1_icon")
+tooltip = "Outgoing attacks deal %s less damage. Ticks down at end of turn."

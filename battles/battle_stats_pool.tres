@@ -32,8 +32,11 @@
 [ext_resource type="Resource" path="res://battles/tier_3_treant.tres" id="29_t3tr"]
 [ext_resource type="Resource" path="res://battles/elite/elite_bloodbound_acolyte.tres" id="30_eba"]
 [ext_resource type="Resource" path="res://battles/tier_1_kuno_slimes.tres" id="31_18ion"]
+[ext_resource type="Resource" path="res://battles/tier_1_pack_bats.tres" id="32_pkbat"]
+[ext_resource type="Resource" path="res://battles/tier_1_shellbreaker.tres" id="33_shell"]
+[ext_resource type="Resource" path="res://battles/tier_3_plague_pit.tres" id="34_ppit"]
 
 [resource]
 script = ExtResource("6_cquyn")
-pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("10_t1sli"), ExtResource("14_arch"), ExtResource("15_6x4eu"), ExtResource("16_t3kun"), ExtResource("17_t5tox"), ExtResource("18_t2mar"), ExtResource("19_t3stk"), ExtResource("20_iajyq"), ExtResource("21_t3gh"), ExtResource("22_t3pr"), ExtResource("23_t3cg"), ExtResource("24_t3bk"), ExtResource("25_t3wp"), ExtResource("26_t3bw"), ExtResource("27_t3cr"), ExtResource("28_t3pd"), ExtResource("29_t3tr"), ExtResource("31_18ion")])
+pool = Array[ExtResource("1_p6jnf")]([ExtResource("2_kip4e"), ExtResource("3_mktey"), ExtResource("4_k6fwo"), ExtResource("5_s5wuo"), ExtResource("6_7ckf5"), ExtResource("7_hpysq"), ExtResource("8_a7oj0"), ExtResource("10_t1sli"), ExtResource("14_arch"), ExtResource("15_6x4eu"), ExtResource("16_t3kun"), ExtResource("17_t5tox"), ExtResource("18_t2mar"), ExtResource("19_t3stk"), ExtResource("20_iajyq"), ExtResource("21_t3gh"), ExtResource("22_t3pr"), ExtResource("23_t3cg"), ExtResource("24_t3bk"), ExtResource("25_t3wp"), ExtResource("26_t3bw"), ExtResource("27_t3cr"), ExtResource("28_t3pd"), ExtResource("29_t3tr"), ExtResource("31_18ion"), ExtResource("32_pkbat"), ExtResource("33_shell"), ExtResource("34_ppit")])
 elite_pool = Array[ExtResource("1_p6jnf")]([ExtResource("11_eblw"), ExtResource("12_erav"), ExtResource("13_ehex"), ExtResource("20_emr"), ExtResource("30_eba")])

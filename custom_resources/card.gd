@@ -229,6 +229,16 @@ func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack
 		if rune is RunechantStatus:
 			packet.arcane += (rune as RunechantStatus).consume()
 
+	# Unblockable status on the attacker marks the packet so its physical hit
+	# bypasses the target's block. Consumption (stacks - 1) happens in
+	# DamagePacket.execute_single_target after the swing dispatches; setting
+	# the flag here doesn't mutate state, so previews are safe to call
+	# build_attack_packet without consuming the buff.
+	if packet.physical > 0 and owner and owner.status_handler:
+		var u := owner.status_handler.get_status_by_id("unblockable") as UnblockableStatus
+		if u and not u.fresh and u.stacks > 0:
+			packet.ignore_block = true
+
 	return packet
 
 ## Fires `custom_zap` arcane damage at the given targets via a pure-arcane

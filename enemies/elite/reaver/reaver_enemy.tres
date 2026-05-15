@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_gxa8c"]
 [ext_resource type="Resource" uid="uid://boams8v5fe67u" path="res://enemies/elite/reaver/reaver_starting_deck.tres" id="3_reav"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_reav"]
-[ext_resource type="Resource" uid="uid://b7twnaxe002" path="res://weapons/elite/twin_axes.tres" id="5_reav"]
+[ext_resource type="Resource" uid="uid://dt42xa5cchfwy" path="res://weapons/berserkers_bite.tres" id="5_reav"]
 
 [resource]
 script = ExtResource("1_reav")

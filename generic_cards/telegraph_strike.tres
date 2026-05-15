@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://generic_cards/telegraph_strike.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
+[ext_resource type="Texture2D" uid="uid://dscvm2j0a7omm" path="res://art/sword_icon.png" id="3_icon"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="4_sound"]
+
+[resource]
+script = ExtResource("1_script")
+id = "telegraph_strike"
+target = 1
+cost = 2
+pitch = 1
+attack = 4
+defense = 2
+go_again = false
+ai_value = 6
+icon = ExtResource("3_icon")
+tooltip_text = "[kw=onhit]On hit[/kw]: Gain [kw=unblockable]Unblockable[/kw] for your next attack next turn."
+sound = ExtResource("4_sound")

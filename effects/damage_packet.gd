@@ -23,6 +23,11 @@ var source_owner: Node = null
 var sound: AudioStream = null
 var go_again: bool = false
 var on_hit_effects: Array[OnHit] = []
+## Set at packet build time when source has Unblockable status (and the status
+## is past its fresh-window). Forwarded into AttackDamageEffect so block
+## subtraction is skipped for the physical hit. The status itself is consumed
+## here in execute_single_target after the swing is dispatched.
+var ignore_block: bool = false
 
 func execute(targets: Array[Node]) -> void:
 	for target in targets:
@@ -48,7 +53,15 @@ func execute_single_target(target: Node) -> void:
 		atk.go_again = go_again
 		atk.on_hit_effects = on_hit_effects
 		atk.source_owner = source_owner
+		atk.ignore_block = ignore_block
 		atk.execute([target])
+		# Consume one Unblockable stack now that the swing has dispatched.
+		# Multiple Telegraph Strikes pile to multiple stacks — each one buys a
+		# single ignore-block swing.
+		if ignore_block and source_owner and source_owner.status_handler:
+			var u := source_owner.status_handler.get_status_by_id("unblockable") as UnblockableStatus
+			if u:
+				u.consume()
 	if arcane > 0:
 		var zap := ZapEffect.new()
 		zap.amount = arcane

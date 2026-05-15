@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnblockableStatus" format=3]
+
+[ext_resource type="Texture2D" uid="uid://dscvm2j0a7omm" path="res://art/sword_icon.png" id="1_icon"]
+[ext_resource type="Script" path="res://statuses/unblockable.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "unblockable"
+type = 2
+stack_type = 1
+can_expire = false
+duration = 0
+stacks = 1
+icon = ExtResource("1_icon")
+tooltip = "Next attack ignores the target's block."

@@ -122,7 +122,7 @@ func _roll_inventory_item() -> Resource:
 		return null
 
 	for attempt in ITEM_ROLL_RETRIES:
-		var roll_weapon := RNG.instance.randf() < 0.5
+		var roll_weapon := RNG.instance.randf() < 0.25
 		var pool: Array = []
 		if roll_weapon:
 			pool = draftable_inventory.weapons.duplicate()

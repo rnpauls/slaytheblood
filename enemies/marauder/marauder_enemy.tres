@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://c3k08kf6vb2d" path="res://enemies/marauder/marauder_starting_deck.tres" id="3_deck"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_hcjr1"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="5_weapon"]
 
 [resource]
 script = ExtResource("1_script")
@@ -15,3 +16,4 @@ max_health = 70
 starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 4
+hand_left = ExtResource("5_weapon")

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_jr4pb"]
 [ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_evohs"]
-[ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="3_2ckkr"]
-[ext_resource type="Resource" uid="uid://jf61dkwx4vu2" path="res://generic_cards/brittle_bones.tres" id="4_5rsm8"]
-[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="4_lra8a"]
-[ext_resource type="Resource" uid="uid://bn1mb1ec4rdxa" path="res://generic_cards/nimble.tres" id="5_2ckkr"]
+[ext_resource type="Resource" path="res://enemies/commoner/cards/pitchfork_jab.tres" id="3_pjab"]
+[ext_resource type="Resource" path="res://enemies/commoner/cards/rabble_cry.tres" id="4_rcry"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="5_blkrd"]
+[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="6_rabl"]
 
 [resource]
 script = ExtResource("2_evohs")
-cards = Array[ExtResource("1_jr4pb")]([ExtResource("3_2ckkr"), ExtResource("3_2ckkr"), ExtResource("3_2ckkr"), ExtResource("4_lra8a"), ExtResource("4_lra8a"), ExtResource("4_lra8a"), ExtResource("4_lra8a"), ExtResource("4_5rsm8"), ExtResource("4_5rsm8"), ExtResource("5_2ckkr")])
+cards = Array[ExtResource("1_jr4pb")]([ExtResource("3_pjab"), ExtResource("3_pjab"), ExtResource("3_pjab"), ExtResource("4_rcry"), ExtResource("4_rcry"), ExtResource("5_blkrd"), ExtResource("6_rabl")])
 metadata/_custom_type_script = "uid://dejd2uv2w4475"

@@ -114,7 +114,11 @@ func create_instance() -> Resource:
 ## available (the default — right for the player today, since the player has
 ## no UI to choose). The enemy AI passes an explicit value so it can keep mana
 ## in reserve for offense or pitch additional cards to spend more.
-func take_damage(damage : int, damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL, prevention: int = -1) -> int:
+##
+## ignore_block: physical attacks marked unblockable (carrier has Unblockable
+## status when the packet was built) bypass block subtraction entirely. Block
+## is left intact — only this swing skips it. No effect on arcane.
+func take_damage(damage : int, damage_kind: Card.DamageKind = Card.DamageKind.PHYSICAL, prevention: int = -1, ignore_block: bool = false) -> int:
 	if damage <= 0:
 		return 0
 	if damage_kind == Card.DamageKind.ARCANE:
@@ -128,8 +132,9 @@ func take_damage(damage : int, damage_kind: Card.DamageKind = Card.DamageKind.PH
 		health -= unprevented
 		return unprevented
 	var initial_damage = damage
-	damage = clampi(damage - block, 0, damage)
-	block = clampi(block - initial_damage, 0, block)
+	if not ignore_block:
+		damage = clampi(damage - block, 0, damage)
+		block = clampi(block - initial_damage, 0, block)
 	health -= damage
 	return damage
 

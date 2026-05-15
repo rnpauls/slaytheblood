@@ -6,6 +6,7 @@
 [ext_resource type="Resource" path="res://enemies/plague_rat/plague_rat_starting_deck.tres" id="3_deck"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_iadty"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="Resource" path="res://statuses/disease_carrier.tres" id="5_carrier"]
 
 [resource]
 script = ExtResource("1_script")
@@ -15,3 +16,4 @@ max_health = 21
 starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 3
+passives = Array[Resource]([ExtResource("5_carrier")])

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BoneHookWeapon" format=3]
+
+[ext_resource type="Texture2D" uid="uid://cvgyr0gjsb6yi" path="res://art/Icon28_40.png" id="1_icon"]
+[ext_resource type="Script" path="res://weapons/bone_hook.gd" id="2_script"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
+
+[resource]
+script = ExtResource("2_script")
+weapon_name = "Bone Hook"
+id = "bone_hook"
+type = 0
+rarity = 1
+hands = 1
+icon = ExtResource("1_icon")
+sound = ExtResource("3_sound")
+tooltip = "[kw=onhit]On hit[/kw]: Take a random card from the target's discard pile and remove it for the rest of the battle."
+attack = 4
+cost = 2

@@ -7,6 +7,7 @@ class_name EnemyHandler
 extends Node2D
 
 const HEALTH_VARIATION := 2
+const ENEMY_SCENE := preload("res://scenes/enemy/enemy.tscn")
 
 var acting_enemies: Array[Enemy] = []
 
@@ -48,8 +49,43 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 		new_enemy_child.stats.exhaust = CardPile.new()
 		new_enemy_child.draw_cards(new_enemy_child.stats.cards_per_turn)
 		new_enemy_child.setup_ai(player_target)
+		_apply_passives(new_enemy_child)
 
 	all_new_enemies.queue_free()
+
+
+## Spawn a fresh enemy mid-battle (used by Slime Splitter and any future spawn
+## mechanic). Mirrors setup_enemies's per-enemy bootstrap: instantiate the
+## enemy scene, assign stats (the EnemyStats setter calls create_instance so
+## the new enemy gets its own deck/HP), build deck/discard/exhaust piles,
+## draw an initial hand, wire AI, and apply passives. The new enemy joins
+## acting_enemies on the NEXT enemy phase — start_turn rebuilds that list
+## from get_children() each enemy phase.
+func spawn_enemy(stats_resource: EnemyStats, spawn_position: Vector2) -> Enemy:
+	var new_enemy := ENEMY_SCENE.instantiate() as Enemy
+	new_enemy.position = spawn_position
+	add_child(new_enemy)
+	new_enemy.battle_ui = battle_ui_ref
+	new_enemy.stats = stats_resource
+	new_enemy.stats.draw_pile = new_enemy.stats.starting_deck.custom_duplicate()
+	new_enemy.stats.draw_pile.shuffle()
+	new_enemy.stats.discard = CardPile.new()
+	new_enemy.stats.exhaust = CardPile.new()
+	new_enemy.draw_cards(new_enemy.stats.cards_per_turn)
+	new_enemy.setup_ai(player_target)
+	_apply_passives(new_enemy)
+	return new_enemy
+
+
+func _apply_passives(enemy: Enemy) -> void:
+	if enemy.stats == null:
+		return
+	var passives: Array = enemy.stats.passives
+	if passives.is_empty():
+		return
+	for resource: Resource in passives:
+		if resource is Status:
+			enemy.status_handler.add_status((resource as Status).duplicate())
 
 func reset_enemy_actions() -> void:
 	for enemy: Enemy in get_children():

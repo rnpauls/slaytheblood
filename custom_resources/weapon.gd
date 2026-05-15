@@ -135,6 +135,12 @@ func build_attack_packet(modifiers: ModifierHandler, custom_attack: int = attack
 		if rune is RunechantStatus:
 			packet.arcane += (rune as RunechantStatus).consume()
 
+	# Unblockable mirrors Card.build_attack_packet — see notes there.
+	if packet.physical > 0 and owner and owner.status_handler:
+		var u := owner.status_handler.get_status_by_id("unblockable") as UnblockableStatus
+		if u and not u.fresh and u.stacks > 0:
+			packet.ignore_block = true
+
 	return packet
 
 ## Rampage helper: draw `qty` extra cards into the source's hand, then randomly

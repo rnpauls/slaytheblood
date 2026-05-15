@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3]
+
+[ext_resource type="Script" path="res://custom_resources/keyword_entry.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"crippled"
+display_name = "Crippled"
+description = "Outgoing attacks deal {x} less damage. Reduces by 1 at end of turn."
