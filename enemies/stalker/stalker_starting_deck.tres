@@ -10,7 +10,8 @@
 [ext_resource type="Resource" uid="uid://bwdwsrg65wk8t" path="res://generic_cards/wounding_blow_red.tres" id="6_wb"]
 [ext_resource type="Resource" uid="uid://bnpxl3v8ym45w" path="res://generic_cards/crushing_strike.tres" id="8_fabjv"]
 [ext_resource type="Resource" path="res://generic_cards/telegraph_strike.tres" id="9_telegraph"]
+[ext_resource type="Resource" path="res://enemies/stalker/cards/shadowstep.tres" id="10_shadow"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("5_vb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("5_vb"), ExtResource("5_vb"), ExtResource("5_vb"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("6_og7to"), ExtResource("6_og7to"), ExtResource("6_og7to"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("8_fabjv"), ExtResource("8_fabjv"), ExtResource("9_telegraph"), ExtResource("9_telegraph")])
+cards = Array[ExtResource("1_card")]([ExtResource("5_vb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("4_o3gq7"), ExtResource("5_vb"), ExtResource("5_vb"), ExtResource("5_vb"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("5_ujifr"), ExtResource("6_og7to"), ExtResource("6_og7to"), ExtResource("6_og7to"), ExtResource("4_is"), ExtResource("4_is"), ExtResource("8_fabjv"), ExtResource("8_fabjv"), ExtResource("9_telegraph"), ExtResource("9_telegraph"), ExtResource("10_shadow"), ExtResource("10_shadow")])

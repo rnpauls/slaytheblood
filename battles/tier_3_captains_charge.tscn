@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
+[ext_resource type="Resource" path="res://enemies/warlord/warlord_enemy.tres" id="2_warlord"]
+[ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="3_comm"]
+
+[node name="Tier3CaptainsCharge" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(900, 350)
+stats = ExtResource("2_warlord")
+
+[node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1080, 320)
+stats = ExtResource("3_comm")
+
+[node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1220, 360)
+stats = ExtResource("3_comm")

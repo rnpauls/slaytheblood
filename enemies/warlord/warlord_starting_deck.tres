@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardPile" format=3]
+
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" path="res://enemies/warlord/cards/warlords_order.tres" id="3_order"]
+[ext_resource type="Resource" path="res://enemies/warlord/cards/captains_strike.tres" id="4_strike"]
+[ext_resource type="Resource" path="res://generic_cards/war_cry.tres" id="5_wcry"]
+[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="6_blk"]
+[ext_resource type="Resource" uid="uid://bnpxl3v8ym45w" path="res://generic_cards/crushing_strike.tres" id="7_crush"]
+
+[resource]
+script = ExtResource("2_pile")
+cards = Array[ExtResource("1_card")]([ExtResource("3_order"), ExtResource("3_order"), ExtResource("4_strike"), ExtResource("4_strike"), ExtResource("5_wcry"), ExtResource("5_wcry"), ExtResource("6_blk"), ExtResource("7_crush")])

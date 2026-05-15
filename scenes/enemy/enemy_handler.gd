@@ -74,6 +74,9 @@ func spawn_enemy(stats_resource: EnemyStats, spawn_position: Vector2) -> Enemy:
 	new_enemy.draw_cards(new_enemy.stats.cards_per_turn)
 	new_enemy.setup_ai(player_target)
 	_apply_passives(new_enemy)
+	# Fire AFTER setup so subscribers (Aura: Command, future spawn-aware
+	# passives) see a fully-wired enemy when they react.
+	Events.enemy_spawned.emit(new_enemy)
 	return new_enemy
 
 

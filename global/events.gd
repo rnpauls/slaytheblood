@@ -87,6 +87,12 @@ signal equipment_self_destruct_requested(equipment: Equipment)
 #Enemy-related events
 signal enemy_phase_ended #Called when all enemies are done, move to player turn
 signal enemy_died(enemy: Enemy)
+## Fires when EnemyHandler.spawn_enemy completes setup for a mid-battle spawn
+## (Slime split today; any future spawn mechanic too). Aura-style statuses
+## subscribe to extend their effect onto newly-arrived allies — initial
+## battle-start enemies don't fire this; the regular per-enemy setup pass
+## handles them.
+signal enemy_spawned(enemy: Enemy)
 signal enemy_attack_declared
 signal enemy_card_drawn(enemy: Enemy)
 ## Emitted when an enemy stages its attack card to the center of the screen

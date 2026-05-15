@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://enemies/stalker/cards/shadowstep.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
+[ext_resource type="Texture2D" uid="uid://c4db7ggurfpek" path="res://art/Icon28_05.png" id="3_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = "shadowstep"
+type = 1
+target = 1
+cost = 1
+pitch = 1
+defense = 1
+ai_value = 5
+icon = ExtResource("3_icon")
+tooltip_text = "Pick a card in the target's hand. It becomes inert (can't be played, pitched, or used to block) until end of their next turn."
+sound = ExtResource("2_blksnd")
+disable_attack = true
