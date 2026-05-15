@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_j4tg2"]
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c5582wbnjbjga" path="res://art/sprites/pixellab/stalker.png" id="2_art"]
-[ext_resource type="Resource" uid="uid://btifwopcim7ka" path="res://enemies/stalker/stalker_starting_deck.tres" id="3_deck"]
+[ext_resource type="Resource" uid="uid://b8x0s6s6n36c2" path="res://enemies/stalker/stalker_starting_deck.tres" id="3_deck"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_wge1v"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
 

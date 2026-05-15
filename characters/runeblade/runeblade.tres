@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="3_np4oh"]
 [ext_resource type="Resource" uid="uid://by78q8te8tqex" path="res://characters/runeblade/runeblade_starting_deck.tres" id="3_sdck0"]
 [ext_resource type="Resource" uid="uid://jiwskb7w1o6" path="res://characters/runeblade/runeblade_starting_inv.tres" id="4_sinv0"]
-[ext_resource type="Resource" uid="uid://crbdr1runebd0" path="res://characters/runeblade/runeblade_draftable_cards.tres" id="5_drft0"]
+[ext_resource type="Resource" uid="uid://bvuokdev3wqxl" path="res://characters/runeblade/runeblade_draftable_cards.tres" id="5_drft0"]
 [ext_resource type="Script" uid="uid://dm186c77vbsjn" path="res://custom_resources/weapon.gd" id="6_wpn00"]
 [ext_resource type="Resource" uid="uid://covn825k1xfh0" path="res://weapons/aether_ash_runeblade.tres" id="7_aash0"]
 [ext_resource type="Resource" uid="uid://bg118yb2wjnyh" path="res://weapons/galvanic_slingshot.tres" id="8_gsls0"]

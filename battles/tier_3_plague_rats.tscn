@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://0jsfywsk3cnc"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
-[ext_resource type="Resource" uid="uid://b3sgw1llaberg" path="res://enemies/plague_rat/plague_rat_enemy.tres" id="2_es"]
+[ext_resource type="Resource" uid="uid://bn11y0ih322i1" path="res://enemies/plague_rat/plague_rat_enemy.tres" id="2_es"]
 
 [node name="Tier3PlagueRats" type="Node2D"]
 

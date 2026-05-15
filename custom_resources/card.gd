@@ -201,7 +201,11 @@ func do_stock_attack_damage_effect(targets: Array[Node], modifiers: ModifierHand
 ## (consumed here, added raw). Used by do_stock_attack_damage_effect and exposed
 ## so the enemy intent system / damage previews can inspect a card's full hit
 ## profile without firing it.
-func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack) -> DamagePacket:
+##
+## `custom_zap` defaults to the card's printed `zap` so attack callers behave
+## as before; do_zap_effect overrides it to fire an arbitrary arcane amount
+## (e.g. Runic Burst's 2× consumed runechants) without a physical component.
+func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack, custom_zap: int = zap) -> DamagePacket:
 	var packet := DamagePacket.new()
 	packet.source_card = self
 	packet.source_owner = owner
@@ -214,8 +218,8 @@ func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack
 	if custom_damage > 0:
 		packet.physical = modifiers.get_modified_value(custom_damage, Modifier.Type.DMG_DEALT)
 
-	if zap > 0:
-		packet.arcane = modifiers.get_modified_value(zap, Modifier.Type.ARCANE_DEALT)
+	if custom_zap > 0:
+		packet.arcane = modifiers.get_modified_value(custom_zap, Modifier.Type.ARCANE_DEALT)
 
 	# Runechants on the attacker pop into the same packet — single decision
 	# point for the defender instead of a sequence of small arcane events.
@@ -227,16 +231,18 @@ func build_attack_packet(modifiers: ModifierHandler, custom_damage: int = attack
 
 	return packet
 
-## Fires the card's `zap` value as arcane damage at the given targets, with no
-## physical component. For non-attack spells (NAAs that just zap) — attack
-## cards already fold zap into their packet via do_stock_attack_damage_effect.
+## Fires `custom_zap` arcane damage at the given targets via a pure-arcane
+## DamagePacket. Routing through the packet path is what gives enemies a chance
+## to make a strategic block/mana decision via enemy_ai.defend_packet — the old
+## direct-ZapEffect path forced auto-mana-spend on the enemy. With
+## custom_damage=0, the runechant rider in build_attack_packet is bypassed
+## (gated on packet.physical > 0), so detonators that pass an already-consumed
+## rune count as custom_zap don't double-consume.
 func do_zap_effect(targets: Array[Node], modifiers: ModifierHandler, custom_zap: int = zap) -> void:
 	if custom_zap <= 0:
 		return
-	var zap_effect := ZapEffect.new()
-	zap_effect.amount = modifiers.get_modified_value(custom_zap, Modifier.Type.ARCANE_DEALT)
-	zap_effect.sound = sound
-	zap_effect.execute(targets)
+	var packet := build_attack_packet(modifiers, 0, custom_zap)
+	packet.execute(targets)
 
 func _on_card_discarded(card: Card) -> void:
 	discarded_card = card

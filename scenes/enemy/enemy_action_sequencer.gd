@@ -45,7 +45,7 @@ func declare_next_attack() -> void:
 		_hand_manager.set_pending_stage(pending_card)
 		pending_card_ui = _hand_manager.get_card_ui(pending_card)
 
-	current_action = enemy_ai.play_next_action()
+	current_action = await enemy_ai.play_next_action()
 	_hand_manager.clear_pending_stage()
 	_enemy.update_intent()
 	_enemy_resource_ui.update_display(enemy_ai)

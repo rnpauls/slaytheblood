@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_arch"]
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="1_h2840"]
 [ext_resource type="Texture2D" uid="uid://d1e1xrwss7adl" path="res://art/sprites/pixellab/archivist.png" id="2_arch"]
-[ext_resource type="Resource" uid="uid://b7archdck002" path="res://enemies/archivist/archivist_starting_deck.tres" id="3_arch"]
+[ext_resource type="Resource" uid="uid://cp7nvutbe1n5i" path="res://enemies/archivist/archivist_starting_deck.tres" id="3_arch"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_csh1k"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_arch"]
 [ext_resource type="Resource" uid="uid://b7catalg002" path="res://weapons/elite/catalog_tome.tres" id="5_arch"]

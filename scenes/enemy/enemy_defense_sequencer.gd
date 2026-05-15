@@ -22,6 +22,7 @@ extends Node
 
 const BLOCK_BADGE_SCENE := preload("res://scenes/enemy/block_badge.tscn")
 const MANA_ICON := preload("res://art/gold.png")
+const PITCH_SOUND := preload("res://art/music/sound_effects/400 Sounds Pack/Items/coin_collect.wav")
 
 ## Defense-card visualization tunables.
 const CARD_PIVOT_OFFSET := Vector2(100, 140)  # Matches CardUI scene pivot.
@@ -68,6 +69,15 @@ func animate_defense(result: Dictionary) -> void:
 	_play_defense_sequence(anim_queue)
 
 
+## Animate a single offensive pitch — used by EnemyAI.play_next_action when
+## the enemy pitches a card to pay for an attack. Same visual as defensive
+## pitches in animate_defense: card travels to the block display, flips
+## face-up, mana badge pops, card fades. Awaitable so the caller can
+## sequence pitch → action cleanly.
+func animate_pitch(card: Card) -> void:
+	await _animate_defense_card(card, card.pitch, "pitch")
+
+
 ## Run each defensive card animation sequentially.
 func _play_defense_sequence(queue: Array) -> void:
 	for entry in queue:
@@ -110,8 +120,10 @@ func _animate_defense_card(card: Card, amount: int, kind: String) -> void:
 	badge.z_index = DEFENSE_BADGE_Z_INDEX
 	if kind == "pitch":
 		badge.set_icon(MANA_ICON)
+		SFXPlayer.play(PITCH_SOUND)
+	else:
+		SFXPlayer.play(card.block_sound)
 	badge.pop(amount)
-	SFXPlayer.play(card.block_sound)
 
 	await _enemy.get_tree().create_timer(DEFENSE_HOLD_DURATION).timeout
 	if not is_instance_valid(card_ui):

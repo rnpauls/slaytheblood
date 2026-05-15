@@ -58,6 +58,8 @@ func play_next_action() -> Card:
 		card_removed_from_hand.emit(pitch)
 		turn_plan.pitched.erase(pitch)
 		print_enemy_ai("pitched %s for %d" % [pitch.id, pitch.pitch])
+		if enemy and enemy.defense_sequencer:
+			await enemy.defense_sequencer.animate_pitch(pitch)
 
 	if resources < next_action.cost:
 		turn_plan.actions.erase(next_action)

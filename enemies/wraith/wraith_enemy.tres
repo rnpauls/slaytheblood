@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyStats" format=3]
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://dn2xqnmdvq8yi"]
 
 [ext_resource type="Script" path="res://custom_resources/enemy_stats.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://art/sprites/pixellab/wraith.png" id="2_art"]

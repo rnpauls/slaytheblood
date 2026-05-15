@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ch6h7f1q654m2"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
-[ext_resource type="Resource" uid="uid://cgl7dy0o7shgd" path="res://enemies/plague_rat/plague_rat_enemy.tres" id="2_es"]
-[ext_resource type="Resource" uid="uid://b8aih8o8lxkjn" path="res://enemies/hex_cultist/hex_cultist_enemy.tres" id="3_es"]
+[ext_resource type="Resource" uid="uid://bn11y0ih322i1" path="res://enemies/plague_rat/plague_rat_enemy.tres" id="2_es"]
+[ext_resource type="Resource" uid="uid://ccqivpjiixffo" path="res://enemies/hex_cultist/hex_cultist_enemy.tres" id="3_es"]
 
 [node name="Tier3CultistRats" type="Node2D"]
 
