@@ -49,7 +49,7 @@ func take_damage(damage: int, which_modifier: Modifier.Type, damage_kind: Card.D
 		return 0
 
 	sprite_2d.material = WHITE_SPRITE_MATERIAL
-	var modified_damage := modifier_handler.get_modified_value(damage, which_modifier)
+	var modified_damage := modifier_handler.get_modified_value(damage, which_modifier, damage_kind)
 	var damage_taken := stats.take_damage(modified_damage, damage_kind, prevention, ignore_block)
 
 	var tween := create_tween()

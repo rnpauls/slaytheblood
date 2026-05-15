@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://boams8v5fe67u" path="res://enemies/elite/reaver/reaver_starting_deck.tres" id="3_reav"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_reav"]
 [ext_resource type="Resource" uid="uid://dt42xa5cchfwy" path="res://weapons/berserkers_bite.tres" id="5_reav"]
+[ext_resource type="Resource" path="res://statuses/bloodthirst.tres" id="6_bthirst"]
 
 [resource]
 script = ExtResource("1_reav")
@@ -17,4 +18,5 @@ starting_deck = ExtResource("3_reav")
 starting_inventory = ExtResource("4_reav")
 cards_per_turn = 3
 hand_left = ExtResource("5_reav")
+passives = Array[Resource]([ExtResource("6_bthirst")])
 metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

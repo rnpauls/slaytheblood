@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://enemies/hex_cultist/cards/mark_of_pain.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="3_icon"]
+[ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="4_sound"]
+
+[resource]
+script = ExtResource("1_script")
+id = "mark_of_pain"
+type = 1
+target = 1
+cost = 1
+pitch = 1
+defense = 1
+ai_value = 4
+icon = ExtResource("3_icon")
+tooltip_text = "Apply [kw=marked:2]Marked 2[/kw] to the target."
+sound = ExtResource("4_sound")
+disable_attack = true

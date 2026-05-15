@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_dqd5h"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="5_weapon"]
+[ext_resource type="Resource" path="res://statuses/bloodied.tres" id="6_bloodied"]
 
 [resource]
 script = ExtResource("1_script")
@@ -17,3 +18,4 @@ starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 4
 hand_left = ExtResource("5_weapon")
+passives = Array[Resource]([ExtResource("6_bloodied")])

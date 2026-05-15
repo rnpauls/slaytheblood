@@ -6,8 +6,9 @@
 [ext_resource type="Resource" path="res://enemies/commoner/cards/rabble_cry.tres" id="4_rcry"]
 [ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="5_blkrd"]
 [ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="6_rabl"]
+[ext_resource type="Resource" path="res://generic_cards/ally_up.tres" id="7_ally"]
 
 [resource]
 script = ExtResource("2_evohs")
-cards = Array[ExtResource("1_jr4pb")]([ExtResource("3_pjab"), ExtResource("3_pjab"), ExtResource("3_pjab"), ExtResource("4_rcry"), ExtResource("4_rcry"), ExtResource("5_blkrd"), ExtResource("6_rabl")])
+cards = Array[ExtResource("1_jr4pb")]([ExtResource("3_pjab"), ExtResource("3_pjab"), ExtResource("3_pjab"), ExtResource("4_rcry"), ExtResource("4_rcry"), ExtResource("5_blkrd"), ExtResource("6_rabl"), ExtResource("7_ally")])
 metadata/_custom_type_script = "uid://dejd2uv2w4475"

@@ -8,7 +8,8 @@
 [ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="6_blk"]
 [ext_resource type="Resource" uid="uid://jk155r0wgw12" path="res://generic_cards/raging_onslaught_red.tres" id="7_rage"]
 [ext_resource type="Resource" path="res://generic_cards/bone_crunch.tres" id="8_bone"]
+[ext_resource type="Resource" path="res://generic_cards/war_cry.tres" id="9_wcry"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_lac"), ExtResource("3_lac"), ExtResource("4_crush"), ExtResource("4_crush"), ExtResource("5_flex"), ExtResource("6_blk"), ExtResource("6_blk"), ExtResource("7_rage"), ExtResource("7_rage"), ExtResource("7_rage"), ExtResource("7_rage"), ExtResource("8_bone"), ExtResource("8_bone"), ExtResource("5_flex"), ExtResource("4_crush"), ExtResource("3_lac")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_lac"), ExtResource("3_lac"), ExtResource("4_crush"), ExtResource("4_crush"), ExtResource("5_flex"), ExtResource("6_blk"), ExtResource("6_blk"), ExtResource("7_rage"), ExtResource("7_rage"), ExtResource("7_rage"), ExtResource("8_bone"), ExtResource("8_bone"), ExtResource("9_wcry"), ExtResource("5_flex"), ExtResource("4_crush"), ExtResource("3_lac")])

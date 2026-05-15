@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://generic_cards/war_cry.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
+[ext_resource type="Texture2D" uid="uid://bd24nyu1ri2t" path="res://art/Iicon_32_11.png" id="3_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = "war_cry"
+type = 1
+target = 0
+cost = 2
+pitch = 1
+defense = 1
+ai_value = 5
+icon = ExtResource("3_icon")
+tooltip_text = "All allied enemies gain [kw=empower:2]Empower 2[/kw]."
+sound = ExtResource("2_blksnd")
+disable_attack = true

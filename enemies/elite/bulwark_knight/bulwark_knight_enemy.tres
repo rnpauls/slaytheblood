@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_tmtwo"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_blwk"]
 [ext_resource type="Resource" uid="uid://b7twrshld001" path="res://weapons/elite/tower_shield.tres" id="5_blwk"]
+[ext_resource type="Resource" path="res://statuses/aegis_thorns.tres" id="6_aegis"]
 
 [resource]
 script = ExtResource("1_blwk")
@@ -17,4 +18,5 @@ starting_deck = ExtResource("3_blwk")
 starting_inventory = ExtResource("4_blwk")
 cards_per_turn = 3
 hand_left = ExtResource("5_blwk")
+passives = Array[Resource]([ExtResource("6_aegis")])
 metadata/_custom_type_script = "uid://ctmwu6sm10xgw"

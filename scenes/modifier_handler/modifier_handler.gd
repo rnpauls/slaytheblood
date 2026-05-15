@@ -38,11 +38,14 @@ func get_modifier(type: Modifier.Type) -> Modifier:
 	
 	return null
 
-func get_modified_value(base: int, type: Modifier.Type) -> int:
+## damage_kind defaults to -1 (no filter) so all existing call sites stay
+## intact. Damage-resolving paths (Combatant.take_damage) pass the actual
+## Card.DamageKind so per-value `only_physical` flags can be honored.
+func get_modified_value(base: int, type: Modifier.Type, damage_kind: int = -1) -> int:
 	var modifier := get_modifier(type)
-	
+
 	if not modifier:
 		return base
-	
+
 	else:
-		return modifier.get_modified_value(base)
+		return modifier.get_modified_value(base, damage_kind)

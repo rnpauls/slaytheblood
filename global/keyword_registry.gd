@@ -47,6 +47,8 @@ const KEYWORDS: Dictionary = {
 	&"block" : preload("uid://cybni5xs23bgd"),
 	&"crippled" : preload("res://keywords/crippled_kw.tres"),
 	&"unblockable" : preload("res://keywords/unblockable_kw.tres"),
+	&"bloodied" : preload("res://keywords/bloodied_kw.tres"),
+	&"aura" : preload("res://keywords/aura_kw.tres"),
 }
 
 const _KW_TAG_REGEX := r"\[kw=([\w-]+)(?::([^\]]+))?\](.*?)\[/kw\]"

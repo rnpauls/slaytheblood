@@ -6,6 +6,8 @@
 [ext_resource type="Resource" path="res://enemies/cursed_treant/cursed_treant_starting_deck.tres" id="3_deck"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="3_ytj8t"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="Resource" path="res://statuses/bloody_sap.tres" id="5_sap"]
+[ext_resource type="Resource" uid="uid://d0ysidmrl0vvu" path="res://weapons/heartblood_maul.tres" id="6_maul"]
 
 [resource]
 script = ExtResource("1_script")
@@ -15,3 +17,5 @@ max_health = 45
 starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 2
+hand_left = ExtResource("6_maul")
+passives = Array[Resource]([ExtResource("5_sap")])

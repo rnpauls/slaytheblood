@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MindAttritionStatus" format=3]
+
+[ext_resource type="Texture2D" uid="uid://daitdh3qfm8xy" path="res://art/Iicon_32_30.png" id="1_icon"]
+[ext_resource type="Script" path="res://statuses/mind_attrition.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+id = "mind_attrition"
+type = 2
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+icon = ExtResource("1_icon")
+tooltip = "At battle start, exhaust 2 random cards from the player's draw pile."

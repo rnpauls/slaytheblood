@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
+[ext_resource type="Resource" uid="uid://cipllp2x4tqrg" path="res://enemies/cursed_treant/cursed_treant_enemy.tres" id="2_treant"]
+[ext_resource type="Resource" path="res://enemies/bat/pack_bat_enemy.tres" id="3_pbat"]
+
+[node name="Tier3ForestAmbush" type="Node2D"]
+
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(900, 360)
+stats = ExtResource("2_treant")
+
+[node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1100, 320)
+stats = ExtResource("3_pbat")
+
+[node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1240, 360)
+stats = ExtResource("3_pbat")

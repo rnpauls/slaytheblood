@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://generic_cards/ally_up.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
+[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="3_icon"]
+
+[resource]
+script = ExtResource("1_script")
+id = "ally_up"
+type = 1
+target = 0
+cost = 0
+pitch = 1
+defense = 1
+ai_value = 4
+icon = ExtResource("3_icon")
+tooltip_text = "Choose another living ally: they gain 2 [kw=muscle:2]Muscle[/kw] and 5 [kw=block]block[/kw]."
+sound = ExtResource("2_blksnd")
+disable_attack = true

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" path="res://art/sprites/pixellab/wraith.png" id="2_art"]
 [ext_resource type="Resource" path="res://enemies/wraith/wraith_starting_deck.tres" id="3_deck"]
 [ext_resource type="Resource" path="res://enemies/empty_inventory.tres" id="4_inv"]
+[ext_resource type="Resource" path="res://statuses/phase.tres" id="5_phase"]
 
 [resource]
 script = ExtResource("1_script")
@@ -13,3 +14,4 @@ max_health = 18
 starting_deck = ExtResource("3_deck")
 starting_inventory = ExtResource("4_inv")
 cards_per_turn = 2
+passives = Array[Resource]([ExtResource("5_phase")])

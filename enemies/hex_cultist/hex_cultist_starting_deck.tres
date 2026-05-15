@@ -7,7 +7,9 @@
 [ext_resource type="Resource" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.tres" id="5_cw"]
 [ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
 [ext_resource type="Resource" path="res://generic_cards/hex_strike.tres" id="7_hex"]
+[ext_resource type="Resource" path="res://enemies/hex_cultist/cards/mark_of_pain.tres" id="8_mark"]
+[ext_resource type="Resource" path="res://generic_cards/pact_of_pain.tres" id="9_pact"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_hl"), ExtResource("3_hl"), ExtResource("4_bb"), ExtResource("4_bb"), ExtResource("5_cw"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_hex"), ExtResource("7_hex")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_hl"), ExtResource("3_hl"), ExtResource("4_bb"), ExtResource("4_bb"), ExtResource("5_cw"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_hex"), ExtResource("7_hex"), ExtResource("8_mark"), ExtResource("8_mark"), ExtResource("9_pact")])

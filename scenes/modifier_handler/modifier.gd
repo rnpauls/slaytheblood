@@ -46,16 +46,26 @@ func clear_values() -> void:
 		value.queue_free()
 	value_changed.emit.call_deferred()
 
-func get_modified_value(base: int) -> int:
+## damage_kind: optional Card.DamageKind hint. -1 means "not damage-resolving"
+## (e.g. CARD_COST or BLOCK_GAINED queries) — every value is included, same as
+## before. When a real damage kind is supplied, ModifierValues marked
+## only_physical are filtered out unless the kind is PHYSICAL. Used by
+## Combatant.take_damage so a status like Wraith Phase can shave physical
+## damage without also dampening arcane.
+func get_modified_value(base: int, damage_kind: int = -1) -> int:
 	var flat_result: int = base
 	var percent_result: float = 1.0
 	#Apply flat first
 	for value: ModifierValue in get_children():
+		if value.only_physical and damage_kind != -1 and damage_kind != Card.DamageKind.PHYSICAL:
+			continue
 		if value.type == ModifierValue.Type.FLAT:
 			flat_result += value.flat_value
-	
+
 	for value: ModifierValue in get_children():
+		if value.only_physical and damage_kind != -1 and damage_kind != Card.DamageKind.PHYSICAL:
+			continue
 		if value.type == ModifierValue.Type.PERCENT_BASED:
 			percent_result += value.percent_value
-	
+
 	return floori(flat_result * percent_result)
