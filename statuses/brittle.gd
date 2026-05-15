@@ -3,6 +3,9 @@ extends Status
 
 var _block_modifier: Modifier
 
+var _target_ref: Node = null
+var _bound_apply: Callable
+
 
 func get_tooltip() -> String:
 	return tooltip % duration
@@ -10,6 +13,9 @@ func get_tooltip() -> String:
 
 func initialize_status(target: Node) -> void:
 	assert(target.get("modifier_handler"), "No modifiers on %s" % target)
+
+	_target_ref = target
+	_bound_apply = apply_status.bind(target)
 
 	_block_modifier = target.modifier_handler.get_modifier(Modifier.Type.BLOCK_GAINED)
 	assert(_block_modifier, "No block gained modifier on %s" % target)
@@ -25,11 +31,21 @@ func initialize_status(target: Node) -> void:
 		status_changed.connect(_on_status_changed)
 
 	if target is Player:
-		Events.enemy_phase_ended.connect(apply_status.bind(target))
+		Events.enemy_phase_ended.connect(_bound_apply)
 	else:
-		Events.player_turn_ended.connect(apply_status.bind(target))
+		Events.player_turn_ended.connect(_bound_apply)
 
 
 func _on_status_changed() -> void:
 	if duration <= 0 and _block_modifier:
 		_block_modifier.remove_value("brittle")
+
+
+func _exit_tree() -> void:
+	if _bound_apply:
+		if _target_ref is Player:
+			if Events.enemy_phase_ended.is_connected(_bound_apply):
+				Events.enemy_phase_ended.disconnect(_bound_apply)
+		else:
+			if Events.player_turn_ended.is_connected(_bound_apply):
+				Events.player_turn_ended.disconnect(_bound_apply)

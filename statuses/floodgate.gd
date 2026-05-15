@@ -8,6 +8,7 @@ extends Status
 
 var damage_modifier: Modifier
 var _target: Node
+var _bound_apply: Callable
 
 
 func get_tooltip() -> String:
@@ -25,7 +26,8 @@ func initialize_status(target: Node) -> void:
 		# one that just granted this Floodgate) is skipped — the grant carries to
 		# the NEXT arcane card instead of being consumed by its own source.
 		_arm_decay.call_deferred()
-		Events.player_turn_ended.connect(apply_status.bind(target))
+		_bound_apply = apply_status.bind(target)
+		Events.player_turn_ended.connect(_bound_apply)
 
 
 func _arm_decay() -> void:
@@ -50,3 +52,7 @@ func apply_status(_t) -> void:
 func _exit_tree() -> void:
 	if damage_modifier:
 		damage_modifier.remove_value("floodgate")
+	if _bound_apply and Events.player_turn_ended.is_connected(_bound_apply):
+		Events.player_turn_ended.disconnect(_bound_apply)
+	if Events.player_card_played.is_connected(_on_card_played):
+		Events.player_card_played.disconnect(_on_card_played)

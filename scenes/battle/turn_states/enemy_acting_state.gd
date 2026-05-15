@@ -71,13 +71,13 @@ func _run_action_loop() -> void:
 		# moves on rather than soft-locking the turn loop.
 		_arm_watchdog(State.ENEMY_EOT, SEGMENT_WATCHDOG_TIMEOUT)
 
-		# declare_next_attack is synchronous: it sets current_action and
-		# stages the card UI. enemy_attack_declared (which flips the END
-		# button to BLOCK in BattleUI) is emitted later in
+		# declare_next_attack awaits any offensive pitch animations before
+		# setting current_action and staging the card UI. enemy_attack_declared
+		# (which flips the END button to BLOCK in BattleUI) is emitted later in
 		# run_pre_block_reveal, after any reveal animation completes —
 		# arming BLOCK earlier would let a click race the reveal await
 		# and soft-lock the turn.
-		_current_enemy.declare_next_attack()
+		await _current_enemy.declare_next_attack()
 		if _cancelled:
 			return
 		if _current_enemy_died:

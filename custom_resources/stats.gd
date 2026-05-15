@@ -100,7 +100,7 @@ func create_instance() -> Resource:
 	instance.reset_mana()
 	instance.reset_action_points()
 	instance.inventory = instance.starting_inventory.duplicate()
-	instance.deck = instance.starting_deck.duplicate()
+	instance.deck = instance.starting_deck.custom_duplicate()
 	instance.draw_pile = CardPile.new()
 	instance.discard = CardPile.new()
 	instance.exhaust = CardPile.new()

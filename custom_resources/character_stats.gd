@@ -26,7 +26,7 @@ func create_instance() -> Resource:
 	instance.block = 0
 	instance.reset_mana()
 	instance.reset_action_points()
-	instance.deck = instance.starting_deck.duplicate()
+	instance.deck = instance.starting_deck.custom_duplicate()
 	instance.inventory = Inventory.new() # Items are added to the character, who adds them to their inventory.
 	# Clear out any per-instance equipped slots so add_weapon/add_equipment can fill them fresh.
 	instance.hand_left = null

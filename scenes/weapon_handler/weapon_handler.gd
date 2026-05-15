@@ -168,6 +168,7 @@ func reset() -> void:
 
 func can_activate_weapon() -> bool:
 	if not weapon: return false
+	if not is_instance_valid(owner_of_weapon): return false
 	var combatant := owner_of_weapon as Combatant
 	if not combatant or not combatant.stats:
 		return false

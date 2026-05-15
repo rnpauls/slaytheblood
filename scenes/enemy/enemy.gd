@@ -158,7 +158,7 @@ func burn_played_cards() -> void:
 # ── Action delegation ─────────────────────────────────────────────────────────
 
 func declare_next_attack() -> void:
-	action_sequencer.declare_next_attack()
+	await action_sequencer.declare_next_attack()
 
 func run_pre_block_reveal() -> void:
 	await action_sequencer.run_pre_block_reveal()

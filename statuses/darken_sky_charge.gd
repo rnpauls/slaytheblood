@@ -11,12 +11,17 @@ const RUNECHANT_STATUS = preload("res://statuses/runechant.tres")
 
 var target_on_hits: Array[OnHit]
 
+var _target_ref: Node = null
+var _bound_apply: Callable
+
 
 func get_tooltip() -> String:
 	return tooltip % stacks
 
 
 func initialize_status(target: Node) -> void:
+	_target_ref = target
+	_bound_apply = apply_status.bind(target)
 	target_on_hits = target.active_on_hits
 
 	var on_hit := OnHit.new()
@@ -26,11 +31,11 @@ func initialize_status(target: Node) -> void:
 	on_hit.ai_value = stacks
 	target_on_hits.append(on_hit)
 
-	target.attack_completed.connect(apply_status.bind(target))
+	target.attack_completed.connect(_bound_apply)
 	if target is Player:
-		Events.player_turn_ended.connect(apply_status.bind(target))
+		Events.player_turn_ended.connect(_bound_apply)
 	else:
-		Events.enemy_phase_ended.connect(apply_status.bind(target))
+		Events.enemy_phase_ended.connect(_bound_apply)
 
 
 func update() -> void:
@@ -45,13 +50,19 @@ func update() -> void:
 
 
 func _exit_tree() -> void:
-	if target_on_hits == null:
-		return
-	var existing := target_on_hits.filter(
-		func(h: OnHit) -> bool: return h.id == "darken_sky_charge"
-	)
-	for h in existing:
-		target_on_hits.erase(h)
+	if target_on_hits != null:
+		var existing := target_on_hits.filter(
+			func(h: OnHit) -> bool: return h.id == "darken_sky_charge"
+		)
+		for h in existing:
+			target_on_hits.erase(h)
+	if _bound_apply:
+		if _target_ref is Player:
+			if Events.player_turn_ended.is_connected(_bound_apply):
+				Events.player_turn_ended.disconnect(_bound_apply)
+		else:
+			if Events.enemy_phase_ended.is_connected(_bound_apply):
+				Events.enemy_phase_ended.disconnect(_bound_apply)
 
 
 func _on_hit_create_runechants(_atk_target: Node, args: Array) -> void:
