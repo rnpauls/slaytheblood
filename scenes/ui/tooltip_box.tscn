@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://scenes/ui/tooltip_box.gd" id="2_box"]
+[ext_resource type="FontFile" uid="uid://dqblqg0f8hv28" path="res://art/themes/lt_cushion/LTCushion-Bold.ttf" id="3_bold"]
 
 [node name="TooltipBox" type="PanelContainer"]
 mouse_filter = 2
@@ -41,6 +42,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 mouse_filter = 2
+theme_override_fonts/bold_font = ExtResource("3_bold")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

@@ -53,10 +53,8 @@ const RARITY_COLORS := {
 }
 
 # ── Pitch sound sequence ────────────────────────────────────────────────────
-# Played in order: first N entries fire when a card with pitch=N is pitched.
-const PITCH_SOUNDS: Array[AudioStream] = [
-	preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_3.wav"),
-	preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_2.wav"),
-	preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_1.wav"),
-]
+# Played pitch_value times, with frequency pitch increasing by PITCH_SOUND_STEP
+# each iteration (so 3 mana = three ascending pops).
+const PITCH_SOUND := preload("uid://buhipb81h8ym1")#preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_1.wav")
 const PITCH_SOUND_GAP := 0.08
+const PITCH_SOUND_STEP := 0.6

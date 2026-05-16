@@ -4,6 +4,7 @@ extends Node2D
 @export var battle_stats: BattleStats
 @export var char_stats: CharacterStats
 @export var music: AudioStream
+@export var music_volume_db: float = 0.0
 @export var relics: RelicHandler
 @onready var hand_left_weapon: WeaponHandler = %LeftWeaponHandler
 @onready var hand_right_weapon: WeaponHandler = %RightWeaponHandler
@@ -30,7 +31,7 @@ func _ready() -> void:
 
 func start_battle() ->void:
 	get_tree().paused = false
-	MusicPlayer.play(music, true)
+	MusicPlayer.play(music, true, 1.0, music_volume_db)
 
 	battle_ui.char_stats = char_stats
 	player.stats = char_stats
@@ -64,7 +65,7 @@ func start_battle() ->void:
 	# so COMBAT_START is active and listening when player_initial_hand_drawn
 	# eventually fires at the end of the setup chain.
 	_setup_turn_state_machine()
-	battle_ui.bind_turn_state_machine(turn_state_machine)
+	battle_ui.bind_battle(self)
 
 	# Initialize the player (equipment, deck, refs) BEFORE relics flash so
 	# equipment is visible during the SOC animation and draw_card doesn't

@@ -83,13 +83,18 @@ func _on_mouse_entered() -> void:
 		return
 	var body := _build_tooltip_text()
 	var ca_icon: Texture2D = null
+	var title := ""
 	var ca = enemy.current_action
 	if ca is Card:
-		ca_icon = (ca as Card).icon
+		var card: Card = ca as Card
+		ca_icon = card.icon
+		title = card.id.capitalize().replace("_", " ")
 	elif ca is Weapon:
-		ca_icon = (ca as Weapon).icon
+		var weapon: Weapon = ca as Weapon
+		ca_icon = weapon.icon
+		title = weapon.weapon_name
 	var entries: Array[TooltipData] = [
-		TooltipData.make(ca_icon, "", body),
+		TooltipData.make(ca_icon, title, body),
 	]
 	entries.append_array(KeywordRegistry.build_tooltip_chain(body))
 	# Owner-tagged: paired with enemy.gd's HoverArea emits using a distinct

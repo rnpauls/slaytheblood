@@ -40,12 +40,27 @@ func enter() -> void:
 	_current_enemy.enemy_ai.plan_created.connect(_on_plan_created)
 	_arm_watchdog(State.ENEMY_ACTING)
 
+	# Wait for the TURN announcement to finish before kicking off the SOT
+	# cascade — player needs time to read who's acting. BattleUI emits
+	# turn_announcement_finished at the end of its tween chain (or
+	# immediately on re-entry edge cases where no announcement plays — see
+	# bail-outs above, which return before reaching this line).
+	Events.turn_announcement_finished.connect(_start_sot_cascade, CONNECT_ONE_SHOT)
+
+
+func _start_sot_cascade() -> void:
+	# Defensive: the state may have already moved on (e.g. enemy died via DOT
+	# during the announcement). Bail rather than poking statuses on a corpse.
+	if not is_instance_valid(_current_enemy):
+		return
 	_current_enemy.status_handler.apply_statuses_by_type(Status.Type.START_OF_TURN)
 
 
 func exit() -> void:
 	if Events.enemy_died.is_connected(_on_enemy_died):
 		Events.enemy_died.disconnect(_on_enemy_died)
+	if Events.turn_announcement_finished.is_connected(_start_sot_cascade):
+		Events.turn_announcement_finished.disconnect(_start_sot_cascade)
 	if _current_enemy and is_instance_valid(_current_enemy):
 		var sh := _current_enemy.status_handler
 		if sh and sh.statuses_applied.is_connected(_on_statuses_applied):

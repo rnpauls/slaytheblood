@@ -38,6 +38,11 @@ var _exhaust_button_tween: Tween
 var current_turn: int = 0
 var _turn_announcer_tween: Tween
 
+# Back-ref to the owning Battle, set via bind_battle(). Used to read the
+# current acting enemy off enemy_handler.acting_enemies for per-enemy
+# turn announcements.
+var _battle: Battle
+
 # Slide-in/out state for the End Turn / Block button. Home position is the
 # button's resting Vector2(position) captured on _ready; offscreen is home
 # plus the button's width + a margin so it sits fully past the right edge.
@@ -70,15 +75,17 @@ func _ready() -> void:
 	call_deferred("_init_end_turn_button_position")
 
 
-## Battle hands us the SM after _setup_turn_state_machine() so we can listen
-## for PLAYER_SOT / ENEMY_SOT to drive the centered turn-announcement label.
-## Called once per combat, after the SM has already entered COMBAT_START
-## (so we deliberately miss that initial emit — we only announce player /
-## enemy turn boundaries, not setup).
-func bind_turn_state_machine(sm: TurnStateMachine) -> void:
-	if not sm:
+## Battle hands us a self-reference after _setup_turn_state_machine() so we
+## can listen for PLAYER_SOT / ENEMY_SOT to drive the centered turn-
+## announcement label AND read the current acting enemy off
+## battle.enemy_handler. Called once per combat, after the SM has already
+## entered COMBAT_START (so we deliberately miss that initial emit — we only
+## announce player / enemy turn boundaries, not setup).
+func bind_battle(battle: Battle) -> void:
+	if not battle or not battle.turn_state_machine:
 		return
-	sm.state_changed.connect(_on_turn_state_changed)
+	_battle = battle
+	battle.turn_state_machine.state_changed.connect(_on_turn_state_changed)
 
 
 func _init_end_turn_button_position() -> void:
@@ -239,7 +246,23 @@ func _on_turn_state_changed(state: int) -> void:
 			current_turn += 1
 			_show_turn_announcement("PLAYER TURN %d" % current_turn)
 		TurnState.State.ENEMY_SOT:
-			_show_turn_announcement("ENEMY TURN %d" % current_turn)
+			var enemy := _current_acting_enemy()
+			if enemy:
+				_show_turn_announcement("%s TURN %d" % [
+					enemy.stats.character_name.to_upper(), current_turn])
+
+
+# Reads the head of the enemy queue — set by EnemyHandler.start_turn() and
+# popped per-enemy as ENEMY_EOT advances. Empty / invalid means there's no
+# enemy whose turn is starting, so callers should skip the announcement.
+func _current_acting_enemy() -> Enemy:
+	if not _battle or not _battle.enemy_handler:
+		return null
+	var queue: Array[Enemy] = _battle.enemy_handler.acting_enemies
+	if queue.is_empty():
+		return null
+	var enemy: Enemy = queue[0]
+	return enemy if is_instance_valid(enemy) else null
 
 
 func _show_turn_announcement(text: String) -> void:
@@ -278,6 +301,9 @@ func _show_turn_announcement(text: String) -> void:
 	_turn_announcer_tween.parallel().tween_property(
 		turn_announcer_bar, "scale:y", 0.0, Constants.TWEEN_FADE
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	# Signals ENEMY_SOT (and anyone else waiting) that the announcement is fully
+	# off-screen and the next phase can begin.
+	_turn_announcer_tween.tween_callback(Events.turn_announcement_finished.emit)
 
 
 func _on_exhaust_button_mouse_entered() -> void:
@@ -415,18 +441,16 @@ func _animate_card_to_enemy_label(card: Card, enemy: Enemy, destination: int, so
 	visual.scale = Vector2.ONE
 	visual.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	visual.z_index = 100
-	# Aim the card's center at the label's center.
-	var card_center_offset: Vector2 = (CardStackPanel.CARD_SIZE_UNSCALED * CardStackPanel.PILE_SCALE) / 2.0
 	var label_center: Vector2 = target_label.global_position + target_label.size / 2.0
-	var target_pos: Vector2 = label_center - card_center_offset
+	var target_pos: Vector2 = label_center - visual.pivot_offset
 
 	var t := visual.create_tween()
 	t.tween_interval(0.3)
 	t.tween_property(visual, "global_position", target_pos, 0.4) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(visual, "scale", Vector2.ZERO, 0.4) \
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	t.parallel().tween_property(visual, "modulate:a", 0.0, 0.4).set_delay(0.2)
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(visual, "modulate:a", 0.0, 0.4)
 	t.tween_callback(func():
 		if is_instance_valid(visual):
 			visual.queue_free())

@@ -42,6 +42,7 @@ point_count = 3
 script = ExtResource("1_0ser8")
 char_stats = ExtResource("4_psa3f")
 music = ExtResource("3_156m4")
+music_volume_db = -18.0
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1702230980]
@@ -304,6 +305,7 @@ rotation_curve = SubResource("Curve_pyfix")
 player = NodePath("../../Player")
 
 [node name="TurnAnnouncer" type="Control" parent="BattleUI" unique_id=1837461029]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -314,8 +316,7 @@ mouse_filter = 2
 [node name="TurnAnnouncerBar" type="ColorRect" parent="BattleUI/TurnAnnouncer" unique_id=1837461031]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
-anchor_left = 0.0
+layout_mode = 0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -323,7 +324,7 @@ offset_top = -80.0
 offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, 0)
+scale = Vector2(1, 1e-05)
 pivot_offset = Vector2(640, 80)
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
@@ -331,7 +332,7 @@ color = Color(0, 0, 0, 1)
 [node name="TurnAnnouncerLabel" type="Label" parent="BattleUI/TurnAnnouncer" unique_id=1837461030]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -343,7 +344,6 @@ offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(400, 60)
-mouse_filter = 2
 text = "PLAYER TURN 1"
 label_settings = ExtResource("25_turnan")
 horizontal_alignment = 1

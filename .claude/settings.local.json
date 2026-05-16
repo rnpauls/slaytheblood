@@ -81,7 +81,8 @@
       "Bash(sed -n '6p' /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/enemy_card_ui.tscn)",
       "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/enemy_card_ui.tscn)",
       "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/player_card_ui.tscn)",
-      "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/card_ui.tscn)"
+      "Bash(xattr -l /Users/rich/Desktop/Godot/Godot/slaytheblood/scenes/card_ui/card_ui.tscn)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit --verbose --path /Users/rich/Desktop/Godot/Godot/slaytheblood)"
     ]
   }
 }

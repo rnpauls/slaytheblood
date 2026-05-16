@@ -114,6 +114,11 @@ signal battle_over_screen_requested(text: String, type: BattleOverPanel.Type)
 signal battle_won
 signal battle_stalemated
 signal status_tooltip_requested(statuses: Array[Status])
+## Emitted by BattleUI after the centered TURN announcement tween completes
+## (fully faded out). ENEMY_SOT waits on this before kicking off its SOT
+## cascade so the player can read who is about to act. Fires for both
+## PLAYER_SOT and ENEMY_SOT announcements — player side ignores it.
+signal turn_announcement_finished
 
 # Map-related events
 signal map_exited(room: Room)

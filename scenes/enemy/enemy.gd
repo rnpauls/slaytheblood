@@ -435,7 +435,6 @@ func _get_card_ui_map() -> Dictionary:
 # ── Exhaust pile click + discard-label slide helper ──────────────────────────
 
 const _DISCARD_FLIGHT_DURATION := 0.4
-const _DISCARD_FADE_DELAY := 0.2
 
 ## Open the BattleUI discard_pile_view retargeted to this enemy's exhaust pile.
 ## Mirrors EnemyResourceUI._on_discard_pressed for the discard counter button.
@@ -456,7 +455,7 @@ func _on_exhaust_pile_pressed() -> void:
 func animate_card_to_discard_label(card_ui: EnemyCardUI) -> void:
 	if not is_instance_valid(card_ui):
 		return
-	var target_label: Control = enemy_resource_ui.discard_count if enemy_resource_ui else null
+	var target_label: Control = enemy_resource_ui.discard_button if enemy_resource_ui else null
 	if not target_label or not battle_ui:
 		if is_instance_valid(card_ui):
 			card_ui.queue_free()
@@ -475,18 +474,15 @@ func animate_card_to_discard_label(card_ui: EnemyCardUI) -> void:
 	card_ui.z_index = 60
 	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var card_center_offset: Vector2 = (CardStackPanel.CARD_SIZE_UNSCALED * CardStackPanel.PILE_SCALE) / 2.0
 	var label_center: Vector2 = target_label.global_position + target_label.size / 2.0
-	var target_pos: Vector2 = label_center - card_center_offset
+	var target_pos: Vector2 = label_center - card_ui.pivot_offset
 
 	var t := card_ui.create_tween()
 	t.tween_property(card_ui, "global_position", target_pos, _DISCARD_FLIGHT_DURATION) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.parallel().tween_property(card_ui, "scale",
-		Vector2(CardStackPanel.PILE_SCALE, CardStackPanel.PILE_SCALE),
-		_DISCARD_FLIGHT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	t.parallel().tween_property(card_ui, "modulate:a", 0.0, _DISCARD_FLIGHT_DURATION) \
-		.set_delay(_DISCARD_FADE_DELAY)
+	t.parallel().tween_property(card_ui, "scale", Vector2.ZERO, _DISCARD_FLIGHT_DURATION) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(card_ui, "modulate:a", 0.0, _DISCARD_FLIGHT_DURATION)
 	t.tween_callback(func():
 		if is_instance_valid(card_ui):
 			card_ui.queue_free())

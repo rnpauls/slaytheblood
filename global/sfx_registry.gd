@@ -26,10 +26,9 @@ func play(sfx_name: StringName, pitch: float = 1.0) -> void:
 	SFXPlayer.play(stream, false, pitch)
 
 func play_pitch_sequence(pitch_value: int) -> void:
-	var count := mini(pitch_value, Constants.PITCH_SOUNDS.size())
-	for i in count:
-		SFXPlayer.play(Constants.PITCH_SOUNDS[i])
-		if i < count - 1:
+	for i in pitch_value:
+		SFXPlayer.play(Constants.PITCH_SOUND, false, 1.0 + i * Constants.PITCH_SOUND_STEP)
+		if i < pitch_value - 1:
 			await get_tree().create_timer(Constants.PITCH_SOUND_GAP).timeout
 
 # ── Auto-attach: every Button gets CLICK_BUTTON and HOVER_UI by default. ──
