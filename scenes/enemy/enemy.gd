@@ -461,21 +461,30 @@ func animate_card_to_discard_label(card_ui: EnemyCardUI) -> void:
 			card_ui.queue_free()
 		return
 
-	var gpos := card_ui.global_position
+	# Read both ends in viewport coords before reparenting — the source is in
+	# the world canvas (block_display) and the target is in BattleUI's canvas;
+	# get_global_transform_with_canvas folds in either canvas's transform so
+	# the values are directly comparable.
+	var source_screen: Vector2 = card_ui.get_global_transform_with_canvas().origin
+	var label_xform := target_label.get_global_transform_with_canvas()
+	var label_center: Vector2 = label_xform.origin + target_label.size / 2.0
+
 	var gscale := card_ui.scale
 	var grot := card_ui.rotation_degrees
 	var prev_parent := card_ui.get_parent()
 	if prev_parent:
 		prev_parent.remove_child(card_ui)
 	battle_ui.add_child(card_ui)
-	card_ui.global_position = gpos
+	card_ui.global_position = source_screen
 	card_ui.scale = gscale
 	card_ui.rotation_degrees = grot
 	card_ui.z_index = 60
 	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var label_center: Vector2 = target_label.global_position + target_label.size / 2.0
-	var target_pos: Vector2 = label_center - card_ui.pivot_offset
+	# The card visually collapses to card_ui.position (its rect's top-left) as
+	# scale tweens to 0, so aim position itself at label_center — no pivot
+	# offset to subtract.
+	var target_pos: Vector2 = label_center
 
 	var t := card_ui.create_tween()
 	t.tween_property(card_ui, "global_position", target_pos, _DISCARD_FLIGHT_DURATION) \
