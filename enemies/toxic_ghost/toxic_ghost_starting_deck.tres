@@ -5,16 +5,16 @@
 [ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="2_l5p37"]
 [ext_resource type="Resource" path="res://enemies/plague_doctor/cards/lance_boil.tres" id="3_lrbb5"]
 [ext_resource type="Resource" path="res://generic_cards/lacerate.tres" id="4_thgoe"]
-[ext_resource type="Resource" path="res://enemies/elite/reaver/cards/bloodlust.tres" id="5_2w7om"]
 [ext_resource type="Resource" path="res://generic_cards/ravenous_rabble_blue.tres" id="6_u1mio"]
 [ext_resource type="Resource" path="res://generic_cards/crushing_strike.tres" id="7_yhxj8"]
-[ext_resource type="Resource" path="res://generic_cards/flexing_pummel.tres" id="8_7ka4p"]
-[ext_resource type="Resource" path="res://generic_cards/nimble.tres" id="9_2eqiw"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/stunning_strike.tres" id="9_1fm4c"]
 [ext_resource type="Resource" path="res://characters/brute/cards/warrior_true_strength.tres" id="10_hucdb"]
-[ext_resource type="Resource" path="res://generic_cards/raging_onslaught_blue.tres" id="11_ru3nj"]
+[ext_resource type="Resource" path="res://generic_cards/sundering_blow.tres" id="10_l5p37"]
+[ext_resource type="Resource" path="res://generic_cards/head_jab_blue.tres" id="11_lrbb5"]
+[ext_resource type="Resource" path="res://characters/ninja/cards/poison_the_blade.tres" id="12_l5p37"]
 [ext_resource type="Resource" path="res://enemies/elite/reaver/cards/reckless_charge.tres" id="12_x77sw"]
 
 [resource]
 script = ExtResource("2_844ut")
-cards = Array[ExtResource("1_sxnko")]([ExtResource("2_l5p37"), ExtResource("2_l5p37"), ExtResource("2_l5p37"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("4_thgoe"), ExtResource("4_thgoe"), ExtResource("4_thgoe"), ExtResource("5_2w7om"), ExtResource("5_2w7om"), ExtResource("5_2w7om"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("7_yhxj8"), ExtResource("7_yhxj8"), ExtResource("7_yhxj8"), ExtResource("8_7ka4p"), ExtResource("8_7ka4p"), ExtResource("8_7ka4p"), ExtResource("9_2eqiw"), ExtResource("9_2eqiw"), ExtResource("9_2eqiw"), ExtResource("10_hucdb"), ExtResource("10_hucdb"), ExtResource("11_ru3nj"), ExtResource("11_ru3nj"), ExtResource("12_x77sw"), ExtResource("12_x77sw"), ExtResource("12_x77sw")])
+cards = Array[ExtResource("1_sxnko")]([ExtResource("2_l5p37"), ExtResource("2_l5p37"), ExtResource("2_l5p37"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("3_lrbb5"), ExtResource("4_thgoe"), ExtResource("4_thgoe"), ExtResource("4_thgoe"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("6_u1mio"), ExtResource("7_yhxj8"), ExtResource("7_yhxj8"), ExtResource("7_yhxj8"), ExtResource("10_hucdb"), ExtResource("10_hucdb"), ExtResource("12_x77sw"), ExtResource("12_x77sw"), ExtResource("12_x77sw"), ExtResource("9_1fm4c"), ExtResource("9_1fm4c"), ExtResource("9_1fm4c"), ExtResource("10_l5p37"), ExtResource("10_l5p37"), ExtResource("10_l5p37"), ExtResource("6_u1mio"), ExtResource("11_lrbb5"), ExtResource("11_lrbb5"), ExtResource("11_lrbb5"), ExtResource("12_l5p37"), ExtResource("12_l5p37"), ExtResource("12_l5p37"), ExtResource("12_l5p37")])
 metadata/_custom_type_script = "uid://dejd2uv2w4475"

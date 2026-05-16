@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://ddn55fnq37iy8"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://cnnath67svamy" path="res://art/Icon28_17.png" id="2_dyct6"]
+[ext_resource type="Texture2D" uid="uid://CoAtDBpevjq2y" path="res://art/card_art/pixellab/whisper_strike.png" id="2_dyct6"]
 [ext_resource type="Script" uid="uid://ddn55fnq37iy7" path="res://characters/ninja/cards/whisper_strike.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="3_sound"]
 

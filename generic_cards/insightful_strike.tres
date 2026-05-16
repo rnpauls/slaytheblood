@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_gocyc"]
 [ext_resource type="Script" uid="uid://ckn070ykqqirg" path="res://generic_cards/insightful_strike.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://pu2lekmmrgox" path="res://art/Icon28_03.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://Bq9iBKr4VnFSa" path="res://art/card_art/pixellab/insightful_strike.png" id="2_icon"]
 [ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
 
 [resource]

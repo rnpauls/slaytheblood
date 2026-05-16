@@ -356,7 +356,10 @@ func _on_statuses_applied(type: Status.Type) -> void:
 		Status.Type.START_OF_TURN:
 			print_debug("[Cascade] _on_statuses_applied(START_OF_TURN) → action_phase_started + enable_hand")
 			Events.player_action_phase_started.emit()
-			hand.enable_hand()
+			# Stunned: leave the hand disabled so cards don't light up during the
+			# auto-skipped turn. PlayerActionState handles the skip-to-EOT itself.
+			if not player.status_handler.has_status("stunned"):
+				hand.enable_hand()
 		Status.Type.END_OF_TURN:
 			print_debug("[Cascade] _on_statuses_applied(END_OF_TURN) → end_turn_cleanup")
 			end_turn_cleanup()

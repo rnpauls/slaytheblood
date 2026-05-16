@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcgy8lhoig5o7" path="res://enemies/warlord/cards/warlords_order.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
-[ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://TG9qeEGzefbtM" path="res://art/card_art/pixellab/warlords_order.png" id="3_icon"]
 
 [resource]
 script = ExtResource("1_script")

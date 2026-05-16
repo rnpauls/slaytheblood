@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctmwu6sm10xgw" path="res://custom_resources/enemy_stats.gd" id="1_stats"]
 [ext_resource type="PackedScene" uid="uid://5aef0ltsrkxq" path="res://scenes/enemy/enemy_ai.tscn" id="2_ai"]
-[ext_resource type="Texture2D" uid="uid://dhu4iv4tvrg51" path="res://art/sprites/pixellab/crab.png" id="3_art"]
+[ext_resource type="Texture2D" path="res://art/sprites/pixellab/shellbreaker.png" id="3_art"]
 [ext_resource type="AudioStream" uid="uid://co6w7ahwuqyra" path="res://art/music/sound_effects/400 Sounds Pack/Retro/hurt.wav" id="4_death"]
 [ext_resource type="Resource" path="res://enemies/shellbreaker/shellbreaker_starting_deck.tres" id="5_deck"]
 [ext_resource type="Resource" uid="uid://b5q1fp3ulww47" path="res://enemies/empty_inventory.tres" id="6_inv"]

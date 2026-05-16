@@ -9,7 +9,7 @@ extends CardUI
 @onready var hover_overlay: CanvasLayer = get_node("/root/Run/HoverOverlay")
 
 var playable := true : set = _set_playable
-var disabled := true
+var disabled := true : set = _set_disabled
 var is_blocking := false
 var selected := false
 
@@ -81,15 +81,14 @@ func _set_playable(value: bool) -> void:
 	playable = value
 	if not is_node_ready():
 		return
-	# Pile cards keep their stats_changed connection but aren't interactable;
-	# never glow them, even face-up in the discard pile.
+	_refresh_glow()
 	if _in_pile():
-		card_render.set_glow(false)
 		return
-	card_render.set_glow(playable)
 	if card_render.card_visuals:
 		# tint_cost gates whether refresh_modified_values touches the cost
 		# label's font_color — keeps our unplayable-red override below winning.
+		# Cost tint is purely playable-based: cards are validly `disabled` between
+		# turns and we don't want them flashing red there.
 		card_render.card_visuals.tint_cost = playable
 		if not playable:
 			card_render.card_visuals.cost.add_theme_color_override("font_color", Color.RED)
@@ -97,6 +96,24 @@ func _set_playable(value: bool) -> void:
 			card_render.card_visuals.cost.remove_theme_color_override("font_color")
 			# Reapply modifier tint to cost (and refresh attack/defense — cheap).
 			card_render.card_visuals.refresh_modified_values()
+
+
+func _set_disabled(value: bool) -> void:
+	disabled = value
+	if not is_node_ready():
+		return
+	_refresh_glow()
+
+
+# Pile cards keep their stats_changed connection but aren't interactable;
+# never glow them, even face-up in the discard pile. The `disabled` gate kills
+# the glow during the enemy phase, mid-drag of a sibling card, and the
+# auto-skipped action phase when the player is stunned.
+func _refresh_glow() -> void:
+	if _in_pile():
+		card_render.set_glow(false)
+		return
+	card_render.set_glow(playable and not disabled)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if _in_pile():

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://cipllp2x4tqrg" path="res://enemies/cursed_treant/cursed_treant_enemy.tres" id="2_es"]
-[ext_resource type="Resource" uid="uid://bf4ywk4wxwsbj" path="res://enemies/bat/pack_bat_enemy.tres" id="3_es"]
+[ext_resource type="Resource" uid="uid://cayfgpx1wwcum" path="res://enemies/bat/pack_bat_enemy.tres" id="3_es"]
 
 [node name="Tier3ForestAmbush" type="Node2D"]
 

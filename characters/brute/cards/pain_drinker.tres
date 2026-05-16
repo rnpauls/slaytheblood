@@ -1,20 +1,19 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://freyvngg8ex8"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" path="res://art/item74.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/brute/cards/pain_drinker.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://dqBtRYhkyGvk8" path="res://art/card_art/pixellab/pain_drinker.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://vyao1iet0vqw" path="res://characters/brute/cards/pain_drinker.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="4_sound"]
 
 [resource]
 script = ExtResource("3_script")
-hp_cost = 2
-muscle_stacks = 2
 id = "pain_drinker"
 type = 1
 pitch = 2
 go_again = true
 icon = ExtResource("2_icon")
-tooltip_text = "Lose 2 HP. Gain 2 [kw=muscle]Muscle[/kw] this turn."
+tooltip_text = "Lose 2 HP.
+Gain 2 [kw=muscle]Muscle[/kw] this turn."
 sound = ExtResource("4_sound")
 disable_attack = true
 disable_defense = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b01a1vfq6xpgs" path="res://enemies/warlord/cards/captains_strike.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
-[ext_resource type="Texture2D" uid="uid://dgi7irxx3206x" path="res://art/Icon28_20.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://WiQDsfKxUaowT" path="res://art/card_art/pixellab/captains_strike.png" id="3_icon"]
 [ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="4_sound"]
 
 [resource]

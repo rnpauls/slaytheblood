@@ -158,8 +158,8 @@ offset_right = -24.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
-counter_placement = 2
 face_down = false
+counter_placement = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="ExhaustButton" type="TextureButton" parent="BattleUI" unique_id=-2047966295]

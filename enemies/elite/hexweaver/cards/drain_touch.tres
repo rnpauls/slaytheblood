@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_d0cfj"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_drnt1"]
-[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_drnt2"]
+[ext_resource type="Texture2D" uid="uid://7bda8cwd4tcMw" path="res://art/card_art/pixellab/drain_touch.png" id="2_drnt2"]
 [ext_resource type="Script" uid="uid://cmucqh8k2qcn1" path="res://enemies/elite/hexweaver/cards/drain_touch.gd" id="3_drnt3"]
 
 [resource]

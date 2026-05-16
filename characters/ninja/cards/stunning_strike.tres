@@ -1,8 +1,8 @@
 [gd_resource type="Resource" format=3 uid="uid://bstun0001nin"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://km88jgm7ikgs" path="res://art/Icon28_13.png" id="2_icon"]
-[ext_resource type="Script" path="res://characters/ninja/cards/stunning_strike.gd" id="3_script"]
+[ext_resource type="Texture2D" uid="uid://6DswcK57BfQy3" path="res://art/card_art/pixellab/stunning_strike.png" id="2_icon"]
+[ext_resource type="Script" uid="uid://ba0yqraeo8ht3" path="res://characters/ninja/cards/stunning_strike.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="4_sound"]
 
 [resource]
@@ -10,12 +10,11 @@ script = ExtResource("3_script")
 id = "stunning_strike"
 rarity = 1
 target = 1
-cost = 1
+cost = 3
 pitch = 1
-attack = 2
+attack = 8
 defense = 2
-ai_value = 4
-ai_value_needs_attack = true
+ai_value = 8
 icon = ExtResource("2_icon")
 tooltip_text = "[kw=onhit]On hit[/kw]: Apply [kw=stunned]Stunned[/kw]."
 sound = ExtResource("4_sound")
