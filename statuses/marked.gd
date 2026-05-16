@@ -22,9 +22,9 @@ func initialize_status(target: Node) -> void:
 	mark_value.flat_value = stacks
 	damage_taken_modifier.add_new_value(mark_value)
 	if target is Player:
-		Events.player_turn_ended.connect(_bound_apply)
-	else:
 		Events.enemy_phase_ended.connect(_bound_apply)
+	else:
+		Events.player_turn_ended.connect(_bound_apply)
 
 
 func update() -> void:
@@ -40,8 +40,8 @@ func _exit_tree() -> void:
 		damage_taken_modifier.remove_value("marked")
 	if _bound_apply:
 		if _target_ref is Player:
-			if Events.player_turn_ended.is_connected(_bound_apply):
-				Events.player_turn_ended.disconnect(_bound_apply)
-		else:
 			if Events.enemy_phase_ended.is_connected(_bound_apply):
 				Events.enemy_phase_ended.disconnect(_bound_apply)
+		else:
+			if Events.player_turn_ended.is_connected(_bound_apply):
+				Events.player_turn_ended.disconnect(_bound_apply)

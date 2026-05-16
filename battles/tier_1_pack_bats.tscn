@@ -1,18 +1,18 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bfuliiu7c0mk0"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
-[ext_resource type="Resource" path="res://enemies/bat/pack_bat_enemy.tres" id="2_pbat"]
+[ext_resource type="Resource" uid="uid://cayfgpx1wwcum" path="res://enemies/bat/pack_bat_enemy.tres" id="2_es"]
 
 [node name="Tier1PackBats" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(880, 320)
-stats = ExtResource("2_pbat")
+position = Vector2(725.161193847656, 350.107543945312)
+stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1050, 360)
-stats = ExtResource("2_pbat")
+position = Vector2(946.774169921875, 349.677429199219)
+stats = ExtResource("2_es")
 
 [node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1220, 320)
-stats = ExtResource("2_pbat")
+position = Vector2(1140.86010742188, 353.548400878906)
+stats = ExtResource("2_es")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="KeywordEntry" format=3 uid="uid://bstun0001kws"]
+
+[ext_resource type="Script" uid="uid://dptu4yriyt0os" path="res://custom_resources/keyword_entry.gd" id="1_stkw"]
+
+[resource]
+script = ExtResource("1_stkw")
+id = &"stunned"
+display_name = "Stunned"
+description = "Cannot play, pitch, or block cards this turn."
+metadata/_custom_type_script = "uid://dptu4yriyt0os"

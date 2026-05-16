@@ -123,7 +123,7 @@ func _on_card_drag_or_aim_ended(_card: Node) -> void:
 	if char_stats and card:
 		playable = char_stats.can_play_card(card)
 
-func _on_card_drawn() -> void:
+func _on_card_drawn(_card: Card) -> void:
 	if char_stats and card:
 		playable = char_stats.can_play_card(card)
 

@@ -42,12 +42,14 @@ func on_gui_input(event: InputEvent) -> void:
 		transition_requested.emit(self, CardState.State.SELECTED)
 		return
 
+	var is_stunned := hand.player and hand.player.status_handler and hand.player.status_handler.has_status("stunned")
+
 	if rmb:
 		if card_ui.card.disable_pitch:
 			_log("BASE on_gui_input: RMB IGNORED (disable_pitch=true)")
 			return
-		if card_ui.disabled or hand.is_selecting or hand.is_blocking:
-			_log("BASE on_gui_input: RMB IGNORED (disabled=%s, is_selecting=%s, is_blocking=%s)" % [card_ui.disabled, hand.is_selecting, hand.is_blocking])
+		if card_ui.disabled or hand.is_selecting or hand.is_blocking or is_stunned:
+			_log("BASE on_gui_input: RMB IGNORED (disabled=%s, is_selecting=%s, is_blocking=%s, stunned=%s)" % [card_ui.disabled, hand.is_selecting, hand.is_blocking, is_stunned])
 			return
 		_log("BASE on_gui_input: RMB → PITCHED")
 		transition_requested.emit(self, CardState.State.PITCHED)
@@ -56,16 +58,16 @@ func on_gui_input(event: InputEvent) -> void:
 	if lmb and hand.is_blocking:
 		var player: Player = hand.player
 		var is_intimidated := player and card_ui.card in player.intimidated_cards
-		if not is_intimidated and not card_ui.card.disable_defense:
+		if not is_intimidated and not is_stunned and not card_ui.card.disable_defense:
 			_log("BASE on_gui_input: LMB (is_blocking=true) → BLOCKED")
 			transition_requested.emit(self, CardState.State.BLOCKED)
 		else:
-			_log("BASE on_gui_input: LMB IGNORED (intimidated=%s, disable_defense=%s)" % [is_intimidated, card_ui.card.disable_defense])
+			_log("BASE on_gui_input: LMB IGNORED (intimidated=%s, stunned=%s, disable_defense=%s)" % [is_intimidated, is_stunned, card_ui.card.disable_defense])
 		return
 
-	if not card_ui.playable or card_ui.disabled:
+	if not card_ui.playable or card_ui.disabled or is_stunned:
 		if lmb:
-			_log("BASE on_gui_input: LMB IGNORED (playable=%s, disabled=%s)" % [card_ui.playable, card_ui.disabled])
+			_log("BASE on_gui_input: LMB IGNORED (playable=%s, disabled=%s, stunned=%s)" % [card_ui.playable, card_ui.disabled, is_stunned])
 		return
 
 	if lmb:

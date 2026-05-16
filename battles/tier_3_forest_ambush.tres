@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleStats" format=3]
 
 [ext_resource type="PackedScene" path="res://battles/tier_3_forest_ambush.tscn" id="1_scene"]
-[ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="2_script"]
+[ext_resource type="Script" path="res://custom_resources/battle_stats.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")

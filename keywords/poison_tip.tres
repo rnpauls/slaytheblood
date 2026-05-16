@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_b4lqo")
-description = "Unit's next attack gets \"[kw=onhit]On hit[/kw]: deal {x} damage."
+id = &"poison_tip"
+display_name = "Poison Tip"
+description = "Unit's next attack gets: \"[kw=onhit]On hit[/kw]: deal {x} damage.\""
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

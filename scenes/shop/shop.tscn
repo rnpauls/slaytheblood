@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://dxkms3e6ja0wr" path="res://characters/brute/brute.tres" id="7_hjjob"]
 [ext_resource type="Resource" uid="uid://stbrelic010b" path="res://relics/caffeine_tab.tres" id="7_qu1ni"]
 [ext_resource type="Resource" uid="uid://stbrelic007b" path="res://relics/lucky_charm.tres" id="8_0272k"]
+[ext_resource type="Resource" uid="uid://ddoa1dtb45voy" path="res://relics/eye_of_pandora.tres" id="9_eyepan"]
 [ext_resource type="Resource" uid="uid://rbm1nv0nx2nj" path="res://test_data/test_run_stats.tres" id="8_ropyq"]
 [ext_resource type="Resource" uid="uid://bc6bqtk55c1q1" path="res://weapons/mandible_claw.tres" id="8_toxgp"]
 [ext_resource type="Resource" uid="uid://cb1bmhck13jst" path="res://weapons/sledge_of_anvilheim.tres" id="9_u2jek"]
@@ -109,7 +110,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1ldyg")
-shop_relics = Array[ExtResource("2_m2rrw")]([ExtResource("3_rno6l"), ExtResource("4_ntyfo"), ExtResource("5_b714b"), ExtResource("6_c5xje"), ExtResource("7_qu1ni"), ExtResource("8_0272k")])
+shop_relics = Array[ExtResource("2_m2rrw")]([ExtResource("3_rno6l"), ExtResource("4_ntyfo"), ExtResource("5_b714b"), ExtResource("6_c5xje"), ExtResource("7_qu1ni"), ExtResource("8_0272k"), ExtResource("9_eyepan")])
 shop_weapons = Array[ExtResource("7_5y7fm")]([ExtResource("8_toxgp"), ExtResource("9_u2jek"), ExtResource("10_bnu54"), ExtResource("11_cxrsv"), ExtResource("12_8jxaa"), ExtResource("13_a1v00"), ExtResource("14_4yy74"), ExtResource("15_njv4s"), ExtResource("W_galvanic"), ExtResource("W_runeblood"), ExtResource("W_aether")])
 shop_equipment = Array[ExtResource("11_f8gqx")]([ExtResource("12_wjgtv"), ExtResource("13_cxrsv"), ExtResource("14_8jxaa"), ExtResource("15_ncc2j"), ExtResource("EQ_bandolier"), ExtResource("EQ_berserker"), ExtResource("EQ_heavy_greaves"), ExtResource("EQ_hexsigil"), ExtResource("EQ_manathreaded"), ExtResource("EQ_runeweaver"), ExtResource("EQ_scabskin"), ExtResource("EQ_smoke"), ExtResource("EQ_spellbinders"), ExtResource("EQ_spiked"), ExtResource("EQ_tabi")])
 char_stats = ExtResource("7_hjjob")

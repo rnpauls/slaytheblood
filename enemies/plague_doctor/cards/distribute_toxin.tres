@@ -14,6 +14,6 @@ pitch = 1
 defense = 1
 ai_value = 5
 icon = ExtResource("3_icon")
-tooltip_text = "All allied enemies gain [kw=poison_tip:2]Poison Tip 2[/kw]."
+tooltip_text = "All allied enemies gain 2 [kw=poison_tip:2]Poison Tip[/kw]."
 sound = ExtResource("2_blksnd")
 disable_attack = true

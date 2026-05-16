@@ -149,9 +149,9 @@ func draw_card() -> void:
 		source_visual = battle_ui.draw_pile.release_top_visual()
 	var card_drawn: Card = character.draw_pile.draw_card()
 	if card_drawn:
+		Events.player_card_drawn.emit(card_drawn)
 		hand.add_card(card_drawn, source_visual)
 		SFXRegistry.play(&"DRAW_CARD")
-		Events.player_card_drawn.emit()
 		# Cards persist across draws (discard → reshuffle → draw again is the same
 		# Card instance), so guard each connect to avoid Godot's "already
 		# connected" error when a card is re-drawn after being played and recycled.

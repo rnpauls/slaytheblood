@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_r0pwa")
-id = &"poison_tip"
-display_name = "Poison Tip"
+id = &"marked"
+display_name = "Marked"
 description = "Until end of turn, unit takes {x} more damage from attacks."
 metadata/_custom_type_script = "uid://dptu4yriyt0os"

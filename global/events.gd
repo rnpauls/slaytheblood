@@ -69,7 +69,7 @@ signal player_turn_ended
 signal player_end_phase_started
 signal player_hit
 signal player_died
-signal player_card_drawn
+signal player_card_drawn(card: Card)
 signal player_action_phase_started
 signal player_blocks_declared
 signal player_set_up #emitted once the player is initialized in the battle

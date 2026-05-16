@@ -17,5 +17,5 @@ defense = 4
 go_again = true
 ai_value = 6
 icon = ExtResource("2_icon")
-tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=bleed]Bleed[/kw] and 1 [kw=poison_tip]Poison Tip[/kw].[/center]"
+tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=bleed]Bleed[/kw] and 1 [kw=poison_tip:1]Poison Tip[/kw].[/center]"
 sound = ExtResource("3_sound")

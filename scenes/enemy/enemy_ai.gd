@@ -53,6 +53,12 @@ func play_next_action() -> Object:
 		turn_plan = null
 		return null
 
+	# Stunned: drop the plan so action_sequencer ends the turn after statuses tick.
+	if enemy.status_handler and enemy.status_handler.has_status("stunned"):
+		turn_plan = null
+		print_enemy_ai("stunned — skipping turn")
+		return null
+
 	_is_playing_action = true
 	var next_action = turn_plan.actions[0]
 
@@ -67,8 +73,11 @@ func play_next_action() -> Object:
 		# stats.mana at end of enemy phase.
 		pitch.pitch_card(enemy.stats)
 		hand.erase(pitch)
-		card_removed_from_hand.emit(pitch)
+		# Erase from turn_plan BEFORE emitting so the synchronous cascade
+		# (_on_ai_card_removed_from_hand → hand_changed → _update_hand_plan_colors)
+		# sees a consistent plan and doesn't warn about a stale plan.pitched entry.
 		turn_plan.pitched.erase(pitch)
+		card_removed_from_hand.emit(pitch)
 		print_enemy_ai("pitched %s for %d" % [pitch.id, pitch.pitch])
 		if enemy and enemy.defense_sequencer:
 			await enemy.defense_sequencer.animate_pitch(pitch)
@@ -89,11 +98,13 @@ func play_next_action() -> Object:
 		enemy.stats.action_points += next_action.action_points_granted
 
 	# Weapons aren't in the hand; only cards trigger the hand-removal signals.
+	# Erase from turn_plan.actions BEFORE emitting so the synchronous cascade sees
+	# a consistent plan (mirrors the pitch loop above).
+	turn_plan.actions.erase(next_action)
 	if next_action is Card:
 		hand.erase(next_action)
 		card_removed_from_hand.emit(next_action)
 	print_enemy_ai("played %s" % [next_action.id])
-	turn_plan.actions.erase(next_action)
 	_is_playing_action = false
 	return next_action
 
@@ -142,10 +153,12 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 	var current_hp: int = enemy.stats.health
 
 	# Build candidate list. Hand cards may take any role subject to flags.
+	# Stunned enemies forfeit both block and pitch — every card stays KEEP.
+	var is_stunned: bool = enemy.status_handler and enemy.status_handler.has_status("stunned")
 	var candidates: Array = []
 	for c: Card in hand:
-		var can_block_c: bool = (not c.disable_defense) and (not (c in intimidated_cards))
-		var can_pitch_c: bool = (not c.disable_pitch) and (not (c in intimidated_cards))
+		var can_block_c: bool = (not is_stunned) and (not c.disable_defense) and (not (c in intimidated_cards))
+		var can_pitch_c: bool = (not is_stunned) and (not c.disable_pitch) and (not (c in intimidated_cards))
 		candidates.append({"card": c, "can_block": can_block_c, "can_pitch": can_pitch_c})
 
 	# Baseline offense if we keep everything (no defense). Used for offense_lost.
