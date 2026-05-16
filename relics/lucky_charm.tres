@@ -9,5 +9,4 @@ relic_name = "Lucky Charm"
 id = "lucky_charm"
 type = 4
 icon = ExtResource("1_svtse")
-tooltip = "[color=\"ffdf00\"]Lucky Charm[/color]
-Once per combat, when you pitch a card, draw a card."
+tooltip = "Once per combat, when you pitch a card, draw a card."

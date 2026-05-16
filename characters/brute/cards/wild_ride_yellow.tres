@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://dlqaaddsmk8dn"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_ug86f"]
-[ext_resource type="Texture2D" uid="uid://i5hpae5jm87n" path="res://art/item31.png" id="1_ytnay"]
+[ext_resource type="Texture2D" uid="uid://drsaef2bwi6cm" path="res://art/card_art/pixellab/wild_ride.png" id="1_ytnay"]
 [ext_resource type="Script" uid="uid://dvuc14bxfg57q" path="res://characters/brute/cards/wild_ride.gd" id="2_ug86f"]
 [ext_resource type="AudioStream" uid="uid://dyuqtroinksbp" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/08_Bite_04.wav" id="4_gr0wf"]
 

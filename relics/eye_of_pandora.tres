@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://ddoa1dtb45voy"]
 
-[ext_resource type="Texture2D" path="res://art/relics/pixellab/eye_of_pandora.png" id="1_icon"]
-[ext_resource type="Script" path="res://relics/eye_of_pandora.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://dniq1vh2olq7m" path="res://art/relics/pixellab/eye_of_pandora.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://bdi42yls5ag4t" path="res://relics/eye_of_pandora.gd" id="2_script"]
 
 [resource]
 script = ExtResource("2_script")
@@ -9,5 +9,4 @@ relic_name = "Eye of Pandora"
 id = "eye_of_pandora"
 type = 4
 icon = ExtResource("1_icon")
-tooltip = "[color=\"ffdf00\"]Eye of Pandora[/color]
-Whenever you draw a card, randomize its cost and pitch (0-3)."
+tooltip = "Whenever you draw a card, randomize its cost and pitch (0-3)."

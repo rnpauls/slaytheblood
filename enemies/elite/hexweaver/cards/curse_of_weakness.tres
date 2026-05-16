@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://drb1153iurkcm"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_crsw1"]
-[ext_resource type="Texture2D" uid="uid://rfG6Lxe9Rh1d8" path="res://art/card_art/pixellab/curse_of_weakness.png" id="2_crsw2"]
+[ext_resource type="Texture2D" uid="uid://loyjxt6tw3de" path="res://art/card_art/pixellab/curse_of_weakness.png" id="2_crsw2"]
 [ext_resource type="Script" uid="uid://bfbhc2hw3om4f" path="res://enemies/elite/hexweaver/cards/curse_of_weakness.gd" id="3_crsw3"]
 
 [resource]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd7xykqp7mwde" path="res://enemies/shellbreaker/cards/burrow.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
-[ext_resource type="Texture2D" uid="uid://8hPNZAM6q6aB4" path="res://art/card_art/pixellab/burrow.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://08jlfve52wcf" path="res://art/card_art/pixellab/burrow.png" id="3_icon"]
 
 [resource]
 script = ExtResource("1_script")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bcshs0001nin"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://ko3yv0iaeyx4" path="res://art/item76.png" id="2_kw1wo"]
+[ext_resource type="Texture2D" uid="uid://cxt1ssxd01yl1" path="res://art/card_art/pixellab/shuriken_storm.png" id="2_kw1wo"]
 [ext_resource type="Script" uid="uid://cs4jq1qhtifid" path="res://characters/ninja/cards/shuriken_storm.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_sound"]
 

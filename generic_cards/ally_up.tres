@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1j58oejoi13g" path="res://generic_cards/ally_up.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
-[ext_resource type="Texture2D" uid="uid://bKMVX3oxEZyid" path="res://art/card_art/pixellab/ally_up.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://di5hsktq3bsa4" path="res://art/card_art/pixellab/ally_up.png" id="3_icon"]
 
 [resource]
 script = ExtResource("1_script")

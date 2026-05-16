@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://c108ukkduydei"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://b4rf70ht6yq8" path="res://art/item70.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://b682i6latafbl" path="res://art/card_art/pixellab/counterattack.png" id="2_icon"]
 [ext_resource type="Script" uid="uid://3rtu35cj6n0b" path="res://characters/brute/cards/counterattack.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
 

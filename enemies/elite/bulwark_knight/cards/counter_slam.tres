@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_cnts1"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_k2rm1"]
-[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_cnts2"]
+[ext_resource type="Texture2D" uid="uid://bhum551sh5f4i" path="res://art/card_art/pixellab/counter_slam.png" id="2_cnts2"]
 [ext_resource type="Script" uid="uid://bnc12dqy83pj0" path="res://enemies/elite/bulwark_knight/cards/counter_slam.gd" id="3_cnts3"]
 
 [resource]

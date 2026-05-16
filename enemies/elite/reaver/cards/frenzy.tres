@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_6uus3"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_fren1"]
-[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_fren2"]
+[ext_resource type="Texture2D" uid="uid://b4lgg0kokxrwl" path="res://art/card_art/pixellab/frenzy.png" id="2_fren2"]
 [ext_resource type="Script" uid="uid://d3o7a6oou55rp" path="res://enemies/elite/reaver/cards/frenzy.gd" id="3_fren3"]
 
 [resource]

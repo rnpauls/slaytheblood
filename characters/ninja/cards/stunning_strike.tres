@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bstun0001nin"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://6DswcK57BfQy3" path="res://art/card_art/pixellab/stunning_strike.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://0ohf3revbpcu" path="res://art/card_art/pixellab/stunning_strike.png" id="2_icon"]
 [ext_resource type="Script" uid="uid://ba0yqraeo8ht3" path="res://characters/ninja/cards/stunning_strike.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://bbm0pywecg8nq" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_slice.wav" id="4_sound"]
 

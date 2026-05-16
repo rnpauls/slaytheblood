@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bxiso7x1yngt3"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_holmx"]
-[ext_resource type="Texture2D" uid="uid://c2t6r0k11hap5" path="res://art/item29.png" id="1_ihg8k"]
+[ext_resource type="Texture2D" uid="uid://bx51vqy5qy47p" path="res://art/card_art/pixellab/swing_big.png" id="1_ihg8k"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="2_ihg8k"]
 [ext_resource type="AudioStream" uid="uid://cpsnh1ghb6fqi" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/punch_3.wav" id="4_fkd8o"]
 

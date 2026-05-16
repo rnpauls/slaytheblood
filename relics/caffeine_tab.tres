@@ -9,5 +9,4 @@ relic_name = "Caffeine Tab"
 id = "caffeine_tab"
 type = 4
 icon = ExtResource("1_7gb3m")
-tooltip = "[color=\"ffdf00\"]Caffeine Tab[/color]
-After the first card you play each turn, gain 1 mana (effectively: it costs 1 less)."
+tooltip = "After the first card you play each turn, gain 1 mana (effectively: it costs 1 less)."

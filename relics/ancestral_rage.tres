@@ -10,5 +10,4 @@ id = "ancestral_rage"
 type = 1
 character_type = 2
 icon = ExtResource("1_s3scs")
-tooltip = "[color=\"ffdf00\"]Ancestral Rage[/color]
-At the start of combat, gain [kw=muscle:1]Muscle 1[/kw]."
+tooltip = "At the start of combat, gain [kw=muscle:1]Muscle 1[/kw]."

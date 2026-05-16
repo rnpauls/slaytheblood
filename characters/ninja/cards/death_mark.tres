@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bk60e7yqlfecb"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://dffcahrwgrcqe" path="res://art/item60.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://bu48oe7u175pw" path="res://art/card_art/pixellab/death_mark.png" id="2_icon"]
 [ext_resource type="Script" uid="uid://gh1o8kpt0yle" path="res://characters/ninja/cards/death_mark.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="4_sound"]
 

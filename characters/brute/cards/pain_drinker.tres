@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://freyvngg8ex8"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://dqBtRYhkyGvk8" path="res://art/card_art/pixellab/pain_drinker.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://copf2v7h1jirn" path="res://art/card_art/pixellab/pain_drinker.png" id="2_icon"]
 [ext_resource type="Script" uid="uid://vyao1iet0vqw" path="res://characters/brute/cards/pain_drinker.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://cw3lfvhexrpuk" path="res://art/music/true_strength.ogg" id="4_sound"]
 

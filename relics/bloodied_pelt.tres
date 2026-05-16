@@ -11,5 +11,4 @@ type = 4
 character_type = 2
 starter_relic = true
 icon = ExtResource("1_4dtfs")
-tooltip = "[color=\"ffdf00\"]Bloodied Pelt[/color]
-The first time you take damage each combat, gain [kw=empower:4]Empower 4[/kw]."
+tooltip = "The first time you take damage each combat, gain [kw=empower:4]Empower 4[/kw]."

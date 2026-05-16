@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://cqwhyuhkr4wgx"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_blkau"]
-[ext_resource type="Texture2D" uid="uid://f7tgpjiguspe" path="res://art/tile_0129.png" id="2_lpfvh"]
+[ext_resource type="Texture2D" uid="uid://erxcy7q2o8k3" path="res://art/card_art/pixellab/immolate.png" id="2_lpfvh"]
 [ext_resource type="Script" uid="uid://b2aqyhhhqt14v" path="res://generic_cards/vanilla_zap.gd" id="3_vzap0"]
 [ext_resource type="AudioStream" uid="uid://dodx2r5nsudm" path="res://art/music/sound_effects/RPG_Essentials_Free/8_Atk_Magic_SFX/25_Wind_01.wav" id="4_p1sam"]
 

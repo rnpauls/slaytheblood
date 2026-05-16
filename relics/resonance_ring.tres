@@ -9,5 +9,4 @@ relic_name = "Resonance Ring"
 id = "resonance_ring"
 type = 4
 icon = ExtResource("1_lfjph")
-tooltip = "[color=\"ffdf00\"]Resonance Ring[/color]
-Every 5 cards you play, draw a card."
+tooltip = "Every 5 cards you play, draw a card."

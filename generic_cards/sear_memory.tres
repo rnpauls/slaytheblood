@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_qxde2"]
 [ext_resource type="Script" uid="uid://dyf5kfq6q54o0" path="res://generic_cards/sear_memory.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://bfxdyp1ggg2sv" path="res://art/Icon28_30.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://3vxwu1bqnoc0" path="res://art/card_art/pixellab/sear_memory.png" id="2_icon"]
 [ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="3_sound"]
 
 [resource]

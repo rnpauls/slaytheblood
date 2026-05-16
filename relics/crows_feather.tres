@@ -9,5 +9,4 @@ relic_name = "Crow's Feather"
 id = "crows_feather"
 type = 4
 icon = ExtResource("1_dy8sa")
-tooltip = "[color=\"ffdf00\"]Crow's Feather[/color]
-The first attack you play each turn refunds 1 [kw=action_point]Action Point[/kw]."
+tooltip = "The first attack you play each turn refunds 1 [kw=action_point]Action Point[/kw]."

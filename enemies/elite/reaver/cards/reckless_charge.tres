@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_bv4mp"]
 [ext_resource type="AudioStream" uid="uid://n7uxwbrwnet4" path="res://art/music/sound_effects/400 Sounds Pack/Combat and Gore/swipe.wav" id="1_rckl1"]
-[ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="2_rckl2"]
+[ext_resource type="Texture2D" uid="uid://dhoigsnfjc870" path="res://art/card_art/pixellab/reckless_charge.png" id="2_rckl2"]
 [ext_resource type="Script" uid="uid://bf36ysdt4toh3" path="res://enemies/elite/reaver/cards/reckless_charge.gd" id="3_rckl3"]
 
 [resource]

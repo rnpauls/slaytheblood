@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bwdwsrg65wk8t"]
 
 [ext_resource type="AudioStream" uid="uid://d0xis2ox56xrv" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_sharpen.wav" id="1_fgrj5"]
-[ext_resource type="Texture2D" uid="uid://jesqh00q1sja" path="res://art/item4.png" id="1_tfyyy"]
+[ext_resource type="Texture2D" uid="uid://7t7bryow5qcm" path="res://art/card_art/pixellab/wounding_blow.png" id="1_tfyyy"]
 [ext_resource type="Script" uid="uid://njo0dl8kewi6" path="res://generic_cards/vanilla_attack.gd" id="2_tfyyy"]
 [ext_resource type="AudioStream" uid="uid://curnnutxjcr7o" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/22_Slash_04.wav" id="4_fornq"]
 

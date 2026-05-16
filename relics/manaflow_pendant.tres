@@ -11,5 +11,4 @@ type = 4
 character_type = 3
 starter_relic = false
 icon = ExtResource("1_icon")
-tooltip = "[color=\"ffdf00\"]Manaflow Pendant[/color]
-After your first attack each turn, gain 1 [kw=floodgate]Floodgate[/kw]."
+tooltip = "After your first attack each turn, gain 1 [kw=floodgate]Floodgate[/kw]."

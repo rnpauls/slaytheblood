@@ -9,5 +9,4 @@ relic_name = "Iron Stomach"
 id = "iron_stomach"
 character_type = 2
 icon = ExtResource("1_iacqc")
-tooltip = "[color=\"ffdf00\"]Iron Stomach[/color]
-At the start of each turn, if your hand holds a 6+ attack card, gain 1 mana."
+tooltip = "At the start of each turn, if your hand holds a 6+ attack card, gain 1 mana."

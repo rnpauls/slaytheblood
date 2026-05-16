@@ -10,5 +10,4 @@ id = "tome_of_wards"
 type = 2
 character_type = 3
 icon = ExtResource("1_pvxm1")
-tooltip = "[color=\"ffdf00\"]Tome of Wards[/color]
-At the end of each turn, if you took no damage this turn, create a [kw=runechant]runechant[/kw]."
+tooltip = "At the end of each turn, if you took no damage this turn, create a [kw=runechant]runechant[/kw]."

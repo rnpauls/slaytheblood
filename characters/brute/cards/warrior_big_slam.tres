@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://cdgxuyupuk3a5"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_jtyte"]
-[ext_resource type="Texture2D" uid="uid://44jbm5bqr4k" path="res://art/tile_0117.png" id="1_wqqw1"]
+[ext_resource type="Texture2D" uid="uid://byf66vy10tp6t" path="res://art/card_art/pixellab/buckle.png" id="1_wqqw1"]
 [ext_resource type="AudioStream" uid="uid://dixklg6g4jnsq" path="res://art/music/slash.ogg" id="3_ocq4c"]
 [ext_resource type="Script" uid="uid://cg5w7oud3a30j" path="res://characters/brute/cards/warrior_big_slam.gd" id="3_oeqbn"]
 

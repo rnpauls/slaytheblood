@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bcrcdt0001run"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://p18hql00cpmh" path="res://art/magicbook/64x64/book_image_16.png" id="2_vpd55"]
+[ext_resource type="Texture2D" uid="uid://0uwl374tskw7" path="res://art/card_art/pixellab/aether_conduit.png" id="2_vpd55"]
 [ext_resource type="Script" uid="uid://dg37ediyhsnnb" path="res://characters/runeblade/cards/aether_conduit.gd" id="3_script"]
 
 [resource]

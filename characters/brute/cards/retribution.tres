@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://cngmewy6pkui3"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://cb02oo4u8qgqt" path="res://art/item72.png" id="2_icon"]
+[ext_resource type="Texture2D" uid="uid://cg7f08fst6rys" path="res://art/card_art/pixellab/retribution.png" id="2_icon"]
 [ext_resource type="Script" uid="uid://c8l65ejfwwm0e" path="res://characters/brute/cards/retribution.gd" id="3_script"]
 [ext_resource type="AudioStream" uid="uid://b1vpjjmi5cj3n" path="res://art/music/axe.ogg" id="4_sound"]
 

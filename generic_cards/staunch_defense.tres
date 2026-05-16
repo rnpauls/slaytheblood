@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://cgqchuhkr4wgx"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_wmy6e"]
-[ext_resource type="Texture2D" uid="uid://bl5e7ueslu6ap" path="res://art/item42.png" id="2_b1iqv"]
+[ext_resource type="Texture2D" uid="uid://cud6xckdchw7j" path="res://art/card_art/pixellab/staunch_defense.png" id="2_b1iqv"]
 [ext_resource type="Script" uid="uid://d2mhqqkkw7egc" path="res://generic_cards/block.gd" id="3_xgq3i"]
 [ext_resource type="AudioStream" uid="uid://cdcrekpo82nwa" path="res://art/music/sound_effects/RPG_Essentials_Free/10_Battle_SFX/39_Block_03.wav" id="4_hvnoj"]
 

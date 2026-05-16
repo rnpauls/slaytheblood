@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhut8dh14svtr" path="res://enemies/commoner/cards/pitchfork_jab.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
-[ext_resource type="Texture2D" uid="uid://SmLjgrCUaVV5G" path="res://art/card_art/pixellab/pitchfork_jab.png" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://db732id681leg" path="res://art/card_art/pixellab/pitchfork_jab.png" id="3_icon"]
 [ext_resource type="AudioStream" uid="uid://jtfy603dbolx" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/harsh_thud.wav" id="4_sound"]
 
 [resource]

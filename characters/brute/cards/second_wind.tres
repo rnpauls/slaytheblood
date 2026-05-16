@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://ddntfmnq37i38"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_block"]
-[ext_resource type="Texture2D" uid="uid://dbu3ioyuhnqj3" path="res://art/item50.png" id="2_3itrj"]
+[ext_resource type="Texture2D" uid="uid://b6rhil68sgkx7" path="res://art/card_art/pixellab/second_wind.png" id="2_3itrj"]
 [ext_resource type="Script" uid="uid://ddntfmnq37i37" path="res://characters/brute/cards/second_wind.gd" id="2_script"]
 [ext_resource type="AudioStream" uid="uid://cyjptpe4kklu6" path="res://art/music/sound_effects/400 Sounds Pack/Other/whoosh_1.wav" id="3_sound"]
 

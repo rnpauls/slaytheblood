@@ -1,7 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bxtg2nt2ljspc"]
 
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="1_d43t4"]
-[ext_resource type="Texture2D" uid="uid://dbu3ioyuhnqj3" path="res://art/item50.png" id="2_y8vdj"]
+[ext_resource type="Texture2D" uid="uid://bo2rahp5cjbek" path="res://art/card_art/pixellab/deep_gash.png" id="2_y8vdj"]
 [ext_resource type="Script" uid="uid://chj4f2gq6bmky" path="res://characters/ninja/cards/deep_gash.gd" id="3_j5kxa"]
 [ext_resource type="AudioStream" uid="uid://bunlh8adnhe2c" path="res://art/music/sound_effects/400 Sounds Pack/Weapons/sword_light.wav" id="4_p3ps0"]
 
