@@ -44,7 +44,6 @@ func _on_statuses_applied(type: Status.Type) -> void:
 		return
 	if _current_enemy and is_instance_valid(_current_enemy):
 		await _current_enemy.exhaust_fleeting_in_hand()
-		await _current_enemy.burn_played_cards()
 	enemy_handler.acting_enemies.erase(_current_enemy)
 	_advance()
 

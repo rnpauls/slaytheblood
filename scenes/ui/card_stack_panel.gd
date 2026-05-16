@@ -20,7 +20,8 @@ const CARD_UI_SCENE := preload("res://scenes/card_ui/card_ui.tscn")
 const CARD_SIZE_UNSCALED := Vector2(200, 280)
 const CARD_PIVOT := Vector2(100, 140)
 
-# Visible scale of cards while in the pile.
+# Default visible scale of cards while in the pile. Kept as a const so external
+# callers (battle_ui.gd) can reference it without needing a panel instance.
 const PILE_SCALE := 0.6
 # Fraction of the card height that peeks above the bottom of the screen for the
 # bottom-most card. Each card stacked above adds another `per_card_offset`.
@@ -36,6 +37,26 @@ const REARRANGE_DURATION := 0.18
 ## pitched/sunk card goes to the bottom of the conceptual deck. Discard piles
 ## leave this false so the most-recently-discarded card sits on top.
 @export var add_to_back_of_deck: bool = false
+## Per-instance visible scale of cards in the pile. Defaults to PILE_SCALE so
+## existing draw/discard piles render unchanged; smaller piles (e.g. per-enemy
+## exhaust pile) override this to render a tighter stack.
+@export var pile_scale: float = PILE_SCALE
+## Cap on how many visual CardUIs the pile shows. 0 means unlimited (default,
+## matches the player's draw/discard piles which always mirror the resource).
+## When set, the oldest peeking visual (front child / north) is evicted as new
+## cards arrive past the cap. The underlying resource pile is unaffected — the
+## CardPileView opened on click still shows every card.
+@export var max_visible_cards: int = 0
+## Total vertical span (px) of the stack peek when the pile is NOT hovered.
+## Per-card offset scales as max_peek_height / (n - 1), clamped by max_per_card.
+@export var max_peek_height: float = 50.0
+## Per-card offset cap (px) when not hovered.
+@export var max_per_card_peek: float = 20.0
+## Total vertical span (px) of the stack peek when the pile IS hovered (spreads
+## the stack open so the player can read more of each card).
+@export var hover_peek_height: float = 70.0
+## Per-card offset cap (px) when hovered.
+@export var hover_per_card_peek: float = 30.0
 
 @onready var click_area: Button = %ClickArea
 @onready var counter: Label = %Counter
@@ -122,7 +143,7 @@ func accept_incoming_visual(card_ui: CardUI) -> void:
 	card_ui.global_position = gpos
 	card_ui.position = Vector2(_slot_position(0).x, card_ui.position.y)
 	card_ui.rotation_degrees = 0.0
-	card_ui.scale = Vector2(PILE_SCALE, PILE_SCALE)
+	card_ui.scale = Vector2(pile_scale, pile_scale)
 	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	# CardRenderContainer and its descendants default to MOUSE_FILTER_STOP and would
 	# otherwise capture hover events before they reach the panel's ClickArea sibling.
@@ -131,6 +152,7 @@ func accept_incoming_visual(card_ui: CardUI) -> void:
 	if card_ui.card_render:
 		card_ui.card_render.show_back = face_down
 		card_ui.card_render.set_glow(false)
+	_enforce_max_visible()
 	_arrange()
 
 
@@ -175,6 +197,9 @@ func accept_pitched_visual(card_ui: CardUI) -> void:
 		card_ui.card_render.set_glow(false)
 
 	_pitched_in_flight = card_ui
+	# Evict over-cap visuals BEFORE computing the target slot so target_index
+	# reflects the post-eviction count.
+	_enforce_max_visible()
 	# The card is now the last visual child; _slot_position uses _visuals().size().
 	var target_index: int = _visuals().size() - 1
 	var target_pos: Vector2 = _slot_position(target_index)
@@ -185,7 +210,7 @@ func accept_pitched_visual(card_ui: CardUI) -> void:
 	var t := card_ui.create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.tween_property(card_ui, "position", target_pos, fly_duration)
 	t.tween_property(card_ui, "rotation_degrees", 0.0, fly_duration)
-	t.tween_property(card_ui, "scale", Vector2(PILE_SCALE, PILE_SCALE), fly_duration) \
+	t.tween_property(card_ui, "scale", Vector2(pile_scale, pile_scale), fly_duration) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	t.chain().tween_callback(func():
 		if _pitched_in_flight == card_ui:
@@ -235,6 +260,8 @@ func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
 		visual.card_render.set_glow(false)
 
 	_pitched_in_flight = visual
+	# Evict over-cap visuals BEFORE computing the target slot.
+	_enforce_max_visible()
 
 	var target_index: int = 0 if add_to_back_of_deck else _visuals().size() - 1
 	var target_pos: Vector2 = _slot_position(target_index)
@@ -247,7 +274,7 @@ func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(visual, "rotation_degrees", 0.0, fly_duration) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.parallel().tween_property(visual, "scale", Vector2(PILE_SCALE, PILE_SCALE), fly_duration) \
+	t.parallel().tween_property(visual, "scale", Vector2(pile_scale, pile_scale), fly_duration) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	# Face-down piles: flip the card to its back as it lands so it joins the
@@ -280,7 +307,12 @@ func _sync_to_resource() -> void:
 	if not card_pile:
 		return
 	var visuals := _visuals()
-	var diff := card_pile.cards.size() - visuals.size()
+	# When capped, only ever spawn up to max_visible_cards visuals — the extras
+	# live only in the resource pile and surface via the CardPileView on click.
+	var target: int = card_pile.cards.size()
+	if max_visible_cards > 0:
+		target = min(target, max_visible_cards)
+	var diff := target - visuals.size()
 	if diff > 0:
 		for i in diff:
 			_spawn_back()
@@ -291,8 +323,31 @@ func _sync_to_resource() -> void:
 		for i in -diff:
 			var top: CardUI = _visuals().back()
 			top.queue_free()
+	# Defensive in case max_visible_cards was lowered at runtime, or a handoff
+	# pushed visuals past the cap.
+	_enforce_max_visible()
 	_update_counter()
 	_arrange()
+
+
+## Evict the oldest peeking visuals (front children = slot 0 = north) when the
+## visual count exceeds max_visible_cards. No-op if the cap is unlimited (0).
+## remove_child + queue_free both run so _visuals() reflects the eviction this
+## frame (queue_free alone is deferred to end-of-frame).
+func _enforce_max_visible() -> void:
+	if max_visible_cards <= 0:
+		return
+	var visuals := _visuals()
+	while visuals.size() > max_visible_cards:
+		var oldest: CardUI = visuals[0]
+		if _pitched_in_flight == oldest:
+			_pitched_in_flight = null
+		if oldest.tween and oldest.tween.is_running():
+			oldest.tween.kill()
+		if oldest.get_parent():
+			oldest.get_parent().remove_child(oldest)
+		oldest.queue_free()
+		visuals = _visuals()
 
 
 func _spawn_back() -> void:
@@ -304,7 +359,7 @@ func _spawn_back() -> void:
 	_set_descendants_mouse_filter(visual, Control.MOUSE_FILTER_IGNORE)
 	# Spawn off-screen below; _arrange will tween it into place.
 	visual.position = _slot_position(0) + Vector2(0, 200)
-	visual.scale = Vector2(PILE_SCALE, PILE_SCALE)
+	visual.scale = Vector2(pile_scale, pile_scale)
 
 
 func _update_counter() -> void:
@@ -332,12 +387,12 @@ func _visuals() -> Array[CardUI]:
 ## card stays on the visible bottom.
 func _slot_position(i: int) -> Vector2:
 	var n := _visuals().size()
-	var max_height: float = 70.0 if _hovered else 50.0
-	var max_per_card: float = 30.0 if _hovered else 20.0
+	var max_height: float = hover_peek_height if _hovered else max_peek_height
+	var max_per_card: float = hover_per_card_peek if _hovered else max_per_card_peek
 	var per_card_offset: float = 0.0
 	if n > 1:
 		per_card_offset = minf(max_per_card, max_height / float(n - 1))
-	var card_height_visible: float = CARD_SIZE_UNSCALED.y * PILE_SCALE
+	var card_height_visible: float = CARD_SIZE_UNSCALED.y * pile_scale
 	var top_visible_band: float = TOP_VISIBLE_FRAC * card_height_visible
 	var bottom_top_y: float = size.y - top_visible_band
 	var step: int = n - 1 - i
@@ -345,7 +400,7 @@ func _slot_position(i: int) -> Vector2:
 	# Convert visible-top-left to Control.position by subtracting the pivot offset
 	# induced by Control scaling around pivot_offset.
 	var visible_top_left := Vector2(0, visible_top_y)
-	return visible_top_left - (1.0 - PILE_SCALE) * CARD_PIVOT
+	return visible_top_left - (1.0 - pile_scale) * CARD_PIVOT
 
 
 func _arrange() -> void:
@@ -369,25 +424,48 @@ func _arrange() -> void:
 			card.tween.kill()
 		card.tween = card.create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
 		card.tween.tween_property(card, "position", target_pos, REARRANGE_DURATION)
-		card.tween.parallel().tween_property(card, "scale", Vector2(PILE_SCALE, PILE_SCALE), REARRANGE_DURATION)
+		card.tween.parallel().tween_property(card, "scale", Vector2(pile_scale, pile_scale), REARRANGE_DURATION)
 		card.tween.parallel().tween_property(card, "rotation_degrees", 0.0, REARRANGE_DURATION)
 
 
-## Shrink the click/hover region to just the visible card stack, so hovering the
-## empty space above the cards (the panel extends taller than the cards' actual
-## peek-out region) doesn't register as a pile hover. The ClickArea is anchored
-## to the panel's bottom edge (anchor_top = anchor_bottom = 1.0), so a negative
-## offset_top sets its height in pixels above the panel bottom.
+## Shrink the click/hover region to just the visible card stack, so hovering
+## either the empty space above the cards (the panel extends taller than the
+## cards' actual peek-out region) or the empty space to the right of a small
+## stack (panel width may exceed card width when pile_scale is small) doesn't
+## register as a pile hover.
+##
+## The ClickArea is anchored at all four sides to the panel rect (offsets adjust
+## inset/outset from that rect). Vertically, the click region extends from the
+## topmost peeking card's visible top to the bottommost card's visible bottom —
+## which can lie BELOW the panel rect for small pile_scale (positive
+## offset_bottom). Horizontally, the click region is the card-visible width
+## starting from the panel's left edge.
 func _update_click_area(n: int) -> void:
 	if not click_area:
 		return
 	if n == 0:
 		click_area.offset_top = 0.0
+		click_area.offset_bottom = 0.0
+		click_area.offset_left = 0.0
+		click_area.offset_right = 0.0
 		return
 	# Slot 0 is the topmost (north) card. _slot_position returns Control.position;
 	# the visible top edge sits pivot_y * (1 - scale) below that.
-	var topmost_visible_y: float = _slot_position(0).y + (1.0 - PILE_SCALE) * CARD_PIVOT.y
+	var topmost_visible_y: float = _slot_position(0).y + (1.0 - pile_scale) * CARD_PIVOT.y
 	click_area.offset_top = topmost_visible_y - size.y
+	# Bottom card's visible bottom = (size.y - top_visible_band) + card_height_visible.
+	# That can exceed size.y when pile_scale is small; offset_bottom positive
+	# extends the click area below the panel rect to cover those visible cards.
+	var card_height_visible: float = CARD_SIZE_UNSCALED.y * pile_scale
+	var top_visible_band: float = TOP_VISIBLE_FRAC * card_height_visible
+	var bottommost_visible_y: float = (size.y - top_visible_band) + card_height_visible
+	click_area.offset_bottom = bottommost_visible_y - size.y
+	# Width: visible cards start at panel-local x=0 (see _slot_position math) and
+	# span CARD_SIZE_UNSCALED.x * pile_scale to the right. Trim the right edge so
+	# the click area doesn't include empty space when panel is wider than card.
+	var card_width_visible: float = CARD_SIZE_UNSCALED.x * pile_scale
+	click_area.offset_left = 0.0
+	click_area.offset_right = card_width_visible - size.x
 
 
 # ── Hover: spread the stack ──────────────────────────────────────────────────

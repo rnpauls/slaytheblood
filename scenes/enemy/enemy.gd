@@ -34,14 +34,13 @@ const DEATH_SINK_DISTANCE := 12.0
 @onready var enemy_resource_ui: EnemyResourceUI = $EnemyResourceUI
 @onready var enemy_hand: EnemyHand = $EnemyHand
 @onready var staged_display: EnemyStagedDisplay = $StagedDisplay
-@onready var played_cards_display: EnemyPlayedCardsDisplay = $PlayedCardsDisplay
+@onready var exhaust_pile: CardStackPanel = $ExhaustPile
 @onready var block_display: Node2D = $BlockDisplay
 @onready var name_label: Label = $NameLabel
 @onready var hover_collision: CollisionShape2D = $HoverArea/CollisionShape2D
 
 @onready var _intent_origin_y: float = intent_ui.position.y
 @onready var _staged_origin_y: float = staged_display.position.y
-@onready var _played_origin_y: float = played_cards_display.position.y
 
 signal enemy_action_completed
 
@@ -81,7 +80,10 @@ func _ready() -> void:
 	defense_sequencer.setup(self, hand_manager, enemy_hand, block_display)
 
 	action_sequencer = EnemyActionSequencer.new()
-	action_sequencer.setup(self, hand_manager, staged_display, played_cards_display, enemy_resource_ui)
+	action_sequencer.setup(self, hand_manager, staged_display, enemy_resource_ui)
+
+	if not exhaust_pile.pressed.is_connected(_on_exhaust_pile_pressed):
+		exhaust_pile.pressed.connect(_on_exhaust_pile_pressed)
 
 
 # ── Combatant overrides ───────────────────────────────────────────────────────
@@ -153,9 +155,6 @@ func add_card_to_hand(card: Card) -> void:
 func exhaust_fleeting_in_hand() -> void:
 	await hand_manager.exhaust_fleeting_in_hand()
 
-func burn_played_cards() -> void:
-	await played_cards_display.burn_all()
-
 
 # ── Action delegation ─────────────────────────────────────────────────────────
 
@@ -215,7 +214,6 @@ func update_enemy() -> void:
 	# upward (bottom is fixed), so the top moves by 2 * dy.
 	intent_ui.position.y = _intent_origin_y - 2.0 * dy
 	staged_display.position.y = _staged_origin_y - 2.0 * dy
-	played_cards_display.position.y = _played_origin_y - 2.0 * dy
 
 	# Vertical middle of the actual sprite — feet at 0, top at -2 * half.y.
 	var sprite_center_y := -half.y
@@ -227,6 +225,11 @@ func update_enemy() -> void:
 	name_label.text = stats.character_name
 	update_stats()
 	_setup_weapon_badge()
+
+	# Wire the visual exhaust pile to the resource pile so cards added to
+	# stats.exhaust (via card_play_finished / blocked) show up in the stack.
+	if stats and stats.exhaust:
+		exhaust_pile.card_pile = stats.exhaust
 
 
 ## Mount the visual weapon badge. WeaponHandler.set_weapon takes care of
@@ -398,6 +401,67 @@ func _get_hand() -> Array[Card]:
 
 func _get_card_ui_map() -> Dictionary:
 	return hand_manager.card_ui_map if hand_manager else {}
+
+
+# ── Exhaust pile click + discard-label slide helper ──────────────────────────
+
+const _DISCARD_FLIGHT_DURATION := 0.4
+const _DISCARD_FADE_DELAY := 0.2
+
+## Open the BattleUI discard_pile_view retargeted to this enemy's exhaust pile.
+## Mirrors EnemyResourceUI._on_discard_pressed for the discard counter button.
+func _on_exhaust_pile_pressed() -> void:
+	if not battle_ui or not stats:
+		return
+	var enemy_name: String = stats.character_name if stats.character_name else "Enemy"
+	battle_ui.show_card_pile(stats.exhaust, "%s Exhaust Pile" % enemy_name)
+
+
+## Animate an existing card_ui to the EnemyResourceUI discard count label and
+## queue_free on landing. Reparents onto BattleUI so the flight isn't bound to
+## staged/play-overlay transforms and draws above the hand/sprite.
+## Used by EnemyActionSequencer for non-exhausting plays and
+## EnemyDefenseSequencer for pitches. Pattern mirrors
+## BattleUI._animate_card_to_enemy_label but operates on an existing visual
+## instead of spawning a transient.
+func animate_card_to_discard_label(card_ui: EnemyCardUI) -> void:
+	if not is_instance_valid(card_ui):
+		return
+	var target_label: Control = enemy_resource_ui.discard_count if enemy_resource_ui else null
+	if not target_label or not battle_ui:
+		if is_instance_valid(card_ui):
+			card_ui.queue_free()
+		return
+
+	var gpos := card_ui.global_position
+	var gscale := card_ui.scale
+	var grot := card_ui.rotation_degrees
+	var prev_parent := card_ui.get_parent()
+	if prev_parent:
+		prev_parent.remove_child(card_ui)
+	battle_ui.add_child(card_ui)
+	card_ui.global_position = gpos
+	card_ui.scale = gscale
+	card_ui.rotation_degrees = grot
+	card_ui.z_index = 60
+	card_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var card_center_offset: Vector2 = (CardStackPanel.CARD_SIZE_UNSCALED * CardStackPanel.PILE_SCALE) / 2.0
+	var label_center: Vector2 = target_label.global_position + target_label.size / 2.0
+	var target_pos: Vector2 = label_center - card_center_offset
+
+	var t := card_ui.create_tween()
+	t.tween_property(card_ui, "global_position", target_pos, _DISCARD_FLIGHT_DURATION) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(card_ui, "scale",
+		Vector2(CardStackPanel.PILE_SCALE, CardStackPanel.PILE_SCALE),
+		_DISCARD_FLIGHT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	t.parallel().tween_property(card_ui, "modulate:a", 0.0, _DISCARD_FLIGHT_DURATION) \
+		.set_delay(_DISCARD_FADE_DELAY)
+	t.tween_callback(func():
+		if is_instance_valid(card_ui):
+			card_ui.queue_free())
+	await t.finished
 
 
 # ── Hover / tooltip routing ───────────────────────────────────────────────────

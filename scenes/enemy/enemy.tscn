@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://be755sb3hx1sv" path="res://scenes/enemy/enemy_hand.tscn" id="9_ehand"]
 [ext_resource type="Script" uid="uid://bi3sysr02rwq3" path="res://scenes/enemy/enemy_staged_display.gd" id="10_staged"]
 [ext_resource type="Theme" uid="uid://dj6v4tpi0851r" path="res://art/themes/main_theme.tres" id="11_name"]
-[ext_resource type="Script" path="res://scenes/enemy/enemy_played_cards_display.gd" id="12_played"]
+[ext_resource type="PackedScene" uid="uid://b8stk2cstkp01" path="res://scenes/ui/card_stack_panel.tscn" id="13_exhaust"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 resource_local_to_scene = true
@@ -69,9 +69,19 @@ position = Vector2(-55, -150)
 script = ExtResource("10_staged")
 staged_scale = 0.15
 
-[node name="PlayedCardsDisplay" type="Node2D" parent="." unique_id=-1293967292]
-position = Vector2(140, -50)
-script = ExtResource("12_played")
+[node name="ExhaustPile" parent="." unique_id=-1293967292 instance=ExtResource("13_exhaust")]
+offset_left = 100.0
+offset_top = -130.0
+offset_right = 160.0
+offset_bottom = -10.0
+pile_scale = 0.24
+face_down = false
+add_to_back_of_deck = false
+max_visible_cards = 4
+max_peek_height = 30.0
+max_per_card_peek = 10.0
+hover_peek_height = 50.0
+hover_per_card_peek = 18.0
 
 [node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
 position = Vector2(-105, -48)

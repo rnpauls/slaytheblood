@@ -20,19 +20,16 @@ var current_action: Object
 var _enemy: Enemy
 var _hand_manager: EnemyHandManager
 var _staged_display: EnemyStagedDisplay
-var _played_display: EnemyPlayedCardsDisplay
 var _enemy_resource_ui: EnemyResourceUI
 var _staged_card_ui: EnemyCardUI = null
 
 
 func setup(enemy: Enemy, hand_manager: EnemyHandManager,
 		staged_display: EnemyStagedDisplay,
-		played_display: EnemyPlayedCardsDisplay,
 		enemy_resource_ui: EnemyResourceUI) -> void:
 	_enemy = enemy
 	_hand_manager = hand_manager
 	_staged_display = staged_display
-	_played_display = played_display
 	_enemy_resource_ui = enemy_resource_ui
 
 
@@ -120,11 +117,15 @@ func do_action() -> void:
 	_enemy_resource_ui.update_display(_enemy.enemy_ai)
 
 
-## Attack path: detach the staged card, run the play-overlay emphasis + effects
-## pipeline inline (skipping the burn that CardUI.play() would do), then hand
-## the card off to the played-cards display where it remains until EOT.
-## Disposition (exhaust vs discard) is driven by card.card_play_finished →
-## EnemyHandManager._on_card_play_finished, which honors card.exhausts.
+## Attack path: detach the staged card, then split on `card.exhausts`:
+##   • Exhausting cards hand off directly to the enemy's ExhaustPile via
+##     accept_incoming_visual. The card_ui slides into the pile and stays there
+##     persistently — same handoff pattern the player uses for non-exhausting
+##     cards going to the discard pile.
+##   • Non-exhausting cards run the play-overlay emphasis + effects pipeline,
+##     then slide to the EnemyResourceUI discard count label and fade.
+## Disposition (which pile the card data lands in) is driven by
+## card.card_play_finished → EnemyHandManager._on_card_play_finished.
 func _do_attack_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
@@ -143,20 +144,27 @@ func _do_attack_action() -> void:
 	card_ui.targets = [_enemy.enemy_ai.target]
 	var played_card: Card = current_action as Card
 
-	# Mirror the enemy branch of CardUI.play() minus the trailing _burn_up +
-	# queue_free; we hand the card off to the played display instead.
-	card_ui._reparent_to_play_overlay()
-	await card_ui._play_emphasis()
-	await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
-	if not is_instance_valid(card_ui):
-		return
+	if played_card.exhausts and _enemy.exhaust_pile:
+		# Handoff BEFORE card.play() so the size_changed handler triggered by
+		# _on_card_play_finished → exhaust.add_card sees visual count already
+		# matching the resource and skips its own auto-spawn.
+		# accept_pitched_visual (vs accept_incoming_visual) tweens the card on a
+		# smooth diagonal from its current global transform directly to the
+		# south slot — no horizontal snap, no first-appears-at-north artifact.
+		_enemy.exhaust_pile.accept_pitched_visual(card_ui)
+		await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
+	else:
+		# Non-exhausting attack: emphasize + effects at the play overlay, then
+		# slide to the EnemyResourceUI discard count label and fade.
+		card_ui._reparent_to_play_overlay()
+		await card_ui._play_emphasis()
+		await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
+		if is_instance_valid(card_ui):
+			await _enemy.animate_card_to_discard_label(card_ui)
 
-	_played_display.add_card(card_ui)
 
-
-## NAA path: apply effects in-place at the staged position, then hand the card
-## off to the played-cards display. We bypass card_ui.play() so the visual
-## stays at center during effects (no flash back to hand).
+## NAA path: detach without reparenting back to the hand, then split on
+## card.exhausts identically to the attack path.
 func _do_naa_action() -> void:
 	var card_ui: EnemyCardUI
 	if is_instance_valid(_staged_card_ui):
@@ -172,16 +180,19 @@ func _do_naa_action() -> void:
 	card_ui.targets = [_enemy.enemy_ai.target]
 	var played_card: Card = current_action as Card
 
-	# Effects resolve while the card is still visible at the staged position.
-	# Most NAAs target SELF and apply a status; card.play handles target lookup.
-	# played_card.play emits card_play_finished, which EnemyHandManager routes
-	# to exhaust or discard (honors card.exhausts).
-	await card_ui._play_emphasis()
-	await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
-	if not is_instance_valid(card_ui):
-		return
-
-	_played_display.add_card(card_ui)
+	if played_card.exhausts and _enemy.exhaust_pile:
+		# accept_pitched_visual (vs accept_incoming_visual) tweens the card on a
+		# smooth diagonal from its current global transform directly to the
+		# south slot — no horizontal snap, no first-appears-at-north artifact.
+		_enemy.exhaust_pile.accept_pitched_visual(card_ui)
+		await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
+	else:
+		# Effects resolve at the staged position; no reparent so the card stays
+		# centered. Most NAAs target SELF and apply a status.
+		await card_ui._play_emphasis()
+		await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
+		if is_instance_valid(card_ui):
+			await _enemy.animate_card_to_discard_label(card_ui)
 
 
 ## Weapon path: apply damage via the same DamagePacket pipeline as a card

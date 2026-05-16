@@ -129,15 +129,24 @@ func _animate_defense_card(card: Card, amount: int, kind: String) -> void:
 	if not is_instance_valid(card_ui):
 		return
 
-	# Pile disposition is signal-driven now: defend_packet emits `blocked` /
-	# calls pitch_card before this animation runs, and EnemyHandManager's
-	# handlers route to exhaust / discard respectively. Nothing to do here.
-	var t := card_ui.create_tween()
-	t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
-	t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)
-	await t.finished
-	if is_instance_valid(card_ui):
-		card_ui.queue_free()
+	# Pile disposition is signal-driven: defend_packet emits `blocked` / calls
+	# pitch_card before this animation runs, and EnemyHandManager's handlers
+	# route to exhaust / discard respectively. The trailing animation here
+	# only disposes of this transient visual:
+	#   • Blocks fade in place — the resource is already in stats.exhaust, and
+	#     the per-enemy ExhaustPile auto-spawns a fresh visual via
+	#     _sync_to_resource on the size_changed signal.
+	#   • Pitches slide to the EnemyResourceUI discard count label so the
+	#     player can see where the pitched card went.
+	if kind == "pitch":
+		await _enemy.animate_card_to_discard_label(card_ui)
+	else:
+		var t := card_ui.create_tween()
+		t.tween_property(card_ui, "scale", Vector2.ZERO, Constants.TWEEN_FADE)
+		t.parallel().tween_property(card_ui, "modulate:a", 0.0, Constants.TWEEN_FADE)
+		await t.finished
+		if is_instance_valid(card_ui):
+			card_ui.queue_free()
 
 
 func _log(msg: String) -> void:
