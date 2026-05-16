@@ -64,28 +64,6 @@ size_flags_vertical = 4
 [node name="EnemyHand" parent="." unique_id=-1293967295 instance=ExtResource("9_ehand")]
 position = Vector2(0, 94)
 
-[node name="StagedDisplay" type="Node2D" parent="." unique_id=-1293967294]
-position = Vector2(-55, -150)
-script = ExtResource("10_staged")
-staged_scale = 0.15
-
-[node name="ExhaustPile" parent="." unique_id=-1293967292 instance=ExtResource("13_exhaust")]
-offset_left = 100.0
-offset_top = -130.0
-offset_right = 160.0
-offset_bottom = -10.0
-pile_scale = 0.24
-face_down = false
-add_to_back_of_deck = false
-max_visible_cards = 4
-max_peek_height = 30.0
-max_per_card_peek = 10.0
-hover_peek_height = 50.0
-hover_per_card_peek = 18.0
-
-[node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
-position = Vector2(-105, -48)
-
 [node name="NameLabel" type="Label" parent="." unique_id=-1293967293]
 visible = false
 anchors_preset = 5
@@ -101,6 +79,29 @@ theme_override_font_sizes/font_size = 18
 text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StagedDisplay" type="Node2D" parent="." unique_id=-1293967294]
+position = Vector2(-55, -150)
+script = ExtResource("10_staged")
+staged_scale = 0.15
+
+[node name="ExhaustPile" parent="." unique_id=-1293967292 instance=ExtResource("13_exhaust")]
+offset_left = 80.0
+offset_top = -130.0
+offset_right = 140.0
+offset_bottom = -10.0
+pile_scale = 0.24
+face_down = false
+add_to_back_of_deck = false
+max_visible_cards = 4
+max_peek_height = 30.0
+max_per_card_peek = 10.0
+hover_peek_height = 50.0
+hover_per_card_peek = 18.0
+counter_placement = 3
+
+[node name="BlockDisplay" type="Node2D" parent="." unique_id=1745282940]
+position = Vector2(-105, -48)
 
 [node name="StatusHandler" parent="." unique_id=321559537 node_paths=PackedStringArray("status_owner") instance=ExtResource("6_4c52q")]
 offset_left = -71.0

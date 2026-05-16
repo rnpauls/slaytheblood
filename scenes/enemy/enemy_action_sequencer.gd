@@ -237,13 +237,17 @@ func _do_weapon_action() -> void:
 ## Tween the weapon badge from its home offset to the StagedDisplay's local
 ## position. Both badge and StagedDisplay are children of Enemy in the same
 ## local coord space, so a direct position tween works without reparenting.
+## The badge is a 64×64 Control whose position is its top-left, so we offset
+## by half the size to center it on the staged anchor (otherwise it slides
+## down-and-right and overlaps the sprite).
 func _stage_weapon_badge() -> void:
 	var badge: WeaponHandler = _enemy.weapon_badge
 	if not is_instance_valid(badge):
 		return
 	badge.z_index = 1
+	var target: Vector2 = _staged_display.position - Vector2(32, 32)
 	var tween := badge.create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(badge, "position", _staged_display.position, Constants.TWEEN_CARD_STAGE)
+	tween.tween_property(badge, "position", target, Constants.TWEEN_CARD_STAGE)
 	await tween.finished
 
 

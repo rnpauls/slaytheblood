@@ -132,6 +132,7 @@ func _on_card_hovered(_card: EnemyCardUI) -> void:
 	_card_ui.animate_to_local_position_and_rotation_and_scale(
 		_scale_target(hovered_scale), 0.0, hovered_scale, Constants.TWEEN_FADE
 	)
+	_card_ui.request_tooltip()
 
 func _on_card_unhovered(_card: EnemyCardUI) -> void:
 	if not is_instance_valid(_card_ui) or not _is_hovered:
@@ -140,3 +141,4 @@ func _on_card_unhovered(_card: EnemyCardUI) -> void:
 	_card_ui.animate_to_local_position_and_rotation_and_scale(
 		_scale_target(staged_scale), 0.0, staged_scale, Constants.TWEEN_FADE
 	)
+	Events.tooltip_hide_requested.emit()

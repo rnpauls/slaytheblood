@@ -58,6 +58,21 @@ const REARRANGE_DURATION := 0.18
 ## Per-card offset cap (px) when hovered.
 @export var hover_per_card_peek: float = 30.0
 
+## Where the Counter label sits relative to the pile. Each case overwrites the
+## Counter's anchors + offsets in _ready (the Counter values baked into
+## card_stack_panel.tscn become irrelevant once a placement is applied).
+##   CENTER_BOTTOM — centered below the cards (legacy default)
+##   RIGHT_OF_PILE — to the right of the pile (player draw pile)
+##   LEFT_OF_PILE  — to the left of the pile (player discard pile)
+##   BELOW_PILE    — below the pile, past the south card (enemy exhaust pile)
+enum CounterPlacement {
+	CENTER_BOTTOM,
+	RIGHT_OF_PILE,
+	LEFT_OF_PILE,
+	BELOW_PILE,
+}
+@export var counter_placement: CounterPlacement = CounterPlacement.CENTER_BOTTOM : set = _set_counter_placement
+
 @onready var click_area: Button = %ClickArea
 @onready var counter: Label = %Counter
 
@@ -72,6 +87,68 @@ func _ready() -> void:
 	click_area.mouse_entered.connect(_on_pile_hover_entered)
 	click_area.mouse_exited.connect(_on_pile_hover_exited)
 	click_area.pressed.connect(func(): pressed.emit())
+	_apply_counter_placement()
+
+
+func _set_counter_placement(value: CounterPlacement) -> void:
+	counter_placement = value
+	if is_node_ready():
+		_apply_counter_placement()
+
+
+## Position the Counter label per the chosen placement. All presets pin a
+## single anchor point (anchor_left == anchor_right, anchor_top == anchor_bottom)
+## and use offsets to define the label rect; this avoids stretching when the
+## parent panel resizes.
+func _apply_counter_placement() -> void:
+	if not counter:
+		return
+	match counter_placement:
+		CounterPlacement.CENTER_BOTTOM:
+			counter.anchor_left = 0.5
+			counter.anchor_right = 0.5
+			counter.anchor_top = 1.0
+			counter.anchor_bottom = 1.0
+			counter.offset_left = -28.0
+			counter.offset_right = 28.0
+			counter.offset_top = -36.0
+			counter.offset_bottom = 0.0
+		CounterPlacement.RIGHT_OF_PILE:
+			# Anchored at the panel's bottom-right corner; label sits just
+			# outside the right edge, vertically near the bottom (close to
+			# the screen edge for the player's bottom-left draw pile).
+			counter.anchor_left = 1.0
+			counter.anchor_right = 1.0
+			counter.anchor_top = 1.0
+			counter.anchor_bottom = 1.0
+			counter.offset_left = -16
+			counter.offset_right = 40
+			counter.offset_top = -20.0
+			counter.offset_bottom = 16.0
+		CounterPlacement.LEFT_OF_PILE:
+			# Mirror of RIGHT_OF_PILE — anchored at the bottom-left corner;
+			# label sits just outside the left edge (player's bottom-right
+			# discard pile).
+			counter.anchor_left = 0.0
+			counter.anchor_right = 0.0
+			counter.anchor_top = 1.0
+			counter.anchor_bottom = 1.0
+			counter.offset_left = -40.0
+			counter.offset_right = 16.0
+			counter.offset_top = -20.0
+			counter.offset_bottom = 16.0
+		CounterPlacement.BELOW_PILE:
+			# Centered horizontally on the panel, positioned below the
+			# panel rect — past the south card for piles whose cards extend
+			# below the panel (small pile_scale; e.g. enemy exhaust).
+			counter.anchor_left = 0.5
+			counter.anchor_right = 0.5
+			counter.anchor_top = 1.0
+			counter.anchor_bottom = 1.0
+			counter.offset_left = -63.0
+			counter.offset_right = -7.0
+			counter.offset_top = 57.0
+			counter.offset_bottom = 93.0
 
 
 func set_card_pile(value: CardPile) -> void:

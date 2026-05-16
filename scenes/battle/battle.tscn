@@ -142,6 +142,7 @@ offset_right = 144.0
 offset_bottom = 0.0
 grow_vertical = 0
 add_to_back_of_deck = true
+counter_placement = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="DiscardPile" parent="BattleUI" unique_id=1643009583 instance=ExtResource("17_3u6fe")]
@@ -157,6 +158,7 @@ offset_right = -24.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
+counter_placement = 2
 face_down = false
 metadata/_edit_use_anchors_ = true
 

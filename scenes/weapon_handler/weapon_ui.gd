@@ -7,7 +7,7 @@ extends Control
 ## (inventory screen, etc.) update_labels renders raw weapon stats.
 var modifier_handler: ModifierHandler = null
 @onready var icon: TextureRect = $Icon
-#@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var atk_label: Label = %AtkLabel
 @onready var cost_label: Label = %CostLabel
 @onready var glow_panel: Panel = %GlowPanel
