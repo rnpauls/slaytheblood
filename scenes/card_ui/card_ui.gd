@@ -99,6 +99,7 @@ func discard() -> void:
 func pitch() -> void:
 	if not card:
 		return
+	SFXRegistry.play_pitch_sequence(card.pitch)
 	var pile = _get_discard_pile() if _is_player_card() else null
 	if pile:
 		# accept_pitched_visual is a single-card variant: the card slides

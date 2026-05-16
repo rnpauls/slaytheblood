@@ -22,7 +22,6 @@ extends Node
 
 const BLOCK_BADGE_SCENE := preload("res://scenes/enemy/block_badge.tscn")
 const MANA_ICON := preload("res://art/gold.png")
-const PITCH_SOUND := preload("res://art/music/sound_effects/400 Sounds Pack/Items/coin_collect.wav")
 
 ## Defense-card visualization tunables.
 const CARD_PIVOT_OFFSET := Vector2(100, 140)  # Matches CardUI scene pivot.
@@ -120,7 +119,7 @@ func _animate_defense_card(card: Card, amount: int, kind: String) -> void:
 	badge.z_index = DEFENSE_BADGE_Z_INDEX
 	if kind == "pitch":
 		badge.set_icon(MANA_ICON)
-		SFXPlayer.play(PITCH_SOUND)
+		SFXRegistry.play_pitch_sequence(card.pitch)
 	else:
 		SFXPlayer.play(card.block_sound)
 	badge.pop(amount)

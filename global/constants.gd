@@ -47,5 +47,14 @@ const RARITY_COLORS := {
 	0: Color.GRAY,
 	1: Color.CORNFLOWER_BLUE,
 	2: Color.GOLD,
-	
+
 }
+
+# ── Pitch sound sequence ────────────────────────────────────────────────────
+# Played in order: first N entries fire when a card with pitch=N is pitched.
+const PITCH_SOUNDS: Array[AudioStream] = [
+	preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_3.wav"),
+	preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_2.wav"),
+	preload("res://art/music/sound_effects/400 Sounds Pack/UI/pop_1.wav"),
+]
+const PITCH_SOUND_GAP := 0.08

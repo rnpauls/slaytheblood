@@ -25,6 +25,13 @@ func play(sfx_name: StringName, pitch: float = 1.0) -> void:
 		return
 	SFXPlayer.play(stream, false, pitch)
 
+func play_pitch_sequence(pitch_value: int) -> void:
+	var count := mini(pitch_value, Constants.PITCH_SOUNDS.size())
+	for i in count:
+		SFXPlayer.play(Constants.PITCH_SOUNDS[i])
+		if i < count - 1:
+			await get_tree().create_timer(Constants.PITCH_SOUND_GAP).timeout
+
 # ── Auto-attach: every Button gets CLICK_BUTTON and HOVER_UI by default. ──
 # Add a Button to the &"no_sfx" group (in the editor or via add_to_group)
 # to opt out — useful for gameplay-context buttons like card click areas.
