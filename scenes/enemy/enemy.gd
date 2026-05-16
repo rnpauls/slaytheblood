@@ -20,7 +20,7 @@ extends Combatant
 
 const ARROW_OFFSET := 45
 const WEAPON_HANDLER_SCENE := preload("res://scenes/weapon_handler/weapon_handler.tscn")
-const WEAPON_BADGE_OFFSET := Vector2(100, -40)
+const WEAPON_BADGE_OFFSET := Vector2(70, -130)
 ## Half of the default `display_height` (152, see custom_resources/stats.gd).
 ## Scene-default positions of intent/staged are calibrated for this baseline:
 ## a sprite of this height needs no per-enemy adjustment. Larger or smaller
