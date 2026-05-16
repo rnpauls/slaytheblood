@@ -32,6 +32,13 @@ signal combatant_attacked(victim: Node, attacker: Node, attempted: int, damage_d
 ## (right-of-source, flips left); pass Rect2() to anchor to the mouse instead.
 signal tooltip_show_requested(entries: Array[TooltipData], anchor_rect: Rect2)
 signal tooltip_hide_requested
+## Owner-tagged variants for sources that fire show/hide in racy cross-frame
+## orderings (e.g. Area2D + Control siblings on the same enemy). The TooltipLayer
+## tracks the current owner_id; a hide is honored only when its owner_id matches
+## the showing owner, so a stale hide from a source the cursor already left
+## doesn't kill a still-pending show from a different source.
+signal tooltip_show_for_owner(entries: Array[TooltipData], anchor_rect: Rect2, owner_id: int)
+signal tooltip_hide_for_owner(owner_id: int)
 ## Show the big InventoryCard preview for a weapon or equipment on hover. Pass
 ## anchor_rect to position next to the source (right-of-source, flips left).
 ## Exactly one of `weapon` or `equipment` should be set; the other is null.

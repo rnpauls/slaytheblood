@@ -9,10 +9,36 @@ var enemy: Enemy = null
 @onready var atk_label: Label = %AtkLabel
 @onready var exclamation: TextureRect = %Exclamation
 
+## Hover count across IntentUI + its outside-the-rect children (AtkLabel,
+## Exclamation). We show on 0→1, hide on 1→0. Direct forwarding without a
+## count would hide whenever the cursor crossed a sub-rect boundary (e.g.,
+## moving up from IntentUI's body into the AtkLabel overhead while both
+## rects still contain the cursor in the overlap zone).
+var _hover_count: int = 0
+
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
+	mouse_entered.connect(_on_zone_entered)
+	mouse_exited.connect(_on_zone_exited)
+	# AtkLabel (offset_top = -30) sticks above the IntentUI top; Exclamation
+	# (offset_right = 71) extends past our right edge. Cursor over either
+	# wouldn't otherwise fire our own mouse_entered.
+	atk_label.mouse_entered.connect(_on_zone_entered)
+	atk_label.mouse_exited.connect(_on_zone_exited)
+	exclamation.mouse_entered.connect(_on_zone_entered)
+	exclamation.mouse_exited.connect(_on_zone_exited)
+
+
+func _on_zone_entered() -> void:
+	_hover_count += 1
+	if _hover_count == 1:
+		_on_mouse_entered()
+
+
+func _on_zone_exited() -> void:
+	_hover_count = maxi(0, _hover_count - 1)
+	if _hover_count == 0:
+		_on_mouse_exited()
 
 func update_intent(intent: Intent) -> void:
 	if not intent:
@@ -66,11 +92,14 @@ func _on_mouse_entered() -> void:
 		TooltipData.make(ca_icon, "", body),
 	]
 	entries.append_array(KeywordRegistry.build_tooltip_chain(body))
-	Events.tooltip_show_requested.emit(entries, Rect2(global_position, size))
+	# Owner-tagged: paired with enemy.gd's HoverArea emits using a distinct
+	# instance id so a stale intent-hide can't kill a pending sprite-show
+	# (or vice versa) across frames.
+	Events.tooltip_show_for_owner.emit(entries, Rect2(global_position, size), get_instance_id())
 	Events.intent_hovered.emit(enemy)
 
 func _on_mouse_exited() -> void:
-	Events.tooltip_hide_requested.emit()
+	Events.tooltip_hide_for_owner.emit(get_instance_id())
 	if enemy:
 		Events.intent_unhovered.emit(enemy)
 

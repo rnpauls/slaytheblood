@@ -132,7 +132,7 @@ func _on_card_hovered(_card: EnemyCardUI) -> void:
 	_card_ui.animate_to_local_position_and_rotation_and_scale(
 		_scale_target(hovered_scale), 0.0, hovered_scale, Constants.TWEEN_FADE
 	)
-	_card_ui.request_tooltip()
+	_emit_staged_tooltip()
 
 func _on_card_unhovered(_card: EnemyCardUI) -> void:
 	if not is_instance_valid(_card_ui) or not _is_hovered:
@@ -142,3 +142,30 @@ func _on_card_unhovered(_card: EnemyCardUI) -> void:
 		_scale_target(staged_scale), 0.0, staged_scale, Constants.TWEEN_FADE
 	)
 	Events.tooltip_hide_requested.emit()
+
+
+## Emit a tooltip anchored to the hovered card's visible rect. We anchor from
+## this StagedDisplay's own Node2D `global_position` (the card's pivot center)
+## and the known hovered scaled size, instead of using `card_ui.request_tooltip`
+## which would emit a rect built from the card's unscaled (200x280) layout. The
+## unscaled rect doesn't line up with the visible scaled card under a Node2D
+## parent, so the tooltip lands too far right.
+func _emit_staged_tooltip() -> void:
+	if not is_instance_valid(_card_ui) or not _card_ui.card:
+		return
+	var enemy_modifiers := _card_ui.get_active_enemy_modifiers()
+	var updated_tooltip := _card_ui.card.get_updated_tooltip(
+		_card_ui.modifier_handler, enemy_modifiers
+	)
+	var entries: Array[TooltipData] = KeywordRegistry.build_tooltip_chain(updated_tooltip)
+	if entries.is_empty():
+		return
+	# Visible hovered card: pivot at our origin, half-extent = pivot * scale.
+	# Add the clamp_push so the anchor lines up vertically with the (possibly
+	# nudged-down) card top.
+	var half := CARD_PIVOT_OFFSET * hovered_scale
+	var clamp_push := maxf(
+		0.0, Constants.TOP_BAR_HEIGHT - (global_position.y - CARD_PIVOT_OFFSET.y * hovered_scale)
+	)
+	var anchor := Rect2(global_position - half + Vector2(0.0, clamp_push), half * 2.0)
+	Events.tooltip_show_requested.emit(entries, anchor)

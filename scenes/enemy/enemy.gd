@@ -28,6 +28,18 @@ const WEAPON_BADGE_OFFSET := Vector2(70, -130)
 const SPRITE_BASELINE_HALF := 76.0
 const DEATH_FADE_DURATION := 0.5
 const DEATH_SINK_DISTANCE := 12.0
+## Authored size.y of intent_ui.tscn (offset_bottom - offset_top). We read this
+## as a constant instead of intent_ui.size.y because the Control's size is not
+## guaranteed to be computed yet when update_enemy() runs (the layout pass for
+## a Control parented to a Node2D can lag past _ready), and an under-reported
+## size leaves the hover collision overlapping intent_ui — which prevents
+## HoverArea.mouse_exited from firing when the cursor moves up into intent.
+const INTENT_UI_HEIGHT := 48.0
+## Extra px gap between intent_ui's bottom and the top of the hover collision.
+## Belt-and-suspenders: even with a correctly-sized intent_ui, a 0-px shared
+## edge can produce inconsistent mouse_enter/exit ordering across the Area2D /
+## Control event pipelines.
+const INTENT_COLLISION_GAP := 4.0
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var intent_ui: IntentUI = $IntentUI as IntentUI
@@ -219,8 +231,25 @@ func update_enemy() -> void:
 	var sprite_center_y := -half.y
 	arrow.position = Vector2(half.x + ARROW_OFFSET, sprite_center_y)
 
-	(hover_collision.shape as RectangleShape2D).size = half * 2.0
-	hover_collision.position.y = sprite_center_y
+	# Trim the top of the hover collision so it doesn't overlap with the
+	# IntentUI's rect just above the head. Without this, cursor moving up
+	# from sprite into IntentUI stays inside the collision (overlap zone), so
+	# HoverArea.mouse_exited never fires and the sprite tooltip persists —
+	# and on the return trip back to sprite, no new HoverArea.mouse_entered
+	# fires (still inside collision), so the sprite tooltip never re-shows.
+	#
+	# Use INTENT_UI_HEIGHT (the .tscn-authored size) instead of intent_ui.size.y:
+	# the latter is sometimes 0 when read here because the layout pass for a
+	# Control-under-Node2D hasn't run yet. Plus INTENT_COLLISION_GAP for a
+	# definite gap so Area2D / Control event ordering can't race at a shared
+	# edge. Clamp to sprite top so the collision never grows beyond the visible
+	# sprite — for very short sprites the IntentUI may already sit fully above
+	# the head and no trimming is needed.
+	var intent_bottom_y: float = intent_ui.position.y + INTENT_UI_HEIGHT + INTENT_COLLISION_GAP
+	var collision_top: float = maxf(intent_bottom_y, -half.y * 2.0)
+	var collision_height: float = maxf(0.0, -collision_top)  # collision extends to y = 0
+	(hover_collision.shape as RectangleShape2D).size = Vector2(half.x * 2.0, collision_height)
+	hover_collision.position.y = collision_top + collision_height * 0.5
 
 	name_label.text = stats.character_name
 	update_stats()
@@ -481,8 +510,11 @@ func _on_hover_area_mouse_entered() -> void:
 	# enemy. get_global_transform_with_canvas folds in any camera/zoom so the
 	# rect lands in the same coordinate system the TooltipLayer uses.
 	var rect := sprite_2d.get_global_transform_with_canvas() * sprite_2d.get_rect()
-	Events.tooltip_show_requested.emit(entries, rect)
+	# Owner-tagged: paired with intent_ui.gd's emits using a distinct instance
+	# id so cross-frame mouse_exited(intent) doesn't kill a still-pending
+	# sprite-show (or vice versa).
+	Events.tooltip_show_for_owner.emit(entries, rect, get_instance_id())
 
 func _on_hover_area_mouse_exited() -> void:
 	name_label.hide()
-	Events.tooltip_hide_requested.emit()
+	Events.tooltip_hide_for_owner.emit(get_instance_id())

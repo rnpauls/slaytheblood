@@ -42,12 +42,12 @@ var _show_generation: int = 0
 ## When true, a hide_now() request is queued and waiting for end-of-frame
 ## resolution. _run_show clears this so a same-frame show beats the hide.
 var _pending_hide: bool = false
-## Set true inside _run_show, cleared at end-of-frame via call_deferred.
-## A hide_now() that fires after the show in the same frame checks this and
-## bails — show always wins over hide in a same-frame transition, regardless
-## of which signal fired first (Godot's mouse_exited / mouse_entered dispatch
-## order is not guaranteed when moving between an Area2D and a Control).
-var _show_called_this_frame: bool = false
+## Frame number when _run_show was last called. A hide_now() called in the
+## same frame bails — show always wins over hide in a same-frame transition,
+## regardless of which signal fired first (Godot's mouse_exited /
+## mouse_entered dispatch order is not guaranteed when moving between an
+## Area2D and a Control).
+var _show_called_frame: int = -1
 
 
 func _ready() -> void:
@@ -85,11 +85,10 @@ func _build_content(_payload: Variant) -> void:
 ## Subclass calls this from its own show method. Returns nothing; runs the
 ## delayed-show + settle + fade-in sequence.
 func _run_show(payload: Variant, anchor_rect: Rect2) -> void:
-	# A show in the same frame overrides any queued hide. Flag both directions
-	# so a hide_now() called after this also defers to the show.
+	# A show in the same frame overrides any queued hide. Stamp the frame so a
+	# hide_now() called after this can detect "same-frame" and bail.
 	_pending_hide = false
-	_show_called_this_frame = true
-	call_deferred("_clear_show_called_this_frame")
+	_show_called_frame = Engine.get_process_frames()
 	_show_generation += 1
 	var gen := _show_generation
 
@@ -142,15 +141,15 @@ func _run_show(payload: Variant, anchor_rect: Rect2) -> void:
 ## Subclass calls this from its own hide method.
 func hide_now() -> void:
 	# Defer the actual hide so a same-frame show can override it. Without this,
-	# mouse transitions between two tooltipped sources (intent UI → staged
-	# card, etc.) race: whichever fires second wins, and the show often loses
+	# mouse transitions between two tooltipped sources (intent UI → enemy
+	# sprite, etc.) race: whichever fires second wins, and the show often loses
 	# because hide_now() also bumps _show_generation, which kills the pending
 	# delayed show.
 	#
 	# Two same-frame orderings to consider:
 	#   1. hide → show: _pending_hide is set, then show clears it. Resolve no-ops.
-	#   2. show → hide: _show_called_this_frame is true, this hide returns early.
-	if _show_called_this_frame:
+	#   2. show → hide: _show_called_frame matches current frame, this returns.
+	if _show_called_frame == Engine.get_process_frames():
 		return
 	if _pending_hide:
 		return
@@ -170,10 +169,6 @@ func _resolve_pending_hide() -> void:
 	# Debounce: if a new show comes in during fade-out, _is_visible will be
 	# true again by the time the timer fires and we'll skip the hide.
 	get_tree().create_timer(fade_seconds, false).timeout.connect(_hide_animation)
-
-
-func _clear_show_called_this_frame() -> void:
-	_show_called_this_frame = false
 
 
 func _hide_animation() -> void:

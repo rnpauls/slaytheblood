@@ -16,7 +16,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54tcg"]
 resource_local_to_scene = true
-size = Vector2(100, 100)
+size = Vector2(152, 132)
 
 [node name="Enemy" type="Node2D" unique_id=844617398 groups=["enemies"]]
 script = ExtResource("1_dl80c")
@@ -27,6 +27,7 @@ offset = Vector2(0, -75)
 
 [node name="Arrow" type="Sprite2D" parent="." unique_id=2093290913]
 visible = false
+texture_filter = 1
 position = Vector2(67, 1.1823433e-11)
 rotation = -1.5708
 scale = Vector2(5, 5)
@@ -36,6 +37,7 @@ texture = ExtResource("2_ywvjq")
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea" unique_id=703996517]
+position = Vector2(0, -66)
 shape = SubResource("RectangleShape2D_54tcg")
 
 [node name="StatsUI" parent="." unique_id=408535621 instance=ExtResource("3_p3m4l")]
@@ -90,9 +92,8 @@ offset_left = 80.0
 offset_top = -130.0
 offset_right = 140.0
 offset_bottom = -10.0
-pile_scale = 0.24
 face_down = false
-add_to_back_of_deck = false
+pile_scale = 0.24
 max_visible_cards = 4
 max_peek_height = 30.0
 max_per_card_peek = 10.0
