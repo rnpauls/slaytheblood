@@ -43,12 +43,12 @@ func start_turn(player_life: int) -> void:
 func recalculate_plan(player_life: int) -> void:
 	turn_plan = calculate_max_offense_now(player_life)
 
-## Play the next action in turn_plan, returns card to the enemy node
-## Pitches cards as needed. _is_playing_action is held true across the body
-## (including the pitch-animation await) so _on_hand_changed won't rebuild
-## turn_plan from under us — the plan computed at start_turn is authoritative
-## for this turn.
-func play_next_action() -> Card:
+## Play the next action in turn_plan; returns either a Card (from hand) or a
+## Weapon (from stats.hand_left). Pitches cards as needed. _is_playing_action
+## is held true across the body (including the pitch-animation await) so
+## _on_hand_changed won't rebuild turn_plan from under us — the plan computed
+## at start_turn is authoritative for this turn.
+func play_next_action() -> Object:
 	if not turn_plan or turn_plan.actions.size() == 0 or enemy.stats.action_points <= 0:
 		turn_plan = null
 		return null
@@ -85,10 +85,13 @@ func play_next_action() -> Card:
 	enemy.stats.action_points -= 1
 	if next_action.go_again:
 		enemy.stats.action_points += 1
-	enemy.stats.action_points += next_action.action_points_granted
+	if next_action is Card:
+		enemy.stats.action_points += next_action.action_points_granted
 
-	hand.erase(next_action)
-	card_removed_from_hand.emit(next_action)
+	# Weapons aren't in the hand; only cards trigger the hand-removal signals.
+	if next_action is Card:
+		hand.erase(next_action)
+		card_removed_from_hand.emit(next_action)
 	print_enemy_ai("played %s" % [next_action.id])
 	turn_plan.actions.erase(next_action)
 	_is_playing_action = false
@@ -146,8 +149,19 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 		candidates.append({"card": c, "can_block": can_block_c, "can_pitch": can_pitch_c})
 
 	# Baseline offense if we keep everything (no defense). Used for offense_lost.
+	# Thread the weapon (if any) into offense scoring so the defender sees
+	# weapon damage as a real option and doesn't over-spend cards defending.
+	var equipped_weapon: Weapon = enemy.stats.hand_left if enemy.stats.hand_left is Weapon else null
+	var weapon_uses: int = 0
+	if equipped_weapon:
+		weapon_uses = maxi(0, equipped_weapon.attacks_per_turn - equipped_weapon.attacks_this_turn)
 	var max_offense_baseline: int = calculate_max_offense(
-		{"cards": hand.duplicate(), "resources": 0}, 1, enemy.stats.health
+		{
+			"cards": hand.duplicate(),
+			"resources": 0,
+			"weapon": equipped_weapon,
+			"weapon_uses_remaining": weapon_uses,
+		}, 1, enemy.stats.health
 	)["damage"]
 
 	var n: int = candidates.size()
@@ -198,7 +212,12 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 		var survives: bool = damage_taken < current_hp
 
 		var offense_after: int = calculate_max_offense(
-			{"cards": keep_cards, "resources": 0}, 1, enemy.stats.health
+			{
+				"cards": keep_cards,
+				"resources": 0,
+				"weapon": equipped_weapon,
+				"weapon_uses_remaining": weapon_uses,
+			}, 1, enemy.stats.health
 		)["damage"]
 		var offense_lost: int = max_offense_baseline - offense_after
 		# On-hit cost: each landing damage component independently fires every
@@ -295,6 +314,9 @@ func defend_packet(packet: DamagePacket) -> Dictionary:
 ##TODO: include damage modifiers
 func calculate_max_offense(state: Dictionary, action_points: int, player_life: int) -> Dictionary:
 	if action_points <= 0 or state.cards.size() == 0:
+		# Empty-hand base case still gives the weapon a chance to swing.
+		if _can_use_weapon(state, action_points):
+			return _score_weapon_use(state, action_points, player_life, 1.0)
 		return {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards}
 
 	var best_result = {"damage": 0, "pitched": [], "actions": [], "remaining": state.cards.duplicate()}
@@ -308,7 +330,10 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	for pitch in state.cards:
 		if pitch.disable_pitch:
 			continue
-		var new_state = {"cards": state.cards.duplicate(), "resources": state.resources + pitch.pitch}
+		var new_state = _carry_weapon(state, {
+			"cards": state.cards.duplicate(),
+			"resources": state.resources + pitch.pitch,
+		})
 		new_state.cards.erase(pitch)
 		var pitch_result = calculate_max_offense(new_state, action_points, player_life)
 		var total_damage = pitch_result.damage * lethal_factor
@@ -328,15 +353,31 @@ func calculate_max_offense(state: Dictionary, action_points: int, player_life: i
 	   (action_result.damage > 0 and action_result.damage == best_result.damage and action_result.pitched.size() < best_result.pitched.size()):
 		best_result = action_result
 
+	# Also try using the weapon (as a sibling of pitch / play-card).
+	if _can_use_weapon(state, action_points):
+		var weapon_result = _score_weapon_use(state, action_points, player_life, lethal_factor)
+		if weapon_result.damage > best_result.damage or \
+		   (weapon_result.damage > 0 and weapon_result.damage == best_result.damage and weapon_result.pitched.size() < best_result.pitched.size()):
+			best_result = weapon_result
+
 	return best_result
 
 ##Helper for calculate_max_offense
 ##Calls with current hand, current mana, and the AP budget actually left.
 ##Used at start of turn and on every mid-turn recalc.
 func calculate_max_offense_now(player_life: int) -> Dictionary:
-	var hand_state = {"cards": hand.duplicate(), "resources": enemy.stats.mana}
+	var equipped: Weapon = enemy.stats.hand_left if enemy.stats.hand_left is Weapon else null
+	var uses: int = 0
+	if equipped:
+		uses = maxi(0, equipped.attacks_per_turn - equipped.attacks_this_turn)
+	var hand_state = {
+		"cards": hand.duplicate(),
+		"resources": enemy.stats.mana,
+		"weapon": equipped,
+		"weapon_uses_remaining": uses,
+	}
 	return calculate_max_offense(hand_state, enemy.stats.action_points, player_life)
-	
+
 ## Try playing actions with hand and resources defined in state
 func try_actions(state: Dictionary, action_points: int, player_life: int, lethal_factor: float) -> Dictionary:
 	var best_damage = 0
@@ -344,11 +385,14 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 	var best_actions = []
 	var best_remaining = state.cards.duplicate()
 
-	for action in state.cards as Array[Card]:
+	for action in state.cards:
 		if action.unplayable:
 			continue
 		if action.cost <= state.resources and (action.type == Card.Type.ATTACK or action.type == Card.Type.NAA):
-			var new_state = {"cards": state.cards.duplicate(), "resources": state.resources - action.cost}
+			var new_state = _carry_weapon(state, {
+				"cards": state.cards.duplicate(),
+				"resources": state.resources - action.cost,
+			})
 			new_state.cards.erase(action)
 			var next_ap = action_points - 1 + (1 if action.go_again else 0) + action.action_points_granted
 			var sub_result = calculate_max_offense(new_state, next_ap, player_life)
@@ -359,7 +403,7 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 			var arc_part: int = action.zap
 			var current_action_damage_modified = modifier_handler.get_modified_value(phys_part, Modifier.Type.DMG_DEALT) + modifier_handler.get_modified_value(arc_part, Modifier.Type.ARCANE_DEALT)
 			var bonus = action.ai_value
-			if action.ai_value_needs_attack and not sub_result.actions.any(func(c): return c.type == Card.Type.ATTACK):
+			if action.ai_value_needs_attack and not sub_result.actions.any(_is_attack_entry):
 				bonus = 0
 			# Split-damage cards (phys + zap) can fire their on-hit twice — once
 			# per landing component. card.on_hits is empty until apply_effects
@@ -371,15 +415,65 @@ func try_actions(state: Dictionary, action_points: int, player_life: int, lethal
 				bonus *= 2
 			current_action_damage_modified += bonus
 			var total_damage = (current_action_damage_modified + sub_result.damage) * lethal_factor
-			
+
 			if total_damage > best_damage or \
 			   (total_damage > 0 and total_damage == best_damage and sub_result.pitched.size() < best_pitched.size()):
 				best_damage = total_damage
 				best_pitched = sub_result.pitched
 				best_actions = [action] + sub_result.actions
 				best_remaining = sub_result.remaining
-	
+
 	return {"damage": best_damage, "pitched": best_pitched, "actions": best_actions, "remaining": best_remaining}
+
+
+## Copy weapon / weapon_uses_remaining from source state into target state so
+## the recursive search keeps weapon availability in sync across branches.
+func _carry_weapon(source: Dictionary, target: Dictionary) -> Dictionary:
+	target["weapon"] = source.get("weapon")
+	target["weapon_uses_remaining"] = source.get("weapon_uses_remaining", 0)
+	return target
+
+
+func _can_use_weapon(state: Dictionary, action_points: int) -> bool:
+	var w = state.get("weapon")
+	if not (w is Weapon):
+		return false
+	if state.get("weapon_uses_remaining", 0) <= 0:
+		return false
+	if action_points <= 0:
+		return false
+	return state.resources >= w.cost
+
+
+## Score a weapon-use branch: spend cost, decrement uses, then recurse.
+func _score_weapon_use(state: Dictionary, action_points: int, player_life: int, lethal_factor: float) -> Dictionary:
+	var w: Weapon = state.weapon
+	var phys: int = modifier_handler.get_modified_value(w.attack, Modifier.Type.DMG_DEALT)
+	var arc: int = modifier_handler.get_modified_value(w.zap, Modifier.Type.ARCANE_DEALT)
+	var weapon_dmg: int = phys + arc
+	var new_state := {
+		"cards": state.cards.duplicate(),
+		"resources": state.resources - w.cost,
+		"weapon": w,
+		"weapon_uses_remaining": int(state.weapon_uses_remaining) - 1,
+	}
+	var next_ap := action_points - 1 + (1 if w.go_again else 0)
+	var sub: Dictionary = calculate_max_offense(new_state, next_ap, player_life)
+	var total_damage: float = (weapon_dmg + sub.damage) * lethal_factor
+	return {
+		"damage": total_damage,
+		"pitched": sub.pitched,
+		"actions": [w] + sub.actions,
+		"remaining": sub.remaining,
+	}
+
+
+## Predicate used by ai_value_needs_attack — recognise both ATTACK cards and
+## weapons (always attacks) as the kind of follow-up that satisfies the rule.
+func _is_attack_entry(entry) -> bool:
+	if entry is Weapon:
+		return true
+	return entry is Card and entry.type == Card.Type.ATTACK
 
 
 func print_enemy_ai(debug_str: String) -> void:

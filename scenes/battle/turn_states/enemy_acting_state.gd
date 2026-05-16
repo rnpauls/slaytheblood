@@ -95,11 +95,15 @@ func _run_action_loop() -> void:
 		if _current_enemy_died:
 			break
 
-		# Attacks: wait for the player to declare blocks (END button in BLOCK mode).
-		# NAAs: deal no player damage, so we hold briefly at the staged position
-		# instead of prompting — Enemy.declare_next_attack skips the
-		# enemy_attack_declared emit for NAAs so the END button never flips.
-		if _current_enemy.current_action.type == Card.Type.ATTACK:
+		# Attacks (cards or weapons): wait for the player to declare blocks
+		# (END button in BLOCK mode). NAAs: deal no player damage, so we
+		# hold briefly at the staged position instead of prompting —
+		# run_pre_block_reveal skips the enemy_attack_declared emit for NAAs
+		# so the END button never flips.
+		var ca = _current_enemy.current_action
+		var is_attack: bool = (ca is Weapon) \
+			or (ca is Card and (ca as Card).type == Card.Type.ATTACK)
+		if is_attack:
 			# Player input — disarm the watchdog so AFK doesn't trigger fallback.
 			_disarm_watchdog()
 			await Events.player_blocks_declared

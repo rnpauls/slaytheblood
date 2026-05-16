@@ -53,12 +53,14 @@ var hand: Array[Card]: get = _get_hand
 var card_ui_map: Dictionary: get = _get_card_ui_map
 
 ## current_action delegates to action_sequencer; setter triggers intent refresh.
-var current_action: Card: set = set_current_action, get = _get_current_action
+## Either a Card (from hand) or a Weapon (from stats.hand_left).
+var current_action: Object: set = set_current_action, get = _get_current_action
 
 ## Visual badge for an enemy-wielded weapon (only set if stats.hand_left is a
 ## Weapon at battle setup). Reuses WeaponHandler with `interactive = false`
 ## so we get the icon + tooltip plumbing without player-input handling.
-var _weapon_badge: WeaponHandler = null
+## Public so the action sequencer can animate it during weapon swings.
+var weapon_badge: WeaponHandler = null
 
 var hand_manager: EnemyHandManager
 var action_sequencer: EnemyActionSequencer
@@ -182,6 +184,10 @@ func cleanup_phase() -> void:
 		hand_manager.draw_cards(to_draw)
 	stats.mana = 0
 	stats.action_points = 1
+	# Refresh per-turn weapon counter so attacks_per_turn enforces correctly
+	# across multi-turn fights. Mirrors PlayerHandler.reset_weapons() at SOT.
+	if stats.hand_left is Weapon:
+		(stats.hand_left as Weapon).reset()
 	enemy_resource_ui.update_display(enemy_ai)
 
 
@@ -230,16 +236,20 @@ func update_enemy() -> void:
 func _setup_weapon_badge() -> void:
 	if not (stats.hand_left is Weapon):
 		return
-	if _weapon_badge != null and is_instance_valid(_weapon_badge):
+	if weapon_badge != null and is_instance_valid(weapon_badge):
 		return
 	var weapon := stats.hand_left as Weapon
+	# Stats.create_instance() shallow-duplicates the resource, so this Weapon
+	# ref persists across battles. Reset the per-turn counter so a fresh
+	# battle doesn't inherit attacks_this_turn from a previous fight.
+	weapon.reset()
 	var badge := WEAPON_HANDLER_SCENE.instantiate() as WeaponHandler
 	badge.interactive = false
 	badge.owner_of_weapon = self
 	add_child(badge)
 	badge.position = WEAPON_BADGE_OFFSET
 	badge.set_weapon(weapon)
-	_weapon_badge = badge
+	weapon_badge = badge
 
 
 ## Refresh the intent display, the resource UI, and the per-card plan colors.
@@ -256,22 +266,38 @@ func update_intent() -> void:
 		enemy_ai.turn_plan = enemy_ai.calculate_max_offense_now(player_life)
 
 	var new_intent = Intent.new()
-	if current_action and current_action.type == Card.Type.ATTACK:
-		var phys := current_action.get_attack_value()
-		var arc := current_action.zap
+	if current_action is Card and (current_action as Card).type == Card.Type.ATTACK:
+		var attack_card: Card = current_action as Card
+		var phys: int = attack_card.get_attack_value()
+		var arc: int = attack_card.zap
 		if phys > 0:
 			phys = modifier_handler.get_modified_value(phys, Modifier.Type.DMG_DEALT)
 		if arc > 0:
 			arc = modifier_handler.get_modified_value(arc, Modifier.Type.ARCANE_DEALT)
 		var modified_damage: int = enemy_ai.target.modifier_handler.get_modified_value(phys + arc, Modifier.Type.DMG_TAKEN)
 
-		if current_action.go_again:
+		if attack_card.go_again:
 			new_intent.base_text = "%s GA"
 		else:
 			new_intent.base_text = "%s"
 		new_intent.current_text = new_intent.base_text % modified_damage
 		new_intent.icon = preload("res://art/tile_0103.png")
-	elif current_action and current_action.type == Card.Type.NAA:
+	elif current_action is Weapon:
+		var weapon: Weapon = current_action as Weapon
+		var phys: int = weapon.attack
+		var arc: int = weapon.zap
+		if phys > 0:
+			phys = modifier_handler.get_modified_value(phys, Modifier.Type.DMG_DEALT)
+		if arc > 0:
+			arc = modifier_handler.get_modified_value(arc, Modifier.Type.ARCANE_DEALT)
+		var modified_damage: int = enemy_ai.target.modifier_handler.get_modified_value(phys + arc, Modifier.Type.DMG_TAKEN)
+		if weapon.go_again:
+			new_intent.base_text = "%s GA"
+		else:
+			new_intent.base_text = "%s"
+		new_intent.current_text = new_intent.base_text % modified_damage
+		new_intent.icon = preload("res://art/tile_0103.png")
+	elif current_action is Card and (current_action as Card).type == Card.Type.NAA:
 		new_intent.current_text = "NAA"
 	else:
 		if enemy_ai and enemy_ai.hand.size() > 0:
@@ -296,9 +322,11 @@ func _update_hand_plan_colors() -> void:
 	# card_ui_map. If not, the plan is pointing at a stale card and the
 	# user's seeing miscolored hand state — surface it for debugging.
 	if plan != null:
-		for c: Card in plan.actions:
-			if not hand_manager.card_ui_map.has(c):
-				push_warning("[Enemy:%s] plan.actions has '%s' not in card_ui_map" % [stats.character_name, c.id])
+		# Weapons can live in plan.actions; they're not in card_ui_map and
+		# don't need a hand-color, so skip them in the sanity check.
+		for entry in plan.actions:
+			if entry is Card and not hand_manager.card_ui_map.has(entry):
+				push_warning("[Enemy:%s] plan.actions has '%s' not in card_ui_map" % [stats.character_name, entry.id])
 		for c: Card in plan.pitched:
 			if not hand_manager.card_ui_map.has(c):
 				push_warning("[Enemy:%s] plan.pitched has '%s' not in card_ui_map" % [stats.character_name, c.id])
@@ -354,12 +382,12 @@ func _on_hand_changed() -> void:
 
 # ── current_action accessors ──────────────────────────────────────────────────
 
-func set_current_action(value: Card) -> void:
+func set_current_action(value: Object) -> void:
 	if action_sequencer:
 		action_sequencer.current_action = value
 	update_intent()
 
-func _get_current_action() -> Card:
+func _get_current_action() -> Object:
 	return action_sequencer.current_action if action_sequencer else null
 
 

@@ -13,7 +13,9 @@
 class_name EnemyActionSequencer
 extends RefCounted
 
-var current_action: Card
+## Either a Card (from hand) or a Weapon (from stats.hand_left). Branches in
+## declare / pre_block_reveal / do_action check the concrete type.
+var current_action: Object
 
 var _enemy: Enemy
 var _hand_manager: EnemyHandManager
@@ -43,11 +45,13 @@ func declare_next_attack() -> void:
 
 	# Flag the upcoming action card so HandManager's AI signal handler skips
 	# its visual removal — staged_display.stage() will reparent the same card_ui.
+	# Weapons aren't in the hand, so they skip this pre-capture entirely.
 	var pending_card_ui: EnemyCardUI = null
 	if enemy_ai.turn_plan and enemy_ai.turn_plan.actions.size() > 0:
-		var pending_card: Card = enemy_ai.turn_plan.actions[0]
-		_hand_manager.set_pending_stage(pending_card)
-		pending_card_ui = _hand_manager.get_card_ui(pending_card)
+		var pending = enemy_ai.turn_plan.actions[0]
+		if pending is Card:
+			_hand_manager.set_pending_stage(pending)
+			pending_card_ui = _hand_manager.get_card_ui(pending)
 
 	current_action = await enemy_ai.play_next_action()
 	_hand_manager.clear_pending_stage()
@@ -55,13 +59,18 @@ func declare_next_attack() -> void:
 	_enemy_resource_ui.update_display(enemy_ai)
 
 	# When current_action is null the enemy's plan is exhausted; EnemyActingState
-	# observes that directly and exits its loop. Otherwise stage the card —
+	# observes that directly and exits its loop. Otherwise stage the action —
 	# enemy_attack_declared is emitted in run_pre_block_reveal AFTER the reveal
 	# so the BLOCK button can't be armed mid-reveal (which would lose the
 	# player_blocks_declared signal and soft-lock the turn).
 	if current_action != null:
-		_log("declaring %s: %s" % [Card.Type.keys()[current_action.type], current_action.id])
-		_stage_attack_card_ui(current_action, pending_card_ui)
+		if current_action is Card:
+			var staged_card: Card = current_action as Card
+			_log("declaring %s: %s" % [Card.Type.keys()[staged_card.type], staged_card.id])
+			_stage_attack_card_ui(staged_card, pending_card_ui)
+		elif current_action is Weapon:
+			_log("declaring weapon: %s" % (current_action as Weapon).id)
+			await _stage_weapon_badge()
 
 
 ## Run any pre-block reveal effects on the staged card (e.g. ravenous_rabble
@@ -78,9 +87,12 @@ func declare_next_attack() -> void:
 func run_pre_block_reveal() -> void:
 	if not current_action:
 		return
-	await current_action.pre_block_reveal(_enemy)
+	if current_action is Card:
+		await (current_action as Card).pre_block_reveal(_enemy)
 	_enemy.update_intent()
-	if current_action.type == Card.Type.ATTACK:
+	var is_attack: bool = (current_action is Weapon) \
+		or (current_action is Card and (current_action as Card).type == Card.Type.ATTACK)
+	if is_attack:
 		Events.enemy_attack_declared.emit()
 
 
@@ -90,8 +102,11 @@ func do_action() -> void:
 	if not current_action:
 		return
 
-	var played_attack: bool = current_action.type == Card.Type.ATTACK
-	if played_attack:
+	var played_attack: bool = (current_action is Weapon) \
+		or (current_action is Card and (current_action as Card).type == Card.Type.ATTACK)
+	if current_action is Weapon:
+		await _do_weapon_action()
+	elif played_attack:
 		await _do_attack_action()
 	else:
 		await _do_naa_action()
@@ -119,14 +134,14 @@ func _do_attack_action() -> void:
 		card_ui = _staged_display.clear_staged()
 		_staged_card_ui = null
 	else:
-		card_ui = _hand_manager.get_or_create_card_ui(current_action)
-		_hand_manager.remove_card(current_action)
+		card_ui = _hand_manager.get_or_create_card_ui(current_action as Card)
+		_hand_manager.remove_card(current_action as Card)
 
 	if not is_instance_valid(card_ui):
 		return
 
 	card_ui.targets = [_enemy.enemy_ai.target]
-	var played_card := current_action
+	var played_card: Card = current_action as Card
 
 	# Mirror the enemy branch of CardUI.play() minus the trailing _burn_up +
 	# queue_free; we hand the card off to the played display instead.
@@ -148,14 +163,14 @@ func _do_naa_action() -> void:
 		card_ui = _staged_display.clear_staged()
 		_staged_card_ui = null
 	else:
-		card_ui = _hand_manager.get_or_create_card_ui(current_action)
-		_hand_manager.remove_card(current_action)
+		card_ui = _hand_manager.get_or_create_card_ui(current_action as Card)
+		_hand_manager.remove_card(current_action as Card)
 
 	if not is_instance_valid(card_ui):
 		return
 
 	card_ui.targets = [_enemy.enemy_ai.target]
-	var played_card := current_action
+	var played_card: Card = current_action as Card
 
 	# Effects resolve while the card is still visible at the staged position.
 	# Most NAAs target SELF and apply a status; card.play handles target lookup.
@@ -167,6 +182,68 @@ func _do_naa_action() -> void:
 		return
 
 	_played_display.add_card(card_ui)
+
+
+## Weapon path: apply damage via the same DamagePacket pipeline as a card
+## swing, then animate the badge back to its home position. We inline the
+## relevant pieces of Weapon.activate_weapon (instead of calling it directly)
+## because activate_weapon emits Events.player_attack_declared, which
+## increments Player.stats.attacks_this_turn — wrong for enemy-wielded weapons.
+## Mana / AP / attacks_this_turn / weapon_used_up are handled here to mirror
+## the player path's accounting.
+func _do_weapon_action() -> void:
+	var weapon: Weapon = current_action as Weapon
+	var target: Node = _enemy.enemy_ai.target
+	if not is_instance_valid(weapon) or not is_instance_valid(target):
+		return
+
+	var badge: WeaponHandler = _enemy.weapon_badge
+	if is_instance_valid(badge):
+		badge.flash()
+	if weapon.sound:
+		SFXPlayer.play(weapon.sound)
+
+	# Mirror Card.play's order: pay mana, decrement AP (with go_again),
+	# apply damage, then zero the target's leftover block.
+	_enemy.stats.mana -= weapon.cost
+	_enemy.stats.action_points -= 1
+	if weapon.go_again:
+		_enemy.stats.action_points += 1
+
+	var packet := weapon.build_attack_packet(_enemy.modifier_handler)
+	packet.execute([target])
+
+	if is_instance_valid(target):
+		target.stats.block = 0
+
+	weapon.attacks_this_turn += 1
+	if weapon.attacks_this_turn >= weapon.attacks_per_turn:
+		weapon.weapon_used_up.emit()
+
+	await _return_weapon_badge_home()
+
+
+## Tween the weapon badge from its home offset to the StagedDisplay's local
+## position. Both badge and StagedDisplay are children of Enemy in the same
+## local coord space, so a direct position tween works without reparenting.
+func _stage_weapon_badge() -> void:
+	var badge: WeaponHandler = _enemy.weapon_badge
+	if not is_instance_valid(badge):
+		return
+	badge.z_index = 1
+	var tween := badge.create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(badge, "position", _staged_display.position, Constants.TWEEN_CARD_STAGE)
+	await tween.finished
+
+
+func _return_weapon_badge_home() -> void:
+	var badge: WeaponHandler = _enemy.weapon_badge
+	if not is_instance_valid(badge):
+		return
+	var tween := badge.create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(badge, "position", Enemy.WEAPON_BADGE_OFFSET, Constants.TWEEN_CARD_STAGE)
+	await tween.finished
+	badge.z_index = 0
 
 
 # ── Staging ───────────────────────────────────────────────────────────────────
