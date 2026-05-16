@@ -23,6 +23,7 @@ const _ANNOUNCEMENT_HOLD := 0.7
 @onready var choice_screen: ColorRect = %ChoiceScreen
 @onready var choice_screen_label: RichTextLabel = %ChoiceScreenLabel
 @onready var turn_announcer_label: Label = %TurnAnnouncerLabel
+@onready var turn_announcer_bar: ColorRect = %TurnAnnouncerBar
 
 var waiting_for_battle_start:= true
 var num_cards_to_choose: int = 0
@@ -242,24 +243,41 @@ func _on_turn_state_changed(state: int) -> void:
 
 
 func _show_turn_announcement(text: String) -> void:
-	if not turn_announcer_label:
+	if not turn_announcer_label or not turn_announcer_bar:
 		return
 	if _turn_announcer_tween and _turn_announcer_tween.is_running():
 		_turn_announcer_tween.kill()
 	turn_announcer_label.text = text
 	turn_announcer_label.modulate.a = 0.0
 	turn_announcer_label.scale = Vector2.ONE * 0.8
+	turn_announcer_bar.modulate.a = 0.0
+	turn_announcer_bar.scale = Vector2(1, 0)
 	_turn_announcer_tween = turn_announcer_label.create_tween()
+	# Step 1 — open: bar shutters vertically + fades in; label fades + pops in.
 	_turn_announcer_tween.tween_property(
+		turn_announcer_bar, "scale:y", 1.0, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_turn_announcer_tween.parallel().tween_property(
+		turn_announcer_bar, "modulate:a", 1.0, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_turn_announcer_tween.parallel().tween_property(
 		turn_announcer_label, "modulate:a", 1.0, Constants.TWEEN_FADE
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	_turn_announcer_tween.parallel().tween_property(
 		turn_announcer_label, "scale", Vector2.ONE, Constants.TWEEN_FADE
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	# Step 2 — hold.
 	_turn_announcer_tween.tween_interval(_ANNOUNCEMENT_HOLD)
+	# Step 3 — close: bar collapses + fades out; label fades out.
 	_turn_announcer_tween.tween_property(
 		turn_announcer_label, "modulate:a", 0.0, Constants.TWEEN_FADE
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	_turn_announcer_tween.parallel().tween_property(
+		turn_announcer_bar, "modulate:a", 0.0, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	_turn_announcer_tween.parallel().tween_property(
+		turn_announcer_bar, "scale:y", 0.0, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 
 
 func _on_exhaust_button_mouse_entered() -> void:
