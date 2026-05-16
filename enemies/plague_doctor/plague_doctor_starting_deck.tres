@@ -1,15 +1,13 @@
-[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://dis4wjnu6bciu"]
+[gd_resource type="Resource" script_class="CardPile" format=3]
 
-[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" uid="uid://bh0sck3akd0gg" path="res://enemies/plague_doctor/cards/lance_boil.tres" id="3_lb"]
-[ext_resource type="Resource" uid="uid://conkkrmqjv2jt" path="res://generic_cards/vampiric_bite.tres" id="4_vb"]
-[ext_resource type="Resource" uid="uid://jf61dkwx4vu2" path="res://generic_cards/brittle_bones.tres" id="5_bb"]
-[ext_resource type="Resource" uid="uid://bswyyr3roc6t5" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
-[ext_resource type="Resource" uid="uid://dgbuxe6614ktp" path="res://generic_cards/block_red.tres" id="7_blk"]
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" path="res://enemies/plague_doctor/cards/lance_boil.tres" id="3_lb"]
+[ext_resource type="Resource" path="res://generic_cards/vampiric_bite.tres" id="4_vb"]
+[ext_resource type="Resource" path="res://generic_cards/wounding_blow_blue.tres" id="6_wb"]
 [ext_resource type="Resource" path="res://enemies/plague_doctor/cards/lance_the_cure.tres" id="8_cure"]
 [ext_resource type="Resource" path="res://enemies/plague_doctor/cards/distribute_toxin.tres" id="9_toxin"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_lb"), ExtResource("3_lb"), ExtResource("4_vb"), ExtResource("4_vb"), ExtResource("5_bb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("7_blk"), ExtResource("8_cure"), ExtResource("9_toxin"), ExtResource("9_toxin")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_lb"), ExtResource("3_lb"), ExtResource("4_vb"), ExtResource("4_vb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("8_cure"), ExtResource("9_toxin"), ExtResource("9_toxin"), ExtResource("8_cure"), ExtResource("8_cure"), ExtResource("9_toxin"), ExtResource("3_lb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("6_wb"), ExtResource("6_wb")])

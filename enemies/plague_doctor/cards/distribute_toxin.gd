@@ -6,7 +6,7 @@
 extends Card
 
 const POISON_TIP_STATUS := preload("res://statuses/poison_tip.tres")
-const POISON_STACKS := 2
+const POISON_STACKS := 3
 
 
 func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:

@@ -12,6 +12,7 @@ target = 1
 pitch = 1
 attack = 2
 defense = 2
+go_again = true
 ai_value = 3
 icon = ExtResource("2_icon")
 tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 3 [kw=poison_tip:3]Poison Tip[/kw].[/center]"

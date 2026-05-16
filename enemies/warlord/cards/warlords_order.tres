@@ -1,6 +1,6 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" format=3 uid="uid://hfmk2ygiujb4"]
 
-[ext_resource type="Script" path="res://enemies/warlord/cards/warlords_order.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bcgy8lhoig5o7" path="res://enemies/warlord/cards/warlords_order.gd" id="1_script"]
 [ext_resource type="AudioStream" uid="uid://df64e7qat73gs" path="res://art/music/block.ogg" id="2_blksnd"]
 [ext_resource type="Texture2D" uid="uid://btxenua5ai0xc" path="res://art/muscle.png" id="3_icon"]
 
@@ -8,12 +8,12 @@
 script = ExtResource("1_script")
 id = "warlords_order"
 type = 1
-target = 0
 cost = 2
 pitch = 1
-defense = 1
+defense = 3
+go_again = true
 ai_value = 5
 icon = ExtResource("3_icon")
-tooltip_text = "If alone, gain [kw=empower:2]Empower 2[/kw]. Otherwise, all allies (including self) gain 1 [kw=muscle:1]Muscle[/kw]."
+tooltip_text = "If alone, gain [kw=empower:4]Empower 4[/kw]. Otherwise, all allies (including self) gain 1 [kw=muscle:1]Muscle[/kw]."
 sound = ExtResource("2_blksnd")
 disable_attack = true

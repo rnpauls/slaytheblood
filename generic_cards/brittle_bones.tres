@@ -12,8 +12,9 @@ rarity = 1
 target = 1
 cost = 2
 pitch = 1
-attack = 3
+attack = 4
 defense = 4
+go_again = true
 ai_value = 5
 icon = ExtResource("2_icon")
 tooltip_text = "[kw=onhit]On hit[/kw]: Apply [kw=brittle:2]Brittle 2[/kw]."

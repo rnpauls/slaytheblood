@@ -14,6 +14,7 @@ cost = 1
 pitch = 1
 attack = 3
 defense = 3
+go_again = true
 ai_value = 5
 icon = ExtResource("2_icon")
 tooltip_text = "[center][kw=onhit]On hit[/kw]: Apply 2 [kw=marked:2]Marked[/kw].[/center]"

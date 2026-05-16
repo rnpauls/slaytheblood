@@ -1,12 +1,14 @@
 [gd_resource type="Resource" script_class="CardPile" format=3]
 
-[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" path="res://enemies/shellbreaker/cards/pincer_grip.tres" id="3_pincer"]
+[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
 [ext_resource type="Resource" path="res://enemies/shellbreaker/cards/burrow.tres" id="4_burrow"]
-[ext_resource type="Resource" uid="uid://c5xvfairy4mu4" path="res://generic_cards/raging_onslaught_blue.tres" id="5_raging"]
-[ext_resource type="Resource" uid="uid://btdfqy1dpyi5u" path="res://generic_cards/ravenous_rabble_red.tres" id="6_rabble"]
+[ext_resource type="Resource" path="res://generic_cards/staunch_defense.tres" id="4_qvykh"]
+[ext_resource type="Resource" path="res://generic_cards/raging_onslaught_blue.tres" id="5_raging"]
+[ext_resource type="Resource" path="res://generic_cards/raging_onslaught_red.tres" id="6_ubxpt"]
+[ext_resource type="Resource" path="res://enemies/karnus/cards/crippling_smash.tres" id="8_dmnsy"]
+[ext_resource type="Resource" path="res://generic_cards/brittle_bones.tres" id="8_qvykh"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_pincer"), ExtResource("3_pincer"), ExtResource("4_burrow"), ExtResource("4_burrow"), ExtResource("5_raging"), ExtResource("6_rabble")])
+cards = Array[ExtResource("1_card")]([ExtResource("4_burrow"), ExtResource("4_burrow"), ExtResource("4_burrow"), ExtResource("4_qvykh"), ExtResource("4_qvykh"), ExtResource("4_qvykh"), ExtResource("4_qvykh"), ExtResource("6_ubxpt"), ExtResource("6_ubxpt"), ExtResource("5_raging"), ExtResource("5_raging"), ExtResource("5_raging"), ExtResource("8_dmnsy"), ExtResource("8_dmnsy"), ExtResource("8_qvykh"), ExtResource("8_qvykh"), ExtResource("8_qvykh")])

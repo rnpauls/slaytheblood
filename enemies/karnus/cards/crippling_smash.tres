@@ -11,8 +11,9 @@ id = "crippling_smash"
 target = 1
 cost = 6
 pitch = 1
-attack = 10
+attack = 12
 defense = 3
+go_again = true
 ai_value = 10
 icon = ExtResource("3_icon")
 tooltip_text = "[kw=onhit]On hit[/kw]: Apply [kw=crippled:2]Crippled 2[/kw]."

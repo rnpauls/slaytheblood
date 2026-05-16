@@ -26,7 +26,7 @@ func apply_effects(_targets: Array[Node], _modifiers: ModifierHandler) -> void:
 		# Solo: pile Empower onto self.
 		if owner.status_handler:
 			var emp: EmpoweredStatus = EMPOWERED_STATUS.duplicate()
-			emp.stacks = 2
+			emp.stacks = 4
 			emp.duration = 1
 			owner.status_handler.add_status(emp)
 		return

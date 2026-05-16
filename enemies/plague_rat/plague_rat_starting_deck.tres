@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
 [ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
 [ext_resource type="Resource" path="res://enemies/plague_rat/cards/filthy_nip.tres" id="3_fn"]
-[ext_resource type="Resource" path="res://generic_cards/head_jab_blue.tres" id="4_hjb"]
-[ext_resource type="Resource" path="res://generic_cards/block_red.tres" id="5_blk"]
+[ext_resource type="Resource" path="res://generic_cards/ravenous_rabble_red.tres" id="4_hrdwt"]
 [ext_resource type="Resource" path="res://enemies/plague_rat/cards/plague_bite.tres" id="6_pbite"]
 
 [resource]
 script = ExtResource("2_pile")
-cards = Array[ExtResource("1_card")]([ExtResource("3_fn"), ExtResource("3_fn"), ExtResource("4_hjb"), ExtResource("4_hjb"), ExtResource("5_blk"), ExtResource("6_pbite"), ExtResource("6_pbite")])
+cards = Array[ExtResource("1_card")]([ExtResource("3_fn"), ExtResource("3_fn"), ExtResource("6_pbite"), ExtResource("6_pbite"), ExtResource("4_hrdwt"), ExtResource("4_hrdwt"), ExtResource("4_hrdwt"), ExtResource("3_fn"), ExtResource("6_pbite"), ExtResource("3_fn"), ExtResource("6_pbite"), ExtResource("6_pbite"), ExtResource("6_pbite"), ExtResource("6_pbite")])

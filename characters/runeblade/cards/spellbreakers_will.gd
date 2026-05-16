@@ -11,7 +11,7 @@ func apply_effects(targets: Array[Node], modifiers: ModifierHandler) -> void:
 	for t in targets:
 		if t == null or t.status_handler == null:
 			continue
-		var exp := EXPOSED_STATUS.duplicate()
-		exp.stacks = 2
-		exp.duration = 2
-		t.status_handler.add_status(exp)
+		var expo := EXPOSED_STATUS.duplicate()
+		expo.stacks = 2
+		expo.duration = 2
+		t.status_handler.add_status(expo)

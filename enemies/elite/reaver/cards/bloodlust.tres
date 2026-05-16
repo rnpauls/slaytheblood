@@ -16,4 +16,5 @@ ai_value = 6
 icon = ExtResource("2_bldl2")
 tooltip_text = "Gain 1 [kw=muscle]Muscle[/kw]."
 sound = ExtResource("1_bldl1")
+disable_defense = true
 metadata/_custom_type_script = "uid://ccdr5wx1m6seg"
