@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://r1wgoacwwm7c" path="res://art/discard.png" id="22_xhst1"]
 [ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="23_endtt"]
 [ext_resource type="StyleBox" path="res://art/themes/styleboxes/end_turn_inner_contour.tres" id="24_endct"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_display.tres" id="25_turnan"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywq45"]
 size = Vector2(1262, 209)
@@ -301,6 +302,35 @@ max_rotation_deg = 18.0
 position_curve = SubResource("Curve_156m4")
 rotation_curve = SubResource("Curve_pyfix")
 player = NodePath("../../Player")
+
+[node name="TurnAnnouncer" type="Control" parent="BattleUI" unique_id=1837461029]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TurnAnnouncerLabel" type="Label" parent="BattleUI/TurnAnnouncer" unique_id=1837461030]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -60.0
+offset_right = 400.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(400, 60)
+mouse_filter = 2
+text = "PLAYER TURN 1"
+label_settings = ExtResource("25_turnan")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=811855806]
 layer = 2

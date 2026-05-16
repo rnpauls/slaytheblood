@@ -45,8 +45,9 @@ func setup_enemies(battle_stats: BattleStats) -> void:
 
 		new_enemy_child.stats.draw_pile = new_enemy_child.stats.starting_deck.custom_duplicate()
 		new_enemy_child.stats.draw_pile.shuffle()
-		new_enemy_child.stats.discard = CardPile.new()
-		new_enemy_child.stats.exhaust = CardPile.new()
+		# discard/exhaust are already fresh CardPiles from Stats.create_instance.
+		# Reassigning them here would orphan signal listeners (e.g. the visual
+		# ExhaustPile that update_enemy wired during add_child above).
 		new_enemy_child.draw_cards(new_enemy_child.stats.cards_per_turn)
 		new_enemy_child.setup_ai(player_target)
 		_apply_passives(new_enemy_child)
@@ -69,8 +70,9 @@ func spawn_enemy(stats_resource: EnemyStats, spawn_position: Vector2) -> Enemy:
 	new_enemy.stats = stats_resource
 	new_enemy.stats.draw_pile = new_enemy.stats.starting_deck.custom_duplicate()
 	new_enemy.stats.draw_pile.shuffle()
-	new_enemy.stats.discard = CardPile.new()
-	new_enemy.stats.exhaust = CardPile.new()
+	# discard/exhaust are already fresh CardPiles from Stats.create_instance.
+	# Reassigning them here would orphan the visual ExhaustPile's signal
+	# listener wired by update_enemy during add_child above.
 	new_enemy.draw_cards(new_enemy.stats.cards_per_turn)
 	new_enemy.setup_ai(player_target)
 	_apply_passives(new_enemy)

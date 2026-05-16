@@ -440,8 +440,13 @@ func _spawn_back() -> void:
 
 
 func _update_counter() -> void:
-	if counter and card_pile:
-		counter.text = str(card_pile.cards.size())
+	if not counter:
+		return
+	var n: int = card_pile.cards.size() if card_pile else 0
+	counter.text = str(n)
+	# Hide the label entirely when the pile is empty — an idle "0" reads as
+	# noise next to a visibly empty pile.
+	counter.visible = n > 0
 
 
 # ── Layout ───────────────────────────────────────────────────────────────────

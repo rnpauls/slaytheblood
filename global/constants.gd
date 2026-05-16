@@ -31,6 +31,8 @@ const TWEEN_PILE_REARRANGE   := 0.18
 const TWEEN_PANEL_SLIDE      := 0.20
 ## Relic carousel scroll.
 const TWEEN_RELIC_SCROLL     := 0.20
+## End Turn / Block button slide on/off screen.
+const TWEEN_END_TURN_BUTTON  := 0.4
 
 ## Generic fade-in/out (tooltip, preview, NAA card resolution, block badge).
 const TWEEN_FADE             := 0.25

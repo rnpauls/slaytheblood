@@ -1,7 +1,14 @@
 class_name BattleUI
 extends CanvasLayer
 
+const _ANNOUNCEMENT_HOLD := 0.7
+
 @export var char_stats: CharacterStats : set = _set_char_stats
+## Swapped onto end_turn_button.icon when the button is in END TURN mode.
+## Null is fine — the button's text styling remains visible as fallback.
+@export var end_turn_icon: Texture2D
+## Swapped onto end_turn_button.icon when the button is in BLOCK mode.
+@export var block_icon: Texture2D
 
 @onready var hand: Hand = $Hand
 @onready var mana_ui: ManaUI = $ManaUI
@@ -15,12 +22,28 @@ extends CanvasLayer
 @onready var exhaust_pile_view: CardPileView = %ExhaustPileView
 @onready var choice_screen: ColorRect = %ChoiceScreen
 @onready var choice_screen_label: RichTextLabel = %ChoiceScreenLabel
+@onready var turn_announcer_label: Label = %TurnAnnouncerLabel
 
 var waiting_for_battle_start:= true
 var num_cards_to_choose: int = 0
 var min_cards_to_choose: int = 0
 #var is_blocking:= false
 var _exhaust_button_tween: Tween
+
+# Player-turn counter for the turn-announcement overlay. Increments on each
+# PLAYER_SOT; the matching ENEMY_SOT reuses the same number ("Player Turn N"
+# then "Enemy Turn N"). Reset implicitly by BattleUI being re-instantiated
+# per battle.
+var current_turn: int = 0
+var _turn_announcer_tween: Tween
+
+# Slide-in/out state for the End Turn / Block button. Home position is the
+# button's resting Vector2(position) captured on _ready; offscreen is home
+# plus the button's width + a margin so it sits fully past the right edge.
+var _end_turn_button_home: Vector2
+var _end_turn_button_offscreen: Vector2
+var _end_turn_button_tween: Tween
+const _END_TURN_BUTTON_OFFSCREEN_MARGIN := 40.0
 
 func _ready() -> void:
 	Events.player_hand_drawn.connect(_on_player_hand_drawn)
@@ -40,6 +63,31 @@ func _ready() -> void:
 	TooltipHelper.attach(draw_pile, "Draw Pile", "Cards left to draw this combat. Click to view. Reshuffled from your discard when empty.")
 	TooltipHelper.attach(discard_pile, "Discard Pile", "Cards you've used this combat. Click to view. Returns to your draw pile when it empties.")
 	TooltipHelper.attach(exhaust_button, "Exhaust Pile", "Cards removed for the rest of this combat. Click to view.")
+	# Defer one frame so the button has resolved its anchored size before we
+	# snapshot home / compute offscreen target. Without the defer, .size is
+	# (0,0) before the first layout pass.
+	call_deferred("_init_end_turn_button_position")
+
+
+## Battle hands us the SM after _setup_turn_state_machine() so we can listen
+## for PLAYER_SOT / ENEMY_SOT to drive the centered turn-announcement label.
+## Called once per combat, after the SM has already entered COMBAT_START
+## (so we deliberately miss that initial emit — we only announce player /
+## enemy turn boundaries, not setup).
+func bind_turn_state_machine(sm: TurnStateMachine) -> void:
+	if not sm:
+		return
+	sm.state_changed.connect(_on_turn_state_changed)
+
+
+func _init_end_turn_button_position() -> void:
+	_end_turn_button_home = end_turn_button.position
+	var offscreen_dx: float = end_turn_button.size.x + _END_TURN_BUTTON_OFFSCREEN_MARGIN
+	_end_turn_button_offscreen = _end_turn_button_home + Vector2(offscreen_dx, 0)
+	# Battle starts with the button offscreen — it slides on in
+	# _on_player_initial_hand_drawn so the first turn feels like the rest.
+	end_turn_button.position = _end_turn_button_offscreen
+	end_turn_button.icon = end_turn_icon
 
 func initialize_card_pile_ui() ->void:
 	draw_pile.card_pile = char_stats.draw_pile
@@ -87,20 +135,28 @@ func _set_char_stats(value: CharacterStats) -> void:
 	action_points_ui.char_stats = char_stats
 	hand.char_stats = char_stats
 
-## EOT cleanup completed and the hand is back at full size. Disable the end
-## turn button — it stays disabled until the enemy declares an attack (flips
-## it to BLOCK) or the enemy phase ends (returns it to END TURN). Also emit
-## player_turn_ended for status effects (intimidated/poison_tip/empowered)
-## that hook into "the player's turn just ended".
+## EOT cleanup completed and the hand is back at full size. The button is
+## already offscreen at this point (slid off when the player clicked End
+## Turn), so just keep it disabled. Also emit player_turn_ended for status
+## effects (intimidated/poison_tip/empowered) that hook into "the player's
+## turn just ended".
 func _on_player_hand_drawn() -> void:
 	print_debug("[EndBtn] disable from _on_player_hand_drawn (post-EOT)")
 	end_turn_button.disabled = true
 	Events.player_turn_ended.emit()
 
 func _on_player_initial_hand_drawn() -> void:
-	print_debug("[EndBtn] enable from _on_player_initial_hand_drawn")
+	print_debug("[EndBtn] enable+slide-on from _on_player_initial_hand_drawn")
 	waiting_for_battle_start = false
+	# The SM skips PLAYER_SOT on the first turn (see combat_start_state.gd —
+	# the SOT cascade already ran inside player_handler.start_battle()), so
+	# the state_changed listener won't announce PLAYER TURN 1. Seed it here
+	# manually; subsequent turns are handled by _on_turn_state_changed.
+	current_turn = 1
+	_show_turn_announcement("PLAYER TURN %d" % current_turn)
+	_set_end_turn_button_mode_end_turn()
 	end_turn_button.disabled = false
+	_slide_end_turn_button_onscreen()
 
 func _on_player_action_phase_started() -> void:
 	if waiting_for_battle_start:
@@ -113,21 +169,97 @@ func _on_end_turn_button_pressed() -> void:
 	print_debug("[EndBtn] disable from _on_end_turn_button_pressed (text=%s)" % end_turn_button.text)
 	end_turn_button.disabled = true
 	if end_turn_button.text == "END TURN":
+		_slide_end_turn_button_offscreen()
 		Events.player_end_phase_started.emit()
 	elif end_turn_button.text == "BLOCK":
-		end_turn_button.text = "END TURN"
+		# Instant snap (placeholder until the block-click impact frame is
+		# built). Mode swap happens later when the next enemy attack
+		# declares or the enemy phase ends — at which point the button
+		# slides back on with the right icon/text.
+		end_turn_button.position = _end_turn_button_offscreen
 		Events.player_blocks_declared.emit()
 
 func _on_enemy_attack_declared() -> void:
 	#is_blocking = true
-	print_debug("[EndBtn] enable+BLOCK from _on_enemy_attack_declared")
-	end_turn_button.text = "BLOCK"
+	print_debug("[EndBtn] enable+BLOCK+slide-on from _on_enemy_attack_declared")
+	_set_end_turn_button_mode_block()
 	end_turn_button.disabled = false
+	_slide_end_turn_button_onscreen()
 
 func _on_enemy_phase_ended() -> void:
-	print_debug("[EndBtn] enable+END TURN from _on_enemy_phase_ended")
-	end_turn_button.text = "END TURN"
+	print_debug("[EndBtn] enable+END TURN+slide-on from _on_enemy_phase_ended")
+	_set_end_turn_button_mode_end_turn()
 	end_turn_button.disabled = false
+	_slide_end_turn_button_onscreen()
+
+
+# ── End-turn / Block button helpers ────────────────────────────────────────
+
+func _set_end_turn_button_mode_end_turn() -> void:
+	end_turn_button.text = "END TURN"
+	end_turn_button.icon = end_turn_icon
+
+
+func _set_end_turn_button_mode_block() -> void:
+	end_turn_button.text = "BLOCK"
+	end_turn_button.icon = block_icon
+
+
+func _slide_end_turn_button_onscreen() -> void:
+	if _end_turn_button_tween and _end_turn_button_tween.is_running():
+		_end_turn_button_tween.kill()
+	# If somehow already onscreen, start from offscreen so the motion reads.
+	if end_turn_button.position == _end_turn_button_home:
+		end_turn_button.position = _end_turn_button_offscreen
+	_end_turn_button_tween = end_turn_button.create_tween() \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_end_turn_button_tween.tween_property(
+		end_turn_button, "position", _end_turn_button_home, Constants.TWEEN_END_TURN_BUTTON)
+
+
+func _slide_end_turn_button_offscreen() -> void:
+	if _end_turn_button_tween and _end_turn_button_tween.is_running():
+		_end_turn_button_tween.kill()
+	_end_turn_button_tween = end_turn_button.create_tween() \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	_end_turn_button_tween.tween_property(
+		end_turn_button, "position", _end_turn_button_offscreen, Constants.TWEEN_END_TURN_BUTTON)
+
+
+# ── Turn-announcement overlay ──────────────────────────────────────────────
+
+## Driven by TurnStateMachine.state_changed. Only PLAYER_SOT / ENEMY_SOT
+## announce; COMBAT_START, *_EOT, *_ACTING, VICTORY/DEFEAT/STALEMATE are
+## silent. Turn number increments on PLAYER_SOT and the matching ENEMY_SOT
+## reuses it (Slay-the-Spire round convention).
+func _on_turn_state_changed(state: int) -> void:
+	match state:
+		TurnState.State.PLAYER_SOT:
+			current_turn += 1
+			_show_turn_announcement("PLAYER TURN %d" % current_turn)
+		TurnState.State.ENEMY_SOT:
+			_show_turn_announcement("ENEMY TURN %d" % current_turn)
+
+
+func _show_turn_announcement(text: String) -> void:
+	if not turn_announcer_label:
+		return
+	if _turn_announcer_tween and _turn_announcer_tween.is_running():
+		_turn_announcer_tween.kill()
+	turn_announcer_label.text = text
+	turn_announcer_label.modulate.a = 0.0
+	turn_announcer_label.scale = Vector2.ONE * 0.8
+	_turn_announcer_tween = turn_announcer_label.create_tween()
+	_turn_announcer_tween.tween_property(
+		turn_announcer_label, "modulate:a", 1.0, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_turn_announcer_tween.parallel().tween_property(
+		turn_announcer_label, "scale", Vector2.ONE, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_turn_announcer_tween.tween_interval(_ANNOUNCEMENT_HOLD)
+	_turn_announcer_tween.tween_property(
+		turn_announcer_label, "modulate:a", 0.0, Constants.TWEEN_FADE
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 
 func _on_exhaust_button_mouse_entered() -> void:
@@ -250,9 +382,9 @@ func _animate_card_to_enemy_label(card: Card, enemy: Enemy, destination: int, so
 		return
 	var resource_ui := enemy.enemy_resource_ui
 	var target_label: Control = (
-		resource_ui.discard_count
+		resource_ui.discard_button
 		if destination == CardAddEffect.Destination.DISCARD_PILE
-		else resource_ui.deck_count
+		else resource_ui.deck_icon
 	)
 	if not target_label:
 		return
@@ -274,7 +406,7 @@ func _animate_card_to_enemy_label(card: Card, enemy: Enemy, destination: int, so
 	t.tween_interval(0.3)
 	t.tween_property(visual, "global_position", target_pos, 0.4) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	t.parallel().tween_property(visual, "scale", Vector2(CardStackPanel.PILE_SCALE, CardStackPanel.PILE_SCALE), 0.4) \
+	t.parallel().tween_property(visual, "scale", Vector2.ZERO, 0.4) \
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	t.parallel().tween_property(visual, "modulate:a", 0.0, 0.4).set_delay(0.2)
 	t.tween_callback(func():

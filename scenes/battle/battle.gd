@@ -64,6 +64,7 @@ func start_battle() ->void:
 	# so COMBAT_START is active and listening when player_initial_hand_drawn
 	# eventually fires at the end of the setup chain.
 	_setup_turn_state_machine()
+	battle_ui.bind_turn_state_machine(turn_state_machine)
 
 	# Initialize the player (equipment, deck, refs) BEFORE relics flash so
 	# equipment is visible during the SOC animation and draw_card doesn't
