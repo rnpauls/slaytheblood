@@ -23,6 +23,17 @@ func _ready() -> void:
 	Events.player_action_phase_started.connect(_on_player_action_phase_started)
 	card_state_machine.init(self)
 
+
+# player_card_drawn fires BEFORE this CardUI is added to the hand (see
+# player_handler.gd:152), so _on_card_drawn misses our own draw event and
+# `playable` would stay at its default (true) until the next stats_changed
+# fire — leaving the freshly-drawn card visually glowing even when it's
+# unplayable. Compute it here, once `card` has been assigned by super.
+func _set_card(value: Card) -> void:
+	await super._set_card(value)
+	if char_stats and card:
+		playable = char_stats.can_play_card(card)
+
 func _input(event: InputEvent) -> void:
 	if _in_pile():
 		return

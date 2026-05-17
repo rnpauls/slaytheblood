@@ -35,6 +35,8 @@ func contains_point(p: Vector2) -> bool:
 
 
 func _on_drag_or_aim_started(origin: Node) -> void:
+	if not is_inside_tree():
+		return
 	if not (origin is CardUI) or not _is_player_card(origin):
 		return
 	# Cancel any pending hide queued by a sibling end-signal that fired
@@ -46,12 +48,12 @@ func _on_drag_or_aim_started(origin: Node) -> void:
 	mana_label.text = "+%d" % origin.card.pitch
 	_apply_pitch_color(origin.card.pitch)
 
-	modulate = Color.WHITE if can_pitch else DISABLED_MODULATE
-	modulate.a = 0.0
+	var base_color := Color.WHITE if can_pitch else DISABLED_MODULATE
+	# Preserve current alpha so a re-show during an in-flight fade doesn't jump.
+	modulate = Color(base_color.r, base_color.g, base_color.b, modulate.a)
 	show()
 
-	if _tween and _tween.is_running():
-		_tween.kill()
+	_kill_tween()
 	_tween = create_tween()
 	_tween.tween_property(self, "modulate:a", 1.0, FADE_DURATION)
 
@@ -68,6 +70,8 @@ func _on_drag_or_aim_ended(origin: Node) -> void:
 
 
 func _apply_pending_hide(origin: CardUI) -> void:
+	if not is_inside_tree():
+		return
 	if not _hide_pending:
 		return
 	if current_card_ui != origin:
@@ -75,11 +79,16 @@ func _apply_pending_hide(origin: CardUI) -> void:
 	_hide_pending = false
 	current_card_ui = null
 	can_pitch = false
-	if _tween and _tween.is_running():
-		_tween.kill()
+	_kill_tween()
 	_tween = create_tween()
 	_tween.tween_property(self, "modulate:a", 0.0, FADE_DURATION)
 	_tween.tween_callback(hide)
+
+
+func _kill_tween() -> void:
+	if _tween and _tween.is_valid():
+		_tween.kill()
+	_tween = null
 
 
 func _apply_pitch_color(pitch: int) -> void:
