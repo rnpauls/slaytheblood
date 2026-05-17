@@ -6,7 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cwm4kpr8q2nva" path="res://scenes/event_rooms/wandering_merchant_event.tscn" id="3_wmrch"]
 [ext_resource type="PackedScene" uid="uid://dcs7hxn5bvk3p" path="res://scenes/event_rooms/cursed_shrine_event.tscn" id="4_cshrn"]
 [ext_resource type="PackedScene" uid="uid://bwt2gkeamq6rj" path="res://scenes/event_rooms/whispering_tome_event.tscn" id="5_wtome"]
+[ext_resource type="PackedScene" uid="uid://stbevent101a" path="res://scenes/event_rooms/vampires_embrace_event.tscn" id="6_vembr"]
+[ext_resource type="PackedScene" uid="uid://stbevent102a" path="res://scenes/event_rooms/bloodforge_anvil_event.tscn" id="7_blanv"]
+[ext_resource type="PackedScene" uid="uid://stbevent103a" path="res://scenes/event_rooms/hungry_mirror_event.tscn" id="8_hmirr"]
+[ext_resource type="PackedScene" uid="uid://stbevent104a" path="res://scenes/event_rooms/whispering_well_event.tscn" id="9_wwell"]
+[ext_resource type="PackedScene" uid="uid://stbevent105a" path="res://scenes/event_rooms/wraiths_vigil_event.tscn" id="10_wvigl"]
 
 [resource]
 script = ExtResource("1_ph2fq")
-event_rooms = Array[PackedScene]([ExtResource("1_okuug"), ExtResource("2_ttupa"), ExtResource("3_wmrch"), ExtResource("4_cshrn"), ExtResource("5_wtome")])
+event_rooms = Array[PackedScene]([ExtResource("1_okuug"), ExtResource("2_ttupa"), ExtResource("3_wmrch"), ExtResource("4_cshrn"), ExtResource("5_wtome"), ExtResource("6_vembr"), ExtResource("7_blanv"), ExtResource("8_hmirr"), ExtResource("9_wwell"), ExtResource("10_wvigl")])

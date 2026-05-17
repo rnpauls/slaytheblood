@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://stbrelic104a"]
+
+[ext_resource type="Texture2D" uid="uid://dyc73bi7m8b4" path="res://art/relics/pixellab/echoing_coin.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/echoing_coin.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Echoing Coin"
+id = "echoing_coin"
+type = 3
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "After winning a combat, gain 20 bonus gold."

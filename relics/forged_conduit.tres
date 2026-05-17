@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://stbrelic102a"]
+
+[ext_resource type="Texture2D" uid="uid://bbeaj2nmk4wac" path="res://art/relics/pixellab/forged_conduit.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/forged_conduit.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Forged Conduit"
+id = "forged_conduit"
+type = 4
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "Whenever a card is sunk during combat, gain 1 mana."

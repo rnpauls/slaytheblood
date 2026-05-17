@@ -68,6 +68,12 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## Project conventions
 
+### Godot MCP Pro
+- 172-tool MCP server connecting Claude Code to the running Godot editor (scenes, scripts, runtime control, screenshots).
+- Tool reference + editor-vs-runtime split: @.claude/godot-mcp-pro.md
+- Server lives outside the project at `/Users/rich/Desktop/Godot/Godot/godot-mcp-pro-v1/server/`. Editor addon at `addons/godot_mcp/`.
+- Requires Godot editor to be open with this project loaded; check the "MCP Pro" bottom panel for a green dot.
+
 ### Pixellab enemy sprites
 - Pixellab API reference: https://api.pixellab.ai/mcp/docs — fetch before non-trivial operations (animations, tilesets, multi-direction characters).
 - Save to `art/sprites/pixellab/`.

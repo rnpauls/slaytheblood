@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://stbrelic101a"]
+
+[ext_resource type="Texture2D" uid="uid://d2at6ejowc0hx" path="res://art/relics/pixellab/crimson_fang.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/crimson_fang.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Crimson Fang"
+id = "crimson_fang"
+type = 4
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "Whenever you kill an enemy, heal 3 HP."

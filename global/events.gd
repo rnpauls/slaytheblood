@@ -140,5 +140,9 @@ signal battle_reward_exited
 # Treasure Room-related events
 signal treasure_room_exited(found_relic: Relic)
 
+## Emitted by relics that grant the player gold (e.g. Echoing Coin). Run.gd
+## listens and bumps RunStats.gold — relics don't hold a direct RunStats ref.
+signal relic_gold_granted(amount: int)
+
 #Random Event room-related events
 signal event_room_exited

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://stbrelic105a"]
+
+[ext_resource type="Texture2D" uid="uid://btbtthbj2wu3y" path="res://art/relics/pixellab/wraiths_vigil.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/wraiths_vigil.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Wraith's Vigil"
+id = "wraiths_vigil"
+type = 2
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "At the end of your turn, if you played no Attack cards this turn, gain 4 block and 1 mana next turn."

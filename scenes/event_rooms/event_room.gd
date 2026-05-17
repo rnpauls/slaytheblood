@@ -3,6 +3,9 @@ extends Node
 
 @export var character_stats: CharacterStats
 @export var run_stats: RunStats
+## Injected by run.gd. Lets events grant relics via relic_handler.add_relic().
+## Optional — events that don't grant relics can leave this null.
+@export var relic_handler: RelicHandler
 
 @export_group("Resolution UI")
 @export var background: TextureRect

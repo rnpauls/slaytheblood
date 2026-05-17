@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Relic" format=3 uid="uid://stbrelic103a"]
+
+[ext_resource type="Texture2D" uid="uid://c2cvpmeyhiuie" path="res://art/relics/pixellab/mirror_shard.png" id="1_icon"]
+[ext_resource type="Script" path="res://relics/mirror_shard.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+relic_name = "Mirror Shard"
+id = "mirror_shard"
+type = 0
+character_type = 0
+icon = ExtResource("1_icon")
+tooltip = "At the start of each turn, discard a random card from your hand and gain 3 mana."

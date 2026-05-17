@@ -226,6 +226,7 @@ func _setup_event_connections() -> void:
 	Events.shop_exited.connect(_show_map)
 	Events.treasure_room_exited.connect(_on_treasure_room_exited)
 	Events.event_room_exited.connect(_show_map)
+	Events.relic_gold_granted.connect(_on_relic_gold_granted)
 	
 	battle_button.pressed.connect(_change_view.bind(BATTLE_SCENE))
 	campfire_button.pressed.connect(_change_view.bind(CAMPFIRE_SCENE))
@@ -249,6 +250,7 @@ func _debug_enter_event(scene: PackedScene) -> void:
 	var event_room := _change_view(scene) as EventRoom
 	event_room.character_stats = character
 	event_room.run_stats = stats
+	event_room.relic_handler = relic_handler
 	event_room.setup()
 
 func _setup_top_bar() -> void:
@@ -317,6 +319,11 @@ func _on_treasure_room_entered() -> void:
 	treasure_scene.char_stats = character
 	treasure_scene.generate_relic()
 
+func _on_relic_gold_granted(amount: int) -> void:
+	if stats:
+		stats.gold += amount
+
+
 func _on_treasure_room_exited(relic: Relic) -> void:
 	var reward_scene := _change_view(BATTLE_REWARD_SCENE)  as BattleReward
 	reward_scene.run_stats = stats
@@ -341,6 +348,7 @@ func _on_event_room_entered(room: Room) -> void:
 	var event_room := _change_view(room.event_scene) as EventRoom
 	event_room.character_stats = character
 	event_room.run_stats = stats
+	event_room.relic_handler = relic_handler
 	event_room.setup()
 
 func _on_battle_won() -> void:
