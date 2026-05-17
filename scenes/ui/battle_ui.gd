@@ -73,6 +73,10 @@ func _ready() -> void:
 	Events.enemy_phase_ended.connect(_on_enemy_phase_ended)
 	Events.top_card_reveal_requested.connect(_on_top_card_reveal_requested)
 	Events.card_add_animation_requested.connect(_on_card_add_animation_requested)
+	# Reset the global pending-animations counter on every battle start so a
+	# tween killed mid-flight (e.g. previous battle ended on a CardAddEffect)
+	# can't leak a positive count that would soft-lock Card.play's drain loop.
+	Events.pending_card_add_animations = 0
 	TooltipHelper.attach(draw_pile, "Draw Pile", "Cards left to draw this combat. Click to view. Reshuffled from your discard when empty.")
 	TooltipHelper.attach(discard_pile, "Discard Pile", "Cards you've used this combat. Click to view. Returns to your draw pile when it empties.")
 	TooltipHelper.attach(exhaust_button, "Exhaust Pile", "Cards removed for the rest of this combat. Click to view.")
@@ -466,6 +470,7 @@ func _animate_card_to_hand(card: Card, source_pos: Vector2) -> void:
 	temp.scale = Vector2.ONE
 	temp.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	temp.z_index = 100
+	Events.register_card_add_animation_start()
 	# Hold at center so the player can read the card, then trigger the existing
 	# draw-style entry: hand.add_card consumes the temp visual (queue_free'd
 	# inside add_card) and starts a new PlayerCardUI at the temp's transform.
@@ -474,6 +479,9 @@ func _animate_card_to_hand(card: Card, source_pos: Vector2) -> void:
 	t.tween_callback(func():
 		if is_instance_valid(temp) and is_instance_valid(hand):
 			hand.add_card(card, temp))
+	# Decrement at the hand handoff (don't wait for hand's own arrangement
+	# tween — the card is visually "in" by then).
+	t.tween_callback(Events.register_card_add_animation_end)
 
 
 func _animate_card_to_enemy_label(card: Card, enemy: Enemy, destination: int, source_pos: Vector2) -> void:
@@ -499,6 +507,7 @@ func _animate_card_to_enemy_label(card: Card, enemy: Enemy, destination: int, so
 	var label_center: Vector2 = target_label.global_position + target_label.size / 2.0
 	var target_pos: Vector2 = label_center - visual.pivot_offset
 
+	Events.register_card_add_animation_start()
 	var t := visual.create_tween()
 	t.tween_interval(1.0)
 	t.tween_property(visual, "global_position", target_pos, 0.8) \
@@ -509,3 +518,4 @@ func _animate_card_to_enemy_label(card: Card, enemy: Enemy, destination: int, so
 	t.tween_callback(func():
 		if is_instance_valid(visual):
 			visual.queue_free())
+	t.tween_callback(Events.register_card_add_animation_end)

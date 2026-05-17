@@ -134,6 +134,10 @@ func play(card_parent: Node, targets: Array[Node], char_stats: Stats, modifiers:
 		if targets[0] is Enemy:
 			Events.player_attack_declared.emit()
 	await apply_effects(targets, modifiers)
+	# Drain any CardAddEffect fly-in tweens kicked off during apply_effects
+	# (direct path or via on_hit.custom_func) before signalling completion —
+	# otherwise the enemy turn loop advances while trash is still in flight.
+	await Events.await_pending_card_add_animations()
 
 	for targetx in targets:
 		if type == Type.ATTACK:

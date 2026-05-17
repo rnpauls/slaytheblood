@@ -343,8 +343,9 @@ func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
 	var target_index: int = 0 if add_to_back_of_deck else _visuals().size() - 1
 	var target_pos: Vector2 = _slot_position(target_index)
 	var hold_duration := 1.0
-	var fly_duration := 0.8
+	var fly_duration := 0.4
 
+	Events.register_card_add_animation_start()
 	var t := visual.create_tween()
 	t.tween_interval(hold_duration)
 	t.tween_property(visual, "position", target_pos, fly_duration) \
@@ -370,6 +371,7 @@ func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
 			_pitched_in_flight = null
 		if is_instance_valid(visual):
 			visual.z_index = 0)
+	t.tween_callback(Events.register_card_add_animation_end)
 	visual.tween = t
 
 	_arrange()

@@ -134,7 +134,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("24_endct")
 
-[node name="BlockButton" type="TextureButton" parent="BattleUI"]
+[node name="BlockButton" type="TextureButton" parent="BattleUI" unique_id=746396407]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 3

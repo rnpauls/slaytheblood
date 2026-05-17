@@ -56,8 +56,26 @@ signal top_card_reveal_finished
 ## pile. Listener (BattleUI) handles visuals; CardAddEffect emits this BEFORE
 ## mutating the resource pile so the listener can do the visual handoff
 ## (parent the CardUI into the target panel) ahead of the size_changed handler.
-## Fire-and-forget — no completion signal; the tween runs independently.
+## Listeners must bracket their tween with register_card_add_animation_start /
+## register_card_add_animation_end so Card.play can drain pending visuals
+## before emitting card_play_finished — otherwise the enemy turn loop advances
+## while the card is still flying.
 signal card_add_animation_requested(card: Card, target: Node, destination: int)
+## Emitted once per CardAddEffect fly-in completion (paired with the start
+## bracket). Card.play awaits this in a loop to drain pending_card_add_animations.
+signal card_add_animation_finished
+var pending_card_add_animations: int = 0
+
+func register_card_add_animation_start() -> void:
+	pending_card_add_animations += 1
+
+func register_card_add_animation_end() -> void:
+	pending_card_add_animations -= 1
+	card_add_animation_finished.emit()
+
+func await_pending_card_add_animations() -> void:
+	while pending_card_add_animations > 0:
+		await card_add_animation_finished
 
 #Player-related events
 signal player_initial_hand_drawn

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="CardPile" format=3]
+[gd_resource type="Resource" script_class="CardPile" format=3 uid="uid://d1epe7yn4lml3"]
 
-[ext_resource type="Script" path="res://custom_resources/card.gd" id="1_card"]
-[ext_resource type="Script" path="res://custom_resources/card_pile.gd" id="2_pile"]
-[ext_resource type="Resource" path="res://generic_cards/gunkshot.tres" id="3_gnksh"]
-[ext_resource type="Resource" path="res://generic_cards/gunk_up.tres" id="4_gnkup"]
-[ext_resource type="Resource" path="res://generic_cards/head_jab_blue.tres" id="5_2i8rf"]
+[ext_resource type="Script" uid="uid://ccdr5wx1m6seg" path="res://custom_resources/card.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://dejd2uv2w4475" path="res://custom_resources/card_pile.gd" id="2_pile"]
+[ext_resource type="Resource" uid="uid://bgnkshtcrd21a" path="res://generic_cards/gunkshot.tres" id="3_gnksh"]
+[ext_resource type="Resource" uid="uid://bgnkupncrd5x4" path="res://generic_cards/gunk_up.tres" id="4_gnkup"]
+[ext_resource type="Resource" uid="uid://dqtd63vqxu3ta" path="res://generic_cards/head_jab_blue.tres" id="5_2i8rf"]
 
 [resource]
 script = ExtResource("2_pile")
