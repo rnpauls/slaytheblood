@@ -214,7 +214,7 @@ func _do_weapon_action() -> void:
 	if is_instance_valid(badge):
 		badge.flash()
 	if weapon.sound:
-		SFXPlayer.play(weapon.sound)
+		SFXRegistry.play_stream(weapon.sound)
 
 	# Mirror Card.play's order: pay mana, decrement AP (with go_again),
 	# apply damage, then zero the target's leftover block.

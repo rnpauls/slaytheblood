@@ -20,6 +20,7 @@ class_name SplitterStatus
 extends Status
 
 const MINI_SLIME_STATS := preload("res://enemies/slime/mini_slime_enemy.tres")
+const STUNNED_STATUS := preload("res://statuses/stunned.tres")
 const SPAWN_OFFSETS: Array[Vector2] = [Vector2(-110, -20), Vector2(110, -20)]
 
 var _has_split: bool = false
@@ -89,6 +90,10 @@ func _perform_split() -> void:
 		var m = handler.spawn_enemy(MINI_SLIME_STATS, base_pos + off)
 		if m != null:
 			minis.append(m)
+
+	for m in minis:
+		if is_instance_valid(m) and m.status_handler:
+			m.status_handler.add_status(STUNNED_STATUS.duplicate())
 
 	if not minis.is_empty():
 		_replace_decks_with_parent_cards(minis, inherited)

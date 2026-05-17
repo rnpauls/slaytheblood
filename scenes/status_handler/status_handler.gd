@@ -29,33 +29,12 @@ func get_tooltip_entries() -> Array[TooltipData]:
 func apply_statuses_by_type(type: Status.Type) -> void:
 	if type == Status.Type.EVENT_BASED:
 		return
-	
-	var status_queue: Array[Status] = _get_all_statuses().filter(
-		func(status: Status):
-			return status.type == type
+	var queue: Array[Status] = _get_all_statuses().filter(
+		func(s: Status): return s.type == type
 	)
-	
-	if status_queue.is_empty():
-		statuses_applied.emit(type)
-		return
-	
-	var tween := create_tween()
-	for status: Status in status_queue:
-		tween.tween_callback(status.apply_status.bind(status_owner))
-		tween.tween_interval(STATUS_APPLY_INTERVAL)
-	
-	tween.finished.connect(func(): statuses_applied.emit(type))
-
-#func _ready():
-	#var test := load("res://statuses/true_strength_form.tres")
-	#await get_tree().create_timer(1).timeout
-	#add_status(test)
-	#await get_tree().create_timer(1).timeout
-	#add_status(test)
-	#await get_tree().create_timer(1).timeout
-	#_get_status(test.id).apply_status(null)
-	#await get_tree().create_timer(1).timeout
-	#_get_status(test.id).apply_status(null)
+	TweenQueue.run(self, queue, STATUS_APPLY_INTERVAL,
+		func(s: Status): s.apply_status(status_owner),
+		func(): statuses_applied.emit(type))
 
 func add_status(status: Status) -> void:
 	var stackable := status.stack_type != Status.StackType.NONE
@@ -136,8 +115,3 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	Events.tooltip_hide_requested.emit()
-
-#func manually_remove_status(id: String) -> void:
-	#for status_ui: StatusUI in get_children():
-		#if status_ui.status.id == id:
-			#status_ui.queue_free()

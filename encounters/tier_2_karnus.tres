@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BattleStats" format=3]
+
+[ext_resource type="PackedScene" path="res://encounters/tier_2_karnus.tscn" id="1_637td"]
+[ext_resource type="Script" path="res://custom_resources/battle_stats.gd" id="2_mxy4s"]
+
+[resource]
+script = ExtResource("2_mxy4s")
+battle_tier = 2
+weight = 2.5
+gold_reward_min = 75
+gold_reward_max = 110
+enemies = ExtResource("1_637td")

@@ -1,91 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://bboj2mcrk4pkx"]
+[gd_scene load_steps=6 format=3 uid="uid://bboj2mcrk4pkx"]
 
-[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="1_b586u"]
-[ext_resource type="Script" uid="uid://ccysrh6ro8exo" path="res://scenes/event_rooms/helpful_boy_event.gd" id="1_laoq4"]
-[ext_resource type="Texture2D" uid="uid://wt8b2gn7a1kr" path="res://art/backgrounds/helpful_boy.jpeg" id="2_55tfd"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="3_jfl6l"]
+[ext_resource type="PackedScene" uid="uid://b0baseeventroom1" path="res://scenes/event_rooms/base_event_room.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://ccysrh6ro8exo" path="res://scenes/event_rooms/helpful_boy_event.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="3_button"]
+[ext_resource type="Texture2D" uid="uid://wt8b2gn7a1kr" path="res://art/backgrounds/helpful_boy.jpeg" id="4_bg"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="5_theme"]
 
-[node name="HelpfulBoyEvent" type="Control" node_paths=PackedStringArray("background", "choice_container", "resolution_container", "resolution_label", "continue_button")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_laoq4")
-background = NodePath("Background")
-choice_container = NodePath("ChoiceContainer")
-resolution_container = NodePath("ResolutionContainer")
-resolution_label = NodePath("ResolutionContainer/ResolutionLabel")
-continue_button = NodePath("ResolutionContainer/ContinueButton")
+[node name="HelpfulBoyEvent" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
 
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_55tfd")
+[node name="Background" parent="." index="0"]
+texture = ExtResource("4_bg")
+expand_mode = 0
+stretch_mode = 0
 
-[node name="ChoiceContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="ChoiceContainer" parent="." index="1"]
 offset_left = 107.0
 offset_top = -41.0
 offset_right = 387.0
 offset_bottom = 222.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="ChoiceContainer"]
+[node name="Label" type="Label" parent="ChoiceContainer" index="0"]
 layout_mode = 2
-theme = ExtResource("3_jfl6l")
+theme = ExtResource("5_theme")
 text = "Helpful Boy"
 horizontal_alignment = 1
 
-[node name="DuplicateLastCardButton" parent="ChoiceContainer" instance=ExtResource("1_b586u")]
+[node name="DuplicateLastCardButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
 text = "Duplicate the last card
 added to your deck"
 
-[node name="PlusMaxHPButton" parent="ChoiceContainer" instance=ExtResource("1_b586u")]
+[node name="PlusMaxHPButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "+5 Max HP"
 
-[node name="ResolutionContainer" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="ResolutionContainer" parent="." index="2"]
 offset_left = 107.0
-offset_top = -100.0
 offset_right = 387.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
 
-[node name="ResolutionLabel" type="Label" parent="ResolutionContainer"]
-layout_mode = 2
-theme = ExtResource("3_jfl6l")
-text = ""
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ContinueButton" parent="ResolutionContainer" instance=ExtResource("1_b586u")]
+[node name="ContinueButton" parent="ResolutionContainer" index="1"]
 custom_minimum_size = Vector2(100, 60)
-layout_mode = 2
-text = "Continue"

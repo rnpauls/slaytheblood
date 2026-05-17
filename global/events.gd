@@ -6,7 +6,6 @@ signal card_drag_started(card_ui: CardUI)
 signal card_drag_ended(card_ui: CardUI)
 signal card_aim_started(origin: Node)
 signal card_aim_ended(origin: Node)
-#signal card_played(card: Card)
 signal card_discarded(card: Card)
 signal card_pitched(card: Card)
 signal card_sunk(card: Card)
@@ -26,7 +25,6 @@ signal combatant_damaged(victim: Node, attacker: Node, damage: int)
 ## `attempted` is the pre-block amount; `damage_dealt` is the post-block
 ## residual that actually hit health.
 signal combatant_attacked(victim: Node, attacker: Node, attempted: int, damage_dealt: int)
-#signal card_milled(card: CardUI)
 ## Show one or more tooltip boxes (e.g. main card description + one box per
 ## keyword). Pass anchor_rect in canvas/global coords to anchor next to a source
 ## (right-of-source, flips left); pass Rect2() to anchor to the mouse instead.

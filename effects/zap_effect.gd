@@ -22,7 +22,7 @@ func execute_single_target(target: Node) -> void:
 	var damage_dealt := 0
 	if target is Enemy or target is Player:
 		damage_dealt = target.take_damage(amount, receiver_modifier_type, damage_kind, prevention)
-		SFXPlayer.play(sound)
+		SFXRegistry.play_stream(sound)
 	if damage_dealt > 0:
 		Events.combatant_damaged.emit(target, source_owner, damage_dealt)
 		for on_hit in on_hit_effects:

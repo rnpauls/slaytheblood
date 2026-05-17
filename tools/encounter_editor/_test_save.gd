@@ -66,7 +66,7 @@ func _ready() -> void:
 
 	# Also verify we can load an existing battle and surface its enemy tokens.
 	editor._on_new_pressed()
-	editor._load_battle("res://battles/tier_1_bat_crab.tres")
+	editor._load_battle("res://encounters/tier_1_bat_crab.tres")
 	if editor._tokens.size() != 2:
 		push_error("Expected 2 tokens after loading tier_1_bat_crab, got %d" % editor._tokens.size())
 		get_tree().quit(1)

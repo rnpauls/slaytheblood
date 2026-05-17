@@ -1,26 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca3btftum1s8f"]
+[gd_scene load_steps=6 format=3 uid="uid://ca3btftum1s8f"]
 
-[ext_resource type="Script" uid="uid://bsswdvdjuuabr" path="res://scenes/event_rooms/gamble_event.gd" id="1_jjfvp"]
-[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="1_vc0fc"]
-[ext_resource type="Texture2D" uid="uid://cyoh7oerow1kx" path="res://art/backgrounds/slot_machine.jpeg" id="2_1wr75"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="3_8v7cw"]
+[ext_resource type="PackedScene" uid="uid://b0baseeventroom1" path="res://scenes/event_rooms/base_event_room.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://bsswdvdjuuabr" path="res://scenes/event_rooms/gamble_event.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="3_button"]
+[ext_resource type="Texture2D" uid="uid://cyoh7oerow1kx" path="res://art/backgrounds/slot_machine.jpeg" id="4_bg"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="5_theme"]
 
-[node name="GambleEvent" type="Control" node_paths=PackedStringArray("background", "choice_container", "resolution_container", "resolution_label", "continue_button")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_jjfvp")
-background = NodePath("Background")
-choice_container = NodePath("ChoiceContainer")
-resolution_container = NodePath("ResolutionContainer")
-resolution_label = NodePath("ResolutionContainer/ResolutionLabel")
-continue_button = NodePath("ResolutionContainer/ContinueButton")
+[node name="GambleEvent" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
 
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="Background" parent="." index="0"]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -28,78 +17,51 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -1360.0
 offset_top = -384.0
+offset_right = 0.0
 offset_bottom = 384.0
 grow_horizontal = 0
 grow_vertical = 2
-texture = ExtResource("2_1wr75")
+texture = ExtResource("4_bg")
+expand_mode = 0
+stretch_mode = 0
 
-[node name="ChoiceContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="ChoiceContainer" parent="." index="1"]
 offset_left = 95.0
 offset_top = -139.0
 offset_right = 435.0
 offset_bottom = 275.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="ChoiceContainer"]
+[node name="Label" type="Label" parent="ChoiceContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("3_8v7cw")
+theme = ExtResource("5_theme")
 text = "Bet your
 money"
 horizontal_alignment = 1
 
-[node name="FiftyButton" parent="ChoiceContainer" instance=ExtResource("1_vc0fc")]
+[node name="FiftyButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Bet 50g: 50% chance
 to win 100G"
 
-[node name="ThirtyButton" parent="ChoiceContainer" instance=ExtResource("1_vc0fc")]
+[node name="ThirtyButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Bet 50g: 30% chance
 to win 200G"
 
-[node name="SkipButton" parent="ChoiceContainer" instance=ExtResource("1_vc0fc")]
+[node name="SkipButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "No thanks!"
 
-[node name="ResolutionContainer" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="ResolutionContainer" parent="." index="2"]
 offset_left = 95.0
-offset_top = -100.0
 offset_right = 435.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
 
-[node name="ResolutionLabel" type="Label" parent="ResolutionContainer"]
-layout_mode = 2
-theme = ExtResource("3_8v7cw")
-text = ""
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ContinueButton" parent="ResolutionContainer" instance=ExtResource("1_vc0fc")]
+[node name="ContinueButton" parent="ResolutionContainer" index="1"]
 custom_minimum_size = Vector2(100, 60)
-layout_mode = 2
-text = "Continue"

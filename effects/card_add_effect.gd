@@ -10,7 +10,7 @@ var destination: Destination = Destination.DRAW_PILE_RANDOM
 func execute(targets: Array[Node]) -> void:
 	if not card_to_add:
 		return
-	SFXPlayer.play(sound)
+	SFXRegistry.play_stream(sound)
 	for target in targets:
 		if not target or not target.stats:
 			continue

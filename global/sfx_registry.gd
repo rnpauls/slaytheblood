@@ -8,6 +8,8 @@ const DRAW_CARD := preload("res://art/music/sound_effects/400 Sounds Pack/Card a
 const CONFIRM := preload("res://art/music/sound_effects/400 Sounds Pack/UI/sci_fi_confirm.wav")
 const CANCEL := preload("res://art/music/sound_effects/400 Sounds Pack/UI/sci_fi_cancel.wav")
 
+const POOL_SIZE := 8
+
 var _by_name: Dictionary = {
 	&"HOVER_CARD": HOVER_CARD,
 	&"HOVER_UI": HOVER_UI,
@@ -17,17 +19,35 @@ var _by_name: Dictionary = {
 	&"CONFIRM": CONFIRM,
 	&"CANCEL": CANCEL,
 }
+var _players: Array[AudioStreamPlayer] = []
 
 func play(sfx_name: StringName, pitch: float = 1.0) -> void:
 	var stream: AudioStream = _by_name.get(sfx_name, null)
 	if stream == null:
 		push_warning("SFXRegistry: unknown SFX '%s'" % sfx_name)
 		return
-	SFXPlayer.play(stream, false, pitch)
+	play_stream(stream, false, pitch)
+
+func play_stream(audio: AudioStream, single: bool = false, pitch: float = 1.0, volume_db: float = 0.0) -> void:
+	if not audio:
+		return
+	if single:
+		stop()
+	for p in _players:
+		if not p.playing:
+			p.stream = audio
+			p.pitch_scale = pitch
+			p.volume_db = volume_db
+			p.play()
+			return
+
+func stop() -> void:
+	for p in _players:
+		p.stop()
 
 func play_pitch_sequence(pitch_value: int) -> void:
 	for i in pitch_value:
-		SFXPlayer.play(Constants.PITCH_SOUND, false, 1.0 + i * Constants.PITCH_SOUND_STEP)
+		play_stream(Constants.PITCH_SOUND, false, 1.0 + i * Constants.PITCH_SOUND_STEP)
 		if i < pitch_value - 1:
 			await get_tree().create_timer(Constants.PITCH_SOUND_GAP).timeout
 
@@ -35,6 +55,11 @@ func play_pitch_sequence(pitch_value: int) -> void:
 # Add a Button to the &"no_sfx" group (in the editor or via add_to_group)
 # to opt out — useful for gameplay-context buttons like card click areas.
 func _ready() -> void:
+	for i in POOL_SIZE:
+		var p := AudioStreamPlayer.new()
+		p.bus = &"SFX"
+		add_child(p)
+		_players.append(p)
 	get_tree().node_added.connect(_on_node_added)
 	# The main scene's nodes are already in the tree by the time this autoload's
 	# _ready runs, so node_added never fires for them. Sweep once to catch them.

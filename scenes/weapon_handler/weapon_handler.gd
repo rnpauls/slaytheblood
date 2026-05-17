@@ -1,9 +1,6 @@
 class_name WeaponHandler
 extends Control
 
-const HOVER_SCALE := Vector2(1.08, 1.08)
-const HOVER_TWEEN_TIME := 0.1
-
 ## When false: skip combat-event listeners, swallow combat input, and the click
 ## handler does nothing — used by the inventory view to display equipped weapons
 ## without wiring any combat behavior. The button still emits `pressed` so the
@@ -228,8 +225,4 @@ func _on_mouse_exited() -> void:
 
 
 func _set_hovered(value: bool) -> void:
-	hover_glow_panel.visible = value
-	if _hover_tween and _hover_tween.is_running():
-		_hover_tween.kill()
-	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	_hover_tween.tween_property(weapon_button, "scale", HOVER_SCALE if value else Vector2.ONE, HOVER_TWEEN_TIME)
+	_hover_tween = InventorySlotHover.apply(self, weapon_button, hover_glow_panel, _hover_tween, value)

@@ -35,12 +35,6 @@ enum CharacterType {ALL, NINJA, BRUTE, RUNEBLADE}
 ## When true: equipment is not destroyed at 0; remains in slot but unusable until regenerated.
 @export var unbreakable: bool = false
 
-@export_group("Triggered Ability")
-## Optional: a Relic resource activated when this equipment is used to block.
-## Reuses the existing Relic.activate_relic system. The trigger fires before the
-## block value is added to player.stats.block.
-@export var trigger_relic: Relic
-
 @export_group("Active Ability")
 ## When true, the equipment can be clicked during the player's action phase to
 ## trigger a per-turn active ability. Subclasses override use_active_ability().

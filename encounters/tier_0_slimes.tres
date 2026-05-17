@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://c2j74065lgww0"]
+
+[ext_resource type="PackedScene" uid="uid://bqjct7iam4fub" path="res://encounters/tier_0_slimes.tscn" id="1_bpn20"]
+[ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="2_lblfe"]
+
+[resource]
+script = ExtResource("2_lblfe")
+weight = 1.5
+gold_reward_min = 30
+gold_reward_max = 50
+enemies = ExtResource("1_bpn20")

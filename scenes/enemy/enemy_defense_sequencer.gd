@@ -121,7 +121,7 @@ func _animate_defense_card(card: Card, amount: int, kind: String) -> void:
 		badge.set_icon(MANA_ICON)
 		SFXRegistry.play_pitch_sequence(card.pitch)
 	else:
-		SFXPlayer.play(card.block_sound)
+		SFXRegistry.play_stream(card.block_sound)
 	badge.pop(amount)
 
 	await _enemy.get_tree().create_timer(DEFENSE_HOLD_DURATION).timeout

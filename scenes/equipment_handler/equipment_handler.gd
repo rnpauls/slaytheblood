@@ -7,9 +7,6 @@ extends Control
 
 signal equipment_destroyed(equipment: Equipment)
 
-const HOVER_SCALE := Vector2(1.08, 1.08)
-const HOVER_TWEEN_TIME := 0.1
-
 ## When false: skip combat-event listeners and the click handler does nothing.
 ## Used by the inventory view to display equipped items without resetting their
 ## current_block (which would clobber a partially-used piece mid-battle) and
@@ -158,16 +155,6 @@ func attempt_to_use_ability() -> void:
 func attempt_to_block() -> void:
 	if not can_block():
 		return
-	# Fire optional triggered ability before adding block, so an "on-defend"
-	# triggered effect resolves visually before the block number jumps.
-	if equipment.trigger_relic:
-		# trigger_relic.activate_relic expects a RelicUI but most relics only
-		# need the owner's tree; we pass the equipment_ui as a stand-in. If a
-		# specific trigger relic needs richer context, extend that relic to
-		# accept Variant and pull from owner_of_equipment.
-		print_debug("Equipment trigger relics not implemented")
-		#equipment.trigger_relic.activate_relic(equipment_ui)
-
 	var block_amount := equipment.consume_block_for_attack()
 
 	var player := owner_of_equipment as Player
@@ -192,7 +179,7 @@ func attempt_to_block() -> void:
 
 func _destroy_equipment() -> void:
 	var destroyed := equipment
-	SFXPlayer.play(destroyed.break_sound)
+	SFXRegistry.play_stream(destroyed.break_sound)
 	# Fire the on-destroyed hook before we tear it down so Heavy Greaves etc.
 	# can grant their last-rites effect.
 	destroyed.on_destroyed(owner_of_equipment)
@@ -256,8 +243,4 @@ func _on_mouse_exited() -> void:
 
 
 func _set_hovered(value: bool) -> void:
-	hover_glow_panel.visible = value
-	if _hover_tween and _hover_tween.is_running():
-		_hover_tween.kill()
-	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	_hover_tween.tween_property(equipment_button, "scale", HOVER_SCALE if value else Vector2.ONE, HOVER_TWEEN_TIME)
+	_hover_tween = InventorySlotHover.apply(self, equipment_button, hover_glow_panel, _hover_tween, value)

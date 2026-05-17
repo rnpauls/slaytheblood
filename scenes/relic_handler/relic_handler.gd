@@ -27,32 +27,16 @@ func _set_relics_owner(new_owner: Combatant) -> void:
 	for relic_ui in relics.get_children():
 		if relic_ui is RelicUI and relic_ui.relic:
 			relic_ui.relic.owner = new_owner
-	
-	
-	#add_relic(preload("res://relics/explosive_barrel.tres"))
-	#await get_tree().create_timer(1).timeout
-	#add_relic(preload("res://relics/healing_potion.tres"))
-	#await get_tree().create_timer(1).timeout
-	#add_relic(preload("res://relics/explosive_barrel.tres"))
 
 func activate_relics_by_type(type: Relic.Type) -> void:
 	if type == Relic.Type.EVENT_BASED:
 		return
-	
-	var relic_queue: Array[RelicUI] = _get_all_relic_ui_nodes().filter(
-		func(relic_ui: RelicUI):
-			return relic_ui.relic.type == type
+	var queue: Array[RelicUI] = _get_all_relic_ui_nodes().filter(
+		func(r: RelicUI): return r.relic.type == type
 	)
-	if relic_queue.is_empty():
-		relics_activated.emit(type)
-		return
-	
-	var tween := create_tween()
-	for relic_ui: RelicUI in relic_queue:
-		tween.tween_callback(relic_ui.relic.activate_relic.bind(relic_ui))
-		tween.tween_interval(RELIC_APPLY_INTERVAL)
-	
-	tween.finished.connect(func(): relics_activated.emit(type))
+	TweenQueue.run(self, queue, RELIC_APPLY_INTERVAL,
+		func(r: RelicUI): r.relic.activate_relic(r),
+		func(): relics_activated.emit(type))
 
 func add_relics(relics_array: Array[Relic]) -> void:
 	for relic: Relic in relics_array:

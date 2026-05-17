@@ -1,105 +1,54 @@
-[gd_scene format=3 uid="uid://bwt2gkeamq6rj"]
+[gd_scene load_steps=6 format=3 uid="uid://bwt2gkeamq6rj"]
 
-[ext_resource type="Script" path="res://scenes/event_rooms/whispering_tome_event.gd" id="1_wt_script"]
-[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="2_wt_button"]
-[ext_resource type="Texture2D" uid="uid://del2yqjjiqwse" path="res://art/backgrounds/de5fb9bc-cd93-40b6-9e0c-502e21629fe3.jpg" id="3_wt_bg"]
-[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="4_wt_theme"]
+[ext_resource type="PackedScene" uid="uid://b0baseeventroom1" path="res://scenes/event_rooms/base_event_room.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/event_rooms/whispering_tome_event.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://blelxs68q7t0p" path="res://scenes/event_rooms/event_room_button.tscn" id="3_button"]
+[ext_resource type="Texture2D" uid="uid://del2yqjjiqwse" path="res://art/backgrounds/de5fb9bc-cd93-40b6-9e0c-502e21629fe3.jpg" id="4_bg"]
+[ext_resource type="Theme" uid="uid://ctof1xmxcyvm6" path="res://art/themes/card_richtext_theme_20.tres" id="5_theme"]
 
-[node name="WhisperingTomeEvent" type="Control" node_paths=PackedStringArray("background", "choice_container", "resolution_container", "resolution_label", "continue_button")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_wt_script")
-background = NodePath("Background")
-choice_container = NodePath("ChoiceContainer")
-resolution_container = NodePath("ResolutionContainer")
-resolution_label = NodePath("ResolutionContainer/ResolutionLabel")
-continue_button = NodePath("ResolutionContainer/ContinueButton")
+[node name="WhisperingTomeEvent" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
 
-[node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_wt_bg")
-expand_mode = 1
-stretch_mode = 6
+[node name="Background" parent="." index="0"]
+texture = ExtResource("4_bg")
 
-[node name="ChoiceContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="ChoiceContainer" parent="." index="1"]
 offset_left = -200.0
 offset_top = -180.0
 offset_right = 200.0
 offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
 
-[node name="Title" type="Label" parent="ChoiceContainer"]
+[node name="Title" type="Label" parent="ChoiceContainer" index="0"]
 layout_mode = 2
-theme = ExtResource("4_wt_theme")
+theme = ExtResource("5_theme")
 text = "Whispering Tome"
 horizontal_alignment = 1
 
-[node name="Flavor" type="Label" parent="ChoiceContainer"]
+[node name="Flavor" type="Label" parent="ChoiceContainer" index="1"]
 layout_mode = 2
-theme = ExtResource("4_wt_theme")
+theme = ExtResource("5_theme")
 text = "A leather-bound book hums
 with words you almost hear."
 horizontal_alignment = 1
 
-[node name="ReadButton" parent="ChoiceContainer" instance=ExtResource("2_wt_button")]
+[node name="ReadButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
 text = "Read it (gain a random Uncommon card)"
 
-[node name="BurnButton" parent="ChoiceContainer" instance=ExtResource("2_wt_button")]
+[node name="BurnButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
 text = "Burn it (+75 gold)"
 
-[node name="LeaveButton" parent="ChoiceContainer" instance=ExtResource("2_wt_button")]
+[node name="LeaveButton" parent="ChoiceContainer" instance=ExtResource("3_button") index="4"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
 text = "Leave"
 
-[node name="ResolutionContainer" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="ResolutionContainer" parent="." index="2"]
 offset_left = -220.0
-offset_top = -100.0
 offset_right = 220.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-
-[node name="ResolutionLabel" type="Label" parent="ResolutionContainer"]
-layout_mode = 2
-theme = ExtResource("4_wt_theme")
-text = ""
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ContinueButton" parent="ResolutionContainer" instance=ExtResource("2_wt_button")]
-custom_minimum_size = Vector2(160, 60)
-layout_mode = 2
-text = "Continue"

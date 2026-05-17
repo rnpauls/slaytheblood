@@ -6,13 +6,13 @@
 ## battle into battle_stats_pool.tres so it shows up in runs.
 ##
 ## Saved files:
-##   res://battles/<name>.tres  — BattleStats resource (via ResourceSaver)
-##   res://battles/<name>.tscn  — Node2D scene with Enemy children at positions
+##   res://encounters/<name>.tres  — BattleStats resource (via ResourceSaver)
+##   res://encounters/<name>.tscn  — Node2D scene with Enemy children at positions
 extends Control
 
-const BATTLES_DIR := "res://battles/"
+const ENCOUNTERS_DIR := "res://encounters/"
 const ENEMIES_DIR := "res://enemies/"
-const BATTLE_POOL_PATH := "res://battles/battle_stats_pool.tres"
+const BATTLE_POOL_PATH := "res://encounters/battle_stats_pool.tres"
 const ENEMY_SCENE_PATH := "res://scenes/enemy/enemy.tscn"
 
 const TOKEN_SIZE := Vector2(96, 96)
@@ -92,10 +92,10 @@ func _ready() -> void:
 func _scan_battles() -> void:
 	_battle_paths.clear()
 	battle_list.clear()
-	_collect_resources(BATTLES_DIR, _battle_paths, _is_battle_stats)
+	_collect_resources(ENCOUNTERS_DIR, _battle_paths, _is_battle_stats)
 	_battle_paths.sort()
 	for p in _battle_paths:
-		battle_list.add_item(p.trim_prefix(BATTLES_DIR))
+		battle_list.add_item(p.trim_prefix(ENCOUNTERS_DIR))
 
 
 func _scan_enemies() -> void:
@@ -436,7 +436,7 @@ func _on_save_as_pressed() -> void:
 		# We just want a leaf filename.
 		_set_status("Invalid filename.")
 		return
-	var tres_path := BATTLES_DIR.path_join(basename + ".tres")
+	var tres_path := ENCOUNTERS_DIR.path_join(basename + ".tres")
 	_save_to(tres_path)
 
 
