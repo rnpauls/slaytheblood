@@ -92,6 +92,7 @@ func _setup_turn_state_machine() -> void:
 	_add_turn_state(EnemyStartOfTurnState.new(), TurnState.State.ENEMY_SOT)
 	_add_turn_state(EnemyActingState.new(), TurnState.State.ENEMY_ACTING)
 	_add_turn_state(EnemyEndOfTurnState.new(), TurnState.State.ENEMY_EOT)
+	_add_turn_state(FatigueVictoryState.new(), TurnState.State.FATIGUE_VICTORY)
 	_add_turn_state(VictoryState.new(), TurnState.State.VICTORY)
 	_add_turn_state(DefeatState.new(), TurnState.State.DEFEAT)
 	_add_turn_state(StalemateState.new(), TurnState.State.STALEMATE)

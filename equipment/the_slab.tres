@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://stbequip007b"]
+
+[ext_resource type="Texture2D" path="res://art/equipment/pixellab/the_slab.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://bd4xs5bydxa5u" path="res://custom_resources/equipment.gd" id="2_script"]
+
+[resource]
+script = ExtResource("2_script")
+equipment_name = "The Slab"
+id = "the_slab"
+slot = 1
+rarity = 1
+character_type = 2
+single_use = true
+icon = ExtResource("1_icon")
+tooltip = "A solid hunk of steel. Stops one big hit."
+max_block = 7
+metadata/_custom_type_script = "uid://bd4xs5bydxa5u"

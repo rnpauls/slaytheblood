@@ -2,6 +2,8 @@ class_name Map
 extends Node2D
 
 const SCROLL_SPEED := 60
+const WEB_PAN_DIVISOR := 10.0
+const DRAG_THRESHOLD := 8.0
 const MAP_ROOM = preload("res://scenes/map/map_room.tscn")
 const MAP_LINE = preload("res://scenes/map/map_line.tscn")
 
@@ -31,6 +33,9 @@ var act: int = 1
 var last_room: Room
 var camera_edge_y: float
 var scroll_locked := false
+var _press_position: Vector2
+var _mouse_held := false
+var _is_dragging := false
 
 func _ready() -> void:
 	camera_edge_y = MapGenerator.Y_DIST * (MapGenerator.FLOORS -1)
@@ -70,13 +75,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("scroll_down"):
-		camera_2d.position.y -= SCROLL_SPEED
-
-	if event.is_action_pressed("scroll_up"):
 		camera_2d.position.y += SCROLL_SPEED
 
+	if event.is_action_pressed("scroll_up"):
+		camera_2d.position.y -= SCROLL_SPEED
+
 	if event is InputEventPanGesture:
-		camera_2d.position.y -= event.delta.y * SCROLL_SPEED
+		var pan_scale := SCROLL_SPEED / WEB_PAN_DIVISOR if OS.has_feature("web") else float(SCROLL_SPEED)
+		camera_2d.position.y -= event.delta.y * pan_scale
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_press_position = event.position
+			_mouse_held = true
+			_is_dragging = false
+		else:
+			_mouse_held = false
+			_is_dragging = false
+
+	if event is InputEventMouseMotion and _mouse_held:
+		if not _is_dragging and event.position.distance_to(_press_position) >= DRAG_THRESHOLD:
+			_is_dragging = true
+		if _is_dragging:
+			camera_2d.position.y -= event.relative.y
 
 	camera_2d.position.y = clampf(camera_2d.position.y, -camera_edge_y, 0)
 
@@ -152,10 +173,24 @@ func hide_current_marker() -> void:
 	current_room_marker.visible = false
 
 
+func _center_on_current_room() -> void:
+	if last_room == null:
+		camera_2d.position.y = 0
+		return
+	var viewport_height := get_viewport_rect().size.y
+	var bottom_padding := 100.0
+	camera_2d.position.y = clampf(
+		last_room.position.y - viewport_height / 2.0 + bottom_padding,
+		-camera_edge_y,
+		0
+	)
+
+
 func show_map() -> void:
 	show()
 	camera_2d.enabled = true
 	legend.visible = true
+	_center_on_current_room()
 
 
 func hide_map() -> void:

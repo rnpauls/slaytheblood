@@ -54,6 +54,10 @@ const INTENT_COLLISION_GAP := 4.0
 @onready var _intent_origin_y: float = intent_ui.position.y
 @onready var _staged_origin_y: float = staged_display.position.y
 
+## Active forward/return tween for the attack lurch. Cancelled on death so the
+## death sink doesn't fight an in-flight return for sprite_2d.position.
+var _lurch_tween: Tween = null
+
 signal enemy_action_completed
 
 var enemy_ai: EnemyAI
@@ -116,6 +120,11 @@ func _on_death() -> void:
 		(stats.hand_left as Weapon).detach_from_combatant(self)
 	# Emit synchronously (EnemyHandler needs it now); defer only queue_free.
 	Events.enemy_died.emit(self)
+
+	# Cancel any in-flight lurch so the death sink starts from a clean baseline.
+	if _lurch_tween and _lurch_tween.is_valid():
+		_lurch_tween.kill()
+		sprite_2d.position = Vector2.ZERO
 
 	var tween := create_tween().set_parallel(true)
 	tween.tween_property(sprite_2d, "modulate:a", 0.0, DEATH_FADE_DURATION)
@@ -496,6 +505,34 @@ func animate_card_to_discard_label(card_ui: EnemyCardUI) -> void:
 		if is_instance_valid(card_ui):
 			card_ui.queue_free())
 	await t.finished
+
+
+## Lurch the sprite toward target_global_pos, then snap back to home.
+## Awaits only the forward stroke — the return runs concurrently with the
+## caller's damage application (Combatant.take_damage flash+shake), so the
+## sequence stays snappy. Safe to call back-to-back: an in-flight tween is
+## killed and a fresh one starts from the sprite's current offset.
+func lurch_attack(target_global_pos: Vector2) -> void:
+	if not is_instance_valid(sprite_2d):
+		return
+	var dir := target_global_pos - global_position
+	if dir.length_squared() < 0.001:
+		return
+	if _lurch_tween and _lurch_tween.is_valid():
+		_lurch_tween.kill()
+
+	# Enemy has no rotation/scale, so world-space direction translates 1:1 into local.
+	var lurch_offset := dir.normalized() * Constants.ENEMY_LURCH_DISTANCE
+
+	_lurch_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_lurch_tween.tween_property(sprite_2d, "position", lurch_offset, Constants.ENEMY_LURCH_FWD)
+	await _lurch_tween.finished
+	if not is_instance_valid(self) or not is_instance_valid(sprite_2d):
+		return
+
+	_lurch_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	_lurch_tween.tween_property(sprite_2d, "position", Vector2.ZERO, Constants.ENEMY_LURCH_RETURN)
+	# Intentionally NOT awaited — return runs in parallel with damage feedback.
 
 
 # ── Hover / tooltip routing ───────────────────────────────────────────────────

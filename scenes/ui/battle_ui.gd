@@ -171,7 +171,7 @@ func _on_player_initial_hand_drawn() -> void:
 	# the state_changed listener won't announce PLAYER TURN 1. Seed it here
 	# manually; subsequent turns are handled by _on_turn_state_changed.
 	current_turn = 1
-	_show_turn_announcement("PLAYER TURN %d" % current_turn)
+	show_turn_announcement("PLAYER TURN %d" % current_turn)
 	_set_end_turn_button_mode_end_turn()
 	end_turn_button.disabled = false
 	_slide_active_button_onscreen()
@@ -299,11 +299,11 @@ func _on_turn_state_changed(state: int) -> void:
 	match state:
 		TurnState.State.PLAYER_SOT:
 			current_turn += 1
-			_show_turn_announcement("PLAYER TURN %d" % current_turn)
+			show_turn_announcement("PLAYER TURN %d" % current_turn)
 		TurnState.State.ENEMY_SOT:
 			var enemy := _current_acting_enemy()
 			if enemy:
-				_show_turn_announcement("%s TURN %d" % [
+				show_turn_announcement("%s TURN %d" % [
 					enemy.stats.character_name.to_upper(), current_turn])
 
 
@@ -320,7 +320,7 @@ func _current_acting_enemy() -> Enemy:
 	return enemy if is_instance_valid(enemy) else null
 
 
-func _show_turn_announcement(text: String) -> void:
+func show_turn_announcement(text: String) -> void:
 	if not turn_announcer_label or not turn_announcer_bar:
 		return
 	if _turn_announcer_tween and _turn_announcer_tween.is_running():

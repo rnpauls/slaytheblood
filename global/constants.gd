@@ -41,6 +41,11 @@ const TWEEN_HAND_ENTRY       := 0.25
 ## Staged-card center move (player and enemy staged displays).
 const TWEEN_CARD_STAGE       := 0.30
 
+## Enemy lurch-toward-player attack animation. Distance in pixels; FWD/RETURN in seconds.
+const ENEMY_LURCH_DISTANCE := 40.0
+const ENEMY_LURCH_FWD      := 0.10
+const ENEMY_LURCH_RETURN   := 0.18
+
 #Colors
 const RED_PITCH = Color(0xb83c3cFF)
 const YELLOW_PITCH = Color(0xd8ae3bFF)

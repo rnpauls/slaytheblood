@@ -37,6 +37,9 @@ IconRegistry="*res://global/icon_registry.gd"
 DebugPause="*res://global/debug_pause.gd"
 SFXRegistry="*res://global/sfx_registry.gd"
 StyleBoxCache="*res://global/stylebox_cache.gd"
+MCPScreenshot="*res://addons/godot_mcp/mcp_screenshot_service.gd"
+MCPInputService="*res://addons/godot_mcp/mcp_input_service.gd"
+MCPGameInspector="*res://addons/godot_mcp/mcp_game_inspector_service.gd"
 
 [display]
 
@@ -49,7 +52,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/icon_thumbnail/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg", "res://addons/icon_thumbnail/plugin.cfg")
 
 [file_customization]
 

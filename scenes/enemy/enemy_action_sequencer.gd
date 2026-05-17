@@ -152,12 +152,14 @@ func _do_attack_action() -> void:
 		# smooth diagonal from its current global transform directly to the
 		# south slot — no horizontal snap, no first-appears-at-north artifact.
 		_enemy.exhaust_pile.accept_pitched_visual(card_ui)
+		await _maybe_lurch()
 		await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
 	else:
 		# Non-exhausting attack: emphasize + effects at the play overlay, then
 		# slide to the EnemyResourceUI discard count label and fade.
 		card_ui._reparent_to_play_overlay()
 		await card_ui._play_emphasis()
+		await _maybe_lurch()
 		await played_card.play(card_ui, card_ui.targets, _enemy.stats, _enemy.modifier_handler)
 		if is_instance_valid(card_ui):
 			await _enemy.animate_card_to_discard_label(card_ui)
@@ -222,6 +224,7 @@ func _do_weapon_action() -> void:
 		_enemy.stats.action_points += 1
 
 	var packet := weapon.build_attack_packet(_enemy.modifier_handler)
+	await _maybe_lurch()
 	packet.execute([target])
 
 	if is_instance_valid(target):
@@ -291,3 +294,15 @@ func unstage_card() -> void:
 
 func _log(msg: String) -> void:
 	print("[EnemyAction:%s] %s" % [_enemy.stats.character_name if _enemy and _enemy.stats else "?", msg])
+
+
+## Trigger the enemy's lurch toward the player. Awaits the forward stroke
+## only — the return runs in parallel with damage feedback. No-ops cleanly
+## if the target is gone or the enemy can't lurch.
+func _maybe_lurch() -> void:
+	if not is_instance_valid(_enemy) or not _enemy.enemy_ai:
+		return
+	var target: Node = _enemy.enemy_ai.target
+	if not (target is Node2D) or not is_instance_valid(target):
+		return
+	await _enemy.lurch_attack((target as Node2D).global_position)

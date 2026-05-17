@@ -3,6 +3,11 @@ extends Combatant
 
 const LEGACY_SPRITE_HALF_EXTENT := 60.0
 
+const JERK_DISTANCE := 60.0
+const JERK_OUT := 0.08
+const JERK_HOLD := 0.04
+const JERK_BACK := 0.12
+
 ## Cards that cannot be used to block this turn due to Intimidate. Set by IntimidatedStatus.
 var intimidated_cards: Array[Card] = []
 
@@ -89,3 +94,15 @@ func _on_mouse_hover_entered() -> void:
 
 func _on_mouse_hover_exited() -> void:
 	Events.tooltip_hide_requested.emit()
+
+
+func jerk_attack(target_global: Vector2) -> void:
+	var dir := (target_global - global_position).normalized()
+	var peak := dir * JERK_DISTANCE
+	var t := sprite_2d.create_tween()
+	t.tween_property(sprite_2d, "position", peak, JERK_OUT) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	t.tween_interval(JERK_HOLD)
+	t.tween_property(sprite_2d, "position", Vector2.ZERO, JERK_BACK) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await t.finished

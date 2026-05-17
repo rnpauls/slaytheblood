@@ -58,7 +58,35 @@ func _advance() -> void:
 # Tail of the enemy phase. Calls into enemy_handler.enemy_end_phase()
 # so the per-enemy cleanup_phase() hooks still run, then emits the
 # legacy enemy_phase_ended signal (BattleUI listens for it to reset
-# the END button text). Then transitions to PLAYER_SOT.
+# the END button text). Then transitions to PLAYER_SOT — unless every
+# alive enemy is fatigued (no cards anywhere + no 0-cost weapon), in
+# which case the player auto-wins via FATIGUE_VICTORY.
 func _finish_phase() -> void:
 	enemy_handler.enemy_end_phase()
-	_request(State.PLAYER_SOT)
+	if _all_alive_enemies_fatigued():
+		_request(State.FATIGUE_VICTORY)
+	else:
+		_request(State.PLAYER_SOT)
+
+
+func _all_alive_enemies_fatigued() -> bool:
+	var any := false
+	for child in enemy_handler.get_children():
+		if not (child is Enemy):
+			continue
+		var e := child as Enemy
+		if not is_instance_valid(e) or e.stats == null or e.stats.health <= 0:
+			continue
+		any = true
+		if not _is_fatigued(e):
+			return false
+	return any
+
+
+func _is_fatigued(e: Enemy) -> bool:
+	var no_cards := e.hand_manager.hand.is_empty() \
+		and e.stats.draw_pile.empty() \
+		and e.stats.discard.empty()
+	var has_zero_cost_weapon := e.stats.hand_left is Weapon \
+		and (e.stats.hand_left as Weapon).cost == 0
+	return no_cards and not has_zero_cost_weapon

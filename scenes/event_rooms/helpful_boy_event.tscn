@@ -53,8 +53,8 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 100)
 layout_mode = 2
-text = "Duplicate the last
-card in your deck"
+text = "Duplicate the last card
+added to your deck"
 
 [node name="PlusMaxHPButton" parent="ChoiceContainer" instance=ExtResource("1_b586u")]
 unique_name_in_owner = true
