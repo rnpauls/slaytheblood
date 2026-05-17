@@ -72,9 +72,13 @@ func _on_mouse_entered() -> void:
 		return
 	SFXRegistry.play(Constants.SFX_HOVER_UI)
 	# Map rooms are Area2D (not BaseButton), so CursorManager's auto-attach
-	# can't catch them. Drive the cursor shape directly here so available
-	# rooms read as clickable. Reset on exit.
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+	# can't catch them, and set_default_cursor_shape doesn't trigger an
+	# immediate cursor refresh while the mouse is already inside the
+	# Area2D's collision. Swap the texture bound to CURSOR_ARROW directly —
+	# this updates the displayed cursor on the same frame.
+	if CursorManager.POINTER:
+		Input.set_custom_mouse_cursor(CursorManager.POINTER, Input.CURSOR_ARROW,
+			CursorManager.POINTER_HOTSPOT)
 	z_index = 1
 	animation_player.stop()
 	_kill_hover_tween()
@@ -85,7 +89,10 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if not available:
 		return
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	# Restore the arrow texture on the ARROW shape.
+	if CursorManager.ARROW:
+		Input.set_custom_mouse_cursor(CursorManager.ARROW, Input.CURSOR_ARROW,
+			CursorManager.ARROW_HOTSPOT)
 	_kill_hover_tween()
 	z_index = 0
 	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
