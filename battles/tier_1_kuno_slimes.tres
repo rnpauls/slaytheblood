@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="BattleStats" format=3]
+[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://q6ddo2c80fay"]
 
-[ext_resource type="PackedScene" path="res://battles/tier_1_kuno_slimes.tscn" id="1_ni27h"]
-[ext_resource type="Script" path="res://custom_resources/battle_stats.gd" id="2_mc3xm"]
+[ext_resource type="PackedScene" uid="uid://q2d1cp8pml4m" path="res://battles/tier_1_kuno_slimes.tscn" id="1_ni27h"]
+[ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="2_mc3xm"]
 
 [resource]
 script = ExtResource("2_mc3xm")

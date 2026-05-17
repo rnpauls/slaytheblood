@@ -26,6 +26,7 @@
 [ext_resource type="Theme" uid="uid://bgsghq00bvm7e" path="res://art/themes/end_turn_button_theme.tres" id="23_endtt"]
 [ext_resource type="StyleBox" path="res://art/themes/styleboxes/end_turn_inner_contour.tres" id="24_endct"]
 [ext_resource type="LabelSettings" path="res://art/themes/typography/type_display.tres" id="25_turnan"]
+[ext_resource type="Texture2D" uid="uid://bo5ngs541y25q" path="res://art/ui/shield_block_button.png" id="26_block"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywq45"]
 size = Vector2(1262, 209)
@@ -132,6 +133,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("24_endct")
+
+[node name="BlockButton" type="TextureButton" parent="BattleUI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -235.0
+offset_right = -60.0
+offset_bottom = -115.0
+grow_horizontal = 0
+grow_vertical = 0
+disabled = true
+texture_normal = ExtResource("26_block")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="DrawPile" parent="BattleUI" unique_id=1843257857 instance=ExtResource("17_3u6fe")]
 unique_name_in_owner = true

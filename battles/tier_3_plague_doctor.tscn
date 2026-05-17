@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bg6o7ixe2bvub"]
+[gd_scene format=3 uid="uid://8pdo36mcgrus"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://4ampvoaioeuc" path="res://enemies/plague_doctor/plague_doctor_enemy.tres" id="2_es"]
@@ -7,9 +7,13 @@
 [node name="Tier3PlagueDoctor" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(929, 343)
+position = Vector2(786.204284667969, 346.440887451172)
 stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1128.38708496094, 353.655975341797)
+position = Vector2(990.752502441406, 349.35498046875)
+stats = ExtResource("3_es")
+
+[node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1177.31176757812, 345.913970947266)
 stats = ExtResource("3_es")

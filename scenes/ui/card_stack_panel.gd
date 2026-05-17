@@ -342,8 +342,8 @@ func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
 
 	var target_index: int = 0 if add_to_back_of_deck else _visuals().size() - 1
 	var target_pos: Vector2 = _slot_position(target_index)
-	var hold_duration := 0.3
-	var fly_duration := 0.4
+	var hold_duration := 1.0
+	var fly_duration := 0.8
 
 	var t := visual.create_tween()
 	t.tween_interval(hold_duration)
@@ -355,13 +355,15 @@ func animate_card_in(card_resource: Card, source_global_pos: Vector2) -> void:
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	# Face-down piles: flip the card to its back as it lands so it joins the
-	# deck visually consistent with the rest of the stack.
+	# deck visually consistent with the rest of the stack. Tween visual.scale:x
+	# (not visual.card_render.scale:x) so the second tween restores to pile_scale,
+	# matching the parallel scale tween above.
 	if face_down:
-		t.tween_property(visual.card_render, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP_FAST)
+		t.tween_property(visual, "scale:x", 0.0, Constants.TWEEN_CARD_FLIP_FAST)
 		t.tween_callback(func():
 			if is_instance_valid(visual) and visual.card_render:
 				visual.card_render.show_back = true)
-		t.tween_property(visual.card_render, "scale:x", 1.0, Constants.TWEEN_CARD_FLIP_FAST)
+		t.tween_property(visual, "scale:x", pile_scale, Constants.TWEEN_CARD_FLIP_FAST)
 
 	t.tween_callback(func():
 		if _pitched_in_flight == visual:

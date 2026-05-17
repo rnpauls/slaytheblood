@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://cpk6isbwlstrp"]
+[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://dwd8mg2uspnad"]
 
-[ext_resource type="PackedScene" uid="uid://df5u6q1ed7pdd" path="res://battles/tier_1_bat_crab.tscn" id="1_4bw0w"]
+[ext_resource type="PackedScene" uid="uid://durii6fm6pvyk" path="res://battles/tier_1_bat_crab.tscn" id="1_4bw0w"]
 [ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="1_dd4eo"]
 
 [resource]

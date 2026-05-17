@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dbef7op2g0u8a"]
+[gd_scene format=3 uid="uid://q2d1cp8pml4m"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://cvixtqsyntvmf" path="res://enemies/kunoichi/kunoichi.tres" id="2_es"]
@@ -7,13 +7,13 @@
 [node name="Tier1KunoSlimes" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(755.161315917969, 347.634429931641)
+position = Vector2(691.505310058594, 354.516143798828)
 stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(960.645202636719, 347.634399414062)
+position = Vector2(905.591186523438, 354.51611328125)
 stats = ExtResource("3_es")
 
 [node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1148.06433105469, 320.107696533203)
+position = Vector2(1132.58044433594, 355.376495361328)
 stats = ExtResource("3_es")

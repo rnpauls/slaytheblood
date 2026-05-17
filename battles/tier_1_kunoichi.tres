@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://bax2ufsjfstta"]
+[gd_resource type="Resource" script_class="BattleStats" format=3 uid="uid://cx0eyo8fosrx7"]
 
-[ext_resource type="PackedScene" uid="uid://ddwlhreap47lu" path="res://battles/tier_1_kunoichi.tscn" id="1_6o2wq"]
+[ext_resource type="PackedScene" uid="uid://b0plfgctcy3y7" path="res://battles/tier_1_kunoichi.tscn" id="1_6o2wq"]
 [ext_resource type="Script" uid="uid://cuif6toyg7yqh" path="res://custom_resources/battle_stats.gd" id="1_b27hx"]
 
 [resource]

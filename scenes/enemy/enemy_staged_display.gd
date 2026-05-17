@@ -18,12 +18,14 @@ extends Node2D
 ## Must match CardUI.tscn's pivot_offset.  If that scene changes, update here.
 const CARD_PIVOT_OFFSET := Vector2(100, 140)
 
-@export var staged_scale  := 0.55
-@export var hovered_scale := 1.0
+@export var staged_scale     := 0.55
+@export var naa_staged_scale := 0.75
+@export var hovered_scale    := 1.0
 
 var _card_ui: EnemyCardUI       = null
 var _original_parent: Node      = null
 var _is_hovered                 := false
+var _current_staged_scale       := staged_scale
 
 ## Local-space target for a given scale that pins the card's visible center
 ## to (0,0) — except when doing so would push the top edge above the TopBar,
@@ -46,6 +48,11 @@ func stage(card_ui: EnemyCardUI) -> void:
 	_card_ui         = card_ui
 	_original_parent = card_ui.get_parent()
 
+	_current_staged_scale = (
+		naa_staged_scale if card_ui.card and card_ui.card.type == Card.Type.NAA
+		else staged_scale
+	)
+
 	card_ui.reparent(self)
 	card_ui.z_index      = 0
 	card_ui.z_as_relative = true
@@ -58,7 +65,7 @@ func stage(card_ui: EnemyCardUI) -> void:
 	# Animate so the card's visible center aligns with this node's origin
 	# (clamped so the top edge never goes past the TopBar).
 	card_ui.animate_to_local_position_and_rotation_and_scale(
-		_scale_target(staged_scale), 0.0, staged_scale, Constants.TWEEN_CARD_STAGE
+		_scale_target(_current_staged_scale), 0.0, _current_staged_scale, Constants.TWEEN_CARD_STAGE
 	)
 
 func unstage() -> void:
@@ -139,7 +146,7 @@ func _on_card_unhovered(_card: EnemyCardUI) -> void:
 		return
 	_is_hovered = false
 	_card_ui.animate_to_local_position_and_rotation_and_scale(
-		_scale_target(staged_scale), 0.0, staged_scale, Constants.TWEEN_FADE
+		_scale_target(_current_staged_scale), 0.0, _current_staged_scale, Constants.TWEEN_FADE
 	)
 	Events.tooltip_hide_requested.emit()
 

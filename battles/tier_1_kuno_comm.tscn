@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ctnrpu6eftjpo"]
+[gd_scene format=3 uid="uid://blhqpg0231a1y"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
 [ext_resource type="Resource" uid="uid://bnfcjw5vkcx82" path="res://enemies/commoner/commoner_enemy.tres" id="2_es"]
@@ -7,9 +7,9 @@
 [node name="Tier1KunoComm" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1150.86010742188, 307.774200439453)
+position = Vector2(1062.2578125, 331.860260009766)
 stats = ExtResource("2_es")
 
 [node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(896.989196777344, 346.483856201172)
+position = Vector2(837.634460449219, 357.666625976562)
 stats = ExtResource("3_es")

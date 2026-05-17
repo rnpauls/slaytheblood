@@ -1,10 +1,19 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://3yt6akqerw2n"]
 
 [ext_resource type="PackedScene" uid="uid://cp7xdwgtmam1n" path="res://scenes/enemy/enemy.tscn" id="1_enemy"]
-[ext_resource type="Resource" path="res://enemies/shellbreaker/shellbreaker_enemy.tres" id="2_shell"]
+[ext_resource type="Resource" uid="uid://b1gywakpa8ogy" path="res://enemies/shellbreaker/shellbreaker_enemy.tres" id="2_es"]
+[ext_resource type="Resource" uid="uid://p755tj1qwgr3" path="res://enemies/bat/bat_enemy.tres" id="3_es"]
 
 [node name="Tier1Shellbreaker" type="Node2D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_enemy")]
-position = Vector2(1050, 350)
-stats = ExtResource("2_shell")
+position = Vector2(810.860168457031, 348.279571533203)
+stats = ExtResource("2_es")
+
+[node name="Enemy2" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(996.774230957031, 345.9140625)
+stats = ExtResource("3_es")
+
+[node name="Enemy3" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(1161.82788085938, 344.193542480469)
+stats = ExtResource("3_es")
