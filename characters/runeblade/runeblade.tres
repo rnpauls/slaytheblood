@@ -18,8 +18,8 @@
 [ext_resource type="Resource" uid="uid://fw27yjhyjbfn" path="res://equipment/spellbinders_robe.tres" id="12_sbrbe"]
 [ext_resource type="Resource" uid="uid://cyi5ptq61dosr" path="res://equipment/runeweaver_gauntlets.tres" id="13_rwgnt"]
 [ext_resource type="Resource" uid="uid://nlkimdmeaoa" path="res://equipment/manathreaded_greaves.tres" id="14_mtgrv"]
-[ext_resource type="Resource" uid="uid://stbequip100b" path="res://equipment/floodgate_sigil.tres" id="15_flsgl"]
-[ext_resource type="Resource" uid="uid://stbequip101b" path="res://equipment/managlass_vambraces.tres" id="16_mgvmb"]
+[ext_resource type="Resource" path="res://equipment/floodgate_sigil.tres" id="15_flsgl"]
+[ext_resource type="Resource" path="res://equipment/managlass_vambraces.tres" id="16_mgvmb"]
 
 [resource]
 script = ExtResource("2_chst0")

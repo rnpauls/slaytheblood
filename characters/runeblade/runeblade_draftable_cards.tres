@@ -31,11 +31,11 @@
 [ext_resource type="Resource" uid="uid://bkxqkjjuplox7" path="res://characters/runeblade/cards/hex.tres" id="29_hex"]
 [ext_resource type="Resource" uid="uid://y5bk4vtobqy7" path="res://characters/runeblade/cards/wracking_curse.tres" id="30_wrcrs"]
 [ext_resource type="Resource" uid="uid://cjunn7hr0dq7" path="res://characters/runeblade/cards/soul_tap.tres" id="31_sltap"]
-[ext_resource type="Resource" uid="uid://cpbjmfy26c7ev" path="res://characters/runeblade/cards/open_the_floodgate.tres" id="32_oflod"]
-[ext_resource type="Resource" uid="uid://d6m8bo3q0leb" path="res://characters/runeblade/cards/mana_surge.tres" id="33_mnsur"]
-[ext_resource type="Resource" uid="uid://c7blr8rt6spmj" path="res://characters/runeblade/cards/tide_caller.tres" id="34_tcllr"]
-[ext_resource type="Resource" uid="uid://dxc5ijd30s3fd" path="res://characters/runeblade/cards/arc_cascade.tres" id="35_arccc"]
-[ext_resource type="Resource" uid="uid://b5vlr8rt6spmj" path="res://characters/runeblade/cards/spellbreakers_will.tres" id="36_spwil"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/open_the_floodgate.tres" id="32_oflod"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/mana_surge.tres" id="33_mnsur"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/tide_caller.tres" id="34_tcllr"]
+[ext_resource type="Resource" path="res://characters/runeblade/cards/arc_cascade.tres" id="35_arccc"]
+[ext_resource type="Resource" uid="uid://builyvvmcfi8i" path="res://characters/runeblade/cards/spellbreakers_will.tres" id="36_spwil"]
 
 [resource]
 script = ExtResource("1_pile0")
