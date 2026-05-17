@@ -65,9 +65,13 @@ func on_gui_input(event: InputEvent) -> void:
 			_log("BASE on_gui_input: LMB IGNORED (intimidated=%s, stunned=%s, disable_defense=%s)" % [is_intimidated, is_stunned, card_ui.card.disable_defense])
 		return
 
-	if not card_ui.playable or card_ui.disabled or is_stunned:
+	# Unplayable cards (insufficient mana) can still be picked up so the
+	# player can drag them to the PitchZone — pitching doesn't require mana.
+	# RELEASED gates the actual play on `playable`, so an unplayable card
+	# released on an enemy bounces back to BASE without firing.
+	if card_ui.disabled or is_stunned:
 		if lmb:
-			_log("BASE on_gui_input: LMB IGNORED (playable=%s, disabled=%s, stunned=%s)" % [card_ui.playable, card_ui.disabled, is_stunned])
+			_log("BASE on_gui_input: LMB IGNORED (disabled=%s, stunned=%s)" % [card_ui.disabled, is_stunned])
 		return
 
 	if lmb:

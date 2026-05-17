@@ -6,7 +6,12 @@ func enter() -> void:
 	played = false
 	var single_targeted := card_ui.card.is_single_targeted()
 	var has_enemy_target := not card_ui.targets.is_empty() and card_ui.targets[0] is Enemy
-	_log("RELEASED entered (single_targeted=%s, targets=%d, has_enemy_target=%s)" % [single_targeted, card_ui.targets.size(), has_enemy_target])
+	_log("RELEASED entered (single_targeted=%s, targets=%d, has_enemy_target=%s, playable=%s)" % [single_targeted, card_ui.targets.size(), has_enemy_target, card_ui.playable])
+	# Unplayable cards (insufficient mana) can be picked up so they can be
+	# pitched, but they must not actually play if dropped on an enemy.
+	if not card_ui.playable:
+		_log("RELEASED: not playable → BASE")
+		return
 	if not single_targeted:
 		_log("RELEASED: not single_targeted → playing")
 		_release_and_play()
