@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c2axityhh8m5i" path="res://art/custom_art/card_visuals/from_claude/replay_badge.png" id="16_jxqcx"]
 [ext_resource type="Texture2D" uid="uid://27vqim86aibk" path="res://art/custom_art/card_visuals/go_again.png" id="17_87ky4"]
 [ext_resource type="Theme" uid="uid://bepkl6nnrfx4u" path="res://art/themes/card_richtext_theme_16.tres" id="18_87ky4"]
+[ext_resource type="Texture2D" path="res://art/custom_art/card_visuals/inert_overlay.png" id="19_inert"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe1ap"]
 bg_color = Color(0.23810464, 0.23816228, 0.30056205, 1)
@@ -317,3 +318,19 @@ mouse_filter = 2
 theme = ExtResource("18_87ky4")
 text = "Attack"
 horizontal_alignment = 1
+
+[node name="InertOverlay" type="TextureRect" parent="." unique_id=2089001745]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_inert")
+expand_mode = 1
+stretch_mode = 6
+modulate = Color(1, 1, 1, 0.5)

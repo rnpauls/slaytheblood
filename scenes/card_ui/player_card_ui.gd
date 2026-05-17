@@ -85,6 +85,12 @@ func _set_playable(value: bool) -> void:
 	if _in_pile():
 		return
 	if card_render.card_visuals:
+		# Chains/padlock overlay shows ONLY on truly inert cards — cards locked
+		# by an Unplayable status, not cards merely lacking resources for this
+		# turn (those can become playable later via pitch/mana gain). The glow
+		# absence already telegraphs "can't play right now"; chains are reserved
+		# for the harder "this card is dead until something clears it."
+		card_render.card_visuals.set_inert(card != null and card.unplayable)
 		# tint_cost gates whether refresh_modified_values touches the cost
 		# label's font_color — keeps our unplayable-red override below winning.
 		# Cost tint is purely playable-based: cards are validly `disabled` between

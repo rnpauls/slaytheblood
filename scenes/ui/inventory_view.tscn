@@ -67,7 +67,7 @@ vertical_alignment = 1
 [node name="MainHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=829711766]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 24
+theme_override_constants/separation = 48
 
 [node name="LoadoutPanel" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MainHBox" unique_id=1050604312]
 layout_mode = 2

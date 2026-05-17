@@ -31,6 +31,10 @@ func execute_single_target(target: Node) -> void:
 		# attempt. combatant_damaged below is gated on residual damage and is
 		# the right signal for "I actually got hit" reactions.
 		Events.combatant_attacked.emit(target, source_owner, amount, damage_dealt)
+		# Floating damage number / "BLOCK" text fires for every physical hit so
+		# fully-blocked swings still get visual feedback.
+		Events.damage_floated.emit(target, damage_dealt if damage_dealt > 0 else amount,
+			Card.DamageKind.PHYSICAL, damage_dealt == 0 and amount > 0)
 	if (damage_dealt > 0):
 		Events.combatant_damaged.emit(target, source_owner, damage_dealt)
 		for on_hit in on_hit_effects:

@@ -165,7 +165,9 @@ func unlock_all_rooms() -> void:
 
 
 func show_current_marker(room: Room) -> void:
-	current_room_marker.position = room.position + Vector2(0, -50)
+	# Ring marker sits ON the room icon (not above it like the old arrow did),
+	# so the player sees a glowing circle around their current node.
+	current_room_marker.position = room.position
 	current_room_marker.visible = true
 
 

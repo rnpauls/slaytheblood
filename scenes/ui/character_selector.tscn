@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="4_cvsin"]
 [ext_resource type="Texture2D" uid="uid://pgj8vfpj6tc5" path="res://art/tile_0130.png" id="4_i3qjr"]
 [ext_resource type="Texture2D" uid="uid://bfvi02kojsa00" path="res://art/tile_0103.png" id="5_mg6na"]
+[ext_resource type="FontFile" uid="uid://utp3j4ukmkdh" path="res://art/themes/tt_norms_pro_serif/TT Norms Pro Serif Trial Bold.ttf" id="9_titlefont"]
 
 [sub_resource type="Gradient" id="Gradient_xoidu"]
 colors = PackedColorArray(0.105882, 0, 0, 1, 0.460509, 0.308384, 0.229435, 1)
@@ -17,6 +18,16 @@ gradient = SubResource("Gradient_xoidu")
 width = 50
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_ucmb5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_screentitle"]
+font = ExtResource("9_titlefont")
+font_size = 64
+font_color = Color(0.86, 0.18, 0.18, 1)
+outline_size = 10
+outline_color = Color(0.04, 0.02, 0.02, 1)
+shadow_size = 8
+shadow_color = Color(0.55, 0.12, 0.05, 0.55)
+shadow_offset = Vector2(0, 4)
 
 [node name="CharacterSelector" type="Control" unique_id=1571501895]
 layout_mode = 3
@@ -48,7 +59,10 @@ offset_right = 582.0
 offset_bottom = 159.0
 grow_horizontal = 2
 text = "CHOOSE YOUR CHARACTER"
-label_settings = ExtResource("3_uy6wb")
+label_settings = SubResource("LabelSettings_screentitle")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
 
 [node name="CharacterText" type="VBoxContainer" parent="." unique_id=1018809801]
 layout_mode = 1

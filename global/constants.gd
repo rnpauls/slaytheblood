@@ -51,11 +51,24 @@ const RED_PITCH = Color(0xb83c3cFF)
 const YELLOW_PITCH = Color(0xd8ae3bFF)
 const BLUE_PITCH = Color(0x4988beFF)
 const RARITY_COLORS := {
-	0: Color.GRAY,
-	1: Color.CORNFLOWER_BLUE,
-	2: Color.GOLD,
+	0: Palette.IVORY_DIM,
+	1: Palette.STEEL_BRIGHT,
+	2: Palette.GOLD_HIGHLIGHT,
 
 }
+
+# ── SFX names ───────────────────────────────────────────────────────────────
+# StringName keys consumed by SFXRegistry.play(). The actual AudioStream
+# preloads live in SFXRegistry; these names are the lookup keys. Centralized
+# here so callsites get a compile-time-resolvable identifier instead of bare
+# &"" literals scattered through the codebase.
+const SFX_HOVER_CARD: StringName = &"HOVER_CARD"
+const SFX_HOVER_UI: StringName = &"HOVER_UI"
+const SFX_CLICK_BUTTON: StringName = &"CLICK_BUTTON"
+const SFX_CLICK_MENU: StringName = &"CLICK_MENU"
+const SFX_DRAW_CARD: StringName = &"DRAW_CARD"
+const SFX_CONFIRM: StringName = &"CONFIRM"
+const SFX_CANCEL: StringName = &"CANCEL"
 
 # ── Pitch sound sequence ────────────────────────────────────────────────────
 # Played pitch_value times, with frequency pitch increasing by PITCH_SOUND_STEP

@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://dbwg1dj4k5cn8" path="res://characters/brute/cards/warrior_slash.tres" id="3_c5rll"]
 [ext_resource type="Resource" uid="uid://cdgxuyupuk3a5" path="res://characters/brute/cards/warrior_big_slam.tres" id="4_wq3xp"]
 [ext_resource type="Resource" uid="uid://b4oavmlo7ueax" path="res://characters/brute/cards/warrior_true_strength.tres" id="5_g26cv"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_display.tres" id="6_typedsp"]
 
 [node name="CardRewards" type="ColorRect"]
 anchors_preset = 15
@@ -12,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.075, 0.06, 0.115, 0.92)
 script = ExtResource("1_xu1dp")
 rewards = Array[Resource]([ExtResource("3_c5rll"), ExtResource("4_wq3xp"), ExtResource("5_g26cv")])
 
@@ -24,12 +25,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -41.5
-offset_top = -20.0
+offset_top = -60.0
 offset_right = 41.5
-offset_bottom = 20.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 30
+
+[node name="Header" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Choose a Card"
+label_settings = ExtResource("6_typedsp")
+horizontal_alignment = 1
 
 [node name="Cards" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true

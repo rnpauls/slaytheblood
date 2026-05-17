@@ -58,7 +58,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	
 	room.selected = true
 	clicked.emit(room)
-	SFXRegistry.play(&"CLICK_BUTTON")
+	SFXRegistry.play(Constants.SFX_CLICK_BUTTON)
 	animation_player.play("select")
 	get_viewport().set_input_as_handled()
 
@@ -70,7 +70,11 @@ func _on_map_room_selected() -> void:
 func _on_mouse_entered() -> void:
 	if not available:
 		return
-	SFXRegistry.play(&"HOVER_UI")
+	SFXRegistry.play(Constants.SFX_HOVER_UI)
+	# Map rooms are Area2D (not BaseButton), so CursorManager's auto-attach
+	# can't catch them. Drive the cursor shape directly here so available
+	# rooms read as clickable. Reset on exit.
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	z_index = 1
 	animation_player.stop()
 	_kill_hover_tween()
@@ -81,6 +85,7 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if not available:
 		return
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	_kill_hover_tween()
 	z_index = 0
 	_hover_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)

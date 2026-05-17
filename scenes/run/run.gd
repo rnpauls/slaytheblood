@@ -10,6 +10,7 @@ const WIN_SCREEN_SCENE = preload("res://scenes/win_screen/win_screen.tscn")
 const DRAFTABLE_INVENTORY := preload("res://custom_resources/draftable_inventory.tres")
 const MAIN_MENU_PATH = "res://scenes/ui/main_menu.tscn"
 const NON_COMBAT_MUSIC := preload("res://art/music/deuslower-medieval-ambient-236809.mp3")
+const BOSS_MUSIC := preload("res://art/music/17406877-battle-of-the-dragons-8037.mp3")
 const EVENT_ROOM_POOL := preload("res://scenes/event_rooms/event_room_pool.tres")
 
 # Highest act in the game. Defeating the boss of this act ends the run; bosses
@@ -311,6 +312,8 @@ func _on_battle_room_entered(room: Room) -> void:
 	battle_scene.char_stats = character
 	battle_scene.battle_stats = room.battle_stats
 	battle_scene.relics = relic_handler
+	if room.type == Room.Type.BOSS:
+		battle_scene.music = BOSS_MUSIC
 	battle_scene.start_battle()
 
 func _on_treasure_room_entered() -> void:

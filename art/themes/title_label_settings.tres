@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://b6dllxybarou"]
 
-[ext_resource type="FontFile" uid="uid://dohgfvvrbs3gn" path="res://art/themes/Abaddon_Fonts/Abaddon-Bold.ttf" id="1_ndr68"]
+[ext_resource type="FontFile" uid="uid://utp3j4ukmkdh" path="res://art/themes/tt_norms_pro_serif/TT Norms Pro Serif Trial Bold.ttf" id="1_ndr68"]
 
 [resource]
 font = ExtResource("1_ndr68")

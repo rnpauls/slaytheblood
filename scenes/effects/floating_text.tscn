@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8floattextslayblood"]
+
+[ext_resource type="Script" path="res://scenes/effects/floating_text.gd" id="1_floattxt"]
+[ext_resource type="LabelSettings" path="res://art/themes/typography/type_number.tres" id="2_typenum"]
+
+[node name="FloatingText" type="Node2D"]
+script = ExtResource("1_floattxt")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -16.0
+offset_right = 40.0
+offset_bottom = 16.0
+text = "0"
+label_settings = ExtResource("2_typenum")
+horizontal_alignment = 1
+vertical_alignment = 1

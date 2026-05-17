@@ -138,14 +138,29 @@ func _make_empty_slot(slot_label: String) -> Control:
 
 func _build_pool() -> void:
 	var equipped := _equipped_items()
-	for w: Weapon in inventory.weapons.duplicate():
+	# Sort by rarity desc so the rarest items rise to the top of the grid —
+	# matches the inventory_view convention of equipped on the left, valuable
+	# items first on the right.
+	var weapons_sorted: Array = inventory.weapons.duplicate()
+	weapons_sorted.sort_custom(func(a, b): return _item_rarity(a) > _item_rarity(b))
+	var equips_sorted: Array = inventory.equips.duplicate()
+	equips_sorted.sort_custom(func(a, b): return _item_rarity(a) > _item_rarity(b))
+	for w: Weapon in weapons_sorted:
 		if w in equipped:
 			continue
 		pool.add_child(_make_pool_card(w))
-	for eq: Equipment in inventory.equips.duplicate():
+	for eq: Equipment in equips_sorted:
 		if eq in equipped:
 			continue
 		pool.add_child(_make_pool_card(eq))
+
+
+# Both Weapon and Equipment expose `rarity` (enum int). Defaults to 0 if the
+# field is absent so older items don't blow up the sort.
+func _item_rarity(item: Resource) -> int:
+	if item and "rarity" in item:
+		return int(item.rarity)
+	return 0
 
 
 func _equipped_items() -> Array:

@@ -14,6 +14,7 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 48.0
 grow_horizontal = 2
+mouse_filter = 2
 script = ExtResource("1_7kcvo")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=2064034557]

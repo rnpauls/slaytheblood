@@ -9,36 +9,45 @@ var enemy: Enemy = null
 @onready var atk_label: Label = %AtkLabel
 @onready var exclamation: TextureRect = %Exclamation
 
-## Hover count across IntentUI + its outside-the-rect children (AtkLabel,
-## Exclamation). We show on 0→1, hide on 1→0. Direct forwarding without a
-## count would hide whenever the cursor crossed a sub-rect boundary (e.g.,
-## moving up from IntentUI's body into the AtkLabel overhead while both
-## rects still contain the cursor in the overlap zone).
-var _hover_count: int = 0
+# Single sibling Control sized to the union bounding box of all visible
+# children (AtkLabel sits above the root, Exclamation extends past the
+# right edge). Drawn LAST so it sits on top in z-order and catches mouse
+# events for the whole intent group with a single mouse_entered/exited
+# pair — no more multi-source hover counting.
+var _hover_area: Control = null
 
 func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_STOP
-	mouse_entered.connect(_on_zone_entered)
-	mouse_exited.connect(_on_zone_exited)
-	# AtkLabel (offset_top = -30) sticks above the IntentUI top; Exclamation
-	# (offset_right = 71) extends past our right edge. Cursor over either
-	# wouldn't otherwise fire our own mouse_entered.
-	atk_label.mouse_entered.connect(_on_zone_entered)
-	atk_label.mouse_exited.connect(_on_zone_exited)
-	exclamation.mouse_entered.connect(_on_zone_entered)
-	exclamation.mouse_exited.connect(_on_zone_exited)
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hover_area = Control.new()
+	_hover_area.name = "HoverArea"
+	_hover_area.mouse_filter = Control.MOUSE_FILTER_STOP
+	add_child(_hover_area)
+	_hover_area.mouse_entered.connect(_on_mouse_entered)
+	_hover_area.mouse_exited.connect(_on_mouse_exited)
+	call_deferred("_resize_hover_area")
 
 
-func _on_zone_entered() -> void:
-	_hover_count += 1
-	if _hover_count == 1:
-		_on_mouse_entered()
-
-
-func _on_zone_exited() -> void:
-	_hover_count = maxi(0, _hover_count - 1)
-	if _hover_count == 0:
-		_on_mouse_exited()
+# Compute the union rect of the interactive children in our local coords
+# and size HoverArea to match. Deferred from _ready so child layouts have
+# settled. Pads outward by 2px so the hover doesn't drop right at the edge.
+func _resize_hover_area() -> void:
+	if not _hover_area:
+		return
+	var union := Rect2()
+	var any := false
+	for child: Control in [icon, label, atk_label, exclamation]:
+		if not child:
+			continue
+		var rect := Rect2(child.position, child.size)
+		if not any:
+			union = rect
+			any = true
+		else:
+			union = union.merge(rect)
+	if any:
+		union = union.grow(2.0)
+		_hover_area.position = union.position
+		_hover_area.size = union.size
 
 func update_intent(intent: Intent) -> void:
 	if not intent:

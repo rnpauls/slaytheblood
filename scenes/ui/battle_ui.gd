@@ -196,7 +196,7 @@ func _on_end_turn_button_pressed() -> void:
 
 func _on_block_button_pressed() -> void:
 	print_debug("[BlockBtn] disable from _on_block_button_pressed")
-	SFXRegistry.play(&"CLICK_BUTTON")
+	SFXRegistry.play(Constants.SFX_CLICK_BUTTON)
 	block_button.disabled = true
 	# Instant snap (placeholder until the block-click impact frame is built).
 	# Mode swap happens later when the next enemy attack declares or the enemy
@@ -206,7 +206,7 @@ func _on_block_button_pressed() -> void:
 
 
 func _on_block_button_mouse_entered() -> void:
-	SFXRegistry.play(&"HOVER_UI")
+	SFXRegistry.play(Constants.SFX_HOVER_UI)
 	if _block_button_hover_tween and _block_button_hover_tween.is_running():
 		_block_button_hover_tween.kill()
 	_block_button_hover_tween = block_button.create_tween() \

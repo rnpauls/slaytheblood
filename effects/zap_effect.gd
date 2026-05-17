@@ -25,6 +25,8 @@ func execute_single_target(target: Node) -> void:
 		SFXRegistry.play_stream(sound)
 	if damage_dealt > 0:
 		Events.combatant_damaged.emit(target, source_owner, damage_dealt)
+		# Arcane bypasses block, so the float is never the BLOCK variant.
+		Events.damage_floated.emit(target, damage_dealt, Card.DamageKind.ARCANE, false)
 		for on_hit in on_hit_effects:
 			if on_hit.effect:
 				on_hit.effect.execute([target])

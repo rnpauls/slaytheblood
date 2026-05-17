@@ -11,13 +11,13 @@ const CANCEL := preload("res://art/music/sound_effects/400 Sounds Pack/UI/sci_fi
 const POOL_SIZE := 8
 
 var _by_name: Dictionary = {
-	&"HOVER_CARD": HOVER_CARD,
-	&"HOVER_UI": HOVER_UI,
-	&"CLICK_BUTTON": CLICK_BUTTON,
-	&"CLICK_MENU": CLICK_MENU,
-	&"DRAW_CARD": DRAW_CARD,
-	&"CONFIRM": CONFIRM,
-	&"CANCEL": CANCEL,
+	Constants.SFX_HOVER_CARD: HOVER_CARD,
+	Constants.SFX_HOVER_UI: HOVER_UI,
+	Constants.SFX_CLICK_BUTTON: CLICK_BUTTON,
+	Constants.SFX_CLICK_MENU: CLICK_MENU,
+	Constants.SFX_DRAW_CARD: DRAW_CARD,
+	Constants.SFX_CONFIRM: CONFIRM,
+	Constants.SFX_CANCEL: CANCEL,
 }
 var _players: Array[AudioStreamPlayer] = []
 
@@ -78,7 +78,7 @@ func _on_node_added(node: Node) -> void:
 			node.mouse_entered.connect(_play_button_hover)
 
 func _play_button_click() -> void:
-	play(&"CLICK_BUTTON")
+	play(Constants.SFX_CLICK_BUTTON)
 
 func _play_button_hover() -> void:
-	play(&"HOVER_UI")
+	play(Constants.SFX_HOVER_UI)

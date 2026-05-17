@@ -244,7 +244,7 @@ func _on_card_hovered(card: PlayerCardUI) -> void:
 
 	var count := get_child_count()
 	var pitch := 1.0 if count <= 1 else lerpf(0.85, 1.15, card.original_index / float(count - 1))
-	SFXRegistry.play(&"HOVER_CARD", pitch)
+	SFXRegistry.play(Constants.SFX_HOVER_CARD, pitch)
 
 	call_deferred("_arrange_cards")   # spread everything out
 

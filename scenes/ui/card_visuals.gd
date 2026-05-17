@@ -28,6 +28,7 @@ var tint_cost: bool = true
 @onready var text_box: RichTextLabel = $TextBox
 @onready var type_label: RichTextLabel = $Type
 @onready var card_name: RichTextLabel = %Name
+@onready var inert_overlay: TextureRect = %InertOverlay
 
 #const FIVE_PIP_4_PITCH_BAR = preload("uid://b7aopbfcwmbtv")
 #const FOUR_PIP_4_PITCH_BAR = preload("uid://dnwth2rfebm4q")
@@ -127,6 +128,15 @@ func _apply_value_tint(label: Label, base: int, modified: int) -> void:
 		label.add_theme_color_override("font_color", Palette.BLOOD_CRIMSON)
 	else:
 		label.remove_theme_color_override("font_color")
+
+## Toggle the chains-and-padlock overlay that signals "this card is currently
+## unplayable" — driven by PlayerCardUI._set_playable. Pile-card consumers
+## never call this so decorative copies stay clean.
+func set_inert(value: bool) -> void:
+	if not is_node_ready():
+		await ready
+	inert_overlay.visible = value
+
 
 func hide_attack() ->void:
 	attack.hide()

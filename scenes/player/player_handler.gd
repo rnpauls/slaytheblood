@@ -151,7 +151,7 @@ func draw_card() -> void:
 	if card_drawn:
 		Events.player_card_drawn.emit(card_drawn)
 		hand.add_card(card_drawn, source_visual)
-		SFXRegistry.play(&"DRAW_CARD")
+		SFXRegistry.play(Constants.SFX_DRAW_CARD)
 		# Cards persist across draws (discard → reshuffle → draw again is the same
 		# Card instance), so guard each connect to avoid Godot's "already
 		# connected" error when a card is re-drawn after being played and recycled.

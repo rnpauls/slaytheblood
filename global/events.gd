@@ -25,6 +25,20 @@ signal combatant_damaged(victim: Node, attacker: Node, damage: int)
 ## `attempted` is the pre-block amount; `damage_dealt` is the post-block
 ## residual that actually hit health.
 signal combatant_attacked(victim: Node, attacker: Node, attempted: int, damage_dealt: int)
+## Emitted alongside combatant_damaged / combatant_attacked so the
+## FloatingTextSpawner can draw a number over the victim. Carries the
+## damage kind (PHYSICAL vs ARCANE) and whether the hit was fully blocked
+## so the spawner can colour and label appropriately (red number / steel
+## "BLOCKED" / purple arcane). Separate signal so we don't have to widen the
+## existing combatant_* signatures that reactive effects depend on.
+signal damage_floated(target: Node, amount: int, kind: int, blocked: bool)
+## Heal-equivalent — emitted by callers that increase a combatant's health
+## (heal cards, campfire rest, certain relics). Spawns a green floating number.
+signal combatant_healed(target: Node, amount: int)
+## Emitted by equipment / cards that perform a die roll the player should see
+## (e.g. scabskin_leathers' active ability rolls a d6). The FloatingTextSpawner
+## spawns a DiceRoll visual on `target`. `value` is the final face shown.
+signal dice_rolled(target: Node, value: int)
 ## Show one or more tooltip boxes (e.g. main card description + one box per
 ## keyword). Pass anchor_rect in canvas/global coords to anchor next to a source
 ## (right-of-source, flips left); pass Rect2() to anchor to the mouse instead.
